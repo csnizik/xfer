@@ -1,0 +1,95 @@
+<?php
+
+use \Symfony\Component\Serializer\SerializerInterface;
+/**
+ * @file
+ * Hook Test Asset Insert trigger
+ */
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hook_test_asset_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+    // $client = \Drupal::httpClient();
+    // $request = $client->createRequest('GET', 'http://localhost:2323');
+
+    // Get details from EntityInterface
+
+    if( $entity -> getEntityType() -> getGroup() == 'content'){
+
+    }
+
+    $entity_id = $entity->id();
+    $entity_type = $entity->getEntityType();
+    $real_entity = $entity->load($entity_id);
+    $json_entity = serialize(($real_entity));
+
+    \Drupal::logger('system')
+    ->info('Asset created: @label', [
+    '@label' => $json_entity,
+  ]);
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update()
+ */
+
+ function hook_test_asset_update(\Drupal\Core\Entity\EntityInterface $entity) {
+
+    \Drupal::logger('system')->info('Asset updated', []);
+ }
+
+/**
+ * Implements hook_ENTITY_TYPE_delete()
+ */
+
+ function hook_test_asset_delete(\Drupal\Core\Entity\EntityInterface $entity) {
+    \Drupal::logger('system')->info('Asset deleted', []);    
+ }
+
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hook_test_log_insert(\Drupal\Core\Entity\EntityInterface $entity) {
+    \Drupal::logger('system')->info('Log inserted', []);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update()
+ */
+
+ function hook_test_log_update(\Drupal\Core\Entity\EntityInterface $entity) {
+    \Drupal::logger('system')->info('Log updated', []);
+ }
+
+/**
+ * Implements hook_ENTITY_TYPE_delete()
+ */
+
+ function hook_test_log_delete(\Drupal\Core\Entity\EntityInterface $entity) {
+    \Drupal::logger('system')->info('Log Deleted', []);     
+ }
+
+/**
+ * Implements hook_ENTITY_TYPE_insert()
+ */
+ function hook_test_taxonomy_insert($term) {
+    \Drupal::logger('system')->info('Taxonomy inserted', []);
+ }
+/**
+ * Implements hook_ENTITY_TYPE_update()
+ */
+ function hook_test_taxonomy_update($term) {
+    \Drupal::logger('system')->info('Taxonomy updaterd', []);
+ }
+
+ /**
+ * Implements hook_ENTITY_TYPE_delete()
+ */
+function hook_test_taxonomy_delete($term) {
+    \Drupal::logger('system')->info('Taxonomy deleted', []);
+ }
+
+ 

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_regional_area_tag
+description: 'A list of Regional Area Tag'
+weight: 0

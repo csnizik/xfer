@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_service_center_area
+description: 'A list of Service Center Area'
+weight: 0

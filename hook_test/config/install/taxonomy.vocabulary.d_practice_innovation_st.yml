@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_practice_innovation_st
+description: 'A list of Practice Innovation Status'
+weight: 0

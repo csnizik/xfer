@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_animal_type
+description: 'A list of Animal Type'
+weight: 0

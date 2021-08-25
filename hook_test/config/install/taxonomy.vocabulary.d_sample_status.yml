@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_sample_status
+description: 'A list of Sample Status'
+weight: 0

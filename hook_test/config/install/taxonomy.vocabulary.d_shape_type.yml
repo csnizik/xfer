@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_shape_type
+description: 'A list of Shape Type'
+weight: 0

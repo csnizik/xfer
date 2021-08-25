@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_aggregate_stability_me
+description: 'A list of Aggregate Stability Method'
+weight: 0

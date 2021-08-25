@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_ec_method
+description: 'A list of Ec Method'
+weight: 0

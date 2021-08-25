@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_swapa_category
+description: 'A list of Swapa Category'
+weight: 0

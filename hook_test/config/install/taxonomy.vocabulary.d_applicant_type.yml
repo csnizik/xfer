@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_applicant_type
+description: 'A list of Applicant Type'
+weight: 0

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_state_practice_list
+description: 'A list of State Practice List'
+weight: 0

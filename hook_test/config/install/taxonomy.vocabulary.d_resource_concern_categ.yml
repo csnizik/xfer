@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_resource_concern_categ
+description: 'A list of Resource Concern Category'
+weight: 0

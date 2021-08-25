@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_cover_crop_type
+description: 'A list of Cover Crop Type'
+weight: 0

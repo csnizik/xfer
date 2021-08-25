@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - d_additional_charges
+name: Additional Charges
+vid: d_additional_charges
+description: 'A list of Additional Charges.'
+weight: 0

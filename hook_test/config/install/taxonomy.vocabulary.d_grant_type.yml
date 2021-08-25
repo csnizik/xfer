@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_grant_type
+description: 'A list of Grant Type'
+weight: 0

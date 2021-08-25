@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_soil_health_extraction
+description: 'A list of Soil Health Extraction Method'
+weight: 0

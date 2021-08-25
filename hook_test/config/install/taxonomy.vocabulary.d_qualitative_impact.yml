@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - hook_test
+vid: d_qualitative_impact
+description: 'A list of Qualitative Impact'
+weight: 0

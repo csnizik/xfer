@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Input Type
 vid: d_input_type
 description: 'A list of Input Type'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Infiltration Method
 vid: d_infiltration_method
 description: 'A list of Infiltration Method'
 weight: 0

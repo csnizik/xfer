@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Practice Shape Type
 vid: d_practice_shape_type
 description: 'A list of Practice Shape Type'
 weight: 0

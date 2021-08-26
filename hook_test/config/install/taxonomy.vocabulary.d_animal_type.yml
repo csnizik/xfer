@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Animal Type
 vid: d_animal_type
 description: 'A list of Animal Type'
 weight: 0

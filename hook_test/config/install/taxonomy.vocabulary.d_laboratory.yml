@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Laboratory
 vid: d_laboratory
 description: 'A list of Laboratory'
 weight: 0

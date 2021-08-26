@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Production Use
 vid: d_production_use
 description: 'A list of Production Use'
 weight: 0

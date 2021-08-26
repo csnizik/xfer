@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Plant Stage
 vid: d_plant_stage
 description: 'A list of Plant Stage'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Source Application
 vid: d_source_application
 description: 'A list of Source Application'
 weight: 0

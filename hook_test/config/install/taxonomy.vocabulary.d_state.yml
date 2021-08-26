@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: State
 vid: d_state
 description: 'A list of State'
 weight: 0

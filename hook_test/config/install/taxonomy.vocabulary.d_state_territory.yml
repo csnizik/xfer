@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: State Territory
 vid: d_state_territory
 description: 'A list of State Territory'
 weight: 0

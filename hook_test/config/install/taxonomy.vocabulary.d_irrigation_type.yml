@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Irrigation Type
 vid: d_irrigation_type
 description: 'A list of Irrigation Type'
 weight: 0

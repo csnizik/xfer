@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Conservation Practice
 vid: d_conservation_practice
 description: 'A list of Conservation Practice'
 weight: 0

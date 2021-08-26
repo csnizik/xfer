@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Program Authorized Database
 vid: d_program_authorized_dat
 description: 'A list of Program Authorized Database'
 weight: 0

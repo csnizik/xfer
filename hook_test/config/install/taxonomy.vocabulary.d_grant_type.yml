@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Grant Type
 vid: d_grant_type
 description: 'A list of Grant Type'
 weight: 0

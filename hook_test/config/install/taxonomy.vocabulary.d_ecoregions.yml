@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Ecoregions
 vid: d_ecoregions
 description: 'A list of Ecoregions'
 weight: 0

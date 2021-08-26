@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Project Status
 vid: d_project_status
 description: 'A list of Project Status'
 weight: 0

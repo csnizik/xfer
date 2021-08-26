@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Applicant Type
 vid: d_applicant_type
 description: 'A list of Applicant Type'
 weight: 0

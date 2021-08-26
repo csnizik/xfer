@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Crop Rotation Years
 vid: d_crop_rotation_years
 description: 'A list of Crop Rotation Years'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Ph Method
 vid: d_ph_method
 description: 'A list of Ph Method'
 weight: 0

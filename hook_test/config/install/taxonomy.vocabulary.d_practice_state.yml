@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Practice State
 vid: d_practice_state
 description: 'A list of Practice State'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Cover Crop Type
 vid: d_cover_crop_type
 description: 'A list of Cover Crop Type'
 weight: 0

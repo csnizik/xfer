@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Swapa Detail
 vid: d_swapa_detail
 description: 'A list of Swapa Detail'
 weight: 0

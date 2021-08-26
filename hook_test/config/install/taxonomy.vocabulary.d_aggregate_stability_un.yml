@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Aggregate Stability Unit
 vid: d_aggregate_stability_un
 description: 'A list of Aggregate Stability Unit'
 weight: 0

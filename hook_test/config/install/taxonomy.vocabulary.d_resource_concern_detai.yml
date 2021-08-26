@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Resource Concern Detail
 vid: d_resource_concern_detai
 description: 'A list of Resource Concern Detail'
 weight: 0

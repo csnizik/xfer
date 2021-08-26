@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Qualitative Impact
 vid: d_qualitative_impact
 description: 'A list of Qualitative Impact'
 weight: 0

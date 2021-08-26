@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Innovation Results
 vid: d_innovation_results
 description: 'A list of Innovation Results'
 weight: 0

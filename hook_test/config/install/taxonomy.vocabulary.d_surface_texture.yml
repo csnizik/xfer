@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Surface Texture
 vid: d_surface_texture
 description: 'A list of Surface Texture'
 weight: 0

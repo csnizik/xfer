@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Program Database
 vid: d_program_database
 description: 'A list of Program Database'
 weight: 0

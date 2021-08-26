@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Resource Concern Component
 vid: d_resource_concern_compo
 description: 'A list of Resource Concern Component'
 weight: 0

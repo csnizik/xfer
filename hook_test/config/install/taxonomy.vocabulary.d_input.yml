@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Input
 vid: d_input
 description: 'A list of Input'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Equipment Ownership
 vid: d_equipment_ownership
 description: 'A list of Equipment Ownership'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: National Practice Overview
 vid: d_national_practice_over
 description: 'A list of National Practice Overview'
 weight: 0

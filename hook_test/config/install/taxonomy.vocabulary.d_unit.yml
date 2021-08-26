@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Unit
 vid: d_unit
 description: 'A list of Unit'
 weight: 0

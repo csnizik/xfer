@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Practice Assessment Points
 vid: d_practice_assessment_po
 description: 'A list of Practice Assessment Points'
 weight: 0

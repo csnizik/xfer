@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Additional Charges
 vid: d_additional_charges
 description: 'A list of Additional Charges'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Project Scale
 vid: d_project_scale
 description: 'A list of Project Scale'
 weight: 0

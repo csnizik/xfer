@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Nitrate N Method
 vid: d_nitrate_n_method
 description: 'A list of Nitrate N Method'
 weight: 0

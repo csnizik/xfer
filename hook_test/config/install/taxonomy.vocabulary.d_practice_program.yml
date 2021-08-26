@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Practice Program
 vid: d_practice_program
 description: 'A list of Practice Program'
 weight: 0

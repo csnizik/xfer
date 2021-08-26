@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Crop
 vid: d_crop
 description: 'A list of Crop'
 weight: 0

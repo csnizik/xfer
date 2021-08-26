@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Lab Interpretation
 vid: d_lab_interpretation
 description: 'A list of Lab Interpretation'
 weight: 0

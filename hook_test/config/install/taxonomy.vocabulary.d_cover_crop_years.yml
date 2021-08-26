@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Cover Crop Years
 vid: d_cover_crop_years
 description: 'A list of Cover Crop Years'
 weight: 0

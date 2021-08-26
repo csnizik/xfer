@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Ec Method
 vid: d_ec_method
 description: 'A list of Ec Method'
 weight: 0

@@ -4,6 +4,7 @@ dependencies:
   enforced:
     module:
       - hook_test
+name: Practice Type Code
 vid: d_practice_type_code
 description: 'A list of Practice Type Code'
 weight: 0

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Aggregate Stability Method
+vid: d_aggregate_stability_me
+description: 'A list of Aggregate Stability Method'
+weight: 0

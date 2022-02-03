@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-podse
+name: Qualitative Impact
+vid: d_qualitative_impact
+description: 'A list of Qualitative Impact'
+weight: 0

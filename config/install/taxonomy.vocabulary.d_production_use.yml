@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Production Use
+vid: d_production_use
+description: 'A list of Production Use'
+weight: 0

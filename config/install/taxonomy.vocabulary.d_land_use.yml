@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Land Use
+vid: d_land_use
+description: 'A list of Land Use'
+weight: 0

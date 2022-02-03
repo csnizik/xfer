@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+    - cig-pods
+  module:
+    - farm_location
+id: cig_project
+label: cig_project
+description: 'CIG Project'
+workflow: asset_default
+new_revision: true

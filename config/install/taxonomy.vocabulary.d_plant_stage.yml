@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Plant Stage
+vid: d_plant_stage
+description: 'A list of Plant Stage'
+weight: 0

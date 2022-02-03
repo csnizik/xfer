@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Source Application
+vid: d_source_application
+description: 'A list of Source Application'
+weight: 0

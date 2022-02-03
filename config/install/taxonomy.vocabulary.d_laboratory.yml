@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Laboratory
+vid: d_laboratory
+description: 'A list of Laboratory'
+weight: 0

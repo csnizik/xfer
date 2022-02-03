@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Shape Type
+vid: d_shape_type
+description: 'A list of Shape Type'
+weight: 0

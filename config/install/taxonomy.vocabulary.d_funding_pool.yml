@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Funding Pool
+vid: d_funding_pool
+description: 'A list of Funding Pool'
+weight: 0

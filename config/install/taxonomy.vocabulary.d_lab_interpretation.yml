@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Lab Interpretation
+vid: d_lab_interpretation
+description: 'A list of Lab Interpretation'
+weight: 0

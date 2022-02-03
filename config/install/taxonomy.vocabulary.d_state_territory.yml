@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: State Territory
+vid: d_state_territory
+description: 'A list of State Territory'
+weight: 0

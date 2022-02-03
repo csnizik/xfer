@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Grazing Type
+vid: d_grazing_type
+description: 'A list of Grazing Type'
+weight: 0

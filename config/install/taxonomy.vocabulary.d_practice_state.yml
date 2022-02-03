@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Practice State
+vid: d_practice_state
+description: 'A list of Practice State'
+weight: 0

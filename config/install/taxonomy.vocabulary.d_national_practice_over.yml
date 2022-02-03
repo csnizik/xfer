@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: National Practice Overview
+vid: d_national_practice_over
+description: 'A list of National Practice Overview'
+weight: 0

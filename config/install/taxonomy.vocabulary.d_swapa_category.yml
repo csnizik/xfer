@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Swapa Category
+vid: d_swapa_category
+description: 'A list of Swapa Category'
+weight: 0

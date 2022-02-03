@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Cover Crop Species
+vid: d_cover_crop_species
+description: 'A list of Cover Crop Species'
+weight: 0

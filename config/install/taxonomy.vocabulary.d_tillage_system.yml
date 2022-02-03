@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Tillage System
+vid: d_tillage_system
+description: 'A list of Tillage System'
+weight: 0

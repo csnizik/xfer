@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Swapa Detail
+vid: d_swapa_detail
+description: 'A list of Swapa Detail'
+weight: 0

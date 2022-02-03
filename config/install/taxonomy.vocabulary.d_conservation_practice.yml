@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig-pods
+name: Conservation Practice
+vid: d_conservation_practice
+description: 'A list of Conservation Practice'
+weight: 0

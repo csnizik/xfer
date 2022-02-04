@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Land Use Modifiers
 vid: d_land_use_modifiers
-description: 'A list of Land Use Modifiers'
+description: 'A list of Land Use Modifierss'
 weight: 0

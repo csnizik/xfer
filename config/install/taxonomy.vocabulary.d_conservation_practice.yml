@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Conservation Practice
 vid: d_conservation_practice
-description: 'A list of Conservation Practice'
+description: 'A list of Conservation Practices'
 weight: 0

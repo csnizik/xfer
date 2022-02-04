@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\cig-pods\Plugin\Asset\AssetType;
+namespace Drupal\cig_pods\Plugin\Asset\AssetType;
 
 use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
 /**

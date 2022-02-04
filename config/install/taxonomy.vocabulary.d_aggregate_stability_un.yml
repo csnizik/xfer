@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Aggregate Stability Unit
 vid: d_aggregate_stability_un
-description: 'A list of Aggregate Stability Unit'
+description: 'A list of Aggregate Stability Units'
 weight: 0

@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Resource Concern
 vid: d_resource_concern
-description: 'A list of Resource Concern'
+description: 'A list of Resource Concerns'
 weight: 0

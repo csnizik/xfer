@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Animal Type
 vid: d_animal_type
-description: 'A list of Animal Type'
+description: 'A list of Animal Types'
 weight: 0

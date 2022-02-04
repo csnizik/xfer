@@ -3,8 +3,8 @@ status: true
 dependencies:
   enforced:
     module:
-      - cig-pods
+      - cig_pods
 name: Infiltration Method
 vid: d_infiltration_method
-description: 'A list of Infiltration Method'
+description: 'A list of Infiltration Methods'
 weight: 0

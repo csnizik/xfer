@@ -1,0 +1,20 @@
+uuid: 9776cd7f-035a-4c4e-bf35-5bf925613eb6
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_phosphorus_method
+field_name: field_phosphorus_method
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

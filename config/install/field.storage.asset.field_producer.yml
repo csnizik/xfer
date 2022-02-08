@@ -1,0 +1,20 @@
+uuid: 72d718df-917c-4834-bce4-3c86a197964d
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_producer
+field_name: field_producer
+entity_type: asset
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 0f0739b3-b83e-4b53-9f68-f7435d6794ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_demo_trial
+    - field.storage.asset.field_laboratory_name
+id: asset.soil_health_demo_trial.field_laboratory_name
+field_name: field_laboratory_name
+entity_type: asset
+bundle: soil_health_demo_trial
+label: laboratory_name
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

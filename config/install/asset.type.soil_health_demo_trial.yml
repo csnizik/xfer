@@ -7,7 +7,7 @@ dependencies:
   module:
     - farm_location
 id: soil_health_demo_trial
-label: SoilHealthDemoTrial
+label: Soil Health Demo Trial
 description: 'Soil Health Demo Trial'
 workflow: asset_default
 new_revision: true

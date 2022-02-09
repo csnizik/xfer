@@ -1,0 +1,20 @@
+uuid: 6e713e71-1b0e-458a-8259-081fe55ab184
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_potassium_method
+field_name: field_potassium_method
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

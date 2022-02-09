@@ -1,0 +1,20 @@
+uuid: 533bd0f1-4415-4df6-a12f-7f5a31985445
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_bulk_density_core_diameter
+field_name: field_bulk_density_core_diameter
+entity_type: asset
+type: decimal
+settings:
+  precision: 10
+  scale: 1
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

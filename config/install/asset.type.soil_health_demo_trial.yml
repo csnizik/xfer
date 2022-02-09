@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+    - cig_pods
+  module:
+    - farm_location
+id: soil_health_demo_trial
+label: Soil Health Demo Trial
+description: 'Soil Health Demo Trial'
+workflow: asset_default
+new_revision: true

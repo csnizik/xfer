@@ -1,0 +1,20 @@
+uuid: 9d9e4ea7-246f-408e-a142-f208709a5662
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_ph_method
+field_name: field_ph_method
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

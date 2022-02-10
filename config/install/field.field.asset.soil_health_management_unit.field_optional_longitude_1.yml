@@ -1,0 +1,23 @@
+uuid: 0c30689b-874e-4a3e-9c58-ed5e7d5e8324
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_optional_longitude_1
+id: asset.soil_health_management_unit.field_optional_longitude_1
+field_name: field_optional_longitude_1
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Optional Longitude 1'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

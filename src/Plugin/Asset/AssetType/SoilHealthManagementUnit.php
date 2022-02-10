@@ -12,5 +12,6 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * )
    */
 class SoilHealthManagementUnit extends FarmAssetType {
+  
 
 }

@@ -1,0 +1,23 @@
+uuid: 85895176-637c-47d6-8236-104f59a31d1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_grazing_stocking_rate
+id: asset.soil_health_management_unit.field_grazing_stocking_rate
+field_name: field_grazing_stocking_rate
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Grazing Stocking Rate'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

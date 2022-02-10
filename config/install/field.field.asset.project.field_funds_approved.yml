@@ -1,0 +1,23 @@
+uuid: 0e52efc3-732c-4651-b16c-2c5d86d42031
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_funds_approved
+id: asset.project.field_funds_approved
+field_name: field_funds_approved
+entity_type: asset
+bundle: project
+label: 'Funds Approved'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

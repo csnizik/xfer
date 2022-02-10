@@ -1,15 +1,17 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: c63810b4-ed58-4158-8578-dbfafd3e1efb
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_final_report_url
+field_name: field_final_report_url
 entity_type: asset
-type: entity_reference
+type: string
 settings:
-  target_type: asset
+  max_length: 2000
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

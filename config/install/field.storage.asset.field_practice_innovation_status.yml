@@ -1,15 +1,14 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: aa9bf769-a8cd-4b1e-8edd-4da8e21dddc7
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_practice_innovation_status
+field_name: field_practice_innovation_status
 entity_type: asset
-type: entity_reference
-settings:
-  target_type: asset
+type: timestamp
+settings: {  }
 module: core
 locked: false
 cardinality: 1

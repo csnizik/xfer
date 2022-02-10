@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 7a69d3cb-68dd-4ecc-b112-65b26d2bf8df
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_irrigation_testing_chlorid
+field_name: field_irrigation_testing_chlorid
 entity_type: asset
-type: entity_reference
+type: integer
 settings:
-  target_type: asset
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

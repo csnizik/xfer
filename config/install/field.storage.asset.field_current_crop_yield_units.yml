@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: fd842305-1256-45ae-8e0f-a0216027cbe3
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+    - taxonomy
+id: asset.field_current_crop_yield_units
+field_name: field_current_crop_yield_units
 entity_type: asset
 type: entity_reference
 settings:
-  target_type: asset
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1

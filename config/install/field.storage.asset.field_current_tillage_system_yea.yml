@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 614180ac-33b5-45f4-ab1f-91544631b2e5
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_current_tillage_system_yea
+field_name: field_current_tillage_system_yea
 entity_type: asset
-type: entity_reference
+type: integer
 settings:
-  target_type: asset
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,23 @@
+uuid: bdbe0af2-ae3e-4ff7-94ff-7034dfa900f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_previous_tillage_system_ye
+id: asset.soil_health_management_unit.field_previous_tillage_system_ye
+field_name: field_previous_tillage_system_ye
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Previous Tillage System Years'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

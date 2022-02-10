@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 96e97a39-f535-441d-9b34-67581d2854b2
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+    - taxonomy
+id: asset.field_crop_rotation_years
+field_name: field_crop_rotation_years
 entity_type: asset
 type: entity_reference
 settings:
-  target_type: asset
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1

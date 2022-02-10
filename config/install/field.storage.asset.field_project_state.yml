@@ -1,18 +1,19 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 13f30029-51fb-4f7d-a083-4b940c40bcbb
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+    - taxonomy
+id: asset.field_project_state
+field_name: field_project_state
 entity_type: asset
 type: entity_reference
 settings:
-  target_type: asset
+  target_type: taxonomy_term
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

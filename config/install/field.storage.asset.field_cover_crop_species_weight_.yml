@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 65eb5eab-127e-4c06-9781-d564ba7dc786
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_cover_crop_species_weight_
+field_name: field_cover_crop_species_weight_
 entity_type: asset
-type: entity_reference
+type: decimal
 settings:
-  target_type: asset
+  precision: 10
+  scale: 2
 module: core
 locked: false
 cardinality: 1

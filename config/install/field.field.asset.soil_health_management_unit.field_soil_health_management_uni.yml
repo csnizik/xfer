@@ -1,0 +1,19 @@
+uuid: 2188cbee-2e37-42a4-ac55-614586620362
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_soil_health_management_uni
+id: asset.soil_health_management_unit.field_soil_health_management_uni
+field_name: field_soil_health_management_uni
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Soil Health Management Unit Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

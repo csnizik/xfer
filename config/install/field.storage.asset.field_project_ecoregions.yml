@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 88e10ae4-805e-454b-8141-6148aea432b5
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+    - taxonomy
+id: asset.field_project_ecoregions
+field_name: field_project_ecoregions
 entity_type: asset
 type: entity_reference
 settings:
-  target_type: asset
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1

@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: f339fd28-4ab1-4f53-8e1b-52b2a77fb59a
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_cover_crop_cost_per_acre
+field_name: field_cover_crop_cost_per_acre
 entity_type: asset
-type: entity_reference
+type: decimal
 settings:
-  target_type: asset
+  precision: 10
+  scale: 2
 module: core
 locked: false
 cardinality: 1

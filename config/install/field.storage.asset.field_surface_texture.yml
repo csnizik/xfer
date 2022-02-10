@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 5ea7b29b-3686-4246-92f8-ed20dd49e13b
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+    - taxonomy
+id: asset.field_surface_texture
+field_name: field_surface_texture
 entity_type: asset
 type: entity_reference
 settings:
-  target_type: asset
+  target_type: taxonomy_term
 module: core
 locked: false
 cardinality: 1

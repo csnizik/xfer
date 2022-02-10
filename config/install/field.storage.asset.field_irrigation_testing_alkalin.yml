@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: a53b8c75-39f5-4f0e-97b9-4b3fc7312dad
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_irrigation_testing_alkalin
+field_name: field_irrigation_testing_alkalin
 entity_type: asset
-type: entity_reference
+type: integer
 settings:
-  target_type: asset
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

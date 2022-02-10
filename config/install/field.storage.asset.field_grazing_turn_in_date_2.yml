@@ -1,15 +1,14 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 5b8385d3-556c-4d73-bce4-96dd9602f9b5
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_grazing_turn_in_date_2
+field_name: field_grazing_turn_in_date_2
 entity_type: asset
-type: entity_reference
-settings:
-  target_type: asset
+type: timestamp
+settings: {  }
 module: core
 locked: false
 cardinality: 1

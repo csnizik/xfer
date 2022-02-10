@@ -1,0 +1,21 @@
+uuid: 3d8be7f9-dd64-4795-bfa1-d80d40fa784e
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_signed_date
+id: asset.project.field_signed_date
+field_name: field_signed_date
+entity_type: asset
+bundle: project
+label: 'Signed Date'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 1643997450
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

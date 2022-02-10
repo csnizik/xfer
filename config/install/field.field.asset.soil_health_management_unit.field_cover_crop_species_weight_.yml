@@ -1,0 +1,23 @@
+uuid: 7b23e2ab-1a78-45f7-be65-2bde4ea97041
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_cover_crop_species_weight_
+id: asset.soil_health_management_unit.field_cover_crop_species_weight_
+field_name: field_cover_crop_species_weight_
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Cover Crop Species Weight Percent'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

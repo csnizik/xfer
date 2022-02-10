@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: d975c6c3-2c89-4f21-a356-13515c3015a1
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_funds_approved
+field_name: field_funds_approved
 entity_type: asset
-type: entity_reference
+type: decimal
 settings:
-  target_type: asset
+  precision: 11
+  scale: 2
 module: core
 locked: false
 cardinality: 1

@@ -1,0 +1,36 @@
+uuid: 5bbddd3a-4c4f-46ea-8ba9-9f2e923124c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_project_conservation_pract
+    - taxonomy.vocabulary.d_conservation_practice
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.project.field_project_conservation_pract
+field_name: field_project_conservation_pract
+entity_type: asset
+bundle: project
+label: 'Project Conservation Practice'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_conservation_practice: d_conservation_practice
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

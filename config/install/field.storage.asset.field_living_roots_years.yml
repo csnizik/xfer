@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 9ae48290-8951-4aac-9aae-8d6e1504ca9b
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_living_roots_years
+field_name: field_living_roots_years
 entity_type: asset
-type: entity_reference
+type: integer
 settings:
-  target_type: asset
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

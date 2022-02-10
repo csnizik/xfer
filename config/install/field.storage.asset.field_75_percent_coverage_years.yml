@@ -1,15 +1,16 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 7db48db0-1cc7-4561-90e4-d6461d372f22
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_75_percent_coverage_years
+field_name: field_75_percent_coverage_years
 entity_type: asset
-type: entity_reference
+type: integer
 settings:
-  target_type: asset
+  unsigned: false
+  size: normal
 module: core
 locked: false
 cardinality: 1

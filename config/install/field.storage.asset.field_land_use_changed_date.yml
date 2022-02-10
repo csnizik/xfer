@@ -1,15 +1,14 @@
-uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
+uuid: 29b135bf-70db-4478-8a9d-57208e686721
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_producer
-field_name: field_producer
+id: asset.field_land_use_changed_date
+field_name: field_land_use_changed_date
 entity_type: asset
-type: entity_reference
-settings:
-  target_type: asset
+type: timestamp
+settings: {  }
 module: core
 locked: false
 cardinality: 1

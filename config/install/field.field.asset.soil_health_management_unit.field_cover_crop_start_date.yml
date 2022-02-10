@@ -1,0 +1,21 @@
+uuid: 433a5e18-637e-4053-9d60-2e50868b6238
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_cover_crop_start_date
+id: asset.soil_health_management_unit.field_cover_crop_start_date
+field_name: field_cover_crop_start_date
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Cover Crop Start Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1644437559
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

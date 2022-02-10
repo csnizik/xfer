@@ -1,0 +1,23 @@
+uuid: 560dc187-1032-46b6-a55f-6779d0baf65b
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_total_annual_crops
+id: asset.soil_health_management_unit.field_total_annual_crops
+field_name: field_total_annual_crops
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Total Annual Crops'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

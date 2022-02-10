@@ -7,7 +7,7 @@ dependencies:
 id: asset.field_living_roots_years
 field_name: field_living_roots_years
 entity_type: asset
-type: integer
+type: float
 settings:
   unsigned: false
   size: normal

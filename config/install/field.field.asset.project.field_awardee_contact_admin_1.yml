@@ -9,7 +9,7 @@ id: asset.project.field_awardee_contact_admin_1
 field_name: field_awardee_contact_admin_1
 entity_type: asset
 bundle: project
-label: 'Awardee Contact Admin 1 ID'
+label: 'Awardee Contact Admin 1'
 description: ''
 required: false
 translatable: false

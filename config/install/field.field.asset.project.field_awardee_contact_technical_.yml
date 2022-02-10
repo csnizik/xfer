@@ -4,12 +4,12 @@ status: true
 dependencies:
   config:
     - asset.type.project
-    - field.storage.asset.field_awardee_contact_technical_
-id: asset.project.field_awardee_contact_technical_
-field_name: field_awardee_contact_technical_
+    - field.storage.asset.field_awardee_contact_technical
+id: asset.project.field_awardee_contact_technical
+field_name: field_awardee_contact_technical
 entity_type: asset
 bundle: project
-label: 'Awardee Contact Technical ID'
+label: 'Awardee Contact (Technical)'
 description: ''
 required: false
 translatable: false

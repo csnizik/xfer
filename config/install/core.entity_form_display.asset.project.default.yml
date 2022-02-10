@@ -5,12 +5,12 @@ dependencies:
   config:
     - asset.type.project
     - field.field.asset.project.field_agreement_number
-    - field.field.asset.project.field_applicant_type_id
+    - field.field.asset.project.field_applicant_type
     - field.field.asset.project.field_award_year
     - field.field.asset.project.field_awardee_contact_admin_1
-    - field.field.asset.project.field_awardee_contact_admin_2_id
+    - field.field.asset.project.field_awardee_contact_admin_2
     - field.field.asset.project.field_awardee_contact_technical_
-    - field.field.asset.project.field_awardee_id
+    - field.field.asset.project.field_awardee
     - field.field.asset.project.field_benefit_underserved_produc
     - field.field.asset.project.field_deliverables
     - field.field.asset.project.field_end_date
@@ -18,28 +18,28 @@ dependencies:
     - field.field.asset.project.field_final_project_evaluation_c
     - field.field.asset.project.field_final_report_receipt_posti
     - field.field.asset.project.field_final_report_url
-    - field.field.asset.project.field_funding_pool_id
+    - field.field.asset.project.field_funding_pool
     - field.field.asset.project.field_funds_approved
-    - field.field.asset.project.field_grant_type_id
-    - field.field.asset.project.field_innovation_results_id
+    - field.field.asset.project.field_grant_type
+    - field.field.asset.project.field_innovation_results
     - field.field.asset.project.field_keywords
     - field.field.asset.project.field_no_cost_extension
     - field.field.asset.project.field_nrcs_technical_contact
     - field.field.asset.project.field_nrcs_technical_contact_wor
     - field.field.asset.project.field_practice_innovation_statid
     - field.field.asset.project.field_practice_innovation_status
-    - field.field.asset.project.field_production_use_id
-    - field.field.asset.project.field_project_awardee_state_id
+    - field.field.asset.project.field_production_use
+    - field.field.asset.project.field_project_awardee_state
     - field.field.asset.project.field_project_background
     - field.field.asset.project.field_project_conservation_pract
     - field.field.asset.project.field_project_ecoregions
     - field.field.asset.project.field_project_regional_area
     - field.field.asset.project.field_project_resource_concern
-    - field.field.asset.project.field_project_scale_id
+    - field.field.asset.project.field_project_scale
     - field.field.asset.project.field_project_state
-    - field.field.asset.project.field_project_status_id
+    - field.field.asset.project.field_project_status
     - field.field.asset.project.field_project_title
-    - field.field.asset.project.field_project_type_id
+    - field.field.asset.project.field_project_type
     - field.field.asset.project.field_signed_date
 id: asset.project.default
 targetEntityType: asset
@@ -54,7 +54,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_applicant_type_id:
+  field_applicant_type:
     type: entity_reference_autocomplete
     weight: 19
     region: content
@@ -79,7 +79,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_awardee_contact_admin_2_id:
+  field_awardee_contact_admin_2:
     type: string_textfield
     weight: 30
     region: content
@@ -95,7 +95,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_awardee_id:
+  field_awardee:
     type: entity_reference_autocomplete
     weight: 27
     region: content
@@ -156,7 +156,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_funding_pool_id:
+  field_funding_pool:
     type: entity_reference_autocomplete
     weight: 25
     region: content
@@ -173,7 +173,7 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_grant_type_id:
+  field_grant_type:
     type: entity_reference_autocomplete
     weight: 20
     region: content
@@ -183,7 +183,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_innovation_results_id:
+  field_innovation_results:
     type: entity_reference_autocomplete
     weight: 21
     region: content
@@ -241,7 +241,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_production_use_id:
+  field_production_use:
     type: entity_reference_autocomplete
     weight: 26
     region: content
@@ -251,7 +251,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_project_awardee_state_id:
+  field_project_awardee_state:
     type: entity_reference_autocomplete
     weight: 28
     region: content
@@ -309,7 +309,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_project_scale_id:
+  field_project_scale:
     type: entity_reference_autocomplete
     weight: 24
     region: content
@@ -329,7 +329,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_project_status_id:
+  field_project_status:
     type: number
     weight: 18
     region: content
@@ -344,7 +344,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_project_type_id:
+  field_project_types:
     type: entity_reference_autocomplete
     weight: 22
     region: content

@@ -17,7 +17,7 @@ id: asset.soil_health_management_unit.field_shmu_land_use_current_modi
 field_name: field_shmu_land_use_current_modi
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'SHMU Land Use Current Modifiers ID'
+label: 'SHMU Land Use Current Modifiers'
 description: ''
 required: false
 translatable: false

@@ -1,4 +1,4 @@
-uuid: 72d718df-917c-4834-bce4-3c86a197964d
+uuid: 7c57402c-5a3a-4c96-8e84-c7ddf58e269f
 langcode: en
 status: true
 dependencies:
@@ -7,10 +7,9 @@ dependencies:
 id: asset.field_producer
 field_name: field_producer
 entity_type: asset
-type: integer
+type: entity_reference
 settings:
-  unsigned: false
-  size: normal
+  target_type: asset
 module: core
 locked: false
 cardinality: 1

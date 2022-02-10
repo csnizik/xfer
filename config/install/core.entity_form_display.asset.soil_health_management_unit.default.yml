@@ -68,7 +68,7 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_shmu_crop_rotation
     - field.field.asset.soil_health_management_unit.field_shmu_land_use_current_modi
     - field.field.asset.soil_health_management_unit.field_shmu_land_use_previous_mod
-    - field.field.asset.soil_health_management_unit.field_shmu_practices_addressed_i
+    - field.field.asset.soil_health_management_unit.field_shmu_practices_addressed
     - field.field.asset.soil_health_management_unit.field_shmu_resource_concern
     - field.field.asset.soil_health_management_unit.field_soil_health_management_uni
     - field.field.asset.soil_health_management_unit.field_surface_texture

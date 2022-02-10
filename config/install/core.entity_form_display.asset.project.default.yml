@@ -9,7 +9,7 @@ dependencies:
     - field.field.asset.project.field_award_year
     - field.field.asset.project.field_awardee_contact_admin_1
     - field.field.asset.project.field_awardee_contact_admin_2
-    - field.field.asset.project.field_awardee_contact_technical_
+    - field.field.asset.project.field_awardee_contact_technical
     - field.field.asset.project.field_awardee
     - field.field.asset.project.field_benefit_underserved_produc
     - field.field.asset.project.field_deliverables
@@ -26,7 +26,7 @@ dependencies:
     - field.field.asset.project.field_no_cost_extension
     - field.field.asset.project.field_nrcs_technical_contact
     - field.field.asset.project.field_nrcs_technical_contact_wor
-    - field.field.asset.project.field_practice_innovation_statid
+    - field.field.asset.project.field_practice_innovation_stat
     - field.field.asset.project.field_practice_innovation_status
     - field.field.asset.project.field_production_use
     - field.field.asset.project.field_project_awardee_state
@@ -87,7 +87,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_awardee_contact_technical_:
+  field_awardee_contact_technical:
     type: string_textfield
     weight: 31
     region: content
@@ -225,7 +225,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_practice_innovation_statid:
+  field_practice_innovation_stat:
     type: entity_reference_autocomplete
     weight: 23
     region: content

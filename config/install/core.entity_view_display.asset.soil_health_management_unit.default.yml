@@ -9,17 +9,17 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_cover_crop_cost_per_acre
     - field.field.asset.soil_health_management_unit.field_cover_crop_species_weight_
     - field.field.asset.soil_health_management_unit.field_cover_crop_start_date
-    - field.field.asset.soil_health_management_unit.field_cover_crop_type_id
+    - field.field.asset.soil_health_management_unit.field_cover_crop_type
     - field.field.asset.soil_health_management_unit.field_cover_crop_varieties
-    - field.field.asset.soil_health_management_unit.field_cover_crop_years_id
+    - field.field.asset.soil_health_management_unit.field_cover_crop_years
     - field.field.asset.soil_health_management_unit.field_crop_rotation_start_date
-    - field.field.asset.soil_health_management_unit.field_crop_rotation_years_id
+    - field.field.asset.soil_health_management_unit.field_crop_rotation_years
     - field.field.asset.soil_health_management_unit.field_current_crop_harvest_date
     - field.field.asset.soil_health_management_unit.field_current_crop_plant_date
     - field.field.asset.soil_health_management_unit.field_current_crop_yield
-    - field.field.asset.soil_health_management_unit.field_current_crop_yield_units_i
-    - field.field.asset.soil_health_management_unit.field_current_land_use_id
-    - field.field.asset.soil_health_management_unit.field_current_tillage_system_id
+    - field.field.asset.soil_health_management_unit.field_current_crop_yield_units
+    - field.field.asset.soil_health_management_unit.field_current_land_use
+    - field.field.asset.soil_health_management_unit.field_current_tillage_system
     - field.field.asset.soil_health_management_unit.field_current_tillage_system_yea
     - field.field.asset.soil_health_management_unit.field_grazing_stocking_rate
     - field.field.asset.soil_health_management_unit.field_grazing_turn_in_date_1
@@ -30,7 +30,7 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_grazing_turn_out_date_2
     - field.field.asset.soil_health_management_unit.field_grazing_turn_out_date_3
     - field.field.asset.soil_health_management_unit.field_grazing_turn_out_date_4
-    - field.field.asset.soil_health_management_unit.field_grazing_type_id
+    - field.field.asset.soil_health_management_unit.field_grazing_type
     - field.field.asset.soil_health_management_unit.field_irrigation_annual_applicat
     - field.field.asset.soil_health_management_unit.field_irrigation_annual_rate
     - field.field.asset.soil_health_management_unit.field_irrigation_arid_high_tunne
@@ -41,7 +41,7 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_irrigation_testing_sulfate
     - field.field.asset.soil_health_management_unit.field_irrigation_testing_tds
     - field.field.asset.soil_health_management_unit.field_irrigation_testing_water_p
-    - field.field.asset.soil_health_management_unit.field_irrigation_type_id
+    - field.field.asset.soil_health_management_unit.field_irrigation_type
     - field.field.asset.soil_health_management_unit.field_land_use_changed_date
     - field.field.asset.soil_health_management_unit.field_living_roots_months
     - field.field.asset.soil_health_management_unit.field_living_roots_years
@@ -54,24 +54,24 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_optional_longitude_2
     - field.field.asset.soil_health_management_unit.field_optional_longitude_3
     - field.field.asset.soil_health_management_unit.field_optional_longitude_4
-    - field.field.asset.soil_health_management_unit.field_previous_land_use_id
-    - field.field.asset.soil_health_management_unit.field_previous_tillage_system_id
+    - field.field.asset.soil_health_management_unit.field_previous_land_use
+    - field.field.asset.soil_health_management_unit.field_previous_tillage_system
     - field.field.asset.soil_health_management_unit.field_previous_tillage_system_ye
-    - field.field.asset.soil_health_management_unit.field_producer_id
+    - field.field.asset.soil_health_management_unit.field_producer
     - field.field.asset.soil_health_management_unit.field_required_latitude_1
     - field.field.asset.soil_health_management_unit.field_required_latitude_2
     - field.field.asset.soil_health_management_unit.field_required_longitude_1
     - field.field.asset.soil_health_management_unit.field_required_longitude_2
     - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation_
-    - field.field.asset.soil_health_management_unit.field_shmu_cover_crop_species_id
-    - field.field.asset.soil_health_management_unit.field_shmu_crop_id
+    - field.field.asset.soil_health_management_unit.field_shmu_cover_crop_species
+    - field.field.asset.soil_health_management_unit.field_shmu_crop
     - field.field.asset.soil_health_management_unit.field_shmu_crop_rotation
     - field.field.asset.soil_health_management_unit.field_shmu_land_use_current_modi
     - field.field.asset.soil_health_management_unit.field_shmu_land_use_previous_mod
-    - field.field.asset.soil_health_management_unit.field_shmu_practices_addressed_i
-    - field.field.asset.soil_health_management_unit.field_shmu_resource_concern_id
+    - field.field.asset.soil_health_management_unit.field_shmu_practices_addressed
+    - field.field.asset.soil_health_management_unit.field_shmu_resource_concern
     - field.field.asset.soil_health_management_unit.field_soil_health_management_uni
-    - field.field.asset.soil_health_management_unit.field_surface_texture_id
+    - field.field.asset.soil_health_management_unit.field_surface_texture
     - field.field.asset.soil_health_management_unit.field_total_annual_crops
     - field.field.asset.soil_health_management_unit.field_total_crop_species
     - field.field.asset.soil_health_management_unit.field_treatment_name
@@ -238,7 +238,7 @@ content:
     third_party_settings: {  }
     weight: 121
     region: content
-  field_cover_crop_type_id:
+  field_cover_crop_type:
     type: entity_reference_label
     label: above
     settings:
@@ -254,7 +254,7 @@ content:
     third_party_settings: {  }
     weight: 170
     region: content
-  field_cover_crop_years_id:
+  field_cover_crop_years:
     type: entity_reference_label
     label: above
     settings:
@@ -272,7 +272,7 @@ content:
     third_party_settings: {  }
     weight: 127
     region: content
-  field_crop_rotation_years_id:
+  field_crop_rotation_years:
     type: entity_reference_label
     label: above
     settings:
@@ -311,7 +311,7 @@ content:
     third_party_settings: {  }
     weight: 130
     region: content
-  field_current_crop_yield_units_i:
+  field_current_crop_yield_units:
     type: entity_reference_label
     label: above
     settings:
@@ -319,7 +319,7 @@ content:
     third_party_settings: {  }
     weight: 131
     region: content
-  field_current_land_use_id:
+  field_current_land_use:
     type: entity_reference_label
     label: above
     settings:
@@ -327,7 +327,7 @@ content:
     third_party_settings: {  }
     weight: 117
     region: content
-  field_current_tillage_system_id:
+  field_current_tillage_system:
     type: entity_reference_label
     label: above
     settings:
@@ -433,7 +433,7 @@ content:
     third_party_settings: {  }
     weight: 148
     region: content
-  field_grazing_type_id:
+  field_grazing_type:
     type: entity_reference_label
     label: above
     settings:
@@ -540,7 +540,7 @@ content:
     third_party_settings: {  }
     weight: 154
     region: content
-  field_irrigation_type_id:
+  field_irrigation_type:
     type: entity_reference_label
     label: above
     settings:
@@ -674,7 +674,7 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
-  field_previous_land_use_id:
+  field_previous_land_use:
     type: entity_reference_label
     label: above
     settings:
@@ -682,7 +682,7 @@ content:
     third_party_settings: {  }
     weight: 119
     region: content
-  field_previous_tillage_system_id:
+  field_previous_tillage_system:
     type: entity_reference_label
     label: above
     settings:
@@ -699,7 +699,7 @@ content:
     third_party_settings: {  }
     weight: 135
     region: content
-  field_producer_id:
+  field_producer:
     type: entity_reference_label
     label: above
     settings:
@@ -759,7 +759,7 @@ content:
     third_party_settings: {  }
     weight: 167
     region: content
-  field_shmu_cover_crop_species_id:
+  field_shmu_cover_crop_species:
     type: entity_reference_label
     label: above
     settings:
@@ -767,7 +767,7 @@ content:
     third_party_settings: {  }
     weight: 163
     region: content
-  field_shmu_crop_id:
+  field_shmu_crop:
     type: entity_reference_label
     label: above
     settings:
@@ -799,7 +799,7 @@ content:
     third_party_settings: {  }
     weight: 168
     region: content
-  field_shmu_practices_addressed_i:
+  field_shmu_practices_addressed:
     type: entity_reference_label
     label: above
     settings:
@@ -807,7 +807,7 @@ content:
     third_party_settings: {  }
     weight: 165
     region: content
-  field_shmu_resource_concern_id:
+  field_shmu_resource_concern:
     type: entity_reference_label
     label: above
     settings:
@@ -823,7 +823,7 @@ content:
     third_party_settings: {  }
     weight: 98
     region: content
-  field_surface_texture_id:
+  field_surface_texture:
     type: entity_reference_label
     label: above
     settings:

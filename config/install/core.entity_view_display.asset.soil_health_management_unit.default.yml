@@ -62,6 +62,9 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_required_latitude_2
     - field.field.asset.soil_health_management_unit.field_required_longitude_1
     - field.field.asset.soil_health_management_unit.field_required_longitude_2
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation2
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation3
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation4
     - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation_
     - field.field.asset.soil_health_management_unit.field_shmu_cover_crop_species
     - field.field.asset.soil_health_management_unit.field_shmu_crop
@@ -85,6 +88,8 @@ dependencies:
     - image
     - options
     - text
+_core:
+  default_config_hash: 5cnU_oxOpJfq99vkRDNqOvb4pSr6nGwtbO0MOrtVppc
 id: asset.soil_health_management_unit.default
 targetEntityType: asset
 bundle: soil_health_management_unit
@@ -750,6 +755,30 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 106
+    region: content
+  field_shmu_animal_type_rotation2:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 172
+    region: content
+  field_shmu_animal_type_rotation3:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 173
+    region: content
+  field_shmu_animal_type_rotation4:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 174
     region: content
   field_shmu_animal_type_rotation_:
     type: entity_reference_label

@@ -1,0 +1,21 @@
+uuid: 893b5463-a15c-450f-9a63-d95421e7a4e8
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_awardee_contact_technical
+field_name: field_awardee_contact_technical
+entity_type: asset
+type: string
+settings:
+  max_length: 50
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

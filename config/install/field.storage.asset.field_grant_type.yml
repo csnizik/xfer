@@ -1,0 +1,20 @@
+uuid: 4ada02f4-e9cb-4883-9cb4-aa1ddc3c4d1c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_grant_type
+field_name: field_grant_type
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

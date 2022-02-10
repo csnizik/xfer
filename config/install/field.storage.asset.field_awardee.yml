@@ -1,0 +1,20 @@
+uuid: 9b8b3d0f-c98e-4cdc-ad37-74cf73f61386
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_awardee
+field_name: field_awardee
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

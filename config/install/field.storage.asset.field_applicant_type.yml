@@ -1,0 +1,20 @@
+uuid: eaf3cc12-55d3-42ed-9671-589869ace3ec
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_applicant_type
+field_name: field_applicant_type
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

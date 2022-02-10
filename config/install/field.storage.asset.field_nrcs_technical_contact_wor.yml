@@ -1,0 +1,21 @@
+uuid: 7f7184a2-e3ef-428a-bab8-d3e50fa9e91e
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_nrcs_technical_contact_wor
+field_name: field_nrcs_technical_contact_wor
+entity_type: asset
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

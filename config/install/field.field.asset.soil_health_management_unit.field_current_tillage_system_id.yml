@@ -1,0 +1,36 @@
+uuid: 723e12d2-4034-41a0-a4fa-6b29885a47ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_current_tillage_system_id
+    - taxonomy.vocabulary.d_tillage_system
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.soil_health_management_unit.field_current_tillage_system_id
+field_name: field_current_tillage_system_id
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Current Tillage System ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_tillage_system: d_tillage_system
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

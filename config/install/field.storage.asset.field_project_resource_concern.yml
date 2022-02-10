@@ -1,0 +1,20 @@
+uuid: 48481bc1-3185-4c80-9deb-b94078b81e50
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_project_resource_concern
+field_name: field_project_resource_concern
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

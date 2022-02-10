@@ -1,0 +1,20 @@
+uuid: 9ae48290-8951-4aac-9aae-8d6e1504ca9b
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_living_roots_years
+field_name: field_living_roots_years
+entity_type: asset
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

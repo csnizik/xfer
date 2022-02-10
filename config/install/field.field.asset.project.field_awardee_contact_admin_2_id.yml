@@ -1,0 +1,19 @@
+uuid: ed1673cd-b9d4-48cb-bcc9-ba7beb416d49
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_awardee_contact_admin_2_id
+id: asset.project.field_awardee_contact_admin_2_id
+field_name: field_awardee_contact_admin_2_id
+entity_type: asset
+bundle: project
+label: 'Awardee Contact Admin 2 ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

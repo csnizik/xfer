@@ -1,0 +1,36 @@
+uuid: 14666adb-a6cc-4972-aca1-19034f9bd215
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_project_regional_area
+    - taxonomy.vocabulary.d_regional_area_tag
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.project.field_project_regional_area
+field_name: field_project_regional_area
+entity_type: asset
+bundle: project
+label: 'Project Regional Area'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_regional_area_tag: d_regional_area_tag
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,13 +1,14 @@
+uuid: 54b44d17-e35b-4d93-b9ba-65a27d441473
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
-    - cig_pods
-  module:
-    - farm_location
+      - cig_pods
+_core:
+  default_config_hash: "-_0oINpWQnVFicmMe8VshipQfyXuKbpmrwYJdSFP828"
 id: soil_health_management_unit
 label: SoilHealthManagementUnit
-description: 'Soil Health Management Unit'
+description: "Soil Health Management Unit"
 workflow: asset_default
 new_revision: true

@@ -1,0 +1,18 @@
+uuid: 3f5150ea-0565-4391-952a-b0baa7a3862f
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_latitude
+field_name: field_latitude
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

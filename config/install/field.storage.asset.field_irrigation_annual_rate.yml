@@ -1,0 +1,18 @@
+uuid: f456f847-dee8-4c64-b7b2-6571e568818d
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_irrigation_annual_rate
+field_name: field_irrigation_annual_rate
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

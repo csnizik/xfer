@@ -1,0 +1,18 @@
+uuid: 4bb06ae6-4e8f-4381-8f5b-5d21b788f8a4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_benefit_underserved_produc
+field_name: field_benefit_underserved_produc
+entity_type: asset
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

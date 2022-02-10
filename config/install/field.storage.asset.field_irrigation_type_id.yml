@@ -1,0 +1,20 @@
+uuid: c44ac8e1-9ba0-4421-8118-6983fc00bd5c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_irrigation_type_id
+field_name: field_irrigation_type_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

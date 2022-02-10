@@ -1,0 +1,21 @@
+uuid: 7dfdaee5-bb9f-4272-94bf-6d0c1653ce33
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_no_cost_extension
+field_name: field_no_cost_extension
+entity_type: asset
+type: string
+settings:
+  max_length: 50
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

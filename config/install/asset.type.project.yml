@@ -1,0 +1,14 @@
+uuid: da52545f-ae69-4675-8417-dd4b5db9f3c4
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: pzzMun48DRRbto-87YiCfqS3VUolC_KeAbY59Etk_t8
+id: project
+label: project
+description: Project
+workflow: asset_default
+new_revision: true

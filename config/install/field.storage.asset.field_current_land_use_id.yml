@@ -1,0 +1,20 @@
+uuid: 2929bbff-ba2a-4f78-97bb-1827ff8fbf83
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_current_land_use_id
+field_name: field_current_land_use_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

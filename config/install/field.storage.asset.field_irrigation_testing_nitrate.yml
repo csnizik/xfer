@@ -1,0 +1,20 @@
+uuid: e18b10f6-3cff-425c-8b7c-ff0bd3ebddbd
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_irrigation_testing_nitrate
+field_name: field_irrigation_testing_nitrate
+entity_type: asset
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

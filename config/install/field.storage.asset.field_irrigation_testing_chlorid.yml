@@ -1,0 +1,20 @@
+uuid: 7a69d3cb-68dd-4ecc-b112-65b26d2bf8df
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_irrigation_testing_chlorid
+field_name: field_irrigation_testing_chlorid
+entity_type: asset
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

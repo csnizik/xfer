@@ -1,0 +1,21 @@
+uuid: 712dd89d-d0b2-492e-89f5-dd8c43b2f380
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_map_unit_symbol
+field_name: field_map_unit_symbol
+entity_type: asset
+type: string
+settings:
+  max_length: 20
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: e3cebe89-b2db-453a-b336-089b57993455
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_75_percent_coverage_months
+id: asset.soil_health_management_unit.field_75_percent_coverage_months
+field_name: field_75_percent_coverage_months
+entity_type: asset
+bundle: soil_health_management_unit
+label: '75 Percent Coverage Months'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

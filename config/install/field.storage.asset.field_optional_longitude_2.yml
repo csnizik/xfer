@@ -1,0 +1,18 @@
+uuid: 8fddd166-3f04-4345-addb-1b285b625f77
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_optional_longitude_2
+field_name: field_optional_longitude_2
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

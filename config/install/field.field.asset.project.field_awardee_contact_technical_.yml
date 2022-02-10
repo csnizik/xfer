@@ -1,0 +1,19 @@
+uuid: 7c5c1be9-4133-4b28-9697-083c25231b8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_awardee_contact_technical_
+id: asset.project.field_awardee_contact_technical_
+field_name: field_awardee_contact_technical_
+entity_type: asset
+bundle: project
+label: 'Awardee Contact Technical ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,20 @@
+uuid: 6f946d90-491f-4c24-8019-d285267bd182
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_project_type_id
+field_name: field_project_type_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

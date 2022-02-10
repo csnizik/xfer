@@ -1,0 +1,14 @@
+uuid: b4d2667e-9c80-44d5-9340-6f1f5c84cde8
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: cahHoMF2Wz83_JzZ2NIvVOEj1drD7f_kN0M6wCLIZXw
+id: producer
+label: producer
+description: Producer
+workflow: asset_default
+new_revision: true

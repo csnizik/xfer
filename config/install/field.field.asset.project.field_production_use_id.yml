@@ -1,0 +1,36 @@
+uuid: 58610569-d01b-4b1b-9c9c-62783decd490
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_production_use_id
+    - taxonomy.vocabulary.d_production_use
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.project.field_production_use_id
+field_name: field_production_use_id
+entity_type: asset
+bundle: project
+label: 'Production Use ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_production_use: d_production_use
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

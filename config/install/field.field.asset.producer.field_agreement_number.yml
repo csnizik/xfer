@@ -1,0 +1,19 @@
+uuid: b370ccff-af82-4f7f-97e7-cead605a0c19
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.producer
+    - field.storage.asset.field_agreement_number
+id: asset.producer.field_agreement_number
+field_name: field_agreement_number
+entity_type: asset
+bundle: producer
+label: 'Agreement Number'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

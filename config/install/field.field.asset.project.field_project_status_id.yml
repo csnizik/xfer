@@ -1,0 +1,23 @@
+uuid: f808627d-1832-4851-af60-e3f23734d78c
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_project_status_id
+id: asset.project.field_project_status_id
+field_name: field_project_status_id
+entity_type: asset
+bundle: project
+label: 'Project Status ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

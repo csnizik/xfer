@@ -1,0 +1,19 @@
+uuid: 8fa20764-42e6-40b1-aa36-a245a55f3ea5
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_treatment_name
+id: asset.soil_health_management_unit.field_treatment_name
+field_name: field_treatment_name
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Treatment Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

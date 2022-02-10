@@ -1,0 +1,19 @@
+uuid: 723ca029-3190-4e05-b084-c95df898ad04
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_treatment_narrative
+id: asset.soil_health_management_unit.field_treatment_narrative
+field_name: field_treatment_narrative
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Treatment Narrative'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,20 @@
+uuid: 4810837a-b291-4dda-8442-8c05a5c5b2f1
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_cover_crop_years_id
+field_name: field_cover_crop_years_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

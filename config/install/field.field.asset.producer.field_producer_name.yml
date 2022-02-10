@@ -1,0 +1,19 @@
+uuid: 9649d24c-4e37-4033-a666-81e7c20aa371
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.producer
+    - field.storage.asset.field_producer_name
+id: asset.producer.field_producer_name
+field_name: field_producer_name
+entity_type: asset
+bundle: producer
+label: 'Producer Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

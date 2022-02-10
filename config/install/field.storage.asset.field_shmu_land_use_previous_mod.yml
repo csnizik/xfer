@@ -1,0 +1,20 @@
+uuid: d51700dd-20e5-410a-8069-440f06bd480a
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_shmu_land_use_previous_mod
+field_name: field_shmu_land_use_previous_mod
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

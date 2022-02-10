@@ -1,0 +1,21 @@
+uuid: d3ee6bb1-e653-4251-8a63-53957376d4d9
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_nrcs_technical_contact
+field_name: field_nrcs_technical_contact
+entity_type: asset
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

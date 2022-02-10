@@ -1,0 +1,20 @@
+uuid: 88e10ae4-805e-454b-8141-6148aea432b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_project_ecoregions
+field_name: field_project_ecoregions
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

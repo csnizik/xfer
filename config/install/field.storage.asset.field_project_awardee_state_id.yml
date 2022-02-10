@@ -1,0 +1,20 @@
+uuid: 5459ad12-1679-4a28-9f09-7367794068ae
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_project_awardee_state_id
+field_name: field_project_awardee_state_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

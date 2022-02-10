@@ -1,0 +1,20 @@
+uuid: b99a8e3a-c1ad-4d16-9105-87a2ee4db5c4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_shmu_cover_crop_species_id
+field_name: field_shmu_cover_crop_species_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

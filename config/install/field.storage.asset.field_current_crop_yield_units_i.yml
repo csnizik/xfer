@@ -1,0 +1,20 @@
+uuid: fd842305-1256-45ae-8e0f-a0216027cbe3
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_current_crop_yield_units_i
+field_name: field_current_crop_yield_units_i
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

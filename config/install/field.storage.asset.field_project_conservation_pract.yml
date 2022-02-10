@@ -1,0 +1,20 @@
+uuid: 500b0e19-5526-4dd1-a288-a09e4661e43a
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_project_conservation_pract
+field_name: field_project_conservation_pract
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

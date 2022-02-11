@@ -27,7 +27,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      unit: unit
+      d_land_use: d_land_use
     sort:
       field: name
       direction: asc

@@ -7,7 +7,7 @@ dependencies:
 id: asset.field_irrigation_testing_nitrate
 field_name: field_irrigation_testing_nitrate
 entity_type: asset
-type: integer
+type: float
 settings:
   unsigned: false
   size: normal

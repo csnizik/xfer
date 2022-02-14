@@ -7,7 +7,7 @@ dependencies:
 id: asset.field_75_percent_coverage_years
 field_name: field_75_percent_coverage_years
 entity_type: asset
-type: integer
+type: float
 settings:
   unsigned: false
   size: normal

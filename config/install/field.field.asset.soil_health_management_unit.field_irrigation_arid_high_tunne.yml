@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_arid_high_tunne
 field_name: field_irrigation_arid_high_tunne
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Arid High Tunnels'
+label: 'Irrigation in Arid Climate/High Tunnel?'
 description: ''
 required: false
 translatable: false

@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_cover_crop_varieties
 field_name: field_cover_crop_varieties
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Cover Crop Varieties'
+label: 'Cover Crop Varieties or Cultivars'
 description: ''
 required: false
 translatable: false

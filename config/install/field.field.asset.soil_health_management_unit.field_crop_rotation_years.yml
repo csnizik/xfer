@@ -17,7 +17,7 @@ id: asset.soil_health_management_unit.field_crop_rotation_years
 field_name: field_crop_rotation_years
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Crop Rotation Years'
+label: 'Years of a Typical Crop Rotation'
 description: ''
 required: false
 translatable: false

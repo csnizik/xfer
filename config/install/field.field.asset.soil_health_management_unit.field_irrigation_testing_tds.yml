@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_tds
 field_name: field_irrigation_testing_tds
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing TDS'
+label: 'Irrigation Testing Total Dissolved Solids (ppm)'
 description: ''
 required: false
 translatable: false

@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_cover_crop_start_date
 field_name: field_cover_crop_start_date
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Cover Crop Start Date'
+label: 'Start Date of Current Cover Crop'
 description: ''
 required: false
 translatable: false

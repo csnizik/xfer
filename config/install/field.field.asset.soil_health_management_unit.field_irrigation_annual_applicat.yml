@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_annual_applicat
 field_name: field_irrigation_annual_applicat
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Annual Applications'
+label: 'Irrigation Applications per Year'
 description: ''
 required: false
 translatable: false

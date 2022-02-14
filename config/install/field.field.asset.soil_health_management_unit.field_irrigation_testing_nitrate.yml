@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_nitrate
 field_name: field_irrigation_testing_nitrate
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing Nitrates'
+label: 'Irrigation Testing Nitrates (ppm)'
 description: ''
 required: false
 translatable: false

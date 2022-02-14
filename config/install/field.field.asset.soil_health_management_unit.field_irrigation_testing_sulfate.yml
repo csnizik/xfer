@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_sulfate
 field_name: field_irrigation_testing_sulfate
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing Sulfates'
+label: 'Irrigation Testing Sulfates (ppm)'
 description: ''
 required: false
 translatable: false

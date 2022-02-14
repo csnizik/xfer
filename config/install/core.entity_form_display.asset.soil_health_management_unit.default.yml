@@ -62,6 +62,9 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_required_latitude_2
     - field.field.asset.soil_health_management_unit.field_required_longitude_1
     - field.field.asset.soil_health_management_unit.field_required_longitude_2
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation2
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation3
+    - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation4
     - field.field.asset.soil_health_management_unit.field_shmu_animal_type_rotation_
     - field.field.asset.soil_health_management_unit.field_shmu_cover_crop_species
     - field.field.asset.soil_health_management_unit.field_shmu_crop
@@ -83,11 +86,11 @@ dependencies:
     - layout_discovery
 third_party_settings:
   field_layout:
-    id: layout_twocol_bricks
+    id: layout_onecol
     settings:
       label: ''
 _core:
-  default_config_hash: zXQKPIdvU_Uy4vUWBn6jvxjg8lb2nIDF1M6hUpTXrmw
+  default_config_hash: nY9X8yBqxdMHlFGZ4_UFbLHKMLhOWAv4SIamIGuFS-0
 id: asset.soil_health_management_unit.default
 targetEntityType: asset
 bundle: soil_health_management_unit
@@ -96,7 +99,7 @@ content:
   75_percent_coverage_months:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -104,7 +107,7 @@ content:
   75_percent_coverage_years:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -112,7 +115,7 @@ content:
   cover_crop_start_date:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -120,7 +123,7 @@ content:
   created_by:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -128,7 +131,7 @@ content:
   created_date:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -136,7 +139,7 @@ content:
   current_tillage_system_years:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -144,7 +147,7 @@ content:
   d_cover_crop_type:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -154,7 +157,7 @@ content:
   d_cover_crop_years:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -164,7 +167,7 @@ content:
   d_crop_rotation_years:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -174,7 +177,7 @@ content:
   d_grazing_type:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -184,7 +187,7 @@ content:
   d_irrigation_type:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -194,7 +197,7 @@ content:
   d_surface_texture:
     type: entity_reference_autocomplete
     weight: -50
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -203,93 +206,86 @@ content:
     third_party_settings: {  }
   field_75_percent_coverage_months:
     type: number
-    weight: 49
-    region: middle
+    weight: 800
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_75_percent_coverage_years:
     type: number
-    weight: 50
-    region: middle
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_cover_crop_cost_per_acre:
-    type: number
-    weight: 23
-    region: middle
+    weight: 801
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_cover_crop_species_weight_:
     type: number
-    weight: 71
-    region: middle
+    weight: 311
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_cover_crop_start_date:
     type: datetime_timestamp
-    weight: 21
-    region: middle
+    weight: 301
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_cover_crop_type:
     type: options_select
-    weight: 20
-    region: middle
+    weight: 300
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_cover_crop_varieties:
     type: string_textfield
-    weight: 70
-    region: middle
+    weight: 310
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   field_cover_crop_years:
     type: options_select
-    weight: 24
-    region: middle
+    weight: 303
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_crop_rotation_start_date:
     type: datetime_timestamp_optional
-    weight: 27
-    region: middle
+    weight: 405
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_crop_rotation_years:
     type: options_select
-    weight: 25
-    region: middle
+    weight: 400
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_current_crop_harvest_date:
     type: datetime_timestamp
     weight: 29
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_current_crop_plant_date:
     type: datetime_timestamp
     weight: 28
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_current_crop_yield:
     type: number
     weight: 30
-    region: middle
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_current_crop_yield_units_i:
     type: entity_reference_autocomplete
     weight: 31
-    region: middle
+    region: content
     settings:
       match_operator: CONTAINS
       match_limit: 10
@@ -298,265 +294,279 @@ content:
     third_party_settings: {  }
   field_current_land_use:
     type: options_select
-    weight: 17
-    region: first_above
+    weight: 202
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_current_tillage_system:
     type: options_select
-    weight: 32
-    region: middle
+    weight: 500
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_current_tillage_system_yea:
     type: number
-    weight: 33
-    region: middle
+    weight: 501
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_grazing_stocking_rate:
     type: number
-    weight: 40
-    region: middle
+    weight: 701
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_grazing_turn_in_date_1:
     type: datetime_timestamp
-    weight: 41
-    region: middle
+    weight: 703
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_in_date_2:
     type: datetime_timestamp
-    weight: 42
-    region: middle
+    weight: 706
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_in_date_3:
     type: datetime_timestamp
-    weight: 43
-    region: middle
+    weight: 709
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_in_date_4:
     type: datetime_timestamp
-    weight: 44
-    region: middle
+    weight: 712
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_out_date_1:
     type: datetime_timestamp
-    weight: 45
-    region: middle
+    weight: 704
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_out_date_2:
     type: datetime_timestamp
-    weight: 46
-    region: middle
+    weight: 707
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_out_date_3:
     type: datetime_timestamp
-    weight: 47
-    region: middle
+    weight: 710
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_turn_out_date_4:
     type: datetime_timestamp
-    weight: 48
-    region: middle
+    weight: 713
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_grazing_type:
     type: options_select
-    weight: 39
-    region: middle
+    weight: 700
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_irrigation_annual_applicat:
     type: number
-    weight: 38
-    region: middle
+    weight: 602
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_annual_rate:
     type: number
-    weight: 37
-    region: middle
+    weight: 601
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_arid_high_tunne:
     type: boolean_checkbox
-    weight: 53
-    region: middle
+    weight: 900
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_irrigation_testing_alkalin:
     type: number
-    weight: 57
-    region: middle
+    weight: 904
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_chlorid:
     type: number
-    weight: 58
-    region: middle
+    weight: 905
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_nitrate:
     type: number
-    weight: 60
-    region: middle
+    weight: 907
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_sar:
     type: number
-    weight: 55
-    region: middle
+    weight: 902
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_sulfate:
     type: number
-    weight: 59
-    region: middle
+    weight: 906
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_tds:
     type: number
-    weight: 56
-    region: middle
+    weight: 903
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_testing_water_p:
     type: number
-    weight: 54
-    region: middle
+    weight: 901
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_irrigation_type:
     type: options_select
-    weight: 36
-    region: middle
+    weight: 600
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_land_use_changed_date:
     type: datetime_timestamp
-    weight: 16
-    region: middle
+    weight: 205
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_living_roots_months:
     type: number
-    weight: 51
-    region: middle
+    weight: 802
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_living_roots_years:
     type: number
-    weight: 52
-    region: middle
+    weight: 803
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_map_unit_symbol:
-    type: string_textfield
-    weight: 3
-    region: middle
-    settings:
-      size: 60
-      placeholder: 'Ex. 2szfp'
-    third_party_settings: {  }
   field_previous_land_use:
     type: options_select
-    weight: 19
-    region: first_above
+    weight: 203
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_previous_tillage_system:
     type: options_select
-    weight: 34
-    region: middle
+    weight: 502
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_previous_tillage_system_ye:
     type: number
-    weight: 35
-    region: middle
+    weight: 503
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_producer:
     type: options_select
-    weight: 2
-    region: top
+    weight: 102
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_shmu_animal_type_rotation2:
+    type: options_select
+    weight: 705
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_shmu_animal_type_rotation3:
+    type: options_select
+    weight: 708
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_shmu_animal_type_rotation4:
+    type: options_select
+    weight: 711
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_animal_type_rotation_:
     type: options_select
-    weight: 67
-    region: middle
+    weight: 702
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_cover_crop_species:
-    type: options_select
-    weight: 63
-    region: middle
-    settings: {  }
+    type: entity_reference_autocomplete
+    weight: 302
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_shmu_crop:
     type: options_select
     weight: 62
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_crop_rotation:
     type: options_select
-    weight: 69
-    region: middle
+    weight: 404
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_land_use_current_modi:
     type: options_select
-    weight: 64
-    region: middle
+    weight: 201
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_land_use_previous_mod:
     type: options_select
-    weight: 68
-    region: middle
+    weight: 204
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_practices_addressed:
     type: options_select
     weight: 65
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_shmu_resource_concern:
     type: options_select
     weight: 66
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_soil_health_management_uni:
     type: string_textfield
-    weight: 0
-    region: top
+    weight: 99
+    region: content
     settings:
       size: 60
       placeholder: 'Ex. Control1A'
@@ -564,27 +574,27 @@ content:
   field_surface_texture:
     type: options_select
     weight: 18
-    region: middle
+    region: content
     settings: {  }
     third_party_settings: {  }
   field_total_annual_crops:
     type: number
-    weight: 26
-    region: middle
+    weight: 402
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_total_crop_species:
     type: number
-    weight: 22
-    region: middle
+    weight: 401
+    region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_treatment_name:
     type: string_textfield
-    weight: 1
-    region: top
+    weight: 101
+    region: content
     settings:
       size: 60
       placeholder: 'Ex. Conventional Tillage, Cover Crop Mix'
@@ -592,7 +602,7 @@ content:
   grazing_stocking_rate:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -600,7 +610,7 @@ content:
   grazing_turn_in_date_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -608,7 +618,7 @@ content:
   grazing_turn_in_date_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -616,7 +626,7 @@ content:
   grazing_turn_in_date_3:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -624,7 +634,7 @@ content:
   grazing_turn_in_date_4:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -632,7 +642,7 @@ content:
   grazing_turn_out_date_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -640,7 +650,7 @@ content:
   grazing_turn_out_date_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -648,7 +658,7 @@ content:
   grazing_turn_out_date_3:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -656,15 +666,15 @@ content:
   grazing_turn_out_date_4:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   intrinsic_geometry:
     type: farm_map_geofield
-    weight: 0
-    region: top
+    weight: 100
+    region: content
     settings:
       display_raw_geometry: true
       populate_file_field: false
@@ -672,7 +682,7 @@ content:
   irrigation_annual_applications:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -680,7 +690,7 @@ content:
   irrigation_annual_rate:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -688,7 +698,7 @@ content:
   irrigation_arid_high_tunnels:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -696,7 +706,7 @@ content:
   irrigation_testing_alkalinity:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -704,7 +714,7 @@ content:
   irrigation_testing_chlorides:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -712,7 +722,7 @@ content:
   irrigation_testing_nitrates:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -720,7 +730,7 @@ content:
   irrigation_testing_sar:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -728,7 +738,7 @@ content:
   irrigation_testing_sulfates:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -736,7 +746,7 @@ content:
   irrigation_testing_tds:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -744,7 +754,7 @@ content:
   irrigation_testing_water_ph:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -752,7 +762,7 @@ content:
   land_use_changed_date:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -760,7 +770,7 @@ content:
   last_modified_by:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -768,7 +778,7 @@ content:
   last_modified_date:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -776,7 +786,7 @@ content:
   map_unit_symbol:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -784,7 +794,7 @@ content:
   optional_latitude_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -792,7 +802,7 @@ content:
   optional_latitude_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -800,7 +810,7 @@ content:
   optional_latitude_3:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -808,7 +818,7 @@ content:
   optional_latitude_4:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -816,7 +826,7 @@ content:
   optional_longitude_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -824,7 +834,7 @@ content:
   optional_longitude_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -832,7 +842,7 @@ content:
   optional_longitude_3:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -840,7 +850,7 @@ content:
   optional_longitude_4:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -848,7 +858,7 @@ content:
   previous_tillage_system_years:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -856,7 +866,7 @@ content:
   required_latitude_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -864,7 +874,7 @@ content:
   required_latitude_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -872,7 +882,7 @@ content:
   required_longitude_1:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -880,7 +890,7 @@ content:
   required_longitude_2:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -888,7 +898,7 @@ content:
   soil_health_management_unit_name:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -896,7 +906,7 @@ content:
   total_crop_species:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -904,7 +914,7 @@ content:
   treatment_name:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -912,7 +922,7 @@ content:
   treatment_narrative:
     type: string_textfield
     weight: 10
-    region: middle
+    region: content
     settings:
       size: 60
       placeholder: ''
@@ -920,7 +930,9 @@ content:
 hidden:
   created: true
   data: true
+  field_cover_crop_cost_per_acre: true
   field_current_crop_yield_units: true
+  field_map_unit_symbol: true
   field_optional_latitude_1: true
   field_optional_latitude_2: true
   field_optional_latitude_3: true

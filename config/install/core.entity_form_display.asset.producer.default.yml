@@ -1,0 +1,65 @@
+uuid: f17d8889-7c4d-4ef0-aba2-5e4ce236fa2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.producer
+    - field.field.asset.producer.field_agreement_number
+    - field.field.asset.producer.field_latitude
+    - field.field.asset.producer.field_longitude
+    - field.field.asset.producer.field_producer_name
+  module:
+    - field_layout
+    - geofield
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+id: asset.producer.default
+targetEntityType: asset
+bundle: producer
+mode: default
+content:
+  field_agreement_number:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  intrinsic_geometry:
+    type: geofield_latlon
+    weight: 96
+    region: content
+    settings:
+      html5_geolocation: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: -100
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  data: true
+  field_latitude: true
+  field_longitude: true
+  field_producer_name: true
+  file: true
+  flag: true
+  geometry: true
+  id_tag: true
+  image: true
+  is_fixed: true
+  is_location: true
+  location: true
+  notes: true
+  parent: true
+  status: true
+  uid: true

@@ -17,7 +17,7 @@ id: asset.soil_health_management_unit.field_cover_crop_years
 field_name: field_cover_crop_years
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Cover Crop Years'
+label: 'Cover Crop History, Years'
 description: ''
 required: false
 translatable: false

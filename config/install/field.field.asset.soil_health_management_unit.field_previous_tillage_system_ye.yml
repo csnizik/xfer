@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_previous_tillage_system_ye
 field_name: field_previous_tillage_system_ye
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Previous Tillage System Years'
+label: 'Years in Previous Tillage System'
 description: ''
 required: false
 translatable: false

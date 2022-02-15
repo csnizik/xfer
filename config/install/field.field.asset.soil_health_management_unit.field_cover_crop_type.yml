@@ -17,7 +17,7 @@ id: asset.soil_health_management_unit.field_cover_crop_type
 field_name: field_cover_crop_type
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Cover Crop Type'
+label: 'Current Cover Crop System Type'
 description: ''
 required: false
 translatable: false

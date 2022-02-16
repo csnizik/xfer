@@ -1,0 +1,23 @@
+uuid: 1f15cac0-0235-4b17-836e-c983c04c3e7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_equipment_hp
+id: asset.operation.field_equipment_hp
+field_name: field_equipment_hp
+entity_type: asset
+bundle: operation
+label: 'Equipment HP'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: gHJJeZ1nPaH_6xk_tFAHcfOuXNB40Bi2DfwpS3ntVWw
 id: asset.field_shmu_practices_addressed
 field_name: field_shmu_practices_addressed
 entity_type: asset

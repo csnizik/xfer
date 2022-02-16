@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: yUuru8FqlpVasR732TCAKbjquiPjsSFzusuTiclem3I
 id: asset.field_total_annual_crops
 field_name: field_total_annual_crops
 entity_type: asset

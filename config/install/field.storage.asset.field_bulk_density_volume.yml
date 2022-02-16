@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: NBdntQ3ancFJkvz02Kj1Ji0sjE6ygY0tGB01E7pKUWg
 id: asset.field_bulk_density_volume
 field_name: field_bulk_density_volume
 entity_type: asset

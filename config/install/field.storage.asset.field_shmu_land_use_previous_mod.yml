@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: uh4N2BNs99y7JznfXN0xF4Qkbr9et6cO3sSsPTUJVpI
 id: asset.field_shmu_land_use_previous_mod
 field_name: field_shmu_land_use_previous_mod
 entity_type: asset

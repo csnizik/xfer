@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: H6Iw13JW7U2OVPdLnyR6Xb3x_PpwJdcae2qCg-z4zRQ
 id: asset.field_cover_crop_varieties
 field_name: field_cover_crop_varieties
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: _JIeeBN0KtVyPhVPfMzittf21YDA41c6Nie55ktAFM0
 id: asset.field_manganese_method
 field_name: field_manganese_method
 entity_type: asset

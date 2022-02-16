@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: OI4IvLjgOAtmOzoKpmnE9QLFuUyuyme--F1hRzMQyD8
 id: asset.field_grazing_stocking_rate
 field_name: field_grazing_stocking_rate
 entity_type: asset

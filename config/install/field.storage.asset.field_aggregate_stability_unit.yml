@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: LVUz7GSny8u_1ekSuKAnHxLL-X3bw_E68aw_m_GFaC4
 id: asset.field_aggregate_stability_unit
 field_name: field_aggregate_stability_unit
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: CPk6_wF_wJ-0UI8Ru4vrRuI-9ZAkYBh23XfloRGcyWA
 id: asset.field_previous_tillage_system
 field_name: field_previous_tillage_system
 entity_type: asset

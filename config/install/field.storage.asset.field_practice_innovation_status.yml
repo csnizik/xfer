@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: lfjRNmuixOOClF2L9lbzGVeLTcFlhwJo_hY77Vhc8uY
 id: asset.field_practice_innovation_status
 field_name: field_practice_innovation_status
 entity_type: asset

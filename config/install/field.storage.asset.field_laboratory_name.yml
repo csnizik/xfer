@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: sc8tYDzwPXTgvhjSjucyZPTF5e6Lu7Spv475hk2ih80
 id: asset.field_laboratory_name
 field_name: field_laboratory_name
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: x0IihkULGR0KlfMawAFcuMWJg0GmTI6cm--px2tBW30
 id: asset.field_surface_texture
 field_name: field_surface_texture
 entity_type: asset

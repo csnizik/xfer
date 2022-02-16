@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: zKbTym_HvkwqC9LZCK07I8I-g7xAmniZbXAYtoL4VkE
 id: asset.field_funds_approved
 field_name: field_funds_approved
 entity_type: asset

@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: c4_Gp2ekLNn54FKe2A3K6SNRKhmkcXyOrEb46lUL3hY
 id: asset.field_current_tillage_system_yea
 field_name: field_current_tillage_system_yea
 entity_type: asset

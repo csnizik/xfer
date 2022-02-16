@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: YbiHfDUewdTdgLCzSw3mPJLM6j4rksLxQqSGtarGt5M
 id: asset.field_environmental_evaluated
 field_name: field_environmental_evaluated
 entity_type: asset

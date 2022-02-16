@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: flIbmqOMss4ST8mBwCKLMXbdRCeKXLO5-Hv4VAKBFHs
 id: asset.field_alum
 field_name: field_alum
 entity_type: asset

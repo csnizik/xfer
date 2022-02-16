@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: EVJtcTBy6JGS3UNpo6ZUhuyN79bS1M_qqBX3g7nw_Qg
 id: asset.field_infiltration_method
 field_name: field_infiltration_method
 entity_type: asset

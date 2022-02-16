@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: C-1ylOidlCsVpH5q2vXnpU9On4G3SxaIhpeZAnB2LPk
 id: asset.field_crop_rotation_start_date
 field_name: field_crop_rotation_start_date
 entity_type: asset

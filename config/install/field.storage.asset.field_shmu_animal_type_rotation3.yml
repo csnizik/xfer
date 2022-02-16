@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: o8RmqDC7VIjX5tyw7Kxx4QRb1GF7I1DGm8t3cn9ryqQ
 id: asset.field_shmu_animal_type_rotation3
 field_name: field_shmu_animal_type_rotation3
 entity_type: asset

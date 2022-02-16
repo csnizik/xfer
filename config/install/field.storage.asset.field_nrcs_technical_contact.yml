@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 2ZNYdSryuVQb-jJYesrF-8VJKduKL9yR9lSpPRxtAsg
 id: asset.field_nrcs_technical_contact
 field_name: field_nrcs_technical_contact
 entity_type: asset

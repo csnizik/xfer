@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: Z8QiHkl2OpEl-c6j-i6GpFgau-0gOmXMi64GXmtX8p4
 id: asset.field_soil_health_demo_trial
 field_name: field_soil_health_demo_trial
 entity_type: asset

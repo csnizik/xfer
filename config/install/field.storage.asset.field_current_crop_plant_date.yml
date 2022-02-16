@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: jT9iglcqDTQWcScnZLVeAUnyKMPDIUolaNOWi2OY-KQ
 id: asset.field_current_crop_plant_date
 field_name: field_current_crop_plant_date
 entity_type: asset

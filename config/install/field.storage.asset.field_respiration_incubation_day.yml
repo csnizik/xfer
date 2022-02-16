@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: _dJeamfPNddbB7Q3sL0zULNAmWe2mp9xlM8t--dh3So
 id: asset.field_respiration_incubation_day
 field_name: field_respiration_incubation_day
 entity_type: asset

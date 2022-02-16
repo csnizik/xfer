@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: biaNCMgii1x6ynsllsZlVbYzb5xgcrZBugNVBngZ2Cs
 id: asset.field_cover_crop_type
 field_name: field_cover_crop_type
 entity_type: asset

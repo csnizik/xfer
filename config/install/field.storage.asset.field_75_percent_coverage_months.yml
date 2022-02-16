@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: dVzVwkGB5ob0BdhluSto6o3MAY7lefmQGTeVYHgsrtU
 id: asset.field_75_percent_coverage_months
 field_name: field_75_percent_coverage_months
 entity_type: asset

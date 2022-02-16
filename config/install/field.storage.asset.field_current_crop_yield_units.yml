@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: RSy9kMZbX_SepkHPcCXuGqgxYm5Id5mNHfD3lI_mVOg
 id: asset.field_current_crop_yield_units
 field_name: field_current_crop_yield_units
 entity_type: asset

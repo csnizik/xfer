@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 0czEv1lMOQ7fHv9sGMZ8G2W3fO5fYP9NEjDEjstrl1g
 id: asset.field_electroconductivity_method
 field_name: field_electroconductivity_method
 entity_type: asset

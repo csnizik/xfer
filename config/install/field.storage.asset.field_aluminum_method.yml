@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: FwHwRogFw_nclcT9tNaBWzo8AD7ID7iUSLfJ2IS2aec
 id: asset.field_aluminum_method
 field_name: field_aluminum_method
 entity_type: asset

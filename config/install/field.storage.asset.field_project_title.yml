@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: pw4hwf0dvT9EjLDUj9_RKr2x2-44QVRj_q1rhPa3WCU
 id: asset.field_project_title
 field_name: field_project_title
 entity_type: asset

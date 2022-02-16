@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 808qIMjeI09R3xT6qvfX2vvRmKqV444kVrRwO2X6I9w
 id: asset.field_phosphorus_method
 field_name: field_phosphorus_method
 entity_type: asset

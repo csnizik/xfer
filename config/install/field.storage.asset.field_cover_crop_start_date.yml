@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: IrWY5jv1Rt9TFw4i7s9fAyGTcaOVUJr4Vv3QdpraSg4
 id: asset.field_cover_crop_start_date
 field_name: field_cover_crop_start_date
 entity_type: asset

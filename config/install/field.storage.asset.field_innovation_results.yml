@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 11RAwohTT9wW_kyLJA_pKk4xb-kblpY-o39eb_V5KZ4
 id: asset.field_innovation_results
 field_name: field_innovation_results
 entity_type: asset

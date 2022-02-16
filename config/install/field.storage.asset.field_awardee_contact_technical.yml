@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: ibK4smLDiU2UdDnHMqiYD_Kswk2uC2fvJbDinauDb_U
 id: asset.field_awardee_contact_technical
 field_name: field_awardee_contact_technical
 entity_type: asset

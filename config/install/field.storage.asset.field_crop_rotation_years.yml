@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: bG_eEiTmrwVdiNLhSsrJFWcEZQ1TCyQKXWDHnfSbLPc
 id: asset.field_crop_rotation_years
 field_name: field_crop_rotation_years
 entity_type: asset

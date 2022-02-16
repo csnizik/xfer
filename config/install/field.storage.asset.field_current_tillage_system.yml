@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: sYJpDSQrEssEtr2aGQzA4XGJAGYdUzAq8J3Ez0k28e4
 id: asset.field_current_tillage_system
 field_name: field_current_tillage_system
 entity_type: asset

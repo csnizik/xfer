@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: nQt4ZUxLGU7NjmGsUcjmyPdMLaCUviChprGDxAKNyNw
 id: asset.field_living_roots_months
 field_name: field_living_roots_months
 entity_type: asset

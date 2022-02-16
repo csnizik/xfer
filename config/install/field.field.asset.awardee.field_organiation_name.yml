@@ -1,0 +1,19 @@
+uuid: 2652ce54-c47f-473f-869e-0c2f3410194c
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.awardee
+    - field.storage.asset.field_organiation_name
+id: asset.awardee.field_organiation_name
+field_name: field_organiation_name
+entity_type: asset
+bundle: awardee
+label: 'Organization Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

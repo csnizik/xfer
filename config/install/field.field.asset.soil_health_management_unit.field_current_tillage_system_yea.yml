@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_current_tillage_system_yea
 field_name: field_current_tillage_system_yea
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Current Tillage System Years'
+label: 'Years in Current Tillage System'
 description: ''
 required: false
 translatable: false

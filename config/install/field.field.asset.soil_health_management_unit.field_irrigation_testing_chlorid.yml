@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_chlorid
 field_name: field_irrigation_testing_chlorid
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing Chlorides'
+label: 'Irrigation Testing Chlorides (ppm)'
 description: ''
 required: false
 translatable: false

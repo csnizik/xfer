@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_sar
 field_name: field_irrigation_testing_sar
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing SAR'
+label: 'Irrigation Testing Sodium Adsorption Ratio'
 description: ''
 required: false
 translatable: false

@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_irrigation_testing_alkalin
 field_name: field_irrigation_testing_alkalin
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Irrigation Testing Alkalinity'
+label: 'Irrigation Total Alkalinity (ppm of Calcium Carbonate)'
 description: ''
 required: false
 translatable: false

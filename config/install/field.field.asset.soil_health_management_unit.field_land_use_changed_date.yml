@@ -9,7 +9,7 @@ id: asset.soil_health_management_unit.field_land_use_changed_date
 field_name: field_land_use_changed_date
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Land Use Changed Date'
+label: 'Date Land Use Changed'
 description: ''
 required: false
 translatable: false

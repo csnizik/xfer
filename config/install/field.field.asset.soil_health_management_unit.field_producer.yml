@@ -17,7 +17,7 @@ id: asset.soil_health_management_unit.field_producer
 field_name: field_producer
 entity_type: asset
 bundle: soil_health_management_unit
-label: 'Producer'
+label: 'Related Producer'
 description: ''
 required: false
 translatable: false

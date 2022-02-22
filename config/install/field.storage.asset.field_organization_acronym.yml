@@ -1,0 +1,21 @@
+uuid: 7d157a05-c2b2-4d38-8d05-33bceb95e0a7
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_organization_acronym
+field_name: field_organization_acronym
+entity_type: asset
+type: string
+settings:
+  max_length: 100
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -4,8 +4,8 @@ status: true
 dependencies:
   config:
     - asset.type.awardee
-    - field.field.asset.awardee.field_organiation_name
     - field.field.asset.awardee.field_organization_acronym
+    - field.field.asset.awardee.field_organization_name
     - field.field.asset.awardee.field_organization_short_name
   module:
     - field_layout
@@ -47,6 +47,7 @@ content:
 hidden:
   created: true
   data: true
+  field_organization_name: true
   file: true
   flag: true
   geometry: true

@@ -50,7 +50,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: wBj1ssn-uAO0qOXmzatOu0IW8a8hsvdNh9w3LE0Xfi4
+  default_config_hash: iLyVZlwiWdPCvWsWe-SnrrrA-zhykPbeTXGWecRPnQM
 id: asset.project.default
 targetEntityType: asset
 bundle: project
@@ -83,7 +83,7 @@ content:
     third_party_settings: {  }
   field_awardee:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 37
     region: content
     settings:
       match_operator: CONTAINS

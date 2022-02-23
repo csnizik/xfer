@@ -58,7 +58,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: fLzLVba6hapHu8IAyjrCbW0MY57v_2PvU3c-xx-9ivc
+  default_config_hash: 0rti0lba_RGgh4-fn7hjj4n9K4BlsM3KkTdb1d-AyCk
 id: asset.project.default
 targetEntityType: asset
 bundle: project
@@ -95,7 +95,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 141
+    weight: 151
     region: content
   field_awardee_contact_admin_1:
     type: string

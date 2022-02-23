@@ -1,8 +1,9 @@
-uuid: 602803d7-9b2e-4e85-a5e1-b6b7e350c762
+uuid: 482c174b-f2d7-41c2-a08c-b6fd71946755
 langcode: en
 status: true
 dependencies:
   config:
+    - asset.type.awardee
     - asset.type.project
     - field.storage.asset.field_awardee
   module:
@@ -23,6 +24,13 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
-  handler_settings: {  }
+  handler: 'default:asset'
+  handler_settings:
+    target_bundles:
+      awardee: awardee
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
 field_type: entity_reference

@@ -27,12 +27,23 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_ph_method
     - field.field.asset.soil_health_demo_trial.field_phosphorus_method
     - field.field.asset.soil_health_demo_trial.field_potassium_method
-    - field.field.asset.soil_health_demo_trial.field_producer
+    - field.field.asset.soil_health_demo_trial.field_producer_id
+    - field.field.asset.soil_health_demo_trial.field_project
     - field.field.asset.soil_health_demo_trial.field_respiration_detection_meth
     - field.field.asset.soil_health_demo_trial.field_respiration_incubation_day
     - field.field.asset.soil_health_demo_trial.field_soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_sulfur_method
     - field.field.asset.soil_health_demo_trial.field_zinc_m
+  module:
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: YSOYHZSOw4aZJYqE2frIH_eHeFb6lsk7t0EQoFWIUY0
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial
@@ -258,11 +269,24 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_producer:
-    type: number
-    weight: 12
+  field_producer_id:
+    type: entity_reference_autocomplete
+    weight: 29
     region: content
     settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_project:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   field_respiration_detection_meth:

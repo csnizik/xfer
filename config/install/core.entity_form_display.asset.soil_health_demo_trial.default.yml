@@ -6,7 +6,6 @@ dependencies:
     - asset.type.soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_method
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_unit
-    - field.field.asset.soil_health_demo_trial.field_alum
     - field.field.asset.soil_health_demo_trial.field_aluminum_method
     - field.field.asset.soil_health_demo_trial.field_boron_method
     - field.field.asset.soil_health_demo_trial.field_bulk_density_core_diameter
@@ -31,7 +30,6 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_project
     - field.field.asset.soil_health_demo_trial.field_respiration_detection_meth
     - field.field.asset.soil_health_demo_trial.field_respiration_incubation_day
-    - field.field.asset.soil_health_demo_trial.field_soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_sulfur_method
     - field.field.asset.soil_health_demo_trial.field_zinc_m
   module:
@@ -43,61 +41,35 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: YSOYHZSOw4aZJYqE2frIH_eHeFb6lsk7t0EQoFWIUY0
+  default_config_hash: 7B5grt31lPhHRTXwh8jdf9_7NF8QbazZfP9hOiYGhJk
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial
 mode: default
 content:
   field_aggregate_stability_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 28
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_aggregate_stability_unit:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 24
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_alum:
-    type: entity_reference_autocomplete
-    weight: 8
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_aluminum_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 9
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_boron_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 7
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_bulk_density_core_diameter:
     type: number
@@ -114,74 +86,46 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_calc:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 0
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_calcium_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 22
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_cation_exchange_capacity:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 17
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_copper:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 2
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_electroconductivity_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 20
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_infiltration_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 11
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_iron_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 4
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_laboratory_name:
     type: string_textfield
@@ -192,44 +136,28 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_magne:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 1
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_manganese_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 5
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_moly:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 10
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_nitrate_n_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 19
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_other_laboratory_name:
     type: string_textfield
@@ -240,64 +168,40 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_ph_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 14
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_phosphorus_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 18
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_potassium_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 13
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_producer_id:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 29
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_project:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 30
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_respiration_detection_meth:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 15
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_respiration_incubation_day:
     type: number
@@ -306,32 +210,17 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_soil_health_demo_trial:
-    type: number
-    weight: 27
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_sulfur_method:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 3
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_zinc_m:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 6
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

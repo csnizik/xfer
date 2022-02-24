@@ -6,7 +6,6 @@ dependencies:
     - asset.type.soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_method
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_unit
-    - field.field.asset.soil_health_demo_trial.field_alum
     - field.field.asset.soil_health_demo_trial.field_aluminum_method
     - field.field.asset.soil_health_demo_trial.field_boron_method
     - field.field.asset.soil_health_demo_trial.field_bulk_density_core_diameter
@@ -31,7 +30,6 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_project
     - field.field.asset.soil_health_demo_trial.field_respiration_detection_meth
     - field.field.asset.soil_health_demo_trial.field_respiration_incubation_day
-    - field.field.asset.soil_health_demo_trial.field_soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_sulfur_method
     - field.field.asset.soil_health_demo_trial.field_zinc_m
     - image.style.large
@@ -51,20 +49,12 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: iNa0Bj2wG1mr6Q1L1kpkOwpYIlGBzDctdn1jeB_BoKg
+  default_config_hash: UbxCC1AQMkXuoFdk5aFFzIQ5UGQoZhi9aoKxX_6iJuQ
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial
 mode: default
 content:
-  field_alum:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 105
-    region: content
   field_aluminum_method:
     type: entity_reference_label
     label: above
@@ -271,6 +261,5 @@ hidden:
   field_potassium_method: true
   field_respiration_detection_meth: true
   field_respiration_incubation_day: true
-  field_soil_health_demo_trial: true
   intrinsic_geometry: true
   uid: true

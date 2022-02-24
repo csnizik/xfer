@@ -1,11 +1,11 @@
-uuid: 068bf524-9632-40e1-b75f-a8e563af910d
+uuid: 482c174b-f2d7-41c2-a08c-b6fd71946755
 langcode: en
 status: true
 dependencies:
   config:
+    - asset.type.awardee
     - asset.type.project
     - field.storage.asset.field_awardee
-    - taxonomy.vocabulary.unit
   module:
     - entity_reference_validators
 third_party_settings:
@@ -17,20 +17,20 @@ id: asset.project.field_awardee
 field_name: field_awardee
 entity_type: asset
 bundle: project
-label: 'Awardee'
+label: Awardee
 description: ''
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  handler: 'default:taxonomy_term'
+  handler: 'default:asset'
   handler_settings:
     target_bundles:
-      unit: unit
+      awardee: awardee
     sort:
-      field: name
-      direction: asc
+      field: _none
+      direction: ASC
     auto_create: false
     auto_create_bundle: ''
 field_type: entity_reference

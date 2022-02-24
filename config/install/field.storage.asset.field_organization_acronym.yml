@@ -1,17 +1,17 @@
-uuid: 3158ecf9-e24c-4308-9105-4223a020641e
+uuid: 7d157a05-c2b2-4d38-8d05-33bceb95e0a7
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: 1WbBpSYCoVJw4CE0nZKxxPZUtuPYTsOe3fpjHTUHNrc
-id: asset.field_awardee
-field_name: field_awardee
+id: asset.field_organization_acronym
+field_name: field_organization_acronym
 entity_type: asset
-type: entity_reference
+type: string
 settings:
-  target_type: asset
+  max_length: 100
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

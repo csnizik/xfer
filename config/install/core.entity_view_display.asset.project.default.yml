@@ -7,10 +7,10 @@ dependencies:
     - field.field.asset.project.field_agreement_number
     - field.field.asset.project.field_applicant_type
     - field.field.asset.project.field_award_year
+    - field.field.asset.project.field_awardee
     - field.field.asset.project.field_awardee_contact_admin_1
     - field.field.asset.project.field_awardee_contact_admin_2
     - field.field.asset.project.field_awardee_contact_technical
-    - field.field.asset.project.field_awardee
     - field.field.asset.project.field_benefit_underserved_produc
     - field.field.asset.project.field_deliverables
     - field.field.asset.project.field_end_date
@@ -20,7 +20,7 @@ dependencies:
     - field.field.asset.project.field_final_report_url
     - field.field.asset.project.field_funding_pool
     - field.field.asset.project.field_funds_approved
-    - field.field.asset.project.field_grant_type 
+    - field.field.asset.project.field_grant_type
     - field.field.asset.project.field_innovation_results
     - field.field.asset.project.field_keywords
     - field.field.asset.project.field_no_cost_extension
@@ -46,10 +46,19 @@ dependencies:
     - farm_field
     - farm_id_tag
     - farm_map
+    - field_layout
     - file
     - image
+    - layout_discovery
     - options
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: 0rti0lba_RGgh4-fn7hjj4n9K4BlsM3KkTdb1d-AyCk
 id: asset.project.default
 targetEntityType: asset
 bundle: project
@@ -80,6 +89,14 @@ content:
     third_party_settings: {  }
     weight: 100
     region: content
+  field_awardee:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 151
+    region: content
   field_awardee_contact_admin_1:
     type: string
     label: above
@@ -103,14 +120,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 145
-    region: content
-  field_awardee:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 141
     region: content
   field_benefit_underserved_produc:
     type: boolean

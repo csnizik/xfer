@@ -1,0 +1,14 @@
+uuid: 55698bbe-b9a7-49ef-abf8-3ba423581dfc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: D0YRFgUO_M7EYMaLgmHvoM7VJ7PdvkCBlsKVWWWYTrA
+id: awardee
+label: Awardee
+description: Awardee
+workflow: asset_default
+new_revision: true

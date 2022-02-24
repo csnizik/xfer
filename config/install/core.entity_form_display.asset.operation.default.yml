@@ -23,13 +23,16 @@ dependencies:
     - field.field.asset.operation.field_other_unit
     - field.field.asset.operation.field_other_unit_cost
     - field.field.asset.operation.field_soil_health_management_id
-    - image.style.medium
   module:
-    - farm_id_tag
-    - farm_map
-    - file
-    - image
-    - text
+    - field_layout
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: 0uRH3POg_lSIdSA-SfA97qlarj3sDEITJQ5FdQ7HLSU
 id: asset.operation.default
 targetEntityType: asset
 bundle: operation
@@ -43,14 +46,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_custom_unit:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 112
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_custom_unit_cost:
     type: number
@@ -67,14 +66,10 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_equipment_ownership:
-    type: entity_reference_autocomplete
+    type: options_buttons
     weight: 101
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_equipment_rows:
     type: number
@@ -90,42 +85,23 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_field_activity_sequence:
-    type: number
-    weight: 100
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
   field_input:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 106
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_input_type:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 105
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_input_unit:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 107
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_input_unit_cost:
     type: number
@@ -147,35 +123,17 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_operation_type:
-    type: entity_reference_autocomplete
-    weight: 99
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_other_additional_charges:
-    type: entity_reference_autocomplete
+    type: options_buttons
     weight: 115
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_other_unit:
-    type: entity_reference_autocomplete
+    type: options_select
     weight: 114
     region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   field_other_unit_cost:
     type: number
@@ -185,99 +143,27 @@ content:
       placeholder: ''
     third_party_settings: {  }
   field_soil_health_management_id:
-    type: entity_reference_autocomplete
-    weight: 97
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  file:
-    type: file_generic
-    weight: 90
-    region: content
-    settings:
-      progress_indicator: throbber
-    third_party_settings: {  }
-  flag:
-    type: options_buttons
-    weight: -75
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  id_tag:
-    type: id_tag
-    weight: 50
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  image:
-    type: image_image
-    weight: 89
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: medium
-    third_party_settings: {  }
-  intrinsic_geometry:
-    type: farm_map_geofield
-    weight: 96
-    region: content
-    settings:
-      populate_file_field: file
-      display_raw_geometry: true
-    third_party_settings: {  }
-  is_fixed:
-    type: boolean_checkbox
-    weight: 95
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  is_location:
-    type: boolean_checkbox
-    weight: 95
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  name:
-    type: string_textfield
-    weight: -100
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  notes:
-    type: text_textarea
-    weight: 0
-    region: content
-    settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  parent:
-    type: entity_reference_autocomplete
-    weight: 40
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  status:
     type: options_select
-    weight: -80
+    weight: 97
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
   data: true
+  field_field_activity_sequence: true
+  field_operation_type: true
+  file: true
+  flag: true
   geometry: true
+  id_tag: true
+  image: true
+  intrinsic_geometry: true
+  is_fixed: true
+  is_location: true
   location: true
+  name: true
+  notes: true
+  parent: true
+  status: true
   uid: true

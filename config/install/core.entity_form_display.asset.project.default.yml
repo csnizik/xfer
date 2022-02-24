@@ -50,7 +50,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: iLyVZlwiWdPCvWsWe-SnrrrA-zhykPbeTXGWecRPnQM
+  default_config_hash: A3YUaVjiD05m6F-vis4Jpd4NF2eanFH5c39VZxIRMQU
 id: asset.project.default
 targetEntityType: asset
 bundle: project
@@ -346,14 +346,6 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
-  field_project_title:
-    type: string_textfield
-    weight: 12
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_project_types:
     type: entity_reference_autocomplete
     weight: 22
@@ -370,9 +362,18 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   created: true
   data: true
+  field_project_title: true
   field_project_type: true
   file: true
   flag: true
@@ -383,7 +384,6 @@ hidden:
   is_fixed: true
   is_location: true
   location: true
-  name: true
   notes: true
   parent: true
   status: true

@@ -1,15 +1,17 @@
-uuid: 3158ecf9-e24c-4308-9105-4223a020641e
+uuid: 105a4f83-d321-42ef-a855-da2b73b485b4
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_awardee
-field_name: field_awardee
+id: asset.field_organization_name
+field_name: field_organization_name
 entity_type: asset
-type: entity_reference
+type: string
 settings:
-  target_type: asset
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

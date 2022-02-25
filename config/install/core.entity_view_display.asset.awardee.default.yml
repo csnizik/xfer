@@ -1,64 +1,58 @@
-uuid: 538a6102-e2eb-437f-8f7c-942e53424d9e
+uuid: c8734a59-f9ed-444c-8aac-3917515e17f9
 langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.producer
-    - field.field.asset.producer.field_agreement_number
-    - field.field.asset.producer.field_latitude
-    - field.field.asset.producer.field_longitude
-    - field.field.asset.producer.field_producer_name
+    - asset.type.awardee
+    - field.field.asset.awardee.field_organization_acronym
+    - field.field.asset.awardee.field_organization_name
+    - field.field.asset.awardee.field_organization_short_name
     - image.style.large
   module:
     - farm_field
     - farm_id_tag
     - farm_map
+    - field_layout
     - file
     - image
+    - layout_discovery
     - options
     - text
-id: asset.producer.default
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: fnp14rf8jzMh-gq2E0kvAMRrMlinnKfKUTMSqGZFcpY
+id: asset.awardee.default
 targetEntityType: asset
-bundle: producer
+bundle: awardee
 mode: default
 content:
-  field_agreement_number:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 100
-    region: content
-  field_latitude:
-    type: number_decimal
-    label: above
-    settings:
-      thousand_separator: ''
-      decimal_separator: .
-      scale: 2
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 98
-    region: content
-  field_longitude:
-    type: number_decimal
-    label: above
-    settings:
-      thousand_separator: ''
-      decimal_separator: .
-      scale: 2
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 99
-    region: content
-  field_producer_name:
+  field_organiation_name:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
     weight: 97
+    region: content
+  field_organization_acronym:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 99
+    region: content
+  field_organization_short_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 98
     region: content
   file:
     type: file_table
@@ -154,5 +148,6 @@ content:
     region: content
 hidden:
   data: true
+  field_organization_name: true
   intrinsic_geometry: true
   uid: true

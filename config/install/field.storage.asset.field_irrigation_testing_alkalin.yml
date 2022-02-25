@@ -4,13 +4,13 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: CG34wIv_nW8mP4bj3AVMNdJaRM9jE1ThEgrsYlHedqQ
 id: asset.field_irrigation_testing_alkalin
 field_name: field_irrigation_testing_alkalin
 entity_type: asset
 type: float
-settings:
-  unsigned: false
-  size: normal
+settings: {  }
 module: core
 locked: false
 cardinality: 1

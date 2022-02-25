@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: yVXM2UXOeLUsWQZk-3w6cjFg7BYzStBlXeAuEGGWzow
 id: asset.field_awardee_contact_admin_1
 field_name: field_awardee_contact_admin_1
 entity_type: asset

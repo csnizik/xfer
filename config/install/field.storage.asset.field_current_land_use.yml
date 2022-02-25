@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: tabn24-dcR4rQV3PnC6dhbGQiCJBdZx9s8MZ5ANgusg
 id: asset.field_current_land_use
 field_name: field_current_land_use
 entity_type: asset

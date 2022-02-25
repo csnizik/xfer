@@ -1,16 +1,14 @@
-uuid: 6198d839-c7e8-4708-9356-ad1a32a9ee58
+uuid: 1217d437-b530-478d-b6d3-e61727e3697c
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-id: asset.field_soil_health_demo_trial
-field_name: field_soil_health_demo_trial
+id: asset.field_operation_date
+field_name: field_operation_date
 entity_type: asset
-type: integer
-settings:
-  unsigned: false
-  size: normal
+type: timestamp
+settings: {  }
 module: core
 locked: false
 cardinality: 1

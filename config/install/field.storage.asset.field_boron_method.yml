@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: apGdOLvH26c353UKdTWmSzobk2tLKxuimqQS4Z1QkPU
 id: asset.field_boron_method
 field_name: field_boron_method
 entity_type: asset

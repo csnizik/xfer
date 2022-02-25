@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: kpoINTJD_Oh9BxyOLSsnkEHPy1rPqu40zcvCn2TmlXY
 id: asset.field_nitrate_n_method
 field_name: field_nitrate_n_method
 entity_type: asset

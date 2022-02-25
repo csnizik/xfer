@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: ddcnBYuDZ6ZWFt0hTjnpwx0_xjyw9pQcC5QRPMZVKkQ
 id: asset.field_project_ecoregions
 field_name: field_project_ecoregions
 entity_type: asset

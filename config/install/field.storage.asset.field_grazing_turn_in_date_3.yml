@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: HnZYRYVMlARLQ-H5wuhOoLOu19VvkkpWR4VgVy7DM4w
 id: asset.field_grazing_turn_in_date_3
 field_name: field_grazing_turn_in_date_3
 entity_type: asset

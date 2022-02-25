@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: kc5P22zMVZDkAd_2GIm-vKlvj2g6WTOo1K3haU6FVIQ
 id: asset.field_cover_crop_cost_per_acre
 field_name: field_cover_crop_cost_per_acre
 entity_type: asset

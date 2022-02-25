@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: UWwsal2Z2K8q6AFG_02-XfQi0OkB8hT7r2alTEnkjM8
 id: asset.field_magne
 field_name: field_magne
 entity_type: asset

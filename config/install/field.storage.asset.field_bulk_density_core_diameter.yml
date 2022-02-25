@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: j75pqUx02IHLlLZHoaFYXWiHJsP-VZSUy9I1ad5eC90
 id: asset.field_bulk_density_core_diameter
 field_name: field_bulk_density_core_diameter
 entity_type: asset

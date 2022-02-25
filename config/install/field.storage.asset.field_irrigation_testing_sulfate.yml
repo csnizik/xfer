@@ -4,13 +4,13 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 3KDexjvmOdygYl6UIaRsqnFmo9TD8dGGQtcWefYjojY
 id: asset.field_irrigation_testing_sulfate
 field_name: field_irrigation_testing_sulfate
 entity_type: asset
 type: float
-settings:
-  unsigned: false
-  size: normal
+settings: {  }
 module: core
 locked: false
 cardinality: 1

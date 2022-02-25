@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: IjIGRZ0Dymr406c8YOJyblbUn0WC37LmUEQChbm8LNY
 id: asset.field_signed_date
 field_name: field_signed_date
 entity_type: asset

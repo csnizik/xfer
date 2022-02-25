@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 5589YRJTF4hlGWshjLp1QzHOtSk2rA7DQ4u-3_2UdSo
 id: asset.field_current_crop_yield
 field_name: field_current_crop_yield
 entity_type: asset

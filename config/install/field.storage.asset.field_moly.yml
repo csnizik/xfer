@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: saVQmTcHsPJU3gZSss8ucDOvdbzimO7bv3-kAra3gu0
 id: asset.field_moly
 field_name: field_moly
 entity_type: asset

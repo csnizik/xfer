@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: QpRsGStbfK9SbsnBGW3FH3EKeP6t6pLuTG5sSkv41h4
 id: asset.field_irrigation_annual_rate
 field_name: field_irrigation_annual_rate
 entity_type: asset

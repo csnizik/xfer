@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: eyn1H2Y8N5bNhnN1ewIvp6R0Uz9PVthsW3PQ4wgNfgo
 id: asset.field_irrigation_testing_sar
 field_name: field_irrigation_testing_sar
 entity_type: asset

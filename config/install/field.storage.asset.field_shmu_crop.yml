@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 6LMF6qxni2DBFMSNGcpcOzdB6-bWFaxdq99nWcFK5KQ
 id: asset.field_shmu_crop
 field_name: field_shmu_crop
 entity_type: asset

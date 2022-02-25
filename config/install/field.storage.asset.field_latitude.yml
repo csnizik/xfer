@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: SiqhpUl0FldgneHQWaIetKz19ynN9a1zZtjozbZa1Ng
 id: asset.field_latitude
 field_name: field_latitude
 entity_type: asset

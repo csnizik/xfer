@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: ZwGxRtlMCwtPxHb3zCX1qTvYRfoMiis-dyMxYL4BmHM
 id: asset.field_previous_tillage_system_ye
 field_name: field_previous_tillage_system_ye
 entity_type: asset

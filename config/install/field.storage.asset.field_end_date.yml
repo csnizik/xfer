@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: IDnMa6y1pEIXt57xTprG8aVZsQVJID0ToV6hbe4KL2M
 id: asset.field_end_date
 field_name: field_end_date
 entity_type: asset

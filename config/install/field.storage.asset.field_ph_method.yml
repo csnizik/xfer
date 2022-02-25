@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: IJL-t9PNsgwIP9pCHD3nb7R7uDFgldyKrjiqIUjPyO4
 id: asset.field_ph_method
 field_name: field_ph_method
 entity_type: asset

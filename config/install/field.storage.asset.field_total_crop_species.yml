@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 7WntlNoY9ClEoMoS567CYMfldJmebdowR6gAcpm0oLQ
 id: asset.field_total_crop_species
 field_name: field_total_crop_species
 entity_type: asset

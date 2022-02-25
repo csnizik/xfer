@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: v8N-PGOg228E-iEU8KNaAGwZfGDaI93zNtpd95zxuMc
 id: asset.field_irrigation_testing_tds
 field_name: field_irrigation_testing_tds
 entity_type: asset

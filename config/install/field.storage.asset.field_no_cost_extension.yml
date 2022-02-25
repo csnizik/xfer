@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: ZKiHKIN8_KaLc6j9ntvXcSLPOgTNC9-V5Xnv7Fn3euc
 id: asset.field_no_cost_extension
 field_name: field_no_cost_extension
 entity_type: asset

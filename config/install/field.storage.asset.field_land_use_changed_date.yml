@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: tFGZB7fWA0bQPKixRcerpf89gq7xSaIr3G2MaP0o1UU
 id: asset.field_land_use_changed_date
 field_name: field_land_use_changed_date
 entity_type: asset

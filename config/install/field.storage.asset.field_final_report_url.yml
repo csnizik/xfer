@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: heWqOD-k_lxUo5uKahJgiOHlvUOEFc4cxGi5vAe7vK8
 id: asset.field_final_report_url
 field_name: field_final_report_url
 entity_type: asset

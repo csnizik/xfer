@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: Dm5dRQ4gkxL11X9iv3WDT8I0kAx1XwbtA3u9SKR0XFc
 id: asset.field_irrigation_type
 field_name: field_irrigation_type
 entity_type: asset

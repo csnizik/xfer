@@ -1,12 +1,12 @@
-uuid: 2ab581b2-f483-4796-8345-5268525b014f
+uuid: ea850f86-98ae-4615-bf3f-b8aa4b570c62
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-id: asset.field_alum
-field_name: field_alum
+id: asset.field_input_type
+field_name: field_input_type
 entity_type: asset
 type: entity_reference
 settings:

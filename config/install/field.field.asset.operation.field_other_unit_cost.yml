@@ -1,0 +1,23 @@
+uuid: f118ab26-c473-4c8e-bb7f-f0a7e8a3c49f
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_other_unit_cost
+id: asset.operation.field_other_unit_cost
+field_name: field_other_unit_cost
+entity_type: asset
+bundle: operation
+label: 'Other Unit Cost'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

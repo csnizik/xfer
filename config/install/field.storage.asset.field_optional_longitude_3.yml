@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 8bpB7tKFiIwS2EPEXob1Tde3y5T5x3XJJPy4jZo5z7Q
 id: asset.field_optional_longitude_3
 field_name: field_optional_longitude_3
 entity_type: asset

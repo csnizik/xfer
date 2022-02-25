@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: NAiIkMo5wigfRK875RF4SB5E_UgPAr7oksAqh0plsns
 id: asset.field_respiration_detection_meth
 field_name: field_respiration_detection_meth
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: TRNIeivQWK32OnxkSAOAo2Bw0CRhEA6ylvJ3zIDM6Ww
 id: asset.field_cation_exchange_capacity
 field_name: field_cation_exchange_capacity
 entity_type: asset

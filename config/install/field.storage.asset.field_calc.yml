@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: GgN7NiJQAFmBl8jeBBbJ49v52JWCa0r7JLHi3xnOcSk
 id: asset.field_calc
 field_name: field_calc
 entity_type: asset

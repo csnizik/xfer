@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: X89t4DbsMFr-UkEqFlbxeJQl7U1Do16VrDrhFQ8gJUA
 id: asset.field_iron_method
 field_name: field_iron_method
 entity_type: asset

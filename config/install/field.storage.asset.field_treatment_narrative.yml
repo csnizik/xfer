@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: qmhOL-MenPcC9R-4X7GdnxEA9ef0fAUtQTkXKJVu_jw
 id: asset.field_treatment_narrative
 field_name: field_treatment_narrative
 entity_type: asset

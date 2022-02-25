@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: sTj8qdotyDBNRDWUvC_a8-62axjZdB7aDH_tjSik7Pg
 id: asset.field_current_crop_harvest_date
 field_name: field_current_crop_harvest_date
 entity_type: asset

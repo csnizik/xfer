@@ -6,7 +6,6 @@ dependencies:
     - asset.type.soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_method
     - field.field.asset.soil_health_demo_trial.field_aggregate_stability_unit
-    - field.field.asset.soil_health_demo_trial.field_alum
     - field.field.asset.soil_health_demo_trial.field_aluminum_method
     - field.field.asset.soil_health_demo_trial.field_boron_method
     - field.field.asset.soil_health_demo_trial.field_bulk_density_core_diameter
@@ -27,10 +26,10 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_ph_method
     - field.field.asset.soil_health_demo_trial.field_phosphorus_method
     - field.field.asset.soil_health_demo_trial.field_potassium_method
-    - field.field.asset.soil_health_demo_trial.field_producer
+    - field.field.asset.soil_health_demo_trial.field_producer_id
+    - field.field.asset.soil_health_demo_trial.field_project
     - field.field.asset.soil_health_demo_trial.field_respiration_detection_meth
     - field.field.asset.soil_health_demo_trial.field_respiration_incubation_day
-    - field.field.asset.soil_health_demo_trial.field_soil_health_demo_trial
     - field.field.asset.soil_health_demo_trial.field_sulfur_method
     - field.field.asset.soil_health_demo_trial.field_zinc_m
     - image.style.large
@@ -38,23 +37,24 @@ dependencies:
     - farm_field
     - farm_id_tag
     - farm_map
+    - field_layout
     - file
     - image
+    - layout_discovery
     - options
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: UbxCC1AQMkXuoFdk5aFFzIQ5UGQoZhi9aoKxX_6iJuQ
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial
 mode: default
 content:
-  field_alum:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 105
-    region: content
   field_aluminum_method:
     type: entity_reference_label
     label: above
@@ -118,6 +118,22 @@ content:
       link: true
     third_party_settings: {  }
     weight: 107
+    region: content
+  field_producer_id:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_project:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 109
     region: content
   field_sulfur_method:
     type: entity_reference_label
@@ -243,9 +259,7 @@ hidden:
   field_ph_method: true
   field_phosphorus_method: true
   field_potassium_method: true
-  field_producer: true
   field_respiration_detection_meth: true
   field_respiration_incubation_day: true
-  field_soil_health_demo_trial: true
   intrinsic_geometry: true
   uid: true

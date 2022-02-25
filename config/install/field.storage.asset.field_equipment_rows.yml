@@ -1,0 +1,20 @@
+uuid: 5e5a1d51-8847-4108-a8c6-831941f488b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_equipment_rows
+field_name: field_equipment_rows
+entity_type: asset
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

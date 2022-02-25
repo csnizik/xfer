@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: dEREFNRUTbX-_Mrk0h-WZu9Lbowy7zaNSnIaiw_ifRI
 id: asset.field_funding_pool
 field_name: field_funding_pool
 entity_type: asset

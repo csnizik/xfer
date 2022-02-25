@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: '-bVvPGx9GfKrN_2rJq_Mbh9R1Id9pNLN1kfAXQOB1e4'
 id: asset.field_potassium_method
 field_name: field_potassium_method
 entity_type: asset

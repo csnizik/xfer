@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 3xAFRIp81lzP4ynyZt2u3IW3PfGtf_IJC4KPimJjiQc
 id: asset.field_project_awardee_state
 field_name: field_project_awardee_state
 entity_type: asset

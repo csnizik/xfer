@@ -4,13 +4,13 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: qJzBQEAQxA5sM_rw1R-dNqab8IdBO91_Sx7XoCU54Y0
 id: asset.field_irrigation_testing_chlorid
 field_name: field_irrigation_testing_chlorid
 entity_type: asset
 type: float
-settings:
-  unsigned: false
-  size: normal
+settings: {  }
 module: core
 locked: false
 cardinality: 1

@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 0ZZOVBrB-Pf_Lx7ZxfoDO9ePkO-7xcU1Prk_kSJiuVY
 id: asset.field_zinc_m
 field_name: field_zinc_m
 entity_type: asset

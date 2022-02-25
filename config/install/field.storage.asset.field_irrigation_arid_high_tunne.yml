@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: kP28dxTk2GDoozdk_z9-WCEH_yWXL35cpVOwEheV8tg
 id: asset.field_irrigation_arid_high_tunne
 field_name: field_irrigation_arid_high_tunne
 entity_type: asset

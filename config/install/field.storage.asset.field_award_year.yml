@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: z2vJ0xPoM61w7m572LYhe9jjVgt5cEGau8Dy2tprABE
 id: asset.field_award_year
 field_name: field_award_year
 entity_type: asset

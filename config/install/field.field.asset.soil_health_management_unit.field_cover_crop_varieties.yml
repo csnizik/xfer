@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_cover_crop_varieties
+_core:
+  default_config_hash: 7fdfvbLkYc-sTGdOEVpgvEgen6h7J9Ptvqt8Pj22oeM
 id: asset.soil_health_management_unit.field_cover_crop_varieties
 field_name: field_cover_crop_varieties
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.awardee
     - field.storage.asset.field_organization_acronym
+_core:
+  default_config_hash: v7HhI2fmmbSSe47KyK4WsLJFdg9RjbglxCYj-TT6LIg
 id: asset.awardee.field_organization_acronym
 field_name: field_organization_acronym
 entity_type: asset

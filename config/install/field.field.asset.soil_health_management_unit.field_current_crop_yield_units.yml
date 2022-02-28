@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: 73FG7iRYRZ7ectt-ecFSV5HgxlI3DJZsjY8A3LCwCZw
 id: asset.soil_health_management_unit.field_current_crop_yield_units
 field_name: field_current_crop_yield_units
 entity_type: asset

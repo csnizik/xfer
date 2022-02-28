@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_input_unit_cost
+_core:
+  default_config_hash: 8ZduEZ7c1S4nJmXkLurGpN_PkEel3XBYMTPST8cvN9M
 id: asset.operation.field_input_unit_cost
 field_name: field_input_unit_cost
 entity_type: asset

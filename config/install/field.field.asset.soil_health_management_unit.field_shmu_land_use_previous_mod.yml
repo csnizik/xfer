@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: ZZJHdjHN_2P8NP1cwGZ0hX5NukzXRBNljhfPADOMvUk
 id: asset.soil_health_management_unit.field_shmu_land_use_previous_mod
 field_name: field_shmu_land_use_previous_mod
 entity_type: asset

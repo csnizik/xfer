@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_final_project_evaluation_c
+_core:
+  default_config_hash: zWI7KXR2ZVI_SeF1FH5JdqjKz4zq_oMliOy3RltOmqk
 id: asset.project.field_final_project_evaluation_c
 field_name: field_final_project_evaluation_c
 entity_type: asset

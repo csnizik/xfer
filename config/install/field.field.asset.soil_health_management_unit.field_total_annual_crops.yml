@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_total_annual_crops
+_core:
+  default_config_hash: VpVxG8I4tMISCP7_zE82Tzg2Cd_0Ckfmo48n9jI1NUw
 id: asset.soil_health_management_unit.field_total_annual_crops
 field_name: field_total_annual_crops
 entity_type: asset

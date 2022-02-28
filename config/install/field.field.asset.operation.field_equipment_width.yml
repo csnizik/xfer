@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_equipment_width
+_core:
+  default_config_hash: mr-4qLfrq-SwakcwCfgrYJTPc6XbPdZKp6amuW8fHYw
 id: asset.operation.field_equipment_width
 field_name: field_equipment_width
 entity_type: asset

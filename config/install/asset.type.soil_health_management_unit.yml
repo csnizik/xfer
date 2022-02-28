@@ -6,9 +6,9 @@ dependencies:
     module:
       - cig_pods
 _core:
-  default_config_hash: "-_0oINpWQnVFicmMe8VshipQfyXuKbpmrwYJdSFP828"
+  default_config_hash: NwbfV2GFGJg5meqml7a6JlRJAwa5jkd_B0TJBAqsKr8
 id: soil_health_management_unit
-label: SoilHealthManagementUnit
-description: "Soil Health Management Unit"
+label: 'Soil Health Management Unit'
+description: 'Soil Health Management Unit'
 workflow: asset_default
 new_revision: true

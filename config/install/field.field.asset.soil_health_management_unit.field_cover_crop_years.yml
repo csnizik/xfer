@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: MhPUhVIX0S-KLFhmvMUreQQI_yg5MbTbzFJFcOT2w0s
 id: asset.soil_health_management_unit.field_cover_crop_years
 field_name: field_cover_crop_years
 entity_type: asset

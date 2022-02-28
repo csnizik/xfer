@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_soil_health_management_uni
+_core:
+  default_config_hash: E8C7HI2pwIalgUdInMrs7uUkDfwF9L0Dt-wR4rz_FCs
 id: asset.soil_health_management_unit.field_soil_health_management_uni
 field_name: field_soil_health_management_uni
 entity_type: asset

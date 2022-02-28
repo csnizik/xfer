@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_keywords
+_core:
+  default_config_hash: Du5-CqyhoqlG-s0_gK3eUDYCDu0E21nbqXgnOF2HaRg
 id: asset.project.field_keywords
 field_name: field_keywords
 entity_type: asset

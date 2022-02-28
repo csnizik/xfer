@@ -28,10 +28,19 @@ dependencies:
     - farm_field
     - farm_id_tag
     - farm_map
+    - field_layout
     - file
     - image
+    - layout_discovery
     - options
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+_core:
+  default_config_hash: bOf6HewVod_q_q9PiKKZe5An0Yql-jx7rxChrZW9Ov4
 id: asset.operation.default
 targetEntityType: asset
 bundle: operation

@@ -1,0 +1,23 @@
+uuid: 70644b43-44e6-4d89-908f-d50e678bffcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_calcium
+id: asset.soil_health_sample.field_calcium
+field_name: field_calcium
+entity_type: asset
+bundle: soil_health_sample
+label: Calcium
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

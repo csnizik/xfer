@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: SOe4eFs2W1bOuFSPpHA9uq6tIcdUfNPt1NBU4RgpR4E
 id: asset.field_operation_type
 field_name: field_operation_type
 entity_type: asset

@@ -5,7 +5,7 @@ dependencies:
   module:
     - asset
 _core:
-  default_config_hash: B7DLBn85R7BWaF2QtwHF35u0MJCm7xfOqd48NE5Ycuw
+  default_config_hash: QmOadwrY9rPZEIj-zrph2Xv9SihEZ-Fbvpt693a2XEY
 id: asset.field_project_background
 field_name: field_project_background
 entity_type: asset

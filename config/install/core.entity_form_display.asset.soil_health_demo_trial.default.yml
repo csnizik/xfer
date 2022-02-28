@@ -43,7 +43,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: YSOYHZSOw4aZJYqE2frIH_eHeFb6lsk7t0EQoFWIUY0
+  default_config_hash: 7B5grt31lPhHRTXwh8jdf9_7NF8QbazZfP9hOiYGhJk
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial

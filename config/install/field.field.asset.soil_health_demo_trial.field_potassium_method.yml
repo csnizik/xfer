@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: 0mtwCui-zskBncBMR87hvna_H82QbIm04GERZIohMPg
 id: asset.soil_health_demo_trial.field_potassium_method
 field_name: field_potassium_method
 entity_type: asset

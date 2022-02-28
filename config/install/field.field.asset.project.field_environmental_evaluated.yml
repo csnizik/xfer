@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_environmental_evaluated
+_core:
+  default_config_hash: HtGQvDTKkspKtxpLz7F19fh6bk0O8orb7NF3oCqSIls
 id: asset.project.field_environmental_evaluated
 field_name: field_environmental_evaluated
 entity_type: asset

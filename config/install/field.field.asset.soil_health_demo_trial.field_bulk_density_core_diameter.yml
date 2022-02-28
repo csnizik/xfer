@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_demo_trial
     - field.storage.asset.field_bulk_density_core_diameter
+_core:
+  default_config_hash: yPoMKLOjL4hbVRJLM1nUZkui-p-nfiV_y4g6Q8fGAzQ
 id: asset.soil_health_demo_trial.field_bulk_density_core_diameter
 field_name: field_bulk_density_core_diameter
 entity_type: asset

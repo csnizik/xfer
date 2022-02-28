@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: bAj7nCWYxJYqOzziwC7JXgHuQvbrVYSVby_e8IokI8s
 id: asset.project.field_project_type
 field_name: field_project_type
 entity_type: asset

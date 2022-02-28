@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_final_report_receipt_posti
+_core:
+  default_config_hash: aqBa3n0--AWM-DUbPODzoDsrrxmTHdha2xhL4QInEfM
 id: asset.project.field_final_report_receipt_posti
 field_name: field_final_report_receipt_posti
 entity_type: asset

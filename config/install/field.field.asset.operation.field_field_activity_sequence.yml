@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_field_activity_sequence
+_core:
+  default_config_hash: 6zblblKukh0vpSU5a8pUjp7nb3wPFhF9ee9MfmJ4hpo
 id: asset.operation.field_field_activity_sequence
 field_name: field_field_activity_sequence
 entity_type: asset

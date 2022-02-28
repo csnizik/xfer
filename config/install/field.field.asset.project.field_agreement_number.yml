@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_agreement_number
+_core:
+  default_config_hash: 4rY30kcF-hVDKfdF3oWXy8h4bIs-DowuiszJhVEIJ6Y
 id: asset.project.field_agreement_number
 field_name: field_agreement_number
 entity_type: asset

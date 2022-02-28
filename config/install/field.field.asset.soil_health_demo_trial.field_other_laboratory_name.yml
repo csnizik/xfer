@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_demo_trial
     - field.storage.asset.field_other_laboratory_name
+_core:
+  default_config_hash: zFyyM9oACBzJxuYo9jVOo7zbOM1atvy8Ysbr-ElAJdc
 id: asset.soil_health_demo_trial.field_other_laboratory_name
 field_name: field_other_laboratory_name
 entity_type: asset

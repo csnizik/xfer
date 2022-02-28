@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_signed_date
+_core:
+  default_config_hash: lB3eJQjqn2EHz_IIwKwVGOW_iCBkMMiy6NMqvnc_-Ak
 id: asset.project.field_signed_date
 field_name: field_signed_date
 entity_type: asset

@@ -1,0 +1,23 @@
+uuid: 3dcc8a32-8cd7-4a42-9c16-ba7adfed4ffe
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_infiltration
+id: asset.soil_health_sample.field_infiltration
+field_name: field_infiltration
+entity_type: asset
+bundle: soil_health_sample
+label: Infiltration
+description: 'inches per hour'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

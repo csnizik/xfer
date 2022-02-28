@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: wYbHCANQu9uMgHz353cEpcbUV-FShwNfb0vjFv0ZRz0
 id: asset.soil_health_demo_trial.field_sulfur_method
 field_name: field_sulfur_method
 entity_type: asset

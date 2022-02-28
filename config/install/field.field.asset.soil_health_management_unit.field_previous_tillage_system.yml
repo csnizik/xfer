@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: hcjUWpog8XKjyamq28Vap6Ard2zLoBs1DkUctiE7s8U
 id: asset.soil_health_management_unit.field_previous_tillage_system
 field_name: field_previous_tillage_system
 entity_type: asset

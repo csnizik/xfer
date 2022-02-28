@@ -6,7 +6,7 @@ dependencies:
     - asset
     - taxonomy
 _core:
-  default_config_hash: YCBnXBy7yN13xdwg5XavYiheridOahn73zAyiASOm-Y
+  default_config_hash: CnkxXu-6UrU4NwSIE89C8oN3zDpOlmW_1Ns7MlyxKLM
 id: asset.field_project_scale
 field_name: field_project_scale
 entity_type: asset

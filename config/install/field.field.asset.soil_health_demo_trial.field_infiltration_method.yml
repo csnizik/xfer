@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: wNvVGw6bQRBEatPkz6K0cgGYV2uimO6Q6RbC0c0ysf0
 id: asset.soil_health_demo_trial.field_infiltration_method
 field_name: field_infiltration_method
 entity_type: asset

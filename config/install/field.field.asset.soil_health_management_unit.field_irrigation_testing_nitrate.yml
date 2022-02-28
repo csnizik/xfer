@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_testing_nitrate
+_core:
+  default_config_hash: TZxYAORfPrqKWAcBQ-m7_hWWWVrp9tq7u6V-UHSXMLI
 id: asset.soil_health_management_unit.field_irrigation_testing_nitrate
 field_name: field_irrigation_testing_nitrate
 entity_type: asset

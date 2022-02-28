@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_demo_trial
     - field.storage.asset.field_soil_health_demo_trial
+_core:
+  default_config_hash: gK_fbVgle_v_0xWchvJFUGzxw1PqWfDuDm7KB1umYJY
 id: asset.soil_health_demo_trial.field_soil_health_demo_trial
 field_name: field_soil_health_demo_trial
 entity_type: asset

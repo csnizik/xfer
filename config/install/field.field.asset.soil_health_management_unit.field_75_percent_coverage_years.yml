@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_75_percent_coverage_years
+_core:
+  default_config_hash: r5rZdTC9JqMjL_u5rsjBibRFRh8djyigMRQpDG-yTOI
 id: asset.soil_health_management_unit.field_75_percent_coverage_years
 field_name: field_75_percent_coverage_years
 entity_type: asset

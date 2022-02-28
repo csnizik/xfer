@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_awardee_contact_admin_2
+_core:
+  default_config_hash: x9f990wxbD3UrON7qzB6h0ZqsNGlmxXHa_4bLMp0sGE
 id: asset.project.field_awardee_contact_admin_2
 field_name: field_awardee_contact_admin_2
 entity_type: asset

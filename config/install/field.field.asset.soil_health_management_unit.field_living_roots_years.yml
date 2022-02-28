@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_living_roots_years
+_core:
+  default_config_hash: E9MTB6a_RIqvj6mtjM7UpDdGUT7IQUCqreeAlhXjen8
 id: asset.soil_health_management_unit.field_living_roots_years
 field_name: field_living_roots_years
 entity_type: asset

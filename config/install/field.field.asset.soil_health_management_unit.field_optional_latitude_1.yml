@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_optional_latitude_1
+_core:
+  default_config_hash: VUvXI4l8Dp5D5HcYn4XXOMCDUtVq_eTcgKccVhbBowE
 id: asset.soil_health_management_unit.field_optional_latitude_1
 field_name: field_optional_latitude_1
 entity_type: asset

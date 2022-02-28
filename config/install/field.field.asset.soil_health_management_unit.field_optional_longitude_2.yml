@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_optional_longitude_2
+_core:
+  default_config_hash: XGM7-TzeErT8LZMGTslz79xb_8tsaV79m40XRJg6UMg
 id: asset.soil_health_management_unit.field_optional_longitude_2
 field_name: field_optional_longitude_2
 entity_type: asset

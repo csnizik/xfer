@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_testing_alkalin
+_core:
+  default_config_hash: G5R8TuepNqNoLBLsE5WjG-xjxJ7_YMeUiAJTnqKWxcU
 id: asset.soil_health_management_unit.field_irrigation_testing_alkalin
 field_name: field_irrigation_testing_alkalin
 entity_type: asset

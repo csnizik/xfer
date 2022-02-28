@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_previous_tillage_system_ye
+_core:
+  default_config_hash: Y7M-XqL2gdAozCOq4s80A08aO8FBTN-bTP4yV2dvT7k
 id: asset.soil_health_management_unit.field_previous_tillage_system_ye
 field_name: field_previous_tillage_system_ye
 entity_type: asset

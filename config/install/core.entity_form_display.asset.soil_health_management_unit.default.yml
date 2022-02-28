@@ -90,7 +90,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: nY9X8yBqxdMHlFGZ4_UFbLHKMLhOWAv4SIamIGuFS-0
+  default_config_hash: j0nVT8WXzXVojALsbm-S2tc_WlVy8Nos71h-MqG36Ws
 id: asset.soil_health_management_unit.default
 targetEntityType: asset
 bundle: soil_health_management_unit

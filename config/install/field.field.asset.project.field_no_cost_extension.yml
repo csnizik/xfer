@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_no_cost_extension
+_core:
+  default_config_hash: flKPgKJZczPSbN2DaYNPaMdU-LymeFxvu3yNPwwpMsY
 id: asset.project.field_no_cost_extension
 field_name: field_no_cost_extension
 entity_type: asset

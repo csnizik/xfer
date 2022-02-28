@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_current_crop_plant_date
+_core:
+  default_config_hash: 0D2oNI5_eX_QqpKkDWYMJFfA8p0OrISBM2avQ3Ixtok
 id: asset.soil_health_management_unit.field_current_crop_plant_date
 field_name: field_current_crop_plant_date
 entity_type: asset

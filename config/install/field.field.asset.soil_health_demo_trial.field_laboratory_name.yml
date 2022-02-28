@@ -5,11 +5,13 @@ dependencies:
   config:
     - asset.type.soil_health_demo_trial
     - field.storage.asset.field_laboratory_name
+_core:
+  default_config_hash: v74WDDAnjEMg2xF6uj5t_oOBEXJQuEd1WJXi0vEQJJA
 id: asset.soil_health_demo_trial.field_laboratory_name
 field_name: field_laboratory_name
 entity_type: asset
 bundle: soil_health_demo_trial
-label: Laboratory Name
+label: 'Laboratory Name'
 description: ''
 required: false
 translatable: false

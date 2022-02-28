@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: 9SndtwQ7PiaTH07J0oypFOPF36KxVuPcv2aY8CXJiU4
 id: asset.operation.field_other_unit
 field_name: field_other_unit
 entity_type: asset

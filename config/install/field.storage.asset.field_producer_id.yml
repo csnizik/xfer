@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: gmtshXBlrSveoiMxDam8sDhi8EpX7dbye2vOhhwbl1A
 id: asset.field_producer_id
 field_name: field_producer_id
 entity_type: asset

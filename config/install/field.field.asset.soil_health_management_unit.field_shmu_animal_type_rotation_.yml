@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: P6J2ICXdATZoXzU2-dJNKztEpspy4JJXEmghA2yRU8M
 id: asset.soil_health_management_unit.field_shmu_animal_type_rotation_
 field_name: field_shmu_animal_type_rotation_
 entity_type: asset

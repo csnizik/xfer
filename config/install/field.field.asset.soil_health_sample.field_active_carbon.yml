@@ -1,0 +1,23 @@
+uuid: 8c42a2f6-c61c-4a7b-b6f8-0a72c85753bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_active_carbon
+id: asset.soil_health_sample.field_active_carbon
+field_name: field_active_carbon
+entity_type: asset
+bundle: soil_health_sample
+label: 'Active Carbon'
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

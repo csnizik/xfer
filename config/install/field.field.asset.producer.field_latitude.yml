@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.producer
     - field.storage.asset.field_latitude
+_core:
+  default_config_hash: CBwoyoudPvR7AlIcnTxHsGqjBWYaSywCVv3Ewqr5AzE
 id: asset.producer.field_latitude
 field_name: field_latitude
 entity_type: asset

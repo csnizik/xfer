@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_final_report_url
+_core:
+  default_config_hash: 7wvKOC2hRh4o02QHgNzKtp8VIiIj8TU-Wun3hxTBBpc
 id: asset.project.field_final_report_url
 field_name: field_final_report_url
 entity_type: asset

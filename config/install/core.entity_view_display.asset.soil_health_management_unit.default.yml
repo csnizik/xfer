@@ -84,12 +84,19 @@ dependencies:
     - farm_field
     - farm_id_tag
     - farm_map
+    - field_layout
     - file
     - image
+    - layout_discovery
     - options
     - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
 _core:
-  default_config_hash: 5cnU_oxOpJfq99vkRDNqOvb4pSr6nGwtbO0MOrtVppc
+  default_config_hash: nqjxmhTJMp3MdRH77n-_qsZ3YzOrLUytt7RjTznLiXE
 id: asset.soil_health_management_unit.default
 targetEntityType: asset
 bundle: soil_health_management_unit

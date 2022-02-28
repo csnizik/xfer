@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_project_background
+_core:
+  default_config_hash: aKIdwQbLSRNeHcgySDOwZmt6UkWWLduYeLxk6nRYjsk
 id: asset.project.field_project_background
 field_name: field_project_background
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_end_date
+_core:
+  default_config_hash: YOvIZ6jkgmQJJJNax2fLkk8_HpygQ20vkf0GS4nfeMc
 id: asset.project.field_end_date
 field_name: field_end_date
 entity_type: asset

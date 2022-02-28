@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: A1CU6kSI_julC5xPh6VgUwSo9oBlJ1yEBgsK2Z6Hy88
 id: asset.soil_health_management_unit.field_crop_rotation_years
 field_name: field_crop_rotation_years
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_equipment_hp
+_core:
+  default_config_hash: 9A9oOcfoOfh8cemNY74xGF-gixOhO5SPRY-zIEjOcxI
 id: asset.operation.field_equipment_hp
 field_name: field_equipment_hp
 entity_type: asset

@@ -6,7 +6,7 @@ dependencies:
     module:
       - cig_pods
 _core:
-  default_config_hash: D0YRFgUO_M7EYMaLgmHvoM7VJ7PdvkCBlsKVWWWYTrA
+  default_config_hash: poCn7NWfIHwf4dOeVZR97A2rksUyK5rEkrK0YoV9vDU
 id: awardee
 label: Awardee
 description: Awardee

@@ -5,7 +5,7 @@ dependencies:
   module:
     - asset
 _core:
-  default_config_hash: ibK4smLDiU2UdDnHMqiYD_Kswk2uC2fvJbDinauDb_U
+  default_config_hash: 6k0jayDqN8v57RW7Tqfc-Dgqi3CYK2-71r8uzETouuo
 id: asset.field_awardee_contact_technical
 field_name: field_awardee_contact_technical
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_input_unit_rate
+_core:
+  default_config_hash: khTmCpvSNkf3tI_p9CavrXFjz8aebmNg0VW4qoERD5E
 id: asset.operation.field_input_unit_rate
 field_name: field_input_unit_rate
 entity_type: asset

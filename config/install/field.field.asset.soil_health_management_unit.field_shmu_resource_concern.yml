@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: UHVvWIX_WeE_7564hOl_dC5Fltl28JQbiYbzvxaGul4
 id: asset.soil_health_management_unit.field_shmu_resource_concern
 field_name: field_shmu_resource_concern
 entity_type: asset

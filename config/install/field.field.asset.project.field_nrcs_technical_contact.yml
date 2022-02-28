@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_nrcs_technical_contact
+_core:
+  default_config_hash: 6JiGw9RIYGSgAHpf99yUxkLeQjqOJdGA5vNgw0CTz5c
 id: asset.project.field_nrcs_technical_contact
 field_name: field_nrcs_technical_contact
 entity_type: asset

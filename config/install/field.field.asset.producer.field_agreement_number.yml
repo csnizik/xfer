@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.producer
     - field.storage.asset.field_agreement_number
+_core:
+  default_config_hash: natA8bvKYbRmTQSbZht29ZkFjC7bs89cQujf3Yq6adI
 id: asset.producer.field_agreement_number
 field_name: field_agreement_number
 entity_type: asset

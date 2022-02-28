@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_grazing_turn_out_date_2
+_core:
+  default_config_hash: SIRUV8tLd82MClZmcSbO46uBJ5h9Fn06_dZjnwJLico
 id: asset.soil_health_management_unit.field_grazing_turn_out_date_2
 field_name: field_grazing_turn_out_date_2
 entity_type: asset

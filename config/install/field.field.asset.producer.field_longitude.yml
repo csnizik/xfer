@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.producer
     - field.storage.asset.field_longitude
+_core:
+  default_config_hash: MWi0gQAqjsixI23jrr0Tt-halZQT2LoIVeoFg-QkxEo
 id: asset.producer.field_longitude
 field_name: field_longitude
 entity_type: asset

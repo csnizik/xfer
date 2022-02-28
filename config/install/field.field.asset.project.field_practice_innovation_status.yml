@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_practice_innovation_status
+_core:
+  default_config_hash: wQ7fQ4wqt2cZvVKay-xf76W0Yv8ifj_zEA5Sdk7dkP4
 id: asset.project.field_practice_innovation_status
 field_name: field_practice_innovation_status
 entity_type: asset

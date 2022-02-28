@@ -6,7 +6,7 @@ dependencies:
     - asset
     - taxonomy
 _core:
-  default_config_hash: 5slpJoCkiwnIS_4X9EhfxSutb7yXu92F9ALxrhPDkAA
+  default_config_hash: s4TOtVjp9ymwbXKWmFuCHfS-NB2Uo3HP_1wW5ci24s0
 id: asset.field_project_regional_area
 field_name: field_project_regional_area
 entity_type: asset

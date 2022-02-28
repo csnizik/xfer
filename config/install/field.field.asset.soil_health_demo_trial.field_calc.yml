@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: e4zZWANz_WOrrD2-qT9J6-1XJujQNjHlNAbnJ_yx65A
 id: asset.soil_health_demo_trial.field_calc
 field_name: field_calc
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_awardee_contact_technical
+_core:
+  default_config_hash: sydaTDfCNsHHephkEaMZP3SroSxGqPSAsfUc4YNyjcM
 id: asset.project.field_awardee_contact_technical
 field_name: field_awardee_contact_technical
 entity_type: asset

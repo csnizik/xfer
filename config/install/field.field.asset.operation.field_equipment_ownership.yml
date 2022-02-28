@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: dVATdKiU8TabPlESK3J4Q9dTSBn4oR0W7Sa1fKDCk1E
 id: asset.operation.field_equipment_ownership
 field_name: field_equipment_ownership
 entity_type: asset

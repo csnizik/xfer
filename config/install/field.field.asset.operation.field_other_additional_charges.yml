@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: 7tmmDUNJQx5-NygnJTyz1t1LtRK-QAj4_9ihnvKSlcg
 id: asset.operation.field_other_additional_charges
 field_name: field_other_additional_charges
 entity_type: asset

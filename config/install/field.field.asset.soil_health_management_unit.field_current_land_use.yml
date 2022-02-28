@@ -5,7 +5,7 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_current_land_use
-    - taxonomy.vocabulary.unit
+    - taxonomy.vocabulary.d_land_use
   module:
     - entity_reference_validators
 third_party_settings:
@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: eYkWKxluitfH74WrjSTbpZk__TURm-eJBG9CdCzzybg
 id: asset.soil_health_management_unit.field_current_land_use
 field_name: field_current_land_use
 entity_type: asset

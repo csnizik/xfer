@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_current_crop_yield
+_core:
+  default_config_hash: X6mDSNFVAAyPIy9rhP-lme0nMkueuWdKMmYQ5_elVUA
 id: asset.soil_health_management_unit.field_current_crop_yield
 field_name: field_current_crop_yield
 entity_type: asset

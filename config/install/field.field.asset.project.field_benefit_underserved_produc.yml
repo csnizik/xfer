@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_benefit_underserved_produc
+_core:
+  default_config_hash: juVwnOqVjYsPSusuZT-y9R5xZvVdbtsKC5eoHSJjbEY
 id: asset.project.field_benefit_underserved_produc
 field_name: field_benefit_underserved_produc
 entity_type: asset

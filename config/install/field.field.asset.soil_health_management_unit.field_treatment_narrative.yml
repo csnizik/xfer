@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_treatment_narrative
+_core:
+  default_config_hash: Vu-1mJvaAM_AHuwKzUclXCADFxxX57GXSoK_YWXXBfI
 id: asset.soil_health_management_unit.field_treatment_narrative
 field_name: field_treatment_narrative
 entity_type: asset

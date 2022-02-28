@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.operation
     - field.storage.asset.field_active_ingredient_percent
+_core:
+  default_config_hash: hJcyO5vKm7Voh7vKkT4fK8RNqjcN_kQft9hw2Vakcs0
 id: asset.operation.field_active_ingredient_percent
 field_name: field_active_ingredient_percent
 entity_type: asset

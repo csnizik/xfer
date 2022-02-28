@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.producer
     - field.storage.asset.field_producer_name
+_core:
+  default_config_hash: jouO0BCUuiYCbWj_Gwnw02galy7NBoNAgug-qdRnKY0
 id: asset.producer.field_producer_name
 field_name: field_producer_name
 entity_type: asset

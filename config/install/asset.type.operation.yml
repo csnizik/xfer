@@ -6,7 +6,7 @@ dependencies:
     module:
       - cig_pods
 _core:
-  default_config_hash: 7SPSJoapIMJ9CluxhhObzMAedYsjPdkM6rSzJED6tWQ
+  default_config_hash: RvDUVi8IYPidVq8W-bovQS3povGYqB-SJC65mmteZnA
 id: operation
 label: Operation
 description: Operation

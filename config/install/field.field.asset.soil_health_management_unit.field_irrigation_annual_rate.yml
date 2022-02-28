@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_annual_rate
+_core:
+  default_config_hash: fFz6uikHap6eunPVE8iXDnY3VGE67MVGaJkoEX-baAA
 id: asset.soil_health_management_unit.field_irrigation_annual_rate
 field_name: field_irrigation_annual_rate
 entity_type: asset

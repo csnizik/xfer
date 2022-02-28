@@ -6,9 +6,9 @@ dependencies:
     module:
       - cig_pods
 _core:
-  default_config_hash: pzzMun48DRRbto-87YiCfqS3VUolC_KeAbY59Etk_t8
+  default_config_hash: FOOfv0VhtuKjSCvxarbieHXl2wCEAcXCLv-0WqH3pfg
 id: project
-label: project
+label: Project
 description: Project
 workflow: asset_default
 new_revision: true

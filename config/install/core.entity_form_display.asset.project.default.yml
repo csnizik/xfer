@@ -50,7 +50,7 @@ third_party_settings:
     settings:
       label: ''
 _core:
-  default_config_hash: iLyVZlwiWdPCvWsWe-SnrrrA-zhykPbeTXGWecRPnQM
+  default_config_hash: r7cwR_iSejHdUaULISV0JtXiOo_pflTQqW1Fj3vAHbg
 id: asset.project.default
 targetEntityType: asset
 bundle: project

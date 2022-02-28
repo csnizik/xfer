@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: h0PaD8jP8neiHhJaol5XvbQ1Okm8O_vJE8kDwg-Riqs
 id: asset.project.field_innovation_results
 field_name: field_innovation_results
 entity_type: asset

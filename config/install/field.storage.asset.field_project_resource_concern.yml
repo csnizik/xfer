@@ -6,7 +6,7 @@ dependencies:
     - asset
     - taxonomy
 _core:
-  default_config_hash: Tocle6PSX6-_big7UaZDN2S383JOPtBEATe2w618K4g
+  default_config_hash: m36e9wvoN7B2vJhPpPEdy_aoBNeBLImSuueFvepxb10
 id: asset.field_project_resource_concern
 field_name: field_project_resource_concern
 entity_type: asset

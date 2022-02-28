@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_funds_approved
+_core:
+  default_config_hash: FScNUjUZkibZo9JB_ZY86L5aGeyiaRxGtXWEMHWDHmA
 id: asset.project.field_funds_approved
 field_name: field_funds_approved
 entity_type: asset

@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: sdtB7or4zFFvuBp_spVZydaShHPqRY2DdHzhJ5C-SxI
 id: asset.project.field_project_regional_area
 field_name: field_project_regional_area
 entity_type: asset

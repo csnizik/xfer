@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: GHd5WsEtamAroB01gD4yo_M5bIKUzCsgbl3O3QoSF78
 id: asset.soil_health_management_unit.field_shmu_crop_rotation
 field_name: field_shmu_crop_rotation
 entity_type: asset

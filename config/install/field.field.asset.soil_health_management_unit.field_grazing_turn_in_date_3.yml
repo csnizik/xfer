@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_grazing_turn_in_date_3
+_core:
+  default_config_hash: JOKLq7roftTTsCFaBqZW1m6M5-2xK14in9fbJB_jdTM
 id: asset.soil_health_management_unit.field_grazing_turn_in_date_3
 field_name: field_grazing_turn_in_date_3
 entity_type: asset

@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: qLSZCs4fAsoWFJ1t0L6-22acrOzgT9mhbE1X8k1REb4
 id: asset.soil_health_management_unit.field_shmu_crop
 field_name: field_shmu_crop
 entity_type: asset

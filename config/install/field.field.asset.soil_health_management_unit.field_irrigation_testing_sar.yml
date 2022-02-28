@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_testing_sar
+_core:
+  default_config_hash: QhT0QDVgWq0PDd2An5-KJ43r1vJS2nGe5w1NG1uOFb8
 id: asset.soil_health_management_unit.field_irrigation_testing_sar
 field_name: field_irrigation_testing_sar
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.project
     - field.storage.asset.field_project_status
+_core:
+  default_config_hash: tCset1zhG3mNqCan-Ne41A3YoDw_shk8cO0wFC5WlxI
 id: asset.project.field_project_status
 field_name: field_project_status
 entity_type: asset

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_grazing_stocking_rate
+_core:
+  default_config_hash: rD8kdUbkmjfrV0iVe6SU6TtdIQhr0w9QXdH65malPOk
 id: asset.soil_health_management_unit.field_grazing_stocking_rate
 field_name: field_grazing_stocking_rate
 entity_type: asset

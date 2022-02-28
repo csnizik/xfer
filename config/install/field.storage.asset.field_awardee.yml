@@ -4,8 +4,11 @@ status: true
 dependencies:
   module:
     - asset
+<<<<<<< HEAD
 _core:
   default_config_hash: 1RS521872dniudwkT4Q280HEWa8nVRCM6a38NwkD93w
+=======
+>>>>>>> develop
 id: asset.field_awardee
 field_name: field_awardee
 entity_type: asset

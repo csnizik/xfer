@@ -24,7 +24,11 @@ third_party_settings:
     settings:
       label: ''
 _core:
+<<<<<<< HEAD
   default_config_hash: hGlWYP-q-HN1iBuTpQRH-MLTy-KjdYJPNgsEWBSkV1w
+=======
+  default_config_hash: fnp14rf8jzMh-gq2E0kvAMRrMlinnKfKUTMSqGZFcpY
+>>>>>>> develop
 id: asset.awardee.default
 targetEntityType: asset
 bundle: awardee

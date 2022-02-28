@@ -16,7 +16,11 @@ third_party_settings:
     settings:
       label: ''
 _core:
+<<<<<<< HEAD
   default_config_hash: v0erbUo8VUJMR-e1A4XkA8h0_N2HhYemHrhLBtXNi_4
+=======
+  default_config_hash: uqBq-8_dHbvgrx8XglkPx3uZEyb2DTQSrhJ8X8wRvro
+>>>>>>> develop
 id: asset.awardee.default
 targetEntityType: asset
 bundle: awardee
@@ -46,6 +50,14 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
   created: true
   data: true
@@ -59,7 +71,6 @@ hidden:
   is_fixed: true
   is_location: true
   location: true
-  name: true
   notes: true
   parent: true
   status: true

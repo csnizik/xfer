@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Input
+vid: d_input
+description: 'A list of Inputs'
+weight: 0

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_total_nitrogen_by_dry_comb
+id: asset.soil_health_sample.field_total_nitrogen_by_dry_comb
+field_name: field_total_nitrogen_by_dry_comb
+entity_type: asset
+bundle: soil_health_sample
+label: 'Total Nitrogen by Dry Combustion'
+description: '%'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,21 @@
+uuid: d1cb45ff-e8e2-4170-b876-74fc6e5d16d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_agreement_number
+_core:
+  default_config_hash: 4rY30kcF-hVDKfdF3oWXy8h4bIs-DowuiszJhVEIJ6Y
+id: asset.project.field_agreement_number
+field_name: field_agreement_number
+entity_type: asset
+bundle: project
+label: 'Agreement Number'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

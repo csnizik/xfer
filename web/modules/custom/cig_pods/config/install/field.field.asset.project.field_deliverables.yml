@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_deliverables
+id: asset.project.field_deliverables
+field_name: field_deliverables
+entity_type: asset
+bundle: project
+label: Deliverables
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

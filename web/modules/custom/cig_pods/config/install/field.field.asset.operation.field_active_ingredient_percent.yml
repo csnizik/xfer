@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_active_ingredient_percent
+id: asset.operation.field_active_ingredient_percent
+field_name: field_active_ingredient_percent
+entity_type: asset
+bundle: operation
+label: 'Active Ingredient Percent'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

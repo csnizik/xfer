@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Sample Status
+vid: d_sample_status
+description: 'A list of Sample Statuss'
+weight: 0

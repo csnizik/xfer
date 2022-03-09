@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Respiration Detection Method
+vid: d_respiration_detection_
+description: 'A list of Respiration Detection Methods'
+weight: 0

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_grazing_turn_in_date_3
+id: asset.soil_health_management_unit.field_grazing_turn_in_date_3
+field_name: field_grazing_turn_in_date_3
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Grazing Turn In Date 3'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1644439763
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

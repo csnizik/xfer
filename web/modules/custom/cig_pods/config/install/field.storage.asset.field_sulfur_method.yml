@@ -1,0 +1,22 @@
+uuid: 0da9fd09-e433-4198-8d58-c40d1746473c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+_core:
+  default_config_hash: 7CN64mLh_gpg0c-LC8EKA_1rdATn5YTjI_RWR9_m3xE
+id: asset.field_sulfur_method
+field_name: field_sulfur_method
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

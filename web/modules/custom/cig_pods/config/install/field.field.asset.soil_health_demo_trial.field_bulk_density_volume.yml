@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_demo_trial
+    - field.storage.asset.field_bulk_density_volume
+id: asset.soil_health_demo_trial.field_bulk_density_volume
+field_name: field_bulk_density_volume
+entity_type: asset
+bundle: soil_health_demo_trial
+label: 'Bulk Density Volume'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

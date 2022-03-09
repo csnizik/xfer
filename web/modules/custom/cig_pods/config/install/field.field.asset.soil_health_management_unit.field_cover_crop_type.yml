@@ -1,0 +1,38 @@
+uuid: 2466709a-6677-44d7-8dc5-a576f3b1aa90
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_cover_crop_type
+    - taxonomy.vocabulary.d_cover_crop_type
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+_core:
+  default_config_hash: qtoVMD8alklY4B_oL1q0hDpXrpusBbYXLqfWKiMzWYw
+id: asset.soil_health_management_unit.field_cover_crop_type
+field_name: field_cover_crop_type
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Current Cover Crop System Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_cover_crop_type: d_cover_crop_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

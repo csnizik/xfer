@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_equipment_rows
+id: asset.operation.field_equipment_rows
+field_name: field_equipment_rows
+entity_type: asset
+bundle: operation
+label: 'Equipment Rows'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

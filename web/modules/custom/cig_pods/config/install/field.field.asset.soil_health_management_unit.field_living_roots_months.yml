@@ -1,0 +1,25 @@
+uuid: d62bea2e-3d0b-48fb-97dc-711ffe2ff17a
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_living_roots_months
+_core:
+  default_config_hash: IqJoVzbVABJhSM1oopcYT4BpfQcz-whzEWNJwXU7xj8
+id: asset.soil_health_management_unit.field_living_roots_months
+field_name: field_living_roots_months
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Months with Living Roots'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

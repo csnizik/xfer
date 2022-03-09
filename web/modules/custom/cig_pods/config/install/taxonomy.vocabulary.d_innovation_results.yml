@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Innovation Results
+vid: d_innovation_results
+description: 'A list of Innovation Resultss'
+weight: 0

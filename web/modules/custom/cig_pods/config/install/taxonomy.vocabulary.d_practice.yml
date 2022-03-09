@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Practice
+vid: d_practice
+description: 'A list of Practices'
+weight: 0

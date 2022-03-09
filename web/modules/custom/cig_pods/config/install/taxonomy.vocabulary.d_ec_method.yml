@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Ec Method
+vid: d_ec_method
+description: 'A list of Ec Methods'
+weight: 0

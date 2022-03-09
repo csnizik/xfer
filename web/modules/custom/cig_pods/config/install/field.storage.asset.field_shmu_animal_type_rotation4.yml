@@ -1,0 +1,22 @@
+uuid: 277a607e-a8b6-4662-8cb5-96d6ff159be4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+_core:
+  default_config_hash: orxU61vqZLC5KJGTdQ42--JDhlqhCToYxGue1rNVVlA
+id: asset.field_shmu_animal_type_rotation4
+field_name: field_shmu_animal_type_rotation4
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

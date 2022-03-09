@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_phe
+id: asset.soil_health_sample.field_phe
+field_name: field_phe
+entity_type: asset
+bundle: soil_health_sample
+label: pH
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: !!float 14
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_input_unit_rate
+id: asset.operation.field_input_unit_rate
+field_name: field_input_unit_rate
+entity_type: asset
+bundle: operation
+label: 'Input Unit Rate'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

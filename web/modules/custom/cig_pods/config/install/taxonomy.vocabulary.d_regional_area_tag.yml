@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Regional Area Tag
+vid: d_regional_area_tag
+description: 'A list of Regional Area Tags'
+weight: 0

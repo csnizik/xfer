@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_available_organic_nitrogen
+id: asset.soil_health_sample.field_available_organic_nitrogen
+field_name: field_available_organic_nitrogen
+entity_type: asset
+bundle: soil_health_sample
+label: 'Available Organic Nitrogen (ACE Protein)'
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,23 @@
+uuid: 19f697d0-46e9-4286-8811-3ff8916681ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_crop_rotation_start_date
+_core:
+  default_config_hash: OiRR4j3iUYd42GD0LTyGT8J4JJA-8J01BoRYzGD4Wh8
+id: asset.soil_health_management_unit.field_crop_rotation_start_date
+field_name: field_crop_rotation_start_date
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Crop Rotation Start Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1644439010
+default_value_callback: ''
+settings: {  }
+field_type: timestamp

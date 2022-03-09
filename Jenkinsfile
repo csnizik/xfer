@@ -26,10 +26,10 @@ pipeline {
         }
         //build deploy image for develop and release branch only
         steps {
-          sh "docker build -t pods:${ENV_NAME} ."
+          sh "docker build . -t pods:${ENV_NAME}"
           // Password and connection info coming from Greyworm Endo Jenkinsfile. Verify we can use the same ECR login info
           // sh "docker tag pods:${ENV_NAME} 766295386465.dkr.ecr.us-east-1.amazonaws.com/greyworm-endo-admin:${ENV_NAME}" 
-          sh "docker run -p 85:80 pods"
+          sh "docker run -p 85:80 pods:${ENV_NAME}"
         }
       }
       // stage("Push Docker Image to AWS ECR") {

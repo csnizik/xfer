@@ -1,0 +1,14 @@
+uuid: 4abc20d0-fcad-4791-a221-975a4b63b026
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_map
+_core:
+  default_config_hash: 5s8eykgcXW8P6nP0wyOK5xN0aTMb3E6caFaC27F3-dg
+id: geofield
+label: Geofield
+description: 'Copies map layer data into a form textarea.'
+library: farm_map/behavior_geofield
+settings: {  }

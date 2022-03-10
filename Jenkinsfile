@@ -26,13 +26,13 @@ pipeline {
         }
         //build deploy image for develop and release branch only
         steps {
-          sh "docker rm pods"
           sh "docker build . -t pods"
           
           // Dockerfile needs to be modified to enable a service file maybe.
           // Right now Jenkins blocks on the process
           // Tried running this as a backgrounded task via "&" but that causes the build to fail silently
-          sh "docker run -p 85:80 pods"
+          // sh "docker run -d -p 85:80 pods"
+          sh "./run-pods.sh"
         }
       }
    }

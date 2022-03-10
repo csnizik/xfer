@@ -30,8 +30,8 @@ pipeline {
           
           // Dockerfile needs to be modified to enable a service file maybe.
           // Right now Jenkins blocks on the process
-          // Ideal situation would be to 
-          sh "docker run -p 85:80 pods:${ENV_NAME} &"
+          // Tried running this as a backgrounded task via "&" but that causes the build to fail silently
+          sh "docker run -p 85:80 pods:${ENV_NAME}"
         }
       }
    }

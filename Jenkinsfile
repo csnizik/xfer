@@ -29,11 +29,18 @@ pipeline {
       
       stage("Reboot PODS"){
          agent {label agentLabel}
+         when {
+            anyOf {
+                branch 'develop_refactor';
+            }
+          }
           // Dockerfile needs to be modified to enable a service file maybe.
           // Right now Jenkins blocks on the process
           // Tried running this as a backgrounded task via "&" but that causes the build to fail silently
           // sh "docker run -d -p 85:80 pods"
-          sh "./run-pods.sh"
+          steps {
+            sh "./run-pods.sh"
+          }
       }
    }
   post {

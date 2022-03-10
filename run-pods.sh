@@ -10,7 +10,7 @@ if [ ! "$(docker ps -q -f name=pods-container)" ]; then
     fi
     # run your container
     # TODO: Mount logs folder
-    docker run -p 85:80 -d --name pods-container pods:latest
+    docker run -p ${PORT}:80 -d --name pods-container pods:latest
 fi
 docker ps -a #shows all active/inactive containers
 

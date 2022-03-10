@@ -7,9 +7,7 @@ pipeline {
 
    agent {label agentLabel}
    environment {
-        SLAVE_NODE = "PODS-DEV"
-        ENV_NAME = "${env.BRANCH_NAME}"
-        httpStatus = ""
+
     }
    stages {
       stage('Notify Bitbucket Status') {
@@ -27,13 +25,15 @@ pipeline {
         //build deploy image for develop and release branch only
         steps {
           sh "docker build . -t pods"
-          
+        }
+      }
+      
+      stage("Reboot PODS"){
           // Dockerfile needs to be modified to enable a service file maybe.
           // Right now Jenkins blocks on the process
           // Tried running this as a backgrounded task via "&" but that causes the build to fail silently
           // sh "docker run -d -p 85:80 pods"
           sh "./run-pods.sh"
-        }
       }
    }
   post {

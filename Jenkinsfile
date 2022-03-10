@@ -1,21 +1,20 @@
-def agentLabel
-angentLabel = "PODS-DEV"
-
-
+def agentLabel = "PODS-DEV"
 
 pipeline {
 
-   agent {label agentLabel}
    environment {
 
     }
    stages {
       stage('Notify Bitbucket Status') {
+        agent {label agentLabel}
+
         steps {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
         }
       } 
       stage("Build Docker Deploy Image") {
+        agent {label agentLabel}
         // We can build the "pods" image 
         when {
             anyOf {
@@ -29,6 +28,7 @@ pipeline {
       }
       
       stage("Reboot PODS"){
+         agent {label agentLabel}
           // Dockerfile needs to be modified to enable a service file maybe.
           // Right now Jenkins blocks on the process
           // Tried running this as a backgrounded task via "&" but that causes the build to fail silently

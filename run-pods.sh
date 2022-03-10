@@ -8,7 +8,7 @@ if ["$(docker ps -q -f name=pods-container)"]; then
 	fi
 	# Build from the pods image, name the container "pods-container" and run in detached mode
 	# Take in arguments here to grab the properly tagged one?
-	docker run -d --name pods-container pods
 fi
 
+docker run -d --name pods-container pods
 docker ps -a

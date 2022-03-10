@@ -1,9 +1,6 @@
 pipeline {
   agent {label "PODS-DEV"}
 
-   environment {
-
-    }
    stages {
       stage('Notify Bitbucket Status') {
         steps {

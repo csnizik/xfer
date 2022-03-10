@@ -1,20 +1,16 @@
-def agentLabel = "PODS-DEV"
-
 pipeline {
+  agent {label "PODS-DEV"}
 
    environment {
 
     }
    stages {
       stage('Notify Bitbucket Status') {
-        agent {label agentLabel}
-
         steps {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
         }
       } 
       stage("Build Docker Deploy Image") {
-        agent {label agentLabel}
         // We can build the "pods" image 
         when {
             anyOf {
@@ -28,7 +24,6 @@ pipeline {
       }
       
       stage("Reboot PODS"){
-         agent {label agentLabel}
          when {
             anyOf {
                 branch 'develop_refactor';

@@ -2,11 +2,15 @@
 # Requirements:
 # 	Docker
 # 	Docker image named "pods"
+# 	PORT : the desired listening port.
 export PORT=85
 if [ ! "$(docker ps -q -f name=pods-container)" ]; then
     if [ "$(docker ps -aq -f status=exited -f name=pods-container)" ]; then
         # cleanup
         docker rm pods-container
+    else
+	docker stop pods-container
+	docker rm pods-container
     fi
     # run your container
     # TODO: Mount logs folder

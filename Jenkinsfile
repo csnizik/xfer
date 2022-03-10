@@ -26,7 +26,7 @@ pipeline {
         }
         //build deploy image for develop and release branch only
         steps {
-          sh "docker stop pods"
+          sh "docker rm pods:${ENV_NAME}"
           sh "docker build . -t pods:${ENV_NAME}"
           
           // Dockerfile needs to be modified to enable a service file maybe.

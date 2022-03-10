@@ -16,6 +16,7 @@ pipeline {
         }
         //build deploy image for develop and release branch only
         steps {
+          sh "whoami"
           sh "docker build . -t pods"
         }
       }

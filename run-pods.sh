@@ -2,13 +2,15 @@
 # Requirements:
 # 	Docker
 # 	Docker image named "pods"
-if ["$(docker ps -q -f name=pods-container)"]; then
-	if ["$(docker ps -aq -f status=exited -f name=pods-container)"]; then
-	docker rm pods-container
-	fi
-	# Build from the pods image, name the container "pods-container" and run in detached mode
-	# Take in arguments here to grab the properly tagged one?
+export PORT=85
+if [ ! "$(docker ps -q -f name=pods-container)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=pods-container)" ]; then
+        # cleanup
+        docker rm pods-container
+    fi
+    # run your container
+    # TODO: Mount logs folder
+    docker run -p 85:80 -d --name pods
 fi
+docker ps -a shows all active/inactive containers
 
-docker run -d --name pods-container pods
-docker ps -a

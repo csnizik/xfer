@@ -6,7 +6,7 @@ WORKDIR /var/www/html/PODS
 COPY composer.json composer.json
 COPY config/sync config/sync
 COPY web/modules/custom/cig_pods web/modules/custom/cig_pods
-COPY pods.conf /etc/apache2/sites-available/pods.conf
+COPY pods.sfi.dev.conf /etc/apache2/sites-available/pods.conf
 
 RUN pwd
 RUN ls /etc/apache2/sites-available/
@@ -30,7 +30,7 @@ RUN cat /etc/apache2/ports.conf
 # Deploy code
 # Run database updates
 
-# RUN a2ensite pods.conf
+RUN a2ensite pods.conf
 
 
 # TODO: Figure out why apache2-foregroud is caled here. I don't understand how there is both an "ENTRYPOINT" script and a "CMD"present. 

@@ -18,7 +18,7 @@ RUN chmod -R a+w web/sites/default/
 
 # Do I need to case on different environments here?
 # TODO: Change back to sfi.dev to serve? Or it's okay because Docker?
-COPY pods.conf /etc/apache2/sites-available/pods.conf
+COPY pods.sfi.dev.conf /etc/apache2/sites-available/pods.conf
 
 RUN pwd
 

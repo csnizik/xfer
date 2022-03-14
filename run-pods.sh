@@ -18,8 +18,9 @@ if [ ! "$(docker ps -q -f name=pods-container)" ]; then
         docker rm pods-container
     else
     # If there is an active "pods-container"
-	docker-compose down 
-	echo "y\n" | docker system prune
+	docker-compose down
+    docker rm pods-container 
+	# echo "y\n" | docker system prune
     fi
     # run your container
     # TODO: Mount logs folder

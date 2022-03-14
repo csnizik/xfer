@@ -18,8 +18,8 @@ if [ ! "$(docker ps -q -f name=pods-container)" ]; then
         docker rm pods-container
     else
     # If there is an active "pods-container"
-	docker-compose down
-    docker rm pods-container 
+        docker-compose down
+        docker rm pods-container 
 	# echo "y\n" | docker system prune
     fi
     # run your container
@@ -32,6 +32,10 @@ else
   if [ "$(docker ps -aq -f status=running -f name=pods-container)" ]; then
 	export PODS_CONTAINER_ID=$(docker ps -q -f name=pods-container -f status=running)
 	echo $PODS_CONTAINER_ID
+    docker stop pods-container
+    docker rm pods-container
+    docker build . -t pods:latest --no-cache
+    docker-compose up -d     
   fi
 	
 fi

@@ -3,7 +3,7 @@ services:
   db:
     image: postgres:12
     volumes:
-      - './db:/var/lib/postgresql/data'
+      - '/opt/jenkins/db:/var/lib/postgresql/data'
     ports:
       - '5432:5432'
     environment:

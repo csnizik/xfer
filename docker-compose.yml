@@ -15,8 +15,6 @@ services:
     depends_on:
       - db
     image: pods:latest
-    volumes:
-      - './web/modules/custom/cig_pods:/opt/drupal/PODS/web/modules/custom/cig_pods'
     ports:
       - '85:80'
     # environment:

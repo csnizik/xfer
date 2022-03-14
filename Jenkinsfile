@@ -7,19 +7,19 @@ pipeline {
                 bitbucketStatusNotify(buildState: 'INPROGRESS')
         }
       } 
-      stage("Build Docker Deploy Image") {
-        // We can build the "pods" image 
-        when {
-            anyOf {
-                branch 'develop_refactor';
-            }
-        }
-        //build deploy image for develop and release branch only
-        steps {
-          sh "whoami"
-          sh "docker build . -t pods"
-        }
-      }
+      // stage("Build Docker Deploy Image") {
+      //   // We can build the "pods" image 
+      //   when {
+      //       anyOf {
+      //           branch 'develop_refactor';
+      //       }
+      //   }
+      //   //build deploy image for develop and release branch only
+      //   steps {
+      //     sh "whoami"
+      //     sh "docker build . -t pods"
+      //   }
+      // }
       
       stage("Reboot PODS"){
          when {

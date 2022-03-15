@@ -25,6 +25,7 @@ pipeline {
          when {
             anyOf {
                 branch 'develop_refactor';
+                branch 'develop';
             }
           }
           // Dockerfile needs to be modified to enable a service file maybe.

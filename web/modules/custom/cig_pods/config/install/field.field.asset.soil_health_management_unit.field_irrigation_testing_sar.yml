@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_irrigation_testing_sar
+id: asset.soil_health_management_unit.field_irrigation_testing_sar
+field_name: field_irrigation_testing_sar
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Irrigation Testing Sodium Adsorption Ratio'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

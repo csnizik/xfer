@@ -1,0 +1,25 @@
+uuid: 38896244-91f9-4d23-9dc7-b26836422fba
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_cover_crop_cost_per_acre
+_core:
+  default_config_hash: pSRw1gAWXJYKoBr9TL6rz9CZKWOJ42cK8UXYN_oMKX8
+id: asset.soil_health_management_unit.field_cover_crop_cost_per_acre
+field_name: field_cover_crop_cost_per_acre
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Cover Crop Cost Per Acre'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

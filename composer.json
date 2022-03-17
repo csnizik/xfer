@@ -1,0 +1,40 @@
+{
+    "name": "pods/pods",
+    "description": "Producer Operation Data System (PODS)",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "oomphinc/composer-installers-extender": "^2.0",
+        "farmos/farmos": "2.x",
+        "wikimedia/composer-merge-plugin": "^2.0",
+	"drupal/structure_sync": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/{$name}": ["type:drupal-module"],
+            "web/profiles/farm": ["farmos/farmos"],
+            "web/themes/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
+        },
+        "merge-plugin": {
+            "include": [
+                "web/profiles/farm/composer.libraries.json",
+                "web/profiles/farm/composer.project.json"
+            ],
+            "merge-extra": true,
+            "merge-extra-deep": true
+        }
+    },
+    "require-dev": {
+        "drupal/config_update_ui": "^1.7"
+    }
+}

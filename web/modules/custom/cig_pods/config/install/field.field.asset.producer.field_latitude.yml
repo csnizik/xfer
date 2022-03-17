@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.producer
+    - field.storage.asset.field_latitude
+id: asset.producer.field_latitude
+field_name: field_latitude
+entity_type: asset
+bundle: producer
+label: Latitude
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

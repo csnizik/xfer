@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_custom_unit_cost
+id: asset.operation.field_custom_unit_cost
+field_name: field_custom_unit_cost
+entity_type: asset
+bundle: operation
+label: 'Custom Unit Cost'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

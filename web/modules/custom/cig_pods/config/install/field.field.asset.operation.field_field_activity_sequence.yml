@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.operation
+    - field.storage.asset.field_field_activity_sequence
+id: asset.operation.field_field_activity_sequence
+field_name: field_field_activity_sequence
+entity_type: asset
+bundle: operation
+label: 'Field Activity Sequence'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

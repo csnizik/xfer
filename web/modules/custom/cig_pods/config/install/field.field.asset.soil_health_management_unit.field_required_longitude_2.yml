@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_required_longitude_2
+id: asset.soil_health_management_unit.field_required_longitude_2
+field_name: field_required_longitude_2
+entity_type: asset
+bundle: soil_health_management_unit
+label: 'Required Longitude 2'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

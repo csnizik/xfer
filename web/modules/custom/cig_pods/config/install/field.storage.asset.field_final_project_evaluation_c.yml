@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+_core:
+  default_config_hash: 2S1ODsWl0E-FpFMOQJVDhsYrsiMu59I1jfglAFkJIFM
+id: asset.field_final_project_evaluation_c
+field_name: field_final_project_evaluation_c
+entity_type: asset
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

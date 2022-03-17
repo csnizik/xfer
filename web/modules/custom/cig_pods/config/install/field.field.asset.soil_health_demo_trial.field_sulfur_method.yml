@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_demo_trial
+    - field.storage.asset.field_sulfur_method
+    - taxonomy.vocabulary.d_soil_health_extraction
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.soil_health_demo_trial.field_sulfur_method
+field_name: field_sulfur_method
+entity_type: asset
+bundle: soil_health_demo_trial
+label: 'Sulfur Method'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_soil_health_extraction: d_soil_health_extraction
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

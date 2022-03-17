@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.project
+    - field.storage.asset.field_final_report_url
+id: asset.project.field_final_report_url
+field_name: field_final_report_url
+entity_type: asset
+bundle: project
+label: 'Final Report URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

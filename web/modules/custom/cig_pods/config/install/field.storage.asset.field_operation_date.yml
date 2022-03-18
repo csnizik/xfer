@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   module:
-    - asset
-id: asset.field_operation_date
+    - log
+id: log.field_operation_date
 field_name: field_operation_date
 entity_type: asset
 type: timestamp

@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_active_ingredient_percent
-id: asset.operation.field_active_ingredient_percent
+    - log.type.operation
+    - field.storage.log.field_active_ingredient_percent
+id: log.operation.field_active_ingredient_percent
 field_name: field_active_ingredient_percent
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Active Ingredient Percent'
 description: ''

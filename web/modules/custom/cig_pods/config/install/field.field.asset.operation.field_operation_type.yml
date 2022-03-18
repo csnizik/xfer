@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_operation_type
+    - log.type.operation
+    - field.storage.log.field_operation_type
     - taxonomy.vocabulary.d_operation_type
   module:
     - entity_reference_validators
@@ -15,9 +15,9 @@ third_party_settings:
     duplicate_reference: false
 _core:
   default_config_hash: PSwYi8aRPzWnHdK8PNHYCBwrLPgoYv1hOsTc6IY1-_k
-id: asset.operation.field_operation_type
+id: log.operation.field_operation_type
 field_name: field_operation_type
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Operation Type'
 description: ''

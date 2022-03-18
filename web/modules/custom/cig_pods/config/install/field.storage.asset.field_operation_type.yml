@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   module:
-    - asset
+    - log
     - taxonomy
-id: asset.field_operation_type
+id: log.field_operation_type
 field_name: field_operation_type
 entity_type: asset
 type: entity_reference

@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_input
+    - log.type.operation
+    - field.storage.log.field_input
     - taxonomy.vocabulary.d_input
   module:
     - entity_reference_validators
@@ -15,9 +15,9 @@ third_party_settings:
     duplicate_reference: false
 _core:
   default_config_hash: NziYn_EOT5WxfvCC4tL-dHNsqpnamfX_YhSjsPiseX8
-id: asset.operation.field_input
+id: log.operation.field_input
 field_name: field_input
-entity_type: asset
+entity_type: log
 bundle: operation
 label: Input
 description: ''

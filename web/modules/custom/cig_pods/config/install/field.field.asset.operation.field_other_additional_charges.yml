@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_other_additional_charges
+    - log.type.operation
+    - field.storage.log.field_other_additional_charges
     - taxonomy.vocabulary.d_additional_charges
   module:
     - entity_reference_validators
@@ -15,9 +15,9 @@ third_party_settings:
     duplicate_reference: false
 _core:
   default_config_hash: 7tmmDUNJQx5-NygnJTyz1t1LtRK-QAj4_9ihnvKSlcg
-id: asset.operation.field_other_additional_charges
+id: log.operation.field_other_additional_charges
 field_name: field_other_additional_charges
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Other Additional Charges'
 description: ''

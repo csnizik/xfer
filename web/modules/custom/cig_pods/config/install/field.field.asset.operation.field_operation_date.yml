@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_operation_date
+    - log.type.operation
+    - field.storage.log.field_operation_date
 _core:
   default_config_hash: MceJUWHXdpnBDDPjOuSUakyC_dyUKs2RdU4K3d7dkwA
-id: asset.operation.field_operation_date
+id: log.operation.field_operation_date
 field_name: field_operation_date
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Operation Date'
 description: ''

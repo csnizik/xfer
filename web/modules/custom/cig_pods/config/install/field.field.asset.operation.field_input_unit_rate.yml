@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_input_unit_rate
-id: asset.operation.field_input_unit_rate
+    - log.type.operation
+    - field.storage.log.field_input_unit_rate
+id: log.operation.field_input_unit_rate
 field_name: field_input_unit_rate
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Input Unit Rate'
 description: ''

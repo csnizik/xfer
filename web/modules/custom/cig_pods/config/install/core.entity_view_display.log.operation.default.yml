@@ -2,26 +2,26 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.field.asset.operation.field_active_ingredient_percent
-    - field.field.asset.operation.field_custom_unit
-    - field.field.asset.operation.field_custom_unit_cost
-    - field.field.asset.operation.field_equipment_hp
-    - field.field.asset.operation.field_equipment_ownership
-    - field.field.asset.operation.field_equipment_rows
-    - field.field.asset.operation.field_equipment_width
-    - field.field.asset.operation.field_field_activity_sequence
-    - field.field.asset.operation.field_input
-    - field.field.asset.operation.field_input_type
-    - field.field.asset.operation.field_input_unit
-    - field.field.asset.operation.field_input_unit_cost
-    - field.field.asset.operation.field_input_unit_rate
-    - field.field.asset.operation.field_operation_date
-    - field.field.asset.operation.field_operation_type
-    - field.field.asset.operation.field_other_additional_charges
-    - field.field.asset.operation.field_other_unit
-    - field.field.asset.operation.field_other_unit_cost
-    - field.field.asset.operation.field_soil_health_management_id
+    - log.type.operation
+    - field.field.log.operation.field_active_ingredient_percent
+    - field.field.log.operation.field_custom_unit
+    - field.field.log.operation.field_custom_unit_cost
+    - field.field.log.operation.field_equipment_hp
+    - field.field.log.operation.field_equipment_ownership
+    - field.field.log.operation.field_equipment_rows
+    - field.field.log.operation.field_equipment_width
+    - field.field.log.operation.field_field_activity_sequence
+    - field.field.log.operation.field_input
+    - field.field.log.operation.field_input_type
+    - field.field.log.operation.field_input_unit
+    - field.field.log.operation.field_input_unit_cost
+    - field.field.log.operation.field_input_unit_rate
+    - field.field.log.operation.field_operation_date
+    - field.field.log.operation.field_operation_type
+    - field.field.log.operation.field_other_additional_charges
+    - field.field.log.operation.field_other_unit
+    - field.field.log.operation.field_other_unit_cost
+    - field.field.log.operation.field_soil_health_management_id
     - image.style.large
   module:
     - farm_field
@@ -38,8 +38,8 @@ third_party_settings:
     id: layout_onecol
     settings:
       label: ''
-id: asset.operation.default
-targetEntityType: asset
+id: log.operation.default
+targetEntityType: log
 bundle: operation
 mode: default
 content:

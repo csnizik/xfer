@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_field_activity_sequence
-id: asset.operation.field_field_activity_sequence
+    - log.type.operation
+    - field.storage.log.field_field_activity_sequence
+id: log.operation.field_field_activity_sequence
 field_name: field_field_activity_sequence
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Field Activity Sequence'
 description: ''

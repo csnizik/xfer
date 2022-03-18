@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.operation
-    - field.storage.asset.field_equipment_ownership
+    - log.type.operation
+    - field.storage.log.field_equipment_ownership
     - taxonomy.vocabulary.d_equipment_ownership
   module:
     - entity_reference_validators
@@ -12,9 +12,9 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-id: asset.operation.field_equipment_ownership
+id: log.operation.field_equipment_ownership
 field_name: field_equipment_ownership
-entity_type: asset
+entity_type: log
 bundle: operation
 label: 'Equipment Ownership'
 description: ''

@@ -3,14 +3,13 @@ status: true
 dependencies:
   config:
     - log.type.operation
-    - field.storage.log.field_field_activity_sequence
-id: log.operation.field_field_activity_sequence
-field_name: field_field_activity_sequence
+id: log.operation.field_equipment_width
+field_name: field_equipment_width
 entity_type: log
 bundle: operation
-label: 'Field Activity Sequence'
+label: 'Equipment Width'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -19,4 +18,4 @@ settings:
   max: null
   prefix: ''
   suffix: ''
-field_type: integer
+field_type: float

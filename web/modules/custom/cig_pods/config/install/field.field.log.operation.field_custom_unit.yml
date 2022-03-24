@@ -1,11 +1,9 @@
-uuid: 1e9c0df6-6206-476a-b07c-aedb578c09ef
 langcode: en
 status: true
 dependencies:
   config:
     - log.type.operation
-    - field.storage.log.field_operation_type
-    - taxonomy.vocabulary.d_operation_type
+    - taxonomy.vocabulary.d_unit
   module:
     - entity_reference_validators
 third_party_settings:
@@ -13,13 +11,11 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: PSwYi8aRPzWnHdK8PNHYCBwrLPgoYv1hOsTc6IY1-_k
-id: log.operation.field_operation_type
-field_name: field_operation_type
+id: log.operation.field_custom_unit
+field_name: field_custom_unit
 entity_type: log
 bundle: operation
-label: 'Operation Type'
+label: 'Custom Unit'
 description: ''
 required: false
 translatable: false
@@ -29,7 +25,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      d_operation_type: d_operation_type
+      d_unit: d_unit
     sort:
       field: name
       direction: asc

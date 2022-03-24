@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+id: soil_health_sample
+label: Soil Health Sample
+description: Soil Health Sample
+workflow: log_default
+new_revision: true

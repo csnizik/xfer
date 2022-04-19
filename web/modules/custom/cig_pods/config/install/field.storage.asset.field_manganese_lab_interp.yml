@@ -1,0 +1,20 @@
+uuid: 5dde1502-7592-4041-8e50-84643e4fcdf8
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_manganese_lab_interp
+field_name: field_manganese_lab_interp
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

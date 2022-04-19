@@ -1,0 +1,18 @@
+uuid: a4613b05-d59c-41c9-8788-8a9f560af9f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_infiltration
+field_name: field_infiltration
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

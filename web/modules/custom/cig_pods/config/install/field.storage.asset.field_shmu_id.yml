@@ -1,0 +1,19 @@
+uuid: 6a1c2c28-ca0b-433e-bba7-19b3b60ef347
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_shmu_id
+field_name: field_shmu_id
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: asset
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

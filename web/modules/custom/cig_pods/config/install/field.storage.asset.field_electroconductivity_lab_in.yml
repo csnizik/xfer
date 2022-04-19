@@ -1,0 +1,20 @@
+uuid: d358f739-dbbb-42c7-8bd4-f2398fbc0c87
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_electroconductivity_lab_in
+field_name: field_electroconductivity_lab_in
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

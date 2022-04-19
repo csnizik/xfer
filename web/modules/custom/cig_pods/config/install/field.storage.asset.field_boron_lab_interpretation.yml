@@ -1,0 +1,20 @@
+uuid: f46faa0a-411b-49da-ab1d-369cab020720
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_boron_lab_interpretation
+field_name: field_boron_lab_interpretation
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

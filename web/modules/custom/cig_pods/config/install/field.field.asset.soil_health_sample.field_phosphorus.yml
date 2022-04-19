@@ -1,0 +1,23 @@
+uuid: fbb246b3-de8a-4bd4-9203-fd52d5209886
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_phosphorus
+id: asset.soil_health_sample.field_phosphorus
+field_name: field_phosphorus
+entity_type: asset
+bundle: soil_health_sample
+label: Phosphorus
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

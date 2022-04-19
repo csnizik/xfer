@@ -1,0 +1,23 @@
+uuid: dc488204-3f54-4a58-ab3b-49bd98e985ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_zinc
+id: asset.soil_health_sample.field_zinc
+field_name: field_zinc
+entity_type: asset
+bundle: soil_health_sample
+label: Zinc
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

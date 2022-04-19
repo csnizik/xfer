@@ -8,4 +8,5 @@ id: operation
 label: Operation
 description: Operation
 workflow: log_default
+name_pattern: 'Operation log [log:id]'
 new_revision: true

@@ -1,0 +1,23 @@
+uuid: 3de165be-d9b7-4965-b477-d998077f55c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_aluminum
+id: asset.soil_health_sample.field_aluminum
+field_name: field_aluminum
+entity_type: asset
+bundle: soil_health_sample
+label: Aluminum
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

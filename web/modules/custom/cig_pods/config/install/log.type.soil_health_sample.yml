@@ -8,4 +8,5 @@ id: soil_health_sample
 label: Soil Health Sample
 description: Soil Health Sample
 workflow: log_default
+name_pattern: 'Soil Health Sample [log:id]'
 new_revision: true

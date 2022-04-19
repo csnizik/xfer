@@ -1,9 +1,11 @@
+uuid: ae4c3312-dec3-4ef0-baf1-08fb1d27ae0d
 langcode: en
 status: true
 dependencies:
   config:
-    - log.type.operation
-    - taxonomy.vocabulary.d_input_type
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_plant_stage_at_sampling
+    - taxonomy.vocabulary.d_plant_stage
   module:
     - entity_reference_validators
 third_party_settings:
@@ -11,11 +13,11 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-id: log.operation.field_input_type
-field_name: field_input_type
-entity_type: log
-bundle: operation
-label: 'Input Type'
+id: asset.soil_health_sample.field_plant_stage_at_sampling
+field_name: field_plant_stage_at_sampling
+entity_type: asset
+bundle: soil_health_sample
+label: 'Plant Stage at Sampling'
 description: ''
 required: false
 translatable: false
@@ -25,10 +27,10 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      d_input_type: d_input_type
+      d_plant_stage: d_plant_stage
     sort:
       field: name
       direction: asc
     auto_create: false
-    auto_create_bundle: d_input
+    auto_create_bundle: ''
 field_type: entity_reference

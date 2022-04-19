@@ -1,10 +1,11 @@
-uuid: 838d23c3-7191-403b-9336-9e7582cb2e3f
+uuid: ec3a59b8-2009-4436-8bd5-c633d0b0d53e
 langcode: en
 status: true
 dependencies:
   config:
-    - log.type.operation
-    - taxonomy.vocabulary.d_unit
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_fe_lab_interpretation
+    - taxonomy.vocabulary.d_lab_interpretation
   module:
     - entity_reference_validators
 third_party_settings:
@@ -12,11 +13,11 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-id: log.operation.field_other_unit
-field_name: field_other_unit
-entity_type: log
-bundle: operation
-label: 'Other Unit'
+id: asset.soil_health_sample.field_fe_lab_interpretation
+field_name: field_fe_lab_interpretation
+entity_type: asset
+bundle: soil_health_sample
+label: 'Iron Lab Interpretation'
 description: ''
 required: false
 translatable: false
@@ -26,7 +27,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      d_unit: d_unit
+      d_lab_interpretation: d_lab_interpretation
     sort:
       field: name
       direction: asc

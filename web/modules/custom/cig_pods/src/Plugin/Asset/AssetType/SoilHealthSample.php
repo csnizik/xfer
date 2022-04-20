@@ -2,16 +2,16 @@
 
 namespace Drupal\cig_pods\Plugin\Log\LogType;
 
-use Drupal\farm_entity\Plugin\Log\LogType\FarmLogType;
+use Drupal\farm_entity\Plugin\Log\AssetType\FarmAssetType;
 /**
-   * Provides the Soil Health Sample log type.
+   * Provides the Soil Health Sample asset type.
    *
-   * @LogType(
+   * @AssetType(
    * id = "soil_health_sample",
    * label = @Translation("Soil Health Sample"),
    * )
    */
-class SoilHealthSample extends FarmLogType {
+class SoilHealthSample extends FarmAssetType {
 
   /**
    * {@inheritdoc}

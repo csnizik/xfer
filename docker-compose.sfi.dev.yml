@@ -1,23 +1,19 @@
 version: '3'
 services:
   db:
-    image: mariadb:latest
+    image: postgres:12
     volumes:
-      - './db:/var/lib/mysql'
+      - '/opt/jenkins/db:/var/lib/postgresql/data'
     ports:
-            - '3306:3306'
+      - '5432:5432'
     environment:
-        MYSQL_ROOT_PASSWORD: farm
-        MYSQL_DATABASE: farm
-        MYSQL_USER: farm
-        MYSQL_PASSWORD: farm
+      POSTGRES_USER: farm
+      POSTGRES_PASSWORD: azy$qypAS9SjXp9o74@6!imGqe?qrrR?gbKKq!tz
+      POSTGRES_DB: farm
 
   pods-container:
     depends_on:
       - db
-    volumes:
-      - './web/modules/custom/cig_pods:/opt/drupal/PODS/web/modules/custom/cig_pods'
-      - './logs:/var/log/apache2/'
     image: pods:latest
     ports:
       - '85:80'

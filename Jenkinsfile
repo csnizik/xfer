@@ -34,6 +34,9 @@ pipeline {
           // sh "docker run -d -p 85:80 pods"
           steps {
             sh "./run-pods.sh"
+            sh "export PODS_CONTAINER_ID=$(docker ps -q -f name=pods-container -f status=running)"
+            sh "docker exec $PODS_CONTAINER_ID vendor/bin/drush en field_layout"
+            sh "docker exec $PODS_CONTAINER_ID vendor/bin/drush en cig_pods"
           }
       }
    }

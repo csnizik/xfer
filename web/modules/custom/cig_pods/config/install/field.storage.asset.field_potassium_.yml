@@ -1,0 +1,18 @@
+uuid: 7d3e729f-8da4-41a0-b4fa-fffc66eca28c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_potassium_
+field_name: field_potassium_
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

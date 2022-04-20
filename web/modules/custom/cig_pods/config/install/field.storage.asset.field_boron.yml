@@ -1,0 +1,18 @@
+uuid: b50bafe5-2040-4482-bf1d-f7cf04663670
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_boron
+field_name: field_boron
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

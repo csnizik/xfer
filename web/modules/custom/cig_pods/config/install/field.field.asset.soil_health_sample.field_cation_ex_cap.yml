@@ -1,0 +1,23 @@
+uuid: 57d5f6fd-9596-464b-8dd0-707beb1de9da
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_cation_ex_cap
+id: asset.soil_health_sample.field_cation_ex_cap
+field_name: field_cation_ex_cap
+entity_type: asset
+bundle: soil_health_sample
+label: 'Cation Exchange Capacity'
+description: meq/100g
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,29 +1,25 @@
 version: '3'
 services:
   db:
-    image: mariadb:latest
+    image: postgres:12
     volumes:
-      - './db:/var/lib/mysql'
+      - '/home/ec2-user/db:/var/lib/postgresql/data'
     ports:
-            - '3306:3306'
+      - '5432:5432'
     environment:
-        MYSQL_ROOT_PASSWORD: farm
-        MYSQL_DATABASE: farm
-        MYSQL_USER: farm
-        MYSQL_PASSWORD: farm
+      POSTGRES_USER: farm
+      POSTGRES_PASSWORD: farm
+      POSTGRES_DB: farm
 
   pods-container:
     depends_on:
       - db
-    volumes:
-      - './web/modules/custom/cig_pods:/opt/drupal/PODS/web/modules/custom/cig_pods'
-      - './logs:/var/log/apache2/'
     image: pods:latest
     ports:
       - '85:80'
-    # environment:
+    environment:
       # XDEBUG_MODE: debug
-      # XDEBUG_CONFIG: client_host=172.17.0.1
+      XDEBUG_CONFIG: client_host=172.17.0.1
       # Enable these for PHPStorm:
       #XDEBUG_SESSION: PHPSTORM
       #PHP_IDE_CONFIG: serverName=localhost

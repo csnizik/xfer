@@ -1,0 +1,23 @@
+uuid: c764b193-9b13-4c69-ba89-a21074fa85f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_potassium_
+id: asset.soil_health_sample.field_potassium_
+field_name: field_potassium_
+entity_type: asset
+bundle: soil_health_sample
+label: 'Potassium '
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

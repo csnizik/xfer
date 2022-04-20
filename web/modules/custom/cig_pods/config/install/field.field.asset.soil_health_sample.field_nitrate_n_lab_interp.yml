@@ -1,0 +1,36 @@
+uuid: ace6f235-3f49-46ee-8709-7d60bcb5f67a
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_nitrate_n_lab_interp
+    - taxonomy.vocabulary.d_lab_interpretation
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.soil_health_sample.field_nitrate_n_lab_interp
+field_name: field_nitrate_n_lab_interp
+entity_type: asset
+bundle: soil_health_sample
+label: 'Nitrate-N Lab Interpretation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_lab_interpretation: d_lab_interpretation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

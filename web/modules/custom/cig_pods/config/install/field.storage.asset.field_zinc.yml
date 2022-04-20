@@ -1,0 +1,18 @@
+uuid: 00e952d6-0413-4243-b404-eeb0d2b1ed01
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_zinc
+field_name: field_zinc
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

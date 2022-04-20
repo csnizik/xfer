@@ -1,0 +1,23 @@
+uuid: 1caf7615-c4dc-4fb3-879b-eac83d71887f
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_sampling_depth
+id: asset.soil_health_sample.field_sampling_depth
+field_name: field_sampling_depth
+entity_type: asset
+bundle: soil_health_sample
+label: 'Sampling Depth'
+description: inches
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

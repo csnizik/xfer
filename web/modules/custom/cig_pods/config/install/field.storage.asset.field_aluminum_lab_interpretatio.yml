@@ -1,0 +1,20 @@
+uuid: 4527c5d9-3d44-471b-871b-dd97165a8a18
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_aluminum_lab_interpretatio
+field_name: field_aluminum_lab_interpretatio
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

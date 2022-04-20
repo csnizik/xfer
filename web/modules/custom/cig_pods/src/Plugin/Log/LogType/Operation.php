@@ -2,24 +2,24 @@
 
 namespace Drupal\cig_pods\Plugin\Log\LogType;
 
-use Drupal\farm_entity\Plugin\Log\AssetType\FarmAssetType;
+use Drupal\farm_entity\Plugin\Log\LogType\FarmLogType;
 /**
-   * Provides the Soil Health Sample asset type.
+   * Provides the Operation log type.
    *
-   * @AssetType(
-   * id = "soil_health_sample",
-   * label = @Translation("Soil Health Sample"),
+   * @LogType(
+   * id = "operation",
+   * label = @Translation("Operation"),
    * )
    */
-class SoilHealthSample extends FarmAssetType {
+class Operation extends FarmLogType {
 
   /**
    * {@inheritdoc}
    */
-  public function buildFieldDefinitions() {
-   $fields = parent::buildFieldDefinitions();
+  // public function buildFieldDefinitions() {
+  //  $fields = parent::buildFieldDefinitions();
 
-  //  // Lot number.
+   // Lot number.
   //  $options = [
   //    'type' => 'string',
   //    'label' => $this->t('Field Pass'),
@@ -31,8 +31,8 @@ class SoilHealthSample extends FarmAssetType {
   //  ];
   //  $fields['field_pass'] = $this->farmFieldFactory->bundleFieldDefinition($options);
 
-   return $fields;
+  //  return $fields;
+
+  //}
  }     
 
-
-}

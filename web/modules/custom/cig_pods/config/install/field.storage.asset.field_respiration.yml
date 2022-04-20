@@ -1,0 +1,18 @@
+uuid: f06629e2-dcb7-4207-a9b0-9956af3ff73e
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_respiration
+field_name: field_respiration
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

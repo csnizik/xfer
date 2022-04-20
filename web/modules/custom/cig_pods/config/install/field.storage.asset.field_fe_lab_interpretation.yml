@@ -1,0 +1,20 @@
+uuid: 0a770f2e-7ccb-46e7-b2b4-8743006a725e
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+id: asset.field_fe_lab_interpretation
+field_name: field_fe_lab_interpretation
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

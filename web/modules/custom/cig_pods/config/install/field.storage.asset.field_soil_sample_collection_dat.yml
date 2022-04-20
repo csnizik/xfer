@@ -1,0 +1,18 @@
+uuid: 6ece9fa4-94f1-4c58-bf51-eaee4011885c
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_soil_sample_collection_dat
+field_name: field_soil_sample_collection_dat
+entity_type: asset
+type: timestamp
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

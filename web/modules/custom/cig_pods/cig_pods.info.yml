@@ -1,5 +1,5 @@
 name: Producer Operations Data System (PODS)
-description: Data Entry system for Soil Health Demo Trials
+description: Producer Operations Data System (PODS)
 type: module
 core_version_requirement: ^9
 dependencies:

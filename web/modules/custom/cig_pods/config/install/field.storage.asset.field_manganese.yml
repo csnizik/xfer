@@ -1,0 +1,18 @@
+uuid: 1720317d-6b9b-4744-a42e-a01e6b6dafcb
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_manganese
+field_name: field_manganese
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

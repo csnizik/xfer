@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+id: operation
+label: Operation
+description: Operation
+workflow: log_default
+name_pattern: 'Operation log [log:id]'
+new_revision: true

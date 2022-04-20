@@ -1,0 +1,18 @@
+uuid: 7e84702a-8abd-406b-96f4-4ff4025709b4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_residue_breakdown
+field_name: field_residue_breakdown
+entity_type: asset
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,25 @@
+uuid: bc27c3e4-c18e-4169-8f80-60c1e7c97764
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_ph
+_core:
+  default_config_hash: vtmYQLFIBGe5k6X7bAQviEj0MrNrjH2h8_AdwEB2E7I
+id: asset.lab_result.field_ph
+field_name: field_ph
+entity_type: asset
+bundle: lab_result
+label: pH
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

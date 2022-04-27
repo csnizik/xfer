@@ -1,9 +1,11 @@
-uuid: 5d8e973c-65c2-4043-8b0b-7ac19605d2ef
+uuid: 3fe5aa07-8367-4a4b-bb2a-c79169ca81a9
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: gRHt6QRxGkl00O0JssxKuI1aGoQihrkADiKHRzLmbqQ
 id: asset.field_phosphorus
 field_name: field_phosphorus
 entity_type: asset

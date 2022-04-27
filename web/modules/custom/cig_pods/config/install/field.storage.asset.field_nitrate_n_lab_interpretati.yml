@@ -1,0 +1,22 @@
+uuid: 00047686-5dfb-4d06-82c2-db462865c85d
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+_core:
+  default_config_hash: AkL2mEKUYfuRJgdt8XgSjXNthDuAoUSWTb0sD7M6mPE
+id: asset.field_nitrate_n_lab_interpretati
+field_name: field_nitrate_n_lab_interpretati
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

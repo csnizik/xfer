@@ -1,9 +1,11 @@
-uuid: cd91bc27-8098-4d72-b37f-fc1ab7133c42
+uuid: 0f744cc7-96b2-4488-abbe-0fc7f3a05bb7
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: f2dVBHWWa5dwASXFhJbQtOBtD-IKNtzNnKirOWlFtCc
 id: asset.field_iron
 field_name: field_iron
 entity_type: asset

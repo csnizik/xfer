@@ -1,9 +1,11 @@
-uuid: 1720317d-6b9b-4744-a42e-a01e6b6dafcb
+uuid: 65787d1e-a409-43d0-a6aa-1097b7fe23b9
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 4j-AOm7UWg3ZgUfKP6UFk9chquS4iy-8EXHWCp0N8iA
 id: asset.field_manganese
 field_name: field_manganese
 entity_type: asset

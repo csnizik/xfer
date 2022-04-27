@@ -1,9 +1,11 @@
-uuid: 8a17480b-1dfc-4b32-82bf-4e89bb9506c8
+uuid: c33c5c21-3980-49e6-897b-e62b77f8ed05
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: kKoVeMt2vUGCUOod-4W3EBk77DG5mRswE-wo-CjE-Lk
 id: asset.field_molybdenum
 field_name: field_molybdenum
 entity_type: asset

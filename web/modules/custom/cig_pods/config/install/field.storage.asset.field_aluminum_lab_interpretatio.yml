@@ -1,10 +1,12 @@
-uuid: 4527c5d9-3d44-471b-871b-dd97165a8a18
+uuid: 22f64f85-e781-484d-9f72-5071d9f36593
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 1AhbFlSBcBpnr6CdOjSHrymr9bcZij3RFnZU7mtYtN4
 id: asset.field_aluminum_lab_interpretatio
 field_name: field_aluminum_lab_interpretatio
 entity_type: asset

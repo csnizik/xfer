@@ -1,0 +1,38 @@
+uuid: 771a1e80-25fe-462e-83c6-efbf34341693
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_soil_sample
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+_core:
+  default_config_hash: L6JvLbp1LJesTkbz4lrZCY8MR8fP-7vZkS-W4bhE_XY
+id: asset.lab_result.field_soil_sample
+field_name: field_soil_sample
+entity_type: asset
+bundle: lab_result
+label: 'Soil Sample'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:asset'
+  handler_settings:
+    target_bundles:
+      soil_health_sample: soil_health_sample
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,25 @@
+uuid: 0912722a-5c05-4d56-9783-47928c949a1b
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_cation
+_core:
+  default_config_hash: 0RHMWP2zvY9kzRtfBVTLYh4sjjJKTaOt70JLMTWTrBE
+id: asset.lab_result.field_cation
+field_name: field_cation
+entity_type: asset
+bundle: lab_result
+label: 'Cation Exchange Capacity'
+description: meq/100g
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -6,9 +6,9 @@ dependencies:
     module:
       - cig_pods
 _core:
-  default_config_hash: hSQ5ClPgMugfOpQcLxnvlszGxmIPVmxiqm1DEHSEPoo
+  default_config_hash: IljQDnAsPNZaEuCjaE1S9uCM4SzBUilIG0dDCCdWPD0
 id: soil_health_demo_trial
-label: 'Soil Health Demo Trial'
-description: 'Soil Health Demo Trial'
+label: 'Laboratory Methods'
+description: 'Laboratory Methods'
 workflow: asset_default
-new_revision: true
+new_revision: false

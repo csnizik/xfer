@@ -1,0 +1,25 @@
+uuid: b49e99df-ecb7-4c57-9d65-b39940c68483
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_sulfur
+_core:
+  default_config_hash: BDvr_3aTs56TGWz0Gfy6mdfVXNgSsNCzB272o3qbWME
+id: asset.lab_result.field_sulfur
+field_name: field_sulfur
+entity_type: asset
+bundle: lab_result
+label: Sulfur
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

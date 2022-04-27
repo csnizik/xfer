@@ -1,0 +1,25 @@
+uuid: edf46672-e731-4bc7-91d0-cf7b0c1025a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_available_organic_nitrogen
+_core:
+  default_config_hash: loe_0rg8xRfgjiuMrkSdBZzqAeNPueJTZCNLUjlHkp8
+id: asset.lab_result.field_available_organic_nitrogen
+field_name: field_available_organic_nitrogen
+entity_type: asset
+bundle: lab_result
+label: 'Available Organic Nitrogen (ACE Protein)'
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\cig_pods\Plugin\Log\LogType;
+namespace Drupal\cig_pods\Plugin\Asset\AssetType;
 
-use Drupal\farm_entity\Plugin\Log\AssetType\FarmAssetType;
+use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
 /**
    * Provides the Soil Health Sample asset type.
    *

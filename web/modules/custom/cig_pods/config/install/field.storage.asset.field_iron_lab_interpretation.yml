@@ -1,0 +1,22 @@
+uuid: 6eda4c1e-5b1f-4c84-8ca6-71c04cc77891
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+    - taxonomy
+_core:
+  default_config_hash: M7Ka_pP9nt13VyBbD_k8RXVhAkBOgc5BQ5-h8tijg3k
+id: asset.field_iron_lab_interpretation
+field_name: field_iron_lab_interpretation
+entity_type: asset
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

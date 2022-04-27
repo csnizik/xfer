@@ -1,0 +1,25 @@
+uuid: 623851be-61ac-4f56-9cb3-5f3242a6d617
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_copper2
+_core:
+  default_config_hash: Wzk3zCglOpGdqtLaZIBOzWdiAa2voC4sNibTdqRs7iY
+id: asset.lab_result.field_copper2
+field_name: field_copper2
+entity_type: asset
+bundle: lab_result
+label: Copper
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,36 @@
+uuid: 5c54b234-123b-4113-9a46-683a6c05bdb1
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.field_assesment
+    - asset.type.soil_health_management_unit
+    - field.storage.asset.field_soil_health_managment_unit
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+id: asset.field_assesment.field_soil_health_managment_unit
+field_name: field_soil_health_managment_unit
+entity_type: asset
+bundle: field_assesment
+label: 'Soil Health Managment Unit'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:asset'
+  handler_settings:
+    target_bundles:
+      soil_health_management_unit: soil_health_management_unit
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -5,6 +5,8 @@ dependencies:
   config:
     - asset.type.soil_health_sample
     - field.storage.asset.field_soil_sample_collection_dat
+_core:
+  default_config_hash: t1VqcrOJozAxr0wVaoDHOcenHxhP2BxfBSetqDcqguo
 id: asset.soil_health_sample.field_soil_sample_collection_dat
 field_name: field_soil_sample_collection_dat
 entity_type: asset

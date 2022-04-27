@@ -1,9 +1,11 @@
-uuid: 21c4e07c-d25c-441e-b4cb-4653acc46c43
+uuid: a6af2b33-2e30-4a5b-8bc3-5dd1d8eea20a
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: z1Dk0SWWyPPyz4TTXTvOGvuYSPCUrhq3fWXo6zhy07Q
 id: asset.field_surface_crusts
 field_name: field_surface_crusts
 entity_type: asset

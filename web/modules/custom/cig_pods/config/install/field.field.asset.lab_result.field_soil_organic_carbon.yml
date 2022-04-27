@@ -1,0 +1,25 @@
+uuid: 442f3000-53aa-4e33-84f2-5774dfbf94a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_soil_organic_carbon
+_core:
+  default_config_hash: wl7zeaqueoI7hoCKSAK-khV4P1MfNh0UcZnPsEmd4Sc
+id: asset.lab_result.field_soil_organic_carbon
+field_name: field_soil_organic_carbon
+entity_type: asset
+bundle: lab_result
+label: 'Soil Organic Carbon'
+description: '%'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

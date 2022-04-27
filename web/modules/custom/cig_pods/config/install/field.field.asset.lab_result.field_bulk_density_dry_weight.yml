@@ -1,0 +1,25 @@
+uuid: 8af68d55-2c4c-467f-ba88-5f3c238b6bff
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_bulk_density_dry_weight
+_core:
+  default_config_hash: hYOqPCmeuY4_8tkALzOlW5XldEQxGAKkMmuibAPK7O8
+id: asset.lab_result.field_bulk_density_dry_weight
+field_name: field_bulk_density_dry_weight
+entity_type: asset
+bundle: lab_result
+label: 'Bulk Density Dry Weight'
+description: grams
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

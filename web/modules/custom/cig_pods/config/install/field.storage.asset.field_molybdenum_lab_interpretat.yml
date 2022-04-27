@@ -1,10 +1,12 @@
-uuid: 6ac54d2b-167a-492b-8aa7-83e6a67439be
+uuid: 30cf2811-94aa-4c2d-ab91-73f00ada97af
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: 6Lu1USvjTB69iL7AosBTkkp4llt2NRDGbPH8QZsDDgA
 id: asset.field_molybdenum_lab_interpretat
 field_name: field_molybdenum_lab_interpretat
 entity_type: asset

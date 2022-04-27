@@ -1,0 +1,25 @@
+uuid: 6e4ded46-b876-4c30-a2e8-e181377b1b25
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_aggregate_stability
+_core:
+  default_config_hash: 8mTu8oN2WS3_LbDsn91psqYdV_SLjoOtKr5eyDmANW0
+id: asset.lab_result.field_aggregate_stability
+field_name: field_aggregate_stability
+entity_type: asset
+bundle: lab_result
+label: 'Aggregate Stability'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

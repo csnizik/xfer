@@ -13,6 +13,8 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
+_core:
+  default_config_hash: MLGd4u0QY7ahNjuneC-SUDOZAqb6ObdfJddDsF0E0NM
 id: asset.soil_health_sample.field_shmu_id
 field_name: field_shmu_id
 entity_type: asset

@@ -1,9 +1,11 @@
-uuid: 3bd1d928-24b1-45cf-b7ae-9af8098a1c79
+uuid: 7684f13a-83a7-49f8-b643-b97482246a64
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: GMo4hjkRygagvH0vtR3pwFZ3KQj2xin8s8DgX-0Ub50
 id: asset.field_nitrate_n
 field_name: field_nitrate_n
 entity_type: asset

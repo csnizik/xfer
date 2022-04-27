@@ -1,0 +1,14 @@
+uuid: 
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: NlyCtGHk3sXFtDOs_LQ1tiQeKL0XQarx2fwR6Av9C-w
+id: field_assesment
+label: Field Assesment
+description: Field Assesment
+workflow: asset_default
+new_revision: false

@@ -1,0 +1,23 @@
+uuid: 19269358-f180-45c6-9926-d3a5aba30fd2
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.field_assesment
+    - field.storage.asset.field_soil_color
+id: asset.field_assesment.field_soil_color
+field_name: field_soil_color
+entity_type: asset
+bundle: field_assesment
+label: 'Soil Color'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

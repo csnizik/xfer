@@ -1,10 +1,12 @@
-uuid: 54d737df-6607-4e0d-810e-d2a047aa3a84
+uuid: 1fdde90a-1003-449c-84f9-ee58461d6f6e
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: IEMr1fc9OdGM_LlqR-MNXVja30X2rgs2BF6-Uv_r0NI
 id: asset.field_calcium_lab_interpretation
 field_name: field_calcium_lab_interpretation
 entity_type: asset

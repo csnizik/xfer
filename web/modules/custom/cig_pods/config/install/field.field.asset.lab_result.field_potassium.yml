@@ -1,0 +1,25 @@
+uuid: 9d59858f-24f5-4fa1-80ca-d8da20b2bd80
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_potassium
+_core:
+  default_config_hash: GMnqL_UIQYfTrgr-3t29LtsXKslwxbnGk-cKlMCWby4
+id: asset.lab_result.field_potassium
+field_name: field_potassium
+entity_type: asset
+bundle: lab_result
+label: Potassium
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

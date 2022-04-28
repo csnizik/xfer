@@ -1,0 +1,20 @@
+uuid: 90a6d757-4978-4235-8710-f233a4077ed4
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+_core:
+  default_config_hash: lLERFuT6xWnk4oKRj8fo_gOn7QP6G2-oPdx5CbzziMw
+id: asset.field_bulk_density_dry_weight
+field_name: field_bulk_density_dry_weight
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

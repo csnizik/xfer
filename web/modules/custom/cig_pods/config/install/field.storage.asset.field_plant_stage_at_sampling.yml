@@ -5,6 +5,8 @@ dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: z6WC-t0NTujhC_gijRbWFSErtY9Hiaw5rZOcHOCUfqg
 id: asset.field_plant_stage_at_sampling
 field_name: field_plant_stage_at_sampling
 entity_type: asset

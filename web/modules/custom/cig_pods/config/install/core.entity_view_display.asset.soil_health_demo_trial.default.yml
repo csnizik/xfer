@@ -1,3 +1,4 @@
+uuid: f250ce27-636d-4dd8-a96a-b5d4beabf3fb
 langcode: en
 status: true
 dependencies:
@@ -39,7 +40,6 @@ dependencies:
     - field_layout
     - file
     - image
-    - layout_discovery
     - options
     - text
 third_party_settings:
@@ -47,6 +47,8 @@ third_party_settings:
     id: layout_onecol
     settings:
       label: ''
+_core:
+  default_config_hash: lwfbxu05VFTkvhahkGzMv--3NlYPTEmoCONQK441iMQ
 id: asset.soil_health_demo_trial.default
 targetEntityType: asset
 bundle: soil_health_demo_trial

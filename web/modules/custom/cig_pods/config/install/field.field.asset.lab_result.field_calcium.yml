@@ -1,0 +1,25 @@
+uuid: 1c576267-b87d-4480-acdb-a106ac48df64
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_calcium
+_core:
+  default_config_hash: 8RB709E_8MDnfNs0gtbR4zHlw4-WaVNI-SObUWws1k4
+id: asset.lab_result.field_calcium
+field_name: field_calcium
+entity_type: asset
+bundle: lab_result
+label: Calcium
+description: ppm
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

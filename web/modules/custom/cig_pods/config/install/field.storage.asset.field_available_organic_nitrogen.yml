@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: 3IdLnlVFgYzkzdr6Y-xywM_LNCCqTQutZpJdEiZxgBg
 id: asset.field_available_organic_nitrogen
 field_name: field_available_organic_nitrogen
 entity_type: asset

@@ -1,0 +1,18 @@
+uuid: 1b2042ad-1245-4622-97c7-03a208d3e684
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_water_stable_aggregates
+field_name: field_water_stable_aggregates
+entity_type: asset
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

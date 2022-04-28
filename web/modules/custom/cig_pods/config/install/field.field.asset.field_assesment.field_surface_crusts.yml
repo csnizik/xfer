@@ -1,0 +1,25 @@
+uuid: 1e644ac5-2b4d-40b7-b79c-bc1523f32fa6
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.field_assesment
+    - field.storage.asset.field_surface_crusts
+_core:
+  default_config_hash: fDCuCXF5vKj-jRNmsdh9q9cvu81sdEE2mp_SzWfxZvc
+id: asset.field_assesment.field_surface_crusts
+field_name: field_surface_crusts
+entity_type: asset
+bundle: field_assesment
+label: 'Surface Crusts'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

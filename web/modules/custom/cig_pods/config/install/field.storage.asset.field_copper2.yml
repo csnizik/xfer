@@ -1,9 +1,11 @@
-uuid: b9e2c890-b1eb-4c8a-a4e3-e043ea143d3b
+uuid: d3dbdccc-70c5-42e9-9b87-65d38ddc7aeb
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: NEaRBhDoRk_mXNd7cVMuwIJMsA02kIDKMRhqbT9C8w0
 id: asset.field_copper2
 field_name: field_copper2
 entity_type: asset

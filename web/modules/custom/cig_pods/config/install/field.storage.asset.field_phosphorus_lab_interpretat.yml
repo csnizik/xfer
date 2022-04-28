@@ -1,10 +1,12 @@
-uuid: 4bca32eb-3040-4dd2-ac69-4fbc8f83be5a
+uuid: 0cdad465-dadb-48eb-bb4e-dc4da1f5cd61
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: snM4y1ZbfKxufZshqOqyo6pGIpgwU0vhmAN3q7osoUg
 id: asset.field_phosphorus_lab_interpretat
 field_name: field_phosphorus_lab_interpretat
 entity_type: asset

@@ -1,0 +1,38 @@
+uuid: feaf7db6-bd78-40f0-9f15-5659b9fd8bb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_zinc_lab_interpretation
+    - taxonomy.vocabulary.d_lab_interpretation
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+_core:
+  default_config_hash: 5TTSdZ2fQpjmynbi4e-SiVQSOpvIpwyVq9EncfMGnBc
+id: asset.lab_result.field_zinc_lab_interpretation
+field_name: field_zinc_lab_interpretation
+entity_type: asset
+bundle: lab_result
+label: 'Zinc Lab Interpretation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_lab_interpretation: d_lab_interpretation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

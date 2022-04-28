@@ -1,9 +1,11 @@
-uuid: b1c63fc6-cfe3-49e8-9e43-9481915191c7
+uuid: 49c78617-1cf2-4b08-8c73-3baaff70bcb2
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: vq8EAS_eHmGR8dFy9K4IFzyFu109PeukhXz_rXSJ6F0
 id: asset.field_electroconductivity
 field_name: field_electroconductivity
 entity_type: asset

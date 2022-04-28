@@ -1,0 +1,25 @@
+uuid: 78cf0e74-4941-4bd7-8594-74bd2eba9c01
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_electroconductivity
+_core:
+  default_config_hash: TS7SzN-tY9FJZORQWi-v1NN_Ao3VNDyZNfJBEXWQC6Y
+id: asset.lab_result.field_electroconductivity
+field_name: field_electroconductivity
+entity_type: asset
+bundle: lab_result
+label: Electroconductivity
+description: dS/m
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

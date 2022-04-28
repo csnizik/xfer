@@ -1,0 +1,67 @@
+uuid: c5329073-4a65-442c-be3a-2d1f01e0ecef
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.field.asset.soil_health_sample.field_plant_stage_at_sampling
+    - field.field.asset.soil_health_sample.field_sampling_depth
+    - field.field.asset.soil_health_sample.field_shmu_id
+    - field.field.asset.soil_health_sample.field_soil_sample_collection_dat
+_core:
+  default_config_hash: WOR_4_-3BJ8nZGY0kSsuQOLTSjVPp9NQ36SDNwcRKfU
+id: asset.soil_health_sample.default
+targetEntityType: asset
+bundle: soil_health_sample
+mode: default
+content:
+  field_plant_stage_at_sampling:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_sampling_depth:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_shmu_id:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_soil_sample_collection_dat:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  data: true
+  file: true
+  flag: true
+  geometry: true
+  id_tag: true
+  image: true
+  intrinsic_geometry: true
+  is_fixed: true
+  is_location: true
+  location: true
+  notes: true
+  parent: true
+  status: true
+  uid: true

@@ -1,9 +1,11 @@
-uuid: a4613b05-d59c-41c9-8788-8a9f560af9f7
+uuid: 7d9ef849-19b6-4413-a9d9-d56813f43edc
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: kT2tgSIvOU0eKihLggQHgwhj8qOibYmXrC-y6S-KZc4
 id: asset.field_infiltration
 field_name: field_infiltration
 entity_type: asset

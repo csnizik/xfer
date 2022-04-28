@@ -4,6 +4,8 @@ status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: IC-oAmjnn5-8I92TOoo3mNliOPsbjD-v_m0pGrGt5RI
 id: asset.field_shmu_id
 field_name: field_shmu_id
 entity_type: asset

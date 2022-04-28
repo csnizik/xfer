@@ -1,0 +1,38 @@
+uuid: d49e3a84-41f5-4128-b484-422906f1961d
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.lab_result
+    - field.storage.asset.field_nitrate_n_lab_interpretati
+    - taxonomy.vocabulary.d_lab_interpretation
+  module:
+    - entity_reference_validators
+third_party_settings:
+  entity_reference_validators:
+    circular_reference: false
+    circular_reference_deep: false
+    duplicate_reference: false
+_core:
+  default_config_hash: oihhdXpPVSOhGI0qAd_43BntWZ5n7k_Cv5sUXvztEe0
+id: asset.lab_result.field_nitrate_n_lab_interpretati
+field_name: field_nitrate_n_lab_interpretati
+entity_type: asset
+bundle: lab_result
+label: 'Nitrate-N Lab Interpretation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      d_lab_interpretation: d_lab_interpretation
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

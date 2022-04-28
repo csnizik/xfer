@@ -1,0 +1,18 @@
+uuid: 731b05c2-fd8e-4779-a235-26c9047b5664
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_cation
+field_name: field_cation
+entity_type: asset
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

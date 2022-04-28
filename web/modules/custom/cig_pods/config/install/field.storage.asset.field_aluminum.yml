@@ -1,9 +1,11 @@
-uuid: 953e23c1-fe2c-485a-8480-c73fee8047ce
+uuid: b2be1e58-e053-4fdb-9c02-ef8b7a080b93
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: OfOy69Hqn0w8vS0yjL2zjdoAeaZvMDQuMVfoXI7coCo
 id: asset.field_aluminum
 field_name: field_aluminum
 entity_type: asset

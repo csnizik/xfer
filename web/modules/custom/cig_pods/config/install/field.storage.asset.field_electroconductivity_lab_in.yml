@@ -1,10 +1,12 @@
-uuid: d358f739-dbbb-42c7-8bd4-f2398fbc0c87
+uuid: a6db8ccd-b489-4d8d-941a-6993fd6fd951
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
+_core:
+  default_config_hash: VyRgjJdOU9DWqsgzpXESXyRnvXPtJJbhgh5UNjJQnOk
 id: asset.field_electroconductivity_lab_in
 field_name: field_electroconductivity_lab_in
 entity_type: asset

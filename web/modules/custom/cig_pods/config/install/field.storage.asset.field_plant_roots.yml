@@ -1,0 +1,18 @@
+uuid: d6d85a1a-17ff-45fb-9d26-c1b39c50f2b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+id: asset.field_plant_roots
+field_name: field_plant_roots
+entity_type: asset
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

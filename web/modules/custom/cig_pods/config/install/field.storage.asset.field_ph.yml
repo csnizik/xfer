@@ -1,9 +1,11 @@
-uuid: 00ad97fa-3a63-46d1-92f5-338f0a6f68e0
+uuid: 3208497a-1a9e-4dbd-bab3-fc815ec8a69f
 langcode: en
 status: true
 dependencies:
   module:
     - asset
+_core:
+  default_config_hash: hWaCZDEO5mbo7BuCNxHAt4J3isRxdPcHHjoSdc5s2TU
 id: asset.field_ph
 field_name: field_ph
 entity_type: asset

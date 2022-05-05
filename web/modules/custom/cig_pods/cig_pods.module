@@ -1,0 +1,23 @@
+<?php
+
+Use Drupal\views\ViewExecutable;
+Use Drupal\Core\Form\FormStateInterface;
+/**
+ * @file
+ * Module file for Producer Operation Data Systems (PODS)
+ */
+
+
+ /*
+	Implements hook_views_pre_render().
+ */
+function cig_pods_views_pre_render(ViewExecutable $view ) {
+	if (isset($view) && ($view->storage->id() == 'producer_entry_form')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/producer_entry_form';
+	}
+}
+
+function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+ 
+}

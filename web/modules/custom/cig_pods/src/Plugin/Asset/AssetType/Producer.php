@@ -9,6 +9,11 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * @AssetType(
    * id = "producer",
    * label = @Translation("Producer"),
+   * handlers = {
+   *  "form" = {
+   *     "add"="Drupal\cig_pods\Form\ProducerForm",
+   *  }
+   * },
    * )
    */
 class Producer extends FarmAssetType {

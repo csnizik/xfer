@@ -1,0 +1,5 @@
+cig_pods.first_page:
+  path: '/first-page'
+  defaults:
+    _controller: 'Drupal\cig_pods\Controller\FirstPageController::content'
+    _title: 'Hello World!'

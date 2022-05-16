@@ -27,13 +27,34 @@ class LabTestingProfile extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       // We do not add a "Name" field because we inherit that from the FarmAssetType class
+      
+
       $field_info = [
-         'ph_method' => [
+        'laboratory' => [
+            'type'  => 'entity_reference',
+            'label' => 'Laboratory',
+            'description' => $this->t('Enter State Inititals (Ex. CA) or Lab Name to find Lab'),
+			'target_type' => 'taxonomy_term',
+			'target_bundle' => 'd_laboratory',
+			'handler' => 'default',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            // Lower weight shows up first in form
+            'weight' => [
+               'form' => -1,
+               'view' => -1
+			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
+		],	
+        'ph_method' => [
             'type'  => 'entity_reference',
             'label' => 'PH method',
             'description' => $this->t(''),
 			'target_type' => 'taxonomy_term',
-			'target_bundle' => 'd_soil_health_extraction',
+			'target_bundle' => 'd_ph_method',
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
@@ -42,13 +63,17 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 10,
                'view' => 10
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'electroconductivity_method' => [
             'type'  => 'entity_reference',
             'label' => 'Electroconductivity Method',
             'description' => $this->t(''),
 			'target_type' => 'taxonomy_term',
-			'target_bundle' => 'd_soil_health_extraction',
+			'target_bundle' => 'd_ec_method',
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
@@ -57,13 +82,17 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 11,
                'view' => 11
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'nitrate_n_method' => [
             'type'  => 'entity_reference',
             'label' => 'Nitrate-N Method',
             'description' => $this->t(''),
 			'target_type' => 'taxonomy_term',
-			'target_bundle' => 'd_soil_health_extraction',
+			'target_bundle' => 'd_nitrate_n_method',
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
@@ -72,6 +101,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 12,
                'view' => 12
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'phosphorus_method' => [
             'type'  => 'entity_reference',
@@ -87,10 +120,14 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 13,
                'view' => 13
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'potassium_method' => [
             'type'  => 'entity_reference',
-            'label' => 'PH method',
+            'label' => 'Potassium Method',
             'description' => $this->t(''),
 			'target_type' => 'taxonomy_term',
 			'target_bundle' => 'd_soil_health_extraction',
@@ -102,6 +139,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 14,
                'view' => 14
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'calcium_method' => [
             'type'  => 'entity_reference',
@@ -117,6 +158,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 15,
                'view' => 15
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'magnesium_method' => [
             'type'  => 'entity_reference',
@@ -132,6 +177,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 16,
                'view' => 16
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'sulfur_method' => [
             'type'  => 'entity_reference',
@@ -147,6 +196,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 17,
                'view' => 17
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'iron_method' => [
             'type'  => 'entity_reference',
@@ -162,6 +215,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 18,
                'view' => 18
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'manganese_method' => [
             'type'  => 'entity_reference',
@@ -177,6 +234,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 19,
                'view' => 19
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'copper_method' => [
             'type'  => 'entity_reference',
@@ -192,6 +253,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 20,
                'view' => 20
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'zinc_method' => [
             'type'  => 'entity_reference',
@@ -207,6 +272,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 21,
                'view' => 21
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'boron_method' => [
             'type'  => 'entity_reference',
@@ -222,6 +291,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 22,
                'view' => 22
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'aluminum_method' => [
             'type'  => 'entity_reference',
@@ -237,6 +310,10 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 23,
                'view' => 23
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],
 		'molybdenum_method' => [
             'type'  => 'entity_reference',
@@ -252,24 +329,36 @@ class LabTestingProfile extends FarmAssetType {
                'form' => 24,
                'view' => 24
 			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
 		],		
 
       ];
       
       $farmFieldFactory = new FarmFieldFactory();
+
+
+
+
       foreach($field_info as $name => $info){
+        // Check if it is one of the default fields that we want to disable (I.e. Images ,)
+
 
 		$fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
 					      -> setDisplayConfigurable('form',TRUE)
 					      -> setDisplayConfigurable('view', TRUE);
 
-		if($fields[$name]['type'] == 'entity_reference'){
-			$fields[$name]->setDisplayOptions('form', array(
-				'type' => 'options_select'
-			));
-		}
+		// if($fields[$name]['type'] == 'entity_reference'){
+		// 	$fields[$name]->setDisplayOptions('form', array(
+		// 		'type' => 'options_select'
+		// 	));
+		// }
 
       }
+
+
       
       return $fields;
     }

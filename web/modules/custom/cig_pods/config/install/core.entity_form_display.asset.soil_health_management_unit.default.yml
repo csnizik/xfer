@@ -73,7 +73,6 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_shmu_land_use_previous_mod
     - field.field.asset.soil_health_management_unit.field_shmu_practices_addressed
     - field.field.asset.soil_health_management_unit.field_shmu_resource_concern
-    - field.field.asset.soil_health_management_unit.field_soil_health_management_uni
     - field.field.asset.soil_health_management_unit.field_surface_texture
     - field.field.asset.soil_health_management_unit.field_total_annual_crops
     - field.field.asset.soil_health_management_unit.field_total_crop_species
@@ -663,14 +662,6 @@ content:
     weight: 7
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_soil_health_management_uni:
-    type: string_textfield
-    weight: 8
-    region: content
-    settings:
-      size: 60
-      placeholder: 'Ex. Control1A'
     third_party_settings: {  }
   field_surface_texture:
     type: options_select

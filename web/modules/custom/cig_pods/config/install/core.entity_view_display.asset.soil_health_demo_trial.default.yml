@@ -18,7 +18,6 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_infiltration_method
     - field.field.asset.soil_health_demo_trial.field_iron_method
     - field.field.asset.soil_health_demo_trial.field_laboratory_name
-    - field.field.asset.soil_health_demo_trial.field_magne
     - field.field.asset.soil_health_demo_trial.field_manganese_method
     - field.field.asset.soil_health_demo_trial.field_moly
     - field.field.asset.soil_health_demo_trial.field_nitrate_n_method
@@ -93,14 +92,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 101
-    region: content
-  field_magne:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 98
     region: content
   field_manganese_method:
     type: entity_reference_label

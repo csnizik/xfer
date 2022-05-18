@@ -5,6 +5,7 @@ namespace Drupal\cig_pods\Form;
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
+Use Drupal\Core\Render\Element\Checkboxes;
 
 
 
@@ -30,53 +31,17 @@ class LabTestingProfileForm extends FormBase {
 				'vid' => 'd_laboratory',
 			]
 		);
-
 		
-		// print_r(array_keys($laboratory_terms));
-		// foreach($laboratory_terms as $lab_term){
-			// print_r($laboratory_terms);
-		// }		
-		// print($laboratory_terms[$lab_keys[0]] -> getName());
-		// $lab_options = array();
-		// $term = $laboratory_terms[1484];
-		// print_r("array keys");
-		// $properties = array_keys(get_object_vars($term));
-		// print_r(gettype($properties));
-		// print_r(array_keys($properties));
-		// print_r("array keys end");
-		// $lab_options['1484'] = 'Western Agricultural...';
-		
-		// print_r($laboratory_terms[1484]);
 		$lab_keys = array_keys($laboratory_terms);
 		foreach($lab_keys as $lab_key){
 			$term = $laboratory_terms[$lab_key];
-			$lab_options[(string) $lab_key] = $term -> getName();		
+			$lab_options[$lab_key] = $term -> getName();		
 		}
 
-		// print_r($lab_options);
-		// foreach($laboratory_terms as $term){
-		// 	print_r($term);
-		// }
-
-		// foreach($laboratory_terms as $term){
-		// 	print_r($term-> tid);
-		// }
-
-
-		// foreach($laboratory_terms as $lab_term) {
-			// $lab_options[$lab_term -> tid] = $lab_term -> label;
-		// }
-
-		$lab_options['option_a'] = '<b> Option A </b>';
-		$lab_options['option_b'] = 'Option B';
-		$lab_options['option_c'] = 'Option C';
-
-
-		$form['laboratories'] = array(
-			'#type' => 'select',
+		$form['laboratory'] = array(
+			'#type' => 'checkboxes',
 			'#options' => $lab_options,
-			'#title' => $this->t('Laboratories'),
-			
+			'#title' => $this->t('Laboratory'),
 		);
 
 		
@@ -101,6 +66,30 @@ class LabTestingProfileForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
+	
+	  $checked = Checkboxes::getCheckedCheckboxes($form_state -> getValue('laboratory'));
+	  foreach($checked as $elem){
+		  print_r($elem);
+		}
+		
+	$asset = Asset::create([
+		'type' => 'lab_testing_profile',
+		'name' => $form['profile_name']['#value'],
+		'laboratory' =>  $checked[0],
+	]);
+	// $asset = Asset::create([
+		// 'type' => 'lab_testing_profile',
+		// 'name' => $form['profile_name']['#value'],
+	// ]);
+
+	$asset->save();
+	
+	$this
+	  ->messenger()
+	  ->addStatus($this
+	  ->t('Form submitted for Profile @profile_name', [
+	  '@profile_name' => $form['profile_name']['#value'],
+	]));
   }
 
   /**

@@ -1,0 +1,4 @@
+producer_entry_form:
+  css:
+    theme:
+      css/producer.css: {}

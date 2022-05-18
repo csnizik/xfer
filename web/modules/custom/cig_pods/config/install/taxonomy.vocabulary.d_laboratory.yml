@@ -6,5 +6,5 @@ dependencies:
       - cig_pods
 name: Laboratory
 vid: d_laboratory
-description: 'A list of Laboratorys'
+description: 'A list of Laboratories'
 weight: 0

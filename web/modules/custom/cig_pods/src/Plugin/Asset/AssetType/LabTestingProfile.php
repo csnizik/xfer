@@ -349,13 +349,6 @@ class LabTestingProfile extends FarmAssetType {
 		$fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
 					      -> setDisplayConfigurable('form',TRUE)
 					      -> setDisplayConfigurable('view', TRUE);
-
-		// if($fields[$name]['type'] == 'entity_reference'){
-		// 	$fields[$name]->setDisplayOptions('form', array(
-		// 		'type' => 'options_select'
-		// 	));
-		// }
-
       }
 
 

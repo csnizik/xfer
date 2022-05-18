@@ -11,3 +11,12 @@ cig_pods.producer_form:
     _title: 'Create new Producer'
   requirements:
     _permission: 'access content'
+
+
+cig_pods.lab_testing_profile_form:
+  path: '/create/profile'
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabTestingProfileForm'
+    _title: 'Create new Lab Testing Profile'
+  requirements:
+    _permission: 'access content'

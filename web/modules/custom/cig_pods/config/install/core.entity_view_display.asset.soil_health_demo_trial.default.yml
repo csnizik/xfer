@@ -21,7 +21,6 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_manganese_method
     - field.field.asset.soil_health_demo_trial.field_moly
     - field.field.asset.soil_health_demo_trial.field_nitrate_n_method
-    - field.field.asset.soil_health_demo_trial.field_other_laboratory_name
     - field.field.asset.soil_health_demo_trial.field_ph_method
     - field.field.asset.soil_health_demo_trial.field_phosphorus_method
     - field.field.asset.soil_health_demo_trial.field_potassium_method
@@ -245,7 +244,6 @@ hidden:
   field_infiltration_method: true
   field_laboratory_name: true
   field_nitrate_n_method: true
-  field_other_laboratory_name: true
   field_ph_method: true
   field_phosphorus_method: true
   field_potassium_method: true

@@ -20,3 +20,11 @@ cig_pods.lab_testing_profile_form:
     _title: 'Create new Lab Testing Profile'
   requirements:
     _permission: 'access content'
+
+cig_pods.awardee_form:
+  path: '/create/awardee'
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AwardeeForm'
+    _title: 'Create new Awardee'
+  requirements:
+    _permission: 'access content'

@@ -21,7 +21,6 @@ dependencies:
     - field.field.asset.soil_health_demo_trial.field_manganese_method
     - field.field.asset.soil_health_demo_trial.field_moly
     - field.field.asset.soil_health_demo_trial.field_nitrate_n_method
-    - field.field.asset.soil_health_demo_trial.field_other_laboratory_name
     - field.field.asset.soil_health_demo_trial.field_ph_method
     - field.field.asset.soil_health_demo_trial.field_phosphorus_method
     - field.field.asset.soil_health_demo_trial.field_potassium_method
@@ -152,14 +151,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_other_laboratory_name:
-    type: string_textfield
-    weight: 21
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
+
   field_ph_method:
     type: options_select
     weight: 14

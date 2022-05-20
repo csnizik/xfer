@@ -32,10 +32,26 @@ class LabTestingProfileForm extends FormBase {
 			]
 		);
 		
+		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset')-> loadByProperties(
+			[
+				'type' => 'producer',
+			]
+		);
+
+
+		$lab_options = array();
 		$lab_keys = array_keys($laboratory_terms);
 		foreach($lab_keys as $lab_key){
 			$term = $laboratory_terms[$lab_key];
 			$lab_options[$lab_key] = $term -> getName();		
+		}
+
+		$producer_options = array();
+		$producer_keys = array_keys($producer_assets);
+
+		foreach($producer_keys as $producer_key){
+			$producer = $producer_assets[$producer_key];
+			$producer_options[$producer_key] = $producer -> getName();		
 		}
 
 		$form['laboratory'] = array(
@@ -44,11 +60,17 @@ class LabTestingProfileForm extends FormBase {
 			'#title' => $this->t('Laboratory'),
 		);
 
+		$form['producer'] = array (
+			'#type' => 'checkboxes',
+			'#options' => $producer_options,
+			'#title' => $this->t('Producer'),
+		);
+
 		
-		$form['actions']['send'] = array([
+		$form['actions']['send'] = array(
 			'#type' => 'submit',
 			'#value' => $this->t('Send'),
-		  ]);
+		);
 
 		
 		return $form;
@@ -67,15 +89,15 @@ class LabTestingProfileForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	
-	  $checked = Checkboxes::getCheckedCheckboxes($form_state -> getValue('laboratory'));
-	  foreach($checked as $elem){
-		  print_r($elem);
-		}
-		
+	$checked_labs = Checkboxes::getCheckedCheckboxes($form_state -> getValue('laboratory'));
+	$checked_producers = Checkboxes::getCheckedCheckboxes($form_state -> getValue('producer'));
+
+	  
 	$asset = Asset::create([
 		'type' => 'lab_testing_profile',
 		'name' => $form['profile_name']['#value'],
-		'laboratory' =>  $checked[0],
+		'laboratory' =>  $checked_labs,
+		'field_producer' => $checked_producers,
 	]);
 	// $asset = Asset::create([
 		// 'type' => 'lab_testing_profile',

@@ -1,12 +1,9 @@
-uuid: bc32bb27-dd57-48df-b374-fb13991b965f
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_active_carbon
-_core:
-  default_config_hash: lgw98S0yBCJwSw6xN92gfvvYTLUCHklr6qUvmhy-VBQ
 id: asset.lab_result.field_active_carbon
 field_name: field_active_carbon
 entity_type: asset

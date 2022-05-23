@@ -1,11 +1,8 @@
-uuid: 9f8a7d3a-6e51-416d-85b6-68e05d74c88b
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: VYFS-saypIq_HU_MIuNWAzXtZHeSUuMRQgQjt3V17pQ
 id: asset.field_residue_breakdown
 field_name: field_residue_breakdown
 entity_type: asset

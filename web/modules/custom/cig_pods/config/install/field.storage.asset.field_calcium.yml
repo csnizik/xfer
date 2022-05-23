@@ -1,11 +1,8 @@
-uuid: 3e231be5-bec2-49f7-88b5-a09581d2f156
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: vGAdKsHUJMCvA07NdgxQK4sALMO_0258-e5GAKdQxcc
 id: asset.field_calcium
 field_name: field_calcium
 entity_type: asset

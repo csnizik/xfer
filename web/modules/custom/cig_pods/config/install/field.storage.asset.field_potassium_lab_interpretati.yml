@@ -1,12 +1,9 @@
-uuid: ed941586-8030-42ee-86c3-009a6984a33d
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-_core:
-  default_config_hash: xaPQFuqR_PTL5pI4w9Of45YAZb-DVSnhNPKxy_I40FQ
 id: asset.field_potassium_lab_interpretati
 field_name: field_potassium_lab_interpretati
 entity_type: asset

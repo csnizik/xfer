@@ -1,4 +1,3 @@
-uuid: 3241a8ec-2202-4e03-be87-2a113852d15b
 langcode: en
 status: true
 dependencies:
@@ -23,8 +22,6 @@ third_party_settings:
     id: layout_onecol
     settings:
       label: ''
-_core:
-  default_config_hash: Amkd_LLrSquGgfP-gRGMIFwQubQVXDH2VkEuUjJuSmk
 id: asset.field_assesment.default
 targetEntityType: asset
 bundle: field_assesment

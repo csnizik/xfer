@@ -1,12 +1,9 @@
-uuid: f9895d54-1e4e-4bb2-9654-65868c15ba59
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_manganese
-_core:
-  default_config_hash: ZHHKeYmUZ0a-wvL8pdOQ84TNfXlONC7lU26tJkGhayw
 id: asset.lab_result.field_manganese
 field_name: field_manganese
 entity_type: asset

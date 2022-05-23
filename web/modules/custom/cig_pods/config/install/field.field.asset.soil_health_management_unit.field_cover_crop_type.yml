@@ -1,4 +1,3 @@
-uuid: 2466709a-6677-44d7-8dc5-a576f3b1aa90
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: qtoVMD8alklY4B_oL1q0hDpXrpusBbYXLqfWKiMzWYw
 id: asset.soil_health_management_unit.field_cover_crop_type
 field_name: field_cover_crop_type
 entity_type: asset

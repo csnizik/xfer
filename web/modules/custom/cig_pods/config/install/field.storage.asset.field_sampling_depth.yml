@@ -1,11 +1,8 @@
-uuid: 52489edf-7648-4e93-9709-9d14fe3af08a
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: KwanSn98KQzVb-jLcR05zxkMaHW8gwy7D09dRGug3g8
 id: asset.field_sampling_depth
 field_name: field_sampling_depth
 entity_type: asset

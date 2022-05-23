@@ -1,12 +1,9 @@
-uuid: 015066ac-c98b-45e6-8ef5-2e55e8ace950
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-_core:
-  default_config_hash: i8yDl5bS851PCJIRkramdey5jFHMahhIB9v7m5fhtGU
 id: asset.field_magnesium_lab_interpretati
 field_name: field_magnesium_lab_interpretati
 entity_type: asset

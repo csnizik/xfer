@@ -1,12 +1,9 @@
-uuid: b3026acd-1bda-4d1a-bd42-4f4ca7c2023c
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_phosphorus
-_core:
-  default_config_hash: Z3SVUwSsz7eoETwa8xtribUEQKAyFv7PmPUMyM14Ios
 id: asset.lab_result.field_phosphorus
 field_name: field_phosphorus
 entity_type: asset

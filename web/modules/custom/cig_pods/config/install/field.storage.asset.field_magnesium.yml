@@ -1,11 +1,8 @@
-uuid: 8c98d9ad-ebf0-4944-b802-dd81f9945cd9
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: y4kfR5AEJqQhORNm1rL3MKDuvFcXog_LGZpdygSxXp0
 id: asset.field_magnesium
 field_name: field_magnesium
 entity_type: asset

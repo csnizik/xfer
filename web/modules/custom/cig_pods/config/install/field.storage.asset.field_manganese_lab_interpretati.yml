@@ -1,12 +1,9 @@
-uuid: 2fe149eb-d6e6-4a9f-a071-9572356b1e60
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-_core:
-  default_config_hash: '-WaL5nijasxLaqbUqlg5d7vjdbdlHn4KWr_Zqo9gj78'
 id: asset.field_manganese_lab_interpretati
 field_name: field_manganese_lab_interpretati
 entity_type: asset

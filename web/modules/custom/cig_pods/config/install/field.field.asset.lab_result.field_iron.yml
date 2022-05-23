@@ -1,12 +1,9 @@
-uuid: 19fe0b56-00b4-4834-86d5-f67d6d721805
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_iron
-_core:
-  default_config_hash: 2GZYVMeNTnfGrNHOk9xphArs4ur0BH9HewP-mBhbWAc
 id: asset.lab_result.field_iron
 field_name: field_iron
 entity_type: asset

@@ -30,37 +30,37 @@ class LabTestingProfile extends FarmAssetType {
       
 
       $field_info = [
-        'laboratory' => [
-            'type'  => 'entity_reference',
-            'label' => 'Laboratory',
-            'description' => $this->t('Enter State Inititals (Ex. CA) or Lab Name to find Lab'),
-			'target_type' => 'taxonomy_term',
-			'target_bundle' => 'd_laboratory',
-			'handler' => 'default',
-            'required' => FALSE,
-            'multiple' => TRUE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => -1,
-               'view' => -1
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
-		],
-        'field_producer' => [
-            'type' => 'entity_reference',
-            'label' => 'Producers',
-            'target_type' => 'asset',
-            'target_bundle' => 'producer',
-            'required' => FALSE,
-            'multiple' => TRUE,
-            'form_display_options' => [
-               'label' => 'inline',
-               'type' => 'options_select',
-            ]
-        ],	
+        // 'field_laboratory' => [
+        //     'type'  => 'entity_reference',
+        //     'label' => 'Laboratory',
+        //     'description' => $this->t('Enter State Inititals (Ex. CA) or Lab Name to find Lab'),
+		// 	'target_type' => 'taxonomy_term',
+		// 	'target_bundle' => 'd_laboratory',
+		// 	'handler' => 'default',
+        //     'required' => FALSE,
+        //     'multiple' => FALSE,
+        //     // Lower weight shows up first in form
+        //     'weight' => [
+        //        'form' => -1,
+        //        'view' => -1
+		// 	],
+        //     'form_display_options' => [
+        //         'label' => 'inline',
+        //         'type' => 'options_select'
+        //     ]
+		// ],
+        // 'field_producer' => [
+        //     'type' => 'entity_reference',
+        //     'label' => 'Producers',
+        //     'target_type' => 'asset',
+        //     'target_bundle' => 'producer',
+        //     'required' => FALSE,
+        //     'multiple' => TRUE,
+        //     'form_display_options' => [
+        //        'label' => 'inline',
+        //        'type' => 'options_select',
+        //     ]
+        // ],	
         'ph_method' => [
             'type'  => 'entity_reference',
             'label' => 'PH method',

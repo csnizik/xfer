@@ -1,11 +1,8 @@
-uuid: 08043ea7-d408-4471-a258-bc59ea48e2a6
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: VCmjgsYLATI6uGdt7qSPY6MQx--GCZrnwU1AawcOR2M
 id: asset.field_boron
 field_name: field_boron
 entity_type: asset

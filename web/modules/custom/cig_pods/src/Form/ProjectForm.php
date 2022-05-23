@@ -227,6 +227,7 @@ class ProjectForm extends FormBase {
 					  'callback' => '::addmoreCallback',
 					  'wrapper' => 'names-fieldset-wrapper',
 					],
+					"#limit_validation_errors" => array(),
 					'#prefix' => '<div class="remove-button-container">',
 					'#suffix' => '</div>',
 				];
@@ -256,10 +257,11 @@ class ProjectForm extends FormBase {
 			'#type' => 'actions',
 		];
 
-		$num_last_index = $num_indexes -1;
 		$form['names_fieldset']['actions']['add_name'] = [
-			'#type' => 'button',
-			'#value' => $this->t('Add Another Contact'),
+			'#type' => 'submit',
+			'#button_type' => 'button',
+			'#name' => 'add_contact_button',
+			'#value' => t('Add Another Contact'),
 			'#submit' => ['::addOne'],
 			'#ajax' => [
 				'callback' => '::addmoreCallback',
@@ -267,11 +269,12 @@ class ProjectForm extends FormBase {
 			],
 			'#states' => [
 				'visible' => [
-				  ":input[name='names_fieldset[$num_last_index][contact_name]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][contact_name]']" => ['!value' => ''],
 				  "and",
-				  ":input[name='names_fieldset[$num_last_index][contact_type]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][contact_type]']" => ['!value' => ''],
 				],
 			],
+			"#limit_validation_errors" => array(),
 			'#prefix' => '<div id="addmore-button-container">',
 			'#suffix' => '</div>',
 		];

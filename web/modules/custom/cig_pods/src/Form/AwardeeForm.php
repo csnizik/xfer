@@ -18,26 +18,32 @@ class AwardeeForm extends FormBase {
 		// Add textfield as name
 		$form['awardee_name'] = [
 			'#type' => 'textfield',
-			'#title' => $this->t('Awardee Name'),
-			'#description' => 'Awaree Name',
+			'#title' => t('Awardee Name'),
 			'#required' => TRUE,
+			'#muliple' => FALSE,
 		];
 
-		$form['project_name'] = array(
-            'type' => 'textfield',
-            'label' => 'Project Name',
-            'description' => '' ,
-            'required' => FALSE ,
-            'multiple' => FALSE			
-		);
+		$form['project_details'] = [
+			'#type' => 'details',
+			'#title' => 'My details',
+			'#open' => TRUE,
+		];
+		// print_r("brr");
 
-		$form['project_agreement_number'] = array(
-			'type' => 'textfield',
-            'label' => 'Project Agreement Number',
-            'description' => '' ,
-            'required' => FALSE ,
-            'multiple' => FALSE	
-		);
+		$proj_form = ProjectForm::buildForm([], $form_state, $options);
+
+		// print_r(array_keys($form));
+
+		foreach($proj_form as $key => $element){
+			if ($key == 'actions'){
+				continue;
+			} else {
+				$form['project_details'][$key] = $element;
+				// Add each element in the form 
+				// print_r($key);
+			}
+		}
+
 
 		// $form['project'] = array (
 			// '#type' => 'checkboxes',
@@ -68,30 +74,31 @@ class AwardeeForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 	
+
+
+	$project = Asset::create([
+		'type' => 'project',
+		'name' => $form['project_details']['project_name']['#value'],
+		'field_project_agreement_number' => $form['project_details']['project_agreement_number']['#value'],
+	]);
+
+	$project->save();
+
+
+	$awardee = Asset::create([
+		'type' => 'awardee',
+		'name' => $form['awardee_name']['#value'],
+		'field_project' => [$project->id()],
+	]);
+
+	$awardee->save();
+
 	$this
 	  ->messenger()
 	  ->addStatus($this
 	  ->t('Form submitted for awardee @awardee_name', [
 	  '@awardee_name' => $form['awardee_name']['#value'],
 	]));
-
-	$project = Asset::create([
-		'type' => 'project',
-		'name' => $form['project_name']['#value'],
-		'field_project_agreement_number' => $form['project_agreement_number']['#value'],
-	]);
-
-	print_r($project->id());
-
-	$project->save();
-
-	print_r($project->id());
-
-	$awardee = Asset::create([
-		'type' => 'awardee',
-		'name' => $form['awardee_name']['#value'],
-		'project' => [$project->id()],
-	]);
 
 	// $asset = Asset::create([
 		// 'type' => 'awardee',

@@ -1,0 +1,129 @@
+.project-create-form .js-form-item{
+	margin-bottom: 30px;
+}
+
+.project-create-form .form-element{
+	width: 648px;
+	border: 1px solid #1B1B1B;
+    border-radius: 0;
+}
+
+.project-create-form #edit-resource-concerns{
+	max-height: 396px;
+	max-width: 630px;
+	overflow-y: overlay;
+	border: 1px solid #1B1B1B;
+    border-radius: 0;
+	padding: 10px 0px 10px 16px;
+}
+
+.project-create-form #edit-resource-concerns--wrapper .fieldset__label{
+	margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+/*Scrollbar CSS Start*/
+/*===================*/
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #DCDEE0; 
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #71767A; 
+}
+/*Scrollbar CSS End*/
+/*===================*/
+
+.project-create-form .form-title{
+	font-weight: 500;
+	font-size: 32px;
+	line-height: 38px;
+}
+
+.project-create-form .subform-title-container{
+    display: flex;
+    align-items: center;
+	clear: both;
+	margin-top: 40px;
+}
+
+.project-create-form .subform-title-container h2{
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 26px;
+    flex: 50%;
+}
+
+.project-create-form .subform-title-container h4{
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.project-create-form input#edit-create-organization{
+	display: block;
+	margin-top: -22px;
+}
+
+.project-create-form button{
+	color: #005EA2;
+    border: 2px solid #005EA2 !important;
+}
+
+.project-create-form #names-fieldset-wrapper{
+	width: 648px;
+}
+
+.project-create-form .inline-components{
+	float: left;
+	width: 316px;
+	margin-right: 8px;
+	margin-bottom: 0px;
+}
+
+.project-create-form .inline-components-short{
+	float: left;
+	width: 205px;
+	margin-right: 8px;
+	margin-bottom: 0px;
+}
+
+.project-create-form .inline-components .js-form-item{
+	margin-bottom: 0;
+}
+
+.project-create-form  .inline-components-short .js-form-item{
+	margin-bottom: 0;
+}
+
+.project-create-form  .remove-button-container{
+	display: inline-block;
+	margin-top: 30px;
+}
+
+.project-create-form .remove-button-container input{
+	margin-bottom: 0px;
+	color: white;
+	background-color: #d83933;
+	border-color: #d83933 !important;
+}
+
+.project-create-form .remove-button-container input:hover{
+	background-color: #b51d09;
+	border-color: #b51d09 !important;
+}
+
+.project-create-form .clear-space{
+	clear: both;
+}
+
+.project-create-form #addmore-button-container input{
+	margin: 8px 0 0 0 ;
+}
+

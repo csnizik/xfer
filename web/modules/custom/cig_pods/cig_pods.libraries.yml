@@ -1,3 +1,10 @@
+project_entry_form:
+  css:
+    theme:
+      css/project.css: {}
+  js:
+    js/project.js: {}
+
 producer_entry_form:
   css:
     theme:

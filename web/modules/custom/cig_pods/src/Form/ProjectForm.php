@@ -120,26 +120,6 @@ class ProjectForm extends FormBase {
 			'#required' => TRUE
 		];
 
-		$form['management_tags'] = [
-			'#type' => 'checkboxes',
-			'#title' => $this
-			  ->t('Management Tags'),
-			'#options' => [
-			  'ct' => $this
-				->t('Conventional Tillage'),
-			  'ncc' => $this
-				->t('No Cover Crop'),
-			  'ccm' => $this
-				->t('Cover Crop Mix'),
-			  'nt' => $this
-				->t('No-Till'),
-			  'cm' => $this
-				->t('Crop Mix'),
-			],
-			'#multiple' => TRUE,
-			'#required' => TRUE
-		];
-
 		/* Awardee Information */
 		$form['subform_2'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 3</h4></div>'

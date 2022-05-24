@@ -7,32 +7,11 @@ Use Drupal\Core\Form\FormStateInterface;
 
 class ProjectForm extends FormBase {
 
-   /**
-   * {@inheritdoc}
-   */
-	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
-
-		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
-
-		$num_lines = $form_state->get('num_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
-		$num_indexes = $form_state->get('num_indexes');//get num of added contacts. (1->n)
-
-		if ($num_indexes === NULL) {//initialize number of contact, set to 1
-			$form_state->set('num_indexes', 1);
-			$num_indexes = $form_state->get('num_indexes');
-		}
-		if ($num_lines === NULL) {
-			$form_state->set('num_lines', 1);
-			$num_lines = $form_state->get('num_lines');
-		}
-
-		$removed_fields = $form_state->get('removed_fields');//get removed contacts indexes
-		if ($removed_fields === NULL) {
-			$form_state->set('removed_fields', array());//initialize arr
-			$removed_fields = $form_state->get('removed_fields');
-		}
-		/* Variables declaration end*/
-
+   
+	/*
+		Take in form and form_state using pass by reference on the form. No need to return the form
+	*/
+	public function buildProjectInformationSection(array &$form, FormStateInterface &$form_state, $options = NULL){
 		$form['form_title'] = [
 			'#markup' => '<h1 id="form-title">Project Information</h1>'
 		];
@@ -55,21 +34,6 @@ class ProjectForm extends FormBase {
 			'#required' => TRUE
 		];
 
-		$form['grant_type'] = [
-			'#type' => 'select',
-			'#title' => $this
-			  ->t('Grant Type'),
-			'#options' => [
-			  '1' => $this
-				->t('Type 1'),
-			  '2' => $this
-				->t('Type 2'),
-			  '3' => $this
-				->t('Type 3'),
-			],
-			'#required' => TRUE
-		];
-
 		$form['funding_amount'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Funding Amount'),
@@ -77,40 +41,26 @@ class ProjectForm extends FormBase {
 			'#required' => TRUE
 		];
 
-		$form['resource_concerns'] = [
-			'#type' => 'checkboxes',
-			'#title' => $this
-			  ->t('Possible Resource Concerns'),
-			'#options' => [
-			  '1' => $this
-				->t('Air - Emissions of airborne reactive nitrogen'),
-			  '2' => $this
-				->t('Air - Emissions of Greenhouse Gases (GHGs)'),
-			  '3' => $this
-				->t('Air - Emissions Of Ozone Precursors'),
-			  '4' => $this
-				->t('Air - Emissions Of Particulate Matter (PM) And PM Precursors'),
-			  '5' => $this
-				->t('Air - Objectionable Odor'),
-			  '6' => $this
-				->t('Animals - Aquatic habitat for fish and other organisms'),
-			  '7' => $this
-				->t('Animals - Elevated water temperature'),
-			  '8' => $this
-				->t('Animals - Feed and forage balance'),
-			  '9' => $this
-				->t('Animals - Habitat Degradation'),
-			  '10' => $this
-				->t('Animals - Inadequate Feed and Forage'),
-			  '11' => $this
-				->t('Animals - Inadequate livestock shelter'),
-			  '12' => $this
-				->t('Animals - Inadequate livestock water quantity, quality and distribution'),
-			  '13' => $this
-				->t('Animals - Inadequate Water'),
-			],
-			'#multiple' => TRUE,
-			'#required' => TRUE
+		$resource_concern_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+		   ['vid' => 'd_resource_concern']
+		);
+		
+
+
+
+		$resource_concern_options = [];
+		$resource_concern_keys = array_keys($resource_concern_terms);
+
+		foreach($resource_concern_keys as $resource_concern_key) {
+		  $term = $resource_concern_terms[$resource_concern_key];
+		  $resource_concern_options[$resource_concern_key] = $term -> getName();
+		}
+		$form['resource_concern'] = [
+		  '#type' => 'checkboxes',
+		  '#title' => t('Possible Resource Concerns'),
+		  '#options' => $resource_concern_options,
+		  '#required' => TRUE,
+		  '#required' => TRUE,
 		];
 
 		$form['project_summary'] = [
@@ -120,25 +70,90 @@ class ProjectForm extends FormBase {
 			'#required' => TRUE
 		];
 
+		// Start: Taxonomy term loaded dynamically example
+
+		$grant_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+			[
+				'vid' => 'd_grant_type',
+			]
+		);
+
+		$grant_type_options = [];
+		$grant_type_keys = array_keys($grant_type_terms);
+
+		foreach($grant_type_keys as $grant_type_key) {
+			$term = $grant_type_terms[$grant_type_key];
+			$grant_type_options[$grant_type_key] = $term -> getName();
+		}
+		
+		$form['grant_type'] = [
+			'#type' => 'select',
+			'#title' => $this
+			  ->t('Grant Type'),
+			'#options' => $grant_type_options,
+			'#required' => TRUE
+		];
+		// End: Taxonomy term loaded dynamically example
+
+
+	}
+
+   /**
+   * {@inheritdoc}
+   */
+	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
+
+		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+
+		$num_lines = $form_state->get('num_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
+		$num_indexes = $form_state->get('num_indexes');//get num of added contacts. (1->n)
+
+		$this->buildProjectInformationSection($form, $form_state, $options);
+		
+		if ($num_indexes === NULL) {//initialize number of contact, set to 1
+			$form_state->set('num_indexes', 1);
+			$num_indexes = $form_state->get('num_indexes');
+		}
+		if ($num_lines === NULL) {
+			$form_state->set('num_lines', 1);
+			$num_lines = $form_state->get('num_lines');
+		}
+
+		$removed_fields = $form_state->get('removed_fields');//get removed contacts indexes
+		if ($removed_fields === NULL) {
+			$form_state->set('removed_fields', array());//initialize arr
+			$removed_fields = $form_state->get('removed_fields');
+		}
+		/* Variables declaration end*/
+
+
+
+
+
 		/* Awardee Information */
 		$form['subform_2'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 3</h4></div>'
 		];
 
-		$form['organization_name'] = [
-			'#type' => 'select',
-			'#title' => $this
-			  ->t('Awardee Organization Name'),
-			'#options' => [
-			  '1' => $this
-				->t('Name 1'),
-			  '2' => $this
-				->t('Name 2'),
-			  '3' => $this
-				->t('Name 3'),
-			],
-			'#required' => TRUE
+		/* Selection of existing Awardees*/
+
+		$awardee_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+			['type' => 'awardee']
+		);
+		$awardee_options = array();
+		$awardee_keys = array_keys($awardee_assets);
+		print_r($awardee_keys);
+		foreach($awardee_keys as $awardee_key) {
+		  $asset = $awardee_assets[$awardee_key];
+		  $awardee_options[$awardee_key] = $asset->getName();
+		}
+		$form['awardee'] = [
+		  '#type' => 'select',
+		  '#title' => t('Awardee Organization'),
+		  '#options' => $awardee_options,
+		  '#required' => TRUE
 		];
+
 
 		$form['create_organization'] = [
 			'#type' => 'button',
@@ -151,6 +166,19 @@ class ProjectForm extends FormBase {
 		  '#prefix' => '<div id="names-fieldset-wrapper"',
 		  '#suffix' => '</div>',
 		];
+
+		// Load the list of existing contact types 
+
+		$contact_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+				['vid' => 'd_contact_type']
+			);
+			
+		$contact_type_options = [];
+		$contact_type_keys = array_keys($contact_type_terms);
+		foreach($contact_type_keys as $contact_type_key) {
+			$term = $contact_type_terms[$contact_type_key];
+			$contact_type_options[$contact_type_key] = $term -> getName();
+		}
 
 		for ($i = 0; $i < $num_indexes; $i++) {//num_indexes: get num of added contacts. (1->n)
 
@@ -165,34 +193,29 @@ class ProjectForm extends FormBase {
 				'#options' => [
 				  '' => $this
 					->t(' - Select - '),
-				  'aw' => $this
-					->t('Agatha Wallace'),
-				  'po' => $this
-					->t('Prescott Olehui'),
-				  'rr' => $this
-					->t('Rachel Rutherford'),
+				  'dacn1' => $this
+					->t('Dummy awardee contact name 1'),
+				  'dacn2' => $this
+					->t('Dummy awardee contact name 2'),
+				  'dacn3' => $this
+					->t('Dummy awardee contact name 3'),
 				],
 				'attributes' => [
 					'class' => 'something',
 				],
+
+				// TODO: Check if this is the best way 
 				'#prefix' => ($num_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 			];
 
+
+	
+
 			$form['names_fieldset'][$i]['contact_type'] = [
 				'#type' => 'select',
-				'#title' => $this
-				  ->t('Contact Type'),
-				'#options' => [
-				  '' => $this
-					->t(' - Select - '),
-				  'apc' => $this
-					->t('Awardee Principal Contact'),
-				  'atc' => $this
-					->t('Awardee Technical Contact'),
-				  'aac' => $this
-					->t('Awardee Administrative Contact'),
-				],
+				'#title' => $this->t('Contact Type'),
+				'#options' => $contact_type_options,
 				'#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
@@ -233,9 +256,6 @@ class ProjectForm extends FormBase {
 		];
 		/* Producers Information Ends*/
 
-		$form['actions'] = [
-			'#type' => 'actions',
-		];
 
 		$form['names_fieldset']['actions']['add_name'] = [
 			'#type' => 'submit',
@@ -308,6 +328,8 @@ class ProjectForm extends FormBase {
   }
 
   public function addOne(array &$form, FormStateInterface $form_state) {
+	print_r("BRRRR");
+	$this->messenger()->addStatus('BRRRR');
     $num_field = $form_state->get('num_indexes');
 	$num_line = $form_state->get('num_lines');
     $add_button = $num_field + 1;

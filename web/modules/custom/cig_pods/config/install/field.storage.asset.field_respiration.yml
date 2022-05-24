@@ -1,11 +1,8 @@
-uuid: f06629e2-dcb7-4207-a9b0-9956af3ff73e
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: wXbAko_mhCRbh-JQ9-J1S_W2pPmi0cmBmERz-v0DNWE
 id: asset.field_respiration
 field_name: field_respiration
 entity_type: asset

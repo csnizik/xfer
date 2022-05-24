@@ -1,4 +1,3 @@
-uuid: d49e3a84-41f5-4128-b484-422906f1961d
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: oihhdXpPVSOhGI0qAd_43BntWZ5n7k_Cv5sUXvztEe0
 id: asset.lab_result.field_nitrate_n_lab_interpretati
 field_name: field_nitrate_n_lab_interpretati
 entity_type: asset

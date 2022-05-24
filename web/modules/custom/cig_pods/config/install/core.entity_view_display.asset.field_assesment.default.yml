@@ -1,4 +1,3 @@
-uuid: 1192618b-c05c-42b7-a95a-2b924f658cbb
 langcode: en
 status: true
 dependencies:
@@ -6,7 +5,6 @@ dependencies:
     - asset.type.field_assesment
     - field.field.asset.field_assesment.field_biological_diversity
     - field.field.asset.field_assesment.field_biopores
-    - field.field.asset.field_assesment.field_penetration_resistance
     - field.field.asset.field_assesment.field_plant_roots
     - field.field.asset.field_assesment.field_ponding
     - field.field.asset.field_assesment.field_residue_breakdown
@@ -16,8 +14,6 @@ dependencies:
     - field.field.asset.field_assesment.field_soil_structure
     - field.field.asset.field_assesment.field_surface_crusts
     - field.field.asset.field_assesment.field_water_stable_aggregates
-_core:
-  default_config_hash: BEhynhaNuKJx_E5kgVtPqK5IkPFhpxCDFywf3cRhHrQ
 id: asset.field_assesment.default
 targetEntityType: asset
 bundle: field_assesment

@@ -1,4 +1,3 @@
-uuid: 41a3e959-82be-4201-901f-2ecdde777310
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: 0x63d79lmSn3P38OYfcKwH38JfifJ5v9fO8efHP_wYo
 id: asset.lab_result.field_magnesium_lab_interpretati
 field_name: field_magnesium_lab_interpretati
 entity_type: asset

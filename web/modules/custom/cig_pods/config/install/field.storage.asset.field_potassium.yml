@@ -1,11 +1,8 @@
-uuid: c7359133-3bdc-4e76-b256-45a12639b277
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: caqzYGcH7ZkRQg-ZL3Faflb6hxTpTVPMrqRQd7zxHso
 id: asset.field_potassium
 field_name: field_potassium
 entity_type: asset

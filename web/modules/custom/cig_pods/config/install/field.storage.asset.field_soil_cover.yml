@@ -1,11 +1,8 @@
-uuid: c5135eb5-d724-4c52-ba9a-d89ecac862f4
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: PmrXfBzR1STSEE5P88W-84_r6w7Mhk94uc2LqN9qWxU
 id: asset.field_soil_cover
 field_name: field_soil_cover
 entity_type: asset

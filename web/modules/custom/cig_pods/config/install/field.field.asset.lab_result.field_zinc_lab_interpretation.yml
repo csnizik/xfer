@@ -1,4 +1,3 @@
-uuid: feaf7db6-bd78-40f0-9f15-5659b9fd8bb9
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: 5TTSdZ2fQpjmynbi4e-SiVQSOpvIpwyVq9EncfMGnBc
 id: asset.lab_result.field_zinc_lab_interpretation
 field_name: field_zinc_lab_interpretation
 entity_type: asset

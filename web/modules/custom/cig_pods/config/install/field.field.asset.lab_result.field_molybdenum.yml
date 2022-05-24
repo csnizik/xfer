@@ -1,12 +1,9 @@
-uuid: 0a425354-6d0d-4161-a2b3-a2e86c4e87b5
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_molybdenum
-_core:
-  default_config_hash: YRAHSbztzWFULJjXyXd26Nm_pzAKwaRM3QEL-xxCKNI
 id: asset.lab_result.field_molybdenum
 field_name: field_molybdenum
 entity_type: asset

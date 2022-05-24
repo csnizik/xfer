@@ -1,11 +1,8 @@
-uuid: 40aeac99-b755-41dd-8df5-27125cca2135
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: 8kzQTTN_BpjvA1WwnHp2oOlTxk4k0Nkc5ibefmvz1Dw
 id: asset.field_soil_sample
 field_name: field_soil_sample
 entity_type: asset

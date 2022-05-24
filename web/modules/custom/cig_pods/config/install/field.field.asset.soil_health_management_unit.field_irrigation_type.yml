@@ -1,4 +1,3 @@
-uuid: 8b536e43-45c3-4550-acf4-cfa46f2bf842
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: Rs5DaBu4VtwzARqTrgJSAN_V6TdJcchKgRdgC8vszg8
 id: asset.soil_health_management_unit.field_irrigation_type
 field_name: field_irrigation_type
 entity_type: asset

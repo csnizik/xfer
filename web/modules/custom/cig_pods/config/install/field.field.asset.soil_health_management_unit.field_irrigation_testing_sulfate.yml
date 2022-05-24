@@ -1,12 +1,9 @@
-uuid: 83cd31f6-f61f-4c82-b63a-12939f486775
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_testing_sulfate
-_core:
-  default_config_hash: DdIIcJQcTG1FWohk3R0YSiYQDXiapmTFxBY91j6NVRE
 id: asset.soil_health_management_unit.field_irrigation_testing_sulfate
 field_name: field_irrigation_testing_sulfate
 entity_type: asset

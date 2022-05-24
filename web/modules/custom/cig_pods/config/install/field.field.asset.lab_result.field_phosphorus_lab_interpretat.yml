@@ -1,4 +1,3 @@
-uuid: ab702d7d-ab4e-4128-ae53-f41d6617fedd
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: fApAsojJLlgpz6W-3ka90_UCTHST1zDhNOTOLJV1Gi4
 id: asset.lab_result.field_phosphorus_lab_interpretat
 field_name: field_phosphorus_lab_interpretat
 entity_type: asset

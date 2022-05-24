@@ -1,12 +1,9 @@
-uuid: 1caf7615-c4dc-4fb3-879b-eac83d71887f
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.soil_health_sample
     - field.storage.asset.field_sampling_depth
-_core:
-  default_config_hash: 70xjdLCe__Ol3oFhyAh7eA3lSMePcNSEwW9R1fKrEHU
 id: asset.soil_health_sample.field_sampling_depth
 field_name: field_sampling_depth
 entity_type: asset

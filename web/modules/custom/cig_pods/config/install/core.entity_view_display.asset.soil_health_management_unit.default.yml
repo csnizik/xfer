@@ -1,4 +1,3 @@
-uuid: 322c82b5-4b56-4325-a614-beaa9f9adbb2
 langcode: en
 status: true
 dependencies:
@@ -57,7 +56,6 @@ dependencies:
     - field.field.asset.soil_health_management_unit.field_previous_land_use
     - field.field.asset.soil_health_management_unit.field_previous_tillage_system
     - field.field.asset.soil_health_management_unit.field_previous_tillage_system_ye
-    - field.field.asset.soil_health_management_unit.field_producer
     - field.field.asset.soil_health_management_unit.field_required_latitude_1
     - field.field.asset.soil_health_management_unit.field_required_latitude_2
     - field.field.asset.soil_health_management_unit.field_required_longitude_1
@@ -93,8 +91,6 @@ third_party_settings:
     id: layout_onecol
     settings:
       label: ''
-_core:
-  default_config_hash: H4rboElhDv0VGuuO41Ary4yVOuEUE9VwHSn4lYiupGY
 id: asset.soil_health_management_unit.default
 targetEntityType: asset
 bundle: soil_health_management_unit
@@ -708,14 +704,6 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 135
-    region: content
-  field_producer:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 161
     region: content
   field_required_latitude_1:
     type: number_decimal

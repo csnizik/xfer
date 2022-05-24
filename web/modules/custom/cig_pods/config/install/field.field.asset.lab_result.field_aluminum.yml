@@ -1,12 +1,9 @@
-uuid: da44bdbf-e43f-4aa8-b72d-ec15f1583ee0
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_aluminum
-_core:
-  default_config_hash: o3Myx1VRheJmBzMtj2aa29UkP1aktEAi3-ahSK-gamw
 id: asset.lab_result.field_aluminum
 field_name: field_aluminum
 entity_type: asset

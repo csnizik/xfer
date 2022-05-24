@@ -1,12 +1,9 @@
-uuid: da52545f-ae69-4675-8417-dd4b5db9f3c4
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - cig_pods
-_core:
-  default_config_hash: FOOfv0VhtuKjSCvxarbieHXl2wCEAcXCLv-0WqH3pfg
 id: project
 label: Project
 description: Project

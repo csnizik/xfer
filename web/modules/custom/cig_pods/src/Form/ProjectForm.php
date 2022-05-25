@@ -7,94 +7,7 @@ Use Drupal\Core\Form\FormStateInterface;
 
 class ProjectForm extends FormBase {
 
-	public function buildProjectInformationSection(array &$form, FormStateInterface &$form_state, $options = NULL){
-		$form['form_title'] = [
-			'#markup' => '<h1 id="form-title">Project Information</h1>'
-		];
 
-		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>7 Fields | Section 1 of 3</h4></div>'
-		];
-
-		$form['project_name'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Project Name'),
-			'$description' => 'Project Name',
-			'#required' => FALSE
-		];
-		
-		$form['agreement_number'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Agreement Number'),
-			'$description' => 'Agreement Number',
-			'#required' => FALSE
-		];
-
-		// Start: Taxonomy term loaded dynamically example
-
-		$grant_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-			[
-				'vid' => 'd_grant_type',
-			]
-		);
-
-		$grant_type_options = [];
-		$grant_type_keys = array_keys($grant_type_terms);
-
-		foreach($grant_type_keys as $grant_type_key) {
-			$term = $grant_type_terms[$grant_type_key];
-			$grant_type_options[$grant_type_key] = $term -> getName();
-		}
-		
-		$form['grant_type'] = [
-			'#type' => 'select',
-			'#title' => $this
-			  ->t('Grant Type'),
-			'#options' => $grant_type_options,
-			'#required' => FALSE
-		];
-		// End: Taxonomy term loaded dynamically example
-
-		$form['funding_amount'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Funding Amount'),
-			'$description' => 'Funding Amount',
-			'#required' => FALSE
-		];
-
-		$resource_concern_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-		   ['vid' => 'd_resource_concern']
-		);
-		
-
-
-
-		$resource_concern_options = [];
-		$resource_concern_keys = array_keys($resource_concern_terms);
-
-		foreach($resource_concern_keys as $resource_concern_key) {
-		  $term = $resource_concern_terms[$resource_concern_key];
-		  $resource_concern_options[$resource_concern_key] = $term -> getName();
-		}
-		$form['resource_concern'] = [
-		  '#type' => 'checkboxes',
-		  '#title' => t('Possible Resource Concerns'),
-		  '#options' => $resource_concern_options,
-		  '#required' => FALSE,
-		  '#required' => FALSE,
-		];
-
-		$form['project_summary'] = [
-			'#type' => 'textarea',
-			'#title' => $this->t('Project Summary'),
-			'$description' => 'Project Summary',
-			'#required' => FALSE
-		];
-
-
-
-
-	}
 
 	public function getAwardeeOptions(){
 		$awardee_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
@@ -122,16 +35,6 @@ class ProjectForm extends FormBase {
 
 	// TODO: improvement: Make this dynamic
 	public function getAwardeeContactTypeOptions(){
-		// $contact_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-		//    ['vid' => 'd_contact_type']
-		// );
-		// $contact_type_options = [];
-		// $contact_type_keys = array_keys($contact_type_terms);
-		// print_r($contact_type_keys);
-		// foreach($contact_type_keys as $contact_type_key) {
-		//   $term = $contact_type_terms[$contact_type_key];
-		//   $contact_type_options[$contact_type_key] = $term -> getName();
-		// }
 		$contact_type_options[''] = '- Select -';
 		$contact_type_options['0'] = 'Awardee Administrative Contact';
 		$contact_type_options['1'] = 'Awardee Principal Contact';
@@ -141,6 +44,99 @@ class ProjectForm extends FormBase {
 		return $contact_type_options;
 	}
 	
+	public function getResourceConcernOptions(){
+		$resource_concern_options = [];
+		$resource_concern_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+			['vid' => 'd_resource_concern']
+		 );
+
+		 $resource_concern_keys = array_keys($resource_concern_terms);
+ 
+		 foreach($resource_concern_keys as $resource_concern_key) {
+		   $term = $resource_concern_terms[$resource_concern_key];
+		   $resource_concern_options[$resource_concern_key] = $term -> getName();
+		 }
+		
+		return $resource_concern_options;
+	}
+
+	public function getGrantTypeOptions(){
+
+		$grant_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+			[
+				'vid' => 'd_grant_type',
+			]
+		);
+
+		$grant_type_options = [];
+		$grant_type_keys = array_keys($grant_type_terms);
+
+		foreach($grant_type_keys as $grant_type_key) {
+			$term = $grant_type_terms[$grant_type_key];
+			$grant_type_options[$grant_type_key] = $term -> getName();
+		}
+		return $grant_type_options;
+	}
+	
+	public function buildProjectInformationSection(array &$form, FormStateInterface &$form_state, $options = NULL){
+		$form['form_title'] = [
+			'#markup' => '<h1 id="form-title">Project Information</h1>'
+		];
+
+		$form['subform_1'] = [
+			'#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>7 Fields | Section 1 of 3</h4></div>'
+		];
+
+		$form['project_name'] = [
+			'#type' => 'textfield',
+			'#title' => $this->t('Project Name'),
+			'$description' => 'Project Name',
+			'#required' => FALSE
+		];
+		
+		$form['agreement_number'] = [
+			'#type' => 'textfield',
+			'#title' => $this->t('Agreement Number'),
+			'$description' => 'Agreement Number',
+			'#required' => FALSE
+		];
+
+		// Start: Taxonomy term loaded dynamically example
+		$grant_type_options = $this->getGrantTypeOptions();
+		
+		$form['grant_type'] = [
+			'#type' => 'select',
+			'#title' => $this
+			  ->t('Grant Type'),
+			'#options' => $grant_type_options,
+			'#required' => FALSE
+		];
+		// End: Taxonomy term loaded dynamically example
+
+		$form['funding_amount'] = [
+			'#type' => 'textfield',
+			'#title' => $this->t('Funding Amount'),
+			'$description' => 'Funding Amount',
+			'#required' => FALSE
+		];
+
+		$resource_concern_options = $this->getResourceConcernOptions();
+		$form['resource_concern'] = [
+		  '#type' => 'checkboxes',
+		  '#title' => t('Possible Resource Concerns'),
+		  '#options' => $resource_concern_options,
+		  '#required' => FALSE,
+		  '#required' => FALSE,
+		];
+
+		$form['project_summary'] = [
+			'#type' => 'textarea',
+			'#title' => $this->t('Project Summary'),
+			'$description' => 'Project Summary',
+			'#required' => FALSE
+		];
+
+	}
    /**
    * {@inheritdoc}
    */
@@ -174,7 +170,7 @@ class ProjectForm extends FormBase {
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2213 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2214 of 3</h4></div>'
 		];
 
 		$form['organization_name'] = [

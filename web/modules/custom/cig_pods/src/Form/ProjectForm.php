@@ -144,23 +144,46 @@ class ProjectForm extends FormBase {
 
 		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
 
-		$num_lines = $form_state->get('num_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
-		$num_indexes = $form_state->get('num_indexes');//get num of added contacts. (1->n)
+		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
+		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
+		$removed_contacts = $form_state->get('removed_contacts');//get removed contacts indexes
 
-		if ($num_indexes === NULL) {//initialize number of contact, set to 1
-			$form_state->set('num_indexes', 1);
-			$num_indexes = $form_state->get('num_indexes');
+		if ($num_contacts === NULL) {//initialize number of contact, set to 1
+			$form_state->set('num_contacts', 1);
+			$num_contacts = $form_state->get('num_contacts');
 		}
-		if ($num_lines === NULL) {
-			$form_state->set('num_lines', 1);
-			$num_lines = $form_state->get('num_lines');
+		if ($num_contact_lines === NULL) {
+			$form_state->set('num_contact_lines', 1);
+			$num_contact_lines = $form_state->get('num_contact_lines');
 		}
 
-		$removed_fields = $form_state->get('removed_fields');//get removed contacts indexes
-		if ($removed_fields === NULL) {
-			$form_state->set('removed_fields', array());//initialize arr
-			$removed_fields = $form_state->get('removed_fields');
+		if ($removed_contacts === NULL) {
+			$form_state->set('removed_contacts', array());//initialize arr
+			$removed_contacts = $form_state->get('removed_contacts');
 		}
+
+
+		$num_producer_lines = $form_state->get('num_producer_lines');
+		$num_producers = $form_state->get('num_producers');
+		$removed_producers = $form_state->get('removed_producers');
+
+		if ($num_producer_lines == NULL){
+			$form_state->set('num_producer_lines', 1);
+			$num_producer_lines = $form_state->get('num_producer_lines');
+		}
+
+		if ($num_producers === NULL) {
+			$form_state->set('num_producers', 1);
+			$num_producers = $form_state->get('num_producers');
+		}
+
+		if($removed_producers === NULL ){
+			$form_state->set('removed_producers', array());
+			$removed_producers = $form_state->get('removed_producers');
+		}
+
+
+
 		/* Variables declaration end*/
 
 		$this->buildProjectInformationSection($form, $form_state);
@@ -170,7 +193,7 @@ class ProjectForm extends FormBase {
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2214 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2215 of 3</h4></div>'
 		];
 
 		$form['organization_name'] = [
@@ -188,11 +211,11 @@ class ProjectForm extends FormBase {
 		  '#suffix' => '</div>',
 		];
 
+		
 
+		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
 
-		for ($i = 0; $i < $num_indexes; $i++) {//num_indexes: get num of added contacts. (1->n)
-
-			if (in_array($i, $removed_fields)) {// Check if field was removed
+			if (in_array($i, $removed_contacts)) {// Check if field was removed
 				continue;
 			}
 
@@ -204,7 +227,7 @@ class ProjectForm extends FormBase {
 				'attributes' => [
 					'class' => 'something',
 				],
-				'#prefix' => ($num_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+				'#prefix' => ($num_contact_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 			];
 
@@ -217,14 +240,14 @@ class ProjectForm extends FormBase {
 		  		'#suffix' => '</div>',
 			];
 
-			if($num_lines > 1 && $i!=0){
+			if($num_contact_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
 					'#name' => $i,
 					'#submit' => ['::removeCallback'],
 					'#ajax' => [
-					  'callback' => '::addmoreCallback',
+					  'callback' => '::addContactRowCallback',
 					  'wrapper' => 'names-fieldset-wrapper',
 					],
 					"#limit_validation_errors" => array(),
@@ -239,20 +262,7 @@ class ProjectForm extends FormBase {
 			];
 			
 		}
-
-		/* Producers Information */
-		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 3 of 3</h4></div>'
-		];
-
-		$form['producer_contact_name'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Producer Contact Name'),
-			'$description' => 'Producer Contact Name',
-			'#required' => TRUE
-		];
-		/* Producers Information Ends*/
-
+		
 		$form['actions'] = [
 			'#type' => 'actions',
 		];
@@ -262,9 +272,9 @@ class ProjectForm extends FormBase {
 			'#button_type' => 'button',
 			'#name' => 'add_contact_button',
 			'#value' => t('Add Another Contact'),
-			'#submit' => ['::addOne'],
+			'#submit' => ['::addContactRow'],
 			'#ajax' => [
-				'callback' => '::addmoreCallback',
+				'callback' => '::addContactRowCallback',
 				'wrapper' => 'names-fieldset-wrapper',
 			],
 			'#states' => [
@@ -278,6 +288,59 @@ class ProjectForm extends FormBase {
 			'#prefix' => '<div id="addmore-button-container">',
 			'#suffix' => '</div>',
 		];
+
+		/* Producers Information */
+		$form['subform_3'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 5 of 3</h4></div>'
+		];
+
+
+		$form['producers_fieldset'] = [
+			'#prefix' => '<div id="producers-fieldset-wrapper"',
+			'#suffix' => '</div>',
+		  ];
+		for($i = 0; $i < 4; $i++){
+			if(in_array($i,$removed_producers)){
+				continue;
+			}
+			
+			$form['producers_fieldset'][$i]['producer_name'] = [
+				'#type' => 'textfield',
+				'#title' => $this
+				  ->t("Producer Name"),
+			];
+			$form['names_fieldset'][$i]['new_line_container'] = [
+				'#markup' => '<div class="clear-space"></div>'
+			];
+		}
+		$form['producers_fieldset']['actions']['add_producer'] = [
+			'#type' => 'submit',
+			'#button_type' => 'button',
+			'#name' => 'add_producer_button',
+			'#value' => t('Add Another Producer'),
+			'#submit' => ['::addProducerRow'],
+			'#ajax' => [
+				'callback' => '::addProducerRowCallback',
+				'wrapper' => 'producers-fieldset-wrapper',
+			],
+			'#states' => [
+				'visible' => [
+				  ":input[name='producers_fieldset[0][producer_name]']" => ['!value' => ''],
+				],
+			],
+			"#limit_validation_errors" => array(),
+			'#prefix' => '<div id="addmore-button-container">',
+			'#suffix' => '</div>',
+		];
+		
+		// $form['producer_contact_name'] = [
+		// 	'#type' => 'textfield',
+		// 	'#title' => $this->t('Producer Contact Name'),
+		// 	'$description' => 'Producer Contact Name',
+		// 	'#required' => TRUE
+		// ];
+		/* Producers Information Ends*/
+
 
 		// $this->buildProducerInformationSection($form, $form_state, $options);
 		$form_state->setCached(FALSE);
@@ -306,6 +369,7 @@ class ProjectForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
 	if($form_state['values']['op'] == t('Save')){
 		$this
 		->messenger()
@@ -324,22 +388,22 @@ class ProjectForm extends FormBase {
     return 'project_create_form';
   }
 
-  public function addmoreCallback(array &$form, FormStateInterface $form_state) {
+  public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
     return $form['names_fieldset'];
   }
 
-  public function addOne(array &$form, FormStateInterface $form_state) {
-    $num_field = $form_state->get('num_indexes');
-	$num_line = $form_state->get('num_lines');
+  public function addContactRow(array &$form, FormStateInterface $form_state) {
+    $num_field = $form_state->get('num_contacts');
+	$num_line = $form_state->get('num_contact_lines');
     $add_button = $num_field + 1;
-    $form_state->set('num_indexes', $add_button);
-	$form_state->set('num_lines', $num_line + 1);
+    $form_state->set('num_contacts', $add_button);
+	$form_state->set('num_contact_lines', $num_line + 1);
     $form_state->setRebuild();
   }
 
   public function removeCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();
-	$num_line = $form_state->get('num_lines');
+	$num_line = $form_state->get('num_contact_lines');
     $indexToRemove = $trigger['#name'];
 
     // Remove the fieldset from $form (the easy way)
@@ -347,10 +411,10 @@ class ProjectForm extends FormBase {
 
     // Keep track of removed fields so we can add new fields at the bottom
     // Without this they would be added where a value was removed
-    $removed_fields = $form_state->get('removed_fields');
-    $removed_fields[] = $indexToRemove;
-    $form_state->set('removed_fields', $removed_fields);
-	$form_state->set('num_lines', $num_line - 1);
+    $removed_contacts = $form_state->get('removed_contacts');
+    $removed_contacts[] = $indexToRemove;
+    $form_state->set('removed_contacts', $removed_contacts);
+	$form_state->set('num_contact_lines', $num_line - 1);
 
     // Rebuild form_state
     $form_state->setRebuild();

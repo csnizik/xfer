@@ -35,11 +35,15 @@ class ProjectForm extends FormBase {
 
 	// TODO: improvement: Make this dynamic
 	public function getAwardeeContactTypeOptions(){
-		$contact_type_options[''] = '- Select -';
-		$contact_type_options['0'] = 'Awardee Administrative Contact';
-		$contact_type_options['1'] = 'Awardee Principal Contact';
-		$contact_type_options['2'] = 'Awardee Technical Contact';
-
+		$contact_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+		   ['vid' => 'd_contact_type']
+		);
+		$contact_type_options = [];
+		$contact_type_keys = array_keys($contact_type_terms);
+		foreach($contact_type_keys as $contact_type_key) {
+		  $term = $contact_type_terms[$contact_type_key];
+		  $contact_type_options[$contact_type_key] = $term -> getName();
+		}
 
 		return $contact_type_options;
 	}
@@ -193,7 +197,7 @@ class ProjectForm extends FormBase {
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2215 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2217 of 3</h4></div>'
 		];
 
 		$form['organization_name'] = [
@@ -245,7 +249,7 @@ class ProjectForm extends FormBase {
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
 					'#name' => $i,
-					'#submit' => ['::removeCallback'],
+					'#submit' => ['::removeContactCallback'],
 					'#ajax' => [
 					  'callback' => '::addContactRowCallback',
 					  'wrapper' => 'names-fieldset-wrapper',
@@ -299,7 +303,7 @@ class ProjectForm extends FormBase {
 			'#prefix' => '<div id="producers-fieldset-wrapper"',
 			'#suffix' => '</div>',
 		  ];
-		for($i = 0; $i < 4; $i++){
+		for($i = 0; $i < $num_producers; $i++){
 			if(in_array($i,$removed_producers)){
 				continue;
 			}
@@ -354,7 +358,6 @@ class ProjectForm extends FormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 		];
-
 		return $form;
 	}
 
@@ -391,17 +394,28 @@ class ProjectForm extends FormBase {
   public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
     return $form['names_fieldset'];
   }
+  public function addProducerRowCallback(array &$form, FormStateInterface $form_state) {
+    return $form['producers_fieldset'];
+  }
+
+  public function addProducerRow(array &$form, FormStateInterface $form_state){
+	  $num_producers = $form_state->get('num_producers');
+	  $num_producer_lines = $form_state->get('num_producer_lines');
+	  $form_state->set('num_producers', $num_producers + 1);
+	  $form_state->set('num_producer_lines',$num_producer_lines + 1);
+	  $form_state->setRebuild();
+  }
+
 
   public function addContactRow(array &$form, FormStateInterface $form_state) {
-    $num_field = $form_state->get('num_contacts');
-	$num_line = $form_state->get('num_contact_lines');
-    $add_button = $num_field + 1;
-    $form_state->set('num_contacts', $add_button);
-	$form_state->set('num_contact_lines', $num_line + 1);
+    $num_contacts = $form_state->get('num_contacts');
+	$num_contact_lines = $form_state->get('num_contact_lines');
+    $form_state->set('num_contacts', $num_contacts + 1);
+	$form_state->set('num_contact_lines', $num_contact_lines + 1);
     $form_state->setRebuild();
   }
 
-  public function removeCallback(array &$form, FormStateInterface $form_state) {
+  public function removeContactCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();
 	$num_line = $form_state->get('num_contact_lines');
     $indexToRemove = $trigger['#name'];
@@ -413,10 +427,28 @@ class ProjectForm extends FormBase {
     // Without this they would be added where a value was removed
     $removed_contacts = $form_state->get('removed_contacts');
     $removed_contacts[] = $indexToRemove;
-    $form_state->set('removed_contacts', $removed_contacts);
+    
+	$form_state->set('removed_contacts', $removed_contacts);
 	$form_state->set('num_contact_lines', $num_line - 1);
 
     // Rebuild form_state
     $form_state->setRebuild();
+  }
+
+  public function removeProduceCallback(array &$form, FomrStateInterfaqce $form_state){
+    $trigger = $form_state->getTriggeringElement();
+	$num_producer_lines = $form_state->get('num_producer_lines');
+	$indexToRemove = $trigger['#name'];
+	
+	unset($form['producers_fieldset'][$indexToRemove]);
+
+	$removed_producers = $form_state->get('removed_producers');
+	$removed_producers[] = $indexToRemove;
+	
+	$form_state->set('removed_producers',$removed_producers);
+	$form_state->set('num_producer_lines', $num_producer_lines);
+
+	$form_state->setRebuild();
+
   }
 }

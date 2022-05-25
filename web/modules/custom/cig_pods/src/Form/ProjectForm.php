@@ -313,9 +313,25 @@ class ProjectForm extends FormBase {
 				'#title' => $this
 				  ->t("Producer Name"),
 			];
-			$form['names_fieldset'][$i]['new_line_container'] = [
+			$form['producers_fieldset'][$i]['new_line_container'] = [
 				'#markup' => '<div class="clear-space"></div>'
 			];
+
+			if($num_producer_lines > 1 && $i!=0){
+				$form['producers_fieldset'][$i]['actions'] = [
+					'#type' => 'submit',
+					'#value' => $this->t('Delete'),
+					'#name' => $i,
+					'#submit' => ['::removeProducerCallback'],
+					'#ajax' => [
+					  'callback' => '::addProducerRowCallback', 
+					  'wrapper' => 'producers-fieldset-wrapper',
+					],
+					"#limit_validation_errors" => array(),
+					'#prefix' => '<div class="remove-button-container">',
+					'#suffix' => '</div>',
+				];
+			}
 		}
 		$form['producers_fieldset']['actions']['add_producer'] = [
 			'#type' => 'submit',
@@ -435,7 +451,7 @@ class ProjectForm extends FormBase {
     $form_state->setRebuild();
   }
 
-  public function removeProduceCallback(array &$form, FomrStateInterfaqce $form_state){
+  public function removeProducerCallback(array &$form, FormStateInterface $form_state){
     $trigger = $form_state->getTriggeringElement();
 	$num_producer_lines = $form_state->get('num_producer_lines');
 	$indexToRemove = $trigger['#name'];

@@ -1,0 +1,120 @@
+{
+  // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+
+  "PODS Textfield": {
+    "scope": "php",
+    "prefix": "pdtf",
+    "body": [
+      "\\$form['$1'] = [",
+      "\t'#type' => 'textfield',",
+      "\t'#title' => \\$this->t('$2'),",
+      "\t'#description' => '$2',",
+      "\t'#required' => TRUE",
+      "]; $0"
+    ],
+    "description": "PODS textfield"
+  },
+
+  "PODS Submit": {
+    "scope": "php",
+    "prefix": "pdsub",
+    "body": [
+      "\\$form['actions']['$1'] = [",
+      "\t'#type' => 'submit',",
+      "\t'#value' => \\$this->t('$2'),",
+      "]; $0"
+    ],
+    "description": "PODS submit"
+  },
+
+  "PODS Button": {
+    "scope": "php",
+    "prefix": "pdbtn",
+    "body": [
+      "\\$form['$1'] = [",
+      "\t'#type' => 'button',",
+      "\t'#value' => \\$this->t('$2'),",
+      "\t'#attributes' => array('onClick' => '$3'),",
+      "]; $0"
+    ],
+    "description": "PODS button"
+  },
+
+  "PODS Markup": {
+    "scope": "php",
+    "prefix": "pdmu",
+    "body": ["\\$form['$1'] = [", "\t'#markup' => '$2',", "]; $0"],
+    "description": "PODS markup"
+  },
+
+  "PODS Form": {
+    "prefix": "pdfm",
+    "body": [
+      "<?php",
+
+      "\nnamespace Drupal\\cig_pods\\Form;",
+
+      "\nUse Drupal\\Core\\FormBase;",
+      "Use Drupal\\Core\\FormStateInterface;",
+
+      "\nclass $TM_FILENAME_BASE extends FormBase {",
+
+      "\n\t/**",
+      "\t* {@inheritdoc}",
+      "\t*/",
+
+      "\tpublic function buildForm(array \\$form, FormStateInterface \\$form_state, \\$options = NULL){",
+      "\n\t$0",
+
+      "\n\n\n\n\t\treturn \\$form;",
+
+      "\n\t}",
+
+      "\n\t/**",
+      "\t* {@inheritdoc}",
+      "\t*/",
+
+      "\tpublic function validateForm(array &\\$form, FormStateInterface \\$form_state){",
+      "\t\treturn;",
+      "\t}",
+
+      "\n\t/**",
+      "\t* {@inheritdoc}",
+      "\t*/",
+
+      "\tpublic function getFormId() {",
+      "\t\treturn '$1';",
+      "\t}",
+
+      "\n\t/**",
+      "\t* {@inheritdoc}",
+      "\t*/",
+
+      "\tpublic function submitForm(array &\\$form, FormStateInterface \\$form_state) {",
+      "\t\t\\$this",
+      "\t\t\t->messenger()",
+      "\t\t\t->addStatus(\\$this",
+      "\t\t\t->t('Form submitted for $2 @$2_name', [",
+      "\t\t\t'@$2_name' => \\$form['$2_name']['#value'],",
+      "\t\t]));",
+      "\t}",
+      "}"
+    ],
+    "description": "PODS form"
+  }
+}

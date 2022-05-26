@@ -7,6 +7,7 @@ Use Drupal\Core\Form\FormStateInterface;
 
 class AwardeeDashboardForm extends FormBase {
 
+ 
     /**
     * {@inheritdoc}
     */
@@ -18,8 +19,6 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
-				// '#title' => $this
-				//   ->t("Create New"),
 				'#options' => [
 				  '' => $this
 					->t('Create New'),
@@ -47,38 +46,43 @@ class AwardeeDashboardForm extends FormBase {
         '#markup' => '<h2 id="form-subtitle">Manage Assets</h2>'
     ]; 
 
-// $query = \Drupal::entityQuery('asset')
-//         ->condition('type', 'project');
-// $count = $query->count()->execute();
+     
+       $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
+       $entityCount = array();
+
+      for($i = 0; $i < count($awardeeEntities); $i++){
+        $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[i]);
+        array_push($entityCount, $query->count()->execute());
+      }
 
     $form['awardee_proj'] = [
       '#type' => 'button',
-      '#value' => $this->t('Project(s)'),
-      '#attributes' => array('onClick' => ''),
+      '#value' => $this->t('Projects(s): '.$entityCount[0]),
+      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
     ]; 
 
     $form['awardee_org'] = [
       '#type' => 'button',
-      '#value' => $this->t('Awardee Organization(s)'),
-      '#attributes' => array('onClick' => ''),
+      '#value' => $this->t('Awardee Organization(s): '.$entityCount[1]),
+      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
     ]; 
 
-    $form['awardee_prod'] = [
+    $form['awardee_prod'] = [  
       '#type' => 'button',
-      '#value' => $this->t('Producer(s)'),
-      '#attributes' => array('onClick' => ''),
+      '#value' => $this->t('Producer(s): '.$entityCount[2]),
+      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
     ]; 
 
-    $form['awardee_lab'] = [
+    $form['actions']['awardee_lab'] = [
       '#type' => 'button',
-      '#value' => $this->t('Lab Test Method(s)'),
-      '#attributes' => array('onClick' => ''),
+      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
+      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
     ]; 
-
 
         return $form;
 
     }
+    
 
     /**
     * {@inheritdoc}

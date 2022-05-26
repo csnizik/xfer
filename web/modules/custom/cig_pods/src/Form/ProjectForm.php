@@ -4,6 +4,10 @@ namespace Drupal\cig_pods\Form;
 
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
+Use Drupal\asset\Entity\Asset;
+Use Drupal\Core\Render\Element\Checkboxes;
+
+
 
 class ProjectForm extends FormBase {
 
@@ -24,21 +28,24 @@ class ProjectForm extends FormBase {
 	}
 
 
-	# Making this function dynamically pull contact names breaks AJAX calls.
+	# Eventually, this function will get replaced with a call to EAuth to find registered users.
 	public function getAwardeeContactNameOptions(){
 		$contact_name_options = array();
 		$contact_name_options[''] = ' - Select -';
-		$contact_name_options['aw'] = 'Agatha Wallace';
+		$contact_name_options['dummy_eauth_id_1'] = 'Agatha Wallace';
+		$contact_name_options['dummy_eauth_id_2'] = 'Prescott Olehui';
+		$contact_name_options['dummy_eauth_id_3'] = 'Rachel Rutherford';
 
 		return $contact_name_options;
 	}
 
-	// TODO: improvement: Make this dynamic
 	public function getAwardeeContactTypeOptions(){
+		$contact_type_options = [];
+		$contact_type_options[''] = ' - Select -';
+
 		$contact_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
 		   ['vid' => 'd_contact_type']
 		);
-		$contact_type_options = [];
 		$contact_type_keys = array_keys($contact_type_terms);
 		foreach($contact_type_keys as $contact_type_key) {
 		  $term = $contact_type_terms[$contact_type_key];
@@ -65,6 +72,8 @@ class ProjectForm extends FormBase {
 	}
 
 	public function getGrantTypeOptions(){
+		$grant_type_options = [];
+		$grant_type_options[''] = '- Select -';
 
 		$grant_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
 			[
@@ -72,7 +81,6 @@ class ProjectForm extends FormBase {
 			]
 		);
 
-		$grant_type_options = [];
 		$grant_type_keys = array_keys($grant_type_terms);
 
 		foreach($grant_type_keys as $grant_type_key) {
@@ -82,6 +90,21 @@ class ProjectForm extends FormBase {
 		return $grant_type_options;
 	}
 	
+	public function getProducerOptions() {
+		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+		   ['type' => 'producer']
+		);
+		$producer_options = [];
+		$producer_options[''] = '- Select -';
+		$producer_keys = array_keys($producer_assets);
+		foreach($producer_keys as $producer_key) {
+		  $asset = $producer_assets[$producer_key];
+		  $producer_options[$producer_key] = $asset -> getName();
+		}
+
+		return $producer_options;
+	}
+
 	public function buildProjectInformationSection(array &$form, FormStateInterface &$form_state, $options = NULL){
 		$form['form_title'] = [
 			'#markup' => '<h1 id="form-title">Project Information</h1>'
@@ -95,17 +118,16 @@ class ProjectForm extends FormBase {
 			'#type' => 'textfield',
 			'#title' => $this->t('Project Name'),
 			'$description' => 'Project Name',
-			'#required' => FALSE
+			'#required' => TRUE,
 		];
 		
 		$form['agreement_number'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Agreement Number'),
 			'$description' => 'Agreement Number',
-			'#required' => FALSE
+			'#required' => TRUE,
 		];
 
-		// Start: Taxonomy term loaded dynamically example
 		$grant_type_options = $this->getGrantTypeOptions();
 		
 		$form['grant_type'] = [
@@ -113,15 +135,14 @@ class ProjectForm extends FormBase {
 			'#title' => $this
 			  ->t('Grant Type'),
 			'#options' => $grant_type_options,
-			'#required' => FALSE
+			'#required' => TRUE,
 		];
-		// End: Taxonomy term loaded dynamically example
 
 		$form['funding_amount'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Funding Amount'),
 			'$description' => 'Funding Amount',
-			'#required' => FALSE
+			'#required' => TRUE,
 		];
 
 		$resource_concern_options = $this->getResourceConcernOptions();
@@ -129,15 +150,14 @@ class ProjectForm extends FormBase {
 		  '#type' => 'checkboxes',
 		  '#title' => t('Possible Resource Concerns'),
 		  '#options' => $resource_concern_options,
-		  '#required' => FALSE,
-		  '#required' => FALSE,
+		  '#required' => TRUE,
 		];
 
 		$form['project_summary'] = [
 			'#type' => 'textarea',
 			'#title' => $this->t('Project Summary'),
 			'$description' => 'Project Summary',
-			'#required' => FALSE
+			'#required' => TRUE,
 		];
 
 	}
@@ -195,9 +215,10 @@ class ProjectForm extends FormBase {
 		$awardee_options = $this->getAwardeeOptions();
 		$contact_name_options = $this->getAwardeeContactNameOptions();
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
+		$producer_options = $this->getProducerOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2217 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 3</h4></div>'
 		];
 
 		$form['organization_name'] = [
@@ -295,7 +316,7 @@ class ProjectForm extends FormBase {
 
 		/* Producers Information */
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 5 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 3 of 3</h4></div>'
 		];
 
 
@@ -309,15 +330,15 @@ class ProjectForm extends FormBase {
 			}
 			
 			$form['producers_fieldset'][$i]['producer_name'] = [
-				'#type' => 'textfield',
-				'#title' => $this
-				  ->t("Producer Name"),
-			];
-			$form['producers_fieldset'][$i]['new_line_container'] = [
-				'#markup' => '<div class="clear-space"></div>'
+				'#type' => 'select',
+				'#title' => $this->t("Producer Name"),
+				'#options' => $producer_options,
+				'#prefix' => ($num_producer_lines > 1 && i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+				'#suffix' => '</div>',  
 			];
 
-			if($num_producer_lines > 1 && $i!=0){
+
+			if($num_producer_lines > 1 && $i != 0){
 				$form['producers_fieldset'][$i]['actions'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
@@ -332,6 +353,10 @@ class ProjectForm extends FormBase {
 					'#suffix' => '</div>',
 				];
 			}
+
+			$form['producers_fieldset'][$i]['new_line_container'] = [
+				'#markup' => '<div class="clear-space"></div>'
+			];
 		}
 		$form['producers_fieldset']['actions']['add_producer'] = [
 			'#type' => 'submit',
@@ -371,8 +396,9 @@ class ProjectForm extends FormBase {
 		];
 
 		$form['actions']['cancel'] = [
-			'#type' => 'submit',
+			'#type' => 'button',
 			'#value' => $this->t('Cancel'),
+			'#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
 		];
 		return $form;
 	}
@@ -384,20 +410,74 @@ class ProjectForm extends FormBase {
 	return;
   }
 
+
+  public function getFormEntityMapping(){
+	  $mapping = [];
+
+	  $mapping['project_name'] = 'name';
+	  $mapping['agreement_number'] = 'field_project_agreement_number';
+	  $mapping['grant_type'] = 'field_grant_type';
+	  $mapping['funding_amount'] = 'field_funding_amount';
+	  $mapping['project_summary'] = 'field_summary';
+	  $mapping['organization_name'] = 'field_awardee';
+
+      return $mapping;
+
+  }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+	$values = $form_state->getValues();
 
-	if($form_state['values']['op'] == t('Save')){
-		$this
-		->messenger()
-		->addStatus($this
-		->t('Form submitted for project @project_name', [
-			'@project_name' => $form['project_name']['#value'],
-		])
-		);
+	$mapping = $this->getFormEntityMapping();
+
+	$project_submission = [];
+	
+	$project_submission['type'] = 'project';
+
+	// Single value fields can be mapped in
+	foreach($mapping as $form_elem_id => $entity_field_id){
+		// If mapping not in form or value is empty string
+		if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+			continue;
+		}
+		$project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
 	}
+	// Read from multivalued checkbox
+	$checked_resource_concerns = Checkboxes::getCheckedCheckboxes($form_state->getValue('resource_concern'));
+
+	$project_submission['field_resource_concerns'] = $checked_resource_concerns;
+	
+	$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions'
+	$num_contacts = count($form['names_fieldset']) - 1; // As above
+
+
+	$producers = [];
+	for( $i = 0; $i < $num_producers; $i++ ){
+		$producers[$i] = $form['producers_fieldset'][$i]['producer_name']['#value'];
+	}
+
+	$project_submission['field_producer_contact_name'] = $producers;
+
+
+	$contact_eauth_ids = [];
+	$contact_types = [];
+	for( $i = 0; $i < $num_contacts; $i++ ){
+		$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+		$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+	}
+
+	$project_submission['field_awardee_eauth_id'] = $contact_eauth_ids;
+	$project_submission['field_awardee_contact_type'] = $contact_types;
+
+
+	// dpm($producers);
+	
+	$project = Asset::create($project_submission);
+	$project -> save();
+
   }
 
   /**

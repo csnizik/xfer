@@ -17,7 +17,7 @@ div#block-gin-content {
     border-radius: 0;
 }
 
-#block-gin-content form #edit-resource-concerns{
+#edit-resource-concern{
 	max-height: 396px;
 	max-width: 630px;
 	overflow-y: overlay;

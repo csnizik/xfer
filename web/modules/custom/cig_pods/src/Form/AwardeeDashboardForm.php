@@ -7,15 +7,11 @@ Use Drupal\Core\Form\FormStateInterface;
 
 class AwardeeDashboardForm extends FormBase {
 
- 
-    /**
-    * {@inheritdoc}
-    */
-    public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
-    $form['form_title'] = [
-        '#markup' => '<h1 id="form-title">Dashboard</h1>'
-    ]; 
+   /**
+   * {@inheritdoc}
+   */
+	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
@@ -32,7 +28,7 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Lab Test Method'),
                 ],
 				'attributes' => [
-					'class' => 'something',
+					'class' => 'something'
 				],
 				'#prefix' => ($num_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
@@ -46,8 +42,7 @@ class AwardeeDashboardForm extends FormBase {
         '#markup' => '<h2 id="form-subtitle">Manage Assets</h2>'
     ]; 
 
-     
-       $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
+     $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
        $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -58,55 +53,87 @@ class AwardeeDashboardForm extends FormBase {
     $form['awardee_proj'] = [
       '#type' => 'button',
       '#value' => $this->t('Projects(s): '.$entityCount[0]),
-      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
+      '#submit' => ['::projectRedirect'],
     ]; 
 
     $form['awardee_org'] = [
       '#type' => 'button',
       '#value' => $this->t('Awardee Organization(s): '.$entityCount[1]),
-      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
+      '#submit' => ['::orgRedirect'],
     ]; 
+	
 
     $form['awardee_prod'] = [  
       '#type' => 'button',
       '#value' => $this->t('Producer(s): '.$entityCount[2]),
-      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
+      '#submit' => ['::producerRedirect'],
     ]; 
 
-    $form['actions']['awardee_lab'] = [
-      '#type' => 'button',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
-      '#attributes' => array('onClick' => 'window.location.href="create/producer"'),
+		$form['awardee_lab'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Lab Test Method(a): '.$entityCount[3]),
+      '#submit' => ['::labRedirect'],
     ]; 
+		
+		return $form;
+	}
 
-        return $form;
+  private function pageRedirect (FormStateInterface $form_state, string $path) {
+     $match = [];
+    $path2 =  $path;
+    $router = \Drupal::service('router.no_access_checks');
 
+    try {
+      $match = $router->match($path); 
     }
-    
-
-    /**
-    * {@inheritdoc}
-    */
-    public function validateForm(array &$form, FormStateInterface $form_state){
-        return;
+    catch (\Exception $e) {
+      // The route using that path hasn't been found,
+      // or the HTTP method isn't allowed for that route.
     }
+   $form_state->setRedirect($match["_route"]);
+  }
 
-    /**
-    * {@inheritdoc}
-    */
-    public function getFormId() {
-        return 'awardee_dashboard';
-    }
+  public function projectRedirect (array &$form, FormStateInterface $form_state) {
+   pageRedirect($form_state, "/assets/project");
+}
+public function orgRedirect (array &$form, FormStateInterface $form_state) {
+   pageRedirect($form_state, "/assets/awardee");
+}
+public function producerRedirect (array &$form, FormStateInterface $form_state) {
+   pageRedirect($form_state, "/assets/producer");
+}
+  public function labRedirect (array &$form, FormStateInterface $form_state) {
+   pageRedirect($form_state, "/assets/lab_testing_profile");
+}
 
-    /**
-    * {@inheritdoc}
-    */
-    public function submitForm(array &$form, FormStateInterface $form_state) {
-        $this
-            ->messenger()
-            ->addStatus($this
-            ->t('Form submitted for  @_name', [
-            '@_name' => $form['_name']['#value'],
-        ]));
-    }
+  /**
+   * {@inheritdoc}
+   */
+  public function validateForm(array &$form, FormStateInterface $form_state){
+    echo "<script>console.log('validate form' );</script>";
+    //window.location.assign("/create/producer");
+	return true;
+}
+
+  /**
+   * {@inheritdoc}
+   */
+   public function submitForm(array &$form, FormStateInterface $form_state) {
+
+
+
+	$this
+	  ->messenger()
+	  ->addStatus($this
+	  ->t('Form submitted for entities_fieldset @entities_fieldset', [
+	  '@entities_fieldset' => $form['entities_fieldset']['#value'],
+	]));
+   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getFormId() {
+    return 'awardee_dashboard_form';
+  }
 }

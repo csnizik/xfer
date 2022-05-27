@@ -71,7 +71,7 @@ class AwardeeDashboardForm extends FormBase {
 
 		$form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(a): '.$entityCount[3]),
+      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
       '#submit' => ['::labRedirect'],
     ]; 
 		

@@ -51,20 +51,20 @@ class AwardeeDashboardForm extends FormBase {
       }
 
     $form['awardee_proj'] = [
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => $this->t('Projects(s): '.$entityCount[0]),
       '#submit' => ['::projectRedirect'],
     ]; 
 
     $form['awardee_org'] = [
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => $this->t('Awardee Organization(s): '.$entityCount[1]),
       '#submit' => ['::orgRedirect'],
     ]; 
 	
 
     $form['awardee_prod'] = [  
-      '#type' => 'button',
+      '#type' => 'submit',
       '#value' => $this->t('Producer(s): '.$entityCount[2]),
       '#submit' => ['::producerRedirect'],
     ]; 
@@ -84,7 +84,7 @@ class AwardeeDashboardForm extends FormBase {
     $router = \Drupal::service('router.no_access_checks');
 
     try {
-      $match = $router->match($path); 
+      $match = $router->match($path2); 
     }
     catch (\Exception $e) {
       // The route using that path hasn't been found,
@@ -93,7 +93,7 @@ class AwardeeDashboardForm extends FormBase {
    $form_state->setRedirect($match["_route"]);
   }
 
-  public function projectRedirect (array &$form, FormStateInterface $form_state) {
+public function projectRedirect (array &$form, FormStateInterface $form_state) {
    pageRedirect($form_state, "/assets/project");
 }
 public function orgRedirect (array &$form, FormStateInterface $form_state) {
@@ -102,7 +102,7 @@ public function orgRedirect (array &$form, FormStateInterface $form_state) {
 public function producerRedirect (array &$form, FormStateInterface $form_state) {
    pageRedirect($form_state, "/assets/producer");
 }
-  public function labRedirect (array &$form, FormStateInterface $form_state) {
+public function labRedirect (array &$form, FormStateInterface $form_state) {
    pageRedirect($form_state, "/assets/lab_testing_profile");
 }
 
@@ -110,24 +110,13 @@ public function producerRedirect (array &$form, FormStateInterface $form_state) 
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state){
-    echo "<script>console.log('validate form' );</script>";
-    //window.location.assign("/create/producer");
-	return true;
+	return ;
 }
 
   /**
    * {@inheritdoc}
    */
    public function submitForm(array &$form, FormStateInterface $form_state) {
-
-
-
-	$this
-	  ->messenger()
-	  ->addStatus($this
-	  ->t('Form submitted for entities_fieldset @entities_fieldset', [
-	  '@entities_fieldset' => $form['entities_fieldset']['#value'],
-	]));
    }
 
   /**

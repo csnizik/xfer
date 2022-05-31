@@ -2,3 +2,8 @@ producer_entry_form:
   css:
     theme:
       css/producer.css: {}
+
+admin_details_display:
+  css:
+    theme:
+      css/admin-details-display.css: {}

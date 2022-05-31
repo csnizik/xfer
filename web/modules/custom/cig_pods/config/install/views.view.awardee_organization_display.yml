@@ -1,4 +1,4 @@
-uuid: 5c0b2812-15f5-42e2-82d6-a128d7c754be
+uuid:
 langcode: en
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
     - asset
     - options
 _core:
-  default_config_hash: 7I5A5FmGNPOraNbBFf5XmnaGAMiDVC3lQYLvpdK8jYk
+  default_config_hash: 
 id: awardee_organization_display
 label: 'Awardee Organization Display'
 module: views

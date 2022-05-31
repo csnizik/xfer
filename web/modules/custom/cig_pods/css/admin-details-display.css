@@ -1,0 +1,143 @@
+.a{
+    --colorGinAppBackgroundRGB:0,0,0;
+}
+
+.admin-details-display table th, td {
+    background-color: white;
+}
+
+.view-content {
+    background-color: white;
+    margin-top: -25px;
+    padding-left: 40px;
+}
+
+.layout-container.region-sticky__items {
+    height: 75px;
+}
+
+h1.page-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 700;
+    display: block;
+    /*background-color: blue;*/
+    padding-left: 50px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    display: block;
+    height: 26px;
+    transition: none;
+    width: 100%;
+}
+div#block-gin-page-title {
+    height: 75px;
+}
+
+table  {
+    border-bottom: 1px solid red;  /*not working*/
+    --colorGinTableBorder:rgba(0,0,0,0); /* working*/
+}
+
+.layout-container::after {
+    display: none;
+}
+
+table.views-table.views-view-table.cols-3 {
+    padding-left: 40px;
+    width:100%;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+.sticky-shadow{
+    display: none;
+} 
+.content-header {
+    display: none;
+}
+.page-content {
+    margin-top: -40px;
+}
+.gin-secondary-toolbar.layout-container {
+    display: none;
+}
+
+.layout-container
+{
+    background-color: white;
+    margin-left: 0;
+    width: 650px
+}
+
+div#block-farm-powered {
+    display: none;
+}
+
+.page-content clearfix::after {
+    display: none;
+}
+
+/*td {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 2rem;
+}
+*/
+
+/*a.views-field.views-field-name {
+    color: #005fa2;
+
+}
+*/
+
+th.views-field.views-field-name {
+    width: max-content;
+    max-width: 250px;
+    min-width: 25px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 36px;
+    --colorGinPrimaryActive: #000000;
+}
+ 
+table.views-table.views-view-table.cols-3 {
+    --colorGinPrimaryActive: #000000;
+     width: auto;
+}
+
+td.views-field.views-field-name {
+    width: max-content;
+    max-width: 250px;
+    min-width: 25px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 36px;
+    --colorGinPrimary:#005fa2;
+}
+ 
+td.views-field.views-field-status {
+    width: 46px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 36px;
+}
+
+td.views-field.views-field-id { 
+    width: 46px;
+    height: 36px;
+    padding-right: 60px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/*
+.region-sticky {
+    height: 48px;
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+*/

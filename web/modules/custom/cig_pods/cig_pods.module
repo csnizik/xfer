@@ -16,6 +16,22 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/producer_entry_form';
 	}
+	if (isset($view) && ($view->storage->id() == 'display_project')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_details_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'producer_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_details_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'awardee_organization_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_details_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'lab_test_profiles_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_details_display';
+	}
 }
 
 function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {

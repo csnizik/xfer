@@ -1,4 +1,3 @@
-uuid: 
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
-  default_config_hash: 
 id: display_project
 label: display-project
 module: views

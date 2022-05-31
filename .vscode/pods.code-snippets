@@ -69,8 +69,8 @@
 
       "\nnamespace Drupal\\cig_pods\\Form;",
 
-      "\nUse Drupal\\Core\\FormBase;",
-      "Use Drupal\\Core\\FormStateInterface;",
+      "\nUse Drupal\\Core\\Form\\FormBase;",
+      "Use Drupal\\Core\\Form\\FormStateInterface;",
 
       "\nclass $TM_FILENAME_BASE extends FormBase {",
 

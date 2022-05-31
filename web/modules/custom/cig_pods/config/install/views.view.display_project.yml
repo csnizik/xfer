@@ -1,4 +1,4 @@
-uuid: baff875a-113c-454e-9b34-fb396eb82a94
+uuid: 
 langcode: en
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
     - asset
     - options
 _core:
-  default_config_hash: zbMqCH5GLUNggSHO7tntQoxMBtnGhKZzieGkRDzk-zU
+  default_config_hash: 
 id: display_project
 label: display-project
 module: views

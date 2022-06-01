@@ -333,7 +333,7 @@ class ProjectForm extends FormBase {
 				'#type' => 'select',
 				'#title' => $this->t("Producer Name"),
 				'#options' => $producer_options,
-				'#prefix' => ($num_producer_lines > 1 && i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+				'#prefix' => ($num_producer_lines > 1 && $i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 				'#suffix' => '</div>',  
 			];
 
@@ -378,16 +378,9 @@ class ProjectForm extends FormBase {
 			'#suffix' => '</div>',
 		];
 		
-		// $form['producer_contact_name'] = [
-		// 	'#type' => 'textfield',
-		// 	'#title' => $this->t('Producer Contact Name'),
-		// 	'$description' => 'Producer Contact Name',
-		// 	'#required' => TRUE
-		// ];
 		/* Producers Information Ends*/
 
 
-		// $this->buildProducerInformationSection($form, $form_state, $options);
 		$form_state->setCached(FALSE);
 
 		$form['actions']['save'] = [
@@ -403,10 +396,43 @@ class ProjectForm extends FormBase {
 		return $form;
 	}
 
+
+ /**
+  * Returns True if all values in array is unique, false otherwise
+  */
+  public function arrayValuesAreUnique($array){
+	$count_dict = array_count_values($array);
+
+	foreach($count_dict as $key => $value){
+		if($value != 1){
+			return False;
+		}
+	}
+	return True;
+
+  }
+
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state){
+	$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions' for the "Add Another Producer Button"
+
+	$producers = [];
+	for( $i = 0; $i < $num_producers; $i++ ){
+		$producer_id = $form['producers_fieldset'][$i]['producer_name']['#value'];
+		$producers[$i] = $producer_id; 
+	}
+	// Check $producers array for duplicate values
+	if (!$this->arrayValuesAreUnique($producers) ){
+		$form_state->setError(
+			$form['producers_fieldset'],
+			$this->t('Each Producer selection must be unique'),
+		);
+	}
+		// dpm($producers);
+	// dpm(strval($num_producers));
+	
 	return;
   }
 
@@ -473,8 +499,6 @@ class ProjectForm extends FormBase {
 	$project_submission['field_awardee_contact_type'] = $contact_types;
 
 
-	// dpm($producers);
-	
 	$project = Asset::create($project_submission);
 	$project -> save();
 

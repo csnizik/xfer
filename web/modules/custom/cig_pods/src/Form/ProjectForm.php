@@ -6,6 +6,7 @@ Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
+Use Drupal\Core\Url;
 
 
 
@@ -417,6 +418,7 @@ class ProjectForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state){
 	$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions' for the "Add Another Producer Button"
+	$num_contacts = count($form['names_fieldset']) - 1; // Minus 1 as above
 
 	$producers = [];
 	for( $i = 0; $i < $num_producers; $i++ ){
@@ -430,8 +432,20 @@ class ProjectForm extends FormBase {
 			$this->t('Each Producer selection must be unique'),
 		);
 	}
-		// dpm($producers);
-	// dpm(strval($num_producers));
+
+	$contact_names = [];
+	for($i = 0; $i < $num_contacts; $i++){
+		$contact_name_id = $form['names_fieldset'][$i]['contact_name']['#value'];
+		$contact_names[$i] = $contact_name_id;
+	}
+	
+	// Check $contact_names array for duplicate values
+	if( !$this->arrayValuesAreUnique($contact_names)){
+		$form_state->setError(
+			$form['names_fieldset'],
+			$this->t('Each contact name selection must be unique'),
+		);
+	}
 	
 	return;
   }
@@ -501,7 +515,10 @@ class ProjectForm extends FormBase {
 
 	$project = Asset::create($project_submission);
 	$project -> save();
+	$url = Url::fromRoute('farm.dashboard');
+	$form_state->setRedirectUrl($url);
 
+	return;
   }
 
   /**

@@ -71,25 +71,6 @@ class ProjectForm extends FormBase {
 		
 		return $resource_concern_options;
 	}
-
-	public function getGrantTypeOptions(){
-		$grant_type_options = [];
-		$grant_type_options[''] = '- Select -';
-
-		$grant_type_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-			[
-				'vid' => 'd_grant_type',
-			]
-		);
-
-		$grant_type_keys = array_keys($grant_type_terms);
-
-		foreach($grant_type_keys as $grant_type_key) {
-			$term = $grant_type_terms[$grant_type_key];
-			$grant_type_options[$grant_type_key] = $term -> getName();
-		}
-		return $grant_type_options;
-	}
 	
 	public function getProducerOptions() {
 		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
@@ -129,15 +110,6 @@ class ProjectForm extends FormBase {
 			'#required' => TRUE,
 		];
 
-		$grant_type_options = $this->getGrantTypeOptions();
-		
-		$form['grant_type'] = [
-			'#type' => 'select',
-			'#title' => $this
-			  ->t('Grant Type'),
-			'#options' => $grant_type_options,
-			'#required' => TRUE,
-		];
 
 		$form['funding_amount'] = [
 			'#type' => 'textfield',
@@ -456,7 +428,6 @@ class ProjectForm extends FormBase {
 
 	  $mapping['project_name'] = 'name';
 	  $mapping['agreement_number'] = 'field_project_agreement_number';
-	  $mapping['grant_type'] = 'field_grant_type';
 	  $mapping['funding_amount'] = 'field_funding_amount';
 	  $mapping['project_summary'] = 'field_summary';
 	  $mapping['organization_name'] = 'field_awardee';

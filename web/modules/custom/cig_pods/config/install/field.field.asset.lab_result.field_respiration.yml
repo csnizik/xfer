@@ -1,12 +1,9 @@
-uuid: d514c126-adb1-4151-b59d-999777132e1e
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_respiration
-_core:
-  default_config_hash: 0tDs9gyiY9SH9Dk3dZYMVmd4s039yqnd8w_Nqlw4hfo
 id: asset.lab_result.field_respiration
 field_name: field_respiration
 entity_type: asset

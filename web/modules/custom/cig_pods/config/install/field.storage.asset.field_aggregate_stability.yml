@@ -1,11 +1,8 @@
-uuid: d89a7505-31a5-4e8d-883c-13b35ba0cb31
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: m9hF6XiLGYOcLhKwA7WOEhXmUX6wY9U5kjFh0vnbj7U
 id: asset.field_aggregate_stability
 field_name: field_aggregate_stability
 entity_type: asset

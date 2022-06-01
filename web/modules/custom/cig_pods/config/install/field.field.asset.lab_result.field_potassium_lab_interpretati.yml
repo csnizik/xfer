@@ -1,4 +1,3 @@
-uuid: d2985629-5059-4caa-ae50-0581ceece262
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: od3nKSOyhq4lYL_1aRLjFMRKJZtU9zf3lO5wV5Yxsoo
 id: asset.lab_result.field_potassium_lab_interpretati
 field_name: field_potassium_lab_interpretati
 entity_type: asset

@@ -1,12 +1,9 @@
-uuid: 6b712416-b597-44f9-9ffb-ea22202bdca3
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_infiltration
-_core:
-  default_config_hash: X708-E4-k2AV1GXmEzHTPhvyh72zMDQzRem7E3GC-gU
 id: asset.lab_result.field_infiltration
 field_name: field_infiltration
 entity_type: asset

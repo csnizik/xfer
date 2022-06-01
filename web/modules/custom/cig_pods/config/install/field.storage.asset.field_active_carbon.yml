@@ -1,11 +1,8 @@
-uuid: 37c0a552-1200-46a4-9ef3-b6bbf98261a4
 langcode: en
 status: true
 dependencies:
   module:
     - asset
-_core:
-  default_config_hash: hXt6A3MBLFv5NYh_ifo2A3erA414uZhR6wF8IMCSsq4
 id: asset.field_active_carbon
 field_name: field_active_carbon
 entity_type: asset

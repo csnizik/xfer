@@ -1,12 +1,9 @@
-uuid: e886b54e-acd3-481b-a26f-89784d1a316d
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - cig_pods
-_core:
-  default_config_hash: IljQDnAsPNZaEuCjaE1S9uCM4SzBUilIG0dDCCdWPD0
 id: soil_health_demo_trial
 label: 'Laboratory Methods'
 description: 'Laboratory Methods'

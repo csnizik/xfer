@@ -1,12 +1,9 @@
-uuid: 66a0a19d-fb7a-4685-a942-ede1760813a7
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_total_nitrogen_by_dry_comb
-_core:
-  default_config_hash: z5EQvJ7YA0pdJtigtxHMoqpzTT8M5yNh30WkPK71N7A
 id: asset.lab_result.field_total_nitrogen_by_dry_comb
 field_name: field_total_nitrogen_by_dry_comb
 entity_type: asset

@@ -1,12 +1,9 @@
-uuid: 4dab9ac7-4ac5-4a28-9e7a-64d50020fe00
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - cig_pods
-_core:
-  default_config_hash: CwIKlouG9JaaDq4JD1a7jSEAb91fg215gXTePiiOyU4
 name: 'Project Scale'
 vid: d_project_scale
 description: 'A list of Project Scales'

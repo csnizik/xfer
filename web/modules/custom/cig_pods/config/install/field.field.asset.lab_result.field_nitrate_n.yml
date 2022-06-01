@@ -1,12 +1,9 @@
-uuid: dc5e1005-9712-41cd-be18-602a66628096
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_nitrate_n
-_core:
-  default_config_hash: B9HFfjJX440i0dLUyD0SG4D3qdm8hR6of9qJa6v0zwE
 id: asset.lab_result.field_nitrate_n
 field_name: field_nitrate_n
 entity_type: asset

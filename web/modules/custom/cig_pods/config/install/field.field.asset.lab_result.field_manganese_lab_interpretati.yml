@@ -1,4 +1,3 @@
-uuid: f31dd477-295d-4ffa-a255-a2671d96ed6d
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: 98Fy4v42cyN3XayGZ35tts3sWaoLKVH8h6P3x_Jlb9g
 id: asset.lab_result.field_manganese_lab_interpretati
 field_name: field_manganese_lab_interpretati
 entity_type: asset

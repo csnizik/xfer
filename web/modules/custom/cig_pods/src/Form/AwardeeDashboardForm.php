@@ -30,10 +30,6 @@ class AwardeeDashboardForm extends FormBase {
                   'ltm' => $this
 					->t('Lab Test Method'),
                 ],
-				// 'attributes' => [
-				// 	'class' => 'something',
-        //   'id' => 'awardee_select_nav'
-				// ],
 				'#prefix' => '<div id="top-form">'
 			];
 

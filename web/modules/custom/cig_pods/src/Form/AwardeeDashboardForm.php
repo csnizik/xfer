@@ -13,6 +13,9 @@ class AwardeeDashboardForm extends FormBase {
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
+    $form['#attached']['library'][] = 'cig_pods/awardee_dashboard_form';
+
+
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [
@@ -27,19 +30,21 @@ class AwardeeDashboardForm extends FormBase {
                   'ltm' => $this
 					->t('Lab Test Method'),
                 ],
-				'attributes' => [
-					'class' => 'something'
-				],
-				'#prefix' => ($num_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
-		  		'#suffix' => '</div>',
+				// 'attributes' => [
+				// 	'class' => 'something',
+        //   'id' => 'awardee_select_nav'
+				// ],
+				'#prefix' => '<div id="top-form">'
 			];
 
     $form['form_body'] = [
-        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods and Producers using this tool.</p>'
+        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods and Producers using this tool.</p>',
+        '#suffix' => '</div>',
     ]; 
 
     $form['form_subtitle'] = [
-        '#markup' => '<h2 id="form-subtitle">Manage Assets</h2>'
+        '#markup' => '<h2 id="form-subtitle">Manage Assets</h2>',
+        	'#prefix' => '<div class="bottom-form">',
     ]; 
 
      $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
@@ -52,8 +57,9 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_proj'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Projects(s): '.$entityCount[0]),
+      '#value' => $this->t('Projects(ms): '.$entityCount[0]),
       '#submit' => ['::projectRedirect'],
+      '#class="button-container">',
     ]; 
 
     $form['awardee_org'] = [
@@ -65,7 +71,7 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_prod'] = [  
       '#type' => 'submit',
-      '#value' => $this->t('Producer(s): '.$entityCount[2]),
+      '#value' => $this->t('Producer(sp): '.$entityCount[2]),
       '#submit' => ['::producerRedirect'],
     ]; 
 
@@ -73,6 +79,7 @@ class AwardeeDashboardForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
       '#submit' => ['::labRedirect'],
+      '#suffix' => '</div>',
     ]; 
 		
 		return $form;
@@ -94,7 +101,7 @@ class AwardeeDashboardForm extends FormBase {
   }
 
 public function projectRedirect (array &$form, FormStateInterface $form_state) {
-   pageRedirect($form_state, "/assets/project");
+   $this->pageRedirect($form_state, "/assets/project");
 }
 public function orgRedirect (array &$form, FormStateInterface $form_state) {
    pageRedirect($form_state, "/assets/awardee");

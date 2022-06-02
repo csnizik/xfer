@@ -1,4 +1,3 @@
-uuid: bcbc8b39-5b94-4be1-8412-0854de3f61e5
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
-  default_config_hash: KzXMBuzQeh0Y_qQTunR1ersNc04LuP_4pFSxRJizT5Q
 id: awardee_organization_display
 label: 'Awardee Organization Display'
 module: views

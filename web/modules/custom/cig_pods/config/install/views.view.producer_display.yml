@@ -1,4 +1,3 @@
-uuid: d3560178-0538-4919-95a1-bb2cf759869b
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
-  default_config_hash: FRYYgZ3KGdt4Z9tK5sVoTh8523gBN-jFmS8meGdQsPM
 id: producer_display
 label: 'Producer Display'
 module: views

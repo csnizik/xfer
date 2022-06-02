@@ -1,12 +1,9 @@
-uuid: 5994c10a-52ca-4645-95e3-53e7118e63fd
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_boron
-_core:
-  default_config_hash: x7AOi1jtOUtWmj9K0fe8bDdXtl6XWSVUu_eaTxZOixs
 id: asset.lab_result.field_boron
 field_name: field_boron
 entity_type: asset

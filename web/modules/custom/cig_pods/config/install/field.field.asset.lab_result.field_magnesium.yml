@@ -1,12 +1,9 @@
-uuid: 60718e78-9971-49bc-b998-21344c6eb5e9
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.lab_result
     - field.storage.asset.field_magnesium
-_core:
-  default_config_hash: Q5WDVkUUfTPY2ULIRuKXFpB7OoUWclkmFUl4bG8i654
 id: asset.lab_result.field_magnesium
 field_name: field_magnesium
 entity_type: asset

@@ -1,4 +1,3 @@
-uuid: ae4c3312-dec3-4ef0-baf1-08fb1d27ae0d
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: K_sFGeBDbH2DgFxaCkmqPGN368R8AYn5a4caBV3A0a4
 id: asset.soil_health_sample.field_plant_stage_at_sampling
 field_name: field_plant_stage_at_sampling
 entity_type: asset

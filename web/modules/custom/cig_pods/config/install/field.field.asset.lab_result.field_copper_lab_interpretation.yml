@@ -1,4 +1,3 @@
-uuid: 36521f85-6a1e-4244-81a3-89e324f48cf6
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: oRBShBu6KPzQNPgiDqeyA0D3LjTusoyOkyBAcCEnykA
 id: asset.lab_result.field_copper_lab_interpretation
 field_name: field_copper_lab_interpretation
 entity_type: asset

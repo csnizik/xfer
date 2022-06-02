@@ -107,21 +107,43 @@ class Project extends FarmAssetType {
             'target_type' => 'asset',
             'target_bundle' => 'awardee',
             'required' => FALSE,
-            'multiple' => TRUE,
+            'multiple' => FALSE,
             'form_display_options' => [
                'label' => 'inline',
                'type' => 'options_select',
             ],
-         'field_producer_contact_name' => [
+         ],
+         'field_awardee_eauth_id' => [
             'type' => 'string',
-            'label' => 'Producer Contact Name',
+            'label' => 'Awardee Contact eAuth ID',
             'multiple' => TRUE,
             'required' => FALSE,
-
-         ]
-         ]
-
-
+         ],
+         'field_awardee_contact_type' => [
+               'type'  => 'entity_reference',
+               'label' => 'Awardee Contact Types',
+               'target_type' => 'taxonomy_term',
+               'target_bundle' => 'd_contact_type',
+               'handler' => 'default',
+               'required' => FALSE,
+               'multiple' => TRUE,
+               'form_display_options' => [
+                  'label' => 'inline',
+                  'type' => 'options_select',
+               ],
+         ],
+         'field_producer_contact_name' => [
+            'type' => 'entity_reference',
+            'label' => 'Producer Contact Name',
+            'target_type' => 'asset',
+            'target_bundle' => 'producer',
+            'multiple' => TRUE,
+            'required' => FALSE,
+            'form_display_options' => [
+               'label' => 'inline',
+               'type' => 'options_select',
+            ],
+         ],
       ];
       
       $farmFieldFactory = new FarmFieldFactory();

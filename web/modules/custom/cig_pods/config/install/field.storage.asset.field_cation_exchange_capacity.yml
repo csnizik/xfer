@@ -1,12 +1,9 @@
-uuid: 8af8f40b-a16d-4930-aa50-d25430df9b68
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-_core:
-  default_config_hash: HvegIDbAyiTj7xlFwNOL6VRtSv2o4pg1qVKC3cpVTpY
 id: asset.field_cation_exchange_capacity
 field_name: field_cation_exchange_capacity
 entity_type: asset

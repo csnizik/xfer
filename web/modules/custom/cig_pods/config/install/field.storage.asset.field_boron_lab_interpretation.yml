@@ -1,12 +1,9 @@
-uuid: 4de6dc37-5b88-455d-a7cc-37d47e81da1f
 langcode: en
 status: true
 dependencies:
   module:
     - asset
     - taxonomy
-_core:
-  default_config_hash: jkvJH7EX5dkfW9mUg8O1r3hjjSM33GYiGifgK2EwUNY
 id: asset.field_boron_lab_interpretation
 field_name: field_boron_lab_interpretation
 entity_type: asset

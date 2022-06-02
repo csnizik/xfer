@@ -1,4 +1,3 @@
-uuid: 61a72c72-a6d1-4705-a8d1-874f086d292f
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: 91eSwd2jmVKq4fPPWrhRdobnM-h3y58xthvMKzECmkI
 id: asset.lab_result.field_sulfur_lab_interpretation
 field_name: field_sulfur_lab_interpretation
 entity_type: asset

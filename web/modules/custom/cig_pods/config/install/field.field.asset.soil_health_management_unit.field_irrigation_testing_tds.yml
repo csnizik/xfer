@@ -1,12 +1,9 @@
-uuid: 78f6dcd6-ec7e-4454-8e05-9b1a515b8dc4
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.soil_health_management_unit
     - field.storage.asset.field_irrigation_testing_tds
-_core:
-  default_config_hash: tMWEt8PSGGprXSa4ZUwv_DVZiQXQm-aUZNhQ_FDc630
 id: asset.soil_health_management_unit.field_irrigation_testing_tds
 field_name: field_irrigation_testing_tds
 entity_type: asset

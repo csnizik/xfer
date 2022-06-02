@@ -4,6 +4,20 @@ cig_pods.first_page:
     _controller: '\Drupal\cig_pods\Controller\FirstPageController::content'
     _title: "Hello World!"
 
+cig_pods.project_form:
+  path: "/create/project"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\ProjectForm'
+  requirements:
+    _permission: "access content"
+
+cig_pods.awardee_organization_info_form:
+  path: "/create/awardee_org"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
+  requirements:
+    _permission: "access content"
+
 cig_pods.producer_form:
   path: "/create/producer"
   defaults:
@@ -17,5 +31,21 @@ cig_pods.awardee_dashboard_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
     _title: "Dashboard"
+  requirements:
+    _permission: "access content"
+
+cig_pods.lab_testing_profile_form:
+  path: "/create/profile"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabTestingProfileForm'
+    _title: "Create new Lab Testing Profile"
+  requirements:
+    _permission: "access content"
+
+cig_pods.awardee_form:
+  path: "/create/awardee"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AwardeeForm'
+    _title: "Create new Awardee"
   requirements:
     _permission: "access content"

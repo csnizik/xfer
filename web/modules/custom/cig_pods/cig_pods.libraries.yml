@@ -1,3 +1,10 @@
+project_entry_form:
+  css:
+    theme:
+      css/project.css: {}
+  js:
+    js/project.js: {}
+
 producer_entry_form:
   css:
     theme:
@@ -9,3 +16,7 @@ awardee_dashboard_form:
   css:
     theme:
       css/awardee_dashboard.css: {}
+admin_details_display:
+  css:
+    theme:
+      css/admin-details-display.css: {}

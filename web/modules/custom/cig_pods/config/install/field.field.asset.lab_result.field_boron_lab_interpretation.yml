@@ -1,4 +1,3 @@
-uuid: 61c51483-e61d-458d-8f27-83644d3922e7
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: SiRHG1QXcgjF1owmBQRu-hU2iVBWOzlWaMe3ozOx9m0
 id: asset.lab_result.field_boron_lab_interpretation
 field_name: field_boron_lab_interpretation
 entity_type: asset

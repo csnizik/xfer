@@ -1,4 +1,3 @@
-uuid: ea2cceec-178f-4641-b4ae-1cf418ebd48c
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: d5WmZor3Zc7mTmx_sdrKkzPnM8BKkiM4xjr5bcZFfzg
 id: asset.lab_result.field_iron_lab_interpretation
 field_name: field_iron_lab_interpretation
 entity_type: asset

@@ -1,4 +1,3 @@
-uuid: eebe008a-774c-4748-bdcd-712aaf21c30f
 langcode: en
 status: true
 dependencies:
@@ -13,8 +12,6 @@ third_party_settings:
     circular_reference: false
     circular_reference_deep: false
     duplicate_reference: false
-_core:
-  default_config_hash: UoD3-zMTYfp5RqRFOP1txVJf3zxLgBAynATDxs7gF6c
 id: asset.lab_result.field_molybdenum_lab_interpretat
 field_name: field_molybdenum_lab_interpretat
 entity_type: asset

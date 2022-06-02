@@ -1,4 +1,3 @@
-uuid: 7a3303a4-e3ed-4347-a048-b25f09bc878f
 langcode: en
 status: true
 dependencies:
@@ -7,8 +6,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
-  default_config_hash: 3PKo-9VQ1PROBUQbXSNWSF_neO1i4W4L82mehSP-GXQ
 id: lab_test_profiles_display
 label: 'Lab Test Profiles Display'
 module: views

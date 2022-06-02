@@ -21,13 +21,13 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "producer";
       break;
     case "awo":
-      formPage = "producer";
+      formPage = "awardee";
       break;
     case "proj":
-      formPage = "producer";
+      formPage = "project";
       break;
     case "ltm":
-      formPage = "producer";
+      formPage = "profile";
       break;
     default:
       formPage = "producer";

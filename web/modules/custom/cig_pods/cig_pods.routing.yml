@@ -50,6 +50,14 @@ cig_pods.awardee_form:
   requirements:
     _permission: "access content"
 
+cig_pods.lab_test_profiles_form:
+  path: "/create/lab_test_profiles"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabTestProfilesForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:

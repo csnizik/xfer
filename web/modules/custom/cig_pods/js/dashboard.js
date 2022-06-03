@@ -21,7 +21,7 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "producer";
       break;
     case "awo":
-      formPage = "awardee";
+      formPage = "awardee_org";
       break;
     case "proj":
       formPage = "project";

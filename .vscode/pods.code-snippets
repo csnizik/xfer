@@ -30,7 +30,16 @@
     "description": "PODS textfield"
   },
 
-  "PODS Textfield": {
+  "PODS Comment": {
+    "scope": "php",
+    "prefix": "pdcm",
+    "body": [
+      "echo(\"<script>console.log('$1: \" . json_encode($2) . \"');</script>\"); $0"
+    ],
+    "description": "PODS comment"
+  },
+
+  "PODS Select": {
     "scope": "php",
     "prefix": "pdsl",
     "body": [

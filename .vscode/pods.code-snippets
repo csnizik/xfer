@@ -30,6 +30,20 @@
     "description": "PODS textfield"
   },
 
+  "PODS Textfield": {
+    "scope": "php",
+    "prefix": "pdsl",
+    "body": [
+      "\\$form['$1'] = [",
+      "\t'#type' => 'select',",
+      "\t'#title' => \\$this->t('$2'),",
+      "\t'#options' => '$3',",
+      "\t'#required' => TRUE",
+      "]; $0"
+    ],
+    "description": "PODS select"
+  },
+
   "PODS Submit": {
     "scope": "php",
     "prefix": "pdsub",

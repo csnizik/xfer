@@ -15,7 +15,12 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['#attached']['library'][] = 'cig_pods/awardee_dashboard_form';
 
+$form['h2'] = [
+  '#markup' => 'Dashboard',
+  	'#prefix' => '<div id="title">',
+     '#suffix' => '</div>',
 
+]; 
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [

@@ -70,3 +70,10 @@ select.form-select.form-element.form-element--type-select {
   font-size: 16px;
   font-weight: 600;
 }
+#title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #1b1b1b;
+  margin-left: -25px;
+  margin-bottom: 10px;
+}

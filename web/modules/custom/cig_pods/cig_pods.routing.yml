@@ -30,7 +30,7 @@ cig_pods.awardee_dashboard_form:
   path: "/create/awardee_dashboard"
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
-    _title: "Dashboard"
+    _title: ""
   requirements:
     _permission: "access content"
 

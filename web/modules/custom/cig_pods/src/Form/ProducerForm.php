@@ -91,9 +91,20 @@ class ProducerForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state){
 	return;
 }
-
+/**
+ * Deletes the producer that is currently being viewed.
+ */
 public function deleteProducer(array &$form, FormStateInterface $form_state){
-	dpm("hello");
+
+	// TODO: we probably want a confirm stage on the delete button. Implementations exist online
+	$producer_id = $form_state->get('producer_id');
+	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($producer_id);
+
+	$producer->delete();
+	$route = $this->pageLookup('/assets/producer');
+
+	$form_state->setRedirect($route);
+
 }
 
 

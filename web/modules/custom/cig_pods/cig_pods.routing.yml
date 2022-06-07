@@ -53,7 +53,7 @@ cig_pods.awardee_form:
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:
-    _form: '\Drupal\cig_pods\Form\ProducerEditForm'
+    _form: '\Drupal\cig_pods\Form\ProducerForm'
     _title: "Edit Producer"
   requirements:
     _permission: "access content"

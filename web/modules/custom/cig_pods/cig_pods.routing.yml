@@ -85,7 +85,7 @@ cig_pods.edit_awardee_form:
 cig_pods.edit_lab_test_form:
   path: "/edit/lab_testing_profile/{id}"
   defaults:
-    _form: '\Drupal\cig_pods\Form\ProducerEditForm'
-    _title: "Edit Producer"
+    _form: '\Drupal\cig_pods\Form\LabTestProfilesAdminForm'
+    _title: ""
   requirements:
     _permission: "access content"

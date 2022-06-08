@@ -11,22 +11,6 @@ Use Drupal\Core\Url;
 
 class ProducerForm extends FormBase {
 	
-	// Returns id of page given path
-	private function pageLookup(string $path) {
-		$match = [];
-	   $path2 =  $path;
-	   $router = \Drupal::service('router.no_access_checks');
-   
-	   try {
-		 $match = $router->match($path2);
-	   }
-	   catch (\Exception $e) {
-		 // The route using that path hasn't been found,
-		 // or the HTTP method isn't allowed for that route.
-	   }
-	   return $match['_route'];
-	 }
-   
 
    /**
    * {@inheritdoc}
@@ -40,14 +24,11 @@ class ProducerForm extends FormBase {
 			$form_state->set('operation','edit');
 			$form_state->set('producer_id',$id);
 			$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			// dpm($producer->getValues());
 		} else {
 			$form_state->set('operation','create');
 		}
 		
-
-		if($form_state->get('operation') == 'create'){
-			
-		}
 
 		// dpm($producer);
 
@@ -55,7 +36,7 @@ class ProducerForm extends FormBase {
 		$form['field_producer_first_name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Producer First Name'),
-			'#required' => TRUE,
+			'#required' => TRUE, // Do Not Change
 			'#default_value' => $producer_first_name_default_value,
 		];
 
@@ -63,21 +44,32 @@ class ProducerForm extends FormBase {
 		$form['field_producer_last_name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Producer Last Name'),
-			'#required' => TRUE,
+			'#required' => TRUE, // Do Not Change
 			'#default_value' => $producer_last_name_default_value,
 		]; 
 		
+		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
 		$form['actions']['send'] = [
 			'#type' => 'submit',
-			'#value' => $this->t('Send'),
+			'#value' => $button_save_label,
 		  ];
+		
+		$form['actions']['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			// '#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
+			'#submit' => ['::dashboardRedirect'],
+
+		];
 		
 
 		if($is_edit){
 			$form['actions']['delete'] = [
 				'#type' => 'submit',
 				'#value' => $this->t('Delete'),
-				'#submit' => ['::deleteProducer']
+				'#submit' => ['::deleteProducer'],
+				// '#prefix' => '<div class="remove-button-container">',
+				// '#suffix' => '</div>',
 			]; 			
 		}
 
@@ -101,10 +93,13 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($producer_id);
 
 	$producer->delete();
-	$route = $this->pageLookup('/assets/producer');
 
-	$form_state->setRedirect($route);
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
+}
+
+public function dashboardRedirect(array &$form, FormStateInterface $form_state){
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 }
 
 
@@ -135,10 +130,7 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 		$producer = Asset::create($producer_submission);
 		$producer->save();
 
-		$route = $this->pageLookup('/assets/producer');
-		$form_state->setRedirect($route);
-		// $url = Url::fromRoute($route);
-		// $form_state->setRedirectUrl($url);
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	} else {
 		$id = $form_state->get('producer_id');
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -152,8 +144,7 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 		$producer->set('name', $full_n);
 
 		$producer->save();
-		$route = $this->pageLookup('/assets/producer');
-		$form_state->setRedirect($route);
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
 	}
 	// Have to identify whether it is an edit or it is a create new

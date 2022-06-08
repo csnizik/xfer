@@ -486,8 +486,7 @@ class ProjectForm extends FormBase {
 
 	$project = Asset::create($project_submission);
 	$project -> save();
-	$url = Url::fromRoute('farm.dashboard');
-	$form_state->setRedirectUrl($url);
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
 	return;
   }

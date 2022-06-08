@@ -27,7 +27,7 @@ cig_pods.producer_form:
     _permission: "access content"
 
 cig_pods.awardee_dashboard_form:
-  path: "/create/awardee_dashboard"
+  path: "/pods_dashboard"
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
     _title: "Dashboard"
@@ -54,7 +54,6 @@ cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\ProducerForm'
-    _title: "Edit Producer"
   requirements:
     _permission: "access content"
 

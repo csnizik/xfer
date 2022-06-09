@@ -281,12 +281,13 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#value' => $this->t('Cancel'),
         '#submit' => ['::redirectAfterCancel'],
     ];
-
-     $form['actions']['delete'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Delete'),
-        '#submit' => ['::deleteLabTest'],
-    ];
+    if($is_edit){
+        $form['actions']['delete'] = [
+            '#type' => 'submit',
+            '#value' => $this->t('Delete'),
+            '#submit' => ['::deleteLabTest'],
+        ];
+    }
         return $form;
     }
 

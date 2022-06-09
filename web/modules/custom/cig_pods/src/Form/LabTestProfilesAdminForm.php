@@ -38,6 +38,12 @@ class LabTestProfilesAdminForm extends FormBase {
         return $match['_route'];
     }
 
+    //add to array once created in Asset/AssetType/LabTestingProfile
+    //'laboratory','aggregate_method', 'aggregate_unit', 'respiratory_incubation', 'respiratory_detection' 
+private function createElementNames(){
+  return array('name', 'ph_method', 'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method','iron_method','manganese_method', 'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method');
+
+}
     /**
     * {@inheritdoc}
     */
@@ -79,48 +85,59 @@ class LabTestProfilesAdminForm extends FormBase {
         '#markup' => '<h1>Lab Test Profiles</h1>',
     ]; 
 $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
-    $form['test_profile_name'] = [
+    $form['name'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Test Profile Name'),
         '#default_value' => $profile_name,
         '#required' => TRUE
     ]; 
 
+    // $laboratory_default_value = $is_edit ? $labTestProfile->get('laboratory')->target_id : NULL;
     // $form['laboratory'] = [
 	// 		'#type' => 'select',
 	// 		'#title' => 'Laboratory',
 	// 		'#options' => $lab,
+            // '#default_value' => $laboratory_default_value,
 	// 		'#required' => TRUE
 	// 	];
 
+    // $aggregate_method_method_default_value = $is_edit ? $labTestProfile->get('aggregate_method')->target_id : NULL;
     // $form['aggregate_method'] = [
 	// 		'#type' => 'select',
 	// 		'#title' => 'Aggregate Stability Method',
 	// 		'#options' => $agg_stab_method,
+            // '#default_value' => $aggregate_method_default_value,
 	// 		'#required' => TRUE
 	// 	];
 
+    // $aggregate_unit_default_value = $is_edit ? $labTestProfile->get('aggregate_unit')->target_id : NULL;
     // $form['aggregate_unit'] = [
 	// 		'#type' => 'select',
 	// 		'#title' => 'Aggregate Stability Unit',
 	// 		'#options' => $agg_stab_unit,
+            // '#default_value' => $aggregate_unit_default_value,
 	// 		'#required' => TRUE
 	// 	];
 
+    // $respiratory_incubation_default_value = $is_edit ? $labTestProfile->get('respiratory_incubation')->target_id : NULL;
     // $form['respiratory_incubation'] = [
 	// 		'#type' => 'select',
 	// 		'#title' => 'Respiration Incubation Days',
 	// 		'#options' => $sdhe,
+            // '#default_value' => $respiratory_incubation_default_value,
 	// 		'#required' => TRUE
 	// 	];
 
-    // $form['respiratory_detection'] = [
-	// 		'#type' => 'select',
-	// 		'#title' => 'Respiration Detection Method (unit ppm)',
-	// 		'#options' => $resp_detect,
-	// 		'#required' => TRUE
-	// 	];
-   $ph_method_default_value =  $is_edit ?  $labTestProfile->get('ph_method')->value : "";
+//     $respiratory_detection_default_value = $is_edit ? $labTestProfile->get('respiratory_detection')->target_id : NULL;
+//      $form['respiratory_detection'] = [
+// 			'#type' => 'select',
+// 			'#title' => 'Respiration Detection Method (unit ppm)',
+// 	 		'#options' => $resp_detect,
+//             '#default_value' => $respiratory_detection_default_value,
+// 	 		'#required' => TRUE
+// 	 	];
+//    $ph_method_default_value = $is_edit ? $labTestProfile->get('ph_method')->target_id : NULL;
+
     $form['ph_method'] = [
 			'#type' => 'select',
 			'#title' => 'pH Method',
@@ -128,8 +145,8 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
              '#default_value' => $ph_method_default_value,
 			'#required' => TRUE
 		];
-
-$electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('electroconductivity_method')->value : "";
+ 
+    $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('electroconductivity_method')->target_id : NULL;
     $form['electroconductivity_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Electroconductivity Method (EC (Unit dS/m))'),
@@ -137,95 +154,121 @@ $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('e
         '#default_value' => $electroconductivity_method_default_value,
         '#required' => TRUE
     ]; 
-
+ 
+    $nitrate_n_method_default_value =  $is_edit ?  $labTestProfile->get('nitrate_n_method')->target_id : NULL;
     $form['nitrate_n_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Nitrate-N Method (Unit ppm)'),
         '#options' => $nitrate_method,
+        '#default_value' => $nitrate_n_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $phosphorus_method_default_value =  $is_edit ?  $labTestProfile->get('phosphorus_method')->target_id : NULL;
     $form['phosphorus_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Phosphorus Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $phosphorus_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $potassium_method_default_value =  $is_edit ?  $labTestProfile->get('potassium_method')->target_id : NULL;
     $form['potassium_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Potassium Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $potassium_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $calcium_method_default_value =  $is_edit ?  $labTestProfile->get('calcium_method')->target_id : NULL;
     $form['calcium_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Calcium Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $calcium_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $magnesium_method_default_value =  $is_edit ?  $labTestProfile->get('magnesium_method')->target_id : NULL;
     $form['magnesium_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Magnesium Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $magnesium_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $sulfur_method_default_value =  $is_edit ?  $labTestProfile->get('sulfur_method')->target_id : NULL;
     $form['sulfur_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Sulfur Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $sulfur_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $iron_method_default_value =  $is_edit ?  $labTestProfile->get('iron_method')->target_id : NULL;
     $form['iron_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Iron Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $iron_method_default_value,
         '#required' => TRUE
     ]; 
 
+     $manganese_method_default_value =  $is_edit ?  $labTestProfile->get('manganese_method')->target_id : NULL;
     $form['manganese_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Manganese Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $manganese_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $copper_method_default_value =  $is_edit ?  $labTestProfile->get('copper_method')->target_id : NULL;
     $form['copper_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Copper Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $copper_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $zinc_method_default_value =  $is_edit ?  $labTestProfile->get('zinc_method')->target_id : NULL;
     $form['zinc_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Zinc Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $zinc_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $boron_method_default_value =  $is_edit ?  $labTestProfile->get('boron_method')->target_id : NULL;
     $form['boron_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Boron Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $boron_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $aluminum_method_default_value =  $is_edit ?  $labTestProfile->get('aluminum_method')->target_id : NULL;
     $form['aluminum_method'] = [
         '#type' => 'select',
         '#title' => $this->t('Aluminum Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $aluminum_method_default_value,
         '#required' => TRUE
     ]; 
 
+    $molybdenum_method_default_value =  $is_edit ?  $labTestProfile->get('molybdenum_method')->target_id : NULL;
     $form['molybdenum_method'] = [
         '#type' => 'select',
-        '#title' => $this->t('Molybdenum Methon (Unit ppm)'),
+        '#title' => $this->t('Molybdenum Method (Unit ppm)'),
         '#options' => $s_he_extract,
+        '#default_value' => $molybdenum_method_default_value,
         '#required' => TRUE
     ]; 
 
@@ -235,15 +278,35 @@ $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('e
     ]; 
 
     $form['actions']['cancel'] = [
-			'#type' => 'button',
-			'#value' => $this->t('Cancel'),
-			// '#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
+        '#type' => 'submit',
+        '#value' => $this->t('Cancel'),
+        '#submit' => ['::redirectAfterCancel'],
     ];
-   //dpm($form_state);
 
+     $form['actions']['delete'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Delete'),
+        '#submit' => ['::deleteLabTest'],
+    ];
         return $form;
-
     }
+
+    public function redirectAfterCancel(array $form, FormStateInterface $form_state){
+    dpm('redirect');
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
+
+    public function deleteLabTest(array &$form, FormStateInterface $form_state){
+
+    // TODO: we probably want a confirm stage on the delete button. Implementations exist online
+    $lab_test_id = $form_state->get('lab_test_id');
+    $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
+
+    $labTest->delete();
+
+    $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
+}
 
     /**
     * {@inheritdoc}
@@ -264,50 +327,32 @@ $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('e
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
         $profile_submission = [];
-    if($form_state->get('operation') == 'create'){
-        echo("<script>console.log('create');</script>"); 
-        // $profile_submission['laboratory'] = $form_state->getValue('laboratory');
-        // $profile_submission['aggregate_method'] = $form_state->getValue('aggregate_method');
-        // $profile_submission['aggregate_unit'] = $form_state->getValue('aggregate_unit');
-        // $profile_submission['respiratory_incubation'] = $form_state->getValue('respiratory_incubation');
-        // $profile_submission['respiratory_detection'] = $form_state->getValue('respiratory_detection');
-        $profile_submission['ph_method'] = $form_state->getValue('ph_method');
-        $profile_submission['electroconductivity_method'] = $form_state->getValue('electroconductivity_method');
-        $profile_submission['nitrate_n_method'] = $form_state->getValue('nitrate_n_method');
-        $profile_submission['phosphorus_method'] = $form_state->getValue('phosphorus_method');
-        $profile_submission['potassium_method'] = $form_state->getValue('potassium_method');
-        $profile_submission['calcium_method'] = $form_state->getValue('calcium_method');
-        $profile_submission['magnesium_method'] = $form_state->getValue('magnesium_method');
-        $profile_submission['sulfur_method'] = $form_state->getValue('nitrate_method');
-        $profile_submission['iron_method'] = $form_state->getValue('iron_method');
-        $profile_submission['manganese_method'] = $form_state->getValue('manganese_method');
-        $profile_submission['copper_method'] = $form_state->getValue('copper_method');
-        $profile_submission['zinc_method'] = $form_state->getValue('zinc_method');
-        $profile_submission['boron_method'] = $form_state->getValue('boron_method');
-        $profile_submission['aluminum_method'] = $form_state->getValue('aluminum_method');
-        $profile_submission['molybdenum_method'] = $form_state->getValue('molybdenum_method');
+        if($form_state->get('operation') === 'create'){
+            $elementNames = $this->createElementNames();
+            foreach($elementNames as $elemName){
+                $profile_submission[$elemName] = $form_state->getValue($elemName);
+            }
 
-        $profile_submission['type'] = 'lab_testing_profile';
-        $profile_submission['name'] = $form_state->getValue('test_profile_name');
+            $profile_submission['type'] = 'lab_testing_profile';
+            $profile = Asset::create($profile_submission);
+            $profile -> save();
 
-        $profile = Asset::create($profile_submission);
-	    $profile -> save();
-
-        $route = $this->pageLookup('/assets/lab_testing_profile');
-        $form_state->setRedirect($route);
+            $route = $this->pageLookup('/assets/lab_testing_profile');
+            $form_state->setRedirect($route);
 
         }else{
-             echo("<script>console.log('edit');</script>"); 
-        $id = $form_state->get('lab_test_id');
-        $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+            $id = $form_state->get('lab_test_id');
+            $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
-     
-        $labTestProfile->set('name', $form_state->getValue('test_profile_name'));
-
-        $labTestProfile->save();
-        $route = $this->pageLookup('/assets/lab_testing_profile');
-        $form_state->setRedirect($route);
-
+            $profile_assets = \Drupal::entityTypeManager()-> getStorage('asset')-> loadByProperties(['type' => 'lab_testing_profile']);
+            $elementNames = $this->createElementNames();
+		    foreach($elementNames as $elemName){
+                $labTestProfile->set($elemName, $form_state->getValue($elemName));
+            }
+	
+            $labTestProfile->save();
+            $route = $this->pageLookup('/assets/lab_testing_profile');
+            $form_state->setRedirect($route);
         }
      }
 }

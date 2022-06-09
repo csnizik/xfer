@@ -136,8 +136,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
 //             '#default_value' => $respiratory_detection_default_value,
 // 	 		'#required' => TRUE
 // 	 	];
-//    $ph_method_default_value = $is_edit ? $labTestProfile->get('ph_method')->target_id : NULL;
-
+   $ph_method_default_value = $is_edit ? $labTestProfile->get('ph_method')->target_id : NULL;
     $form['ph_method'] = [
 			'#type' => 'select',
 			'#title' => 'pH Method',

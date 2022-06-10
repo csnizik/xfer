@@ -23,11 +23,11 @@ class LabTestingProfile extends FarmAssetType {
 
     public function buildFieldDefinitions() {
 
-      // 
+      //
       $fields = parent::buildFieldDefinitions();
 
       // We do not add a "Name" field because we inherit that from the FarmAssetType class
-      
+
 
       $field_info = [
         // 'field_laboratory' => [
@@ -60,7 +60,7 @@ class LabTestingProfile extends FarmAssetType {
         //        'label' => 'inline',
         //        'type' => 'options_select',
         //     ]
-        // ],	
+        // ],
         'ph_method' => [
             'type'  => 'entity_reference',
             'label' => 'PH method',
@@ -345,10 +345,10 @@ class LabTestingProfile extends FarmAssetType {
                 'label' => 'inline',
                 'type' => 'options_select'
             ]
-		],		
+		],
 
       ];
-      
+
       $farmFieldFactory = new FarmFieldFactory();
 
 
@@ -364,7 +364,7 @@ class LabTestingProfile extends FarmAssetType {
       }
 
 
-      
+
       return $fields;
     }
 

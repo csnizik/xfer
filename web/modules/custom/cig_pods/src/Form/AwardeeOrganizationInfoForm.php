@@ -54,7 +54,6 @@ class AwardeeOrganizationInfoForm extends FormBase {
 
 
 		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
-		// $form['#attributes']['novalidate'] = 'novalidate';
 
 		$form['form_title'] = [
 			'#markup' => '<h1 id="form-title">Awardee Organization Information</h1>'

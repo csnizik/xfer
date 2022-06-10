@@ -1,0 +1,8 @@
+uuid: decbb996-d8d6-4c62-a8dc-04b0b18c6c75
+langcode: en
+status: true
+dependencies: {  }
+name: 'Respiration Incubation days'
+vid: d_respiration_incubation_days
+description: ''
+weight: 0

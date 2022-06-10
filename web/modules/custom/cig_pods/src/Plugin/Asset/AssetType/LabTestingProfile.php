@@ -345,7 +345,45 @@ class LabTestingProfile extends FarmAssetType {
                 'label' => 'inline',
                 'type' => 'options_select'
             ]
-		],		
+		],
+        // 'field_profile_laboratory' => [
+        //     'type' => 'entity_reference',
+        //     'label' => 'Profile Laboratory',
+        //     'target_type' => 'taxonomy_term',
+        //     'target_bundle' => 'd_laboratory',
+        //     'handler' => 'default',
+        //     'required' => FALSE,
+        //     'multiple' => FALSE,
+        // ],
+        // 'field_profile_aggregate_stability_method' => [
+        //     'type' => 'entity_reference',
+        //     'label' => 'Aggregate Stability Method',
+        //     'target_type' => 'taxonomy_term',
+        //     'target_bundle' => 'd_aggregate_stability_me',
+        //     'required' => FALSE,
+        //     'multiple' => FALSE,
+        // ],
+        // 'field_profile_aggregate_stability_unit' => [
+        //     'type' => 'entity_reference',
+        //     'label' => 'Aggregate Stability Unit',
+        //     'target_type' => 'taxonomy_term',
+        //     'target_bundle' => 'd_aggregate_stability_un',
+        //     'required' => FALSE,
+        //     'multiple' => FALSE
+        // ],
+        // 'field_profile_respiratory_incubation_days' => [
+        //     'type' => 'entity_reference',
+        //     'label' => 'Days in Respiratory Incubation',
+        //     'target_type' => 'taxonomy_term',
+        //     'target_bundle' => 'd_respiration_incubation_days',
+        //     'required' => FALSE,
+        //     'multiple' => FALSE,
+        // ],
+        // 'field_profile_respiration_detection_method' => [
+        //     'type' => 'entity_reference',
+        //     'target_type' => 'taxonomy_term',
+        //     'target_bundle' => 'd_respiration_detection_',
+        // ],		
 
       ];
       

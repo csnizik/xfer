@@ -38,10 +38,8 @@ class LabTestProfilesAdminForm extends FormBase {
         return $match['_route'];
     }
 
-    //add to array once created in Asset/AssetType/LabTestingProfile
-    //'laboratory','aggregate_method', 'aggregate_unit', 'respiratory_incubation', 'respiratory_detection' 
 private function createElementNames(){
-  return array('name', 'ph_method', 'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method','iron_method','manganese_method', 'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method');
+  return array('name', 'field_profile_laboratory','field_profile_aggregate_stability_method', 'field_profile_respiratory_incubation_days', 'field_profile_respiration_detection_method', 'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method','iron_method','manganese_method', 'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method');
 
 }
     /**
@@ -72,14 +70,14 @@ private function createElementNames(){
     $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form';
 
     $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
-    $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
+    // $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
     $ec_method = $this->getSoilHealthExtractionOptions("d_ec_method");
     $lab = $this->getSoilHealthExtractionOptions("d_laboratory");
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
     $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
+     $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
-    
     
     $form['lab_test_title'] = [
         '#markup' => '<h1>Lab Test Profiles</h1>',
@@ -92,58 +90,41 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#required' => TRUE
     ]; 
 
-    // $laboratory_default_value = $is_edit ? $labTestProfile->get('laboratory')->target_id : NULL;
-    // $form['laboratory'] = [
-	// 		'#type' => 'select',
-	// 		'#title' => 'Laboratory',
-	// 		'#options' => $lab,
-            // '#default_value' => $laboratory_default_value,
-	// 		'#required' => TRUE
-	// 	];
-
-    // $aggregate_method_method_default_value = $is_edit ? $labTestProfile->get('aggregate_method')->target_id : NULL;
-    // $form['aggregate_method'] = [
-	// 		'#type' => 'select',
-	// 		'#title' => 'Aggregate Stability Method',
-	// 		'#options' => $agg_stab_method,
-            // '#default_value' => $aggregate_method_default_value,
-	// 		'#required' => TRUE
-	// 	];
-
-    // $aggregate_unit_default_value = $is_edit ? $labTestProfile->get('aggregate_unit')->target_id : NULL;
-    // $form['aggregate_unit'] = [
-	// 		'#type' => 'select',
-	// 		'#title' => 'Aggregate Stability Unit',
-	// 		'#options' => $agg_stab_unit,
-            // '#default_value' => $aggregate_unit_default_value,
-	// 		'#required' => TRUE
-	// 	];
-
-    // $respiratory_incubation_default_value = $is_edit ? $labTestProfile->get('respiratory_incubation')->target_id : NULL;
-    // $form['respiratory_incubation'] = [
-	// 		'#type' => 'select',
-	// 		'#title' => 'Respiration Incubation Days',
-	// 		'#options' => $sdhe,
-            // '#default_value' => $respiratory_incubation_default_value,
-	// 		'#required' => TRUE
-	// 	];
-
-//     $respiratory_detection_default_value = $is_edit ? $labTestProfile->get('respiratory_detection')->target_id : NULL;
-//      $form['respiratory_detection'] = [
-// 			'#type' => 'select',
-// 			'#title' => 'Respiration Detection Method (unit ppm)',
-// 	 		'#options' => $resp_detect,
-//             '#default_value' => $respiratory_detection_default_value,
-// 	 		'#required' => TRUE
-// 	 	];
-   $ph_method_default_value = $is_edit ? $labTestProfile->get('ph_method')->target_id : NULL;
-    $form['ph_method'] = [
+    $laboratory_default_value = $is_edit ? $labTestProfile->get('field_profile_laboratory')->target_id : NULL;
+    $form['field_profile_laboratory'] = [
 			'#type' => 'select',
-			'#title' => 'pH Method',
-			'#options' => $ph_method,
-             '#default_value' => $ph_method_default_value,
+			'#title' => 'Laboratory',
+			'#options' => $lab,
+            '#default_value' => $laboratory_default_value,
 			'#required' => TRUE
 		];
+
+    $aggregate_method_default_value = $is_edit ? $labTestProfile->get('field_profile_aggregate_stability_method')->target_id : NULL;
+    $form['field_profile_aggregate_stability_method'] = [
+			'#type' => 'select',
+			'#title' => 'Aggregate Stability Method',
+			'#options' => $agg_stab_method,
+            '#default_value' => $aggregate_method_default_value,
+			'#required' => TRUE
+		];
+
+    $respiratory_incubation_default_value = $is_edit ? $labTestProfile->get('field_profile_respiratory_incubation_days')->target_id : NULL;
+    $form['field_profile_respiratory_incubation_days'] = [
+			'#type' => 'select',
+			'#title' => 'Respiration Incubation Days',
+			'#options' => $resp_incub,
+            '#default_value' => $respiratory_incubation_default_value,
+			'#required' => TRUE
+		];
+
+    $respiratory_detection_default_value = $is_edit ? $labTestProfile->get('field_profile_respiration_detection_method')->target_id : NULL;
+     $form['field_profile_respiration_detection_method'] = [
+			'#type' => 'select',
+			'#title' => 'Respiration Detection Method (unit ppm)',
+	 		'#options' => $resp_detect,
+            '#default_value' => $respiratory_detection_default_value,
+	 		'#required' => TRUE
+	 	];
  
     $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('electroconductivity_method')->target_id : NULL;
     $form['electroconductivity_method'] = [

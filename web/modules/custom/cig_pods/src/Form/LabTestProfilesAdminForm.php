@@ -70,7 +70,6 @@ private function createElementNames(){
     $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form';
 
     $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
-    // $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
     $ec_method = $this->getSoilHealthExtractionOptions("d_ec_method");
     $lab = $this->getSoilHealthExtractionOptions("d_laboratory");
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");

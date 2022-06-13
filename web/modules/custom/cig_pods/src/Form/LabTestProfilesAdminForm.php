@@ -281,10 +281,17 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     $lab_test_id = $form_state->get('lab_test_id');
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 
-    $labTest->delete();
-
-    $form_state->setRedirect('cig_pods.awardee_dashboard_form');
-
+    try{
+        $labTest->delete();
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }catch(Exception $e){
+        $this
+        ->messenger()
+        ->addStatus($this
+        ->t('Some Message about the Asset being Referenced by another @delete_error', [
+        '@delete_error' => $form['awardee_org_name']['#value'],
+        ]));
+    }
 }
 
     /**
@@ -316,7 +323,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             $profile = Asset::create($profile_submission);
             $profile -> save();
 
-            $route = $this->pageLookup('/assets/lab_testing_profile');
+            $route = $this->pageLookup('/create/awardee_dashboard');
             $form_state->setRedirect($route);
 
         }else{
@@ -330,7 +337,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             }
 	
             $labTestProfile->save();
-            $route = $this->pageLookup('/assets/lab_testing_profile');
+            $route = $this->pageLookup('/create/awardee_dashboard');
             $form_state->setRedirect($route);
         }
      }

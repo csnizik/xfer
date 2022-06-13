@@ -27,7 +27,7 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "project";
       break;
     case "ltm":
-      formPage = "profile";
+      formPage = "lab_test_profiles_admin";
       break;
     default:
       formPage = "producer";

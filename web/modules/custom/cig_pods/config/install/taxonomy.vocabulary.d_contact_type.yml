@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: 'Contact Type'
+vid: d_contact_type
+description: 'A list of Contact Types'
+weight: 0

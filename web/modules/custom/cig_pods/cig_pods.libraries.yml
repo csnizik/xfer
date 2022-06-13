@@ -9,7 +9,7 @@ producer_entry_form:
   css:
     theme:
       css/producer.css: {}
-
+      css/project.js: {}
 awardee_dashboard_form:
   js:
     js/dashboard.js: {}

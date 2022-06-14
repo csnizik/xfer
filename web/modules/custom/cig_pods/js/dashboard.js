@@ -4,13 +4,6 @@ select.addEventListener("change", function handleChange(event) {
   var formPage = "";
   var getUrl = window.location;
   var baseUrl = getUrl.protocol + "//" + getUrl.host + "/create";
-  // 👉️ get selected VALUE
-
-  // 👇️ get selected VALUE even outside event handler
-  //console.log(select.options[select.selectedIndex].value);
-
-  // 👇️ get selected TEXT in or outside event handler
-  // console.log(select.options[select.selectedIndex].text);
 
   switch (event.target.value) {
     case "pr":

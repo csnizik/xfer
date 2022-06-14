@@ -71,7 +71,7 @@ class LabResult extends FarmAssetType {
              'required' => FALSE,
              'description' => '(Unit dS/m)',
          ],
-         'field_lab_result_sf_electroconductivity_lab_interpretation' => [
+         'field_lab_result_sf_ec_lab_interpretation' => [
              'label'=> 'Electroconductivity Lab Interpretation',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',

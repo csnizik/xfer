@@ -30,6 +30,29 @@
     "description": "PODS textfield"
   },
 
+  "PODS Comment": {
+    "scope": "php",
+    "prefix": "pdcm",
+    "body": [
+      "echo(\"<script>console.log('$1: \" . json_encode($2) . \"');</script>\"); $0"
+    ],
+    "description": "PODS comment"
+  },
+
+  "PODS Select": {
+    "scope": "php",
+    "prefix": "pdsl",
+    "body": [
+      "\\$form['$1'] = [",
+      "\t'#type' => 'select',",
+      "\t'#title' => \\$this->t('$2'),",
+      "\t'#options' => '$3',",
+      "\t'#required' => TRUE",
+      "]; $0"
+    ],
+    "description": "PODS select"
+  },
+
   "PODS Submit": {
     "scope": "php",
     "prefix": "pdsub",
@@ -62,6 +85,42 @@
     "description": "PODS markup"
   },
 
+  "PODS Routing yml": {
+    "prefix": "pdrt",
+    "body": [
+      "cig_pods.$1:",
+      "\tpath: \"$2\"",
+      "\tdefaults:",
+      "\t\t_form: \"$3\"",
+      "\t\t_title: \"$4\"",
+      "\trequirements:",
+      "\t\t_permission: \"access content\"$0"
+    ],
+    "description": "PODS routing yml entry"
+  },
+
+  "PODS Create Select Data": {
+    "scope": "php",
+    "prefix": "pdcsd",
+    "body": [
+      "public function $1($2){",
+      "\t\\$shde_options = [];",
+      "\t\\$shde_terms = \\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(",
+      "\t\t[",
+      "\t\t\t'vid' => '$3',",
+      "\t\t]",
+      "\t);",
+      "\t\\$shde_keys = array_keys(\\$shde_terms);",
+      "\tforeach(\\$shde_keys as \\$shde_key){",
+      "\t\t\\$term = \\$shde_terms[\\$shde_key];",
+      "\t\t\\$sdhe_options[\\$shde_key] = \\$term -> getName();",
+      "\t}",
+      "\treturn \\$sdhe_options;",
+      "}$0"
+    ],
+    "description": "Create Select element data from taxonomy"
+  },
+
   "PODS DDL primative field": {
     "scope": "php",
     "prefix": "pddlpf",
@@ -71,9 +130,8 @@
       "\t 'type'=> '$3',",
       "\t 'required' => $4,",
       "\t 'description' => '$5',",
-      "\n],",
-    ],
-
+      "\n],"
+    ]
   },
   "PODS DDL Entity reference field": {
     "scope": "php",
@@ -86,8 +144,8 @@
       "\t 'target_bundle'=> '$4',",
       "\t 'required' => $5,",
       "\t 'description' => '$6',",
-      "\n],",
-    ],    
+      "\n],"
+    ]
   },
 
   "PODS Form": {

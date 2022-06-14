@@ -19,11 +19,11 @@ class Awardee extends FarmAssetType {
     * {@inheritdoc}
     */
     public function buildFieldDefinitions() {
-       
+
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-       'field_project' => [
+       'project' => [
             'type' => 'entity_reference',
             'label' => 'Projects',
             'target_type' => 'asset',
@@ -31,15 +31,41 @@ class Awardee extends FarmAssetType {
             'required' => FALSE,
             'multiple' => TRUE,
         ],
-       'field_organization_acronym' => [
+       'organization_acronym' => [
             'type' => 'string',
-            'label' => 'Organization acronym',
+            'label' => 'Organization Acronym',
             'description' => '' ,
             'required' => FALSE ,
             'multiple' => FALSE
-       ]
-      ];
-      
+       ],
+       'organization_short_name' => [
+         'type' => 'string',
+         'label' => 'Organization Short Name',
+         'description' => '' ,
+         'required' => FALSE ,
+         'multiple' => FALSE
+       ],
+       'organization_state_territory' => [
+         'type' => 'entity_reference',
+         'label' => 'Awardee Organization State Or Territory',
+         'description' => $this->t(''),
+			  'target_type' => 'taxonomy_term',
+			  'target_bundle' => 'd_state_territory',
+			  'handler' => 'default',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            // Lower weight shows up first in form
+           'weight' => [
+               'form' => 14,
+               'view' => 14
+			      ],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
+          ],
+        ];
+
       $farmFieldFactory = new FarmFieldFactory();
 
       foreach($field_info as $name => $info){
@@ -47,7 +73,7 @@ class Awardee extends FarmAssetType {
                       -> setDisplayConfigurable('form',TRUE)
                       -> setDisplayConfigurable('view', TRUE);
       }
-      
+
       return $fields;
 
     }

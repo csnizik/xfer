@@ -45,7 +45,7 @@ cig_pods.lab_testing_profile_form:
 cig_pods.awardee_form:
   path: "/create/awardee"
   defaults:
-    _form: '\Drupal\cig_pods\Form\AwardeeForm'
+    _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
     _title: "Create new Awardee"
   requirements:
     _permission: "access content"
@@ -69,15 +69,13 @@ cig_pods.edit_project_form:
   path: "/edit/project/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\ProducerEditForm'
-    _title: "Edit Producer"
   requirements:
     _permission: "access content"
 
 cig_pods.edit_awardee_form:
   path: "/edit/awardee/{id}"
   defaults:
-    _form: '\Drupal\cig_pods\Form\ProducerEditForm'
-    _title: "Edit Producer"
+    _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
   requirements:
     _permission: "access content"
 

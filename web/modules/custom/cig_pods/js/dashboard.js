@@ -1,13 +1,9 @@
 const select = document.getElementById("edit-create-new");
 
 select.addEventListener("change", function handleChange(event) {
-  console.log(event.target.value);
   var formPage = "";
   var getUrl = window.location;
-
-  var baseUrl =
-    getUrl.protocol + "//" + getUrl.host + "/" + getUrl.pathname.split("/")[1];
-  console.log("base: ", baseUrl);
+  var baseUrl = getUrl.protocol + "//" + getUrl.host + "/create";
   // 👉️ get selected VALUE
 
   // 👇️ get selected VALUE even outside event handler

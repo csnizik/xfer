@@ -314,7 +314,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             $profile = Asset::create($profile_submission);
             $profile -> save();
 
-            $route = $this->pageLookup('/create/awardee_dashboard');
+            $route = $this->pageLookup('/pods_dashboard');
             $form_state->setRedirect($route);
 
         }else{
@@ -328,7 +328,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             }
 	
             $labTestProfile->save();
-            $route = $this->pageLookup('/create/awardee_dashboard');
+            $route = $this->pageLookup('/pods_dashboard');
             $form_state->setRedirect($route);
         }
      }

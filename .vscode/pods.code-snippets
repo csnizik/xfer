@@ -62,6 +62,34 @@
     "description": "PODS markup"
   },
 
+  "PODS DDL primative field": {
+    "scope": "php",
+    "prefix": "pddlpf",
+    "body": [
+      "'field_$1' => [",
+      "\t 'label'=> '$2',",
+      "\t 'type'=> '$3',",
+      "\t 'required' => $4,",
+      "\t 'description' => '$5',",
+      "\n],",
+    ],
+
+  },
+  "PODS DDL Entity reference field": {
+    "scope": "php",
+    "prefix": "pdddlerf",
+    "body": [
+      "'field_$1' => [",
+      "\t 'label'=> '$2',",
+      "\t 'type'=> 'entity_reference',",
+      "\t 'target_type'=> '$3',",
+      "\t 'target_bundle'=> '$4',",
+      "\t 'required' => $5,",
+      "\t 'description' => '$6',",
+      "\n],",
+    ],    
+  },
+
   "PODS Form": {
     "prefix": "pdfm",
     "body": [

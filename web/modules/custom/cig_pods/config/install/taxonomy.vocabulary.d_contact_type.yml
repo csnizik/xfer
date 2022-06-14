@@ -4,7 +4,7 @@ dependencies:
   enforced:
     module:
       - cig_pods
-name: 'Contact Type'
+name: Contact Type
 vid: d_contact_type
 description: 'A list of Contact Types'
 weight: 0

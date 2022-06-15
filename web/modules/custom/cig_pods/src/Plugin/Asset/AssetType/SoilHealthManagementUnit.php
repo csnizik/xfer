@@ -3,6 +3,8 @@
 namespace Drupal\cig_pods\Plugin\Asset\AssetType;
 
 use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
+use Drupal\farm_field\FarmFieldFactory;
+
 /**
    * Provides the Soil Health Management Unit asset type.
    *
@@ -12,6 +14,216 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * )
    */
 class SoilHealthManagementUnit extends FarmAssetType {
-  
+
+   public function buildFieldDefinitions() {
+      $fields = parent::buildFieldDefinitions();
+
+      $field_info = [
+         'field_shmu_involved_producer' => [
+             'label'=> 'Producer',
+             'type'=> 'entity_reference',
+             'target_type'=> 'asset',
+             'target_bundle'=> 'producer',
+             'required' => TRUE,
+             'description' => '',
+         ],
+         'field_shmu_name' => [
+             'label'=> 'Soil Health Management Unit (SHMU) Name',
+             'type'=> 'string',
+             'required' => TRUE,
+             'description' => '',
+         
+         ],
+         'field_shmu_type' => [
+             'label'=> 'Soil Health Management Unit (SHMU) Type',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_shmu_type', // TODO make taxonomy
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_replicate_number' => [
+             'label'=> 'Replicate Number',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_treatment_narrative' => [
+             'label'=> 'Treatment Narrative',
+             'type'=> 'string',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_experimental_design' => [
+             'label'=> 'Experimental Design',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_experimental_design',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         // TODO: add 'field_shmu_farmos_map'
+         'field_shmu_latitude' => [
+             'label'=> 'Latitude',
+             'type'=> 'fraction', // TODO: Check accuracy
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_longitude' => [
+             'label'=> 'Longitude',
+             'type'=> 'fraction', // TODO: Check accuracy
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_prev_land_use' => [
+             'label'=> 'Previous Land Use',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_land_use',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_prev_land_use_modifiers' => [
+             'label'=> 'Previous Land Use Modifiers(s)',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_land_use_modifiers',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_date_land_use_changed' => [
+             'label'=> 'Date Land Use Changed',
+             'type'=> 'timestamp',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_current_land_use_modifiers' => [
+             'label'=> 'Current Land Use Modifier(s)',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_land_use_modifiers',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         // TODO: Currently skipping Production System pending re-design from Justin
+         'field_current_tillage_system' => [
+             'label'=> 'Current Tillage System',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_tillage_system',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_years_in_current_tillage_system' => [
+             'label'=> 'Years in Current Tillage System',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_previous_tillage_system' => [
+             'label'=> 'Previous Tillage system',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_tillage_system',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_is_irragation_in_arid_or_high' => [
+             'label'=> 'Irrigation in Arid Climate or High Tunnel',
+             'type'=> 'boolean',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_irrigation_sample_date' => [
+             'label'=> 'Irrigation - Sample Date',
+             'type'=> 'timestamp',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_irrigation_water_ph' => [
+             'label'=> 'Irrigation - Water pH',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         ],
+         'field_shmu_irrigation_sodium_absorption_ratio' => [
+             'label'=> 'Irrigation - Sodium Absorption',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_irrigation_total_dissolved_solids' => [
+             'label'=> 'Irrigation - Total Disolved Solids',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_irrigation_total_alkalinity' => [
+             'label'=> 'Irrigation - Total Alkalinity',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_irrigation_chlorides' => [
+             'label'=> 'Irrigation - Chlorides',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ], 
+         'field_shmu_irrigation_sulfates' => [
+             'label'=> 'Irrigation - Sulfates',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_irrigation_nitrates' => [
+             'label'=> 'Irrigation - Nitrates',
+             'type'=> 'fraction',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
+         'field_shmu_major_resource_concerns' => [
+             'label'=> 'Other Major Resource Concerns',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_major_resource_concern',
+             'required' => FALSE,
+             'multiple' => TRUE,
+             'description' => '',
+         ],
+         'field_shmu_practices_addressed' => [
+             'label'=> 'Practices Addressed',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_practice',
+             'required' => FALSE,
+             'description' => '',
+         ],
+      ];
+
+      $farmFieldFactory = new FarmFieldFactory();
+      foreach($field_info as $name => $info){
+         // Check if it is one of the default fields that we want to disable (I.e. Images ,)
+ 
+ 
+       $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
+                      -> setDisplayConfigurable('form',TRUE)
+                      -> setDisplayConfigurable('view', TRUE);
+       }
+
+       return $fields;
+   }
 
 }

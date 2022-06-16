@@ -24,3 +24,7 @@ lab_test_profiles_admin_form:
   css:
     theme:
       css/lab_test_profiles_admin.css: {}
+lab_results_form:
+  css:
+    theme:
+      css/lab_results.css: {}

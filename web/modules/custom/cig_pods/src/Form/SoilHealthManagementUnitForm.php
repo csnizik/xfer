@@ -137,7 +137,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#required' => FALSE
 		];
 		 
-		$form['field_shmu_name'] = [
+		$form['name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Soil Health Management (SHMU) Name'),
 			'#description' => '',
@@ -433,9 +433,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$this
 			->messenger()
 			->addStatus($this
-			->t('Form submitted for Soil Helath Management Unit @shmu_name', [
-			'@shmu_name' => $form['shmu_name']['#value'],
-		]));
+			->t('Form submitted for Soil Health Management Unit', []));
 
 	}
 }

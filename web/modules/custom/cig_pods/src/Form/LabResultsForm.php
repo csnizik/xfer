@@ -25,8 +25,7 @@ class LabResultsForm extends FormBase {
 
 
     private function createElementNames(){
-  return array('name', 
-  'field_lab_result_raw_soil_organic_carbon', 'field_lab_result_raw_aggregate_stability', 'field_lab_result_raw_respiration', 'field_lab_result_active_carbon', 'field_lab_result_available_organic_nitrogen', 'field_lab_result_sf_bulk_density_dry_weight', 'field_lab_result_sf_infiltration_rate', 'field_lab_result_sf_ph_value', 'field_lab_result_sf_electroconductivity', 'field_lab_result_sf_ec_lab_interpretation', 'field_lab_result_sf_cation_exchange_capacity', 'field_lab_result_sf_nitrate_n', 'field_lab_result_sf_nitrate_n_lab_interpretation', 'field_lab_result_sf_nitrogen_by_dry_combustion', 'field_lab_result_sf_phosphorous', 'field_lab_result_sf_phosphorous_lab_interpretation' , 'field_lab_result_sf_potassium', 'field_lab_result_sf_potassium_lab_interpretation', 'field_lab_result_sf_calcium', 'field_lab_result_sf_calcium_lab_interpretation', 'field_lab_result_sf_magnesium', 'field_lab_result_sf_magnesium_lab_interpretation', 'field_lab_result_sf_sulfur', 'field_lab_result_sf_sulfur_lab_interpretation', 'field_lab_result_sf_iron', 'field_lab_result_sf_iron_lab_interpretation', 'field_lab_result_sf_manganese', 'field_lab_result_sf_manganese_lab_interpretation', 'field_lab_result_sf_copper', 'field_lab_result_sf_copper_lab_interpretation', 'field_lab_result_sf_zinc',  'field_lab_result_sf_zinc_lab_interpretation', 'field_lab_result_sf_boron', 'field_lab_result_sf_boron_lab_interpretation', 'field_lab_result_sf_aluminum', 'field_lab_result_sf_aluminum_lab_interpretation' ,'field_lab_result_sf_molybdenum', 'field_lab_result_sf_molybdenum_lab_interpretation'
+  return array('field_lab_result_raw_soil_organic_carbon', 'field_lab_result_raw_aggregate_stability', 'field_lab_result_raw_respiration', 'field_lab_result_active_carbon', 'field_lab_result_available_organic_nitrogen', 'field_lab_result_sf_bulk_density_dry_weight', 'field_lab_result_sf_infiltration_rate', 'field_lab_result_sf_ph_value', 'field_lab_result_sf_electroconductivity', 'field_lab_result_sf_ec_lab_interpretation', 'field_lab_result_sf_cation_exchange_capacity', 'field_lab_result_sf_nitrate_n', 'field_lab_result_sf_nitrate_n_lab_interpretation', 'field_lab_result_sf_nitrogen_by_dry_combustion', 'field_lab_result_sf_phosphorous', 'field_lab_result_sf_phosphorous_lab_interpretation' , 'field_lab_result_sf_potassium', 'field_lab_result_sf_potassium_lab_interpretation', 'field_lab_result_sf_calcium', 'field_lab_result_sf_calcium_lab_interpretation', 'field_lab_result_sf_magnesium', 'field_lab_result_sf_magnesium_lab_interpretation', 'field_lab_result_sf_sulfur', 'field_lab_result_sf_sulfur_lab_interpretation', 'field_lab_result_sf_iron', 'field_lab_result_sf_iron_lab_interpretation', 'field_lab_result_sf_manganese', 'field_lab_result_sf_manganese_lab_interpretation', 'field_lab_result_sf_copper', 'field_lab_result_sf_copper_lab_interpretation', 'field_lab_result_sf_zinc',  'field_lab_result_sf_zinc_lab_interpretation', 'field_lab_result_sf_boron', 'field_lab_result_sf_boron_lab_interpretation', 'field_lab_result_sf_aluminum', 'field_lab_result_sf_aluminum_lab_interpretation' ,'field_lab_result_sf_molybdenum', 'field_lab_result_sf_molybdenum_lab_interpretation'
 );
 }
 
@@ -54,28 +53,22 @@ private function convertFractionsToDecimal($is_edit, $labResults, $field){
         return "";
     }      
 }
+
     /**
     * {@inheritdoc}
     */
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 
-           $labResults = [];
+        $labResults = [];
 
-         $is_edit = $id <> NULL;
- 
+        $is_edit = $id <> NULL;
+
         if($is_edit){
             $form_state->set('operation','edit');
             $form_state->set('lab_result_id',$id);
             $labResults = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-          
-
         } else {
             $form_state->set('operation','create');
-        }
-
-
-        if($form_state->get('operation') == 'create'){
-
         }
 
      $form['#attached']['library'][] = 'cig_pods/lab_results_form';
@@ -85,13 +78,6 @@ private function convertFractionsToDecimal($is_edit, $labResults, $field){
      $form['title'] = [
          '#markup' => '<h1 id="form-title">Soil Test Results</h1',
      ]; 
-
-    //   $form['name'] = [
-    //     '#type' => 'textfield',
-    //     '#title' => $this->t('Temp Name'),
-    //     '#description' => '',
-    //     '#required' => TRUE
-    // ]; 
 
      $form['sub_title_1'] = [
          '#markup' => '<div class="subform-title-container"><h2>Soil Health Raw Values</h2><h4>6 Fields | Section 1 of 3</h4></div>',
@@ -500,7 +486,7 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
     }
 
        public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
 
     /**

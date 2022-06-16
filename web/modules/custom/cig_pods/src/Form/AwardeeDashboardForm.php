@@ -15,31 +15,29 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['#attached']['library'][] = 'cig_pods/awardee_dashboard_form';
 
-$form['h2'] = [
-  '#markup' => 'Dashboard',
-  	'#prefix' => '<div id="title">',
-     '#suffix' => '</div>',
+    $form['h2'] = [
+      '#markup' => 'Dashboard',
+  	  '#prefix' => '<div id="title">',
+      '#suffix' => '</div>',
+    ];
 
-]; 
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [
 				  '' => $this
 					->t('Create New'),
-				  'pr' => $this
-					->t('Producer(s)'),
 				  'awo' => $this
 					->t('Awardee Org'),
 				  'proj' => $this
 					->t('Project'),
-                  'ltm' => $this
+          'ltm' => $this
 					->t('Lab Test Method'),
-                ],
+        ],
 				'#prefix' => '<div id="top-form">'
-			];
+		];
 
     $form['form_body'] = [
-        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods and Producers using this tool.</p>',
+        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods using this tool.</p>',
         '#suffix' => '</div>',
     ];
 
@@ -48,9 +46,9 @@ $form['h2'] = [
         	'#prefix' => '<div class="bottom-form">',
     ];
 
-     $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
-       $entityCount = array();
-
+    $awardeeEntities = array('project', 'awardee', 'soil_health_demo_trial' );
+    $entityCount = array();
+    
       for($i = 0; $i < count($awardeeEntities); $i++){
         $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[$i]);
         array_push($entityCount, $query->count()->execute());
@@ -69,16 +67,9 @@ $form['h2'] = [
       '#submit' => ['::orgRedirect'],
     ];
 
-
-    $form['awardee_prod'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Producer(s): '.$entityCount[2]),
-      '#submit' => ['::producerRedirect'],
-    ];
-
 		$form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
+      '#value' => $this->t('Lab Test Method(s): '.$entityCount[2]),
       '#submit' => ['::labRedirect'],
       '#suffix' => '</div>',
     ];
@@ -87,7 +78,7 @@ $form['h2'] = [
 	}
 
   private function pageRedirect (FormStateInterface $form_state, string $path) {
-     $match = [];
+    $match = [];
     $path2 =  $path;
     $router = \Drupal::service('router.no_access_checks');
 
@@ -106,9 +97,6 @@ public function projectRedirect (array &$form, FormStateInterface $form_state) {
 }
 public function orgRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/awardee");
-}
-public function producerRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/producer");
 }
 public function labRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/lab_testing_profile");

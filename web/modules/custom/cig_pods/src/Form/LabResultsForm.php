@@ -23,12 +23,6 @@ class LabResultsForm extends FormBase {
         return $sdhe_options;
     }
 
-
-    private function createElementNames(){
-  return array('field_lab_result_raw_soil_organic_carbon', 'field_lab_result_raw_aggregate_stability', 'field_lab_result_raw_respiration', 'field_lab_result_active_carbon', 'field_lab_result_available_organic_nitrogen', 'field_lab_result_sf_bulk_density_dry_weight', 'field_lab_result_sf_infiltration_rate', 'field_lab_result_sf_ph_value', 'field_lab_result_sf_electroconductivity', 'field_lab_result_sf_ec_lab_interpretation', 'field_lab_result_sf_cation_exchange_capacity', 'field_lab_result_sf_nitrate_n', 'field_lab_result_sf_nitrate_n_lab_interpretation', 'field_lab_result_sf_nitrogen_by_dry_combustion', 'field_lab_result_sf_phosphorous', 'field_lab_result_sf_phosphorous_lab_interpretation' , 'field_lab_result_sf_potassium', 'field_lab_result_sf_potassium_lab_interpretation', 'field_lab_result_sf_calcium', 'field_lab_result_sf_calcium_lab_interpretation', 'field_lab_result_sf_magnesium', 'field_lab_result_sf_magnesium_lab_interpretation', 'field_lab_result_sf_sulfur', 'field_lab_result_sf_sulfur_lab_interpretation', 'field_lab_result_sf_iron', 'field_lab_result_sf_iron_lab_interpretation', 'field_lab_result_sf_manganese', 'field_lab_result_sf_manganese_lab_interpretation', 'field_lab_result_sf_copper', 'field_lab_result_sf_copper_lab_interpretation', 'field_lab_result_sf_zinc',  'field_lab_result_sf_zinc_lab_interpretation', 'field_lab_result_sf_boron', 'field_lab_result_sf_boron_lab_interpretation', 'field_lab_result_sf_aluminum', 'field_lab_result_sf_aluminum_lab_interpretation' ,'field_lab_result_sf_molybdenum', 'field_lab_result_sf_molybdenum_lab_interpretation'
-);
-}
-
  private function pageLookup(string $path) {
         $match = [];
         $path2 =  $path;
@@ -467,6 +461,14 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
         '#submit' => ['::redirectAfterCancel'],
     ];
 
+     if($is_edit){
+        $form['actions']['delete'] = [
+            '#type' => 'submit',
+            '#value' => $this->t('Delete'),
+            '#submit' => ['::deleteLabTest'],
+        ];
+    }
+
         return $form;
 
     }
@@ -489,15 +491,34 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
 
+      public function deleteLabTest(array &$form, FormStateInterface $form_state){
+
+    // TODO: we probably want a confirm stage on the delete button. Implementations exist online
+    try{
+        $lab_result_id = $form_state->get('lab_result_id');
+        $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_result_id);
+
+        $labTest->delete();
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }catch(\Exception $e){
+         $this
+            ->messenger()
+            ->addStatus($this
+            ->t('This item cannot be deleted right now because its information is being referenced elsewhere.'));
+    } 
+    }
+
     /**
     * {@inheritdoc}
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
+        $elementNames = array_keys($form_state->getValues());
         $profile_submission = [];
          if($form_state->get('operation') === 'create'){
-            $elementNames = $this->createElementNames();
             foreach($elementNames as $elemName){
+                if(strpos($elemName, "field_") === 0){
                 $profile_submission[$elemName] = $form_state->getValue($elemName);
+                }
             }
 
             $profile_submission['type'] = 'lab_result';
@@ -512,14 +533,15 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
             $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
             $profile_assets = \Drupal::entityTypeManager()-> getStorage('asset')-> loadByProperties(['type' => 'lab_result']);
-            $elementNames = $this->createElementNames();
 		    foreach($elementNames as $elemName){
+                if(strpos($elemName, "field_") === 0){     
                 $labTestProfile->set($elemName, $form_state->getValue($elemName));
+                }
             }
 	
             $labTestProfile->save();
             $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            // $form_state->setRedirect($route);
         }
      }
 }

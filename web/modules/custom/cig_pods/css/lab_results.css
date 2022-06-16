@@ -9,17 +9,17 @@
   border-radius: 0;
 }
 
-form#lab-test-profiles-admin #edit-save.button {
-  background-color: #005ea2;
+form#lab-results-form #edit-save.button {
+  background-color: #ffffff;
   border-radius: 2px;
   border-color: #005ea2 !important;
   padding: 12 20 12 20 !important;
-  color: #ffffff;
+  color: #005ea2;
   font-weight: 600;
   font-size: 16px;
 }
 
-form#lab-test-profiles-admin #edit-cancel {
+form#lab-results-form #edit-cancel {
   background-color: #ffffff;
   border-radius: 2px;
   border-color: #005ea2 !important;
@@ -37,4 +37,42 @@ form#lab-test-profiles-admin #edit-delete {
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
+}
+
+#block-gin-content form #form-title {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 38px;
+}
+
+#block-gin-content form .subform-title-container {
+  display: flex;
+  align-items: center;
+  clear: both;
+  margin-top: 40px;
+}
+
+#block-gin-content form .subform-title-container h2 {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 26px;
+  flex: 50%;
+  margin-bottom: -3px;
+  margin-top: 34px;
+}
+
+#block-gin-content form .subform-title-container h4 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: -3px;
+  margin-top: 34px;
+}
+
+#block-gin-content form#lab-results-form .form-item {
+  margin-top: 42px;
+}
+
+form#lab-results-form #edit-save.button {
+  margin-top: 51px;
 }

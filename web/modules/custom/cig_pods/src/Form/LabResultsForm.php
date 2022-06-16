@@ -541,7 +541,7 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
 	
             $labTestProfile->save();
             $route = $this->pageLookup('/pods_dashboard');
-            // $form_state->setRedirect($route);
+            $form_state->setRedirect($route);
         }
      }
 }

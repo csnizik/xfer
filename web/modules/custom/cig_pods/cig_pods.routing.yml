@@ -57,6 +57,13 @@ cig_pods.lab_test_profiles_admin_form:
     _title: ""
   requirements:
     _permission: "access content"
+cig_pods.soil_health_management_unit_form:
+  path: "/create/shmu"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthManagementUnitForm'
+    _title: ""
+  requirements:
+    _permission: "access content"    
 
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"

@@ -24,7 +24,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
              'target_bundle'=> 'producer',
-             'required' => TRUE,
+             'required' => False,
              'description' => '',
          ],
          'field_shmu_name' => [
@@ -38,7 +38,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'label'=> 'Soil Health Management Unit (SHMU) Type',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
-             'target_bundle'=> 'd_shmu_type', // TODO make taxonomy
+             'target_bundle'=> 'd_shmu_type', 
              'required' => FALSE,
              'description' => '',
          
@@ -100,6 +100,15 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
          ],
+         'field_shmu_current_land_use' => [
+             'label'=> 'Current Land Use',
+             'type'=> 'entity_reference',
+             'target_type'=> 'taxonomy_term',
+             'target_bundle'=> 'd_land_use',
+             'required' => FALSE,
+             'description' => '',
+         
+         ],
          'field_shmu_current_land_use_modifiers' => [
              'label'=> 'Current Land Use Modifier(s)',
              'type'=> 'entity_reference',
@@ -108,6 +117,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
          ],
+         
          // TODO: Currently skipping Production System pending re-design from Justin
          'field_current_tillage_system' => [
              'label'=> 'Current Tillage System',
@@ -125,7 +135,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          
          ],
-         'field_previous_tillage_system' => [
+         'field_shmu_previous_tillage_system' => [
              'label'=> 'Previous Tillage system',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
@@ -134,7 +144,8 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          
          ],
-         'field_is_irragation_in_arid_or_high' => [
+         // TODO: fix spelling
+         'field_is_irrigation_in_arid_or_high' => [
              'label'=> 'Irrigation in Arid Climate or High Tunnel',
              'type'=> 'boolean',
              'required' => FALSE,
@@ -153,7 +164,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          ],
          'field_shmu_irrigation_sodium_absorption_ratio' => [
-             'label'=> 'Irrigation - Sodium Absorption',
+             'label'=> 'Irrigation - Sodium Absorption', //TODO: Fix spelling
              'type'=> 'fraction',
              'required' => FALSE,
              'description' => '',
@@ -194,7 +205,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          
          ],
-         'field_shmu_major_resource_concerns' => [
+         'field_shmu_major_resource_concern' => [
              'label'=> 'Other Major Resource Concerns',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
@@ -203,6 +214,16 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'multiple' => TRUE,
              'description' => '',
          ],
+         'field_shmu_resource_concern' => [
+            'label'=> 'Other Major Resource Concerns',
+            'type'=> 'entity_reference',
+            'target_type'=> 'taxonomy_term',
+            'target_bundle'=> 'd_major_resource_concern',
+            'required' => FALSE,
+            'multiple' => TRUE,
+            'description' => '',
+        ],
+
          'field_shmu_practices_addressed' => [
              'label'=> 'Practices Addressed',
              'type'=> 'entity_reference',

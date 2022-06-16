@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Major Resource Concern
+vid: d_major_resource_concern
+description: 'A list of Contact Types'
+weight: 0

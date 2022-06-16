@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: SHMU Type
+vid: d_shmu_type
+description: 'A list of SHMU Types'
+weight: 0

@@ -23,21 +23,6 @@ class LabResultsForm extends FormBase {
         return $sdhe_options;
     }
 
- private function pageLookup(string $path) {
-        $match = [];
-        $path2 =  $path;
-        $router = \Drupal::service('router.no_access_checks');
-
-        try {
-            $match = $router->match($path2);
-        }
-        catch (\Exception $e) {
-          // The route using that path hasn't been found,
-          // or the HTTP method isn't allowed for that route.
-        }
-        return $match['_route'];
-    }
-
 private function convertFractionsToDecimal($is_edit, $labResults, $field){
     if($is_edit){
         $num = $labResults->get($field)[0]->getValue()["numerator"];
@@ -525,8 +510,7 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
             $profile = Asset::create($profile_submission);
             $profile -> save();
          
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
             $id = $form_state->get('lab_result_id');
@@ -540,8 +524,7 @@ $aluminum_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'fiel
             }
 	
             $labTestProfile->save();
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
      }
 }

@@ -20,7 +20,7 @@ $form['h2'] = [
   	'#prefix' => '<div id="title">',
      '#suffix' => '</div>',
 
-]; 
+];
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [
@@ -33,7 +33,7 @@ $form['h2'] = [
 				  'proj' => $this
 					->t('Project'),
                   'ltm' => $this
-					->t('Lab Test Method'),
+					->t('Methods'),
                 ],
 				'#prefix' => '<div id="top-form">'
 			];
@@ -48,7 +48,7 @@ $form['h2'] = [
         	'#prefix' => '<div class="bottom-form">',
     ];
 
-     $awardeeEntities = array('project', 'awardee','producer', 'soil_health_demo_trial' );
+     $awardeeEntities = array('project', 'awardee','producer', 'lab_testing_method' );
        $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -78,7 +78,7 @@ $form['h2'] = [
 
 		$form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
+      '#value' => $this->t('Methods: '.$entityCount[3]),
       '#submit' => ['::labRedirect'],
       '#suffix' => '</div>',
     ];
@@ -111,7 +111,7 @@ public function producerRedirect (array &$form, FormStateInterface $form_state) 
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function labRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/lab_testing_profile");
+  $this->pageRedirect($form_state, "/assets/lab_testing_method");
 }
 
   /**

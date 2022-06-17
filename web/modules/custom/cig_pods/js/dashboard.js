@@ -6,9 +6,6 @@ select.addEventListener("change", function handleChange(event) {
   var baseUrl = getUrl.protocol + "//" + getUrl.host + "/create";
 
   switch (event.target.value) {
-    case "pr":
-      formPage = "producer";
-      break;
     case "awo":
       formPage = "awardee_org";
       break;
@@ -19,7 +16,7 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "lab_testing_method";
       break;
     default:
-      formPage = "producer";
+      formPage = "awardee_org";
   }
 
   window.location.assign(baseUrl + "/" + formPage);

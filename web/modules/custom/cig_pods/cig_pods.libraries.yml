@@ -16,19 +16,28 @@ awardee_dashboard_form:
   css:
     theme:
       css/awardee_dashboard.css: {}
+
 admin_details_display:
   css:
     theme:
       css/admin-details-display.css: {}
+
 awardee_methods_details_display:
   css:
     theme:
       css/awardee-methods-details-display.css: {}
+
 lab_test_profiles_admin_form:
   css:
     theme:
       css/lab_test_profiles_admin.css: {}
+
 lab_test_method_admin_form:
   css:
     theme:
       css/lab_test_method_admin.css: {}
+
+lab_results_form:
+  css:
+    theme:
+      css/lab_results.css: {}

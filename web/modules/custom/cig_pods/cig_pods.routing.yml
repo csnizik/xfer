@@ -62,6 +62,13 @@ cig_pods.lab_test_method_form:
   path: "/create/lab_testing_method"
   defaults:
     _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
+  requirements:
+  _permission: "access content"
+
+cig_pods.lab_results_form:
+  path: "/create/lab_results"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabResultsForm'
     _title: ""
   requirements:
     _permission: "access content"
@@ -99,6 +106,13 @@ cig_pods.edit_lab_test_method_form:
   path: "/edit/lab_testing_method/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_lab_results_form:
+  path: "/edit/lab_results/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabResultsForm'
     _title: ""
   requirements:
     _permission: "access content"

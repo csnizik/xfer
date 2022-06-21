@@ -30,9 +30,9 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Awardee Org'),
 				  'proj' => $this
 					->t('Project'),
-          'ltm' => $this
-					->t('Lab Test Method'),
-        ],
+                  'ltm' => $this
+					->t('Methods'),
+                ],
 				'#prefix' => '<div id="top-form">'
 		];
 
@@ -46,9 +46,9 @@ class AwardeeDashboardForm extends FormBase {
         	'#prefix' => '<div class="bottom-form">',
     ];
 
-    $awardeeEntities = array('project', 'awardee', 'soil_health_demo_trial' );
-    $entityCount = array();
-    
+     $awardeeEntities = array('project', 'awardee','producer', 'lab_testing_method' );
+       $entityCount = array();
+
       for($i = 0; $i < count($awardeeEntities); $i++){
         $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[$i]);
         array_push($entityCount, $query->count()->execute());
@@ -69,7 +69,7 @@ class AwardeeDashboardForm extends FormBase {
 
 		$form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[2]),
+      '#value' => $this->t('Methods: '.$entityCount[3]),
       '#submit' => ['::labRedirect'],
       '#suffix' => '</div>',
     ];
@@ -99,7 +99,7 @@ public function orgRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/awardee");
 }
 public function labRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/lab_testing_profile");
+  $this->pageRedirect($form_state, "/assets/lab_testing_method");
 }
 
   /**

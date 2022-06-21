@@ -18,7 +18,7 @@ h1.page-title {
     width: 100%;
 }
 
-.admin-details-display table th, td {
+.awardee-methods-details-display table th, td {
     background-color: white;
 }
 
@@ -50,7 +50,7 @@ table  {
     --colorGinTableBorder:rgba(0,0,0,0); /* working*/
 }
 
-table.views-table.views-view-table.cols-3 {
+table.views-table.views-view-table.cols-4 {
     padding-left: 40px;
     width:100%;
     margin-top: 0px;
@@ -88,12 +88,23 @@ th.views-field.views-field-name {
     --colorGinPrimaryActive: #000000;
 }
 
-table.views-table.views-view-table.cols-3 {
+table.views-table.views-view-table.cols-4 {
     --colorGinPrimaryActive: #000000;
      width: auto;
 }
 
 td.views-field.views-field-name {
+    width: max-content;
+    max-width: 250px;
+    min-width: 25px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 36px;
+    --colorGinPrimary:#005fa2;
+    --colorGinPrimaryHover: #005fa2;
+}
+
+td{
     width: max-content;
     max-width: 250px;
     min-width: 25px;

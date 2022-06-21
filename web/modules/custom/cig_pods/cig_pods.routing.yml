@@ -58,6 +58,14 @@ cig_pods.lab_test_profiles_admin_form:
   requirements:
     _permission: "access content"
 
+cig_pods.lab_test_method_form:
+  path: "/create/lab_testing_method"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.lab_results_form:
   path: "/create/lab_results"
   defaults:
@@ -92,6 +100,13 @@ cig_pods.edit_lab_test_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\LabTestProfilesAdminForm'
     _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_lab_test_method_form:
+  path: "/edit/lab_testing_method/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
   requirements:
     _permission: "access content"
 

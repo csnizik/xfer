@@ -1,0 +1,4 @@
+#!/bin/bash
+DOCKERID=$(docker ps | awk 'NR > 1 {print $1; exit}')
+docker exec $DOCKERID composer require drupal/devel
+docker exec $DOCKERID vendor/bin/drush en devel

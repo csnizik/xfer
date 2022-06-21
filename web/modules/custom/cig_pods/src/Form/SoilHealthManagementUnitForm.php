@@ -119,56 +119,99 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return $options;
 	}
 
+	// goal is to replace this logic
+	// $field_shmu_irrigation_water_ph_value = $is_edit ? $shmu->get('field_shmu_irrigation_water_ph')->numerator : '';
+	// SHMU is a reference to SoilHealthManagmentUnit entity
+	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){
+		return $shmu->get($field_name)-> numerator / $shmu->get($field_name)->denominator;
+	}
+
+	// Returns array of options suitable to be passed into '#default_value' for the checkboxes type
+	// field_name must be a string relating to a field witn "multiple -> TRUE" in its definition
+	public function getDefaultValuesArrayFromMultivaluedSHMUField(object $shmu, string $field_name){
+		$field_iter = $shmu->get($field_name);
+
+		$populated_values = [];
+		foreach($field_iter as $key => $term){
+			$populated_values[] = $term->target_id;
+		}
+		return $populated_values;
+	}
 	/**
 	* {@inheritdoc}
 	*/
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		$is_edit = $id <> NULL;
 
+		$shmu = NULL;
+		if($is_edit){
+			$form_state->set('operation','edit');
+			$form_state->set('shmu_id', $id);
+			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		} else {
+			$form_state->set('operation','create');
+		}
+
+		// Attach the SHMU css library
+		$form['#attached']['library'][] = 'cig_pods/soil_health_management_unit_form';
 		// First section
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 11</h4></div>'
 		];
+		$field_shmu_involved_producer_value = $is_edit ?  $shmu->get('field_shmu_involved_producer')->value : ''; // Default Value: Empty string
 		$producer_select_options = $this->getProducerOptions();
 		$form['field_shmu_involved_producer'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Select a Producer'),
 			'#options' => $producer_select_options,
+			'#default_value' => $field_shmu_involved_producer_value,
 			'#required' => FALSE
 		];
-		 
+		
+		$name_value = $is_edit ? $shmu->get('name')->value : ''; // Default Value: Empty string
 		$form['name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Soil Health Management (SHMU) Name'),
 			'#description' => '',
+			'#default_value' => $name_value,
 			'#required' => TRUE
 		];
+
+		$field_shmu_type_value = $is_edit ? $shmu->get('field_shmu_type')->target_id: ''; // Default Value: Empty String
 		$shmu_type_options = $this->getShmuTypeOptions();
 		$form['field_shmu_type'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Health Management Unit (SHMU) Type'),
 			'#options' => $shmu_type_options,
+			'#default_value' => $field_shmu_type_value,
 			'#required' => FALSE
 		]; 
 
+		$field_shmu_replicate_number_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_replicate_number'): '';
 		$form['field_shmu_replicate_number'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Replicate Number'),
 			'#description' => '',
+			'#default_value' => $field_shmu_replicate_number_value,
+			'#min_value' => 0,
+			'#step' => 1, // We enforce integer with step = 1.
 			'#required' => FALSE
 		]; 
 
+		$field_treatmenent_narrative_value = $is_edit ? $shmu->get('field_shmu_treatment_narrative')->value: '';
 
 		$form['field_shmu_treatment_narrative'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Treatment Narrative'),
 			'#description' => '',
+			'#default_value' => $field_treatmenent_narrative_value,
 			'#required' => FALSE
 		]; 
 		$form['subform_2'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
 		];
 		
+		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_ide: '';
 		$shmu_experimental_design_options = $this->getExperimentalDesignOptions();
 		$form['field_shmu_experimental_design'] = [
 			'#type' => 'select',
@@ -181,69 +224,97 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
 		];
 		// TODO: Lat/Long input needs decimal precision
+		$field_shmu_latitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_latitude'): '';
 		$form['field_shmu_latitude'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Latitude'),
 			'#description' => '',
+			'#default_value' => $field_shmu_latitude_value,
+			'#min_value' => -90,
+			'#max_value' => 90,
+			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
 			'#required' => FALSE
 		];
-		// TODO: Add read only of project summary (Ask Justin)
+		$field_shmu_longitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_longitude'): '';
+
 		$form['field_shmu_longitude'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Longitude'),
 			'#description' => '',
+			'#default_value' => $field_shmu_longitude_value,
+			'#min_value' => -180,
+			'#max_value' => 180,
+			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
 			'#required' => FALSE
 		];  
+		// TODO: Add read only of project summary (Ask Justin)
 		// TODO: Refine with Justin whether Lat/Longs are appropriate
 
 		// New section (Soil and Treatment Identification)
 		$form['subform_4'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> <p> Under construction </p> </div>'
+			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> </div>'
 		];
 		
 		// New section (Land Use History)
 		$form['subform_5'] = [
 			'#markup' => '<div class="subform-title-container"><h2> Land Use History </h2><h4> 5 Fields | Section 5 of 11</h4></div>'
 		];
+		$field_shmu_prev_land_use_value = $is_edit ? $shmu->get('field_shmu_prev_land_use')->target_id : '';
 		$land_use_options = $this->getLandUseOptions();
 		$form['field_shmu_prev_land_use'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Previous Land Use'),
 			'#options' => $land_use_options,
+			'#default_value' => $field_shmu_prev_land_use_value,
 			'#required' => FALSE
 		];
+
+
+		$field_shmu_prev_land_use_modifiers_values = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_prev_land_use_modifiers') : [];
 		$land_use_modifier_options = $this->getLandUseModifierOptions(); 
 		$form['field_shmu_prev_land_use_modifiers'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Previous Land Use Modifiers'),
 			'#options' => $land_use_modifier_options,
+			'#default_value' => $field_shmu_prev_land_use_modifiers_values,
 			'#required' => FALSE
 		]; 
 		
+
+		$field_shmu_date_land_use_changed_value = $is_edit ? $shmu->get('field_shmu_date_land_use_changed')->value : '';
 		$form['field_shmu_date_land_use_changed'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Date Land Use Changed'),
 			'#description' => '',
+			'#default_value' => $field_shmu_date_land_use_changed_value,
 			'#required' => FALSE
 		]; 
-
+		
+		$field_shmu_current_land_use_value = $is_edit ? $shmu->get('field_shmu_current_land_use')->target_id : '';
 		$form['field_shmu_current_land_use'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Current Land Use'),
 			'#options' => $land_use_options,
+			'#default_value' => $field_shmu_current_land_use_value,
 			'#required' => FALSE
 		];
 
+		// TODO: Implement edit for checkoxes
+		// dpm($shmu->get('field_shmu_current_land_use_modifiers'));
+		$field_shmu_current_land_use_modifiers_value = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_current_land_use_modifiers') : [];
+
+		// $field_shmu_current_land_use_modifiers_value = $is_edit ? Checkboxes::getCheckedCheckboxes($shmu->get('field_shmu_current_land_use_modifiers')->value) : [];
 		$form['field_shmu_current_land_use_modifiers'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Current Land Use Modifiers'),
 			'#options' => $land_use_modifier_options,
+			'#default_value' => $field_shmu_current_land_use_modifiers_value,
 			'#required' => FALSE
 		];
 
 		// New section (Overview of the Production System)
 		$form['subform_6'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 11</h4> <p> Under construction</p></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 11</h4> </div>'
 		];
 
 		// New section (Cover Crop History)
@@ -255,30 +326,45 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_8'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Tillage Type</h2><h4> 4 Fields | Section 8 of 11</h4></div>'
 		];
+
+		$field_current_tillage_system_value = $is_edit ? $shmu->get('field_current_tillage_system')->target_id : '';
 		$tillage_system_options = $this->getTillageSystemOptions();
 		$form['field_current_tillage_system'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Current Tillage System'),
 			'#options' => $tillage_system_options,
+			'#default_value' => $field_current_tillage_system_value,
 			'#required' => FALSE
 		]; 
+		$field_years_in_current_tillage_system_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_current_tillage_system'): '';
 
 		$form['field_years_in_current_tillage_system'] = [
 			// TODO: Check if needs integer number of years
 			'#type' => 'number',
 			'#title' => $this->t('Years in Current Tillage System'),
+			'#min_value' => 0,
+			'#step' => 1, // Int
 			'#description' => '',
+			'#default_value' => $field_years_in_current_tillage_system_value,
 			'#required' => FALSE
-		]; 
+		];
+		
+		$field_shmu_previous_tillage_system_value = $is_edit ? $shmu->get('field_shmu_previous_tillage_system')->target_id : '';
 		$form['field_shmu_previous_tillage_system'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Previous Tillage System'),
 			'#options' => $tillage_system_options,
+			'#default_value' => $field_shmu_previous_tillage_system_value,
 			'#required' => FALSE
 		];
+		// TODO: Enable
+		$field_years_in_prev_tillage_system_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_prev_tillage_system'): '';
+
 		$form['field_years_in_prev_tillage_system'] = [
 			// TODO: Check if needs integer number of years
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#step' => 1, // Int
 			'#title' => $this->t('Years in Previous Tillage System'),
 			'#description' => '',
 			'#required' => FALSE
@@ -291,90 +377,154 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$irrigation_in_arid_or_high_options = [];
 		$irrigation_in_arid_or_high_options['true'] = 'Yes';
 		$irrigation_in_arid_or_high_options['false'] = 'No';
+		
+		// TODO: Make fields visible based on irrigation selection.
+		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : '';
 
 		$form['field_is_irrigation_in_arid_or_high'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
 			'#options' => $irrigation_in_arid_or_high_options,
+			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
 			'#required' => FALSE
 		];
 		
+		$field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_shmu_irrigation_sample_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Sample Date'),
 			'#description' => '',
+			'#default_value' => $field_shmu_irrigation_sample_date_value,
 			'#required' => FALSE
 		];
+
+		$field_shmu_irrigation_water_ph_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_water_ph'): '';
+
 		$form['field_shmu_irrigation_water_ph'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Water pH'),
+			'#min_value' => 1,
+			'#max_value' => 14,
+			'#step' => 0.01, // Float
 			'#description' => '',
+			'#default_value' => $field_shmu_irrigation_water_ph_value,
 			'#required' => FALSE
 		];
-		$form['field_shmu_irrigation_sodium_absorption_ratio'] = [
+
+		$field_shmu_irrigation_sodium_adsorption_ratio_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sodium_adsorption_ratio'): '';
+
+		$form['field_shmu_irrigation_sodium_adsorption_ratio'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Sodium Adsoprtion Ratio'),
-			'#description' => '',
+			'#description' => '(Unit meq/L)',
+			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
 			'#required' => FALSE
 		]; 
 		
+		$field_shmu_irrigation_total_dissolved_solids_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_dissolved_solids'): '';
+
 		$form['field_shmu_irrigation_total_dissolved_solids'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Total Dissolved Solids'),
-			'#description' => '',
+			'#description' => '(Unit ppm)',
+			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
 			'#required' => FALSE
-		]; 
+		];
+		
+
+		$field_shmu_irrigation_total_alkalinity_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_alkalinity'): '';
+
 		$form['field_shmu_irrigation_total_alkalinity'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Total Alkalinity'),
-			'#description' => '',
+			'#description' => '(Unit ppm CaCO3)',
+			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
 			'#required' => FALSE
 		]; 
+
+		$field_shmu_irrigation_chlorides_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_chlorides'): '';
+
 		$form['field_shmu_irrigation_chlorides'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Chlorides'),
-			'#description' => '',
+			'#description' => '(Unit ppm)',
+			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		]; 
+		// TODO: implement fraction to decimal system
+		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sulfates'): '';
 		$form['field_shmu_irrigation_sulfates'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Sulfates'),
-			'#description' => '',
+			'#description' => '(Unit ppm)',
+			'#default_value' => $field_shmu_irrigation_sulfates_value,
 			'#required' => FALSE
 		]; 
+
+		$field_shmu_irrigation_nitrates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_nitrates'): '';
+		
 		$form['field_shmu_irrigation_nitrates'] = [
 			'#type' => 'number',
+			'#min_value' => 0,
+			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
+			'#step' => 0.01, // Float
 			'#title' => $this->t('Nitrates'),
-			'#description' => '',
+			'#description' => '(Unit ppm)',
+			'#default_value' => $field_shmu_irrigation_nitrates_value,
 			'#required' => FALSE
 		];
 		// New section (Additional Concerns or Impacts)
 		$form['subform_10'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Additional Concerns or Impacts</h2><h4> 2 Fields | Section 10 of 11</h4></div>'
 		];
+		
 		$major_resource_concerns_options = $this->getMajorResourceConcernOptions();
+
+		$field_shmu_major_resource_concern_values = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_major_resource_concern') : [];
+
 		$form['field_shmu_major_resource_concern'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Other Major Resource Concerns'),
 			'#options' => $major_resource_concerns_options,
+			'#default_value' => $field_shmu_major_resource_concern_values,
 			'#required' => FALSE
 		];
+		
+		$field_shmu_resource_concern_values = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_resource_concern') : [];
 
 		$resource_concern_options = $this->getResourceConcernOptions();
 		$form['field_shmu_resource_concern'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Other Specific Resource Concerns'),
 			'#options' => $resource_concern_options,
-			'#required' => TRUE
+			'#default_value' => $field_shmu_resource_concern_values,
+			'#required' => FALSE
 		]; 
 		$form['subform_11'] = [
 			'#markup' => '<div class="subform-title-container"><h2>NRCS Practices</h2><h4> 1 Field | Section 11 of 11</h4></div>'
 		];
+
+		$field_shmu_practices_addressed_values = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_practices_addressed') : [];
 		$practices_addressed_options = $this->getPracticesAddressedOptions();
 		$form['field_shmu_practices_addressed'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Practices Addressed'),
 			'#options' => $practices_addressed_options,
+			'#default_value' => $field_shmu_practices_addressed_values,
 			'#required' => FALSE
 		];
 		
@@ -405,6 +555,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
+		
+		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op'];
+		
 		$values = $form_state->getValues();
 		// dpm($values);
 
@@ -414,26 +568,49 @@ class SoilHealthManagementUnitForm extends FormBase {
 						   'field_shmu_major_resource_concern',
 						   'field_shmu_resource_concern',
 							'field_shmu_practices_addressed'];
-		// To be submitted to asset creation
-		$shmu_submission = [];
-		$shmu_submission['type'] = 'soil_health_management_unit';
-		foreach($values as $key => $value){
-			if(in_array($key,$checkbox_types)){
-				// Value is of type array (Multi-select)
-				$shmu_submission[$key] =  Checkboxes::getCheckedCheckboxes($value);
-			} else {
-				// Value is primative or reference
-				$shmu_submission[$key] = $value;
+
+		if($form_state->get('operation') == 'create'){
+			// To be submitted to asset creation
+			$shmu_submission = [];
+			$shmu_submission['type'] = 'soil_health_management_unit';
+	
+			foreach($values as $key => $value){
+				// If it is an ignored field, skip the loop
+				if(in_array($key, $ignored_fields)){ continue; }
+				
+				if(in_array($key,$checkbox_types)){
+					// Value is of type array (Multi-select)
+					$shmu_submission[$key] =  Checkboxes::getCheckedCheckboxes($value);
+				} else {
+					// Value is primative or reference
+					$shmu_submission[$key] = $value;
+				}
 			}
+	
+			$shmu = Asset::create($shmu_submission);
+			$shmu -> save();
+		}					
+
+		if($form_state->get('operation') == 'edit'){
+			// Find the existing one
+			$id = $form_state->get('shmu_id');
+			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+
+			foreach($values as $key=>$value){
+				// If it is an ignored field, skip the loop
+				if(in_array($key, $ignored_fields)){ continue; }
+
+				$shmu->set($key,$value);
+			}
+			$shmu->save();
 		}
 
-		$shmu = Asset::create($shmu_submission);
-		$shmu -> save();
-
+		// Send success message to user.
 		$this
 			->messenger()
 			->addStatus($this
 			->t('Form submitted for Soil Health Management Unit', []));
 
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 }

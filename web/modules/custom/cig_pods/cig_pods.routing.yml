@@ -93,3 +93,10 @@ cig_pods.edit_lab_test_form:
     _title: ""
   requirements:
     _permission: "access content"
+cig_pods.edit_soil_health_management_unit_form:
+  path: "/edit/shmu/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthManagementUnitForm'
+    _title: ""
+  requirements:
+    _permission: "access content"    

@@ -86,7 +86,7 @@ private function convertFractionsToDecimal($is_edit, $labResults, $field){
      $form['field_lab_result_raw_respiration'] = [
          '#type' => 'number',
          '#step' => 0.01,
-         '#title' => $this->t('Respiration (Unit mg/g dry weight'),
+         '#title' => $this->t('Respiration (Unit mg/g dry weight)'),
          '#description' => '',
          '#default_value' => $raw_respiration_results,
          '#required' => TRUE

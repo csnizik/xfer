@@ -62,8 +62,9 @@ cig_pods.lab_test_method_form:
   path: "/create/lab_testing_method"
   defaults:
     _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
+    _title: ""
   requirements:
-  _permission: "access content"
+    _permission: "access content"
 
 cig_pods.lab_results_form:
   path: "/create/lab_results"

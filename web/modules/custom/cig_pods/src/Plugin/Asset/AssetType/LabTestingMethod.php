@@ -409,6 +409,25 @@ class LabTestingMethod extends FarmAssetType {
                 'type' => 'options_select'
             ]
         ],
+        'field_lab_soil_test_laboratory' => [
+            'type'  => 'entity_reference',
+            'label' => 'Soil Health Test Laboratory',
+            'description' => $this->t('Lab Test Method d_laboratory'),
+			'target_type' => 'taxonomy_term',
+			'target_bundle' => 'd_laboratory',
+			'handler' => 'default',
+            'required' => TRUE,
+            'multiple' => FALSE,
+            // Lower weight shows up first in form
+            'weight' => [
+               'form' => 25,
+               'view' => 25
+			],
+            'form_display_options' => [
+                'label' => 'inline',
+                'type' => 'options_select'
+            ]
+        ],
 
       ];
 

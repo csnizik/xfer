@@ -62,7 +62,7 @@ class LabTestMethodForm extends FormBase {
         'field_lab_method_respiration_incubation_days', 'field_lab_method_respiration_detection_method', 'field_lab_method_bulk_density_core_diameter', 'field_lab_method_bulk_density_volume',
         'field_lab_method_infiltration_method', 'field_lab_method_electroconductivity_method', 'field_lab_method_nitrate_n_method','field_lab_method_phosphorus_method','field_lab_method_potassium_method',
         'field_lab_method_calcium_method', 'field_lab_method_magnesium_method', 'field_lab_method_sulfur_method', 'field_lab_method_iron_method', 'field_lab_method_manganese_method', 'field_lab_method_copper_method',
-        'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method', 'field_lab_method_molybdenum_method');
+        'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method', 'field_lab_method_molybdenum_method', 'field_lab_soil_test_laboratory');
 
     }
 
@@ -95,22 +95,15 @@ class LabTestMethodForm extends FormBase {
         $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
         $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
         $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
-        $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
+        // $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
         $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
+        $s_he_test_laboratory = $this->getSoilHealthExtractionOptions("d_laboratory");
 
         $soil_sample = $this->getSoilSampleOptions();
 
         $form['lab_test_title'] = [
             '#markup' => '<h1>Methods</h1>',
         ];
-
-        // $method_name = $is_edit ?  $labTestMethod->get('name')->value : "";
-        // $form['name'] = [
-        //     '#type' => 'textfield',
-        //     '#title' => $this->t('Methods Name'),
-        //     '#default_value' => $method_name,
-        //     '#required' => TRUE
-        // ];
 
         $soil_sample_default_id = $is_edit ? $labTestMethod->get('field_lab_method_soil_sample')->target_id : NULL;
         $form['field_lab_method_soil_sample'] = [
@@ -122,7 +115,16 @@ class LabTestMethodForm extends FormBase {
 		];
 
         $form['lab_form_header'] = [
-			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Methods</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+		];
+
+        $soil_test_lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
+        $form['field_lab_soil_test_laboratory'] = [
+			'#type' => 'select',
+			'#title' => 'Soil Health Test Laboratory',
+			'#options' => $s_he_test_laboratory,
+            '#default_value' => $soil_test_lab_default,
+			'#required' => TRUE
 		];
 
         $aggregate_unit_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_unit')->target_id : NULL;

@@ -8,7 +8,7 @@ Use Drupal\asset\Entity\Asset;
 
 class LabTestMethodForm extends FormBase {
 
-    public function getSoilHealthExtractionOptions($bundle){
+    public function getTaxonomyOptions($bundle){
         $shde_options = [];
         $shde_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
             [
@@ -88,16 +88,15 @@ class LabTestMethodForm extends FormBase {
 
         $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form';
 
-        $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
-        $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
-        $infiltration_method = $this->getSoilHealthExtractionOptions("d_infiltration_method");
-        $ec_method = $this->getSoilHealthExtractionOptions("d_ec_method");
-        $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
-        $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
-        $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
-        // $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
-        $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
-        $s_he_test_laboratory = $this->getSoilHealthExtractionOptions("d_laboratory");
+        $agg_stab_unit = $this->getTaxonomyOptions("d_aggregate_stability_un");
+        $agg_stab_method = $this->getTaxonomyOptions("d_aggregate_stability_me");
+        $infiltration_method = $this->getTaxonomyOptions("d_infiltration_method");
+        $ec_method = $this->getTaxonomyOptions("d_ec_method");
+        $nitrate_method = $this->getTaxonomyOptions("d_nitrate_n_method");
+        $ph_method = $this->getTaxonomyOptions("d_ph_method");
+        $resp_detect = $this->getTaxonomyOptions("d_respiration_detection_");
+        $s_he_extract = $this->getTaxonomyOptions("d_soil_health_extraction");
+        $s_he_test_laboratory = $this->getTaxonomyOptions("d_laboratory");
 
         $soil_sample = $this->getSoilSampleOptions();
 
@@ -157,21 +156,11 @@ class LabTestMethodForm extends FormBase {
         $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
         $form['field_lab_method_respiration_detection_method'] = [
 		    '#type' => 'select',
-		    '#title' => 'Respiration Detection Method (unit ppm)',
+		    '#title' => 'Respiration Detection Method',
 	 	    '#options' => $resp_detect,
             '#default_value' => $respiratory_detection_default_value,
 	 	    '#required' => TRUE
 	    ];
-
-        $bulk_density_volume_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_volume') : NULL;
-        $form['field_lab_method_bulk_density_volume'] = [
-            '#type' => 'number',
-            '#step' => 0.01,
-            '#min' => 0,
-            '#title' => $this->t('Bulk Density Core Diameter (Unit Inches)'),
-            '#default_value' => $bulk_density_volume_default,
-            '#required' => TRUE
-        ];
 
         $bulk_density_core_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_core_diameter') : NULL;
         $form['field_lab_method_bulk_density_core_diameter'] = [
@@ -180,6 +169,16 @@ class LabTestMethodForm extends FormBase {
             '#step' => 0.01,
             '#min' => 0,
             '#default_value' => $bulk_density_core_default,
+            '#required' => TRUE
+        ];
+
+        $bulk_density_volume_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_volume') : NULL;
+        $form['field_lab_method_bulk_density_volume'] = [
+            '#type' => 'number',
+            '#step' => 0.01,
+            '#min' => 0,
+            '#title' => $this->t('Bulk Density Volume (Cubic Centimeters)'),
+            '#default_value' => $bulk_density_volume_default,
             '#required' => TRUE
         ];
 

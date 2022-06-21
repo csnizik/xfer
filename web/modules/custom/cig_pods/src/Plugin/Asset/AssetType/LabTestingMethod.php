@@ -39,15 +39,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => -1,
-               'view' => -1
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
         'field_lab_method_aggregate_stability_unit' => [
             'type'  => 'entity_reference',
@@ -58,14 +49,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            'weight' => [
-               'form' => 6,
-               'view' => 6
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
         'field_lab_method_aggregate_stability_method' => [
             'type'  => 'entity_reference',
@@ -76,15 +59,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 7,
-               'view' => 7
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
         'field_lab_method_respiration_incubation_days' =>[
             'type'  => 'fraction',
@@ -102,15 +76,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 9,
-               'view' => 9
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
         'field_lab_method_bulk_density_core_diameter' =>[
             'type' => 'fraction',
@@ -133,15 +98,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 10,
-               'view' => 10
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_electroconductivity_method' => [
             'type'  => 'entity_reference',
@@ -152,15 +108,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 11,
-               'view' => 11
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_nitrate_n_method' => [
             'type'  => 'entity_reference',
@@ -171,15 +118,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 12,
-               'view' => 12
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_phosphorus_method' => [
             'type'  => 'entity_reference',
@@ -190,15 +128,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 13,
-               'view' => 13
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_potassium_method' => [
             'type'  => 'entity_reference',
@@ -209,15 +138,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 14,
-               'view' => 14
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_calcium_method' => [
             'type'  => 'entity_reference',
@@ -228,15 +148,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 15,
-               'view' => 15
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_magnesium_method' => [
             'type'  => 'entity_reference',
@@ -247,15 +158,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 16,
-               'view' => 16
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_sulfur_method' => [
             'type'  => 'entity_reference',
@@ -266,15 +168,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 17,
-               'view' => 17
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_iron_method' => [
             'type'  => 'entity_reference',
@@ -285,15 +178,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 18,
-               'view' => 18
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_manganese_method' => [
             'type'  => 'entity_reference',
@@ -304,15 +188,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 19,
-               'view' => 19
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_copper_method' => [
             'type'  => 'entity_reference',
@@ -323,15 +198,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 20,
-               'view' => 20
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_zinc_method' => [
             'type'  => 'entity_reference',
@@ -342,15 +208,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 21,
-               'view' => 21
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_boron_method' => [
             'type'  => 'entity_reference',
@@ -361,15 +218,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 22,
-               'view' => 22
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_aluminum_method' => [
             'type'  => 'entity_reference',
@@ -380,15 +228,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 23,
-               'view' => 23
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
 		],
 		'field_lab_method_molybdenum_method' => [
             'type'  => 'entity_reference',
@@ -399,15 +238,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => FALSE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 24,
-               'view' => 24
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
         ],
         'field_lab_soil_test_laboratory' => [
             'type'  => 'entity_reference',
@@ -418,15 +248,6 @@ class LabTestingMethod extends FarmAssetType {
 			'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-            // Lower weight shows up first in form
-            'weight' => [
-               'form' => 25,
-               'view' => 25
-			],
-            'form_display_options' => [
-                'label' => 'inline',
-                'type' => 'options_select'
-            ]
         ],
 
       ];

@@ -5,6 +5,8 @@ namespace Drupal\cig_pods\Form;
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
 
 class LabTestMethodForm extends FormBase {
 
@@ -23,9 +25,9 @@ class LabTestMethodForm extends FormBase {
         return $sdhe_options;
     }
 
-    private function getSoilSampleOptions(){
+    private function getAssetOptions($assetType){
         $soil_health_sample_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_sample']
+			['type' => $assetType]
 		);
 		$soil_health_sample_options = array();
 		$soil_health_sample_keys = array_keys($soil_health_sample_assets);
@@ -62,7 +64,7 @@ class LabTestMethodForm extends FormBase {
         'field_lab_method_respiration_incubation_days', 'field_lab_method_respiration_detection_method', 'field_lab_method_bulk_density_core_diameter', 'field_lab_method_bulk_density_volume',
         'field_lab_method_infiltration_method', 'field_lab_method_electroconductivity_method', 'field_lab_method_nitrate_n_method','field_lab_method_phosphorus_method','field_lab_method_potassium_method',
         'field_lab_method_calcium_method', 'field_lab_method_magnesium_method', 'field_lab_method_sulfur_method', 'field_lab_method_iron_method', 'field_lab_method_manganese_method', 'field_lab_method_copper_method',
-        'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method', 'field_lab_method_molybdenum_method', 'field_lab_soil_test_laboratory');
+        'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method', 'field_lab_method_molybdenum_method', 'field_lab_soil_test_laboratory', 'field_lab_method_lab_test_profile');
 
     }
 
@@ -72,6 +74,8 @@ class LabTestMethodForm extends FormBase {
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 
         $labTestMethod  = [];
+
+        $labTestProfile = NULL;
 
         $is_edit = $id <> NULL;
 
@@ -98,7 +102,8 @@ class LabTestMethodForm extends FormBase {
         $s_he_extract = $this->getTaxonomyOptions("d_soil_health_extraction");
         $s_he_test_laboratory = $this->getTaxonomyOptions("d_laboratory");
 
-        $soil_sample = $this->getSoilSampleOptions();
+        $soil_sample = $this->getAssetOptions('soil_health_sample');
+        $lab_test_profile = $this->getAssetOptions('lab_testing_profile');
 
         $form['lab_test_title'] = [
             '#markup' => '<h1>Methods</h1>',
@@ -117,13 +122,25 @@ class LabTestMethodForm extends FormBase {
 			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
 
-        $soil_test_lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
+        $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
         $form['field_lab_soil_test_laboratory'] = [
 			'#type' => 'select',
 			'#title' => 'Soil Health Test Laboratory',
 			'#options' => $s_he_test_laboratory,
-            '#default_value' => $soil_test_lab_default,
-			'#required' => TRUE
+            '#default_value' => $lab_default,
+			'#required' => TRUE,
+		];
+
+        $lab_profile_default = $is_edit ? $labTestMethod->get('field_lab_method_lab_test_profile')->target_id : NULL;
+        $form['field_lab_method_lab_test_profile'] = [
+			'#type' => 'select',
+			'#title' => 'Soil Health Test Methods',
+			'#options' => $lab_test_profile,
+            '#default_value' => $soil_sample_default_id,
+			'#required' => TRUE,
+            '#ajax' => [
+                'callback' => '::loadProfileData',
+            ]
 		];
 
         $aggregate_unit_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_unit')->target_id : NULL;
@@ -347,6 +364,18 @@ class LabTestMethodForm extends FormBase {
         }
 
         return $form;
+    }
+
+    public function loadProfileData(array $form, FormStateInterface $form_state){
+
+        if($selectedValue = $form_state->getValue('field_lab_method_lab_test_profile')){
+            $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($form['field_lab_method_lab_test_profile']['options'][$selectedValue]);
+            $form['field_lab_method_aggregate_stability_unit']['#value'] = $labTestProfile;
+        }
+
+
+
+        return $form['field_lab_method_aggregate_stability_unit'];
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){

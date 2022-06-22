@@ -59,7 +59,7 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit' );
+     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method' );
     $entityCount = array();
     
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -119,7 +119,7 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
+      '#value' => $this->t('Lab Test Method(s): '.$entityCount[8]),
       '#submit' => ['::labRedirect'],
       '#suffix' => '</div>',
     ];
@@ -150,7 +150,7 @@ public function orgRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/awardee");
 }
 public function labRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/lab_testing_profile");
+  $this->pageRedirect($form_state, "/assets/lab_testing_method");
 }
 public function labresRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/lab_result");

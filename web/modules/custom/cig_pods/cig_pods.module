@@ -32,8 +32,12 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_details_display';
 	}
+	if (isset($view) && ($view->storage->id() == 'methods_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/awardee_methods_details_display';
+	}
 }
 
 function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {
- 
+
 }

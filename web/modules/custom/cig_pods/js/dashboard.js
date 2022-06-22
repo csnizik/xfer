@@ -13,7 +13,7 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "project";
       break;
     case "ltm":
-      formPage = "lab_test_profiles_admin";
+      formPage = "lab_testing_method";
       break;
     case "ltr":
       formPage = "lab_result";

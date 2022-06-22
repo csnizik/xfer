@@ -21,11 +21,11 @@ select.addEventListener("change", function handleChange(event) {
     case "pro":
       formPage = "producer";
       break;
-    //needs to be 'soil_health_sample' when form is created  
+    //needs to be 'soil_health_sample' when form is created
     case "ssa":
       formPage = "producer";
       break;
-    //needs to be 'soil_health_management_unit' when form is created    
+    //needs to be 'soil_health_management_unit' when form is created
     case "shmu":
       formPage = "producer";
       break;
@@ -33,9 +33,12 @@ select.addEventListener("change", function handleChange(event) {
     case "oper":
       formPage = "operation";
       break;
-    //needs to be 'field_assesment' when form is created  
+    //needs to be 'field_assesment' when form is created
     case "ifa":
       formPage = "field_assesment";
+      break;
+    case "ltp":
+      formPage = "lab_test_profiles_admin";
       break;
     default:
       formPage = "awardee_org";

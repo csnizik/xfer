@@ -4,7 +4,6 @@ project_entry_form:
       css/project.css: {}
   js:
     js/project.js: {}
-
 producer_entry_form:
   css:
     theme:
@@ -41,3 +40,7 @@ lab_results_form:
   css:
     theme:
       css/lab_results.css: {}
+awardee_organization_form:
+  css:
+    theme:
+      css/awardee-organization.css: {}

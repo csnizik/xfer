@@ -55,7 +55,7 @@ class ProjectForm extends FormBase {
 
 		return $contact_type_options;
 	}
-	
+
 	public function getResourceConcernOptions(){
 		$resource_concern_options = [];
 		$resource_concern_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
@@ -63,15 +63,15 @@ class ProjectForm extends FormBase {
 		 );
 
 		 $resource_concern_keys = array_keys($resource_concern_terms);
- 
+
 		 foreach($resource_concern_keys as $resource_concern_key) {
 		   $term = $resource_concern_terms[$resource_concern_key];
 		   $resource_concern_options[$resource_concern_key] = $term -> getName();
 		 }
-		
+
 		return $resource_concern_options;
 	}
-	
+
 	public function getProducerOptions() {
 		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
 		   ['type' => 'producer']
@@ -102,7 +102,7 @@ class ProjectForm extends FormBase {
 			'$description' => 'Project Name',
 			'#required' => TRUE,
 		];
-		
+
 		$form['agreement_number'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Agreement Number'),
@@ -209,7 +209,7 @@ class ProjectForm extends FormBase {
 		  '#suffix' => '</div>',
 		];
 
-		
+
 
 		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
 
@@ -258,9 +258,9 @@ class ProjectForm extends FormBase {
 			$form['names_fieldset'][$i]['new_line_container'] = [
 				'#markup' => '<div class="clear-space"></div>'
 			];
-			
+
 		}
-		
+
 		$form['actions'] = [
 			'#type' => 'actions',
 		];
@@ -301,13 +301,13 @@ class ProjectForm extends FormBase {
 			if(in_array($i,$removed_producers)){
 				continue;
 			}
-			
+
 			$form['producers_fieldset'][$i]['producer_name'] = [
 				'#type' => 'select',
 				'#title' => $this->t("Producer Name"),
 				'#options' => $producer_options,
 				'#prefix' => ($num_producer_lines > 1 && $i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
-				'#suffix' => '</div>',  
+				'#suffix' => '</div>',
 			];
 
 
@@ -318,7 +318,7 @@ class ProjectForm extends FormBase {
 					'#name' => $i,
 					'#submit' => ['::removeProducerCallback'],
 					'#ajax' => [
-					  'callback' => '::addProducerRowCallback', 
+					  'callback' => '::addProducerRowCallback',
 					  'wrapper' => 'producers-fieldset-wrapper',
 					],
 					"#limit_validation_errors" => array(),
@@ -350,7 +350,7 @@ class ProjectForm extends FormBase {
 			'#prefix' => '<div id="addmore-button-container">',
 			'#suffix' => '</div>',
 		];
-		
+
 		/* Producers Information Ends*/
 
 
@@ -395,7 +395,7 @@ class ProjectForm extends FormBase {
 	$producers = [];
 	for( $i = 0; $i < $num_producers; $i++ ){
 		$producer_id = $form['producers_fieldset'][$i]['producer_name']['#value'];
-		$producers[$i] = $producer_id; 
+		$producers[$i] = $producer_id;
 	}
 	// Check $producers array for duplicate values
 	if (!$this->arrayValuesAreUnique($producers) ){
@@ -410,7 +410,7 @@ class ProjectForm extends FormBase {
 		$contact_name_id = $form['names_fieldset'][$i]['contact_name']['#value'];
 		$contact_names[$i] = $contact_name_id;
 	}
-	
+
 	// Check $contact_names array for duplicate values
 	if( !$this->arrayValuesAreUnique($contact_names)){
 		$form_state->setError(
@@ -418,7 +418,7 @@ class ProjectForm extends FormBase {
 			$this->t('Each contact name selection must be unique'),
 		);
 	}
-	
+
 	return;
   }
 
@@ -445,7 +445,7 @@ class ProjectForm extends FormBase {
 	$mapping = $this->getFormEntityMapping();
 
 	$project_submission = [];
-	
+
 	$project_submission['type'] = 'project';
 
 	// Single value fields can be mapped in
@@ -460,7 +460,7 @@ class ProjectForm extends FormBase {
 	$checked_resource_concerns = Checkboxes::getCheckedCheckboxes($form_state->getValue('resource_concern'));
 
 	$project_submission['field_resource_concerns'] = $checked_resource_concerns;
-	
+
 	$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions'
 	$num_contacts = count($form['names_fieldset']) - 1; // As above
 
@@ -486,7 +486,7 @@ class ProjectForm extends FormBase {
 
 	$project = Asset::create($project_submission);
 	$project -> save();
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	return;
   }
@@ -534,7 +534,7 @@ class ProjectForm extends FormBase {
     // Without this they would be added where a value was removed
     $removed_contacts = $form_state->get('removed_contacts');
     $removed_contacts[] = $indexToRemove;
-    
+
 	$form_state->set('removed_contacts', $removed_contacts);
 	$form_state->set('num_contact_lines', $num_line - 1);
 
@@ -546,12 +546,12 @@ class ProjectForm extends FormBase {
     $trigger = $form_state->getTriggeringElement();
 	$num_producer_lines = $form_state->get('num_producer_lines');
 	$indexToRemove = $trigger['#name'];
-	
+
 	unset($form['producers_fieldset'][$indexToRemove]);
 
 	$removed_producers = $form_state->get('removed_producers');
 	$removed_producers[] = $indexToRemove;
-	
+
 	$form_state->set('removed_producers',$removed_producers);
 	$form_state->set('num_producer_lines', $num_producer_lines);
 

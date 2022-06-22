@@ -15,6 +15,24 @@ select.addEventListener("change", function handleChange(event) {
     case "ltm":
       formPage = "lab_test_profiles_admin";
       break;
+    case "ltr":
+      formPage = "lab_result";
+      break;
+    case "pro":
+      formPage = "producer";
+      break;
+    case "ssa":
+      formPage = "soil_health_sample";
+      break;
+    case "shmu":
+      formPage = "soil_health_management_unit";
+      break;
+    case "oper":
+      formPage = "operation";
+      break;
+    case "ifa":
+      formPage = "field_assesment";
+      break;
     default:
       formPage = "awardee_org";
   }

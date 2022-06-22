@@ -32,6 +32,18 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Project'),
           'ltm' => $this
 					->t('Lab Test Method'),
+          'ltr' => $this
+					->t('Lab Result'),
+          'pro' => $this
+					->t('Producer'),
+          'ssa' => $this
+					->t('Soil Sample'),
+          'shmu' => $this
+					->t('Soil Health Management Unit'),
+          'oper' => $this
+					->t('Operation'),
+          'ifa' => $this
+					->t('In-Field Assessment'),
         ],
 				'#prefix' => '<div id="top-form">'
 		];
@@ -46,7 +58,8 @@ class AwardeeDashboardForm extends FormBase {
         	'#prefix' => '<div class="bottom-form">',
     ];
 
-    $awardeeEntities = array('project', 'awardee', 'soil_health_demo_trial' );
+    $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
+     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit' );
     $entityCount = array();
     
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -67,12 +80,50 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::orgRedirect'],
     ];
 
-		$form['awardee_lab'] = [
+    $form['awardee_producer'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[2]),
+      '#value' => $this->t('Producer(s): '.$entityCount[2]),
+      '#submit' => ['::proRedirect'],
+    ];
+
+    $form['awardee_soil_health_sample'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Soil Health Sample(s): '.$entityCount[4]),
+      '#submit' => ['::ssaRedirect'],
+    ];
+
+    $form['awardee_operation'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Operation(s): '.$entityCount[0]),
+      '#submit' => ['::operRedirect'],
+    ];
+
+
+		$form['awardee_lab_result'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Lab Result(s): '.$entityCount[5]),
+      '#submit' => ['::labresRedirect'],
+    ];
+
+    $form['awardee_in_field_assesment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Field Assesment(s): '.$entityCount[6]),
+      '#submit' => ['::ifaRedirect'],
+    ];
+
+    $form['awardee_soil_health_management_unit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('SHMU(s): '.$entityCount[7]),
+      '#submit' => ['::shmuRedirect'],
+    ];
+
+    $form['awardee_lab'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Lab Test Method(s): '.$entityCount[3]),
       '#submit' => ['::labRedirect'],
       '#suffix' => '</div>',
     ];
+
 
 		return $form;
 	}
@@ -100,6 +151,24 @@ public function orgRedirect (array &$form, FormStateInterface $form_state) {
 }
 public function labRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/lab_testing_profile");
+}
+public function labresRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/lab_result");
+}
+public function proRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/producer");
+}
+public function ifaRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/field_assesment");
+}
+public function ssaRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/soil_health_sample");
+}
+public function shmuRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/soil_health_management_unit");
+}
+public function operRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/operation");
 }
 
   /**

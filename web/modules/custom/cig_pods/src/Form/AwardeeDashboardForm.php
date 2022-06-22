@@ -45,7 +45,7 @@ class AwardeeDashboardForm extends FormBase {
 		];
 
     $form['form_body'] = [
-        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods using this tool.</p>',
+        '#markup' => '<p id="form-body">"Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
         '#suffix' => '</div>',
     ];
 

@@ -16,20 +16,24 @@ select.addEventListener("change", function handleChange(event) {
       formPage = "lab_testing_method";
       break;
     case "ltr":
-      formPage = "lab_result";
+      formPage = "lab_results";
       break;
     case "pro":
       formPage = "producer";
       break;
+    //needs to be 'soil_health_sample' when form is created  
     case "ssa":
-      formPage = "soil_health_sample";
+      formPage = "producer";
       break;
+    //needs to be 'soil_health_management_unit' when form is created    
     case "shmu":
-      formPage = "soil_health_management_unit";
+      formPage = "producer";
       break;
+    //needs to be 'operation' when form is created
     case "oper":
       formPage = "operation";
       break;
+    //needs to be 'field_assesment' when form is created  
     case "ifa":
       formPage = "field_assesment";
       break;

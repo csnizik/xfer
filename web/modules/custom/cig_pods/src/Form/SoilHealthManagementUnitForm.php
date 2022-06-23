@@ -160,10 +160,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 		}
 		return $populated_values;
 	}
-	// TODO: R
 	public function getAsset($id){
 		// We use load instead of load by properties here because we are looking by id
-		// dpm($id);
 		$asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		return $asset;
 
@@ -198,8 +196,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 			$shmu_db_crop_rotations = $this->getCropRotationIdsForShmu($shmu);
 			$form_state->set('crop_rotations', $shmu_db_crop_rotations);
-			dpm($shmu_db_crop_rotations);
-			dpm("hi");
 		} else {
 			$form_state->set('operation','create');
 		}
@@ -345,7 +341,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		
 
 
-
+		// For the Date input fields, we have to convert from UNIX to yyyy-mm-dd 
 		if($is_edit){
 			// $field_shhmu_date_land_use_changed_value is expected to be a UNIX timestamp
 			$field_shmu_date_land_use_changed_value = $shmu->get('field_shmu_date_land_use_changed')[0]->value;
@@ -353,7 +349,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		} else {
 			$default_value_shmu_date_land_use_changed = '';
 		}
-		// Format the UNIX timestamp
 		
 		$form['field_shmu_date_land_use_changed'] = [
 			'#type' => 'date',
@@ -372,10 +367,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		// dpm($shmu->get('field_shmu_current_land_use_modifiers'));
 		$field_shmu_current_land_use_modifiers_value = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_current_land_use_modifiers') : [];
 
-		// $field_shmu_current_land_use_modifiers_value = $is_edit ? Checkboxes::getCheckedCheckboxes($shmu->get('field_shmu_current_land_use_modifiers')->value) : [];
 		$form['field_shmu_current_land_use_modifiers'] = [
 			'#type' => 'checkboxes',
 			'#title' => $this->t('Current Land Use Modifiers'),
@@ -389,14 +382,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6.2 of 11</h4> </div>'
 		];
 
-		// TODO: Multiple rotation support on Crop rotation sequence (Crop sequence is a collection of crop rotations) 
 
 		$form['crop_sequence'] = [
 			'#prefix' => '<div id ="crop_sequence">',
 			'#suffix' => '</div>',
 		];
 
-		$num_crop_rotations = 2; // TODO: Make dynamic
+		$num_crop_rotations = 2; // TODO: Make dynamic 
 		
 		// Get Options for Year and Crop Dropdowns
 		$crop_options = $this->getCropOptions();
@@ -407,47 +399,31 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$month_lookup = ["J","F","M","A","M","J","J","A","S","O","N","D"];
 
-		// $crop_rotation_target_ids is expected to be a list of ids associated with assets of type SHMU Crop Rotation
-		// $crop_rotation_target_ids = [];
-		// if($is_edit){
-		// 	$field_shmu_crop_rotation_list = $shmu->get('field_shmu_crop_rotation_sequence'); // Expected type of FieldItemList
-		// 	foreach($field_shmu_crop_rotation_list as $key=>$value){
-		// 		$crop_rotation_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
-		// 	}
-		// }
-		// dpm($crop_rotation_target_ids);
-		// Array
-		// (
-		// 	[0] => 16
-		// 	[1] => 17
-		// )
-
-		// TODO: Implement editing logic
 		for($rotation=0; $rotation < $num_crop_rotations; $rotation++){
 
 			$crop_default_value = '';
 			$crop_year_default_value = '';
 			$crop_months_present_lookup = [];
-			// dpm($crop_rotation_target_ids);
+
 			if($is_edit){
 
+				// $shmu_db_crop_rotations is expected to be a list of ids associated with assets of type SHMU Crop Rotation
 				$crop_rotation_id = $shmu_db_crop_rotations[$rotation];
+
 				$tmp_rotation = $this->getAsset($crop_rotation_id)->toArray();
-				// dpm($tmp_rotation);
-				// dpm($tmp_rotation->toArray());
+
 				$crop_default_value = $tmp_rotation['field_shmu_crop_rotation_crop'][0]['target_id'];
-				// It is of int type, denom will always be 1 
 				$crop_years_default_value = $tmp_rotation['field_shmu_crop_rotation_year'][0]['numerator'];
 
 				$tmp_rotation_crops_present = $tmp_rotation['field_shmu_crop_rotation_crop_present']; 
 				foreach($tmp_rotation_crops_present as $key=>$fraction){
-					$crop_months_present_lookup[] = $fraction['numerator'];
+					$crop_months_present_lookup[] = $fraction['numerator']; // TODO: Probably a better approach to this
 				}
 			
 			}
 
 			$form['crop_sequence'][$rotation] = [
-				'#prefix' => '<div id="crop_rotation">', // TODO maybe add attribute here
+				'#prefix' => '<div id="crop_rotation">', 
 				'#suffix' => '</div>',				
 			];
 
@@ -476,8 +452,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 					'#title' => $month_lookup[$month],
 					'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
 					'#type' => 'checkbox',
-					'#return_value' => True, // Value to return when the checkbox is checked TODO: maybe change to $month?
-					// '#default_value' => True,
+					'#return_value' => True, 
 					'#default_value' => in_array($month, $crop_months_present_lookup),
 				];
 			}	
@@ -506,7 +481,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$field_years_in_current_tillage_system_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_current_tillage_system'): '';
 
 		$form['field_years_in_current_tillage_system'] = [
-			// TODO: Check if needs integer number of years. Same with prev till years below
 			'#type' => 'number',
 			'#title' => $this->t('Years in Current Tillage System'),
 			'#min_value' => 0,
@@ -737,7 +711,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
 		
 		$form_values = $form_state->getValues();
-		// dpm($values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
@@ -753,7 +726,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence'];
 
 		$shmu = NULL;
-		dpm("Brrr 1");
 		if(!$is_edit){
 			$shmu_template = [];
 			$shmu_template['type'] = 'soil_health_management_unit'; 
@@ -761,14 +733,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access
-			dpm("Brrr 2");
 			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 		foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
 			if(in_array($key, $ignored_fields)){ continue; }
 
-			// These fields have special handling
+			// These fields have special handling. Shown below
 			if(in_array($key, $crop_rotation_fields)){ continue; }
 			
 			if(in_array($key, $checkboxes_fields)){
@@ -784,26 +755,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 			
 			$shmu->set( $key,$value );
 		}
-		dpm("Brrr 3");
 
 		// TODO: Make Dynamic
 		$num_crop_rotations = 2;
 
-
-		
 		$crop_options = $this->getCropOptions();
 
 		$crop_rotation_template = [];
 		$crop_rotation_template['type'] = 'shmu_crop_rotation';
 
-		// foreach($form_values as $key => $value){
-		// 	dpm($key);
-		// 	dpm($value);
-		// }
-
-		// $crop_sequence = $form_state->getValues()[''];
-		// dpm(array_keys($form_values['crop_sequence'][0]));
-		// dpm(array_keys($form_values['field_shmu_crop_rotation_crop']));
 		for($rotation = 0; $rotation < $num_crop_rotations; $rotation++ ){
 			dpm("Brrr 4");
 
@@ -832,7 +792,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$crop_rotation->set('field_shmu_crop_rotation_crop_present',$months_present);
 			
 			// TODO: Possibly change Name
-			$crop_rotation_name = $shmu->getName()." - Crop (".$crop_options[$crop_id].") Rotation ";
+			$crop_rotation_name = $shmu->getName()." - Crop (".$crop_options[$crop_id].") Rotation - Year ".$crop_rotation_year;
 			$crop_rotation->set('name',$crop_rotation_name);
 			$crop_rotation->save();
 			$crop_rotation_ids[] = $crop_rotation -> id(); // Append ID of SHMU Crop Rotation to list
@@ -841,22 +801,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 		}
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
+
 		// Cleanup - remove the old Crop Rotation Assets that are no longer used
-		
 		if($is_edit){
-			// dpm("Cleanup");
-			// $trash_rotation_ids = $form_state->getValues('crop_rotations');; // IDs of SHMU Crop Rotations that are to be deleted 
 			$trash_rotation_ids = $form_state->get('crop_rotations');
-			dpm("Trash rotation IDS:");
-			dpm($trash_rotation_ids);
-			// dpm($trash_rotation_ids);
-			// dpm("Brrr 8");
 			foreach($trash_rotation_ids as $key => $id){
 				$crop_rotation_old = Asset::load($id);
 				$crop_rotation_old->delete();
 			}
 		}
-		
 		// Cleanup done
 
 
@@ -866,7 +819,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			->addStatus($this
 			->t('Form submitted for Soil Health Management Unit', []));
 
-		// TODO: Uncomment
-		// $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 }

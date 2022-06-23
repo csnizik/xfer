@@ -217,11 +217,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$shmu = NULL;
 
+		if ($form_state->get('load_done') == NULL){
+			$form_state->set('load_done', FALSE);
+		}
+
 		// Determine if it is an edit process. If it is, load SHMU into local variable.
 		if($is_edit){
-			if ($form_state->get('load_done') == NULL){
-				$form_state->set('load_done', FALSE);
-			}
 			$form_state->set('operation','edit');
 			$form_state->set('shmu_id', $id);
 			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -427,82 +428,87 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#prefix' => '<div id ="crop_sequence">',
 			'#suffix' => '</div>',
 		];
-		
-		$fs_crop_rotations = $form_state -> get('rotations');
-		// dpm($fs_crop_rotations);
-		
-		$num_crop_rotations = 1;
-		if($is_edit && count($fs_crop_rotations) <> 0){
-			$num_crop_rotations = count($fs_crop_rotations);
-		}
-		
+
 		// Get Options for Year and Crop Dropdowns
 		$crop_options = $this->getCropOptions();
 		$crop_options[''] = '-- Select --'; 
 
 		$crop_rotation_years_options = $this->getCropRotationYearOptions();
 		$crop_rotation_years_options[''] = '-- Select --';
-
+		
 		$month_lookup = ["J","F","M","A","M","J","J","A","S","O","N","D"];
 
+		$fs_crop_rotations = $form_state -> get('rotations');
+		
+		$num_crop_rotations = 1;
 
+		if(count($fs_crop_rotations) <> 0){
+			$num_crop_rotations = count($fs_crop_rotations);
+		}
+		
+		// dpm("Num rotations detected:");
 		// dpm($num_crop_rotations);
-		for( $rotation = 0; $rotation < $num_crop_rotations; $rotation++ ){
+		
+		// dpm("Loading crop rotations with the follow keys in form state index");
+		// dpm(array_keys($fs_crop_rotations));
 
+		$form_index = 0; // Not to be confused with rotation
+		foreach($fs_crop_rotations as $fs_index => $rotation  ){
+			// dpm("\$fs_index");
+			// dpm($fs_index);
+			
+			// dpm("\$form_index");
+			// dpm($form_index);
+			// if(!in_array($rotation, $fs_crop_rotations)){
+			// 	$num_crop_rotations += 1;
+			// }
 			$crop_default_value = ''; // Default value for empty Rotation
 			$crop_year_default_value = ''; // Default value for empty rotation
 			$crop_months_present_lookup = []; // Default value for empty rotation
 
+			$crop_default_value = $rotation['field_shmu_crop_rotation_crop'][0]['target_id'];
+			$crop_years_default_value = $rotation['field_shmu_crop_rotation_year'][0]['numerator'];
+			$crop_months_present_lookup_raw = $rotation['field_shmu_crop_rotation_crop_present']; // Of type array
+			
+			foreach($crop_months_present_lookup_raw as $key=>$value){
+				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
+			}
+
+			// dpm("Values for crop rotation:");
+			// dpm($crop_default_value);
+			// dpm($crop_years_default_value);
+			// dpm($crop_months_present_lookup);
+
 			// dpm("Brrr 10");
 			// dpm(array_keys($fs_crop_rotations));
 			// If this rotation is indexed in fs crop rotations
-			if(in_array($rotation, array_keys($fs_crop_rotations))){
-				// dpm("Populating crop rotation from form state");
-				$crop_default_value = $fs_crop_rotations[$rotation]['field_shmu_crop_rotation_crop'][0]['target_id'];
-				$crop_years_default_value = $fs_crop_rotations[$rotation]['field_shmu_crop_rotation_year'][0]['numerator'];
-				$crop_months_present_lookup_raw = $fs_crop_rotations[$rotation]['field_shmu_crop_rotation_crop_present']; // Of type array
-				
-				$crop_months_present_lookup = [];
-				foreach($crop_months_present_lookup_raw as $key=>$value){
-					$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
-				}
-				// dpm("Values for crop rotation:");
-				// dpm($crop_default_value);
-				// dpm($crop_years_default_value);
-				// dpm($crop_months_present_lookup);
-			} else {
-				// There's nothing in the form state, don't draw.
-				dpm("Skipping rendering Crop rotation section because it is not in the form state (Something bad happened) ");
-				// dpm($rotation);
-				// dpm($fs_crop_rotations);
 
-				continue;
-			}
 			// dpm("Rendering Crop rotation section");
-			$form['crop_sequence'][$rotation] = [
+			dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
+
+			$form['crop_sequence'][$fs_index] = [
 				'#prefix' => '<div id="crop_rotation">', 
 				'#suffix' => '</div>',				
 			];
 
-			$form['crop_sequence'][$rotation]['field_shmu_crop_rotation_crop'] = [
+			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
 				'#type' => 'select',
 				'#title' => 'Crop',
 				'#options' => $crop_options,
 				'#default_value' => $crop_default_value
 			];
-			$form['crop_sequence'][$rotation]['field_shmu_crop_rotation_year'] = [
+			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_year'] = [
 				'#type' => 'select',
 				'#title' => 'Year',
 				'#options' => $crop_rotation_years_options,
 				'#default_value' => $crop_years_default_value,
 			];
-			$form['crop_sequence'][$rotation]['month_wrapper'] = [
+			$form['crop_sequence'][$fs_index]['month_wrapper'] = [
 				'#prefix' => '<div id="crop_rotation_months"',
 				'#suffix' => '</div>',				
 			];
 			for( $month = 0; $month < 12 ; $month++ ){
-				$month_default_value = False;
-				$form['crop_sequence'][$rotation]['month_wrapper'][$month]['is_present'] = [
+				$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
 					'#title' => $month_lookup[$month],
 					'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
 					'#type' => 'checkbox',
@@ -510,11 +516,22 @@ class SoilHealthManagementUnitForm extends FormBase {
 					'#default_value' => in_array($month, $crop_months_present_lookup),
 				];
 			}
-			$form['crop_sequence'][$rotation]['actions']['send'] = [
+			$form['crop_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
-				'#value' => 'Delete (Not functional)',
+				'#name' => $fs_index, 
+				'#submit' => ['::deleteCropRotation'],
+				'#ajax' => [
+					'callback' => "::deleteCropRotationCallback",
+					'wrapper' => 'crop_sequence',
+				],
+				'#value' => 'Delete',
 			];
+
+			// Very important
+			$form_index = $form_index + 1;
+			// End very important
 		}
+		// Add another logic
 		$form['crop_sequence']['actions']['addCrop'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCropRotation'],
@@ -816,11 +833,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 			}
 			if(in_array($key,$date_fields)){
 				// $value is expected to be a string of format yyyy-mm-dd
-				$shmu->set( $key,strtotime($value) ); //Set directly on SHMU object 
+				$shmu->set( $key, strtotime( $value ) ); //Set directly on SHMU object 
 				continue;
 			}
 			
-			$shmu->set( $key,$value );
+			$shmu->set( $key, $value );
 		}
 
 		// TODO: Make Dynamic
@@ -832,11 +849,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$crop_rotation_template['type'] = 'shmu_crop_rotation';
 
 		for($rotation = 0; $rotation < $num_crop_rotations; $rotation++ ){
-			dpm("Brrr 4");
+			// dpm("Brrr 4");
 
 			// If they did not select a crop for the row, do not include it in the save
 			if($form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_crop'] == NULL) continue;
-			dpm("Brrr 5");
+			// dpm("Brrr 5");
 
 			// We alwasys create a new crop rotation asset for each rotation
 			$crop_rotation = Asset::create( $crop_rotation_template );
@@ -848,14 +865,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// read the crop rotation year from select dropdown for given rotation
 			$crop_rotation_year = $form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_year'];
 			$crop_rotation->set( 'field_shmu_crop_rotation_year', $crop_rotation_year );
-			dpm("Brrr 6");
+			// dpm("Brrr 6");
 
 			$months_present = []; // List of months in which the crop is present in the SHMU for year specified in $crop_rotation_year
 			for($month = 0; $month < 12; $month++){
 				$crop_present = $form_values['crop_sequence'][$rotation]['month_wrapper'][$month]['is_present'];
 				if($crop_present) $months_present[] = $month; 
 			}
-			dpm("Brrr 7");
+			// dpm("Brrr 7");
 
 			$crop_rotation -> set('field_shmu_crop_rotation_crop_present', $months_present);
 			
@@ -864,8 +881,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$crop_rotation->set('name',$crop_rotation_name);
 			$crop_rotation->save();
 			$crop_rotation_ids[] = $crop_rotation -> id(); // Append ID of SHMU Crop Rotation to list
-			dpm("Created new Crop rotation with ID:");
-			dpm($crop_rotation->id());
+			// dpm("Created new Crop rotation with ID:");
+			// dpm($crop_rotation->id());
 		}
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
@@ -892,7 +909,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 	// Adds a new row to crop rotation
 	public function addAnotherCropRotation(array &$form, FormStateInterface $form_state){
-		dpm("Adding  new rotation");
+		// dpm("Adding  new rotation");
 		$rotations = $form_state->get('rotations');
 		$new_crop_rotation = [];
 		$new_crop_rotation['field_shmu_crop_rotation_crop'] = array();
@@ -900,16 +917,81 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$new_crop_rotation['field_shmu_crop_rotation_year'][0]['numerator'] = '';
 		$new_crop_rotation['field_shmu_crop_rotation_crop_present'] = [];
 
-		dpm($new_crop_rotation);
+		// dpm($new_crop_rotation);
+		$crop_options = $this->getCropOptions();
 		$rotations[] = $new_crop_rotation;
 		$form_state->set('rotations', $rotations);
+		dpm("new indices");
+		dpm(array_keys($rotations));
 		$form_state->setRebuild(True);
-		dpm("New value for rotations in form state");
-		dpm($rotations);
+
+		foreach($rotations as $key=>$rotation){
+			if($rotation[0]['target_id'] <> ''){
+				dpm($crop_options[$rotation[0]['target_id']]);
+			} else {
+				dpm('No target ID');
+			}
+			// dpm($crop_options[$value[]]);
+			// dpm($this->getAsset($value['id'])->getName());
+		}
+		// dpm("New value for rotations in form state");
+		// dpm($rotations);
 		// dpm("button clicked");
 	}
 
 	public function addAnotherCropRotationCallback(array &$form, FormStateInterface $form_state){
+		return $form['crop_sequence'];
+	}
+
+	public function deleteCropRotation(array &$form, FormStateInterface $form_state){
+	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+
+		$rotations = $form_state->get('rotations');
+		// dpm("old rotations:");
+		// dpm($rotations);
+		dpm("old rotations");
+		dpm(array_keys($rotations));
+		dpm($rotations);
+		dpm("Removing rotation with index ".$idx_to_rm);
+
+		unset($rotations[$idx_to_rm]); // Remove the index
+		dpm("new rotation");
+		dpm($rotations);
+		
+		// dpm(array_keys($rotations));
+		// $rotations = array
+		// dpm($rotations);
+		$form_state->set('rotations',$rotations);
+
+		// dpm("Num rotations");
+		// dpm(count($rotations));
+		// // dpm("Rotations:");
+		// // dpm($rotations);
+		// dpm("Removing rotation at index ".$idx_to_rm);
+
+		// $new_rotations = [];
+		// foreach($rotations as $index=> $rotation){
+		// 	dpm("Trying");
+		// 	dpm($index);
+		// 	if($index != $idx_to_rm){
+		// 		$new_rotations[] = $rotation;
+		// 	} else {
+		// 		dpm($rotation);
+		// 	}
+		// }
+		// // dpm("Rotations 2:");
+		// // dpm($rotations);
+		// // $rotations = array_values($rotations); // Re-index to 0,1,2,3... continuous
+		// // dpm("Rotations 3:");
+		// // dpm($rotations);
+		// // dpm("New rotations");
+		// dpm($new_rotations);
+
+		$form_state->setRebuild(True);
+	}
+
+
+	public function deleteCropRotationCallback(array &$form, FormStateInterface $form_state){
 		return $form['crop_sequence'];
 	}
 }

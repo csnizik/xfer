@@ -42,10 +42,21 @@
 /*Scrollbar CSS End*/
 /*===================*/
 
-#form-checkboxes {
+.form-checkboxes {
 	max-height: 396px;
 	overflow-y: overlay;
 	border: 1px solid #1B1B1B;
     border-radius: 0;
 	padding: 10px 0px 10px 16px;
+}
+.fieldset__label, .fieldset__label--group, .form-item__label {
+	font-weight: normal !important; 
+}
+
+#crop_rotation_months {
+	display: flex;
+}
+
+#crop_rotation {
+	display: flex ;
 }

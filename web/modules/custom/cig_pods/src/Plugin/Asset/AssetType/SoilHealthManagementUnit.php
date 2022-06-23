@@ -112,7 +112,15 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'multiple' => TRUE,
              'description' => '',
          ],
-         
+         'field_shmu_crop_rotation_sequence' => [
+             'label'=> 'Crop Rotation Sequence',
+             'type'=> 'entity_reference',
+             'target_type'=> 'asset',
+             'target_bundle'=> 'shmu_crop_rotation',
+             'required' => FALSE,
+             'multiple' => TRUE,
+             'description' => '',
+         ],
          // TODO: Currently skipping Production System pending re-design from Justin
          'field_current_tillage_system' => [
              'label'=> 'Current Tillage System',

@@ -212,7 +212,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		dpm("building form");
+		// dpm("building form");
 		$is_edit = $id <> NULL;
 
 		$shmu = NULL;
@@ -228,7 +228,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 			$shmu_db_crop_rotations = $this->getCropRotationIdsForShmu($shmu);
 			if(!$form_state->get('load_done')){
-				dpm("Performing initial load of Crop rotations");
+				// dpm("Performing initial load of Crop rotations");
 				$this->loadCropRotationsIntoFormState($shmu_db_crop_rotations, $form_state);
 				$form_state->set('load_done',TRUE);
 			}
@@ -237,7 +237,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// The list of Crop Rotation assets that 
 			$form_state->set('original_crop_rotation_ids', $shmu_db_crop_rotations);
 		} else {
-			$this->loadCropRotationsIntoFormState([], $form_state);
+			if(!$form_state->get('load_done')){
+				// dpm("Performing initial load of Crop rotations");
+				$this->loadCropRotationsIntoFormState([], $form_state);
+				$form_state->set('load_done',TRUE);
+			}
+			// $this->loadCropRotationsIntoFormState([], $form_state);
 			$form_state->set('operation','create');
 		}
 
@@ -324,6 +329,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_3'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
 		];
+
+		$form['static']['crop_rotation_description'] = [
+			'#markup'
+		];
 		// TODO: Lat/Long input needs decimal precision
 		$field_shmu_latitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_latitude'): '';
 		$form['field_shmu_latitude'] = [
@@ -354,6 +363,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// New section (Soil and Treatment Identification)
 		$form['subform_4'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> </div>'
+		];
+		$form['dominant_map_unit_symbol'] = [
+			'#markup' => '<div> Dominant Map Unit Symbol <br> Data fed from SSURGO <br> <br> <br> </div>' // TODO: do with CSS
+		];
+		$form['dominant_surface_texture'] = [
+			'#markup' => '<div> Dominant Surface Texture <br> Data fed from SSURGO </div>'
 		];
 		
 		// New section (Land Use History)
@@ -446,22 +461,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$num_crop_rotations = count($fs_crop_rotations);
 		}
 		
-		// dpm("Num rotations detected:");
-		// dpm($num_crop_rotations);
-		
-		// dpm("Loading crop rotations with the follow keys in form state index");
-		// dpm(array_keys($fs_crop_rotations));
 
 		$form_index = 0; // Not to be confused with rotation
 		foreach($fs_crop_rotations as $fs_index => $rotation  ){
-			// dpm("\$fs_index");
-			// dpm($fs_index);
-			
-			// dpm("\$form_index");
-			// dpm($form_index);
-			// if(!in_array($rotation, $fs_crop_rotations)){
-			// 	$num_crop_rotations += 1;
-			// }
+
 			$crop_default_value = ''; // Default value for empty Rotation
 			$crop_year_default_value = ''; // Default value for empty rotation
 			$crop_months_present_lookup = []; // Default value for empty rotation
@@ -474,16 +477,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
 			}
 
-			// dpm("Values for crop rotation:");
-			// dpm($crop_default_value);
-			// dpm($crop_years_default_value);
-			// dpm($crop_months_present_lookup);
-
-			// dpm("Brrr 10");
-			// dpm(array_keys($fs_crop_rotations));
-			// If this rotation is indexed in fs crop rotations
-
-			// dpm("Rendering Crop rotation section");
 			dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
 			$form['crop_sequence'][$fs_index] = [
@@ -531,7 +524,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$form_index = $form_index + 1;
 			// End very important
 		}
-		// Add another logic
+
+		// Add another button
 		$form['crop_sequence']['actions']['addCrop'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCropRotation'],
@@ -544,8 +538,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		// New section (Cover Crop History)
 		$form['subform_7'] = [
-			'#markup' => '<div class="subform-title-container"> <h3> Cover Crop History </h3> <h4> 1 Field | Section 7 of 11</h4> </div>'	
+			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'	
 		];
+		$form['field_shmu_initial_crops_planted'] = [
+			'#type' => 'checkboxes',
+			'#title' => 'What Crops are Currently Planted',
+			'#options' => $crop_options,
+		] ;
 
 		// New section (Tillage Type)
 		$form['subform_8'] = [
@@ -621,7 +620,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$field_shmu_irrigation_sample_date_timestamp_default_value = NULL; // TODO: Check behavior
 		}
 
-		// TODO: This field is not working correctly on create
 		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_shmu_irrigation_sample_date'] = [
 			'#type' => 'date',
@@ -849,11 +847,9 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$crop_rotation_template['type'] = 'shmu_crop_rotation';
 
 		for($rotation = 0; $rotation < $num_crop_rotations; $rotation++ ){
-			// dpm("Brrr 4");
 
 			// If they did not select a crop for the row, do not include it in the save
 			if($form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_crop'] == NULL) continue;
-			// dpm("Brrr 5");
 
 			// We alwasys create a new crop rotation asset for each rotation
 			$crop_rotation = Asset::create( $crop_rotation_template );
@@ -865,24 +861,21 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// read the crop rotation year from select dropdown for given rotation
 			$crop_rotation_year = $form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_year'];
 			$crop_rotation->set( 'field_shmu_crop_rotation_year', $crop_rotation_year );
-			// dpm("Brrr 6");
 
 			$months_present = []; // List of months in which the crop is present in the SHMU for year specified in $crop_rotation_year
 			for($month = 0; $month < 12; $month++){
 				$crop_present = $form_values['crop_sequence'][$rotation]['month_wrapper'][$month]['is_present'];
 				if($crop_present) $months_present[] = $month; 
 			}
-			// dpm("Brrr 7");
 
 			$crop_rotation -> set('field_shmu_crop_rotation_crop_present', $months_present);
 			
-			// TODO: Possibly change Name
 			$crop_rotation_name = $shmu->getName()." - Crop (".$crop_options[$crop_id].") Rotation - Year ".$crop_rotation_year;
 			$crop_rotation->set('name',$crop_rotation_name);
 			$crop_rotation->save();
 			$crop_rotation_ids[] = $crop_rotation -> id(); // Append ID of SHMU Crop Rotation to list
-			// dpm("Created new Crop rotation with ID:");
-			// dpm($crop_rotation->id());
+
+			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
@@ -925,15 +918,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 		dpm(array_keys($rotations));
 		$form_state->setRebuild(True);
 
-		foreach($rotations as $key=>$rotation){
-			if($rotation[0]['target_id'] <> ''){
-				dpm($crop_options[$rotation[0]['target_id']]);
-			} else {
-				dpm('No target ID');
-			}
-			// dpm($crop_options[$value[]]);
-			// dpm($this->getAsset($value['id'])->getName());
-		}
+		// foreach($rotations as $key=>$rotation){
+		// 	if($rotation[0]['target_id'] <> ''){
+		// 		dpm($crop_options[$rotation[0]['target_id']]);
+		// 	} else {
+		// 		dpm('No target ID');
+		// 	}
+		// 	dpm($crop_options[$value[]]);
+		// 	dpm($this->getAsset($value['id'])->getName());
+		// }
 		// dpm("New value for rotations in form state");
 		// dpm($rotations);
 		// dpm("button clicked");
@@ -949,14 +942,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$rotations = $form_state->get('rotations');
 		// dpm("old rotations:");
 		// dpm($rotations);
-		dpm("old rotations");
-		dpm(array_keys($rotations));
-		dpm($rotations);
-		dpm("Removing rotation with index ".$idx_to_rm);
+		// dpm("old rotations");
+		// dpm(array_keys($rotations));
+		// dpm($rotations);
+		// dpm("Removing rotation with index ".$idx_to_rm);
 
 		unset($rotations[$idx_to_rm]); // Remove the index
-		dpm("new rotation");
-		dpm($rotations);
+		// dpm("new rotation");
+		// dpm($rotations);
 		
 		// dpm(array_keys($rotations));
 		// $rotations = array

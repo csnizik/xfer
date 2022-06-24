@@ -46,3 +46,8 @@ lab_results_form:
   css:
     theme:
       css/lab_results.css: {}
+
+css_form:
+  css:
+    theme:
+      css/form.css: {}

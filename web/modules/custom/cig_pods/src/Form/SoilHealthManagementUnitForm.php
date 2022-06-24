@@ -325,9 +325,18 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#options' => $shmu_experimental_design_options,
 			'#required' => FALSE
 		];
+		$form['static_0']['label'] = [
+			'#markup' => '<div> Project Summary <b> (Will be populated with related project summary once Drupal roles are established) </b> </div>'
+		];
+		$form['static_0']['content'] = [
+			'#markup' => '<div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique senectus et. Volutpat sed cras ornare arcu dui vivamus. Pellentesque id nibh tortor id aliquet lectus proin. Accumsan lacus vel facilisis volutpat est velit egestas. In massa tempor nec feugiat nisl pretium. Neque egestas congue quisque egestas diam in arcu cursus euismod. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Tellus orci ac auctor augue mauris augue neque. Diam sit amet nisl suscipit.</div>'
+		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
+		];
+		$form['static_1']['content'] = [
+			'#markup' => '<div> Map Placeholder </div>',
 		];
 
 
@@ -437,17 +446,17 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 
-		$form['crop_sequence'] = [
-			'#prefix' => '<div id ="crop_sequence">',
-			'#suffix' => '</div>',
-		];
-
 		$form['static']['crop_rotation_description'] = [
 			'#markup' => '<div> Crop rotation </div>',
 		];
 
 		$form['static']['crop_rotation_description_sequence'] = [
 			'#markup' => '<div> Overview of Crop Rotation Sequence </div>'
+		];
+
+		$form['crop_sequence'] = [
+			'#prefix' => '<div id ="crop_sequence">',
+			'#suffix' => '</div>',
 		];
 		// Get Options for Year and Crop Dropdowns
 		$crop_options = $this->getCropOptions();

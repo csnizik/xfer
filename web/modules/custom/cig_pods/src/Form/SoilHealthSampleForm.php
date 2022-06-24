@@ -9,7 +9,7 @@ Use Drupal\Core\Url;
 
 class SoilHealthSampleForm extends FormBase {
 
-    public function getSHMU() {
+    public function getSHMUOptions() {
 		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
 		   ['type' => 'soil_health_management_unit']
 		);
@@ -59,7 +59,7 @@ class SoilHealthSampleForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Sample Information</h2><h4>6 Fields | Section 1 of 2</h4></div>'
 		];
 
-        $shmu_options = $this->getSHMU();
+        $shmu_options = $this->getSHMUOptions();
 		$shmu_default_value = $is_edit ?  $sample_collection->get('field_shmu_id')->target_id : '';
 		$form['shmu'] = [
 		  '#type' => 'select',

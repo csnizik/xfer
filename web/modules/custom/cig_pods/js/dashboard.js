@@ -21,13 +21,12 @@ select.addEventListener("change", function handleChange(event) {
     case "pro":
       formPage = "producer";
       break;
-    //needs to be 'soil_health_sample' when form is created
     case "ssa":
-      formPage = "producer";
+      formPage = "soil_health_sample";
       break;
     //needs to be 'soil_health_management_unit' when form is created
     case "shmu":
-      formPage = "producer";
+      formPage = "soil_health_management_unit";
       break;
     //needs to be 'operation' when form is created
     case "oper":

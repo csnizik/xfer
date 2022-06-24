@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_equipment_used
+id: asset.soil_health_sample.field_equipment_used
+field_name: field_equipment_used
+entity_type: asset
+bundle: soil_health_sample
+label: 'Equipment Used'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -138,3 +138,19 @@ cig_pods.edit_lab_results_form:
     _title: ""
   requirements:
     _permission: "access content"
+
+cig_pods.soil_health_sample_form:
+  path: "/create/soil_health_sample"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_soil_health_sample_form:
+  path: "/edit/soil_health_sample/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"

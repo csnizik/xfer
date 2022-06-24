@@ -45,6 +45,7 @@ lab_results_form:
   css:
     theme:
       css/lab_results.css: {}
+<<<<<<< HEAD
 awardee_organization_form:
   css:
     theme:
@@ -69,3 +70,10 @@ admin_project_display:
 
 
 
+=======
+
+css_form:
+  css:
+    theme:
+      css/form.css: {}
+>>>>>>> develop

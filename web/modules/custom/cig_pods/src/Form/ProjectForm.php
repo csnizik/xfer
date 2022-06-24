@@ -364,7 +364,7 @@ class ProjectForm extends FormBase {
 		$form['actions']['cancel'] = [
 			'#type' => 'button',
 			'#value' => $this->t('Cancel'),
-			'#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
+			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
 		];
 		return $form;
 	}

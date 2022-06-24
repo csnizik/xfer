@@ -22,7 +22,6 @@ cig_pods.producer_form:
   path: "/create/producer"
   defaults:
     _form: '\Drupal\cig_pods\Form\ProducerForm'
-    _title: "Create new Producer"
   requirements:
     _permission: "access content"
 

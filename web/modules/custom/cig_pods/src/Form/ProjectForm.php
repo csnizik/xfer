@@ -33,9 +33,9 @@ class ProjectForm extends FormBase {
 	public function getAwardeeContactNameOptions(){
 		$contact_name_options = array();
 		$contact_name_options[''] = ' - Select -';
-		$contact_name_options['dummy_eauth_id_1'] = 'Agatha Wallace';
-		$contact_name_options['dummy_eauth_id_2'] = 'Prescott Olehui';
-		$contact_name_options['dummy_eauth_id_3'] = 'Rachel Rutherford';
+		$contact_name_options['Agatha Wallace'] = 'Agatha Wallace';
+		$contact_name_options['Prescott Olehui'] = 'Prescott Olehui';
+		$contact_name_options['Rachel Rutherford'] = 'Rachel Rutherford';
 
 		return $contact_name_options;
 	}

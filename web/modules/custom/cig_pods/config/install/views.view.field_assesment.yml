@@ -2,12 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.lab_result
+    - asset.type.field_assesment
+    - field.storage.asset.field_soil_health_managment_unit
   module:
     - asset
     - options
-id: lab_results_display
-label: 'Lab Results Display'
+id: field_assesment
+label: 'Field Assesment Display'
 module: views
 description: ''
 tag: ''
@@ -20,7 +21,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Soil Test Results'
+      title: 'Manage Soil Samples and Assessment'
       fields:
         id_1:
           id: id_1
@@ -98,11 +99,11 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: 'Soil Test Results'
+          label: 'Field Assessment Name'
           exclude: false
           alter:
-            alter_text: true
-            text: '<a href="/edit/lab_results/{{id_1}}">{{name__value}}</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -142,7 +143,7 @@ display:
           click_sort_column: value
           type: string
           settings:
-            link_to_entity: false
+            link_to_entity: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -153,17 +154,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_lab_result_soil_sample_target_id:
-          id: field_lab_result_soil_sample_target_id
-          table: asset__field_lab_result_soil_sample
-          field: field_lab_result_soil_sample_target_id
+        field_soil_health_managment_unit:
+          id: field_soil_health_managment_unit
+          table: asset__field_soil_health_managment_unit
+          field: field_soil_health_managment_unit
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: asset
-          entity_field: field_lab_result_soil_sample
           plugin_id: field
-          label: 'Soil Sample ID'
+          label: SHMU
           exclude: false
           alter:
             alter_text: false
@@ -384,7 +383,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            lab_result: lab_result
+            field_assesment: field_assesment
           group: 1
           exposed: false
           expose:
@@ -427,7 +426,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: awardee-lab-results-display
+      css_class: awardee-soil-sample-display
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -436,7 +435,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags: {  }
+      tags:
+        - 'config:field.storage.asset.field_soil_health_managment_unit'
   page_1:
     id: page_1
     display_title: Page
@@ -444,10 +444,11 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: assets/lab_result
+      path: assets/field_assessment
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags: {  }
+      tags:
+        - 'config:field.storage.asset.field_soil_health_managment_unit'

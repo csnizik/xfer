@@ -40,6 +40,8 @@ select.addEventListener("change", function handleChange(event) {
     case "ltp":
       formPage = "lab_test_profiles_admin";
       break;
+    case "crn":
+      break;
     default:
       formPage = "awardee_org";
   }

@@ -44,3 +44,23 @@ awardee_organization_form:
   css:
     theme:
       css/awardee-organization.css: {}
+producer_form:
+  css:
+    theme:
+      css/producer.css: {}
+awardee_lab_results_display:
+  css:
+    theme:
+      css/awardee-lab-results-display.css: {}
+awardee_soil_sample_display:
+  css:
+    theme:
+      css/awardee-soil-sample-display.css: {}
+admin_project_display:
+  css:
+    theme:
+      css/admin-project-display.css: {}
+
+
+
+

@@ -24,7 +24,7 @@ class AwardeeDashboardForm extends FormBase {
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [
-				  '' => $this
+				  'crn' => $this
 					->t('Create New'),
           'pro' => $this
 					->t('Producer'),
@@ -35,7 +35,7 @@ class AwardeeDashboardForm extends FormBase {
           'ifa' => $this
 					->t('Assessment'),
           'ltr' => $this
-					->t('Lab Result'),
+					->t('Soil Test Result'),
           'ltm' => $this
 					->t('Methods'),
           'oper' => $this
@@ -45,7 +45,7 @@ class AwardeeDashboardForm extends FormBase {
 		];
 
     $form['form_body'] = [
-        '#markup' => '<p id="form-body">"Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
+        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
         '#suffix' => '</div>',
     ];
 
@@ -55,7 +55,7 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method' );
+     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation' );
     $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -91,7 +91,7 @@ class AwardeeDashboardForm extends FormBase {
 
 		$form['awardee_lab_result'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Result(s): '.$entityCount[5]),
+      '#value' => $this->t('Soil Test Result(s): '.$entityCount[5]),
       '#submit' => ['::labresRedirect'],
     ];
 
@@ -103,7 +103,7 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_operation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Operation(s): '.$entityCount[0]),
+      '#value' => $this->t('Operation(s): '.$entityCount[9]),
       '#submit' => ['::operRedirect'],
       '#suffix' => '</div>',
     ];
@@ -138,7 +138,7 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/field_assesment");
+  $this->pageRedirect($form_state, "/assets/field_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

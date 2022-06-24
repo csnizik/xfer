@@ -280,7 +280,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Soil Health Management (SHMU) Name'),
 			'#description' => '',
 			'#default_value' => $name_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_type_value = $is_edit ? $shmu->get('field_shmu_type')->target_id: ''; // Default Value: Empty String
@@ -330,9 +330,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
 		];
 
-		$form['static']['crop_rotation_description'] = [
-			'#markup'
-		];
+
 		// TODO: Lat/Long input needs decimal precision
 		$field_shmu_latitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_latitude'): '';
 		$form['field_shmu_latitude'] = [
@@ -435,7 +433,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		// New section (Overview of the Production System)
 		$form['subform_6'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6.2 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 11</h4> </div>'
 		];
 
 
@@ -444,6 +442,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#suffix' => '</div>',
 		];
 
+		$form['static']['crop_rotation_description'] = [
+			'#markup' => '<div> Crop rotation </div>',
+		];
+
+		$form['static']['crop_rotation_description_sequence'] = [
+			'#markup' => '<div> Overview of Crop Rotation Sequence </div>'
+		];
 		// Get Options for Year and Crop Dropdowns
 		$crop_options = $this->getCropOptions();
 		$crop_options[''] = '-- Select --'; 
@@ -537,6 +542,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 		// New section (Cover Crop History)
+		// TODO: Add "Years of cover Cropping Field"
 		$form['subform_7'] = [
 			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'	
 		];
@@ -601,12 +607,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$irrigation_in_arid_or_high_options['false'] = 'No';
 		
 		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : '';
+		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
 
 		$form['field_is_irrigation_in_arid_or_high'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
 			'#options' => $irrigation_in_arid_or_high_options,
+			'#name' => 'irrigation_or_high_input',
 			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
 			'#required' => FALSE
 		];
@@ -626,6 +633,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Sample Date'),
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_sample_date_timestamp_default_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		];
 
@@ -639,6 +650,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#step' => 0.01, // Float
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_water_ph_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		];
 
@@ -651,6 +666,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Sodium Adsoprtion Ratio'),
 			'#description' => '(Unit meq/L)',
 			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		]; 
 		
@@ -664,6 +683,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Total Dissolved Solids'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		];
 		
@@ -678,6 +701,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Total Alkalinity'),
 			'#description' => '(Unit ppm CaCO3)',
 			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],			
 			'#required' => FALSE
 		]; 
 
@@ -690,6 +717,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#step' => 0.01, // Float
 			'#title' => $this->t('Chlorides'),
 			'#description' => '(Unit ppm)',
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		]; 
@@ -702,6 +733,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Sulfates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_sulfates_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		]; 
 
@@ -715,6 +750,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Nitrates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_nitrates_value,
+			'#states' => ['visible' => [
+				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				],
+			],
 			'#required' => FALSE
 		];
 		// New section (Additional Concerns or Impacts)

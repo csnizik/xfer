@@ -25,12 +25,12 @@ div#block-gin-content {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #DCDEE0; 
+	background: #DCDEE0;
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #71767A; 
+	background: #71767A;
 }
 /*Scrollbar CSS End*/
 /*===================*/

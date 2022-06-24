@@ -26,7 +26,7 @@ select.addEventListener("change", function handleChange(event) {
       break;
     //needs to be 'soil_health_management_unit' when form is created
     case "shmu":
-      formPage = "soil_health_management_unit";
+      formPage = "shmu";
       break;
     //needs to be 'operation' when form is created
     case "oper":

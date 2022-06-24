@@ -102,7 +102,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/awardee/{{id_1}}">{{name__value}}</a>'
+            text: '<a href="/edit/shmu/{{id_1}}">{{name__value}}</a>'
             make_link: false
             path: ''
             absolute: false

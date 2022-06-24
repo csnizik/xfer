@@ -30,7 +30,7 @@ lab_test_profiles_admin_form:
   css:
     theme:
       css/lab_test_profiles_admin.css: {}
-      
+
 soil_health_management_unit_form:
   css:
     theme:
@@ -45,7 +45,6 @@ lab_results_form:
   css:
     theme:
       css/lab_results.css: {}
-<<<<<<< HEAD
 awardee_organization_form:
   css:
     theme:
@@ -66,14 +65,7 @@ admin_project_display:
   css:
     theme:
       css/admin-project-display.css: {}
-
-
-
-
-=======
-
 css_form:
   css:
     theme:
       css/form.css: {}
->>>>>>> develop

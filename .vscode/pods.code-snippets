@@ -23,7 +23,7 @@
       "\\$form['$1'] = [",
       "\t'#type' => 'textfield',",
       "\t'#title' => \\$this->t('$2'),",
-      "\t'#description' => '$2',",
+      "\t'#description' => '',",
       "\t'#required' => TRUE",
       "]; $0"
     ],
@@ -40,6 +40,13 @@
       "\t'#required' => TRUE",
       "]; $0"     
     ]
+  },
+
+  "PODS Default Value": {
+    "scope": "php",
+    "prefix": "pddv",
+    "body": ["'#default_value' => $0,"],
+    "description": "PODS default value"
   },
 
   "PODS Comment": {

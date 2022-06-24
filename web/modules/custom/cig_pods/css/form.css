@@ -1,0 +1,78 @@
+div#block-gin-content {
+    width: 688px;
+    margin: auto;
+}
+
+#block-gin-content form .js-form-item{
+	margin-bottom: 30px;
+}
+
+#block-gin-content form .fieldgroup .js-form-item{
+	margin-bottom: 0.5em;
+}
+
+#block-gin-content form .form-element{
+	width: 648px;
+	border: 1px solid #1B1B1B;
+    border-radius: 0;
+}
+
+/*Scrollbar CSS Start*/
+/*===================*/
+::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #DCDEE0; 
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #71767A; 
+}
+/*Scrollbar CSS End*/
+/*===================*/
+
+#block-gin-content form .form-title{
+	font-weight: 500;
+	font-size: 32px;
+	line-height: 38px;
+}
+
+#block-gin-content form .subform-title-container{
+    display: flex;
+    align-items: center;
+	clear: both;
+	margin-top: 40px;
+}
+
+#block-gin-content form .subform-title-container h2{
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 26px;
+    flex: 50%;
+}
+
+#block-gin-content form .subform-title-container h4{
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+#block-gin-content form  .remove-button-container{
+	display: inline-block;
+}
+
+#block-gin-content form .remove-button-container input{
+	margin-bottom: 0px;
+	color: white;
+	background-color: #d83933;
+	border-color: #d83933 !important;
+}
+
+#block-gin-content form .remove-button-container input:hover{
+	background-color: #b51d09;
+	border-color: #b51d09 !important;
+}

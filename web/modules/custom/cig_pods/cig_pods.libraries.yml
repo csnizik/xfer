@@ -30,6 +30,11 @@ lab_test_profiles_admin_form:
   css:
     theme:
       css/lab_test_profiles_admin.css: {}
+      
+soil_health_management_unit_form:
+  css:
+    theme:
+      css/shmu.css: {}
 
 lab_test_method_admin_form:
   css:

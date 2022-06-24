@@ -781,3 +781,5 @@ $databases['default']['default'] = array (
 );
 
 $settings["config_sync_directory"] = "/opt/drupal/PODS/config/sync";
+
+ini_set('memory_limit','256M');

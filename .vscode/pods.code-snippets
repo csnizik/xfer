@@ -29,6 +29,18 @@
     ],
     "description": "PODS textfield"
   },
+  "PODS Form Element Number":{
+    "scope": "php",
+    "prefix": "pdfen",
+    "body": [
+      "\\$form['$1'] = [",
+      "\t'#type' => 'number',",
+      "\t'#title' => \\$this->t('$2'),",
+      "\t'#description' => '',",
+      "\t'#required' => TRUE",
+      "]; $0"     
+    ]
+  },
 
   "PODS Default Value": {
     "scope": "php",
@@ -94,6 +106,7 @@
 
   "PODS Routing yml": {
     "prefix": "pdrt",
+    "scope": "yml",
     "body": [
       "cig_pods.$1:",
       "\tpath: \"$2\"",
@@ -106,24 +119,21 @@
     "description": "PODS routing yml entry"
   },
 
-  "PODS Create Select Data": {
+  "PODS Create Select Taxonomy": {
     "scope": "php",
-    "prefix": "pdcsd",
+    "prefix": "pdcst",
     "body": [
-      "public function $1($2){",
-      "\t\\$shde_options = [];",
-      "\t\\$shde_terms = \\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(",
-      "\t\t[",
-      "\t\t\t'vid' => '$3',",
-      "\t\t]",
-      "\t);",
-      "\t\\$shde_keys = array_keys(\\$shde_terms);",
-      "\tforeach(\\$shde_keys as \\$shde_key){",
-      "\t\t\\$term = \\$shde_terms[\\$shde_key];",
-      "\t\t\\$sdhe_options[\\$shde_key] = \\$term -> getName();",
-      "\t}",
-      "\treturn \\$sdhe_options;",
-      "}$0"
+      "\tpublic function get$1Options(){",
+      "\t\t\\$options = [];",
+      "\t\t\\$taxonomy_terms = \\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(",
+      "\t\t\t['vid' => '$3']);",
+      "\t\t\\$keys = array_keys(\\$taxonomy_terms);",
+      "\t\tforeach(\\$keys as \\$key){",
+      "\t\t\t\\$term = \\$taxonomy_terms[\\$key];",
+      "\t\t\t\\$options[\\$key] = \\$term -> getName();",
+      "\t\t}",
+      "\t\treturn \\$options;",
+      "\t}$0"
     ],
     "description": "Create Select element data from taxonomy"
   },

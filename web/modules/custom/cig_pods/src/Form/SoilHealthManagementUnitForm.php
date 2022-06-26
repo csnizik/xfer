@@ -45,6 +45,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return $options;
 	}
 
+	public function getYearOptions(){
+		$month_options = [];
+		$month_keys =  ["J","F","M","A","M","J","J","A","S","O","N","D"];
+		foreach($month_keys as $month_key) {
+		  $month_options[$month_key] = $month_key;//TODO: modify values
+		}
+
+		return $month_options;
+	}
+
 	public function getMajorResourceConcernOptions(){
 		$options = [];
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
@@ -466,6 +476,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$crop_rotation_years_options[''] = '-- Select --';
 		
 		$month_lookup = ["J","F","M","A","M","J","J","A","S","O","N","D"];
+		$month_options = $this->getYearOptions();
 
 		$fs_crop_rotations = $form_state -> get('rotations');
 		
@@ -491,7 +502,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
 			}
 
-			dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
+			//dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
 			$form['crop_sequence'][$fs_index] = [
 				'#prefix' => '<div id="crop_rotation">', 
@@ -514,15 +525,21 @@ class SoilHealthManagementUnitForm extends FormBase {
 				'#prefix' => '<div id="crop_rotation_months"',
 				'#suffix' => '</div>',				
 			];
-			for( $month = 0; $month < 12 ; $month++ ){
-				$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
-					'#title' => $month_lookup[$month],
-					'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
-					'#type' => 'checkbox',
-					'#return_value' => True, 
-					'#default_value' => in_array($month, $crop_months_present_lookup),
-				];
-			}
+			// for( $month = 0; $month < 12 ; $month++ ){
+			// 	$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
+			// 		'#title' => $month_lookup[$month],
+			// 		'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
+			// 		'#type' => 'checkbox',
+			// 		'#return_value' => True, 
+			// 		'#default_value' => in_array($month, $crop_months_present_lookup),
+			// 	];
+			// }
+			$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
+				'#type' => 'checkboxes',
+				'#title' => '',
+				'#title_display' => 'before',
+				'#options' => $month_options,
+			];
 			$form['crop_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
 				'#name' => $fs_index, 
@@ -531,7 +548,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 					'callback' => "::deleteCropRotationCallback",
 					'wrapper' => 'crop_sequence',
 				],
-				'#value' => 'Delete',
+				'#value' => 'X',
 			];
 
 			// Very important
@@ -962,8 +979,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$crop_options = $this->getCropOptions();
 		$rotations[] = $new_crop_rotation;
 		$form_state->set('rotations', $rotations);
-		dpm("new indices");
-		dpm(array_keys($rotations));
+		//dpm("new indices");
+		//dpm(array_keys($rotations));
 		$form_state->setRebuild(True);
 
 		// foreach($rotations as $key=>$rotation){

@@ -4,7 +4,6 @@ project_entry_form:
       css/project.css: {}
   js:
     js/project.js: {}
-
 producer_entry_form:
   css:
     theme:
@@ -32,6 +31,11 @@ lab_test_profiles_admin_form:
     theme:
       css/lab_test_profiles_admin.css: {}
 
+soil_health_management_unit_form:
+  css:
+    theme:
+      css/shmu.css: {}
+
 lab_test_method_admin_form:
   css:
     theme:
@@ -41,3 +45,27 @@ lab_results_form:
   css:
     theme:
       css/lab_results.css: {}
+awardee_organization_form:
+  css:
+    theme:
+      css/awardee-organization.css: {}
+producer_form:
+  css:
+    theme:
+      css/producer.css: {}
+awardee_lab_results_display:
+  css:
+    theme:
+      css/awardee-lab-results-display.css: {}
+awardee_soil_sample_display:
+  css:
+    theme:
+      css/awardee-soil-sample-display.css: {}
+admin_project_display:
+  css:
+    theme:
+      css/admin-project-display.css: {}
+css_form:
+  css:
+    theme:
+      css/form.css: {}

@@ -18,7 +18,7 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 	}
 	if (isset($view) && ($view->storage->id() == 'display_project')) {
 		$view->element['#attached']['library'][] =
-		'cig_pods/admin_details_display';
+		'cig_pods/admin_project_display';
 	}
 	if (isset($view) && ($view->storage->id() == 'producer_display')) {
 		$view->element['#attached']['library'][] =
@@ -35,6 +35,22 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 	if (isset($view) && ($view->storage->id() == 'methods_display')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/awardee_methods_details_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'shmu_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_details_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'lab_results_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/awardee_lab_results_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'soil_health_sample_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/awardee_soil_sample_display';
+	}
+	if (isset($view) && ($view->storage->id() == 'field_assesment')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/awardee_soil_sample_display';
 	}
 }
 

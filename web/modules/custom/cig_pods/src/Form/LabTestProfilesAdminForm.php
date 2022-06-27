@@ -272,7 +272,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.admin_dashboard_form');
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
@@ -282,7 +282,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 
     $labTest->delete();
-    $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    $form_state->setRedirect('cig_pods.admin_dashboard_form');
 }
 
     /**
@@ -314,8 +314,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             $profile = Asset::create($profile_submission);
             $profile -> save();
 
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.admin_dashboard_form');
 
         }else{
             $id = $form_state->get('lab_test_id');
@@ -328,8 +327,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             }
 
             $labTestProfile->save();
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.admin_dashboard_form');
         }
      }
 }

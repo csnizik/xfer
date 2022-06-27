@@ -12076,7 +12076,7 @@ taxonomies:
       uuid: 8ffa0765-6ba6-4ddb-a4f9-769e75a67fdb
   d_irrigation_type: {  }
   d_lab_interpretation: {  }
-   d_laboratory:
+  d_laboratory:
     -
       vid: d_laboratory
       tid: '3001'

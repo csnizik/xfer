@@ -22,14 +22,21 @@ cig_pods.producer_form:
   path: "/create/producer"
   defaults:
     _form: '\Drupal\cig_pods\Form\ProducerForm'
-    _title: "Create new Producer"
   requirements:
     _permission: "access content"
 
 cig_pods.awardee_dashboard_form:
-  path: "/pods_dashboard"
+  path: "/pods_awardee_dashboard"
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.admin_dashboard_form:
+  path: "/pods_admin_dashboard"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AdminDashboardForm'
     _title: ""
   requirements:
     _permission: "access content"
@@ -128,6 +135,22 @@ cig_pods.edit_lab_results_form:
   path: "/edit/lab_results/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\LabResultsForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.soil_health_sample_form:
+  path: "/create/soil_health_sample"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_soil_health_sample_form:
+  path: "/edit/soil_health_sample/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
     _title: ""
   requirements:
     _permission: "access content"

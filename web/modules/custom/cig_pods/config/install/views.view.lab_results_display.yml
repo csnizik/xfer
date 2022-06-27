@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.lab_testing_method
+    - asset.type.lab_result
   module:
     - asset
     - options
-id: methods_display
-label: 'Methods Display'
+id: lab_results_display
+label: 'Lab Results Display'
 module: views
 description: ''
 tag: ''
@@ -20,7 +20,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Methods'
+      title: 'Manage Soil Test Results'
       fields:
         id_1:
           id: id_1
@@ -98,11 +98,11 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: Methods
+          label: 'Soil Test Results'
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/lab_testing_method/{{id_1}}">{{name__value}}</a>'
+            text: '<a href="/edit/lab_results/{{id_1}}">{{name__value}}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -153,21 +153,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_lab_method_soil_sample_target_id:
-          id: field_lab_method_soil_sample_target_id
-          table: asset__field_lab_method_soil_sample
-          field: field_lab_method_soil_sample_target_id
+        field_lab_result_soil_sample_target_id:
+          id: field_lab_result_soil_sample_target_id
+          table: asset__field_lab_result_soil_sample
+          field: field_lab_result_soil_sample_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_lab_method_soil_sample
+          entity_field: field_lab_result_soil_sample
           plugin_id: field
           label: 'Soil Sample ID'
           exclude: false
           alter:
-            alter_text: true
-            text: '<a href="/edit/soil_health_sample/{{ field_lab_method_soil_sample_target_id__target_id }}">{{ field_lab_method_soil_sample_target_id }}</a>'
+            alter_text: false
+            text: ''
             make_link: false
             path: ''
             absolute: false
@@ -207,7 +207,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: false
+            link: true
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -384,7 +384,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            lab_testing_method: lab_testing_method
+            lab_result: lab_result
           group: 1
           exposed: false
           expose:
@@ -427,7 +427,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: awardee-methods-details-display
+      css_class: awardee-lab-results-display
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -444,7 +444,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: assets/lab_testing_method
+      path: assets/lab_result
     cache_metadata:
       max-age: -1
       contexts:

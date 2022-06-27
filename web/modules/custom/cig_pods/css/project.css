@@ -39,12 +39,12 @@ div#block-gin-content {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #DCDEE0; 
+	background: #DCDEE0;
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #71767A; 
+	background: #71767A;
 }
 /*Scrollbar CSS End*/
 /*===================*/
@@ -135,4 +135,25 @@ div#block-gin-content {
 #block-gin-content form #addmore-button-container input{
 	margin: 8px 0 0 0 ;
 }
+
+form#project-create-form #edit-actions-save.button {
+	background-color: #ffffff;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	padding: 12 20 12 20;
+	color: #005ea2;
+	font-weight: 600;
+	font-size: 16px;
+  }
+
+  form#project-create-form #edit-actions-cancel{
+	background-color: #ffffff;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	padding: 12 20 12 20;
+	color: #005ea2;
+	font-weight: 600;
+	font-size: 16px;
+  }
+
 

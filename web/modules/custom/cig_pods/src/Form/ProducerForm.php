@@ -10,27 +10,32 @@ Use Drupal\Core\Url;
 
 
 class ProducerForm extends FormBase {
-	
+
 
    /**
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		$producer = [];
-		
+
 		$is_edit = $id <> NULL;
-		
+
 		if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('producer_id',$id);
 			$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-			// dpm($producer->getValues());
 		} else {
 			$form_state->set('operation','create');
 		}
-		
 
-		// dpm($producer);
+
+
+
+		$form['#attached']['library'][] = 'cig_pods/producer_form';
+
+		$form['producer_title'] = [
+            '#markup' => '<h1>Producer Information</h1>',
+        ];
 
 		$producer_first_name_default_value = $is_edit ?  $producer->get('field_producer_first_name')->value : '';
 		$form['field_producer_first_name'] = [
@@ -46,14 +51,14 @@ class ProducerForm extends FormBase {
 			'#title' => $this->t('Producer Last Name'),
 			'#required' => TRUE, // Do Not Change
 			'#default_value' => $producer_last_name_default_value,
-		]; 
-		
+		];
+
 		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
-		$form['actions']['send'] = [
+		$form['actions']['save'] = [
 			'#type' => 'submit',
 			'#value' => $button_save_label,
 		  ];
-		
+
 		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
@@ -61,7 +66,7 @@ class ProducerForm extends FormBase {
 			'#submit' => ['::dashboardRedirect'],
 
 		];
-		
+
 
 		if($is_edit){
 			$form['actions']['delete'] = [
@@ -70,10 +75,10 @@ class ProducerForm extends FormBase {
 				'#submit' => ['::deleteProducer'],
 				// '#prefix' => '<div class="remove-button-container">',
 				// '#suffix' => '</div>',
-			]; 			
+			];
 		}
 
-		
+
 		return $form;
 	}
 
@@ -107,7 +112,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-	
+
 	$this
 	  ->messenger()
 	  ->addStatus($this
@@ -134,7 +139,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 	} else {
 		$id = $form_state->get('producer_id');
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-		
+
 		$fn = $form_state->getValue('field_producer_first_name');
 		$ln = $form_state->getValue('field_producer_last_name');
 		$full_n = $fn." ".$ln;
@@ -155,7 +160,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 	// ]);
 
 	// $asset->save();
-	
+
 
   }
 

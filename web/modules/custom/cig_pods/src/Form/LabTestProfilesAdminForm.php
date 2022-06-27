@@ -18,7 +18,7 @@ class LabTestProfilesAdminForm extends FormBase {
         $shde_keys = array_keys($shde_terms);
         foreach($shde_keys as $shde_key){
             $term = $shde_terms[$shde_key];
-            $sdhe_options[$shde_key] = $term -> getName();        
+            $sdhe_options[$shde_key] = $term -> getName();
         }
         return $sdhe_options;
     }
@@ -50,12 +50,12 @@ private function createElementNames(){
         $labTestProfile = [];
 
          $is_edit = $id <> NULL;
- 
+
         if($is_edit){
             $form_state->set('operation','edit');
             $form_state->set('lab_test_id',$id);
             $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-          
+
 
         } else {
             $form_state->set('operation','create');
@@ -77,17 +77,17 @@ private function createElementNames(){
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
      $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
-    
+
     $form['lab_test_title'] = [
         '#markup' => '<h1>Lab Test Profiles</h1>',
-    ]; 
+    ];
 $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     $form['name'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Test Profile Name'),
         '#default_value' => $profile_name,
         '#required' => TRUE
-    ]; 
+    ];
 
     $laboratory_default_value = $is_edit ? $labTestProfile->get('field_profile_laboratory')->target_id : NULL;
     $form['field_profile_laboratory'] = [
@@ -124,7 +124,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             '#default_value' => $respiratory_detection_default_value,
 	 		'#required' => TRUE
 	 	];
- 
+
     $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('electroconductivity_method')->target_id : NULL;
     $form['electroconductivity_method'] = [
         '#type' => 'select',
@@ -132,8 +132,8 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $ec_method,
         '#default_value' => $electroconductivity_method_default_value,
         '#required' => TRUE
-    ]; 
- 
+    ];
+
     $nitrate_n_method_default_value =  $is_edit ?  $labTestProfile->get('nitrate_n_method')->target_id : NULL;
     $form['nitrate_n_method'] = [
         '#type' => 'select',
@@ -141,7 +141,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $nitrate_method,
         '#default_value' => $nitrate_n_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $phosphorus_method_default_value =  $is_edit ?  $labTestProfile->get('phosphorus_method')->target_id : NULL;
     $form['phosphorus_method'] = [
@@ -150,7 +150,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $phosphorus_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $potassium_method_default_value =  $is_edit ?  $labTestProfile->get('potassium_method')->target_id : NULL;
     $form['potassium_method'] = [
@@ -159,7 +159,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $potassium_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $calcium_method_default_value =  $is_edit ?  $labTestProfile->get('calcium_method')->target_id : NULL;
     $form['calcium_method'] = [
@@ -168,7 +168,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $calcium_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $magnesium_method_default_value =  $is_edit ?  $labTestProfile->get('magnesium_method')->target_id : NULL;
     $form['magnesium_method'] = [
@@ -177,7 +177,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $magnesium_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $sulfur_method_default_value =  $is_edit ?  $labTestProfile->get('sulfur_method')->target_id : NULL;
     $form['sulfur_method'] = [
@@ -186,7 +186,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $sulfur_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $iron_method_default_value =  $is_edit ?  $labTestProfile->get('iron_method')->target_id : NULL;
     $form['iron_method'] = [
@@ -195,7 +195,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $iron_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
      $manganese_method_default_value =  $is_edit ?  $labTestProfile->get('manganese_method')->target_id : NULL;
     $form['manganese_method'] = [
@@ -204,7 +204,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $manganese_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $copper_method_default_value =  $is_edit ?  $labTestProfile->get('copper_method')->target_id : NULL;
     $form['copper_method'] = [
@@ -213,7 +213,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $copper_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $zinc_method_default_value =  $is_edit ?  $labTestProfile->get('zinc_method')->target_id : NULL;
     $form['zinc_method'] = [
@@ -222,7 +222,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $zinc_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $boron_method_default_value =  $is_edit ?  $labTestProfile->get('boron_method')->target_id : NULL;
     $form['boron_method'] = [
@@ -231,7 +231,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $boron_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $aluminum_method_default_value =  $is_edit ?  $labTestProfile->get('aluminum_method')->target_id : NULL;
     $form['aluminum_method'] = [
@@ -240,7 +240,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $aluminum_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $molybdenum_method_default_value =  $is_edit ?  $labTestProfile->get('molybdenum_method')->target_id : NULL;
     $form['molybdenum_method'] = [
@@ -249,12 +249,12 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
         '#options' => $s_he_extract,
         '#default_value' => $molybdenum_method_default_value,
         '#required' => TRUE
-    ]; 
+    ];
 
     $form['actions']['save'] = [
         '#type' => 'submit',
         '#value' => $this->t('Save'),
-    ]; 
+    ];
 
     $form['actions']['cancel'] = [
         '#type' => 'submit',
@@ -272,7 +272,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.admin_dashboard_form');
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
@@ -282,7 +282,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 
     $labTest->delete();
-    $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    $form_state->setRedirect('cig_pods.admin_dashboard_form');
 }
 
     /**
@@ -314,8 +314,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             $profile = Asset::create($profile_submission);
             $profile -> save();
 
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.admin_dashboard_form');
 
         }else{
             $id = $form_state->get('lab_test_id');
@@ -326,10 +325,9 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
 		    foreach($elementNames as $elemName){
                 $labTestProfile->set($elemName, $form_state->getValue($elemName));
             }
-	
+
             $labTestProfile->save();
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.admin_dashboard_form');
         }
      }
 }

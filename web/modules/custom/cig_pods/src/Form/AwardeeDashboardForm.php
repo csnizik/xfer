@@ -24,28 +24,28 @@ class AwardeeDashboardForm extends FormBase {
     $form['entities_fieldset'][$i]['create_new'] = [
 				'#type' => 'select',
 				'#options' => [
-				  '' => $this
+				  'crn' => $this
 					->t('Create New'),
-          'ltm' => $this
-					->t('Lab Test Method'),
-          'ltr' => $this
-					->t('Lab Result'),
           'pro' => $this
 					->t('Producer'),
+          'shmu' => $this
+					->t('SHMU'),
           'ssa' => $this
 					->t('Soil Sample'),
-          'shmu' => $this
-					->t('Soil Health Management Unit'),
+          'ifa' => $this
+					->t('Assessment'),
+          'ltr' => $this
+					->t('Soil Test Result'),
+          'ltm' => $this
+					->t('Methods'),
           'oper' => $this
 					->t('Operation'),
-          'ifa' => $this
-					->t('In-Field Assessment'),
         ],
 				'#prefix' => '<div id="top-form">'
 		];
 
     $form['form_body'] = [
-        '#markup' => '<p id="form-body">"Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
+        '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
         '#suffix' => '</div>',
     ];
 
@@ -55,45 +55,20 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method' );
+     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation' );
     $entityCount = array();
-    
+
       for($i = 0; $i < count($awardeeEntities); $i++){
         $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[$i]);
         array_push($entityCount, $query->count()->execute());
       }
 
-    
+
 
     $form['awardee_producer'] = [
       '#type' => 'submit',
       '#value' => $this->t('Producer(s): '.$entityCount[2]),
       '#submit' => ['::proRedirect'],
-    ];
-
-    $form['awardee_soil_health_sample'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Soil Health Sample(s): '.$entityCount[4]),
-      '#submit' => ['::ssaRedirect'],
-    ];
-
-    $form['awardee_operation'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Operation(s): '.$entityCount[0]),
-      '#submit' => ['::operRedirect'],
-    ];
-
-
-		$form['awardee_lab_result'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Lab Result(s): '.$entityCount[5]),
-      '#submit' => ['::labresRedirect'],
-    ];
-
-    $form['awardee_in_field_assesment'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Field Assesment(s): '.$entityCount[6]),
-      '#submit' => ['::ifaRedirect'],
     ];
 
     $form['awardee_soil_health_management_unit'] = [
@@ -102,10 +77,34 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::shmuRedirect'],
     ];
 
+    $form['awardee_soil_health_sample'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Soil Sample(s): '.$entityCount[4]),
+      '#submit' => ['::ssaRedirect'],
+    ];
+
+    $form['awardee_in_field_assesment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Assesment(s): '.$entityCount[6]),
+      '#submit' => ['::ifaRedirect'],
+    ];
+
+		$form['awardee_lab_result'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Soil Test Result(s): '.$entityCount[5]),
+      '#submit' => ['::labresRedirect'],
+    ];
+
     $form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Method(s): '.$entityCount[8]),
+      '#value' => $this->t('Method(s): '.$entityCount[8]),
       '#submit' => ['::labRedirect'],
+    ];
+
+    $form['awardee_operation'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Operation(s): '.$entityCount[9]),
+      '#submit' => ['::operRedirect'],
       '#suffix' => '</div>',
     ];
 
@@ -139,7 +138,7 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/field_assesment");
+  $this->pageRedirect($form_state, "/assets/field_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

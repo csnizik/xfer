@@ -154,8 +154,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-<<<<<<< HEAD
-=======
         field_shmu_id:
           id: field_shmu_id
           table: asset__field_shmu_id
@@ -219,7 +217,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
->>>>>>> develop
         status:
           id: status
           table: asset_field_data
@@ -438,12 +435,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-<<<<<<< HEAD
-      tags: {  }
-=======
       tags:
         - 'config:field.storage.asset.field_shmu_id'
->>>>>>> develop
   page_1:
     id: page_1
     display_title: Page
@@ -457,9 +450,5 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-<<<<<<< HEAD
-      tags: {  }
-=======
       tags:
         - 'config:field.storage.asset.field_shmu_id'
->>>>>>> develop

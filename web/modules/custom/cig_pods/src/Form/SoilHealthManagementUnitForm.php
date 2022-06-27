@@ -48,9 +48,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 	public function getYearOptions(){
 		$month_options = [];
 		$month_keys =  ["J","F","M","A","M","J","J","A","S","O","N","D"];
+		$i = 0;
 		foreach($month_keys as $month_key) {
-		  $month_options[$month_key] = $month_key;//TODO: modify values
+		  $month_options[$i] = $month_key;
+		  $i++;
 		}
+		$i = 0;
+
 
 		return $month_options;
 	}
@@ -502,7 +506,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
 			}
 
-			//dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
+			dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
 			$form['crop_sequence'][$fs_index] = [
 				'#prefix' => '<div id="crop_rotation">',
@@ -510,7 +514,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			];
 
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
-				'#type' => 'select',getYearOptions
+				'#type' => 'select',
 				'#title' => 'Crop',
 				'#options' => $crop_options,
 				'#default_value' => $crop_default_value
@@ -525,15 +529,24 @@ class SoilHealthManagementUnitForm extends FormBase {
 				'#prefix' => '<div id="crop_rotation_months"',
 				'#suffix' => '</div>',
 			];
-			for( $month = 0; $month < 12 ; $month++ ){
-				$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
-					'#title' => $month_lookup[$month],
-					'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
-					'#type' => 'checkbox',
-					'#return_value' => True,
-					'#default_value' => in_array($month, $crop_months_present_lookup),
-				];
-			}
+			// for( $month = 0; $month < 12 ; $month++ ){
+			// 	$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
+			// 		'#title' => $month_lookup[$month],
+			// 		'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
+			// 		'#type' => 'checkbox',
+			// 		'#return_value' => True,
+			// 		'#default_value' => in_array($month, $crop_months_present_lookup),
+			// 	];
+			// }
+
+			dpm($crop_months_present_lookup);
+			$form['crop_sequence'][$fs_index]['month_wrapper']['field_shmu_crop_rotation_crop_present'] = [
+				'#type' => 'checkboxes',
+				'#title' => '',
+				'#title_display' => 'before',
+				'#options' => $month_options,
+				'#default_value' => $crop_months_present_lookup, // List of months present on that db
+			];
 			$form['crop_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
 				'#name' => $fs_index,
@@ -846,12 +859,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 
+		
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
-
+		
 		$form_values = $form_state->getValues();
+		
+		dpm($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
@@ -921,12 +937,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$crop_rotation_year = $form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_year'];
 			$crop_rotation->set( 'field_shmu_crop_rotation_year', $crop_rotation_year );
 
-			$months_present = []; // List of months in which the crop is present in the SHMU for year specified in $crop_rotation_year
-			for($month = 0; $month < 12; $month++){
-				$crop_present = $form_values['crop_sequence'][$rotation]['month_wrapper'][$month]['is_present'];
-				if($crop_present) $months_present[] = $month;
-			}
-
+			#
+			$months_present  = Checkboxes::getCheckedCheckboxes($form_values['crop_sequence'][$rotation]['month_wrapper']['field_shmu_crop_rotation_crop_present']);
 			$crop_rotation -> set('field_shmu_crop_rotation_crop_present', $months_present);
 
 			$crop_rotation_name = $shmu->getName()." - Crop (".$crop_options[$crop_id].") Rotation - Year ".$crop_rotation_year;
@@ -949,7 +961,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		}
 		// Cleanup done
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		// Send success message to the user
+		$this
+			->messenger()
+			->addStatus($this
+			->t('Form submitted for Soil Health Management Unit', []));
+		// Success message done
+		
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 
 	// Adds a new row to crop rotation

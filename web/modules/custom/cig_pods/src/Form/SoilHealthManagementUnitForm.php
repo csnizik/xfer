@@ -506,24 +506,24 @@ class SoilHealthManagementUnitForm extends FormBase {
 				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
 			}
 
-			dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
+			// dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
 			$form['crop_sequence'][$fs_index] = [
 				'#prefix' => '<div id="crop_rotation">',
 				'#suffix' => '</div>',
 			];
 
-			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
-				'#type' => 'select',
-				'#title' => 'Crop',
-				'#options' => $crop_options,
-				'#default_value' => $crop_default_value
-			];
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_year'] = [
 				'#type' => 'select',
 				'#title' => 'Year',
 				'#options' => $crop_rotation_years_options,
 				'#default_value' => $crop_years_default_value,
+			];
+			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
+				'#type' => 'select',
+				'#title' => 'Crop',
+				'#options' => $crop_options,
+				'#default_value' => $crop_default_value
 			];
 			$form['crop_sequence'][$fs_index]['month_wrapper'] = [
 				'#prefix' => '<div id="crop_rotation_months"',
@@ -539,7 +539,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// 	];
 			// }
 
-			dpm($crop_months_present_lookup);
+			// dpm($crop_months_present_lookup);
+
 			$form['crop_sequence'][$fs_index]['month_wrapper']['field_shmu_crop_rotation_crop_present'] = [
 				'#type' => 'checkboxes',
 				'#title' => '',
@@ -571,7 +572,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 				'callback' => '::addAnotherCropRotationCallback',
 				'wrapper' => 'crop_sequence',
 			],
-			'#value' => 'Add Another Crop Rotation',
+			'#value' => 'Add to Sequence',
 		];
 
 		// New section (Cover Crop History)
@@ -636,6 +637,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
 		];
 		$irrigation_in_arid_or_high_options = [];
+		$irrigation_in_arid_or_high_options[''] = '-- Select -- ';
 		$irrigation_in_arid_or_high_options['true'] = 'Yes';
 		$irrigation_in_arid_or_high_options['false'] = 'No';
 
@@ -867,7 +869,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		
 		$form_values = $form_state->getValues();
 		
-		dpm($form_values);
+		// dpm($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',

@@ -43,20 +43,6 @@ class LabTestMethodForm extends FormBase {
         return $num / $denom;
     }
 
-    private function pageLookup(string $path) {
-        $match = [];
-        $path2 =  $path;
-        $router = \Drupal::service('router.no_access_checks');
-
-        try {
-            $match = $router->match($path2);
-        }
-        catch (\Exception $e) {
-          // The route using that path hasn't been found,
-          // or the HTTP method isn't allowed for that route.
-        }
-        return $match['_route'];
-    }
     private function createElementNames(){
         return array('field_lab_method_soil_sample','field_lab_method_aggregate_stability_unit', 'field_lab_method_aggregate_stability_method', 'field_lab_method_aggregate_stability_method',
         'field_lab_method_respiration_incubation_days', 'field_lab_method_respiration_detection_method', 'field_lab_method_bulk_density_core_diameter', 'field_lab_method_bulk_density_volume',
@@ -393,8 +379,7 @@ class LabTestMethodForm extends FormBase {
             $method = Asset::create($method_submission);
             $method -> save();
 
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
             $id = $form_state->get('lab_test_id');
@@ -408,8 +393,7 @@ class LabTestMethodForm extends FormBase {
             $labTestMethod->set('name', 'Methods');
 
             $labTestMethod->save();
-            $route = $this->pageLookup('/pods_dashboard');
-            $form_state->setRedirect($route);
+            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
      }
 }

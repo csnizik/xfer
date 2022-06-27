@@ -20,7 +20,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Lab Test Methods'
+      title: 'Manage Lab Test Profiles'
       fields:
         id_1:
           id: id_1
@@ -98,7 +98,7 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: 'Project Name'
+          label: 'Lab Test Profile Name'
           exclude: false
           alter:
             alter_text: true

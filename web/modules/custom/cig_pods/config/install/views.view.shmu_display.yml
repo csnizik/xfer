@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.lab_testing_method
+    - asset.type.soil_health_management_unit
   module:
     - asset
     - options
-id: methods_display
-label: 'Methods Display'
+id: shmu_display
+label: 'SHMU Display'
 module: views
 description: ''
 tag: ''
@@ -20,7 +20,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Methods'
+      title: 'Manage Soil Health Management Units (SHMU)'
       fields:
         id_1:
           id: id_1
@@ -98,11 +98,11 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: Methods
+          label: SHMU
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/lab_testing_method/{{id_1}}">{{name__value}}</a>'
+            text: '<a href="/edit/shmu/{{id_1}}">{{name__value}}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -144,71 +144,6 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_lab_method_soil_sample_target_id:
-          id: field_lab_method_soil_sample_target_id
-          table: asset__field_lab_method_soil_sample
-          field: field_lab_method_soil_sample_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: asset
-          entity_field: field_lab_method_soil_sample
-          plugin_id: field
-          label: 'Soil Sample ID'
-          exclude: false
-          alter:
-            alter_text: true
-            text: '<a href="/edit/soil_health_sample/{{ field_lab_method_soil_sample_target_id__target_id }}">{{ field_lab_method_soil_sample_target_id }}</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -384,7 +319,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            lab_testing_method: lab_testing_method
+            soil_health_management_unit: soil_health_management_unit
           group: 1
           exposed: false
           expose:
@@ -427,7 +362,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: awardee-methods-details-display
+      css_class: admin-details-display
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -444,7 +379,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: assets/lab_testing_method
+      path: assets/soil_health_management_unit
     cache_metadata:
       max-age: -1
       contexts:

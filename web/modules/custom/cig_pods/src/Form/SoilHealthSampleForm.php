@@ -41,12 +41,12 @@ class SoilHealthSampleForm extends FormBase {
 		);
 
 		 $plant_stage_keys = array_keys($plant_stage_terms);
-	
+
 		 foreach($plant_stage_keys as $plant_stage_key) {
 		   $term = $plant_stage_terms[$plant_stage_key];
 		   $plant_stage_options[$plant_stage_key] = $term -> getName();
 		 }
-		
+
 		return $plant_stage_options;
 	}
 
@@ -118,7 +118,7 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_depth_default_value = $is_edit ? $sample_collection->get('field_sampling_depth')->value : '';
         $form['sample_depth'] = [
 			'#type' => 'number',
-			'#title' => $this->t('Sampling Depth'),
+			'#title' => $this->t('Sampling Depth (Unit Inches)'),
 			'#step' => 1,
 			'$description' => 'In feet',
 			'#default_value' => $sample_depth_default_value,
@@ -132,7 +132,7 @@ class SoilHealthSampleForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
 		];
 
-		$form['latitude1'] = [//5 decimal 
+		$form['latitude1'] = [//5 decimal
 			'#type' => 'number',
 			'#title' => $this->t('Latitude'),
 			'#description' => '',
@@ -257,7 +257,7 @@ class SoilHealthSampleForm extends FormBase {
 				"#limit_validation_errors" => array(),
 				'#prefix' => '<div class="remove-button-container">',
 				'#suffix' => '</div>',
-			]; 			
+			];
 		}
 
 		$form['actions']['add_assessment'] = array(
@@ -280,7 +280,7 @@ class SoilHealthSampleForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-	
+
 	$mapping = $this->getFormEntityMapping();
 
 	$is_create = $form_state->get('operation') === 'create';
@@ -328,7 +328,7 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_collection_submission->save();
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
-	
+
 	return;
   }
 

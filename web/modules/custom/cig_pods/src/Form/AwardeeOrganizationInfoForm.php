@@ -23,19 +23,6 @@ class AwardeeOrganizationInfoForm extends FormBase {
         return $state_territory_options;
     }
 
-	private function pageLookup(string $path) {
-        $match = [];
-        $path2 =  $path;
-        $router = \Drupal::service('router.no_access_checks');
-
-        try {
-            $match = $router->match($path2);
-        }
-        catch (\Exception $e) {
-        }
-        return $match['_route'];
-    }
-
    /**
    * {@inheritdoc}
    */
@@ -53,7 +40,7 @@ class AwardeeOrganizationInfoForm extends FormBase {
 		}
 
 
-		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+		$form['#attached']['library'][] = 'cig_pods/awardee_organization_form';
 
 		$form['form_title'] = [
 			'#markup' => '<h1 id="form-title">Awardee Organization Information</h1>'
@@ -116,7 +103,7 @@ class AwardeeOrganizationInfoForm extends FormBase {
 	}
 
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
 
 	public function deleteAwardee(array &$form, FormStateInterface $form_state){
@@ -127,7 +114,7 @@ class AwardeeOrganizationInfoForm extends FormBase {
 
 		$awardee->delete();
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	}
 
@@ -162,7 +149,7 @@ class AwardeeOrganizationInfoForm extends FormBase {
 		$awardee = Asset::create($awardee_submission);
 		$awardee->save();
 
-		$form_state->setRedirect($this->pageLookup('/assets/awardee'));
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	} else {
 		$awardee_id = $form_state->get('awardee_id');
 		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
@@ -178,7 +165,7 @@ class AwardeeOrganizationInfoForm extends FormBase {
 		$awardee->set('organization_acronym', $awardee_acronym);
 
 		$awardee->save();
-		$form_state->setRedirect($this->pageLookup('/assets/awardee'));
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	}
 

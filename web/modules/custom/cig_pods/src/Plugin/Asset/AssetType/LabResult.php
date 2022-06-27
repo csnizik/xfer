@@ -13,7 +13,7 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * )
    */
 class LabResult extends FarmAssetType {
-   
+
    public function buildFieldDefinitions(){
       $fields = parent::buildFieldDefinitions();
       $field_info = [
@@ -44,13 +44,13 @@ class LabResult extends FarmAssetType {
              'required' => FALSE,
              'description' => '(Unit ppm)',
          ],
-         
+
          'field_lab_result_sf_bulk_density_dry_weight' => [
              'label'=> 'Bulk Density Dry weight',
              'type'=> 'fraction',
              'required' => FALSE,
              'description' => '(Unit grams)',
-         
+
          ],
          'field_lab_result_sf_infiltration_rate' => [
              'label'=> 'Infiltration Rate',
@@ -110,7 +110,7 @@ class LabResult extends FarmAssetType {
              'type'=> 'fraction',
              'required' => FALSE,
              'description' => '(Unit ppm)',
-         
+
          ],
          'field_lab_result_sf_phosphorous_lab_interpretation' => [
              'label'=> 'Phosphorous Lab Interpretation ',
@@ -133,7 +133,7 @@ class LabResult extends FarmAssetType {
              'target_bundle'=> 'd_lab_interpretation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_lab_result_sf_calcium' => [
              'label'=> 'Calcium',
@@ -148,7 +148,7 @@ class LabResult extends FarmAssetType {
              'target_bundle'=> 'd_lab_interpretation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_lab_result_sf_magnesium' => [
              'label'=> 'Magnesium',
@@ -276,7 +276,15 @@ class LabResult extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
          ],
-         
+         'field_lab_result_soil_sample' => [
+            'label'=> 'Soil Sample ID',
+            'type'=> 'entity_reference',
+            'target_type'=> 'asset',
+            'target_bundle'=> 'soil_health_sample',
+            'required' => TRUE,
+            'description' => $this->t('Lab Result Soil Sample'),
+        ],
+
 
       ];
 

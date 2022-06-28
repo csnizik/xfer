@@ -56,6 +56,33 @@ class ProjectForm extends FormBase {
 		return $contact_type_options;
 	}
 
+	public function getGrantTypeOptions(){
+	$grand_type_options = array();
+	$grand_type_options = [];
+	$grand_type_options[''] = ' - Select -';
+
+	$grand_type_options = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+		 ['vid' => 'd_grant_type']
+	);
+	$grand_type_keys = array_keys($grand_type_options);
+	foreach($grand_type_keys as $grand_type_key) {
+		$term = $grand_type_options[$grand_type_key];
+		$grand_type_options[$grand_type_key] = $term -> getName();
+	}
+
+	return $grand_type_options;
+}
+
+private function convertFractionsToDecimal($is_edit, $awardee, $field){
+		if($is_edit){
+				$num = $awardee->get($field)[0]->getValue()["numerator"];
+				$denom = $awardee->get($field)[0]->getValue()["denominator"];
+				return $num / $denom;
+		}else{
+				return "";
+		}
+}
+
 	public function getResourceConcernOptions(){
 		$resource_concern_options = [];
 		$resource_concern_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
@@ -87,72 +114,59 @@ class ProjectForm extends FormBase {
 		return $producer_options;
 	}
 
-	public function buildProjectInformationSection(array &$form, FormStateInterface &$form_state, $options = NULL){
-		$form['form_title'] = [
-			'#markup' => '<h1 id="form-title">Project Information</h1>'
-		];
-
-		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>7 Fields | Section 1 of 3</h4></div>'
-		];
-
-		$form['project_name'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Project Name'),
-			'$description' => 'Project Name',
-			'#required' => TRUE,
-		];
-
-		$form['agreement_number'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Agreement Number'),
-			'$description' => 'Agreement Number',
-			'#required' => TRUE,
-		];
-
-
-		$form['funding_amount'] = [
-			'#type' => 'textfield',
-			'#title' => $this->t('Funding Amount'),
-			'$description' => 'Funding Amount',
-			'#required' => TRUE,
-		];
-
-		$resource_concern_options = $this->getResourceConcernOptions();
-		$form['resource_concern'] = [
-		  '#type' => 'checkboxes',
-		  '#title' => t('Possible Resource Concerns'),
-		  '#options' => $resource_concern_options,
-		  '#required' => TRUE,
-		];
-
-		$form['project_summary'] = [
-			'#type' => 'textarea',
-			'#title' => $this->t('Project Summary'),
-			'$description' => 'Project Summary',
-			'#required' => TRUE,
-		];
-
-	}
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL, $id = Null){
 
-		$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+	$awardee = [];
+	$is_edit = $id <> NULL;
+
+	if($is_edit){
+			$form_state->set('operation','edit');
+			$form_state->set('awardee_id',$id);
+			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+	} else {
+			$form_state->set('operation','create');
+	}
+	$form['#attached']['library'][] = 'cig_pods/project_entry_form';
 
 		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
 		$removed_contacts = $form_state->get('removed_contacts');//get removed contacts indexes
+		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
+		$cname=array();
+			foreach ($awardee_org_default_name as $checks) {
+			 $eauth = $checks['value'];
+					$cname[] = $eauth;
 
-		if ($num_contacts === NULL) {//initialize number of contact, set to 1
-			$form_state->set('num_contacts', 1);
-			$num_contacts = $form_state->get('num_contacts');
-		}
-		if ($num_contact_lines === NULL) {
-			$form_state->set('num_contact_lines', 1);
-			$num_contact_lines = $form_state->get('num_contact_lines');
-		}
+			}
+
+			$ex_count = count($cname);
+
+		if($is_edit){
+
+			if ($num_contacts === NULL) {//initialize number of contact, set to 1
+				$form_state->set('num_contacts', $ex_count);
+				$num_contacts = $form_state->get('num_contacts');
+			}
+			if ($num_contact_lines === NULL) {
+				$form_state->set('num_contact_lines', $ex_count);
+				$num_contact_lines = $form_state->get('num_contact_lines');
+			}
+
+
+
+		}else{
+				if ($num_contacts === NULL) {//initialize number of contact, set to 1
+					$form_state->set('num_contacts', 1);
+					$num_contacts = $form_state->get('num_contacts');
+				}
+				if ($num_contact_lines === NULL) {
+					$form_state->set('num_contact_lines', 1);
+					$num_contact_lines = $form_state->get('num_contact_lines');
+				}
+			}
 
 		if ($removed_contacts === NULL) {
 			$form_state->set('removed_contacts', array());//initialize arr
@@ -179,11 +193,81 @@ class ProjectForm extends FormBase {
 			$removed_producers = $form_state->get('removed_producers');
 		}
 
+			$form['form_title'] = [
+				'#markup' => '<h1 id="form-title">Project Information</h1>'
+			];
 
+			$form['subform_1'] = [
+				'#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>6 Fields | Section 1 of 2</h4></div>'
+			];
+
+			$awardee_org_default_name = $is_edit ? $awardee->get('name')->value : '';
+			$form['name'] = [
+				'#type' => 'textfield',
+				'#title' => $this->t('Project Name'),
+				'$description' => 'Project Name',
+				'#required' => TRUE,
+				'#default_value' => $awardee_org_default_name,
+			];
+
+
+			$awardee_org_default_name = $is_edit ? $awardee->get('field_project_agreement_number')->getValue()[0]['value'] : '';
+			$form['field_project_agreement_number'] = [
+				'#type' => 'textfield',
+				'#title' => $this->t('Agreement Number'),
+				'$description' => 'Agreement Number',
+				'#default_value' => $awardee_org_default_name,
+				'#required' => TRUE,
+			];
+
+
+			$grand_type_options = $this->getGrantTypeOptions();
+			$awardee_org_default_name = $is_edit ? $awardee->get('field_grant_type')->target_id : NULL;
+			$form['field_grant_type'] = [
+				'#type' => 'select',
+				'#title' => 'Grant Type',
+				'#options' => $grand_type_options,
+				'#required' => TRUE,
+				'#default_value' => $awardee_org_default_name,
+			];
+
+			$awardee_org_default_name = $this->convertFractionsToDecimal($is_edit,$awardee, 'field_funding_amount');
+			$form['field_funding_amount'] = [
+				'#type' => 'textfield',
+				'#title' => $this->t('Funding Amount'),
+				'$description' => 'Funding Amount',
+				'#required' => TRUE,
+				'#default_value' => $awardee_org_default_name,
+			];
+
+			$awardee_org_default_name = $is_edit ? $awardee->get('field_resource_concerns')->getValue() : '';
+			$resource_concern_options = $this->getResourceConcernOptions();
+			$details=array();
+				foreach ($awardee_org_default_name as $checks) {
+				 $details = $checks['target_id'];
+						$detail[] = $details;
+				}
+
+			$form['field_resource_concerns'] = [
+				'#type' => 'checkboxes',
+				'#title' => t('Possible Resource Concerns'),
+				'#options' => $resource_concern_options,
+				'#required' => TRUE,
+				'#default_value' => $detail,
+			];
+
+			$awardee_org_default_name = $is_edit ? $awardee->get('field_summary')->getValue()[0]['value'] : '';
+			$form['field_summary'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Project Summary'),
+				'$description' => 'Project Summary',
+				'#required' => TRUE,
+				'#default_value' => $awardee_org_default_name,
+			];
 
 		/* Variables declaration end*/
 
-		$this->buildProjectInformationSection($form, $form_state);
+	//	$this->buildProjectInformationSection($form, $form_state);
 
 		$awardee_options = $this->getAwardeeOptions();
 		$contact_name_options = $this->getAwardeeContactNameOptions();
@@ -191,14 +275,16 @@ class ProjectForm extends FormBase {
 		$producer_options = $this->getProducerOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
 		];
 
-		$form['organization_name'] = [
+		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee')->target_id : NULL;
+		$form['field_awardee'] = [
 			'#type' => 'select',
 			'#title' => 'Awardee Organization Name',
 			'#options' => $awardee_options,
-			'#required' => TRUE
+			'#required' => TRUE,
+			'#default_value' => $awardee_org_default_name,
 		];
 
 
@@ -209,7 +295,19 @@ class ProjectForm extends FormBase {
 		  '#suffix' => '</div>',
 		];
 
+		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
+		$cname=array();
+		foreach ($awardee_org_default_name as $checks) {
+		 $eauth = $checks['value'];
+				$cname[] = $eauth;
+		}
 
+		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_contact_type')->getValue() : '';
+		$ctype=array();
+			foreach ($awardee_org_default_name as $checks) {
+			 $detail = $checks['target_id'];
+			 $ctype[] = $detail;
+			}
 
 		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
 
@@ -222,6 +320,7 @@ class ProjectForm extends FormBase {
 				'#title' => $this
 				  ->t("Contact Name"),
 				'#options' => $contact_name_options,
+				'#default_value' => $cname[$i],
 				'attributes' => [
 					'class' => 'something',
 				],
@@ -234,6 +333,7 @@ class ProjectForm extends FormBase {
 				'#title' => $this
 				  ->t('Contact Type'),
 				'#options' => $contact_type_options,
+				'#default_value' => $ctype[$i],
 				'#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
@@ -288,68 +388,68 @@ class ProjectForm extends FormBase {
 		];
 
 		/* Producers Information */
-		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 3 of 3</h4></div>'
-		];
-
-
-		$form['producers_fieldset'] = [
-			'#prefix' => '<div id="producers-fieldset-wrapper"',
-			'#suffix' => '</div>',
-		  ];
-		for($i = 0; $i < $num_producers; $i++){
-			if(in_array($i,$removed_producers)){
-				continue;
-			}
-
-			$form['producers_fieldset'][$i]['producer_name'] = [
-				'#type' => 'select',
-				'#title' => $this->t("Producer Name"),
-				'#options' => $producer_options,
-				'#prefix' => ($num_producer_lines > 1 && $i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
-				'#suffix' => '</div>',
-			];
-
-
-			if($num_producer_lines > 1 && $i != 0){
-				$form['producers_fieldset'][$i]['actions'] = [
-					'#type' => 'submit',
-					'#value' => $this->t('Delete'),
-					'#name' => $i,
-					'#submit' => ['::removeProducerCallback'],
-					'#ajax' => [
-					  'callback' => '::addProducerRowCallback',
-					  'wrapper' => 'producers-fieldset-wrapper',
-					],
-					"#limit_validation_errors" => array(),
-					'#prefix' => '<div class="remove-button-container">',
-					'#suffix' => '</div>',
-				];
-			}
-
-			$form['producers_fieldset'][$i]['new_line_container'] = [
-				'#markup' => '<div class="clear-space"></div>'
-			];
-		}
-		$form['producers_fieldset']['actions']['add_producer'] = [
-			'#type' => 'submit',
-			'#button_type' => 'button',
-			'#name' => 'add_producer_button',
-			'#value' => t('Add Another Producer'),
-			'#submit' => ['::addProducerRow'],
-			'#ajax' => [
-				'callback' => '::addProducerRowCallback',
-				'wrapper' => 'producers-fieldset-wrapper',
-			],
-			'#states' => [
-				'visible' => [
-				  ":input[name='producers_fieldset[0][producer_name]']" => ['!value' => ''],
-				],
-			],
-			"#limit_validation_errors" => array(),
-			'#prefix' => '<div id="addmore-button-container">',
-			'#suffix' => '</div>',
-		];
+		// $form['subform_3'] = [
+		// 	'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 3 of 3</h4></div>'
+		// ];
+		//
+		//
+		// $form['producers_fieldset'] = [
+		// 	'#prefix' => '<div id="producers-fieldset-wrapper"',
+		// 	'#suffix' => '</div>',
+		//   ];
+		// for($i = 0; $i < $num_producers; $i++){
+		// 	if(in_array($i,$removed_producers)){
+		// 		continue;
+		// 	}
+		//
+		// 	$form['producers_fieldset'][$i]['producer_name'] = [
+		// 		'#type' => 'select',
+		// 		'#title' => $this->t("Producer Name"),
+		// 		'#options' => $producer_options,
+		// 		'#prefix' => ($num_producer_lines > 1 && $i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+		// 		'#suffix' => '</div>',
+		// 	];
+		//
+		//
+		// 	if($num_producer_lines > 1 && $i != 0){
+		// 		$form['producers_fieldset'][$i]['actions'] = [
+		// 			'#type' => 'submit',
+		// 			'#value' => $this->t('Delete'),
+		// 			'#name' => $i,
+		// 			'#submit' => ['::removeProducerCallback'],
+		// 			'#ajax' => [
+		// 			  'callback' => '::addProducerRowCallback',
+		// 			  'wrapper' => 'producers-fieldset-wrapper',
+		// 			],
+		// 			"#limit_validation_errors" => array(),
+		// 			'#prefix' => '<div class="remove-button-container">',
+		// 			'#suffix' => '</div>',
+		// 		];
+		// 	}
+		//
+		// 	$form['producers_fieldset'][$i]['new_line_container'] = [
+		// 		'#markup' => '<div class="clear-space"></div>'
+		// 	];
+		// }
+		// $form['producers_fieldset']['actions']['add_producer'] = [
+		// 	'#type' => 'submit',
+		// 	'#button_type' => 'button',
+		// 	'#name' => 'add_producer_button',
+		// 	'#value' => t('Add Another Producer'),
+		// 	'#submit' => ['::addProducerRow'],
+		// 	'#ajax' => [
+		// 		'callback' => '::addProducerRowCallback',
+		// 		'wrapper' => 'producers-fieldset-wrapper',
+		// 	],
+		// 	'#states' => [
+		// 		'visible' => [
+		// 		  ":input[name='producers_fieldset[0][producer_name]']" => ['!value' => ''],
+		// 		],
+		// 	],
+		// 	"#limit_validation_errors" => array(),
+		// 	'#prefix' => '<div id="addmore-button-container">',
+		// 	'#suffix' => '</div>',
+		// ];
 
 		/* Producers Information Ends*/
 
@@ -366,9 +466,30 @@ class ProjectForm extends FormBase {
 			'#value' => $this->t('Cancel'),
 			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
 		];
+
+		if($is_edit){
+				$form['actions']['delete'] = [
+					'#type' => 'submit',
+					'#value' => $this->t('Delete'),
+					'#submit' => ['::deleteProject'],
+				];
+			}
 		return $form;
 	}
 
+
+	public function deleteProject(array &$form, FormStateInterface $form_state){
+
+		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
+
+		$awardee_id = $form_state->get('awardee_id');
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+
+		$project->delete();
+
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
+	}
 
  /**
   * Returns True if all values in array is unique, false otherwise
@@ -426,13 +547,14 @@ class ProjectForm extends FormBase {
   public function getFormEntityMapping(){
 	  $mapping = [];
 
-	  $mapping['project_name'] = 'name';
-	  $mapping['agreement_number'] = 'field_project_agreement_number';
-	  $mapping['funding_amount'] = 'field_funding_amount';
-	  $mapping['project_summary'] = 'field_summary';
-	  $mapping['organization_name'] = 'field_awardee';
+		$mapping['name'] = 'name';
+	  $mapping['field_project_agreement_number'] = 'field_project_agreement_number';
+	  $mapping['field_funding_amount'] = 'field_funding_amount';
+	  $mapping['field_summary'] = 'field_summary';
+	  $mapping['field_awardee'] = 'field_awardee';
+	  $mapping['field_grant_type'] = 'field_grant_type';
 
-      return $mapping;
+    return $mapping;
 
   }
 
@@ -440,6 +562,9 @@ class ProjectForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+	$is_create = $form_state->get('operation') === 'create';
+
+	if($is_create){
 	$values = $form_state->getValues();
 
 	$mapping = $this->getFormEntityMapping();
@@ -457,7 +582,7 @@ class ProjectForm extends FormBase {
 		$project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
 	}
 	// Read from multivalued checkbox
-	$checked_resource_concerns = Checkboxes::getCheckedCheckboxes($form_state->getValue('resource_concern'));
+	$checked_resource_concerns = Checkboxes::getCheckedCheckboxes($form_state->getValue('field_resource_concerns'));
 
 	$project_submission['field_resource_concerns'] = $checked_resource_concerns;
 
@@ -489,7 +614,56 @@ class ProjectForm extends FormBase {
 	$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	return;
-  }
+
+} else {
+		$awardee_id = $form_state->get('awardee_id');
+		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+
+		$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions'
+		$num_contacts = count($form['names_fieldset']) - 1; // As above
+
+		$producers = [];
+		for( $i = 0; $i < $num_producers; $i++ ){
+			$producers[$i] = $form['producers_fieldset'][$i]['producer_name']['#value'];
+		}
+
+		$project_submission['field_producer_contact_name'] = $producers;
+
+		$contact_eauth_ids = [];
+		$contact_types = [];
+		for( $i = 0; $i < $num_contacts; $i++ ){
+			$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+			$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+		}
+
+
+		$project_submission['field_awardee_eauth_id'] = $contact_eauth_ids;
+		$project_submission['field_awardee_contact_type'] = $contact_types;
+
+
+
+		$awardee_name = $form_state->getValue('name');
+		$agreement_number = $form_state->getValue('field_project_agreement_number');
+		$field_resource_concerns = $form_state->getValue('field_resource_concerns');
+		$field_funding_amount = $form_state->getValue('field_funding_amount');
+		$summary = $form_state->getValue('field_summary');
+		$field_awardee = $form_state->getValue('field_awardee');
+		$field_grant_type = $form_state->getValue('field_grant_type');
+
+
+		$awardee->set('name', $awardee_name);
+		$awardee->set('field_project_agreement_number', $agreement_number);
+		$awardee->set('field_resource_concerns', $field_resource_concerns);
+		$awardee->set('field_funding_amount', $field_funding_amount);
+		$awardee->set('field_summary', $summary);
+		$awardee->set('field_awardee', $field_awardee);
+		$awardee->set('field_awardee_eauth_id', $contact_eauth_ids);
+		$awardee->set('field_awardee_contact_type', $contact_types);
+		$awardee->set('field_grant_type', $field_grant_type);
+		$awardee->save();
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	}
+}
 
   /**
    * {@inheritdoc}

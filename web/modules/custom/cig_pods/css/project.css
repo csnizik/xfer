@@ -134,6 +134,9 @@ div#block-gin-content {
 
 #block-gin-content form #addmore-button-container input{
 	margin: 8px 0 0 0 ;
+  background-color: #FFFFFF;
+  color: #005EA2;
+  border-color: #005EA2 !important;
 }
 
 form#project-create-form #edit-actions-save.button {
@@ -156,4 +159,51 @@ form#project-create-form #edit-actions-save.button {
 	font-size: 16px;
   }
 
+  #block-gin-content form #edit-actions-save input{
+  background-color: #005EA2 !important;
+  color: white !important;
+  border-color: #005EA2 !important;
+  }
 
+  input#edit-actions-save, input#edit-actions-cancel, input#edit-actions-delete{
+    background-color: #FFFFFF;
+    color: #005EA2;
+    border-color: #005EA2 !important;
+  }
+
+  input#edit-actions-save:hover, input#edit-actions-cancel:hover{
+    background-color: #005EA2 !important;
+    color: white !important;
+    border-color: #005EA2 !important;
+  }
+
+  #block-gin-content form #addmore-button-container input:hover{
+    background-color: #005EA2 !important;
+    color: white !important;
+    border-color: #005EA2 !important;
+  }
+
+  input#edit-actions-delete:hover{
+    background-color: #D83933;
+    color: white;
+    border-color: #D83933 !important;
+  }
+
+  .form-boolean--type-checkbox:checked {
+      background-color: #205493 !important;
+  }
+
+  fieldset#edit-field-resource-concerns--wrapper {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 0px 20px 16px;
+      gap: 10px;
+      width: auto;
+      height: auto;
+      left: 0.5px;
+      top: 0px;
+      background: #FFFFFF;
+      border: 1px solid #1B1B1B;
+  }

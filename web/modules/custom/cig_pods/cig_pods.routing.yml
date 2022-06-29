@@ -88,6 +88,14 @@ cig_pods.lab_results_form:
   requirements:
     _permission: "access content"
 
+cig_pods.field_assessment_form:
+  path: "/create/field_assessment"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\FieldAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:

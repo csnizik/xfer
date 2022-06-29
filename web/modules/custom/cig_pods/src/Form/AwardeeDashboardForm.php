@@ -83,9 +83,9 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::ssaRedirect'],
     ];
 
-    $form['awardee_in_field_assesment'] = [
+    $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Assesment(s): '.$entityCount[6]),
+      '#value' => $this->t('Assessment(s): '.$entityCount[6]),
       '#submit' => ['::ifaRedirect'],
     ];
 

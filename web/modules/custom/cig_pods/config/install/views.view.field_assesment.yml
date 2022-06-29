@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.field_assesment
+    - asset.type.field_assessment
     - field.storage.asset.field_soil_health_managment_unit
   module:
     - asset
     - options
 id: field_assesment
-label: 'Field Assesment Display'
+label: 'Field Assessment Display'
 module: views
 description: ''
 tag: ''

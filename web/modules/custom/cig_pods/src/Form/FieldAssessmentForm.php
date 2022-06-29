@@ -18,66 +18,77 @@ class FieldAssessmentForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		$producer = [];
 
+		dpm("up to date 1");
+
+		if($form_state->get('calculated_value') == NULL ) {
+			$form_state->set('calculated_value', '');
+		} else {
+			dpm($form_state->get('calculated_value'));
+			dpm("Calculated value is defined");
+		}
+
 		$is_edit = $id <> NULL;
 
-		// if($is_edit){
-		// 	$form_state->set('operation','edit');
-		// 	$form_state->set('producer_id',$id);
-		// 	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-		// } else {
-		// 	$form_state->set('operation','create');
-		// }
 
 
-
+		$form['#tree'] = True;
 
 		$form['#attached']['library'][] = 'cig_pods/producer_form';
 
 		$form['producer_title'] = [
-            '#markup' => '<h1>Producer Information</h1>',
-        ];
+			'#markup' => '<h1>Field Assesment </h1>',
+		];
 
-		// $producer_first_name_default_value = $is_edit ?  $producer->get('field_producer_first_name')->value : '';
-		// $form['field_producer_first_name'] = [
-		// 	'#type' => 'textfield',
-		// 	'#title' => $this->t('Producer First Name'),
-		// 	'#required' => TRUE, // Do Not Change
-		// 	'#default_value' => $producer_first_name_default_value,
-		// ];
-
-		// $producer_last_name_default_value = $is_edit ?  $producer->get('field_producer_last_name')->value : '';
-		// $form['field_producer_last_name'] = [
-		// 	'#type' => 'textfield',
-		// 	'#title' => $this->t('Producer Last Name'),
-		// 	'#required' => TRUE, // Do Not Change
-		// 	'#default_value' => $producer_last_name_default_value,
-		// ];
-
-		// $button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
-		// $form['actions']['save'] = [
-		// 	'#type' => 'submit',
-		// 	'#value' => $button_save_label,
-		//   ];
-
-		// $form['actions']['cancel'] = [
-		// 	'#type' => 'submit',
-		// 	'#value' => $this->t('Cancel'),
-		// 	// '#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
-		// 	'#submit' => ['::dashboardRedirect'],
-
-		// ];
+		$form['assessment_wrapper'] = [
+			'#prefix' => '<div id="assessment_wrapper">',
+			'#suffix' => '</div>',
+		];
 
 
-		// if($is_edit){
-		// 	$form['actions']['delete'] = [
-		// 		'#type' => 'submit',
-		// 		'#value' => $this->t('Delete'),
-		// 		'#submit' => ['::deleteProducer'],
-		// 		// '#prefix' => '<div class="remove-button-container">',
-		// 		// '#suffix' => '</div>',
-		// 	];
-		// }
 
+		$form['assessment_wrapper']['field_soil_cover'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil cover'),
+			'#options' => ['a','b','c'],
+			'#required' => TRUE
+			
+			// '#submit' = > ['']
+			// '#ajax' => [
+				// 'wrapper'
+				// 'callback'
+			// ],
+		];
+		
+		$form['assessment_wrapper']['actions']['send'] = [
+			'#type' => 'submit',
+			'#submit' => ['::calcuateResourceConcerns'],
+			'#ajax' => [
+				'callback' => '::calcuateResourceConcernsCallback',
+				'wrapper' => 'assessment_wrapper'
+			],
+			'#value' => $this->t('Calculate Resource Concerns'),
+		];
+
+		$default_calculated_field = '';
+		if($form_state->get('calculated_value') <> NULL){
+			dpm("it goes brrr");
+			$default_calculated_field = $form_state->get('calculated_value');
+			dpm(gettype($default_calculated_field));
+		}
+		dpm("calculated field");
+		dpm($default_calculated_field);
+
+		if($default_calculated_field <> ''){
+			$form['assessment_wrapper']['calculated_field'] = [
+				'#type' => 'textfield',
+				'#title' => 'Calculated Value',
+				'#required' => FALSE,
+				'#value' => $form_state->get('calculated_value'),
+				'#prefix' => '<div class="calculated_field_container">',
+				'#suffix' => '</div>',
+			];
+		}
+			
 
 		return $form;
 	}
@@ -113,50 +124,35 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-	// $this
-	//   ->messenger()
-	//   ->addStatus($this
-	//   ->t('Form submitted for producer @producer_name', [
-	//   '@producer_name' => $form['producer_name']['#value'],
-	// ]));
-
-	// $is_create = $form_state->get('operation') === 'create';
-	// // dpm(gettype($operation));
-
-	// // PHP: '1' == 1 is True but '1' === 1 is False
-
-	// $producer_submission = [];
-	// $producer_submission['field_producer_first_name'] = $form_state -> getValue('field_producer_first_name');
-	// $producer_submission['field_producer_last_name'] = $form_state -> getValue('field_producer_last_name');
-	// $producer_submission['type'] = 'producer';
-	// $producer_submission['name'] = $producer_submission['field_producer_first_name']." ".$producer_submission['field_producer_last_name'];
-
-	// $producer = Asset::create($producer_submission);
-	// $producer->save();
-
-	// $form_state->setRedirect('cig_pods.awardee_dashboard_form');
-	// if($is_create){
-	// } else {
-	// 	$id = $form_state->get('producer_id');
-	// 	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-
-	// 	$fn = $form_state->getValue('field_producer_first_name');
-	// 	$ln = $form_state->getValue('field_producer_last_name');
-	// 	$full_n = $fn." ".$ln;
-
-	// 	$producer->set('field_producer_first_name', $fn);
-	// 	$producer->set('field_producer_last_name', $ln);
-	// 	$producer->set('name', $full_n);
-
-	// 	$producer->save();
-	// 	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
-
-	// }
-
-
-
   }
 
+  public function calcuateResourceConcerns(array &$form, FormStateInterface $form_state){
+	
+	
+	dpm("calculateResourceConcners triggered");
+	$form_values = $form_state->getValues();
+	$val = $form_values['assessment_wrapper']['field_soil_cover'];
+	// $form_state->set('')
+	switch($val){
+		case 0:
+			$form_state->set('calculated_value', 'a');
+			break;
+		case 1:
+			$form_state->set('calculated_value', 'b');
+			break;
+		case 2:
+			$form_state->set('calculated_value', 'c');
+			break;
+	}
+	// $form_state->set('calculated_value', 'brrrr2');
+	// $form['assessment_wrapper']['calculated_field']['#value'] = 'brrrrr585858';
+	$form_state->setRebuild(True);
+  }
+
+  public function calcuateResourceConcernsCallback(array &$form, FormStateInterface $form_state){
+
+	return $form['assessment_wrapper'];
+  }
   /**
    * {@inheritdoc}
    */

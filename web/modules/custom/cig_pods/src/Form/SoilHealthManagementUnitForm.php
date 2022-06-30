@@ -861,14 +861,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 
-		
+
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
-		
+
 		$form_values = $form_state->getValues();
-		
+
 		// dpm($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
@@ -969,7 +969,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			->addStatus($this
 			->t('Form submitted for Soil Health Management Unit', []));
 		// Success message done
-		
+
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 

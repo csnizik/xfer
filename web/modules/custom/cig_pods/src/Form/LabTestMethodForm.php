@@ -54,7 +54,7 @@ class LabTestMethodForm extends FormBase {
     * {@inheritdoc}
     */
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        dpm("Changes Made 7");
+        dpm("Changes Made 5");
 
         $labTestMethod  = [];
 
@@ -166,11 +166,19 @@ class LabTestMethodForm extends FormBase {
                 $aggregate_method_default_value = $fs_lab_profile['field_profile_aggregate_stability_method'];
                 // $respiratory_incubation_default_value = $fs_lab_profile['field_profile_respiratory_incubation_days'];
                 $respiratory_detection_default_value = $fs_lab_profile['field_profile_respiration_detection_method'];
+                $electroconductivity_method_default_value =  $fs_lab_profile['electroconductivity_method'];
+                $nitrate_n_method_default_value =  $fs_lab_profile['nitrate_n_method'];
+                $phosphorus_method_default_value =  $fs_lab_profile['phosphorus_method'];
+                $potassium_method_default_value =  $fs_lab_profile['potassium_method'];
             }else {
                 $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : NULL;
                 $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
                 // $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
                 $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
+                $electroconductivity_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_electroconductivity_method')->target_id : NULL;
+                $nitrate_n_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_nitrate_n_method')->target_id : NULL;
+                $phosphorus_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_phosphorus_method')->target_id : NULL;
+                $potassium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_potassium_method')->target_id : NULL;
 
             }
 
@@ -184,6 +192,7 @@ class LabTestMethodForm extends FormBase {
                 '#required' => FALSE,
             ];
 
+            // The following field needs to either be changed to a taxonomy in the lab php definietion or be changed to a fraction in the lab profile php definition
             // $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
             // $form['autoload_container']['field_lab_method_respiration_incubation_days'] = [
             //     '#type' => 'number',
@@ -193,7 +202,6 @@ class LabTestMethodForm extends FormBase {
             //     '#required' => FALSE,
             // ];
 
-            // $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
             $form['autoload_container']['field_lab_method_respiration_detection_method'] = [
                 '#type' => 'select',
                 '#empty_option' => '- Select -',
@@ -204,87 +212,78 @@ class LabTestMethodForm extends FormBase {
                 '#required' => FALSE
             ];
 
-            // $bulk_density_core_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_core_diameter') : NULL;
-            // $form['autoload_container']['field_lab_method_bulk_density_core_diameter'] = [
-            //     '#type' => 'number',
-            //     '#title' => $this->t('Bulk Density Core Diameter (Unit Inches)'),
-            //     '#step' => 0.01,
-            //     '#min' => 0,
-            //     // '#value' => $fs_lab_profile['field_profile_respiratory_incubation_days'],
-            //     '#default_value' => $bulk_density_core_default,
-            //     '#required' => FALSE
-            // ];
+            $bulk_density_core_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_core_diameter') : NULL;
+            $form['autoload_container']['field_lab_method_bulk_density_core_diameter'] = [
+                '#type' => 'number',
+                '#title' => $this->t('Bulk Density Core Diameter (Unit Inches)'),
+                '#step' => 0.01,
+                '#min' => 0,
+                '#default_value' =>  $bulk_density_core_default,
+                '#required' => FALSE
+            ];
 
-            // $bulk_density_volume_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_volume') : NULL;
-            // $form['autoload_container']['field_lab_method_bulk_density_volume'] = [
-            //     '#type' => 'number',
-            //     '#step' => 0.01,
-            //     '#min' => 0,
-            //     '#title' => $this->t('Bulk Density Volume (Cubic Centimeters)'),
-            //     // '#value' => $fs_lab_profile['field_profile_respiratory_incubation_days'],
-            //     '#default_value' => $bulk_density_volume_default,
-            //     '#required' => FALSE
-            // ];
+            $bulk_density_volume_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_volume') : NULL;
+            $form['autoload_container']['field_lab_method_bulk_density_volume'] = [
+                '#type' => 'number',
+                '#step' => 0.01,
+                '#min' => 0,
+                '#title' => $this->t('Bulk Density Volume (Cubic Centimeters)'),
+                '#default_value' => $bulk_density_volume_default,
+                '#required' => FALSE
+            ];
 
-            // $infiltration_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_infiltration_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_infiltration_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Infiltration Method'),
-            //     '#options' => $infiltration_method,
-            //     // '#value' => $fs_lab_profile['field_profile_respiratory_incubation_days'],
-            //     '#default_value' => $infiltration_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            // This field is not in the Lab Test Profile Entity it should be, need to mark a bug
+            $infiltration_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_infiltration_method')->target_id : NULL;
+            $form['autoload_container']['field_lab_method_infiltration_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Infiltration Method'),
+                '#options' => $infiltration_method,
+                '#default_value' => $infiltration_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $electroconductivity_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_electroconductivity_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_electroconductivity_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Electroconductivity Method'),
-            //     '#options' => $ec_method,
-            //     '#value' => $fs_lab_profile['electroconductivity_method'],
-            //     '#default_value' => $electroconductivity_method_default_value,
-            //     '#required' => FALSE
-            // ];
 
-            // $nitrate_n_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_nitrate_n_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_nitrate_n_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Nitrate-N Method'),
-            //     '#options' => $nitrate_method,
-            //     '#value' => $fs_lab_profile['nitrate_n_method'],
-            //     '#default_value' => $nitrate_n_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_electroconductivity_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Electroconductivity Method'),
+                '#options' => $ec_method,
+                '#value' => $electroconductivity_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $phosphorus_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_phosphorus_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_phosphorus_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Phosphorus Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['phosphorus_method'],
-            //     '#default_value' => $phosphorus_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_nitrate_n_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Nitrate-N Method'),
+                '#options' => $nitrate_method,
+                '#value' => $nitrate_n_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $potassium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_potassium_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_potassium_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Potassium Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['potassium_method'],
-            //     '#default_value' => $potassium_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_phosphorus_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Phosphorus Method'),
+                '#options' => $s_he_extract,
+                '#value' => $phosphorus_method_default_value,
+                '#required' => FALSE
+            ];
+
+            $form['autoload_container']['field_lab_method_potassium_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Potassium Method'),
+                '#options' => $s_he_extract,
+                '#value' => $potassium_method_default_value,
+                '#required' => FALSE
+            ];
 
             // $calcium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_calcium_method')->target_id : NULL;
             // $form['autoload_container']['field_lab_method_calcium_method'] = [
@@ -503,20 +502,22 @@ class LabTestMethodForm extends FormBase {
         $method_submission['field_lab_method_aggregate_stability_method'] = $form_state->getValue('autoload_container')['field_lab_method_aggregate_stability_method'];
         // $method_submission['field_lab_method_respiration_incubation_days'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_incubation_days'];
         $method_submission['field_lab_method_respiration_detection_method'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_detection_method'];
-        // $method_submission['field_lab_method_bulk_density_core_diameter'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_core_diameter'];
-        // $method_submission['field_lab_method_bulk_density_volume'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_volume'];
-        // $method_submission['field_lab_method_electroconductivity_method'] = $form_state->getValue('autoload_container')['field_lab_method_electroconductivity_method'];
-        // $method_submission['field_lab_method_phosphorus_method'] = $form_state->getValue('autoload_container')['field_lab_method_phosphorus_method'];
-        // $method_submission['field_lab_method_potassium_method'] = $form_state->getValue('autoload_container')['field_lab_method_potassium_method'];
-        // $method_submission['field_lab_method_calcium_method'] = $form_state->getValue('autoload_container')['field_lab_method_calcium_method'];
-        // $method_submission['field_lab_method_magnesium_method'] = $form_state->getValue('autoload_container')['field_lab_method_magnesium_method'];
-        // $method_submission['field_lab_method_sulfur_method'] = $form_state->getValue('autoload_container')['field_lab_method_sulfur_method'];
-        // $method_submission['field_lab_method_iron_method'] = $form_state->getValue('autoload_container')['field_lab_method_iron_method'];
-        // $method_submission['field_lab_method_manganese_method'] = $form_state->getValue('autoload_container')['field_lab_method_manganese_method'];
-        // $method_submission['field_lab_method_copper_method'] = $form_state->getValue('autoload_container')['field_lab_method_copper_method'];
-        // $method_submission['field_lab_method_zinc_method'] = $form_state->getValue('autoload_container')['field_lab_method_zinc_method'];
-        // $method_submission['field_lab_method_boron_method'] = $form_state->getValue('autoload_container')['field_lab_method_boron_method'];
-        // $method_submission['field_lab_method_aluminum_method'] = $form_state->getValue('autoload_container')['field_lab_method_aluminum_method'];
+        $method_submission['field_lab_method_bulk_density_core_diameter'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_core_diameter'];
+        $method_submission['field_lab_method_bulk_density_volume'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_volume'];
+        $method_submission['field_lab_method_electroconductivity_method'] = $form_state->getValue('autoload_container')['field_lab_method_electroconductivity_method'];
+        $method_submission['field_lab_method_phosphorus_method'] = $form_state->getValue('autoload_container')['field_lab_method_phosphorus_method'];
+        $method_submission['field_lab_method_potassium_method'] = $form_state->getValue('autoload_container')['field_lab_method_potassium_method'];
+        $method_submission['field_lab_method_calcium_method'] = $form_state->getValue('autoload_container')['field_lab_method_calcium_method'];
+        $method_submission['field_lab_method_magnesium_method'] = $form_state->getValue('autoload_container')['field_lab_method_magnesium_method'];
+        $method_submission['field_lab_method_sulfur_method'] = $form_state->getValue('autoload_container')['field_lab_method_sulfur_method'];
+        $method_submission['field_lab_method_iron_method'] = $form_state->getValue('autoload_container')['field_lab_method_iron_method'];
+        $method_submission['field_lab_method_manganese_method'] = $form_state->getValue('autoload_container')['field_lab_method_manganese_method'];
+        $method_submission['field_lab_method_copper_method'] = $form_state->getValue('autoload_container')['field_lab_method_copper_method'];
+        $method_submission['field_lab_method_zinc_method'] = $form_state->getValue('autoload_container')['field_lab_method_zinc_method'];
+        $method_submission['field_lab_method_boron_method'] = $form_state->getValue('autoload_container')['field_lab_method_boron_method'];
+        $method_submission['field_lab_method_aluminum_method'] = $form_state->getValue('autoload_container')['field_lab_method_aluminum_method'];
+        $method_submission['field_lab_method_infiltration_method'] = $form_state->getValue('autoload_container')['field_lab_method_infiltration_method'];
+        $method_submission['field_lab_method_nitrate_n_method'] = $form_state->getValue('autoload_container')['field_lab_method_nitrate_n_method'];
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {

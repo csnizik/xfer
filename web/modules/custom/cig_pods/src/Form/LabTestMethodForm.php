@@ -50,22 +50,11 @@ class LabTestMethodForm extends FormBase {
 
     }
 
-    private function createAutoLoadedElementNames(){
-        return array(/*'field_lab_method_aggregate_stability_unit', 'field_lab_method_aggregate_stability_method', 'field_lab_method_aggregate_stability_method',
-        'field_lab_method_respiration_incubation_days', 'field_lab_method_respiration_detection_method', 'field_lab_method_bulk_density_core_diameter', 'field_lab_method_bulk_density_volume',
-        'field_lab_method_infiltration_method', 'field_lab_method_electroconductivity_method', 'field_lab_method_nitrate_n_method','field_lab_method_phosphorus_method','field_lab_method_potassium_method',
-        'field_lab_method_calcium_method', 'field_lab_method_magnesium_method', 'field_lab_method_sulfur_method', 'field_lab_method_iron_method', 'field_lab_method_manganese_method', 'field_lab_method_copper_method',
-        'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method',*/ 'field_lab_method_molybdenum_method');
-
-    }
-
-
-
     /**
     * {@inheritdoc}
     */
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        dpm("Changes Made 8");
+        dpm("Changes Made 7");
 
         $labTestMethod  = [];
 
@@ -82,7 +71,11 @@ class LabTestMethodForm extends FormBase {
             $form_state->set('operation','edit');
             $form_state->set('lab_test_id',$id);
             $labTestMethod = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-            $form_state->set('lab_profile', array(1 => 'value'));
+
+            if($form_state->get('loading') == NULL){
+                $form_state->set('lab_profile', array(1 => 'value'));
+            }
+
 
 
         } else {
@@ -138,7 +131,7 @@ class LabTestMethodForm extends FormBase {
 			'#type' => 'select',
 			'#title' => 'Soil Health Test Methods',
 			'#options' => $lab_test_profile,
-            '#default_value' => $soil_sample_default_id,
+            '#default_value' => $lab_profile_default,
 			'#required' => TRUE,
 		];
 
@@ -167,39 +160,49 @@ class LabTestMethodForm extends FormBase {
 
         $fs_lab_profile = $form_state->get('lab_profile');
         if(count($fs_lab_profile) <> 0){
-            // $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_aggregate_stability_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => 'Aggregate Stability Method',
-            //     '#options' => $agg_stab_method,
-            //     '#value' => $fs_lab_profile['field_profile_aggregate_stability_method'],
-            //     '#default_value' => $aggregate_method_default_value,
-            //     '#required' => FALSE,
-            // ];
+
+            if($form_state->get('loading') <> NULL){
+                $molybdenum_method_default_value = $fs_lab_profile['molybdenum_method'];
+                $aggregate_method_default_value = $fs_lab_profile['field_profile_aggregate_stability_method'];
+                // $respiratory_incubation_default_value = $fs_lab_profile['field_profile_respiratory_incubation_days'];
+                $respiratory_detection_default_value = $fs_lab_profile['field_profile_respiration_detection_method'];
+            }else {
+                $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : NULL;
+                $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
+                // $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
+                $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
+
+            }
+
+            $form['autoload_container']['field_lab_method_aggregate_stability_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => 'Aggregate Stability Method',
+                '#options' => $agg_stab_method,
+                '#value' => $aggregate_method_default_value,
+                '#required' => FALSE,
+            ];
 
             // $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
             // $form['autoload_container']['field_lab_method_respiration_incubation_days'] = [
             //     '#type' => 'number',
             //     '#title' => 'Respiration Incubation Days',
             //     '#min' => 0,
-            //     // '#value' => $fs_lab_profile['field_profile_respiratory_incubation_days'],
-            //     '#default_value' => $respiratory_incubation_default_value,
-            //     '#required' => FALSE
+            //     '#value' => $respiratory_incubation_default_value,
+            //     '#required' => FALSE,
             // ];
 
             // $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_respiration_detection_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => 'Respiration Detection Method',
-            //     '#options' => $resp_detect,
-            //     '#value' => $fs_lab_profile['field_profile_respiration_detection_method'],
-            //     '#default_value' => $respiratory_detection_default_value,
-            //      '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_respiration_detection_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => 'Respiration Detection Method',
+                '#options' => $resp_detect,
+                '#value' => $respiratory_detection_default_value,
+                '#required' => FALSE
+            ];
 
             // $bulk_density_core_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_core_diameter') : NULL;
             // $form['autoload_container']['field_lab_method_bulk_density_core_diameter'] = [
@@ -391,15 +394,13 @@ class LabTestMethodForm extends FormBase {
             //     '#required' => FALSE
             // ];
 
-            $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : '- Select -';
             $form['autoload_container']['field_lab_method_molybdenum_method'] = [
                 '#type' => 'select',
                 '#empty_option' => '- Select -',
                 '#empty_value' => '- Select -',
                 '#title' => $this->t('Molybdenum Method'),
                 '#options' => $s_he_extract,
-                '#value' => $fs_lab_profile['molybdenum_method'],
-                '#default_value' => $molybdenum_method_default_value,
+                '#value' => $molybdenum_method_default_value,
                 '#required' => FALSE,
             ];
 
@@ -437,6 +438,8 @@ class LabTestMethodForm extends FormBase {
     }
 
     public function loadProfileData(array &$form, FormStateInterface $form_state){
+
+        $form_state->set('loading', 1);
 
         $lab_profile_db = \Drupal::entityTypeManager()->getStorage('asset')->load($form['field_lab_method_lab_test_profile']['#value'])->toArray();
 
@@ -494,24 +497,12 @@ class LabTestMethodForm extends FormBase {
     /**
     * {@inheritdoc}
     */
-
-    public function testFormStateSubmit(array &$form, FormStateInterface $form_state){
-        // $test = $form_state->getValue('autoload_container')['field_lab_method_molybdenum_method'];
-        $method_submission = [];
-        $loadedElementNames = $this->createAutoLoadedElementNames();
-        // foreach($loadedElementNames as $elemName){
-        //     $method_submission[$elemName] = $form_state->getValue('autoload_wrapper')[$elemName];
-        // }
-        $method_submission['field_lab_method_molybdenum_method'] = $form_state->getValue('autoload_container')['field_lab_method_molybdenum_method'];
-        dpm($method_submission);
-    }
-
     private function saveProfileFields(array &$method_submission, FormStateInterface $form_state){
         $method_submission['field_lab_method_molybdenum_method'] = $form_state->getValue('autoload_container')['field_lab_method_molybdenum_method'];
         // $method_submission['field_lab_method_aggregate_stability_unit'] = $form_state->getValue('autoload_container')['field_lab_method_aggregate_stability_unit'];
-        // $method_submission['field_lab_method_aggregate_stability_method'] = $form_state->getValue('autoload_container')['field_lab_method_aggregate_stability_method'];
+        $method_submission['field_lab_method_aggregate_stability_method'] = $form_state->getValue('autoload_container')['field_lab_method_aggregate_stability_method'];
         // $method_submission['field_lab_method_respiration_incubation_days'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_incubation_days'];
-        // $method_submission['field_lab_method_respiration_detection_method'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_detection_method'];
+        $method_submission['field_lab_method_respiration_detection_method'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_detection_method'];
         // $method_submission['field_lab_method_bulk_density_core_diameter'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_core_diameter'];
         // $method_submission['field_lab_method_bulk_density_volume'] = $form_state->getValue('autoload_container')['field_lab_method_bulk_density_volume'];
         // $method_submission['field_lab_method_electroconductivity_method'] = $form_state->getValue('autoload_container')['field_lab_method_electroconductivity_method'];
@@ -547,6 +538,7 @@ class LabTestMethodForm extends FormBase {
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
+            $elementsToUpdate = [];
             $id = $form_state->get('lab_test_id');
             $labTestMethod = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
@@ -555,6 +547,13 @@ class LabTestMethodForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $labTestMethod->set($elemName, $form_state->getValue($elemName));
             }
+
+            $this->saveProfileFields($elementsToUpdate, $form_state);
+
+            foreach($elementsToUpdate as $key => $value){
+                $labTestMethod->set($key, $value);
+            }
+
             $labTestMethod->set('name', 'Methods');
 
             $labTestMethod->save();

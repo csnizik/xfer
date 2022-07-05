@@ -170,6 +170,14 @@ class LabTestMethodForm extends FormBase {
                 $nitrate_n_method_default_value =  $fs_lab_profile['nitrate_n_method'];
                 $phosphorus_method_default_value =  $fs_lab_profile['phosphorus_method'];
                 $potassium_method_default_value =  $fs_lab_profile['potassium_method'];
+                $calcium_method_default_value =  $fs_lab_profile['calcium_method'];
+                $magnesium_method_default_value = $fs_lab_profile['magnesium_method'];
+                $sulfur_method_default_value = $fs_lab_profile['sulfur_method'];
+                $iron_method_default_value = $fs_lab_profile['iron_method'];
+                $manganese_method_default_value =  $fs_lab_profile['manganese_method'];
+                $copper_method_default_value = $fs_lab_profile['copper_method'];
+                $zinc_method_default_value = $fs_lab_profile['zinc_method'];
+                $boron_method_default_value = $fs_lab_profile['boron_method'];
             }else {
                 $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : NULL;
                 $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
@@ -179,6 +187,14 @@ class LabTestMethodForm extends FormBase {
                 $nitrate_n_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_nitrate_n_method')->target_id : NULL;
                 $phosphorus_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_phosphorus_method')->target_id : NULL;
                 $potassium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_potassium_method')->target_id : NULL;
+                $calcium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_calcium_method')->target_id : NULL;
+                $magnesium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_magnesium_method')->target_id : NULL;
+                $sulfur_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_sulfur_method')->target_id : NULL;
+                $iron_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_iron_method')->target_id : NULL;
+                $manganese_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_manganese_method')->target_id : NULL;
+                $copper_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_copper_method')->target_id : NULL;
+                $zinc_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_zinc_method')->target_id : NULL;
+                $boron_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_boron_method')->target_id : NULL;
 
             }
 
@@ -285,101 +301,92 @@ class LabTestMethodForm extends FormBase {
                 '#required' => FALSE
             ];
 
-            // $calcium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_calcium_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_calcium_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Calcium Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['calcium_method'],
-            //     '#default_value' => $calcium_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_calcium_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Calcium Method'),
+                '#options' => $s_he_extract,
+                '#value' => $calcium_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $magnesium_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_magnesium_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_magnesium_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Magnesium Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['magnesium_method'],
-            //     '#default_value' => $magnesium_method_default_value,
-            //     '#required' => FALSE
-            // ];
 
-            // $sulfur_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_sulfur_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_sulfur_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Sulfur Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['sulfur_method'],
-            //     '#default_value' => $sulfur_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_magnesium_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Magnesium Method'),
+                '#options' => $s_he_extract,
+                '#value' => $magnesium_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $iron_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_iron_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_iron_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Iron Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['iron_method'],
-            //     '#default_value' => $iron_method_default_value,
-            //     '#required' => FALSE
-            // ];
 
-            // $manganese_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_manganese_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_manganese_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Manganese Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['manganese_method'],
-            //     '#default_value' => $manganese_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_sulfur_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Sulfur Method'),
+                '#options' => $s_he_extract,
+                '#value' => $sulfur_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $copper_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_copper_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_copper_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Copper Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['copper_method'],
-            //     '#default_value' => $copper_method_default_value,
-            //     '#required' => FALSE
-            // ];
 
-            // $zinc_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_zinc_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_zinc_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Zinc Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['zinc_method'],
-            //     '#default_value' => $zinc_method_default_value,
-            //     '#required' => FALSE
-            // ];
+            $form['autoload_container']['field_lab_method_iron_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Iron Method'),
+                '#options' => $s_he_extract,
+                '#value' => $iron_method_default_value,
+                '#required' => FALSE
+            ];
 
-            // $boron_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_boron_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_boron_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Boron Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['boron_method'],
-            //     '#default_value' => $boron_method_default_value,
-            //     '#required' => FALSE
-            // ];
+
+            $form['autoload_container']['field_lab_method_manganese_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Manganese Method'),
+                '#options' => $s_he_extract,
+                '#value' => $manganese_method_default_value,
+                '#required' => FALSE
+            ];
+
+
+            $form['autoload_container']['field_lab_method_copper_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Copper Method'),
+                '#options' => $s_he_extract,
+                '#value' =>$copper_method_default_value,
+                '#required' => FALSE
+            ];
+
+
+            $form['autoload_container']['field_lab_method_zinc_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Zinc Method'),
+                '#options' => $s_he_extract,
+                '#value' => $zinc_method_default_value,
+                '#required' => FALSE
+            ];
+
+
+            $form['autoload_container']['field_lab_method_boron_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Boron Method'),
+                '#options' => $s_he_extract,
+                '#value' => $boron_method_default_value,
+                '#required' => FALSE
+            ];
 
             // $aluminum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_aluminum_method')->target_id : NULL;
             // $form['autoload_container']['field_lab_method_aluminum_method'] = [

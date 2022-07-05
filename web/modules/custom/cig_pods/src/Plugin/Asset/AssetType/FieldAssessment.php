@@ -150,6 +150,7 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
          
          ],
+         // TODO: Add Plant roots
 
       ];
     $farmFieldFactory = new FarmFieldFactory();

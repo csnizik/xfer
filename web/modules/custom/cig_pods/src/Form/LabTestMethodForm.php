@@ -49,12 +49,23 @@ class LabTestMethodForm extends FormBase {
         return array('field_lab_method_soil_sample', 'field_lab_soil_test_laboratory', 'field_lab_method_lab_test_profile');
 
     }
+    private function createAutoLoadElementNames(){
+        return array('field_lab_method_molybdenum_method', 'field_lab_method_aggregate_stability_method', 'field_lab_method_respiration_detection_method',
+        'field_lab_method_bulk_density_core_diameter', 'field_lab_method_bulk_density_volume', 'field_lab_method_electroconductivity_method', 'field_lab_method_phosphorus_method',
+        'field_lab_method_potassium_method', 'field_lab_method_calcium_method', 'field_lab_method_magnesium_method', 'field_lab_method_sulfur_method', 'field_lab_method_iron_method',
+        'field_lab_method_manganese_method', 'field_lab_method_copper_method', 'field_lab_method_zinc_method', 'field_lab_method_boron_method', 'field_lab_method_aluminum_method',
+        'field_lab_method_infiltration_method', 'field_lab_method_nitrate_n_method');
+        // $method_submission['field_lab_method_aggregate_stability_unit'] = $form_state->getValue('autoload_container')['field_lab_method_aggregate_stability_unit'];
+        // $method_submission['field_lab_method_respiration_incubation_days'] = $form_state->getValue('autoload_container')['field_lab_method_respiration_incubation_days'];
+
+    }
+
 
     /**
     * {@inheritdoc}
     */
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        dpm("Changes Made 5");
+        dpm("Changes Made 1");
 
         $labTestMethod  = [];
 
@@ -146,17 +157,13 @@ class LabTestMethodForm extends FormBase {
         $form['autoload_container']['actions']['update_profile'] = [
             '#type' => 'submit',
             '#submit' => ['::loadProfileData'],
+            '#limit_validation_errors' => '',
             '#value' => $this->t('Load Selected Profile'),
             '#ajax' => [
                 'callback' => '::updateProfile',
                 'wrapper' => 'autoload_container',
             ],
         ];
-
-        // $aggregate_method_default_value = $is_edit ? $form_state->get('lab_profile')->get('field_profile_aggregate_stability_method')->target_id : NULL;
-
-
-        // if($form_state->get('lab_profile') <> array()){
 
         $fs_lab_profile = $form_state->get('lab_profile');
         if(count($fs_lab_profile) <> 0){
@@ -178,6 +185,7 @@ class LabTestMethodForm extends FormBase {
                 $copper_method_default_value = $fs_lab_profile['copper_method'];
                 $zinc_method_default_value = $fs_lab_profile['zinc_method'];
                 $boron_method_default_value = $fs_lab_profile['boron_method'];
+                $aluminum_method_default_value = $fs_lab_profile['aluminum_method'];
             }else {
                 $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : NULL;
                 $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
@@ -195,6 +203,7 @@ class LabTestMethodForm extends FormBase {
                 $copper_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_copper_method')->target_id : NULL;
                 $zinc_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_zinc_method')->target_id : NULL;
                 $boron_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_boron_method')->target_id : NULL;
+                $aluminum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_aluminum_method')->target_id : NULL;
 
             }
 
@@ -205,17 +214,17 @@ class LabTestMethodForm extends FormBase {
                 '#title' => 'Aggregate Stability Method',
                 '#options' => $agg_stab_method,
                 '#value' => $aggregate_method_default_value,
-                '#required' => FALSE,
+                '#required' => TRUE,
             ];
 
-            // The following field needs to either be changed to a taxonomy in the lab php definietion or be changed to a fraction in the lab profile php definition
+            // The following field needs to either be changed to a taxonomy in the lab method php definietion or be changed to a fraction in the lab profile php definition
             // $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
             // $form['autoload_container']['field_lab_method_respiration_incubation_days'] = [
             //     '#type' => 'number',
             //     '#title' => 'Respiration Incubation Days',
             //     '#min' => 0,
             //     '#value' => $respiratory_incubation_default_value,
-            //     '#required' => FALSE,
+            //     '#required' => TRUE,
             // ];
 
             $form['autoload_container']['field_lab_method_respiration_detection_method'] = [
@@ -225,7 +234,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => 'Respiration Detection Method',
                 '#options' => $resp_detect,
                 '#value' => $respiratory_detection_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $bulk_density_core_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_core_diameter') : NULL;
@@ -235,7 +244,7 @@ class LabTestMethodForm extends FormBase {
                 '#step' => 0.01,
                 '#min' => 0,
                 '#default_value' =>  $bulk_density_core_default,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $bulk_density_volume_default =  $is_edit ?  $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_bulk_density_volume') : NULL;
@@ -245,7 +254,7 @@ class LabTestMethodForm extends FormBase {
                 '#min' => 0,
                 '#title' => $this->t('Bulk Density Volume (Cubic Centimeters)'),
                 '#default_value' => $bulk_density_volume_default,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             // This field is not in the Lab Test Profile Entity it should be, need to mark a bug
@@ -257,7 +266,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Infiltration Method'),
                 '#options' => $infiltration_method,
                 '#default_value' => $infiltration_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -268,7 +277,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Electroconductivity Method'),
                 '#options' => $ec_method,
                 '#value' => $electroconductivity_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $form['autoload_container']['field_lab_method_nitrate_n_method'] = [
@@ -278,7 +287,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Nitrate-N Method'),
                 '#options' => $nitrate_method,
                 '#value' => $nitrate_n_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $form['autoload_container']['field_lab_method_phosphorus_method'] = [
@@ -288,7 +297,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Phosphorus Method'),
                 '#options' => $s_he_extract,
                 '#value' => $phosphorus_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $form['autoload_container']['field_lab_method_potassium_method'] = [
@@ -298,7 +307,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Potassium Method'),
                 '#options' => $s_he_extract,
                 '#value' => $potassium_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
             $form['autoload_container']['field_lab_method_calcium_method'] = [
@@ -308,7 +317,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Calcium Method'),
                 '#options' => $s_he_extract,
                 '#value' => $calcium_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -319,7 +328,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Magnesium Method'),
                 '#options' => $s_he_extract,
                 '#value' => $magnesium_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -330,7 +339,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Sulfur Method'),
                 '#options' => $s_he_extract,
                 '#value' => $sulfur_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -341,7 +350,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Iron Method'),
                 '#options' => $s_he_extract,
                 '#value' => $iron_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -352,7 +361,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Manganese Method'),
                 '#options' => $s_he_extract,
                 '#value' => $manganese_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -363,7 +372,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Copper Method'),
                 '#options' => $s_he_extract,
                 '#value' =>$copper_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -374,7 +383,7 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Zinc Method'),
                 '#options' => $s_he_extract,
                 '#value' => $zinc_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
 
@@ -385,20 +394,19 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Boron Method'),
                 '#options' => $s_he_extract,
                 '#value' => $boron_method_default_value,
-                '#required' => FALSE
+                '#required' => TRUE
             ];
 
-            // $aluminum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_aluminum_method')->target_id : NULL;
-            // $form['autoload_container']['field_lab_method_aluminum_method'] = [
-            //     '#type' => 'select',
-            //     '#empty_option' => '- Select -',
-            //     '#empty_value' => '- Select -',
-            //     '#title' => $this->t('Aluminum Method'),
-            //     '#options' => $s_he_extract,
-            //     '#value' => $fs_lab_profile['aluminum_method'],
-            //     '#default_value' => $aluminum_method_default_value,
-            //     '#required' => FALSE
-            // ];
+
+            $form['autoload_container']['field_lab_method_aluminum_method'] = [
+                '#type' => 'select',
+                '#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
+                '#title' => $this->t('Aluminum Method'),
+                '#options' => $s_he_extract,
+                '#value' => $aluminum_method_default_value,
+                '#required' => TRUE
+            ];
 
             $form['autoload_container']['field_lab_method_molybdenum_method'] = [
                 '#type' => 'select',
@@ -407,10 +415,11 @@ class LabTestMethodForm extends FormBase {
                 '#title' => $this->t('Molybdenum Method'),
                 '#options' => $s_he_extract,
                 '#value' => $molybdenum_method_default_value,
-                '#required' => FALSE,
+                '#required' => TRUE,
             ];
 
         }
+            // This field needs to be added to the Lab Testing Profile Asset in order to be loaded in by this asset
             // $aggregate_unit_default_value = $is_edit ? $form_state->get('lab_profile')->get('field_profile_aggregate_stability_unit')->target_id : NULL;
             // $form['test-wrapper']['field_lab_method_aggregate_stability_unit'] = [
             //     '#type' => 'select',

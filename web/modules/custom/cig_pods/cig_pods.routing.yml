@@ -70,7 +70,7 @@ cig_pods.soil_health_management_unit_form:
     _form: '\Drupal\cig_pods\Form\SoilHealthManagementUnitForm'
     _title: ""
   requirements:
-    _permission: "access content"    
+    _permission: "access content"
 
 cig_pods.lab_test_method_form:
   path: "/create/lab_testing_method"
@@ -106,7 +106,7 @@ cig_pods.edit_producer_form:
 cig_pods.edit_project_form:
   path: "/edit/project/{id}"
   defaults:
-    _form: '\Drupal\cig_pods\Form\ProducerEditForm'
+    _form: '\Drupal\cig_pods\Form\ProjectForm'
   requirements:
     _permission: "access content"
 
@@ -130,7 +130,7 @@ cig_pods.edit_soil_health_management_unit_form:
     _form: '\Drupal\cig_pods\Form\SoilHealthManagementUnitForm'
     _title: ""
   requirements:
-    _permission: "access content"    
+    _permission: "access content"
 
 cig_pods.edit_lab_test_method_form:
   path: "/edit/lab_testing_method/{id}"

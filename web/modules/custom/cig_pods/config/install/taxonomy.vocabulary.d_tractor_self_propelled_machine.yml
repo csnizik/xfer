@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Tractor/Self-Propelled Machine
+vid: d_tractor_self_propelled_machine
+description: 'A list of Tractor/Self-Propelled Machines'
+weight: 0

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Input Category
+vid: d_input_category
+description: 'A list of Input Categories'
+weight: 0

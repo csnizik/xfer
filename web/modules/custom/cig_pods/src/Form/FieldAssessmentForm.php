@@ -31,10 +31,11 @@ class FieldAssessmentForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		$producer = [];
 
-		dpm("up to date 4");
+		// TODO: Add soil structure
+		dpm("up to date 9");
 
-		if($form_state->get('calculated_value') == NULL ) {
-			$form_state->set('calculated_value', '');
+		if($form_state->get('calculate_rcs') == NULL ) {
+			$form_state->set('calculate_rcs', False);
 		}
 
 		$is_edit = $id <> NULL;
@@ -158,40 +159,48 @@ class FieldAssessmentForm extends FormBase {
 		// dpm("calculated field");
 		// dpm($default_calculated_field);
 
-		if($default_calculated_field <> ''){
+		if( $form_state -> get( 'calculate_rcs' )){
+			// Invariant: If calculate RCS is True, then all ***_rc_present vars will have a value
+			$soil_organic_matter_rc = $form_state -> get('soil_organic_matter_rc_present') ? 'Present' : 'Not Present';
 			$form['assessment_wrapper']['calculated_field_soil_organic_matter'] = [
 				'#type' => 'textfield',
-				'#title' => 'Soil Organic Matter',
+				'#title' => 'Soil Organic Matter Depletion Resource Concern',
 				'#required' => FALSE,
 				'#disabled' => TRUE,
-				'#value' => $form_state -> get('calculated_value'),
+				'#value' => $soil_organic_matter_rc,
 				'#prefix' => '<div class="calculated_field_container">',
 				'#suffix' => '</div>',
 			];
+			
+			$agg_instability_val = $form_state -> get('aggregate_instability_rc_present')  ? 'Present' : 'Not Present'; 
+
 			$form['assessment_wrapper']['calculated_field_aggregate_instability'] = [
 				'#type' => 'textfield',
-				'#title' => 'Aggregate Instability',
+				'#title' => 'Aggregate Instability Resource Concern',
 				'#required' => FALSE,
 				'#disabled' => TRUE,
-				'#value' => $form_state -> get('calculated_value'),
+				'#value' => $agg_instability_val,
 				'#prefix' => '<div class="calculated_field_container">',
 				'#suffix' => '</div>',
 			];
+			$compaction_val = $form_state -> get('compaction_rc_present')  ? 'Present' : 'Not Present'; 
+
 			$form['assessment_wrapper']['calculated_field_compaction'] = [
 				'#type' => 'textfield',
-				'#title' => 'Compaction',
+				'#title' => 'Compaction Resource Concern',
 				'#required' => FALSE,
 				'#disabled' => TRUE,
-				'#value' => $form_state -> get('calculated_value'),
+				'#value' => $compaction_val,
 				'#prefix' => '<div class="calculated_field_container">',
 				'#suffix' => '</div>',
 			];
+			$cfsoh_val = $form_state -> get('soil_organism_habitat_rc_present')  ? 'Present' : 'Not Present'; 
 			$form['assessment_wrapper']['calculated_field_soil_organism_habitat'] = [
 				'#type' => 'textfield',
-				'#title' => 'Soil Organism Habitat',
+				'#title' => 'Soil Organism Habitat Resource Concern',
 				'#required' => FALSE,
 				'#disabled' => TRUE,
-				'#value' => $form_state -> get('calculated_value'),
+				'#value' => $cfsoh_val,
 				'#prefix' => '<div class="calculated_field_container">',
 				'#suffix' => '</div>',
 			];
@@ -346,9 +355,16 @@ class FieldAssessmentForm extends FormBase {
 	$form_state -> set('compaction_rc_present', $compaction_rc_present);
 	$form_state -> set('aggregate_instability_rc_present', $aggregate_instability_rc_present);
 	$form_state -> set('soil_organic_matter_rc_present', $soil_organic_matter_rc_present);
+	$form_state -> set('soil_organism_habitat_rc_present', $soil_organism_habitat_rc_present);
 
+	$form_state -> set('calculate_rcs', True);
 	// End: Save calculated values into form state.
 
+
+	dpm($compaction_rc_present);
+	dpm($aggregate_instability_rc_present);
+	dpm($soil_organic_matter_rc_present);
+	dpm($soil_organism_habitat_rc_present);
 
 	// $form_state->set('')
 	// switch($val){

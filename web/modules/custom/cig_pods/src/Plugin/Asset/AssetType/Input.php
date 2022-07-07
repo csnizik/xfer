@@ -28,7 +28,7 @@ class Input extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        'field_input_dat' => [
+        'field_input_date' => [
            'label'=> 'Date',
            'type'=> 'timestamp',
            'required' => FALSE,

@@ -27,7 +27,7 @@ class Operation extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
         ],
-        'field_operation_dat' => [
+        'field_operation_date' => [
             'label'=> 'Date Of Operation',
             'type'=> 'timestamp',
             'required' => FALSE,
@@ -37,7 +37,7 @@ class Operation extends FarmAssetType {
             'label'=> 'Operation',
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
-            'target_bundle'=> 'd_operation',
+            'target_bundle'=> 'd_operation_type',
             'required' => FALSE,
             'description' => '',
         ],
@@ -45,7 +45,7 @@ class Operation extends FarmAssetType {
             'label'=> 'Ownership Status',
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
-            'target_bundle'=> 'd_ownership_status',
+            'target_bundle'=> 'd_equipment_ownership',
             'required' => FALSE,
             'description' => '',
         ],

@@ -69,3 +69,7 @@ css_form:
   css:
     theme:
       css/form.css: {}
+field_assesment:
+  css:
+    theme:
+      css/field-assesment-display.css: {}

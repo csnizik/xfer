@@ -65,7 +65,6 @@ class LabTestMethodForm extends FormBase {
     * {@inheritdoc}
     */
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        dpm("Changes Made 1");
 
         $labTestMethod  = [];
 

@@ -98,7 +98,7 @@ cig_pods.edit_producer_form:
 cig_pods.edit_project_form:
   path: "/edit/project/{id}"
   defaults:
-    _form: '\Drupal\cig_pods\Form\ProducerEditForm'
+    _form: '\Drupal\cig_pods\Form\ProjectForm'
   requirements:
     _permission: "access content"
 

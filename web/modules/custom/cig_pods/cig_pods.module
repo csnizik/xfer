@@ -32,6 +32,10 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_details_display';
 	}
+	if (isset($view) && ($view->storage->id() == 'field_assesment')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/field_assesment';
+	}
 	if (isset($view) && ($view->storage->id() == 'methods_display')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/awardee_methods_details_display';

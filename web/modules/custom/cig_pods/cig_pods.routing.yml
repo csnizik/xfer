@@ -154,3 +154,11 @@ cig_pods.edit_soil_health_sample_form:
     _title: ""
   requirements:
     _permission: "access content"
+
+cig_pods.edit_field_assesment_form:
+  path: "/edit/field_assesment/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"

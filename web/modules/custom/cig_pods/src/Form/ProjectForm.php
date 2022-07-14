@@ -201,34 +201,34 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>6 Fields | Section 1 of 2</h4></div>'
 			];
 
-			$awardee_org_default_name = $is_edit ? $awardee->get('name')->value : '';
+			$project_default_name = $is_edit ? $awardee->get('name')->value : '';
 			$form['name'] = [
 				'#type' => 'textfield',
 				'#title' => $this->t('Project Name'),
 				'$description' => 'Project Name',
 				'#required' => TRUE,
-				'#default_value' => $awardee_org_default_name,
+				'#default_value' => $project_default_name,
 			];
 
 
-			$awardee_org_default_name = $is_edit ? $awardee->get('field_project_agreement_number')->getValue()[0]['value'] : '';
+			$agreement_number_default = $is_edit ? $awardee->get('field_project_agreement_number')->getValue()[0]['value'] : '';
 			$form['field_project_agreement_number'] = [
 				'#type' => 'textfield',
 				'#title' => $this->t('Agreement Number'),
 				'$description' => 'Agreement Number',
-				'#default_value' => $awardee_org_default_name,
+				'#default_value' => $agreement_number_default,
 				'#required' => TRUE,
 			];
 
 
 			$grand_type_options = $this->getGrantTypeOptions();
-			$awardee_org_default_name = $is_edit ? $awardee->get('field_grant_type')->target_id : NULL;
+			$grant_type_default = $is_edit ? $awardee->get('field_grant_type')->target_id : NULL;
 			$form['field_grant_type'] = [
 				'#type' => 'select',
 				'#title' => 'Grant Type',
 				'#options' => $grand_type_options,
 				'#required' => TRUE,
-				'#default_value' => $awardee_org_default_name,
+				'#default_value' => $grant_type_default,
 			];
 
 			$awardee_org_default_name = $this->convertFractionsToDecimal($is_edit,$awardee, 'field_funding_amount');
@@ -240,12 +240,12 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#default_value' => $awardee_org_default_name,
 			];
 
-			$awardee_org_default_name = $is_edit ? $awardee->get('field_resource_concerns')->getValue() : '';
+			$field_resource_concerns_default = $is_edit ? $awardee->get('field_resource_concerns')->getValue() : '';
 			$resource_concern_options = $this->getResourceConcernOptions();
-			$details=array();
-				foreach ($awardee_org_default_name as $checks) {
-				 $details = $checks['target_id'];
-						$detail[] = $details;
+			$field_resource_concerns_default_final=array();
+				foreach ($field_resource_concerns_default as $checks) {
+				 $field_resource_concerns_default_final = $checks['target_id'];
+						$field_resource_concerns_defaultvalue[] = $field_resource_concerns_default_final;
 				}
 
 			$form['field_resource_concerns'] = [
@@ -253,16 +253,16 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#title' => t('Possible Resource Concerns'),
 				'#options' => $resource_concern_options,
 				'#required' => TRUE,
-				'#default_value' => $detail,
+				'#default_value' => $field_resource_concerns_defaultvalue,
 			];
 
-			$awardee_org_default_name = $is_edit ? $awardee->get('field_summary')->getValue()[0]['value'] : '';
+			$summary_default = $is_edit ? $awardee->get('field_summary')->getValue()[0]['value'] : '';
 			$form['field_summary'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Project Summary'),
 				'$description' => 'Project Summary',
 				'#required' => TRUE,
-				'#default_value' => $awardee_org_default_name,
+				'#default_value' => $summary_default,
 			];
 
 		/* Variables declaration end*/
@@ -278,13 +278,13 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
 		];
 
-		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee')->target_id : NULL;
+		$awardee_default_name = $is_edit ? $awardee->get('field_awardee')->target_id : NULL;
 		$form['field_awardee'] = [
 			'#type' => 'select',
 			'#title' => 'Awardee Organization Name',
 			'#options' => $awardee_options,
 			'#required' => TRUE,
-			'#default_value' => $awardee_org_default_name,
+			'#default_value' => $awardee_default_name,
 		];
 
 
@@ -295,18 +295,18 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		  '#suffix' => '</div>',
 		];
 
-		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
-		$cname=array();
-		foreach ($awardee_org_default_name as $checks) {
+		$eauth_default_id = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
+		$contactname=array();
+		foreach ($eauth_default_id as $checks) {
 		 $eauth = $checks['value'];
-				$cname[] = $eauth;
+				$contactname[] = $eauth;
 		}
 
-		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_contact_type')->getValue() : '';
-		$ctype=array();
-			foreach ($awardee_org_default_name as $checks) {
+		$contact_default_name = $is_edit ? $awardee->get('field_awardee_contact_type')->getValue() : '';
+		$contacttype=array();
+			foreach ($contact_default_name as $checks) {
 			 $detail = $checks['target_id'];
-			 $ctype[] = $detail;
+			 $contacttype[] = $detail;
 			}
 
 		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
@@ -320,7 +320,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#title' => $this
 				  ->t("Contact Name"),
 				'#options' => $contact_name_options,
-				'#default_value' => $cname[$i],
+				'#default_value' => $contactname[$i],
 				'attributes' => [
 					'class' => 'something',
 				],
@@ -333,7 +333,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#title' => $this
 				  ->t('Contact Type'),
 				'#options' => $contact_type_options,
-				'#default_value' => $ctype[$i],
+				'#default_value' => $contacttype[$i],
 				'#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
@@ -487,7 +487,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 
 		$project->delete();
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	}
 
@@ -661,7 +661,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		$awardee->set('field_awardee_contact_type', $contact_types);
 		$awardee->set('field_grant_type', $field_grant_type);
 		$awardee->save();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
 }
 

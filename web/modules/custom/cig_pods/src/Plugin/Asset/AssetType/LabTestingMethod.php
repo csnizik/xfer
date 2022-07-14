@@ -40,6 +40,16 @@ class LabTestingMethod extends FarmAssetType {
             'required' => TRUE,
             'multiple' => FALSE,
 		],
+        'field_lab_method_lab_test_profile' => [
+            'type'  => 'entity_reference',
+            'label' => 'Lab Test Profile',
+            'description' => $this->t('Lab Test Method Lab Test Profile'),
+			'target_type' => 'asset',
+			'target_bundle' => 'lab_testing_profile',
+			'handler' => 'default',
+            'required' => TRUE,
+            'multiple' => FALSE,
+		],
         'field_lab_method_aggregate_stability_unit' => [
             'type'  => 'entity_reference',
             'label' => 'Aggregate Stability Unit',

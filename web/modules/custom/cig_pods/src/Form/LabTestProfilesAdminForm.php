@@ -75,7 +75,7 @@ private function createElementNames(){
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
     $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
-     $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
+    $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
 
     $form['lab_test_title'] = [

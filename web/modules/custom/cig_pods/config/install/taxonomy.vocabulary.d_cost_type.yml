@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: Cost Type
+vid: d_cost_type
+description: 'A list of Cost Types'
+weight: 0

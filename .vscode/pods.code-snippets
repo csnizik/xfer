@@ -29,7 +29,7 @@
     ],
     "description": "PODS textfield"
   },
-  "PODS Form Element Number":{
+  "PODS Form Element Number": {
     "scope": "php",
     "prefix": "pdfen",
     "body": [
@@ -38,7 +38,7 @@
       "\t'#title' => \\$this->t('$2'),",
       "\t'#description' => '',",
       "\t'#required' => TRUE",
-      "]; $0"     
+      "]; $0"
     ]
   },
 
@@ -106,7 +106,7 @@
 
   "PODS Routing yml": {
     "prefix": "pdrt",
-    "scope": "yml",
+    // "scope": "yml",
     "body": [
       "cig_pods.$1:",
       "\tpath: \"$2\"",

@@ -171,10 +171,5 @@ cig_pods.edit_soil_health_sample_form:
   requirements:
     _permission: "access content"
 
-cig_pods.example_winnowing_form:
-  path: "/winnow"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\TaxonomyWinnowingForm'
-    _title: "Example Form"
   requirements:
     _permission: "access content"

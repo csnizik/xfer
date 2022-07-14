@@ -138,7 +138,7 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/field_assessment");
+  $this->pageRedirect($form_state, "/assets/field_assesment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

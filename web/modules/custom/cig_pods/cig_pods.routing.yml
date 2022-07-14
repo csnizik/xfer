@@ -170,6 +170,3 @@ cig_pods.edit_soil_health_sample_form:
     _title: ""
   requirements:
     _permission: "access content"
-
-  requirements:
-    _permission: "access content"

@@ -96,6 +96,14 @@ cig_pods.field_assessment_form:
   requirements:
     _permission: "access content"
 
+cig_pods.edit_field_assessment_form:
+  path: "/edit/field_assessment/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\FieldAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:
@@ -160,5 +168,13 @@ cig_pods.edit_soil_health_sample_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
     _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.example_winnowing_form:
+  path: "/winnow"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\TaxonomyWinnowingForm'
+    _title: "Example Form"
   requirements:
     _permission: "access content"

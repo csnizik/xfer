@@ -36,7 +36,7 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
          
          ],
-         'field_soil_cover' => [
+         'field_assessment_soil_cover' => [
              'label'=> 'Soil Cover',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
@@ -45,7 +45,7 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
          
          ],
-         'field_residue_breakdown' => [
+         'field_assessment_residue_breakdown' => [
              'label'=> 'Residue Breakdown',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
@@ -106,6 +106,15 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
          
          ],
+         'field_assessment_plant_roots' => [
+            'label'=> 'Soil Color',
+            'type'=> 'entity_reference',
+            'target_type'=> 'taxonomy_term',
+            'target_bundle'=> 'd_assessment_evaluation',
+            'required' => FALSE,
+            'description' => '',
+        
+        ],
          'field_assessment_biological_diversity' => [
              'label'=> 'Biological Diversity',
              'type'=> 'entity_reference',
@@ -150,7 +159,6 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
          
          ],
-         // TODO: Add Plant roots
 
       ];
     $farmFieldFactory = new FarmFieldFactory();

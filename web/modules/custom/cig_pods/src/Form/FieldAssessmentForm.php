@@ -15,9 +15,9 @@ class FieldAssessmentForm extends FormBase {
 		$options = [];
 		$options[''] = '-- Select --';
 
-		// TODO: "vid => d_assesment_..." is spelled incorrectly, but that is the machine name in the system.
+		// TODO: "vid => d_assessment_..." is spelled incorrectly, but need to
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_assesment_evaluation']);
+			['vid' => 'd_assessment_evaluation']);
 		$keys = array_keys($taxonomy_terms);
 		foreach($keys as $key){
 			$term = $taxonomy_terms[$key];
@@ -25,41 +25,79 @@ class FieldAssessmentForm extends FormBase {
 		}
 		return $options;
 	}
+
+
+	public function getSHMUOptions(){
+		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+			['type' => 'soil_health_management_unit']
+		 );
+		 $producer_options = [];
+		 $producer_options[''] = '- Select -';
+		 $producer_keys = array_keys($producer_assets);
+		 foreach($producer_keys as $producer_key) {
+		   $asset = $producer_assets[$producer_key];
+		   $producer_options[$producer_key] = $asset -> getName();
+		 }
+
+		 return $producer_options;
+	}
    /**
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		$producer = [];
 
-		// TODO: Add soil structure
-		dpm("up to date 9");
+		$is_edit = $id <> NULL;
 
+		if($is_edit){
+			$form_state->set('operation', 'edit');
+			// $form_state->set('calculate_rcs',True);
+			$form_state->set('assessment_id', $id);
+			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			
+		} else {
+			$form_state->set('operation', 'create');
+		}
+		
 		if($form_state->get('calculate_rcs') == NULL ) {
 			$form_state->set('calculate_rcs', False);
 		}
 
-		$is_edit = $id <> NULL;
-
-		$form['#tree'] = True;
-
+		
+		$form['#tree'] = False; // No hierarchy needed for this form.
 		$form['#attached']['library'][] = 'cig_pods/producer_form';
 
 		$form['producer_title'] = [
-			'#markup' => '<h1>Field Assesment </h1>',
+			'#markup' => '<h1>Assessments </h1>',
+		];
+		// TOOD: Attach appropriate CSS for this to display correctly
+		$form['subform_1'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Cropland In-Field Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
 		];
 
+		
+		$field_assessment_shmu_value = $is_edit ? $assessment->get('field_assessment_shmu')->target_id : ''; 
 		$form['field_assessment_shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit',
-			'#options' => [], // TODO: Populate
+			'#options' => $this->getSHMUOptions(), 
+			'#default_value' => $field_assessment_shmu_value,
 			'#required' => FALSE,
 		];
+
+		// Date field requires some special handling.		
+		if($is_edit){
+			// $field_shhmu_date_land_use_changed_value is expected to be a UNIX timestamp
+			$field_assessment_shmu_date_value = $assessment->get('field_assessment_date')[0]->value;
+			$field_assessment_shmu_date_form_value = date("Y-m-d", $field_assessment_shmu_date_value);
+		} else {
+			$field_assessment_shmu_date_form_value = '2022-01-01'; // Use this as default because otherwise it will default to Jan 1 1969
+		}
 
 		$form['field_assessment_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Date'),
 			'#description' => '',
-			'#default_value' => '2022-01-01', // Default value for "date" field type is a string in form of 'yyyy-MM-dd'
+			'#default_value' => $field_assessment_shmu_date_form_value, // Default value for "date" field type is a string in form of 'yyyy-MM-dd'
 			'#required' => FALSE
 		];
 
@@ -68,74 +106,112 @@ class FieldAssessmentForm extends FormBase {
 			'#suffix' => '</div>',
 		];
 
+		$field_assessment_soil_cover_value = $is_edit ? $assessment->get('field_assessment_soil_cover')->target_id : ''; 
 
-		$assesment_evaluations_options = $this->getAssessmentEvaluationOptions();
-		$form['assessment_wrapper']['field_soil_cover'] = [
+		$assessment_evaluations_options = $this->getAssessmentEvaluationOptions();
+		$form['assessment_wrapper']['field_assessment_soil_cover'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Cover'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_soil_cover_value,
 			'#required' => FALSE
 		];
-		
-		$form['assessment_wrapper']['field_residue_breakdown'] = [
+
+		$field_assessment_residue_breakdown_value = $is_edit ? $assessment->get('field_assessment_residue_breakdown')->target_id : ''; 
+
+		$form['assessment_wrapper']['field_assessment_residue_breakdown'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Residue Breakdown'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_residue_breakdown_value,
 			'#required' => FALSE
 		];
+
+		$field_assessment_surface_crusts_value = $is_edit ? $assessment->get('field_assessment_surface_crusts')->target_id : ''; 
 
 		$form['assessment_wrapper']['field_assessment_surface_crusts'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Surface Crusts'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_surface_crusts_value,
 			'#required' => FALSE
 		];
+		$field_assessment_ponding_value = $is_edit ? $assessment->get('field_assessment_ponding')->target_id : ''; 
 
 		$form['assessment_wrapper']['field_assessment_ponding'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Ponding'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_ponding_value,
 			'#required' => FALSE
 		];
+
+		$field_assessment_penetration_resistance_value = $is_edit ? $assessment->get('field_assessment_penetration_resistance')->target_id : ''; 
 
 		$form['assessment_wrapper']['field_assessment_penetration_resistance'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Penetration Resistance'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_penetration_resistance_value,
 			'#required' => FALSE
 		];
+		$field_assessment_water_stable_aggregates_value = $is_edit ? $assessment->get('field_assessment_water_stable_aggregates')->target_id : ''; 
 
 		$form['assessment_wrapper']['field_assessment_water_stable_aggregates'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Water Stable Aggregates'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_water_stable_aggregates_value,
 			'#required' => FALSE
 		];
+
+		$field_assessment_soil_structure_value = $is_edit ? $assessment->get('field_assessment_soil_structure')->target_id : ''; 
+
+		$form['assessment_wrapper']['field_assessment_soil_structure'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil Structure'),
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_soil_structure_value,
+			'#required' => FALSE
+		];
+
+		$field_assessment_soil_color_value = $is_edit ? $assessment->get('field_assessment_soil_color')->target_id : ''; 
 
 		$form['assessment_wrapper']['field_assessment_soil_color'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Color'),
-			'#options' => $assesment_evaluations_options,
-			'#required' => FALSE
-		];
-		$form['assessment_wrapper']['field_assessment_plant_roots'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Plant Roots'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_soil_color_value,
 			'#required' => FALSE
 		];
 
-		$form['assessment_wrapper']['field_assessment_bioligical_diversity'] = [
+		$field_assessment_plant_roots_value = $is_edit ? $assessment->get('field_assessment_plant_roots')->target_id : ''; 
+
+		$form['assessment_wrapper']['field_assessment_plant_roots'] = [
 			'#type' => 'select',
-			'#title' => $this->t('Biological Diversity'),
-			'#options' => $assesment_evaluations_options,
+			'#title' => $this->t('Plant Roots'),
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_plant_roots_value,
 			'#required' => FALSE
 		];
+
+		$field_assessment_biological_diversity_value = $is_edit ? $assessment->get('field_assessment_biological_diversity')->target_id : ''; 
+
+		$form['assessment_wrapper']['field_assessment_biological_diversity'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Biological Diversity'),
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_biological_diversity_value,
+			'#required' => FALSE
+		];
+		$field_assessment_biopores_value = $is_edit ? $assessment->get('field_assessment_biopores')->target_id : ''; 
+
 
 		$form['assessment_wrapper']['field_assessment_biopores'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Biopores'),
-			'#options' => $assesment_evaluations_options,
+			'#options' => $assessment_evaluations_options,
+			'#default_value' => $field_assessment_biopores_value,
 			'#required' => FALSE
 		];
 
@@ -147,22 +223,14 @@ class FieldAssessmentForm extends FormBase {
 				'callback' => '::calcuateResourceConcernsCallback',
 				'wrapper' => 'assessment_wrapper'
 			],
-			'#value' => $this->t('Calculate Resource Concerns'),
+			'#value' => $this->t('Identify Resource Concerns'),
 		];
 
-		$default_calculated_field = '';
-		if($form_state->get('calculated_value') <> NULL){
-			// dpm("it goes brrr");
-			$default_calculated_field = $form_state -> get('calculated_value');
-			dpm(gettype($default_calculated_field));
-		}
-		// dpm("calculated field");
-		// dpm($default_calculated_field);
-
 		if( $form_state -> get( 'calculate_rcs' )){
+
 			// Invariant: If calculate RCS is True, then all ***_rc_present vars will have a value
 			$soil_organic_matter_rc = $form_state -> get('soil_organic_matter_rc_present') ? 'Present' : 'Not Present';
-			$form['assessment_wrapper']['calculated_field_soil_organic_matter'] = [
+			$form['assessment_wrapper']['field_assessment_rc_soil_organic_matter'] = [
 				'#type' => 'textfield',
 				'#title' => 'Soil Organic Matter Depletion Resource Concern',
 				'#required' => FALSE,
@@ -174,7 +242,7 @@ class FieldAssessmentForm extends FormBase {
 			
 			$agg_instability_val = $form_state -> get('aggregate_instability_rc_present')  ? 'Present' : 'Not Present'; 
 
-			$form['assessment_wrapper']['calculated_field_aggregate_instability'] = [
+			$form['assessment_wrapper']['field_assessment_rc_aggregate_instability'] = [
 				'#type' => 'textfield',
 				'#title' => 'Aggregate Instability Resource Concern',
 				'#required' => FALSE,
@@ -185,7 +253,7 @@ class FieldAssessmentForm extends FormBase {
 			];
 			$compaction_val = $form_state -> get('compaction_rc_present')  ? 'Present' : 'Not Present'; 
 
-			$form['assessment_wrapper']['calculated_field_compaction'] = [
+			$form['assessment_wrapper']['field_assessment_rc_compaction'] = [
 				'#type' => 'textfield',
 				'#title' => 'Compaction Resource Concern',
 				'#required' => FALSE,
@@ -195,7 +263,7 @@ class FieldAssessmentForm extends FormBase {
 				'#suffix' => '</div>',
 			];
 			$cfsoh_val = $form_state -> get('soil_organism_habitat_rc_present')  ? 'Present' : 'Not Present'; 
-			$form['assessment_wrapper']['calculated_field_soil_organism_habitat'] = [
+			$form['assessment_wrapper']['field_assessment_rc_soil_organism_habitat'] = [
 				'#type' => 'textfield',
 				'#title' => 'Soil Organism Habitat Resource Concern',
 				'#required' => FALSE,
@@ -204,8 +272,27 @@ class FieldAssessmentForm extends FormBase {
 				'#prefix' => '<div class="calculated_field_container">',
 				'#suffix' => '</div>',
 			];
-		}
 			
+		}
+		
+		$form['actions']['save'] = [
+			'#type' => 'submit',
+			'#value' => 'Save'
+		];
+		$form['actions']['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			'#submit' => ['::dashboardRedirect'],
+
+		];
+
+        if($is_edit){
+            $form['actions']['delete'] = [
+                '#type' => 'submit',
+                '#value' => $this->t('Delete'),
+                '#submit' => ['::deleteFieldAssessment'],
+            ];
+        }
 
 		return $form;
 	}
@@ -217,25 +304,101 @@ class FieldAssessmentForm extends FormBase {
 	return;
 }
 
-// public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-// 	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
-// }
+public function dashboardRedirect(array &$form, FormStateInterface $form_state){
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+}
+public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
 
+	$assessment_id = $form_state->get('assessment_id');
+	$labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
+	$labTest->delete();
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+}
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+public function submitForm(array &$form, FormStateInterface $form_state) {
+	dpm('submit form go brr');
+
+	$ignored_fields = ['send',
+						'form_build_id',
+						'form_token',
+						'form_id',
+						'op',
+						'actions',
+						'assessment_wrapper', 
+						'save',
+						'cancel',
+						'delete'];
+
+	$calculated_fields = [
+						'field_assessment_rc_soil_organic_matter',
+						'field_assessment_rc_aggregate_instability',
+						'field_assessment_rc_compaction',
+						'field_assessment_rc_soil_organism_habitat'					
+	];
+
+	$date_fields = ['field_assessment_date'];
+
+	$is_edit = $form_state->get('operation') == 'edit';
+	
+	if($is_edit){
+		$id = $form_state->get('assessment_id');
+		$assessment = Asset::load($id);
+	} else {
+		$assessment_template = [];
+		$assessment_template['type'] = 'field_assessment';
+		$assessment = Asset::create($assessment_template);
+	}
+	
+	$form_values = $form_state -> getValues();
+
+	// TODO: fix naming
+	$related_shmu_id = $form_values['field_assessment_shmu'];
+	$date = $form_values['field_assessment_date'];
+	$related_shmu = Asset::load($related_shmu_id);
+	if($related_shmu <> NULL) {
+		$related_shmu_name = $related_shmu -> getName();
+	} else {
+		$related_shmu_name = '';
+	}
+	$assessment->set('name', $related_shmu_name." Assesment (".$date.")");
+
+	foreach( $form_values as $key => $value ){
+		if(in_array($key,$ignored_fields)) continue;
+		if(in_array($key,$date_fields)){
+			// $value is expected to be a string of format yyyy-mm-dd
+			$assessment -> set( $key, strtotime( $value ) ); 
+			continue;
+		}
+		// Handled outside of loop
+		if(in_array($key, $calculated_fields)){
+			continue;
+		}
+
+		$assessment->set($key,$value);
+	}
+
+	// Calculated fields
+	$assessment->set('field_assessment_rc_soil_organic_matter',$form_state->get('soil_organic_matter_rc_present'));
+	$assessment->set('field_assessment_rc_aggregate_instability',$form_state->get('aggregate_instability_rc_present'));
+	$assessment->set('field_assessment_rc_compaction',$form_state->get('compaction_rc_present'));
+	$assessment->set('field_assessment_rc_soil_organism_habitat',$form_state->get('soil_organism_habitat_rc_present'));
+
+
+	$assessment->save();
+	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
 
   }
+
 
   public function calcuateResourceConcerns(array &$form, FormStateInterface $form_state){
 	dpm("calculateResourceConcners triggered");
 	
 	
 	$form_values = $form_state->getValues(); //
-	// $val = $form_values['lab_test_profile']; 
-	$val = $form_values['assessment_wrapper']['field_assessment_soil_cover'];
 
 	// List of fields in consideration for calculating the presence of compaction
 	$compaction_keys = [
@@ -253,10 +416,10 @@ class FieldAssessmentForm extends FormBase {
 						'field_assessment_soil_structure',
 						'field_assessment_soil_color',
 						'field_assessment_plant_roots',
-						'field_assessment_bioligical_diversity',
+						'field_assessment_biological_diversity',
 						'field_assessment_biopores',
 	];
-	// List of fields in consideration for calculating the presence of Soil Organism Habiottat Loss Or Degradation
+	// List of fields in consideration for calculating the presence of Soil Organism Habitat Loss Or Degradation
 	$soil_organism_habitat_keys = [
 						'field_soil_cover',
 						'field_residue_breakdown',
@@ -264,21 +427,20 @@ class FieldAssessmentForm extends FormBase {
 						'field_assessment_water_stable_aggregates',
 						'field_assessment_soil_structure',
 						'field_assessment_plant_roots',
-						'field_assessment_bioligical_diversity',
+						'field_assessment_biological_diversity',
 						'field_assessment_biopores',
 	];
 
 	// List of Fields in consideration for calcuating the presence of Aggregate Instability.
 	$aggregate_instability_keys = [
-		'field_soil_cover',
-		'field_assessment_surface_crusts',
-		'field_assessment_ponding', 
-		'field_assessment_water_stable_aggregates',
-		'field_assessment_soil_structure',
-		'field_assessment_plant_roots',
-		'field_assessment_bioligical_diversity',
-		'field_assessment_biopores',
-		
+						'field_soil_cover',
+						'field_assessment_surface_crusts',
+						'field_assessment_ponding', 
+						'field_assessment_water_stable_aggregates',
+						'field_assessment_soil_structure',
+						'field_assessment_plant_roots',
+						'field_assessment_biological_diversity',
+						'field_assessment_biopores',
 	];
 	$assessment_options = $this->getAssessmentEvaluationOptions();
 
@@ -287,6 +449,8 @@ class FieldAssessmentForm extends FormBase {
 	$yes_taxonomy_id = NULL;
 	$no_taxonomy_id = NULL;
 	$n_a_taxonomy_id = NULL;
+
+	// Important: If the dropdowns change value in the db, this code needs to be changed to reflect the new values.
 	foreach($assessment_options as $key => $value){
 		if($value == 'Yes') $yes_taxonomy_id = $key;
 		if($value == 'No') $no_taxonomy_id = $key;
@@ -298,11 +462,11 @@ class FieldAssessmentForm extends FormBase {
 
 	$compaction_keys_false_count = 0;
 	foreach($compaction_keys as $key){
-		if($form_values['assessment_wrapper'][$key] == $no_taxonomy_id){
+		if($form_values[$key] == $no_taxonomy_id){
 				$compaction_keys_false_count += 1;
 		}
 	}
-	$compaction_rc_present = $compaction_keys_false_count >= 2 || $form_values['assessment_wrapper']['field_soil_structure'] == $no_taxonomy_id;
+	$compaction_rc_present = $compaction_keys_false_count >= 2 || $form_values['field_soil_structure'] == $no_taxonomy_id;
 
 	// End: Compaction
 
@@ -312,7 +476,7 @@ class FieldAssessmentForm extends FormBase {
 	$soil_organic_matter_false_count = 0;
 
 	foreach($soil_organic_keys as $key){
-		if($form_values['assessment_wrapper'][$key] == $no_taxonomy_id){
+		if($form_values[$key] == $no_taxonomy_id){
 			$soil_organic_matter_false_count += 1;
 		}
 	}
@@ -327,12 +491,12 @@ class FieldAssessmentForm extends FormBase {
 	$aggregate_instability_false_count = 0;
 
 	foreach($aggregate_instability_keys as $key){
-		if($form_values['assessment_wrapper'][$key] == $no_taxonomy_id){
+		if($form_values[$key] == $no_taxonomy_id){
 			$aggregate_instability_false_count += 1;
 		}		
 	}
 
-	$aggregate_instability_rc_present = $aggregate_instability_false_count >= 2 || $form_values['assessment_wrapper']['field_assessment_water_stable_aggregates'] == $no_taxonomy_id;
+	$aggregate_instability_rc_present = $aggregate_instability_false_count >= 2 || $form_values['field_assessment_water_stable_aggregates'] == $no_taxonomy_id;
 
 	// End: Aggregate Instability Resource concern calculation
 
@@ -343,7 +507,7 @@ class FieldAssessmentForm extends FormBase {
 	$soil_organism_habitat_false_count = 0;
 
 	foreach($soil_organic_keys as $key){
-		if($form_values['assessment_wrapper'][$key] == $no_taxonomy_id){
+		if($form_values[$key] == $no_taxonomy_id){
 			$soil_organism_habitat_false_count += 1;
 		}
 	}
@@ -366,20 +530,7 @@ class FieldAssessmentForm extends FormBase {
 	dpm($soil_organic_matter_rc_present);
 	dpm($soil_organism_habitat_rc_present);
 
-	// $form_state->set('')
-	// switch($val){
-	// 	case 0:
-	// 		$form_state->set('calculated_value', 'a');
-	// 		break;
-	// 	case 1:
-	// 		$form_state->set('calculated_value', 'b');
-	// 		break;
-	// 	case 2:
-	// 		$form_state->set('calculated_value', 'c');
-	// 		break;
-	// }
-	// $form_state->set('calculated_value', 'brrrr2');
-	// $form['assessment_wrapper']['calculated_field']['#value'] = 'brrrrr585858';
+
 	$form_state->setRebuild(True);
   }
 
@@ -390,6 +541,6 @@ class FieldAssessmentForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'producer_create_form';
+    return 'field_assessment_form';
   }
 }

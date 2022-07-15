@@ -36,6 +36,11 @@ soil_health_management_unit_form:
     theme:
       css/shmu.css: {}
 
+irrigation_form:
+  css:
+    theme:
+      css/irrigation.css: {}
+
 lab_test_method_admin_form:
   css:
     theme:

@@ -40,6 +40,8 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Methods'),
           'oper' => $this
 					->t('Operation'),
+          'irr' => $this
+					->t('Irrigation'),
         ],
 				'#prefix' => '<div id="top-form">'
 		];

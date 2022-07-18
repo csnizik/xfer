@@ -37,6 +37,8 @@ soil_health_management_unit_form:
       css/shmu.css: {}
 
 lab_test_method_admin_form:
+  js:
+    js/methods.js: {}
   css:
     theme:
       css/lab_test_method_admin.css: {}
@@ -73,3 +75,4 @@ field_assesment:
   css:
     theme:
       css/field-assesment-display.css: {}
+

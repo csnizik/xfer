@@ -436,6 +436,7 @@ class LabTestMethodForm extends FormBase {
 
             $form['actions']['cancel'] = [
                 '#type' => 'submit',
+                '#limit_validation_errors' => '',
                 '#value' => $this->t('Cancel'),
                 '#submit' => ['::redirectAfterCancel'],
             ];

@@ -29,7 +29,7 @@ font-weight: 400;
 line-height: 20px;
 }
 
-form#lab-test-methods-admin #edit-autoload-container-actions-update-profile.button {
+form#lab-test-methods-admin #edit-actions-update-profile.button {
   background-color: #ffffff;
   border-radius: 2px;
   border-color: #005ea2 !important;

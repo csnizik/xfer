@@ -14,9 +14,19 @@ use Drupal\farm_field\FarmFieldFactory;
    * )
    */
 class Irrigation extends FarmAssetType {
+
+    
     public function buildFieldDefinitions() {
         $fields = parent::buildFieldDefinitions();
         $field_info = [
+        'field_shmu' => [
+            'label'=> 'SHMU',
+            'type'=> 'entity_reference',
+            'target_type'=> 'asset',
+            'target_bundle'=> 'soil_health_management_unit',
+            'required' => False,
+            'description' => '',
+        ],
         'field_is_irrigation_in_arid_or_high' => [
             'label'=> 'Irrigation in Arid Climate or High Tunnel',
             'type'=> 'boolean',

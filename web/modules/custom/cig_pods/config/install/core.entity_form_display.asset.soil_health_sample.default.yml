@@ -3,17 +3,18 @@ status: true
 dependencies:
   config:
     - asset.type.soil_health_sample
+    - field.field.asset.soil_health_sample.field_diameter
+    - field.field.asset.soil_health_sample.field_equipment_used
+    - field.field.asset.soil_health_sample.field_latitude_1
+    - field.field.asset.soil_health_sample.field_latitude_2
+    - field.field.asset.soil_health_sample.field_latitude_3
+    - field.field.asset.soil_health_sample.field_longtitude_1
+    - field.field.asset.soil_health_sample.field_longtitude_2
+    - field.field.asset.soil_health_sample.field_longtitude_3
     - field.field.asset.soil_health_sample.field_plant_stage_at_sampling
     - field.field.asset.soil_health_sample.field_sampling_depth
     - field.field.asset.soil_health_sample.field_shmu_id
     - field.field.asset.soil_health_sample.field_soil_sample_collection_dat
-    - field.field.asset.soil_health_sample.field_equipment_used
-    - field.field.asset.soil_health_sample.field_latitude_1
-    - field.field.asset.soil_health_sample.field_longtitude_1
-    - field.field.asset.soil_health_sample.field_latitude_2
-    - field.field.asset.soil_health_sample.field_longtitude_2
-    - field.field.asset.soil_health_sample.field_latitude_3
-    - field.field.asset.soil_health_sample.field_longtitude_3
   module:
     - farm_map
     - field_layout
@@ -28,6 +29,63 @@ targetEntityType: asset
 bundle: soil_health_sample
 mode: default
 content:
+  field_diameter:
+    type: number
+    weight: 7
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_equipment_used:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_latitude_1:
+    type: number
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_latitude_2:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_latitude_3:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_longtitude_1:
+    type: number
+    weight: 9
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_longtitude_2:
+    type: number
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_longtitude_3:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_plant_stage_at_sampling:
     type: options_select
     weight: 2
@@ -52,54 +110,6 @@ content:
     weight: 5
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_equipment_used:
-    type: options_select
-    weight: 6
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  field_latitude_1:
-    type: number
-    weight: 7
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_longtitude_1:
-    type: number
-    weight: 8
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_latitude_2:
-    type: number
-    weight: 9
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_longtitude_2:
-    type: number
-    weight: 10
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_latitude_3:
-    type: number
-    weight: 11
-    region: content
-    settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_longtitude_3:
-    type: number
-    weight: 12
-    region: content
-    settings:
-      placeholder: ''
     third_party_settings: {  }
   geometry:
     type: farm_map_geofield

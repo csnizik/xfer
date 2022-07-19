@@ -71,8 +71,12 @@ css_form:
   css:
     theme:
       css/form.css: {}
-field_assesment:
+field_assessment:
   css:
     theme:
       css/field-assesment-display.css: {}
 
+field_assessment_form:
+  css:
+    theme:
+      css/awardee-field-assessment.css: {}

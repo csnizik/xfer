@@ -889,7 +889,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$shmu_template = [];
 			$shmu_template['type'] = 'soil_health_management_unit';
 			$shmu = Asset::create($shmu_template);
-			
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access

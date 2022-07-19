@@ -11,20 +11,7 @@ Use Drupal\Core\Url;
 
 class IrrigationForm extends FormBase {
 
-	public function getSHMUOptions() {
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'soil_health_management_unit']
-		);
-		$shmu_options = [];
-		$shmu_options[''] = '- Select -';
-		$shmu_keys = array_keys($shmu_assets);
-		foreach($shmu_keys as $shmu_key) {
-		  $asset = $shmu_assets[$shmu_key];
-		  $shmu_options[$shmu_key] = $asset -> getName();
-		}
 
-		return $shmu_options;
-	}
 
 	/**
 	* {@inheritdoc}
@@ -33,7 +20,7 @@ class IrrigationForm extends FormBase {
         $is_edit = $id <> NULL;
 
         
-		
+
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
@@ -55,15 +42,6 @@ class IrrigationForm extends FormBase {
 		}
         $form['subform_9'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
-		];
-		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $sample_collection->get('field_shmu_id')->target_id : '';
-		$form['field_shmu'] = [
-		  '#type' => 'select',
-		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
-		  '#options' => $shmu_options,
-		  '#default_value' => $shmu_default_value,
-		  '#required' => TRUE,
 		];
 		$irrigation_in_arid_or_high_options = [];
 		$irrigation_in_arid_or_high_options[''] = '-- Select -- ';
@@ -245,29 +223,24 @@ class IrrigationForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
 
 		$form_values = $form_state->getValues();
-		
         if(!$is_edit){
 			$irrigation_template = [];
 			$irrigation_template['type'] = 'irrigation';
-			// dpm($irrigation_template);
-			// dpm("------------");
 			$irrigation = Asset::create($irrigation_template);
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
 			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
-		
+
         foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
 			if(in_array($key, $ignored_fields)){ continue; }
 
             $irrigation->set( $key, $value );
         }
-
-		$irrigation->save();
 		// Success message done
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
 }

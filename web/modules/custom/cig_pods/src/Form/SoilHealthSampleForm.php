@@ -262,7 +262,7 @@ class SoilHealthSampleForm extends FormBase {
 		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			"#limit_validation_errors" => array(),
+			"#limit_validation_errors" => '',
 			'#submit' => ['::dashboardRedirect'],
 		];
 

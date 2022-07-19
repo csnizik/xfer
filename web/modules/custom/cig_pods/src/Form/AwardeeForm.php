@@ -39,7 +39,7 @@ class AwardeeForm extends FormBase {
 				continue;
 			} else {
 				$form['project_details'][$key] = $element;
-				// Add each element in the form 
+				// Add each element in the form
 				// print_r($key);
 			}
 		}
@@ -57,9 +57,20 @@ class AwardeeForm extends FormBase {
 			'#value' => $this->t('Send'),
 		);
 
+		$form['actions']['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			'#limit_validation_errors' => '',
+			'#submit' => ['::dashboardRedirect'],
+		];
+
 		return $form;
 
 
+	}
+
+	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
 
   /**
@@ -73,7 +84,7 @@ class AwardeeForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-	
+
 
 
 	$project = Asset::create([
@@ -106,7 +117,7 @@ class AwardeeForm extends FormBase {
 	// ]);
 
 	// $asset->save();
-	
+
 
   }
 

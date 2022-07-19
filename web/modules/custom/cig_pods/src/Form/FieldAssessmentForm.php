@@ -45,6 +45,7 @@ class FieldAssessmentForm extends FormBase {
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
 
 		$is_edit = $id <> NULL;
 
@@ -67,7 +68,7 @@ class FieldAssessmentForm extends FormBase {
 		$form['#attached']['library'][] = 'cig_pods/producer_form';
 
 		$form['producer_title'] = [
-			'#markup' => '<h1>Assessments </h1>',
+			'#markup' => '<h1> <b> Assessments </b> </h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
@@ -216,7 +217,7 @@ class FieldAssessmentForm extends FormBase {
 		];
 
 
-		$form['assessment_wrapper']['actions']['send'] = [
+		$form['assessment_wrapper']['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
 			'#submit' => ['::calcuateResourceConcerns'],
 			'#ajax' => [
@@ -319,8 +320,6 @@ public function deleteFieldAssessment(array &$form, FormStateInterface $form_sta
    * {@inheritdoc}
    */
 public function submitForm(array &$form, FormStateInterface $form_state) {
-	dpm('submit form go brr');
-
 	$ignored_fields = ['send',
 						'form_build_id',
 						'form_token',
@@ -395,8 +394,6 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 
   public function calcuateResourceConcerns(array &$form, FormStateInterface $form_state){
-	dpm("calculateResourceConcners triggered");
-	
 	
 	$form_values = $form_state->getValues(); //
 
@@ -524,11 +521,6 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	$form_state -> set('calculate_rcs', True);
 	// End: Save calculated values into form state.
 
-
-	dpm($compaction_rc_present);
-	dpm($aggregate_instability_rc_present);
-	dpm($soil_organic_matter_rc_present);
-	dpm($soil_organism_habitat_rc_present);
 
 
 	$form_state->setRebuild(True);

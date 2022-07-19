@@ -10,7 +10,7 @@ dependencies:
     - options
 _core:
   default_config_hash: 4OP7S_yPTC9ZiiEQ9LbGQEBL7QFwQNtfSnMWIpWgHtk
-id: field_assesment
+id: field_assessment
 label: "Field Assesment"
 module: views
 description: ""
@@ -106,7 +106,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/field_assesment/{{id_1}}">{{name__value}}</a>'
+            text: '<a href="/edit/field_assessment/{{id_1}}">{{name__value}}</a>'
             make_link: false
             path: ""
             absolute: false
@@ -386,7 +386,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            field_assesment: field_assesment
+            field_assessment: field_assessment
           group: 1
           exposed: false
           expose:
@@ -447,7 +447,7 @@ display:
     position: 1
     display_options:
       display_extenders: {}
-      path: assets/field_assesment
+      path: assets/field_assessment
     cache_metadata:
       max-age: -1
       contexts:

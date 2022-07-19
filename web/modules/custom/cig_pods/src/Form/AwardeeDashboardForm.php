@@ -55,7 +55,7 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation' );
+     'soil_health_sample', 'lab_result', 'field_assessment', 'soil_health_management_unit', 'lab_testing_method', 'operation' );
     $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -138,7 +138,7 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/field_assesment");
+  $this->pageRedirect($form_state, "/assets/field_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

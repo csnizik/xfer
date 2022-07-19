@@ -329,6 +329,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 						'assessment_wrapper', 
 						'save',
 						'cancel',
+						'identify-resource-concerns',
 						'delete'];
 
 	$calculated_fields = [

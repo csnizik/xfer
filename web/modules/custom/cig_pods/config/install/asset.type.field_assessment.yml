@@ -4,8 +4,8 @@ dependencies:
   enforced:
     module:
       - cig_pods
-id: field_assesment
-label: Field Assesment
-description: Field Assesment
+id: field_assessment
+label: Field Assessment
+description: Field Assessment
 workflow: asset_default
 new_revision: false

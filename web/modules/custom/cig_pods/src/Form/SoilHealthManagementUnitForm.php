@@ -838,9 +838,20 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		];
 
+		$form['actions']['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			'#limit_validation_errors' => '',
+			'#submit' => ['::redirectAfterCancel'],
+		];
+
 		return $form;
 
 	}
+
+	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
 
 	/**
 	* {@inheritdoc}

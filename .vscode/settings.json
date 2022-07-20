@@ -1,0 +1,27 @@
+{
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 5432,
+			"driver": "PostgreSQL",
+			"name": "Local Docker db",
+			"database": "farm",
+			"username": "farm",
+			"password": "farm"
+		},
+		{
+			"mysqlOptions": {
+				"authProtocol": "default"
+			},
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 3306,
+			"driver": "MySQL",
+			"name": "MySQL Docker db",
+			"database": "farm",
+			"username": "farm",
+			"password": "farm"
+		}
+	]
+}

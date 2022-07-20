@@ -85,9 +85,9 @@ class AwardeeOrganizationInfoForm extends FormBase {
 		];
 
 		$form['actions']['cancel'] = [
-			'#type' => 'submit',
+			'#type' => 'button',
 			'#value' => $this->t('Cancel'),
-			'#submit' => ['::dashboardRedirect'],
+			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
 		];
 
 		if($is_edit){

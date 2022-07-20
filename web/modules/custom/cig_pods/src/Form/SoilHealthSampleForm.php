@@ -237,6 +237,7 @@ class SoilHealthSampleForm extends FormBase {
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+		 $form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$sample_collection = [];
 		$is_edit = $id <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';

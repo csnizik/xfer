@@ -31,6 +31,11 @@ lab_test_profiles_admin_form:
     theme:
       css/lab_test_profiles_admin.css: {}
 
+soil_health_sample_form:
+  css:
+    theme:
+      css/soil-health-sample.css: {}
+
 soil_health_management_unit_form:
   css:
     theme:
@@ -75,4 +80,3 @@ field_assesment:
   css:
     theme:
       css/field-assesment-display.css: {}
-

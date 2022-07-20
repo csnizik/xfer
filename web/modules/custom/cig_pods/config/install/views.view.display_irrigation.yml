@@ -88,21 +88,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_input_date_value:
-          id: field_input_date_value
-          table: asset__field_input_date
-          field: field_input_date_value
+        field_shmu_irrigation_sample_date_value:
+          id: field_shmu_irrigation_sample_date_value
+          table: asset__field_shmu_irrigation_sample_date
+          field: field_shmu_irrigation_sample_date_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_input_date
+          entity_field: field_shmu_irrigation_sample_date
           plugin_id: field
-          label: Date
+          label: 'Irrigation - Sample Date'
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<a href="/edit/irrigation/{{id_1}}">{{field_shmu_irrigation_sample_date_value}}</a>'
             make_link: false
             path: ''
             absolute: false

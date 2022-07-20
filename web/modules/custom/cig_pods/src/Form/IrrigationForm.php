@@ -26,6 +26,10 @@ class IrrigationForm extends FormBase {
 		return $shmu_options;
 	}
 
+	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){
+		return $shmu->get($field_name)-> numerator / $shmu->get($field_name)->denominator;
+	}
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -57,7 +61,7 @@ class IrrigationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $sample_collection->get('field_shmu_id')->target_id : '';
+		$shmu_default_value = $is_edit ?  $irrigation->get('field_shmu')->target_id : '';
 		$form['field_shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
@@ -71,8 +75,8 @@ class IrrigationForm extends FormBase {
 		$irrigation_in_arid_or_high_options['false'] = 'No';
 
 		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
-
+		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $irrigation->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
+		// dpm($field_is_irrigation_in_arid_or_high_value); 
 		$form['field_is_irrigation_in_arid_or_high'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
@@ -84,7 +88,7 @@ class IrrigationForm extends FormBase {
 
 		if($is_edit){
 			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
-			$field_shmu_irrigation_sample_date_timestamp = $shmu->get('field_shmu_irrigation_sample_date')[0]->value;
+			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')[0]->value;
 
 			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
 		} else {
@@ -104,7 +108,7 @@ class IrrigationForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		$field_shmu_irrigation_water_ph_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_water_ph'): '';
+		$field_shmu_irrigation_water_ph_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_water_ph'): '';
 
 		$form['field_shmu_irrigation_water_ph'] = [
 			'#type' => 'number',
@@ -121,7 +125,7 @@ class IrrigationForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		$field_shmu_irrigation_sodium_adsorption_ratio_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sodium_adsorption_ratio'): '';
+		$field_shmu_irrigation_sodium_adsorption_ratio_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_sodium_adsorption_ratio'): '';
 
 		$form['field_shmu_irrigation_sodium_adsorption_ratio'] = [
 			'#type' => 'number',
@@ -137,7 +141,7 @@ class IrrigationForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		$field_shmu_irrigation_total_dissolved_solids_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_dissolved_solids'): '';
+		$field_shmu_irrigation_total_dissolved_solids_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_total_dissolved_solids'): '';
 
 		$form['field_shmu_irrigation_total_dissolved_solids'] = [
 			'#type' => 'number',
@@ -155,7 +159,7 @@ class IrrigationForm extends FormBase {
 		];
 
 
-		$field_shmu_irrigation_total_alkalinity_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_alkalinity'): '';
+		$field_shmu_irrigation_total_alkalinity_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_total_alkalinity'): '';
 
 		$form['field_shmu_irrigation_total_alkalinity'] = [
 			'#type' => 'number',
@@ -172,7 +176,7 @@ class IrrigationForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		$field_shmu_irrigation_chlorides_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_chlorides'): '';
+		$field_shmu_irrigation_chlorides_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_chlorides'): '';
 
 		$form['field_shmu_irrigation_chlorides'] = [
 			'#type' => 'number',
@@ -188,7 +192,7 @@ class IrrigationForm extends FormBase {
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		];
-		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sulfates'): '';
+		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_sulfates'): '';
 		$form['field_shmu_irrigation_sulfates'] = [
 			'#type' => 'number',
 			'#min_value' => 0,
@@ -204,7 +208,7 @@ class IrrigationForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		$field_shmu_irrigation_nitrates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_nitrates'): '';
+		$field_shmu_irrigation_nitrates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_nitrates'): '';
 
 		$form['field_shmu_irrigation_nitrates'] = [
 			'#type' => 'number',
@@ -223,16 +227,46 @@ class IrrigationForm extends FormBase {
 
         $form['actions']['save'] = [
 			'#type' => 'submit',
-			'#value' => 'Save',
+			'#value' => $this->t('Save'),
 
 		];
+		$form['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			'#submit' => [[$this, 'cancelSubmit']],
+		];
+
+		$form['delete'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Delete'),
+			'#states' => ['visible' => [
+				":input[name='is_edit']" => ['value' => 'true'],
+				],
+			],
+			'#submit' => [[$this, 'deleteSubmit']],
+		];
+
         return $form;
     }
+
+	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		return;
+	}
+
+	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
+		$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+		$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		$irrigation->delete();
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		return;
+	}
 
     /**
 	* {@inheritdoc}
 	*/
 	public function getFormId() {
+		
 		return 'irrigation_form';
 	}
 
@@ -242,7 +276,7 @@ class IrrigationForm extends FormBase {
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 
         $is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
 
 		$form_values = $form_state->getValues();
 		

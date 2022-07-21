@@ -69,22 +69,6 @@ class IrrigationForm extends FormBase {
 		  '#default_value' => $shmu_default_value,
 		  '#required' => TRUE,
 		];
-		$irrigation_in_arid_or_high_options = [];
-		$irrigation_in_arid_or_high_options[''] = '-- Select -- ';
-		$irrigation_in_arid_or_high_options['true'] = 'Yes';
-		$irrigation_in_arid_or_high_options['false'] = 'No';
-
-		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $irrigation->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
-		// dpm($field_is_irrigation_in_arid_or_high_value); 
-		$form['field_is_irrigation_in_arid_or_high'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
-			'#options' => $irrigation_in_arid_or_high_options,
-			'#name' => 'irrigation_or_high_input',
-			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
-			'#required' => FALSE
-		];
 
 		if($is_edit){
 			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
@@ -101,10 +85,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sample Date'),
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_sample_date_timestamp_default_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -118,10 +98,6 @@ class IrrigationForm extends FormBase {
 			'#step' => 0.01, // Float
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_water_ph_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -134,10 +110,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sodium Adsoprtion Ratio'),
 			'#description' => '(Unit meq/L)',
 			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -151,10 +123,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Total Dissolved Solids'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -169,10 +137,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Total Alkalinity'),
 			'#description' => '(Unit ppm CaCO3)',
 			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -185,10 +149,6 @@ class IrrigationForm extends FormBase {
 			'#step' => 0.01, // Float
 			'#title' => $this->t('Chlorides'),
 			'#description' => '(Unit ppm)',
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		];
@@ -201,10 +161,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sulfates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_sulfates_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -218,10 +174,6 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Nitrates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_nitrates_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
 			'#required' => FALSE
 		];
 
@@ -234,17 +186,17 @@ class IrrigationForm extends FormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => [[$this, 'cancelSubmit']],
+			'#limit_validation_errors' => array(),
 		];
 
-		$form['delete'] = [
-			'#type' => 'submit',
-			'#value' => $this->t('Delete'),
-			'#states' => ['visible' => [
-				":input[name='is_edit']" => ['value' => 'true'],
-				],
-			],
-			'#submit' => [[$this, 'deleteSubmit']],
-		];
+		if($is_edit){
+			$form['delete'] = [
+				'#type' => 'submit',
+				'#value' => $this->t('Delete'),
+				'#submit' => [[$this, 'deleteSubmit']],
+				'#limit_validation_errors' => array(),
+			];
+		}
 
         return $form;
     }

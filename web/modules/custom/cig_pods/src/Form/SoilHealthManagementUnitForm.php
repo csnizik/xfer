@@ -275,7 +275,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		if($is_edit){
 			$producer = $shmu->get('field_shmu_involved_producer');
 			if($producer <> NULL && $producer->target_id <> NULL){
-				dpm($producer->target_id);
 				$field_shmu_involved_producer_value = $producer->target_id;
 			}
 		}

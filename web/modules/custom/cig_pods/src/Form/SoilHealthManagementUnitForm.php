@@ -274,8 +274,9 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Look for existing producers on the SHMU
 		if($is_edit){
 			$producer = $shmu->get('field_shmu_involved_producer');
-			if($producer <> NULL && $prod->target_id <> NULL){
-				$field_shmu_involved_producer_value = $prod->target_id;
+			if($producer <> NULL && $producer->target_id <> NULL){
+				dpm($producer->target_id);
+				$field_shmu_involved_producer_value = $producer->target_id;
 			}
 		}
 
@@ -845,11 +846,29 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#submit' => ['::redirectAfterCancel'],
 		];
 
+		 if($is_edit){
+                $form['actions']['delete'] = [
+                    '#type' => 'submit',
+                    '#value' => $this->t('Delete'),
+                    '#submit' => ['::deleteShmu'],
+                ];
+            }
+
 		return $form;
 
 	}
 
 	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
+
+	public function deleteShmu(array &$form, FormStateInterface $form_state){
+
+        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
+        $shmu_id = $form_state->get('shmu_id');
+        $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
+
+        $shmu->delete();
         $form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
 
@@ -880,7 +899,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$form_values = $form_state->getValues();
 
-		// dpm($form_values);
+		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',

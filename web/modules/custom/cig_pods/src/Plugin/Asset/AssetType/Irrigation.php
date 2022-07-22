@@ -27,12 +27,6 @@ class Irrigation extends FarmAssetType {
             'required' => False,
             'description' => '',
         ],
-        'field_is_irrigation_in_arid_or_high' => [
-            'label'=> 'Irrigation in Arid Climate or High Tunnel',
-            'type'=> 'boolean',
-            'required' => FALSE,
-            'description' => '',
-        ],
         'field_shmu_irrigation_sample_date' => [
             'label'=> 'Irrigation - Sample Date',
             'type'=> 'timestamp',
@@ -45,8 +39,8 @@ class Irrigation extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        'field_shmu_irrigation_sodium_adsorption_ratio' => [
-            'label'=> 'Irrigation - Sodium Adsorption Ratio', //TODO: Fix spelling
+        'field_shmu_irrigation_sodium_absorption_ratio' => [
+            'label'=> 'Irrigation - Sodium Absorption Ratio', //TODO: Fix spelling
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',

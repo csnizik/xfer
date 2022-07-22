@@ -57,8 +57,12 @@ class IrrigationForm extends FormBase {
 			}
 			$form_state->set('operation','create');
 		}
-        $form['subform_9'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
+		$form['subform_1'] = [
+			'#markup' => '<div class="subform-title-container"><h1>Water Testing</h1></div>'
+		];
+
+        $form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
 		$shmu_default_value = $is_edit ?  $irrigation->get('field_shmu')->target_id : '';
@@ -85,7 +89,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sample Date'),
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_sample_date_timestamp_default_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_irrigation_water_ph_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_water_ph'): '';
@@ -98,7 +102,7 @@ class IrrigationForm extends FormBase {
 			'#step' => 0.01, // Float
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_water_ph_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_irrigation_sodium_adsorption_ratio_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_sodium_absorption_ratio'): '';
@@ -110,7 +114,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sodium Absorption Ratio'),
 			'#description' => '(Unit meq/L)',
 			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_irrigation_total_dissolved_solids_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_total_dissolved_solids'): '';
@@ -123,7 +127,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Total Dissolved Solids'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 
@@ -137,7 +141,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Total Alkalinity'),
 			'#description' => '(Unit ppm CaCO3)',
 			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_irrigation_chlorides_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_chlorides'): '';
@@ -150,7 +154,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Chlorides'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_sulfates'): '';
 		$form['field_shmu_irrigation_sulfates'] = [
@@ -161,7 +165,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Sulfates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_sulfates_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
 		$field_shmu_irrigation_nitrates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($irrigation, 'field_shmu_irrigation_nitrates'): '';
@@ -174,7 +178,7 @@ class IrrigationForm extends FormBase {
 			'#title' => $this->t('Nitrates'),
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_nitrates_value,
-			'#required' => TRUE
+			'#required' => FALSE
 		];
 
         $form['actions']['save'] = [

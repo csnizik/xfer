@@ -11,6 +11,7 @@ Use Drupal\Core\Url;
 
 class SoilHealthManagementUnitForm extends FormBase {
 
+	
 	public function getShmuTypeOptions(){
 		$options = [];
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
@@ -228,7 +229,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		// dpm("building form");
 		$is_edit = $id <> NULL;
-
+		$irrigating = false;
 		$shmu = NULL;
 
 		if ($form_state->get('load_done') == NULL){
@@ -640,23 +641,27 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// TODO: Make fields visible based on irrigation selection.
 		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
 
-		$form['field_is_irrigation'] = [
-			'#type' => 'checkboxes',
-			'#title' => $this->t('Are you Irrigating?'),
-			'#name' => 'irrigation_input',
-			'#options' => $irrigation_options,
-			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
-			'#required' => FALSE
+
+		$form['irrigation_radios'] = [
+			'#type' => 'radios',
+			'#title' => t('Is this SHMU being irrigated?'),
+			'#name' => 'irrigation_radios',
+			'#default_value' => 1,
+			'#options' => [
+				0 => $this->t('Yes'),
+				1 => $this->t('No')
+			],
 		];
+
 
 		$form['subform_etc'] = [
 			'#markup' => '<p>Remember to add an irrigation sample!<p>',
 			'#states' => ['visible' => [
-				":input[name='irrigation_input']" => ['value' => 'true'],
+				":input[name='irrigation_radios']" => ['value' => 0],
 				],
 			],
 		];
-
+		
 		
 		// New section (Additional Concerns or Impacts)
 		$form['subform_10'] = [
@@ -709,6 +714,18 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 	}
 
+	// public function yesSubmit(array &$form, FormStateInterface $form_state) {
+	// 	$form_state->disableRedirect();
+	// 	$irrigating = true;
+	// 	return;
+	// }
+
+	// public function noSubmit(array &$form, FormStateInterface $form_state) {
+	// 	$form_state->disableRedirect();
+	// 	$irrigating = false;
+	// 	return;
+	// }
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -727,7 +744,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-
+		$form_state->enableRedirect();
 
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields

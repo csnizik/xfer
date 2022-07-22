@@ -43,6 +43,14 @@ div#block-gin-content {
 	line-height: 38px;
 }
 
+div#edit-irrigation-radios {
+	float: left;
+	width: 50%
+}
+.form-item label.option {
+	display: inline;
+}
+
 /*Scrollbar CSS Start*/
 /*===================*/
 ::-webkit-scrollbar {

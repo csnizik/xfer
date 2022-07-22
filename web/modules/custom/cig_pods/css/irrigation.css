@@ -65,6 +65,13 @@ input#edit-actions-save:hover {
     flex: 50%;
 }
 
+#block-gin-content form .subform-title-container h1{
+	font-size: 26px;
+	font-weight: 800;
+	line-height: 26px;
+    flex: 50%;
+}
+
 #block-gin-content form .subform-title-container h4{
 	font-size: 16px;
 	font-weight: 400;

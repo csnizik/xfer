@@ -645,19 +645,22 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['irrigation_radios'] = [
 			'#type' => 'radios',
 			'#title' => t('Is this SHMU being irrigated?'),
-			'#name' => 'irrigation_radios',
-			'#default_value' => 1,
+			'#default_value' => 'no',
 			'#options' => [
-				0 => $this->t('Yes'),
-				1 => $this->t('No')
+				'yes' => $this->t('Yes'),
+				'no' => $this->t('No')
+			],
+			'#attributes' => [
+				'#name' => 'irrigation_radios',
 			],
 		];
 
 
 		$form['subform_etc'] = [
+			'#type' => 'item',
 			'#markup' => '<p>Remember to add an irrigation sample!<p>',
 			'#states' => ['visible' => [
-				":input[name='irrigation_radios']" => ['value' => 0],
+				':input[name="irrigation_radios"]' => ['value' => 'yes'],
 				],
 			],
 		];

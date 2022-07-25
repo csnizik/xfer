@@ -32,9 +32,9 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_details_display';
 	}
-	if (isset($view) && ($view->storage->id() == 'field_assesment')) {
+	if (isset($view) && ($view->storage->id() == 'field_assessment')) {
 		$view->element['#attached']['library'][] =
-		'cig_pods/field_assesment';
+		'cig_pods/field_assessment';
 	}
 	if (isset($view) && ($view->storage->id() == 'methods_display')) {
 		$view->element['#attached']['library'][] =
@@ -56,7 +56,7 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/awardee_soil_sample_display';
 	}
-	if (isset($view) && ($view->storage->id() == 'field_assesment')) {
+	if (isset($view) && ($view->storage->id() == 'field_assessment')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/awardee_soil_sample_display';
 	}

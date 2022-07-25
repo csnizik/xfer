@@ -31,6 +31,11 @@ lab_test_profiles_admin_form:
     theme:
       css/lab_test_profiles_admin.css: {}
 
+soil_health_sample_form:
+  css:
+    theme:
+      css/soil-health-sample.css: {}
+
 soil_health_management_unit_form:
   css:
     theme:
@@ -42,6 +47,8 @@ irrigation_form:
       css/irrigation.css: {}
 
 lab_test_method_admin_form:
+  js:
+    js/methods.js: {}
   css:
     theme:
       css/lab_test_method_admin.css: {}
@@ -74,7 +81,12 @@ css_form:
   css:
     theme:
       css/form.css: {}
-field_assesment:
+field_assessment:
   css:
     theme:
       css/field-assesment-display.css: {}
+
+field_assessment_form:
+  css:
+    theme:
+      css/awardee-field-assessment.css: {}

@@ -258,9 +258,11 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
 
     $form['actions']['cancel'] = [
         '#type' => 'submit',
+        '#limit_validation_errors' => '',
         '#value' => $this->t('Cancel'),
         '#submit' => ['::redirectAfterCancel'],
     ];
+
     if($is_edit){
         $form['actions']['delete'] = [
             '#type' => 'submit',

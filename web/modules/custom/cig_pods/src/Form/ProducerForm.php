@@ -62,7 +62,7 @@ class ProducerForm extends FormBase {
 		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			// '#attributes' => array('onClick' => 'window.location.href="/dashboard"'),
+			'#limit_validation_errors' => '',
 			'#submit' => ['::dashboardRedirect'],
 
 		];
@@ -73,8 +73,6 @@ class ProducerForm extends FormBase {
 				'#type' => 'submit',
 				'#value' => $this->t('Delete'),
 				'#submit' => ['::deleteProducer'],
-				// '#prefix' => '<div class="remove-button-container">',
-				// '#suffix' => '</div>',
 			];
 		}
 

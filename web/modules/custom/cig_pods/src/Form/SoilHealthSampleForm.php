@@ -27,8 +27,16 @@ class SoilHealthSampleForm extends FormBase {
 	public function getEquipmentUsedOptions(){
 		$equipment_used_options = array();
 		$equipment_used_options[''] = ' - Select -';
-		$equipment_used_options['probe'] = 'Probe';
-		$equipment_used_options['shovel'] = 'Shovel';
+    $equipment_used_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+   			['vid' => 'd_equipment']
+   		);
+
+   		$equipment_used_keys = array_keys($equipment_used_terms);
+
+   		 foreach($equipment_used_keys as $equipment_used_key) {
+   		   $term = $equipment_used_terms[$equipment_used_key];
+   		   $equipment_used_options[$equipment_used_key] = $term -> getName();
+   		 }
 
 		return $equipment_used_options;
 	}
@@ -92,6 +100,15 @@ class SoilHealthSampleForm extends FormBase {
 			'#default_value' => $equipment_used_default_value,
             '#required' => TRUE,
         ];
+
+    $diameter_default_value = $is_edit ?  $sample_collection->get('field_diameter')->value : '';
+  	$form['field_diameter'] = [
+			'#type' => 'textfield',
+			'#title' => $this->t('Probe Diameter'),
+			'$description' => 'Diameter',
+			'#default_value' => $diameter_default_value,
+			'#required' => FALSE,
+		];
 
 		$soil_sample_default_value = $is_edit ?  $sample_collection->get('name')->value : '';
 		$form['soil_sample_id'] = [
@@ -220,6 +237,7 @@ class SoilHealthSampleForm extends FormBase {
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+		 $form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$sample_collection = [];
 		$is_edit = $id <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';
@@ -245,7 +263,7 @@ class SoilHealthSampleForm extends FormBase {
 		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			"#limit_validation_errors" => array(),
+			"#limit_validation_errors" => '',
 			'#submit' => ['::dashboardRedirect'],
 		];
 
@@ -317,6 +335,7 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_plant_stage_at_sampling = $form_state->getValue('plant_stage_at_sampling');
 		$sample_depth = $form_state->getValue('sample_depth');
 		$sample_name = $form_state->getValue('soil_sample_id');
+    $diameter = $form_state->getValue('field_diameter');
 
 		$sample_collection_submission->set('field_shmu_id', $sample_shmu);
 		$sample_collection_submission->set('field_soil_sample_collection_dat', $sample_collection_date);
@@ -324,6 +343,7 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_collection_submission->set('field_plant_stage_at_sampling', $sample_plant_stage_at_sampling);
 		$sample_collection_submission->set('field_sampling_depth', $sample_depth);
 		$sample_collection_submission->set('name', $sample_name);
+    $sample_collection_submission->set('field_diameter', $diameter);
 
 		$sample_collection_submission->save();
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -339,6 +359,7 @@ class SoilHealthSampleForm extends FormBase {
 	$mapping['equipment_used'] = 'field_equipment_used';
 	$mapping['sample_depth'] = 'field_sampling_depth';
 	$mapping['soil_sample_id'] = 'name';
+  $mapping['field_diameter'] = 'field_diameter';
 
 	return $mapping;
 

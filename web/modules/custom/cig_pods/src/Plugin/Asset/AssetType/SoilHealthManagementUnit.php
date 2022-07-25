@@ -31,17 +31,17 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'label'=> 'Soil Health Management Unit (SHMU) Type',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
-             'target_bundle'=> 'd_shmu_type', 
+             'target_bundle'=> 'd_shmu_type',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_shmu_replicate_number' => [
              'label'=> 'Replicate Number',
              'type'=> 'fraction',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_shmu_treatment_narrative' => [
              'label'=> 'Treatment Narrative',
@@ -56,18 +56,18 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'target_bundle'=> 'd_experimental_design',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          // TODO: add 'field_shmu_farmos_map'
          'field_shmu_latitude' => [
              'label'=> 'Latitude',
-             'type'=> 'fraction', 
+             'type'=> 'fraction',
              'required' => FALSE,
              'description' => '',
          ],
          'field_shmu_longitude' => [
              'label'=> 'Longitude',
-             'type'=> 'fraction', 
+             'type'=> 'fraction',
              'required' => FALSE,
              'description' => '',
          ],
@@ -101,7 +101,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'target_bundle'=> 'd_land_use',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_shmu_current_land_use_modifiers' => [
              'label'=> 'Current Land Use Modifier(s)',
@@ -129,7 +129,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'target_bundle'=> 'd_tillage_system',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_years_in_current_tillage_system' => [
              'label'=> 'Years in Current Tillage System',
@@ -179,13 +179,24 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'multiple' => TRUE,
              'description' => '',
          ],
+
+         'field_shmu_initial_crops_planted' => [
+            'label'=> 'SHMU initial crops planted',
+            'type'=> 'entity_reference',
+            'target_type'=> 'taxonomy_term',
+            'target_bundle'=> 'd_crop',
+            'required' => FALSE,
+            'multiple' => TRUE,
+            'description' => '',
+        ],
+
       ];
 
       $farmFieldFactory = new FarmFieldFactory();
       foreach($field_info as $name => $info){
          // Check if it is one of the default fields that we want to disable (I.e. Images ,)
- 
- 
+
+
        $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
                       -> setDisplayConfigurable('form',TRUE)
                       -> setDisplayConfigurable('view', TRUE);

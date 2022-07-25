@@ -221,6 +221,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
+	public function getDefaultAridValue($values, $shmu, $is_edit){
+		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
+			return 'true';
+		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
+			return 'false';
+		}
+
+		return '';
+	}
+
 
 	// TODO: check that producer reference saves correctly
 	/**
@@ -275,8 +285,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Look for existing producers on the SHMU
 		if($is_edit){
 			$producer = $shmu->get('field_shmu_involved_producer');
-			if($producer <> NULL && $prod->target_id <> NULL){
-				$field_shmu_involved_producer_value = $prod->target_id;
+			if($producer <> NULL && $producer->target_id <> NULL){
+				$field_shmu_involved_producer_value = $producer->target_id;
 			}
 		}
 
@@ -332,12 +342,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
 		];
 
-		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_ide: '';
+		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id: '';
 		$shmu_experimental_design_options = $this->getExperimentalDesignOptions();
 		$form['field_shmu_experimental_design'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Experimental Design'),
 			'#options' => $shmu_experimental_design_options,
+			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => FALSE
 		];
 		$form['static_0']['label'] = [
@@ -437,6 +448,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 		$field_shmu_current_land_use_value = $is_edit ? $shmu->get('field_shmu_current_land_use')->target_id : '';
+
 		$form['field_shmu_current_land_use'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Current Land Use'),
@@ -581,10 +593,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_7'] = [
 			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'
 		];
+
+		$field_shmu_initial_crops_planted = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_initial_crops_planted') : [];
+
 		$form['field_shmu_initial_crops_planted'] = [
 			'#type' => 'checkboxes',
 			'#title' => 'What Crops are Currently Planted',
 			'#options' => $crop_options,
+			'#default_value' => $field_shmu_initial_crops_planted,
 		] ;
 
 		// New section (Tillage Type)
@@ -639,7 +655,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$irrigation_options['false'] = 'No';
 
 		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
+		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
 
 
 		$form['irrigation_radios'] = [
@@ -713,21 +729,38 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		];
 
+		$form['actions']['cancel'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Cancel'),
+			'#limit_validation_errors' => '',
+			'#submit' => ['::redirectAfterCancel'],
+		];
+
+		 if($is_edit){
+                $form['actions']['delete'] = [
+                    '#type' => 'submit',
+                    '#value' => $this->t('Delete'),
+                    '#submit' => ['::deleteShmu'],
+                ];
+            }
+
 		return $form;
 
 	}
 
-	// public function yesSubmit(array &$form, FormStateInterface $form_state) {
-	// 	$form_state->disableRedirect();
-	// 	$irrigating = true;
-	// 	return;
-	// }
+	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
 
-	// public function noSubmit(array &$form, FormStateInterface $form_state) {
-	// 	$form_state->disableRedirect();
-	// 	$irrigating = false;
-	// 	return;
-	// }
+	public function deleteShmu(array &$form, FormStateInterface $form_state){
+
+        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
+        $shmu_id = $form_state->get('shmu_id');
+        $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
+
+        $shmu->delete();
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
 
 	/**
 	* {@inheritdoc}
@@ -743,6 +776,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return 'soil_health_management_unit_form';
 	}
 
+	public function isArid(array &$form, FormStateInterface $form_state){
+
+		if($form_state->getValue('field_is_irrigation_in_arid_or_high') === 'true'){
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -756,7 +798,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$form_values = $form_state->getValues();
 
-		// dpm($form_values);
+		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
@@ -769,7 +811,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$date_fields = ['field_shmu_date_land_use_changed','field_shmu_irrigation_sample_date'];
 
 		// Specialty crop rotation section fields
-		$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence', 'field_shmu_initial_crops_planted'];
+	$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence'/*, 'field_shmu_initial_crops_planted'*/];
 
 		$shmu = NULL;
 		if(!$is_edit){
@@ -838,6 +880,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
+
+		$shmu->set('field_is_irrigation_in_arid_or_high', $this->isArid($form, $form_state));
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
 

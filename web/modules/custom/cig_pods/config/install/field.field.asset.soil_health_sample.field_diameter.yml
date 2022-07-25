@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - asset.type.soil_health_sample
+    - field.storage.asset.field_diameter
+id: asset.soil_health_sample.field_diameter
+field_name: field_diameter
+entity_type: asset
+bundle: soil_health_sample
+label: Diameter
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

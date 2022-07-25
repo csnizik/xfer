@@ -85,9 +85,9 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::ssaRedirect'],
     ];
 
-    $form['awardee_in_field_assesment'] = [
+    $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Assesment(s): '.$entityCount[6]),
+      '#value' => $this->t('Assessment(s): '.$entityCount[6]),
       '#submit' => ['::ifaRedirect'],
     ];
 
@@ -148,7 +148,7 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/producer");
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
-  $this->pageRedirect($form_state, "/assets/field_assesment");
+  $this->pageRedirect($form_state, "/assets/field_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

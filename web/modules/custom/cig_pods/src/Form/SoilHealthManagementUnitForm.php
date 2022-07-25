@@ -220,12 +220,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
-	public function getDefaultAridValue(array &$values, $form_state, $is_edit){
-		dpm("Array: ", $values['true'])
-		if($is_edit && $form_state->getValue('field_is_irrigation_in_arid_or_high') === TRUE){
-			return $values['true'];
-		}else if($is_edit && $form_state->getValue('field_is_irrigation_in_arid_or_high') === FALSE){
-			return $values['false'];
+	public function getDefaultAridValue($values, $shmu, $is_edit){
+		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
+			return 'true';
+		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
+			return 'false';
 		}
 
 		return '';
@@ -342,12 +341,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
 		];
 
-		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_ide: '';
+		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id: '';
 		$shmu_experimental_design_options = $this->getExperimentalDesignOptions();
 		$form['field_shmu_experimental_design'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Experimental Design'),
 			'#options' => $shmu_experimental_design_options,
+			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => FALSE
 		];
 		$form['static_0']['label'] = [
@@ -657,16 +657,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$irrigation_in_arid_or_high_options['false'] = 'No';
 
 		// TODO: Make fields visible based on irrigation selection.
-		dpm("change: 4");
-		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $form_state, $is_edit);
-		//  $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : '';
-		dpm($field_is_irrigation_in_arid_or_high_value);
+		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
 
 		$form['field_is_irrigation_in_arid_or_high'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
 			'#options' => $irrigation_in_arid_or_high_options,
-			// '#name' => 'irrigation_or_high_input',
 			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
 			'#required' => FALSE,
 			'#empty_option' => '- Select -',

@@ -220,6 +220,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
+	public function getDefaultAridValue($values, $shmu, $is_edit){
+		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
+			return 'true';
+		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
+			return 'false';
+		}
+
+		return '';
+	}
+
 
 	// TODO: check that producer reference saves correctly
 	/**
@@ -331,12 +341,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
 		];
 
-		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_ide: '';
+		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id: '';
 		$shmu_experimental_design_options = $this->getExperimentalDesignOptions();
 		$form['field_shmu_experimental_design'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Experimental Design'),
 			'#options' => $shmu_experimental_design_options,
+			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => FALSE
 		];
 		$form['static_0']['label'] = [
@@ -436,6 +447,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 		$field_shmu_current_land_use_value = $is_edit ? $shmu->get('field_shmu_current_land_use')->target_id : '';
+
 		$form['field_shmu_current_land_use'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Current Land Use'),
@@ -580,10 +592,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_7'] = [
 			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'
 		];
+
+		$field_shmu_initial_crops_planted = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_initial_crops_planted') : [];
+
 		$form['field_shmu_initial_crops_planted'] = [
 			'#type' => 'checkboxes',
 			'#title' => 'What Crops are Currently Planted',
 			'#options' => $crop_options,
+			'#default_value' => $field_shmu_initial_crops_planted,
 		] ;
 
 		// New section (Tillage Type)
@@ -637,20 +653,20 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
 		];
 		$irrigation_in_arid_or_high_options = [];
-		$irrigation_in_arid_or_high_options[''] = '-- Select -- ';
 		$irrigation_in_arid_or_high_options['true'] = 'Yes';
 		$irrigation_in_arid_or_high_options['false'] = 'No';
 
 		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
+		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
 
 		$form['field_is_irrigation_in_arid_or_high'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
 			'#options' => $irrigation_in_arid_or_high_options,
-			'#name' => 'irrigation_or_high_input',
 			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
-			'#required' => FALSE
+			'#required' => FALSE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		if($is_edit){
@@ -669,7 +685,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_sample_date_timestamp_default_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -686,7 +702,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '',
 			'#default_value' => $field_shmu_irrigation_water_ph_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -702,7 +718,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '(Unit meq/L)',
 			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -719,7 +735,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -737,7 +753,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '(Unit ppm CaCO3)',
 			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -753,13 +769,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Chlorides'),
 			'#description' => '(Unit ppm)',
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		];
+
 		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sulfates'): '';
+		// dpm($field_shmu_irrigation_sulfates_value);
 		$form['field_shmu_irrigation_sulfates'] = [
 			'#type' => 'number',
 			'#min_value' => 0,
@@ -769,7 +787,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_sulfates_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -786,7 +804,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#description' => '(Unit ppm)',
 			'#default_value' => $field_shmu_irrigation_nitrates_value,
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				":input[name='field_is_irrigation_in_arid_or_high']" => ['value' => 'true'],
 				],
 			],
 			'#required' => FALSE
@@ -885,6 +903,15 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return 'soil_health_management_unit_form';
 	}
 
+	public function isArid(array &$form, FormStateInterface $form_state){
+
+		if($form_state->getValue('field_is_irrigation_in_arid_or_high') === 'true'){
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 	/**
 	* {@inheritdoc}
 	*/
@@ -911,7 +938,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$date_fields = ['field_shmu_date_land_use_changed','field_shmu_irrigation_sample_date'];
 
 		// Specialty crop rotation section fields
-		$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence', 'field_shmu_initial_crops_planted'];
+	$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence'/*, 'field_shmu_initial_crops_planted'*/];
 
 		$shmu = NULL;
 		if(!$is_edit){
@@ -979,6 +1006,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
+
+		$shmu->set('field_is_irrigation_in_arid_or_high', $this->isArid($form, $form_state));
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
 

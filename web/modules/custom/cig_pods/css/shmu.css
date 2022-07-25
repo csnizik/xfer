@@ -84,6 +84,14 @@ form#soil-health-management-unit-form
   font-size: 16px;
 }
 
+div#edit-irrigation-radios {
+	float: left;
+	width: 50%
+}
+.form-item label.option {
+	display: inline;
+}
+
 /*Scrollbar CSS Start*/
 /*===================*/
 ::-webkit-scrollbar {

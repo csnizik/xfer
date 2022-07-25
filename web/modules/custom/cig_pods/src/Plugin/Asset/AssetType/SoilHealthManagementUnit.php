@@ -151,66 +151,6 @@ class SoilHealthManagementUnit extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
          ],
-         'field_is_irrigation_in_arid_or_high' => [
-             'label'=> 'Irrigation in Arid Climate or High Tunnel',
-             'type'=> 'boolean',
-             'required' => FALSE,
-             'description' => '',
-         ],
-         'field_shmu_irrigation_sample_date' => [
-             'label'=> 'Irrigation - Sample Date',
-             'type'=> 'timestamp',
-             'required' => FALSE,
-             'description' => '',
-         ],
-         'field_shmu_irrigation_water_ph' => [
-             'label'=> 'Irrigation - Water pH',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-         ],
-         'field_shmu_irrigation_sodium_adsorption_ratio' => [
-             'label'=> 'Irrigation - Sodium Adsorption Ratio', //TODO: Fix spelling
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
-         'field_shmu_irrigation_total_dissolved_solids' => [
-             'label'=> 'Irrigation - Total Disolved Solids',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
-         'field_shmu_irrigation_total_alkalinity' => [
-             'label'=> 'Irrigation - Total Alkalinity',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
-         'field_shmu_irrigation_chlorides' => [
-             'label'=> 'Irrigation - Chlorides',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
-         'field_shmu_irrigation_sulfates' => [
-             'label'=> 'Irrigation - Sulfates',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
-         'field_shmu_irrigation_nitrates' => [
-             'label'=> 'Irrigation - Nitrates',
-             'type'=> 'fraction',
-             'required' => FALSE,
-             'description' => '',
-
-         ],
          'field_shmu_major_resource_concern' => [
              'label'=> 'Other Major Resource Concerns',
              'type'=> 'entity_reference',

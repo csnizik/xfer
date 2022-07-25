@@ -39,6 +39,9 @@ select.addEventListener("change", function handleChange(event) {
     case "ltp":
       formPage = "lab_test_profiles_admin";
       break;
+    case "irr":
+      formPage = "irrigation";
+      break;
     case "crn":
       break;
     default:

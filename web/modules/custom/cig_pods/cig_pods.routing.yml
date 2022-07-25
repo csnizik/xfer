@@ -88,6 +88,10 @@ cig_pods.lab_results_form:
   requirements:
     _permission: "access content"
 
+cig_pods.irrigation_form:
+  path: "/create/irrigation"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\IrrigationForm'
 cig_pods.field_assessment_form:
   path: "/create/field_assessment"
   defaults:
@@ -167,6 +171,22 @@ cig_pods.edit_soil_health_sample_form:
   path: "/edit/soil_health_sample/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_field_assesment_form:
+  path: "/edit/field_assesment/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_irrigation_form:
+  path: "/edit/irrigation/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\IrrigationForm'
     _title: ""
   requirements:
     _permission: "access content"

@@ -86,3 +86,9 @@ behavior_wkt_refresh:
     js/farmOS.map.behaviors.wkt_refresh.js: {}
   dependencies:
     - farm_map/farm_map
+
+behavior_zoom_us:
+  js:
+    js/farmOS.map.behaviors.zoom_us.js: {}
+  dependencies:
+    - farm_map/farm_map

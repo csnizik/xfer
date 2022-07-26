@@ -9,7 +9,11 @@
       function handleInput(e) {
         // If a wkt value is available, remove the old "Geometry"
         // layer, add a new one with the WKT, and zoom to it.
-        if (wkt.value) {
+        console.log("zebra");
+        console.log("wkt value: ", wkt.value);
+        if (wkt.value === "") {
+          instance.map.removeLayer(instance.getLayerByName("Geometry"));
+        } else if (wkt.value) {
           instance.map.removeLayer(instance.getLayerByName("Geometry"));
           var layer = instance.addLayer("wkt", {
             title: "Geometry",

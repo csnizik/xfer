@@ -170,3 +170,11 @@ cig_pods.edit_soil_health_sample_form:
     _title: ""
   requirements:
     _permission: "access content"
+
+cig_pods.example_map_form:
+  path: "/example_map_form"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\ExampleMapForm'
+    _title: ""
+  requirements:
+    _permission: "access content"

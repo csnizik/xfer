@@ -349,6 +349,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_3'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
 		];
+
+		$form['mymap'] = [
+			'#type' => 'farm_map_input',
+			'#map_type' => 'default',
+			'#display_raw_geometry' => FALSE,
+			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : 'LINESTRING(-125.76303611391039 39.80911745640148,-69.45684129662622 39.702676665560546)',
+			
+  			// '#default_value' => 'POINT(38.598964 -99.851931)',
+		];
+
 		$form['static_1']['content'] = [
 			'#markup' => '<div> Map Placeholder </div>',
 		];
@@ -876,7 +886,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','mymap'];
 
 		$form_values = $form_state->getValues();
 
@@ -903,7 +913,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access
-			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$shmu = Asset::load($id);
 		}
 		foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
@@ -925,6 +935,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 			$shmu->set( $key, $value );
 		}
+
+		// Map submission logic
+		$shmu->set('field_geofield',$form_values['mymap']);
+
 
 		// TODO: Make Dynamic
 		$num_crop_rotations = count($form_values['crop_sequence']); // TODO: Can be calculate dynamically based off of form submit

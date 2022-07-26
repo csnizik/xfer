@@ -352,9 +352,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$form['mymap'] = [
 			'#type' => 'farm_map_input',
-			'#map_type' => 'default',
-			'#display_raw_geometry' => FALSE,
-			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : 'LINESTRING(-125.76303611391039 39.80911745640148,-69.45684129662622 39.702676665560546)',
+			'#map_type' => 'pods',
+			 '#behaviors' => [
+       		 	'wkt_refresh',
+      		],
+			'#display_raw_geometry' => TRUE,
+			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
 			
   			// '#default_value' => 'POINT(38.598964 -99.851931)',
 		];

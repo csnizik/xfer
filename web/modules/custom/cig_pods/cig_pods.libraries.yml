@@ -80,3 +80,9 @@ field_assessment_form:
   css:
     theme:
       css/awardee-field-assessment.css: {}
+
+behavior_wkt_refresh:
+  js:
+    js/farmOS.map.behaviors.wkt_refresh.js: {}
+  dependencies:
+    - farm_map/farm_map

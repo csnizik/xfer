@@ -347,7 +347,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 11</h4> </div>'
+		];
+
+		$form['static_1']['content'] = [
+			'#markup' => '<div>Draw your SHMU on the Map</div>',
 		];
 
 		$form['mymap'] = [
@@ -363,35 +367,6 @@ class SoilHealthManagementUnitForm extends FormBase {
   			// '#default_value' => 'POINT(38.598964 -99.851931)',
 		];
 
-		$form['static_1']['content'] = [
-			'#markup' => '<div> Map Placeholder </div>',
-		];
-
-
-		// TODO: Lat/Long input needs decimal precision
-		$field_shmu_latitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_latitude'): '';
-		$form['field_shmu_latitude'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
-			'#required' => FALSE
-		];
-		$field_shmu_longitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_longitude'): '';
-
-		$form['field_shmu_longitude'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
-			'#required' => FALSE
-		];
 		// TODO: Add read only of project summary (Ask Justin)
 		// TODO: Refine with Justin whether Lat/Longs are appropriate
 

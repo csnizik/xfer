@@ -3,6 +3,12 @@
     attach: function (instance) {
       // Get the wkt input element.
       var wkt = document.getElementById("edit-mymap-value");
+      // Make the geometry label visible and change to "Geometry".
+      var label = wkt.parentElement.previousElementSibling;
+      label.classList.remove("visually-hidden");
+      label.style.fontSize = "16px";
+      label.innerHTML =
+        "<span 'font-size:16px'>Geometry</span><br><span style='font-size:12px'>You may paste a well known text (WKT) formatted polygon here as an alternative to heads up digitizing on the map</span>";
 
       // Run a handleInput() callback when input changes.
       wkt.oninput = handleInput;

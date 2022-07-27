@@ -7,17 +7,30 @@
       // Run a handleInput() callback when input changes.
       wkt.oninput = handleInput;
       function handleInput(e) {
-        // If a wkt value is available, remove the old "Geometry"
-        // layer, add a new one with the WKT, and zoom to it.
-        if (wkt.value === "") {
-          instance.map.removeLayer(instance.getLayerByName("Geometry"));
-        } else if (wkt.value) {
-          instance.map.removeLayer(instance.getLayerByName("Geometry"));
+        if (wkt.value) {
+          // Clear features from the current edit layer's source.
+          instance.edit.layer.getSource().clear();
+
+          // Add a new temporary invisible WKT layer.
           var layer = instance.addLayer("wkt", {
-            title: "Geometry",
+            title: "WKT",
             wkt: wkt.value,
+            visible: false,
           });
-          instance.zoomToLayer(layer);
+
+          // Copy features from the WKT layer to the edit layer.
+          instance.edit.layer
+            .getSource()
+            .addFeatures(layer.getSource().getFeatures());
+
+          // Remove the temporary WKT layer.
+          instance.map.removeLayer(layer);
+
+          // Zoom to the edit layer.
+          instance.zoomToLayer(instance.edit.layer);
+        } else if (wkt.value === "") {
+          // Clear features from the current edit layer's source.
+          instance.edit.layer.getSource().clear();
         }
       }
     },

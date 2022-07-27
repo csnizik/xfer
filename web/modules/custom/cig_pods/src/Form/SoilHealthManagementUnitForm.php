@@ -359,9 +359,9 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#map_type' => 'pods',
 			 '#behaviors' => [
 				'zoom_us',
-       		 	// 'wkt_refresh',
+       		 	 'wkt_refresh',
       		],
-			'#display_raw_geometry' => FALSE,
+			'#display_raw_geometry' => TRUE,
 			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
 			
   			// '#default_value' => 'POINT(38.598964 -99.851931)',

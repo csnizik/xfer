@@ -784,7 +784,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 		
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'field_is_irrigation','mymap'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','mymap'];
 
 		$form_values = $form_state->getValues();
 

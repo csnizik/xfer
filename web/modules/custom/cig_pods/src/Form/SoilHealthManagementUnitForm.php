@@ -221,17 +221,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
-	public function getDefaultAridValue($values, $shmu, $is_edit){
-		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
-			return 'true';
-		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
-			return 'false';
-		}
-
-		return '';
-	}
-
-
 	// TODO: check that producer reference saves correctly
 	/**
 	* {@inheritdoc}
@@ -638,15 +627,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		// New Section (Irrigation water testing)
-		$irrigation_options = [];
-		$irrigation_options['true'] = 'Yes';
-		$irrigation_options['false'] = 'No';
-
-		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
-
-
 		$form['irrigation_radios'] = [
 			'#type' => 'radios',
 			'#title' => t('Is this SHMU being irrigated?'),
@@ -765,15 +745,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return 'soil_health_management_unit_form';
 	}
 
-	public function isArid(array &$form, FormStateInterface $form_state){
-
-		if($form_state->getValue('field_is_irrigation_in_arid_or_high') === 'true'){
-			return TRUE;
-		}
-
-		return FALSE;
-	}
-
 	/**
 	* {@inheritdoc}
 	*/
@@ -784,7 +755,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 		
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','mymap'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
 
 		$form_values = $form_state->getValues();
 
@@ -808,7 +779,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$shmu_template = [];
 			$shmu_template['type'] = 'soil_health_management_unit';
 			$shmu = Asset::create($shmu_template);
-			
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access
@@ -875,7 +845,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 
-		$shmu->set('field_is_irrigation_in_arid_or_high', $this->isArid($form, $form_state));
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
 

@@ -44,6 +44,55 @@ div#block-gin-content {
   line-height: 38px;
 }
 
+form#soil-health-management-unit-form #edit-actions-send.button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form #edit-actions-cancel.button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form #edit-actions-delete.button {
+  background-color: #d83933;
+  border-radius: 2px;
+  border-color: #d83933 !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form
+  #edit-crop-sequence-actions-addcrop.button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+div#edit-irrigation-radios {
+  float: left;
+  width: 50%;
+}
+.form-item label.option {
+  display: inline;
+}
+
 /*Scrollbar CSS Start*/
 /*===================*/
 ::-webkit-scrollbar {

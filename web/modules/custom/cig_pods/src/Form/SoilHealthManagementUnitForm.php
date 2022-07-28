@@ -11,6 +11,7 @@ Use Drupal\Core\Url;
 
 class SoilHealthManagementUnitForm extends FormBase {
 
+	
 	public function getShmuTypeOptions(){
 		$options = [];
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
@@ -220,6 +221,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
+	public function getDefaultAridValue($values, $shmu, $is_edit){
+		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
+			return 'true';
+		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
+			return 'false';
+		}
+
+		return '';
+	}
+
 
 	// TODO: check that producer reference saves correctly
 	/**
@@ -228,7 +239,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 		// dpm("building form");
 		$is_edit = $id <> NULL;
-
+		$irrigating = false;
 		$shmu = NULL;
 
 		if ($form_state->get('load_done') == NULL){
@@ -274,8 +285,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Look for existing producers on the SHMU
 		if($is_edit){
 			$producer = $shmu->get('field_shmu_involved_producer');
-			if($producer <> NULL && $prod->target_id <> NULL){
-				$field_shmu_involved_producer_value = $prod->target_id;
+			if($producer <> NULL && $producer->target_id <> NULL){
+				$field_shmu_involved_producer_value = $producer->target_id;
 			}
 		}
 
@@ -331,12 +342,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
 		];
 
-		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_ide: '';
+		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id: '';
 		$shmu_experimental_design_options = $this->getExperimentalDesignOptions();
 		$form['field_shmu_experimental_design'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Experimental Design'),
 			'#options' => $shmu_experimental_design_options,
+			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => FALSE
 		];
 		$form['static_0']['label'] = [
@@ -425,6 +437,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 		$field_shmu_current_land_use_value = $is_edit ? $shmu->get('field_shmu_current_land_use')->target_id : '';
+
 		$form['field_shmu_current_land_use'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Current Land Use'),
@@ -569,10 +582,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_7'] = [
 			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'
 		];
+
+		$field_shmu_initial_crops_planted = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_initial_crops_planted') : [];
+
 		$form['field_shmu_initial_crops_planted'] = [
 			'#type' => 'checkboxes',
 			'#title' => 'What Crops are Currently Planted',
 			'#options' => $crop_options,
+			'#default_value' => $field_shmu_initial_crops_planted,
 		] ;
 
 		// New section (Tillage Type)
@@ -622,164 +639,38 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 
 		// New Section (Irrigation water testing)
-		$form['subform_9'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Irrigation Water Testing</h2><h4> 9 Fields | Section 9 of 11</h4></div>'
-		];
-		$irrigation_in_arid_or_high_options = [];
-		$irrigation_in_arid_or_high_options[''] = '-- Select -- ';
-		$irrigation_in_arid_or_high_options['true'] = 'Yes';
-		$irrigation_in_arid_or_high_options['false'] = 'No';
+		$irrigation_options = [];
+		$irrigation_options['true'] = 'Yes';
+		$irrigation_options['false'] = 'No';
 
 		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $is_edit ? $shmu->get('field_is_irrigation_in_arid_or_high')->target_id : 'false';
+		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
 
-		$form['field_is_irrigation_in_arid_or_high'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Are you Irrigating in Arid Climate or High Tunnel?'),
-			'#options' => $irrigation_in_arid_or_high_options,
-			'#name' => 'irrigation_or_high_input',
-			'#default_value' => $field_is_irrigation_in_arid_or_high_value,
-			'#required' => FALSE
+
+		$form['irrigation_radios'] = [
+			'#type' => 'radios',
+			'#title' => t('Is this SHMU being irrigated?'),
+			'#default_value' => 'no',
+			'#options' => [
+				'yes' => $this->t('Yes'),
+				'no' => $this->t('No')
+			],
+			'#attributes' => [
+				'#name' => 'irrigation_radios',
+			],
 		];
 
-		if($is_edit){
-			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
-			$field_shmu_irrigation_sample_date_timestamp = $shmu->get('field_shmu_irrigation_sample_date')[0]->value;
 
-			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
-		} else {
-			$field_shmu_irrigation_sample_date_timestamp_default_value = NULL; // TODO: Check behavior
-		}
-
-		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
-		$form['field_shmu_irrigation_sample_date'] = [
-			'#type' => 'date',
-			'#title' => $this->t('Sample Date'),
-			'#description' => '',
-			'#default_value' => $field_shmu_irrigation_sample_date_timestamp_default_value,
+		$form['subform_etc'] = [
+			'#type' => 'item',
+			'#markup' => '<p>Remember to add an irrigation sample!<p>',
 			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
+				':input[name="irrigation_radios"]' => ['value' => 'yes'],
 				],
 			],
-			'#required' => FALSE
 		];
-
-		$field_shmu_irrigation_water_ph_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_water_ph'): '';
-
-		$form['field_shmu_irrigation_water_ph'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Water pH'),
-			'#min_value' => 1,
-			'#max_value' => 14,
-			'#step' => 0.01, // Float
-			'#description' => '',
-			'#default_value' => $field_shmu_irrigation_water_ph_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
-
-		$field_shmu_irrigation_sodium_adsorption_ratio_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sodium_adsorption_ratio'): '';
-
-		$form['field_shmu_irrigation_sodium_adsorption_ratio'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Sodium Adsoprtion Ratio'),
-			'#description' => '(Unit meq/L)',
-			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
-
-		$field_shmu_irrigation_total_dissolved_solids_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_dissolved_solids'): '';
-
-		$form['field_shmu_irrigation_total_dissolved_solids'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Total Dissolved Solids'),
-			'#description' => '(Unit ppm)',
-			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
-
-
-		$field_shmu_irrigation_total_alkalinity_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_total_alkalinity'): '';
-
-		$form['field_shmu_irrigation_total_alkalinity'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Total Alkalinity'),
-			'#description' => '(Unit ppm CaCO3)',
-			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
-
-		$field_shmu_irrigation_chlorides_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_chlorides'): '';
-
-		$form['field_shmu_irrigation_chlorides'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Chlorides'),
-			'#description' => '(Unit ppm)',
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#default_value' => $field_shmu_irrigation_chlorides_value,
-			'#required' => FALSE
-		];
-		$field_shmu_irrigation_sulfates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_sulfates'): '';
-		$form['field_shmu_irrigation_sulfates'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Sulfates'),
-			'#description' => '(Unit ppm)',
-			'#default_value' => $field_shmu_irrigation_sulfates_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
-
-		$field_shmu_irrigation_nitrates_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_irrigation_nitrates'): '';
-
-		$form['field_shmu_irrigation_nitrates'] = [
-			'#type' => 'number',
-			'#min_value' => 0,
-			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
-			'#step' => 0.01, // Float
-			'#title' => $this->t('Nitrates'),
-			'#description' => '(Unit ppm)',
-			'#default_value' => $field_shmu_irrigation_nitrates_value,
-			'#states' => ['visible' => [
-				":input[name='irrigation_or_high_input']" => ['value' => 'true'],
-				],
-			],
-			'#required' => FALSE
-		];
+		
+		
 		// New section (Additional Concerns or Impacts)
 		$form['subform_10'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Additional Concerns or Impacts</h2><h4> 2 Fields | Section 10 of 11</h4></div>'
@@ -834,11 +725,29 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#submit' => ['::redirectAfterCancel'],
 		];
 
+		 if($is_edit){
+                $form['actions']['delete'] = [
+                    '#type' => 'submit',
+                    '#value' => $this->t('Delete'),
+                    '#submit' => ['::deleteShmu'],
+                ];
+            }
+
 		return $form;
 
 	}
 
 	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
+        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }
+
+	public function deleteShmu(array &$form, FormStateInterface $form_state){
+
+        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
+        $shmu_id = $form_state->get('shmu_id');
+        $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
+
+        $shmu->delete();
         $form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
 
@@ -856,20 +765,30 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return 'soil_health_management_unit_form';
 	}
 
+	public function isArid(array &$form, FormStateInterface $form_state){
+
+		if($form_state->getValue('field_is_irrigation_in_arid_or_high') === 'true'){
+			return TRUE;
+		}
+
+		return FALSE;
+	}
+
 	/**
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-
+		
 
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','mymap'];
+		
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'field_is_irrigation','mymap'];
 
 		$form_values = $form_state->getValues();
 
-		// dpm($form_values);
+		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
@@ -882,13 +801,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$date_fields = ['field_shmu_date_land_use_changed','field_shmu_irrigation_sample_date'];
 
 		// Specialty crop rotation section fields
-		$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence', 'field_shmu_initial_crops_planted'];
+	$crop_rotation_fields = ['crop_sequence', 'crop_rotation','field_shmu_crop_rotation_crop','field_shmu_crop_rotation_year','is_present','field_shmu_crop_rotation_sequence'/*, 'field_shmu_initial_crops_planted'*/];
 
 		$shmu = NULL;
 		if(!$is_edit){
 			$shmu_template = [];
 			$shmu_template['type'] = 'soil_health_management_unit';
 			$shmu = Asset::create($shmu_template);
+			
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access
@@ -954,6 +874,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
+
+		$shmu->set('field_is_irrigation_in_arid_or_high', $this->isArid($form, $form_state));
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
 

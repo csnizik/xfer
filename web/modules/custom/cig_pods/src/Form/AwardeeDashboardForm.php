@@ -40,6 +40,8 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Methods'),
           'oper' => $this
 					->t('Operation'),
+          'irr' => $this
+					->t('Irrigation'),
         ],
 				'#prefix' => '<div id="top-form">'
 		];
@@ -55,7 +57,7 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assessment', 'soil_health_management_unit', 'lab_testing_method', 'operation' );
+     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation', 'irrigation' );
     $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -101,12 +103,20 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::labRedirect'],
     ];
 
+    $form['awardee_irrigation'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Irrigation(s): '.$entityCount[10]),
+      '#submit' => ['::irrRedirect'],
+    ];
+
     $form['awardee_operation'] = [
       '#type' => 'submit',
       '#value' => $this->t('Operation(s): '.$entityCount[9]),
       '#submit' => ['::operRedirect'],
       '#suffix' => '</div>',
     ];
+
+    
 
 
 		return $form;
@@ -148,6 +158,10 @@ public function shmuRedirect (array &$form, FormStateInterface $form_state) {
 }
 public function operRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/operation");
+}
+
+public function irrRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/irrigation");
 }
 
   /**

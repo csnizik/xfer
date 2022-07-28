@@ -71,6 +71,13 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
          ],
+         'field_geofield' => [
+             'label'=> 'Geofield',
+             'type'=> 'geofield',
+             'required' => FALSE,
+             'description' => '',
+         ],
+
          'field_shmu_prev_land_use' => [
              'label'=> 'Previous Land Use',
              'type'=> 'entity_reference',

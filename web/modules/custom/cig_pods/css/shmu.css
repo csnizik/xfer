@@ -21,7 +21,8 @@ div#block-gin-content {
   display: flex;
   align-items: center;
   clear: both;
-  margin-top: 40px;
+  margin-top: 60px;
+  margin-bottom: 30px;
 }
 
 #block-gin-content form .subform-title-container h2 {
@@ -85,11 +86,11 @@ form#soil-health-management-unit-form
 }
 
 div#edit-irrigation-radios {
-	float: left;
-	width: 50%
+  float: left;
+  width: 50%;
 }
 .form-item label.option {
-	display: inline;
+  display: inline;
 }
 
 /*Scrollbar CSS Start*/

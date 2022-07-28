@@ -783,3 +783,5 @@ $databases['default']['default'] = array (
 $settings["config_sync_directory"] = "/opt/drupal/PODS/config/sync";
 
 ini_set('memory_limit','256M');
+
+$config['farm_map_mapbox.settings']['api_key'] = 'pk.eyJ1IjoidG9ueWJhY29uIiwiYSI6ImNsMzM1dWN1cjFrMWYzYm1oNjc5ZGIzOTQifQ.LJ35_Zd3IiS1Obg4hip6Gw';

@@ -221,17 +221,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return;
 	}
 
-	public function getDefaultAridValue($values, $shmu, $is_edit){
-		if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 1)){
-			return 'true';
-		}else if($is_edit and ($shmu->get('field_is_irrigation_in_arid_or_high')->value == 0)){
-			return 'false';
-		}
-
-		return '';
-	}
-
-
 	// TODO: check that producer reference saves correctly
 	/**
 	* {@inheritdoc}
@@ -359,37 +348,26 @@ class SoilHealthManagementUnitForm extends FormBase {
 		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>5 Fields | Section 3 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 11</h4> </div>'
 		];
+
 		$form['static_1']['content'] = [
-			'#markup' => '<div> Map Placeholder </div>',
+			'#markup' => '<div>Draw your SHMU on the Map</div>',
 		];
 
-
-		// TODO: Lat/Long input needs decimal precision
-		$field_shmu_latitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_latitude'): '';
-		$form['field_shmu_latitude'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
-			'#required' => FALSE
+		$form['mymap'] = [
+			'#type' => 'farm_map_input',
+			'#map_type' => 'pods',
+			 '#behaviors' => [
+				'zoom_us',
+       		 	 'wkt_refresh',
+      		],
+			'#display_raw_geometry' => TRUE,
+			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
+			
+  			// '#default_value' => 'POINT(38.598964 -99.851931)',
 		];
-		$field_shmu_longitude_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_longitude'): '';
 
-		$form['field_shmu_longitude'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.000000000000001, // Based off of precision given in FarmOS map.
-			'#required' => FALSE
-		];
 		// TODO: Add read only of project summary (Ask Justin)
 		// TODO: Refine with Justin whether Lat/Longs are appropriate
 
@@ -649,15 +627,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#required' => FALSE
 		];
 
-		// New Section (Irrigation water testing)
-		$irrigation_options = [];
-		$irrigation_options['true'] = 'Yes';
-		$irrigation_options['false'] = 'No';
-
-		// TODO: Make fields visible based on irrigation selection.
-		$field_is_irrigation_in_arid_or_high_value = $this->getDefaultAridValue($irrigation_in_arid_or_high_options, $shmu, $is_edit);
-
-
 		$form['irrigation_radios'] = [
 			'#type' => 'radios',
 			'#title' => t('Is this SHMU being irrigated?'),
@@ -776,25 +745,17 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return 'soil_health_management_unit_form';
 	}
 
-	public function isArid(array &$form, FormStateInterface $form_state){
-
-		if($form_state->getValue('field_is_irrigation_in_arid_or_high') === 'true'){
-			return TRUE;
-		}
-
-		return FALSE;
-	}
-
 	/**
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-		$form_state->enableRedirect();
+		
 
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'field_is_irrigation'];
+		
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
 
 		$form_values = $form_state->getValues();
 
@@ -818,11 +779,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$shmu_template = [];
 			$shmu_template['type'] = 'soil_health_management_unit';
 			$shmu = Asset::create($shmu_template);
-			
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('shmu_id'); // TODO: Standardize access
-			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$shmu = Asset::load($id);
 		}
 		foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
@@ -844,6 +804,10 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 			$shmu->set( $key, $value );
 		}
+
+		// Map submission logic
+		$shmu->set('field_geofield',$form_values['mymap']);
+
 
 		// TODO: Make Dynamic
 		$num_crop_rotations = count($form_values['crop_sequence']); // TODO: Can be calculate dynamically based off of form submit
@@ -881,7 +845,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 
-		$shmu->set('field_is_irrigation_in_arid_or_high', $this->isArid($form, $form_state));
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
 		$shmu->save();
 

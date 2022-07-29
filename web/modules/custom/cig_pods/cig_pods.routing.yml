@@ -92,6 +92,8 @@ cig_pods.irrigation_form:
   path: "/create/irrigation"
   defaults:
     _form: '\Drupal\cig_pods\Form\IrrigationForm'
+  requirements:
+    _permission: "access content"
 cig_pods.field_assessment_form:
   path: "/create/field_assessment"
   defaults:

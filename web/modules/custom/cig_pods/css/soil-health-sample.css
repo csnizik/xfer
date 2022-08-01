@@ -27,3 +27,15 @@ form#sample-collection-form #edit-add-assessment.button {
   font-weight: 600;
   font-size: 16px;
 }
+
+form#sample-collection-form div.js-form-item {
+  margin-bottom: 41px;
+}
+
+form#sample-collection-form div.subform-title-container {
+  margin-top: 21px;
+}
+
+form#sample-collection-form div#subform2.subform-title-container {
+  margin-top: 104px;
+}

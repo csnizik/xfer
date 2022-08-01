@@ -146,12 +146,12 @@ class SoilHealthSampleForm extends FormBase {
 	public function buildGPSPointsSection(array &$form, FormStateInterface &$form_state, $options = NULL){
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
 		];
 
 		$form['latitude1'] = [//5 decimal
 			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
+			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
 			'#description' => '',
 			//'#default_value' => $field_shmu_latitude_value,
 			'#min_value' => -90,
@@ -162,7 +162,7 @@ class SoilHealthSampleForm extends FormBase {
 
 		$form['longitude1'] = [
 			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
+			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
 			'#description' => '',
 			//'#default_value' => $field_shmu_longitude_value,
 			'#min_value' => -180,
@@ -171,49 +171,49 @@ class SoilHealthSampleForm extends FormBase {
 			'#required' => TRUE
 		];
 
-		$form['latitude2'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.00001,
-			'#required' => TRUE
-		];
+		// $form['latitude2'] = [
+		// 	'#type' => 'number',
+		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
+		// 	'#description' => '',
+		// 	//'#default_value' => $field_shmu_latitude_value,
+		// 	'#min_value' => -90,
+		// 	'#max_value' => 90,
+		// 	'#step' => 0.00001,
+		// 	'#required' => TRUE
+		// ];
 
-		$form['longitude2'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.00001, // Based off of precision given in FarmOS map.
-			'#required' => TRUE
-		];
+		// $form['longitude2'] = [
+		// 	'#type' => 'number',
+		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
+		// 	'#description' => '',
+		// 	//'#default_value' => $field_shmu_longitude_value,
+		// 	'#min_value' => -180,
+		// 	'#max_value' => 180,
+		// 	'#step' => 0.00001, // Based off of precision given in FarmOS map.
+		// 	'#required' => TRUE
+		// ];
 
-		$form['latitude3'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.00001,
-			'#required' => TRUE
-		];
+		// $form['latitude3'] = [
+		// 	'#type' => 'number',
+		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
+		// 	'#description' => '',
+		// 	//'#default_value' => $field_shmu_latitude_value,
+		// 	'#min_value' => -90,
+		// 	'#max_value' => 90,
+		// 	'#step' => 0.00001,
+		// 	'#required' => TRUE
+		// ];
 
-		$form['longitude3'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.00001,
-			'#required' => TRUE
-		];
+		// $form['longitude3'] = [
+		// 	'#type' => 'number',
+		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
+		// 	'#description' => '',
+		// 	//'#default_value' => $field_shmu_longitude_value,
+		// 	'#min_value' => -180,
+		// 	'#max_value' => 180,
+		// 	'#step' => 0.00001,
+		// 	'#required' => TRUE
+		// ];
 	}
 
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
@@ -277,12 +277,14 @@ class SoilHealthSampleForm extends FormBase {
 				'#suffix' => '</div>',
 			];
 		}
+		// commented out because not part of mvp 
+		// but will be used latter
 
-		$form['actions']['add_assessment'] = array(
-			'#type' => 'submit',
-			'#value' => $this->t('Next: Add Assessment'),
-			'#submit' => ['::dashboardRedirect'],
-		);
+		// $form['actions']['add_assessment'] = array(
+		// 	'#type' => 'submit',
+		// 	'#value' => $this->t('Next: Add Assessment'),
+		// 	'#submit' => ['::dashboardRedirect'],
+		// );
 
 		return $form;
 	}

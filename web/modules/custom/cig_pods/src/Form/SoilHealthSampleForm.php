@@ -146,7 +146,7 @@ class SoilHealthSampleForm extends FormBase {
 	public function buildGPSPointsSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
 		];
 
 
@@ -156,7 +156,7 @@ class SoilHealthSampleForm extends FormBase {
 		dpm($default_latitude_1);
 		$form['field_lattitude_1'] = [//5 decimal
 			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
+			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
 			'#description' => '',
 			//'#default_value' => $field_shmu_latitude_value,
 			'#min_value' => -90,
@@ -169,7 +169,7 @@ class SoilHealthSampleForm extends FormBase {
 		// $default_longitude_1 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_1') : NULL;
 		$form['field_longtitude_1'] = [
 			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
+			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
 			'#description' => '',
 			//'#default_value' => $field_shmu_longitude_value,
 			'#min_value' => -180,
@@ -177,58 +177,6 @@ class SoilHealthSampleForm extends FormBase {
 			'#step' => 0.00001, // Based off of precision given in FarmOS map.
 			'#required' => TRUE,
 			// '#default_value' => $default_longitude_1
-		];
-
-		// $default_latitude_2 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_2') : NULL;
-		$form['field_latitude_2'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.00001,
-			'#required' => TRUE,
-			// '#default_value' => $default_latitude_2
-		];
-
-		// $default_longitude_2 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_2') : NULL;
-		$form['field_longtitude_2'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.00001, // Based off of precision given in FarmOS map.
-			'#required' => TRUE,
-			// '#default_value' => $default_longitude_2
-		];
-
-		// $default_latitude_3 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_3') : NULL;
-		$form['field_latitude_3'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Latitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.00001,
-			'#required' => TRUE,
-			// '#default_value' => $default_latitude_3
-		];
-
-		// $default_longitude_3 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_3') : NULL;
-		$form['field_longtitude_3'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Longitude'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.00001,
-			'#required' => TRUE,
-			// '#default_value' => $default_longitude_3
 		];
 	}
 
@@ -293,12 +241,14 @@ class SoilHealthSampleForm extends FormBase {
 				'#suffix' => '</div>',
 			];
 		}
+		// commented out because not part of mvp
+		// but will be used latter
 
-		$form['actions']['add_assessment'] = array(
-			'#type' => 'submit',
-			'#value' => $this->t('Next: Add Assessment'),
-			'#submit' => ['::dashboardRedirect'],
-		);
+		// $form['actions']['add_assessment'] = array(
+		// 	'#type' => 'submit',
+		// 	'#value' => $this->t('Next: Add Assessment'),
+		// 	'#submit' => ['::dashboardRedirect'],
+		// );
 
 		return $form;
 	}

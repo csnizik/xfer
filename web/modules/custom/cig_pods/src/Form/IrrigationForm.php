@@ -76,11 +76,11 @@ class IrrigationForm extends FormBase {
 
 		if($is_edit){
 			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
-			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')[0]->value;
-
+			
+			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')->value;
 			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
 		} else {
-			$field_shmu_irrigation_sample_date_timestamp_default_value = NULL; // TODO: Check behavior
+			$field_shmu_irrigation_sample_date_timestamp_default_value = ''; // TODO: Check behavior
 		}
 
 		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
@@ -233,7 +233,7 @@ class IrrigationForm extends FormBase {
 
         $is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
-
+		$date_fields = ['field_shmu_irrigation_sample_date'];
 		$form_values = $form_state->getValues();
 		
         if(!$is_edit){
@@ -247,10 +247,15 @@ class IrrigationForm extends FormBase {
 			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
 			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
-		
+
         foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
 			if(in_array($key, $ignored_fields)){ continue; }
+			if(in_array($key,$date_fields)){
+				// $value is expected to be a string of format yyyy-mm-dd
+				$irrigation->set( $key, strtotime( $value ) ); //Set directly on SHMU object
+				continue;
+			}
 
             $irrigation->set( $key, $value );
         }

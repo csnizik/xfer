@@ -69,7 +69,7 @@ class SoilHealthSampleForm extends FormBase {
 
         $shmu_options = $this->getSHMUOptions();
 		$shmu_default_value = $is_edit ?  $sample_collection->get('field_shmu_id')->target_id : '';
-		$form['shmu'] = [
+		$form['field_shmu_id'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,
@@ -83,7 +83,7 @@ class SoilHealthSampleForm extends FormBase {
             $prev_date_value = $sample_collection->get('field_soil_sample_collection_dat')[0]->value;
             $date_default_value = date("Y-m-d", $prev_date_value);
         }
-        $form['sample_collection_date'] = [
+        $form['field_soil_sample_collection_dat'] = [
             '#type' => 'date',
             '#title' => t('Sample Collection Date'),
             '#date_label_position' => 'within',
@@ -92,8 +92,8 @@ class SoilHealthSampleForm extends FormBase {
         ];
 
         $equipment_used_options = $this->getEquipmentUsedOptions();
-		$equipment_used_default_value = $is_edit ?  $sample_collection->get('field_equipment_used')->value : '';
-        $form['equipment_used'] = [
+		$equipment_used_default_value = $is_edit ?  $sample_collection->get('field_equipment_used')->target_id : '';
+        $form['field_equipment_used'] = [
             '#type' => 'select',
             '#title' => t('Equipment Used'),
             '#options' => $equipment_used_options,
@@ -101,7 +101,7 @@ class SoilHealthSampleForm extends FormBase {
             '#required' => TRUE,
         ];
 
-    $diameter_default_value = $is_edit ?  $sample_collection->get('field_diameter')->value : '';
+    $diameter_default_value = $is_edit ?  $this->convertFractionsToDecimal($sample_collection, 'field_diameter') : NULL;
   	$form['field_diameter'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Probe Diameter'),
@@ -124,7 +124,7 @@ class SoilHealthSampleForm extends FormBase {
 		if($is_edit && $sample_collection) {
 			$plant_stage_default_value = $sample_collection->get('field_plant_stage_at_sampling')->target_id;
 		}
-        $form['plant_stage_at_sampling'] = [
+        $form['field_plant_stage_at_sampling'] = [
             '#type' => 'select',
             '#title' => t('Plant Stage at Sampling'),
             '#options' => $plant_options,
@@ -132,8 +132,8 @@ class SoilHealthSampleForm extends FormBase {
             '#required' => TRUE,
         ];
 
-		$sample_depth_default_value = $is_edit ? $sample_collection->get('field_sampling_depth')->value : '';
-        $form['sample_depth'] = [
+		$sample_depth_default_value = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_sampling_depth') : NULL;
+        $form['field_sampling_depth'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Sampling Depth (Unit Inches)'),
 			'#step' => 1,
@@ -143,13 +143,18 @@ class SoilHealthSampleForm extends FormBase {
 		];
     }
 
-	public function buildGPSPointsSection(array &$form, FormStateInterface &$form_state, $options = NULL){
+	public function buildGPSPointsSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){
 
 		$form['subform_2'] = [
 			'#markup' => '<div class="subform-title-container"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
 		];
 
-		$form['latitude1'] = [//5 decimal
+
+		// dpm($sample_collection);
+
+		$default_latitude_1 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_1') : NULL;
+		dpm($default_latitude_1);
+		$form['field_lattitude_1'] = [//5 decimal
 			'#type' => 'number',
 			'#title' => $this->t('Latitude'),
 			'#description' => '',
@@ -157,10 +162,12 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -90,
 			'#max_value' => 90,
 			'#step' => 0.00001,
-			'#required' => TRUE
+			'#required' => TRUE,
+			'#default_value' => $default_latitude_1,
 		];
 
-		$form['longitude1'] = [
+		// $default_longitude_1 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_1') : NULL;
+		$form['field_longtitude_1'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Longitude'),
 			'#description' => '',
@@ -168,10 +175,12 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -180,
 			'#max_value' => 180,
 			'#step' => 0.00001, // Based off of precision given in FarmOS map.
-			'#required' => TRUE
+			'#required' => TRUE,
+			// '#default_value' => $default_longitude_1
 		];
 
-		$form['latitude2'] = [
+		// $default_latitude_2 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_2') : NULL;
+		$form['field_latitude_2'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Latitude'),
 			'#description' => '',
@@ -179,10 +188,12 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -90,
 			'#max_value' => 90,
 			'#step' => 0.00001,
-			'#required' => TRUE
+			'#required' => TRUE,
+			// '#default_value' => $default_latitude_2
 		];
 
-		$form['longitude2'] = [
+		// $default_longitude_2 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_2') : NULL;
+		$form['field_longtitude_2'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Longitude'),
 			'#description' => '',
@@ -190,10 +201,12 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -180,
 			'#max_value' => 180,
 			'#step' => 0.00001, // Based off of precision given in FarmOS map.
-			'#required' => TRUE
+			'#required' => TRUE,
+			// '#default_value' => $default_longitude_2
 		];
 
-		$form['latitude3'] = [
+		// $default_latitude_3 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_3') : NULL;
+		$form['field_latitude_3'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Latitude'),
 			'#description' => '',
@@ -201,10 +214,12 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -90,
 			'#max_value' => 90,
 			'#step' => 0.00001,
-			'#required' => TRUE
+			'#required' => TRUE,
+			// '#default_value' => $default_latitude_3
 		];
 
-		$form['longitude3'] = [
+		// $default_longitude_3 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_3') : NULL;
+		$form['field_longtitude_3'] = [
 			'#type' => 'number',
 			'#title' => $this->t('Longitude'),
 			'#description' => '',
@@ -212,7 +227,8 @@ class SoilHealthSampleForm extends FormBase {
 			'#min_value' => -180,
 			'#max_value' => 180,
 			'#step' => 0.00001,
-			'#required' => TRUE
+			'#required' => TRUE,
+			// '#default_value' => $default_longitude_3
 		];
 	}
 
@@ -251,7 +267,7 @@ class SoilHealthSampleForm extends FormBase {
 		}
 
         $this->buildSampleInformationSection($form, $form_state, $is_edit, $sample_collection);
-		$this->buildGPSPointsSection($form, $form_state);
+		$this->buildGPSPointsSection($form, $form_state, $is_edit, $sample_collection);
 
 		// Add submit button
 		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
@@ -294,12 +310,24 @@ class SoilHealthSampleForm extends FormBase {
 	return;
 }
 
-  /**
-   * {@inheritdoc}
-   */
+private function convertFractionsToDecimal($soilSample, $field){
+	// dpm($soilSample);
+	$num = $soilSample->get($field)[0]->getValue()["numerator"];
+	$denom = $soilSample->get($field)[0]->getValue()["denominator"];
+	return $num / $denom;
+}
+
+public function entityfields(){
+	return array('field_diameter','field_equipment_used','field_latitude_1','field_latitude_2','field_latitude_3','field_longtitude_1','field_longtitude_2',
+	'field_longtitude_3','field_plant_stage_at_sampling','field_sampling_depth','field_shmu_id','field_soil_sample_collection_dat');
+}
+
+	/**
+	 * {@inheritdoc}
+	 */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-	$mapping = $this->getFormEntityMapping();
+	$form_values = $this->entityfields();
 
 	$is_create = $form_state->get('operation') === 'create';
 
@@ -307,19 +335,10 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_collection_submission = [];
 		$sample_collection_submission['type'] = 'soil_health_sample';
 
-		// Single value fields can be mapped in
-		foreach($mapping as $form_elem_id => $entity_field_id){
-			// If mapping not in form or value is empty string
-			if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
-				continue;
-			}
-			$sample_collection_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
+		foreach($form_values as $value){
+			$sample_collection_submission[$value] = $form_state->getValue($value);
 		}
-		$sample_plant_stage_at_sampling = $form_state->getValue('plant_stage_at_sampling');
-		$sample_collection_date = strtotime($form_state->getValue('sample_collection_date'));
-
-		$sample_collection_submission['field_plant_stage_at_sampling'] = $sample_plant_stage_at_sampling;
-		$sample_collection_submission['field_soil_sample_collection_dat'] = $sample_collection_date;
+		$sample_collection_submission['name'] = $form_state->getValue('soil_sample_id');
 
 		$sample_collection = Asset::create($sample_collection_submission);
 		$sample_collection->save();
@@ -327,43 +346,19 @@ class SoilHealthSampleForm extends FormBase {
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	} else {
 		$id = $form_state->get('sample_id');
-		$sample_collection_submission = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
-		$sample_shmu = $form_state->getValue('shmu');
-		$sample_collection_date = strtotime($form_state->getValue('sample_collection_date'));
-		$sample_equipment_used = $form_state->getValue('equipment_used');
-		$sample_plant_stage_at_sampling = $form_state->getValue('plant_stage_at_sampling');
-		$sample_depth = $form_state->getValue('sample_depth');
-		$sample_name = $form_state->getValue('soil_sample_id');
-    $diameter = $form_state->getValue('field_diameter');
+		foreach($form_values as $value){
+			$sample_collection->set($value, $form_state->getValue($value));
+		}
+		$sample_collection->set('name', $form_state->getValue('soil_sample_id'));
 
-		$sample_collection_submission->set('field_shmu_id', $sample_shmu);
-		$sample_collection_submission->set('field_soil_sample_collection_dat', $sample_collection_date);
-		$sample_collection_submission->set('field_equipment_used', $sample_equipment_used);
-		$sample_collection_submission->set('field_plant_stage_at_sampling', $sample_plant_stage_at_sampling);
-		$sample_collection_submission->set('field_sampling_depth', $sample_depth);
-		$sample_collection_submission->set('name', $sample_name);
-    $sample_collection_submission->set('field_diameter', $diameter);
-
-		$sample_collection_submission->save();
+		$sample_collection->save();
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 
 	return;
   }
-
-  public function getFormEntityMapping(){
-	$mapping = [];
-
-	$mapping['shmu'] = 'field_shmu_id';
-	$mapping['equipment_used'] = 'field_equipment_used';
-	$mapping['sample_depth'] = 'field_sampling_depth';
-	$mapping['soil_sample_id'] = 'name';
-  $mapping['field_diameter'] = 'field_diameter';
-
-	return $mapping;
-
-}
 
   /**
    * {@inheritdoc}

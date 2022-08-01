@@ -386,7 +386,14 @@ class LabTestingProfile extends FarmAssetType {
             'target_bundle' => 'd_respiration_detection_',
             'required' => FALSE,
             'multiple' => FALSE,
-        ],		
+        ],
+        'field_profile_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Lab Profile Project ID reference',
+            'description' => $this->t('Lab Profile Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
 
       ];
 

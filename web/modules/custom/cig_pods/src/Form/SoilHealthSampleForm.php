@@ -170,50 +170,6 @@ class SoilHealthSampleForm extends FormBase {
 			'#step' => 0.00001, // Based off of precision given in FarmOS map.
 			'#required' => TRUE
 		];
-
-		// $form['latitude2'] = [
-		// 	'#type' => 'number',
-		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-		// 	'#description' => '',
-		// 	//'#default_value' => $field_shmu_latitude_value,
-		// 	'#min_value' => -90,
-		// 	'#max_value' => 90,
-		// 	'#step' => 0.00001,
-		// 	'#required' => TRUE
-		// ];
-
-		// $form['longitude2'] = [
-		// 	'#type' => 'number',
-		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-		// 	'#description' => '',
-		// 	//'#default_value' => $field_shmu_longitude_value,
-		// 	'#min_value' => -180,
-		// 	'#max_value' => 180,
-		// 	'#step' => 0.00001, // Based off of precision given in FarmOS map.
-		// 	'#required' => TRUE
-		// ];
-
-		// $form['latitude3'] = [
-		// 	'#type' => 'number',
-		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-		// 	'#description' => '',
-		// 	//'#default_value' => $field_shmu_latitude_value,
-		// 	'#min_value' => -90,
-		// 	'#max_value' => 90,
-		// 	'#step' => 0.00001,
-		// 	'#required' => TRUE
-		// ];
-
-		// $form['longitude3'] = [
-		// 	'#type' => 'number',
-		// 	'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-		// 	'#description' => '',
-		// 	//'#default_value' => $field_shmu_longitude_value,
-		// 	'#min_value' => -180,
-		// 	'#max_value' => 180,
-		// 	'#step' => 0.00001,
-		// 	'#required' => TRUE
-		// ];
 	}
 
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){

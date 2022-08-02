@@ -10,7 +10,19 @@ Use Drupal\Core\Url;
 
 
 class ProducerForm extends FormBase {
+	private function getAssetOptions($assetType){
+        $project_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+			['type' => $assetType]
+		);
+		$project_options = array();
+		$project_keys = array_keys($project_assets);
+		foreach($project_keys as $project_key) {
+		  $asset = $project_assets[$project_key];
+		  $project_options[$project_key] = $asset->getName();
+		}
 
+		return $project_options;
+	}
 
    /**
    * {@inheritdoc}
@@ -37,6 +49,17 @@ class ProducerForm extends FormBase {
             '#markup' => '<h1>Producer Information</h1>',
         ];
 
+		$projects = $this->getAssetOptions('project');
+
+		$producer_project_default_value = $is_edit ? $producer->get('field_producer_project')->target_id : NULL;
+        $form['field_producer_project'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Producer project'),
+			'#options' => $projects,
+			'#required' => TRUE,
+            '#default_value' => $producer_project_default_value,
+		];
+
 		$producer_first_name_default_value = $is_edit ?  $producer->get('field_producer_first_name')->value : '';
 		$form['field_producer_first_name'] = [
 			'#type' => 'textfield',
@@ -51,6 +74,14 @@ class ProducerForm extends FormBase {
 			'#title' => $this->t('Producer Last Name'),
 			'#required' => TRUE, // Do Not Change
 			'#default_value' => $producer_last_name_default_value,
+		];
+
+		$producer_headquarter_default_value = $is_edit ?  $producer->get('field_producer_headquarter')->value : '';
+		$form['field_producer_headquarter'] = [
+			'#type' => 'textfield',
+			'#title' => $this->t('Producer Headquarter Location'),
+			'#required' => FALSE, // Do Not Change
+			'#default_value' => $producer_headquarter_default_value,
 		];
 
 		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
@@ -127,6 +158,8 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 		$producer_submission = [];
 		$producer_submission['field_producer_first_name'] = $form_state -> getValue('field_producer_first_name');
 		$producer_submission['field_producer_last_name'] = $form_state -> getValue('field_producer_last_name');
+		$producer_submission['field_producer_headquarter'] = $form_state -> getValue('field_producer_headquarter');
+		$producer_submission['field_producer_project'] = $form_state -> getValue('field_producer_project');
 		$producer_submission['type'] = 'producer';
 		$producer_submission['name'] = $producer_submission['field_producer_first_name']." ".$producer_submission['field_producer_last_name'];
 
@@ -140,10 +173,14 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 
 		$fn = $form_state->getValue('field_producer_first_name');
 		$ln = $form_state->getValue('field_producer_last_name');
+		$hq = $form_state->getValue('field_producer_headquarter');
+		$pp = $form_state->getValue('field_producer_project');
 		$full_n = $fn." ".$ln;
 
 		$producer->set('field_producer_first_name', $fn);
 		$producer->set('field_producer_last_name', $ln);
+		$producer->set('field_producer_headquarter', $hq);
+		$producer->set('field_producer_project', $pp);
 		$producer->set('name', $full_n);
 
 		$producer->save();

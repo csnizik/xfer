@@ -20105,44 +20105,554 @@ taxonomies:
   d_state_territory:
     -
       vid: d_state_territory
-      tid: '2101'
+      tid: '2106'
+      langcode: en
+      name: AK
+      description__value: Alaska
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 82870cbc-3383-4090-9d0d-5354a56767cf
+    -
+      vid: d_state_territory
+      tid: '2105'
+      langcode: en
+      name: AL
+      description__value: Alabama
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 12603777-f442-448c-92d7-0634dfc59489
+    -
+      vid: d_state_territory
+      tid: '2108'
+      langcode: en
+      name: AR
+      description__value: Arkansas
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 736790ea-d0f0-4922-88af-ff3266ff3a65
+    -
+      vid: d_state_territory
+      tid: '2107'
+      langcode: en
+      name: AZ
+      description__value: Arizona
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e1e6d09a-7bf7-4c9d-a520-4cc44c0ba70e
+    -
+      vid: d_state_territory
+      tid: '2109'
+      langcode: en
+      name: CA
+      description__value: California
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 734b9887-87f9-4656-87f8-d9a1afca093e
+    -
+      vid: d_state_territory
+      tid: '2110'
+      langcode: en
+      name: CO
+      description__value: Colorado
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e07325ed-978c-422e-af52-8f0683c85501
+    -
+      vid: d_state_territory
+      tid: '2111'
+      langcode: en
+      name: CT
+      description__value: Connecticut
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5763134a-d80c-44ad-8b63-0f75697de652
+    -
+      vid: d_state_territory
+      tid: '2113'
+      langcode: en
+      name: DC
+      description__value: 'District of Columbia'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 59955da8-1a57-41f5-84cf-78c4099e520f
+    -
+      vid: d_state_territory
+      tid: '2112'
+      langcode: en
+      name: DE
+      description__value: Delaware
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: f326bd68-ec7c-47bb-a75c-220f84ea3c6d
+    -
+      vid: d_state_territory
+      tid: '2114'
+      langcode: en
+      name: FL
+      description__value: Florida
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e3c90d44-8f33-4a69-8bae-c3cb89210eb6
+    -
+      vid: d_state_territory
+      tid: '2115'
+      langcode: en
+      name: GA
+      description__value: Georgia
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 0dfdb510-df6e-45cb-b7d9-d1e32a023b2d
+    -
+      vid: d_state_territory
+      tid: '2116'
+      langcode: en
+      name: GU
+      description__value: Guam
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 98918fbf-21b1-4ba1-bd2a-b805411ac266
+    -
+      vid: d_state_territory
+      tid: '2117'
+      langcode: en
+      name: HI
+      description__value: Hawaii
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 380a0385-b452-43cf-87f5-f756f4b4e384
+    -
+      vid: d_state_territory
+      tid: '2120'
+      langcode: en
+      name: IA
+      description__value: Iowa
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 65795402-5d31-4d4e-8571-037dd8eb9a97
+    -
+      vid: d_state_territory
+      tid: '2003'
       langcode: en
       name: ID
-      description__value: null
+      description__value: Idaho
       description__format: null
       weight: '0'
       parent: '0'
       uuid: 51f505ed-df39-4835-a211-972182b21816
     -
       vid: d_state_territory
-      tid: '2102'
+      tid: '2118'
+      langcode: en
+      name: IL
+      description__value: Illinois
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: a6743c74-af92-4020-9b87-ed96ac1f75fa
+    -
+      vid: d_state_territory
+      tid: '2119'
+      langcode: en
+      name: IN
+      description__value: Indiana
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: df3847f6-314e-4336-9488-3fdd1a6f9548
+    -
+      vid: d_state_territory
+      tid: '2121'
+      langcode: en
+      name: KS
+      description__value: Kansas
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 29fc744d-4d87-4b80-830d-9bfa84285c37
+    -
+      vid: d_state_territory
+      tid: '2122'
+      langcode: en
+      name: KY
+      description__value: Kentucky
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 3e8d6656-d565-4bf8-9a99-e14429355aa3
+    -
+      vid: d_state_territory
+      tid: '2123'
+      langcode: en
+      name: LA
+      description__value: Louisiana
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 689c483d-e934-4901-aa29-29825e7c5f0c
+    -
+      vid: d_state_territory
+      tid: '2126'
+      langcode: en
+      name: MA
+      description__value: Massachusetts
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 9c80de0f-d8c9-42a8-ad2d-05d012ec7f4a
+    -
+      vid: d_state_territory
+      tid: '2004'
       langcode: en
       name: MD
-      description__value: null
+      description__value: Maryland
       description__format: null
       weight: '0'
       parent: '0'
       uuid: f90bf8d5-020a-49e8-9f56-9eb290963228
     -
       vid: d_state_territory
-      tid: '2103'
+      tid: '2124'
+      langcode: en
+      name: ME
+      description__value: Maine
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d47b5d74-7f9c-4d08-868d-74eae8a974b0
+    -
+      vid: d_state_territory
+      tid: '2127'
+      langcode: en
+      name: MI
+      description__value: Michigan
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 470b1664-e5d2-4218-93c7-be30ccc3b86f
+    -
+      vid: d_state_territory
+      tid: '2128'
+      langcode: en
+      name: MN
+      description__value: Minnesota
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 932d3dea-03b6-4cb3-893c-062609e9a0ec
+    -
+      vid: d_state_territory
+      tid: '2130'
+      langcode: en
+      name: MO
+      description__value: Missouri
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5029bbe9-b771-42f5-b57b-b720fcb51769
+    -
+      vid: d_state_territory
+      tid: '2125'
+      langcode: en
+      name: MP
+      description__value: 'Northern Mariana Islands'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 1d15948a-0f8c-489a-8328-ba68094e7539
+    -
+      vid: d_state_territory
+      tid: '2129'
+      langcode: en
+      name: MS
+      description__value: Mississippi
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 0375e56d-b07e-4984-9c8d-8e517fb1ebbe
+    -
+      vid: d_state_territory
+      tid: '2131'
+      langcode: en
+      name: MT
+      description__value: Montana
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d97cdb37-1ac2-459b-a43f-dada1e23eb0b
+    -
+      vid: d_state_territory
+      tid: '2138'
+      langcode: en
+      name: NC
+      description__value: 'North Carolina'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5a8af9fa-49be-4c12-8dd5-560d1172caa4
+    -
+      vid: d_state_territory
+      tid: '2139'
+      langcode: en
+      name: ND
+      description__value: 'North Dakota'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 97fcf326-06d0-4b96-bc66-c160af01325f
+    -
+      vid: d_state_territory
+      tid: '2132'
+      langcode: en
+      name: NE
+      description__value: Nebraska
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: e1725bda-b09e-4c65-a6ba-4507729e5ec2
+    -
+      vid: d_state_territory
+      tid: '2134'
+      langcode: en
+      name: NH
+      description__value: 'New Hampshire'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 66f7c3c5-9da4-46bc-82d9-e3b60b43929a
+    -
+      vid: d_state_territory
+      tid: '2135'
+      langcode: en
+      name: NJ
+      description__value: 'New Jersey'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 5ce4215b-85a8-4760-bc63-feaa4c434368
+    -
+      vid: d_state_territory
+      tid: '2136'
+      langcode: en
+      name: NM
+      description__value: 'New Mexico'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 887089ae-7410-4ea3-90ee-ae2cf50d0a08
+    -
+      vid: d_state_territory
+      tid: '2133'
+      langcode: en
+      name: NV
+      description__value: Nevada
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 87924be5-7678-4fb5-8b71-4c220e7aa023
+    -
+      vid: d_state_territory
+      tid: '2137'
+      langcode: en
+      name: NY
+      description__value: 'New York'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 94ca3ca0-da7d-4820-804b-85e6bcc50795
+    -
+      vid: d_state_territory
+      tid: '2140'
+      langcode: en
+      name: OH
+      description__value: Ohio
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 835498fe-3554-435e-a687-0447d4e3c997
+    -
+      vid: d_state_territory
+      tid: '2141'
+      langcode: en
+      name: OK
+      description__value: Oklahoma
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: a180d9a0-4df4-4cc2-a29f-4a29ebc06628
+    -
+      vid: d_state_territory
+      tid: '2142'
+      langcode: en
+      name: OR
+      description__value: Oregon
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: d6405739-6eb6-4f1d-97b1-c008cea5aeac
+    -
+      vid: d_state_territory
+      tid: '2143'
+      langcode: en
+      name: PA
+      description__value: Pennsylvania
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 6e75c7e0-7663-4416-b3e5-de40d5a2c495
+    -
+      vid: d_state_territory
+      tid: '2144'
+      langcode: en
+      name: PR
+      description__value: 'Puerto Rico'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 00ed4b0e-180b-45bc-84b8-db49c508f3b2
+    -
+      vid: d_state_territory
+      tid: '2145'
+      langcode: en
+      name: RI
+      description__value: 'Rhode Island'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: aeb2bcd1-fb7f-42c8-b4a8-4a107172cb96
+    -
+      vid: d_state_territory
+      tid: '2146'
+      langcode: en
+      name: SC
+      description__value: 'South Carolina'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: cab83c82-7683-4afe-87cc-b70bed2a9f75
+    -
+      vid: d_state_territory
+      tid: '2147'
+      langcode: en
+      name: SD
+      description__value: 'South Dakota'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: a5f69d0b-86dd-4d66-ae95-de0c4bbb0ab1
+    -
+      vid: d_state_territory
+      tid: '2148'
+      langcode: en
+      name: TN
+      description__value: Tennessee
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: b6397ea9-23ce-413b-824b-3873cfdf6a5f
+    -
+      vid: d_state_territory
+      tid: '2149'
+      langcode: en
+      name: TX
+      description__value: Texas
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: dd9c71e7-11e3-4701-aed9-6ea711fe38c0
+    -
+      vid: d_state_territory
+      tid: '2005'
       langcode: en
       name: UT
-      description__value: null
+      description__value: Utah
       description__format: null
       weight: '0'
       parent: '0'
       uuid: 631f93c7-9af8-42f6-8926-439fac8d171a
     -
       vid: d_state_territory
-      tid: '2104'
+      tid: '2152'
+      langcode: en
+      name: VA
+      description__value: Virginia
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 8546d984-9fc2-41d2-b250-ae693ce18f93
+    -
+      vid: d_state_territory
+      tid: '2151'
+      langcode: en
+      name: VI
+      description__value: 'Virgin Islands'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 07dc1dd4-6839-4102-9fb0-8d5bd7a608ad
+    -
+      vid: d_state_territory
+      tid: '2150'
+      langcode: en
+      name: VT
+      description__value: Vermont
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: c5a1fce3-06d1-4c6d-b663-18f8e1b89ee4
+    -
+      vid: d_state_territory
+      tid: '2006'
       langcode: en
       name: WA
-      description__value: null
+      description__value: Washington
       description__format: null
       weight: '0'
       parent: '0'
       uuid: 6aabdf75-c3d4-4fc2-9d22-e1d47117961f
+    -
+      vid: d_state_territory
+      tid: '2154'
+      langcode: en
+      name: WI
+      description__value: Wisconsin
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 62e6de42-13c7-48b6-b9e4-4f3062f77ba6
+    -
+      vid: d_state_territory
+      tid: '2153'
+      langcode: en
+      name: WV
+      description__value: 'West Virginia'
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 85a2f2f3-1cb6-4df8-80a8-1ab1796909d0
+    -
+      vid: d_state_territory
+      tid: '2155'
+      langcode: en
+      name: WY
+      description__value: Wyoming
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: ff41912b-df70-43e1-89bd-24d48f0c11ff
   d_surface_texture:
     -
       vid: d_surface_texture

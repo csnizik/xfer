@@ -14,6 +14,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	
 	public function getShmuTypeOptions(){
 		$options = [];
+		$options[""] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
 			['vid' => 'd_shmu_type']);
 		$keys = array_keys($taxonomy_terms);
@@ -25,6 +26,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 	}
 	public function getExperimentalDesignOptions(){
 		$options = [];
+		$options[""] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
 			['vid' => 'd_experimental_design']);
 		$keys = array_keys($taxonomy_terms);
@@ -36,6 +38,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 }
 	public function getTillageSystemOptions(){
 		$options = [];
+		 $options[""] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
 			['vid' => 'd_tillage_system']);
 		$keys = array_keys($taxonomy_terms);
@@ -86,6 +89,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 	public function getLandUseOptions(){
 		$options = [];
+		$options[""] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
 			['vid' => 'd_land_use']);
 		$keys = array_keys($taxonomy_terms);
@@ -93,6 +97,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$term = $taxonomy_terms[$key];
 			$options[$key] = $term -> getName();
 		}
+		
+		// dpm($options);
 		return $options;
 	}
 
@@ -285,7 +291,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Select a Producer'),
 			'#options' => $producer_select_options,
 			'#default_value' => $field_shmu_involved_producer_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$name_value = $is_edit ? $shmu->get('name')->value : ''; // Default Value: Empty string
@@ -294,7 +300,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Soil Health Management (SHMU) Name'),
 			'#description' => '',
 			'#default_value' => $name_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$field_shmu_type_value = $is_edit ? $shmu->get('field_shmu_type')->target_id: ''; // Default Value: Empty String
@@ -304,7 +310,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Soil Health Management Unit (SHMU) Type'),
 			'#options' => $shmu_type_options,
 			'#default_value' => $field_shmu_type_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$field_shmu_replicate_number_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_replicate_number'): '';
@@ -315,7 +321,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#default_value' => $field_shmu_replicate_number_value,
 			'#min_value' => 0,
 			'#step' => 1, // We enforce integer with step = 1.
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$field_treatmenent_narrative_value = $is_edit ? $shmu->get('field_shmu_treatment_narrative')->value: '';
@@ -338,7 +344,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Experimental Design'),
 			'#options' => $shmu_experimental_design_options,
 			'#default_value' => $field_shmu_experimental_design_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 		$form['static_0']['label'] = [
 			'#markup' => '<div> Project Summary <b> (Will be populated with related project summary once Drupal roles are established) </b> </div>'
@@ -432,7 +438,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Current Land Use'),
 			'#options' => $land_use_options,
 			'#default_value' => $field_shmu_current_land_use_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$field_shmu_current_land_use_modifiers_value = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_current_land_use_modifiers') : [];
@@ -442,7 +448,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Current Land Use Modifiers'),
 			'#options' => $land_use_modifier_options,
 			'#default_value' => $field_shmu_current_land_use_modifiers_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		// New section (Overview of the Production System)
@@ -507,12 +513,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_year'] = [
 				'#type' => 'select',
 				'#title' => 'Year',
+				'#required' => TRUE,
 				'#options' => $crop_rotation_years_options,
 				'#default_value' => $crop_years_default_value,
 			];
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
 				'#type' => 'select',
 				'#title' => 'Crop',
+				'#required' => TRUE,
 				'#options' => $crop_options,
 				'#default_value' => $crop_default_value
 			];
@@ -576,6 +584,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$form['field_shmu_initial_crops_planted'] = [
 			'#type' => 'checkboxes',
+			'#required' => TRUE,
 			'#title' => 'What Crops are Currently Planted',
 			'#options' => $crop_options,
 			'#default_value' => $field_shmu_initial_crops_planted,
@@ -593,7 +602,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Current Tillage System'),
 			'#options' => $tillage_system_options,
 			'#default_value' => $field_current_tillage_system_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 		$field_years_in_current_tillage_system_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_current_tillage_system'): '';
 
@@ -604,7 +613,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#step' => 1, // Int
 			'#description' => '',
 			'#default_value' => $field_years_in_current_tillage_system_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$field_shmu_previous_tillage_system_value = $is_edit ? $shmu->get('field_shmu_previous_tillage_system')->target_id : '';
@@ -613,7 +622,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Previous Tillage System'),
 			'#options' => $tillage_system_options,
 			'#default_value' => $field_shmu_previous_tillage_system_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 		$field_years_in_prev_tillage_system_value = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_prev_tillage_system'): '';
 
@@ -624,11 +633,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Years in Previous Tillage System'),
 			'#description' => '',
 			'#default_value' => $field_years_in_prev_tillage_system_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$form['irrigation_radios'] = [
 			'#type' => 'radios',
+			'#required' => TRUE,
 			'#title' => t('Is this SHMU being irrigated?'),
 			'#default_value' => 'no',
 			'#options' => [
@@ -689,7 +699,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 			'#title' => $this->t('Practices Addressed'),
 			'#options' => $practices_addressed_options,
 			'#default_value' => $field_shmu_practices_addressed_values,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
 		$form['actions']['send'] = [

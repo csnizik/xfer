@@ -24,13 +24,13 @@ class Operation extends FarmAssetType {
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
              'target_bundle'=> 'soil_health_management_unit', 
-             'required' => FALSE,
+             'required' => TRUE,
              'description' => '',
         ],
         'field_operation_date' => [
             'label'=> 'Date Of Operation',
             'type'=> 'timestamp',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_operation' => [
@@ -38,7 +38,7 @@ class Operation extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_operation_type',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_ownership_status' => [
@@ -46,7 +46,7 @@ class Operation extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_equipment_ownership',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_tractor_self_propelled_machine' => [
@@ -54,7 +54,7 @@ class Operation extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_tractor_self_propelled_machine',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_row_number' => [

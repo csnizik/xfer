@@ -102,6 +102,12 @@ class SoilHealthSample extends FarmAssetType {
         'required' => FALSE,
         'description' => '',
       ],
+      'field_soil_sample_geofield' => [
+        'label'=> 'Geofield',
+        'type'=> 'geofield',
+        'required' => FALSE,
+        'description' => '',
+    ],
     ];
 
     $farmFieldFactory = new FarmFieldFactory();

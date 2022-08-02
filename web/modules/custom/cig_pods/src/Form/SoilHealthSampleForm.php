@@ -143,43 +143,6 @@ class SoilHealthSampleForm extends FormBase {
 		];
     }
 
-	public function buildGPSPointsSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){
-
-		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
-		];
-
-
-		// dpm($sample_collection);
-
-		$default_latitude_1 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_latitude_1') : NULL;
-		dpm($default_latitude_1);
-		$form['field_lattitude_1'] = [//5 decimal
-			'#type' => 'number',
-			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_latitude_value,
-			'#min_value' => -90,
-			'#max_value' => 90,
-			'#step' => 0.00001,
-			'#required' => TRUE,
-			'#default_value' => $default_latitude_1,
-		];
-
-		// $default_longitude_1 = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_longtitude_1') : NULL;
-		$form['field_longtitude_1'] = [
-			'#type' => 'number',
-			'#title' => $this->t('Well Known Text (Use this format: "Point (Longitude, Latitude)")'),
-			'#description' => '',
-			//'#default_value' => $field_shmu_longitude_value,
-			'#min_value' => -180,
-			'#max_value' => 180,
-			'#step' => 0.00001, // Based off of precision given in FarmOS map.
-			'#required' => TRUE,
-			// '#default_value' => $default_longitude_1
-		];
-	}
-
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
@@ -201,7 +164,7 @@ class SoilHealthSampleForm extends FormBase {
    * {@inheritdoc}
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		 $form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
+		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$sample_collection = [];
 		$is_edit = $id <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';
@@ -215,7 +178,51 @@ class SoilHealthSampleForm extends FormBase {
 		}
 
         $this->buildSampleInformationSection($form, $form_state, $is_edit, $sample_collection);
-		$this->buildGPSPointsSection($form, $form_state, $is_edit, $sample_collection);
+
+		$form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
+		];
+
+		$form['lat_long_div'] = [
+			'#prefix' => '<div id="lat-long"',
+			'#suffix' => '</div>',
+		];
+
+		$form['lat_long_div']['lat'] = [
+			'#type' => 'number',
+			'#title' => $this->t('Latitude'),
+			'#min' => -90,
+			'#max' => 90,
+			'#step' => 0.00000000000001,
+		];
+
+		$form['lat_long_div']['lon'] = [
+			'#type' => 'number',
+			'#title' => $this->t('Longitude'),
+			'#min' => -180,
+			'#max' => 180,
+			'#step' => 0.00000000000001,
+		];
+
+		$form['lat_long_div']['add_point'] = [
+			'#type' => 'button',
+			'#value' => $this->t('Add point to map'),
+			'#attributes' => [
+				'onclick' => 'event.preventDefault();',
+			],
+		];
+
+		$form['field_map'] = [
+			'#type' => 'farm_map_input',
+			'#map_type' => 'pods',
+			 '#behaviors' => [
+				'latlon_add',
+				'zoom_us',
+       		 	'wkt_refresh_soil_sample',
+      		],
+			'#display_raw_geometry' => TRUE,
+			'#default_value' => $is_edit ? $sample_collection->get('field_soil_sample_geofield')->value : '',
+		];
 
 		// Add submit button
 		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
@@ -261,7 +268,6 @@ class SoilHealthSampleForm extends FormBase {
 }
 
 private function convertFractionsToDecimal($soilSample, $field){
-	// dpm($soilSample);
 	$num = $soilSample->get($field)[0]->getValue()["numerator"];
 	$denom = $soilSample->get($field)[0]->getValue()["denominator"];
 	return $num / $denom;
@@ -272,9 +278,9 @@ public function entityfields(){
 	'field_longtitude_3','field_plant_stage_at_sampling','field_sampling_depth','field_shmu_id','field_soil_sample_collection_dat');
 }
 
-	/**
-	 * {@inheritdoc}
-	 */
+/**
+ * {@inheritdoc}
+ */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	$form_values = $this->entityfields();
@@ -291,6 +297,7 @@ public function entityfields(){
 		$sample_collection_submission['name'] = $form_state->getValue('soil_sample_id');
 
 		$sample_collection = Asset::create($sample_collection_submission);
+		$sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));
 		$sample_collection->save();
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -301,6 +308,7 @@ public function entityfields(){
 		foreach($form_values as $value){
 			$sample_collection->set($value, $form_state->getValue($value));
 		}
+		$sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));
 		$sample_collection->set('name', $form_state->getValue('soil_sample_id'));
 
 		$sample_collection->save();

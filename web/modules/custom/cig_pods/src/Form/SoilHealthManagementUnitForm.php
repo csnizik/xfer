@@ -363,6 +363,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		$form['mymap'] = [
 			'#type' => 'farm_map_input',
+			 '#required' => TRUE,
 			'#map_type' => 'pods',
 			 '#behaviors' => [
 				'zoom_us',
@@ -745,6 +746,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function validateForm(array &$form, FormStateInterface $form_state){
+		// commented out until farmOS bug with map validation is fixed
+		//  parent::validateForm($form, $form_state);
+ 		//  $values = $form_state->getValues();
+ 		//  if ($values['mymap'] == '' || $values['mymap'] == "GEOMETRYCOLLECTION EMPTY") {
+      	// 	$form_state->setErrorByName('mymap', $this->t('The map is required!'));
+   		// }
 		return;
 	}
 
@@ -765,10 +772,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 		
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc', 'mymap'];
 
 		$form_values = $form_state->getValues();
-
+		//dpm("+++++++++++++++++++++++++++++++");
+		//dpm($form_state->getValues());
 		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page

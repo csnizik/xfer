@@ -24,7 +24,7 @@ class Input extends FarmAssetType {
             'label'=> 'Operation',
             'type'=> 'entity_reference',
             'target_type'=> 'asset',
-            'target_bundle'=> 'operation', 
+            'target_bundle'=> 'operation',
             'required' => FALSE,
             'description' => '',
         ],
@@ -90,6 +90,13 @@ class Input extends FarmAssetType {
                'type' => 'options_select',
             ],
         ],
+        'field_input_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Input Project ID reference',
+            'description' => $this->t('Input Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
       ];
 
       $farmFieldFactory = new FarmFieldFactory();

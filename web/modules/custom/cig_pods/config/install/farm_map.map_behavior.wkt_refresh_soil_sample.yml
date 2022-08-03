@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+id: wkt_refresh_soil_sample
+label: WKT Refresh
+description: "Refreshes map with WKT from form input."
+library: "cig_pods/behavior_wkt_refresh_soil_sample"
+settings: {}

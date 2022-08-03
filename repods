@@ -3,5 +3,5 @@ docker-compose down
 docker system prune
 sudo rm -r db
 docker build . -t pods:latest
-docker-compose up
+docker-compose up -d
 

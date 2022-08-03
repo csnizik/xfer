@@ -11,7 +11,7 @@ Use Drupal\Core\Url;
 
 class SoilHealthManagementUnitForm extends FormBase {
 
-	
+
 	public function getShmuTypeOptions(){
 		$options = [];
 		$options[""] = '- Select -';
@@ -371,7 +371,6 @@ class SoilHealthManagementUnitForm extends FormBase {
       		],
 			'#display_raw_geometry' => TRUE,
 			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
-			
   			// '#default_value' => 'POINT(38.598964 -99.851931)',
 		];
 
@@ -660,8 +659,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 				],
 			],
 		];
-		
-		
+
+
 		// New section (Additional Concerns or Impacts)
 		$form['subform_10'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Additional Concerns or Impacts</h2><h4> 2 Fields | Section 10 of 11</h4></div>'
@@ -766,13 +765,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-		
+
 
 		// We aren't interested in some of the attributes that $form_state->getValues() gives us.
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
-		
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc', 'mymap'];
+
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
 
 		$form_values = $form_state->getValues();
 		//dpm("+++++++++++++++++++++++++++++++");

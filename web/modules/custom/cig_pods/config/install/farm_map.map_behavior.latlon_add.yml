@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+id: latlon_add
+label: Lat/Lon Add
+description: 'Adds a point to the map from lat/lon fields.'
+library: 'cig_pods/behavior_latlon_add'
+settings: { }

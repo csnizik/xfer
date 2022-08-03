@@ -284,6 +284,13 @@ class LabResult extends FarmAssetType {
             'required' => TRUE,
             'description' => $this->t('Lab Result Soil Sample'),
         ],
+        'field_lab_result_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Lab Result Project ID reference',
+            'description' => $this->t('Lab Result Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
 
 
       ];

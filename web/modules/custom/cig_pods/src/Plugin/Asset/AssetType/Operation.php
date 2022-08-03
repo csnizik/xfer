@@ -23,7 +23,7 @@ class Operation extends FarmAssetType {
              'label'=> 'Soil Health Management Unit (SHMU)',
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
-             'target_bundle'=> 'soil_health_management_unit', 
+             'target_bundle'=> 'soil_health_management_unit',
              'required' => FALSE,
              'description' => '',
         ],
@@ -87,13 +87,20 @@ class Operation extends FarmAssetType {
                'type' => 'options_select',
             ],
         ],
+        'field_operation_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Operation Project ID reference',
+            'description' => $this->t('Operation Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
       ];
 
       $farmFieldFactory = new FarmFieldFactory();
       foreach($field_info as $name => $info){
          // Check if it is one of the default fields that we want to disable (I.e. Images ,)
- 
- 
+
+
        $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
                       -> setDisplayConfigurable('form',TRUE)
                       -> setDisplayConfigurable('view', TRUE);

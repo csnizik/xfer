@@ -97,8 +97,26 @@ behavior_wkt_refresh:
   dependencies:
     - farm_map/farm_map
 
+behavior_wkt_refresh_soil_sample:
+  js:
+    js/farmOS.map.behaviors.wkt_refresh_soil_sample.js: {}
+  dependencies:
+    - farm_map/farm_map
+
 behavior_zoom_us:
   js:
     js/farmOS.map.behaviors.zoom_us.js: {}
+  dependencies:
+    - farm_map/farm_map
+
+behavior_latlon_add:
+  js:
+    js/farmOS.map.behaviors.latlon_add.js: { }
+  dependencies:
+    - farm_map/farm_map
+
+behavior_latlon_refresh:
+  js:
+    js/farmOS.map.behaviors.latlon_refresh.js: { }
   dependencies:
     - farm_map/farm_map

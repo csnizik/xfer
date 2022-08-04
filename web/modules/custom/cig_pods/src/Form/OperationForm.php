@@ -26,6 +26,44 @@ class OperationForm extends FormBase {
 		return $shmu_options;
 	}
 
+	public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state){
+
+		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
+
+		$sequences = [];
+		$i = 0;
+		foreach($cost_seqence_ids as $key=>$cost_seqence_id){
+			$tmp_rotation = $this->getAsset($cost_seqence_id)->toArray();
+			$sequences[$i] = array();
+			$sequences[$i]['field_shmu_crop_rotation_crop'] = $tmp_rotation['field_shmu_crop_rotation_crop'];
+			$sequences[$i]['field_shmu_crop_rotation_year'] = $tmp_rotation['field_shmu_crop_rotation_year'];
+			$sequences[$i]['field_shmu_crop_rotation_crop_present'] = $tmp_rotation['field_shmu_crop_rotation_crop_present'];
+			$i++;
+		}
+
+		// If rotations is still empty, set a blank crop rotation at index 0
+		if($i == 0){
+			$sequences[0]['field_shmu_crop_rotation_year'] = '';
+			$sequences[0]['field_shmu_crop_rotation_year'] = '';
+		}
+		$form_state->set('sequences', $sequences);
+		// dpm($rotations);
+
+		return;
+	}
+
+	public function getOtherCostsOptions(){
+		$options = [];
+		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+			['vid' => 'd_cost_type']);
+		$keys = array_keys($taxonomy_terms);
+		foreach($keys as $key){
+			$term = $taxonomy_terms[$key];
+			$options[$key] = $term -> getName();
+		}
+		return $options;
+	}
+
 	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){
 		return $shmu->get($field_name)-> numerator / $shmu->get($field_name)->denominator;
 	}
@@ -91,7 +129,7 @@ class OperationForm extends FormBase {
 		];
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Operation Information</h2><h4>2 Fields | Section 1 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Tractor/Self-Propelled Machine Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
 		$field_operation_type = $is_edit ? $operation->get('field_operation'):'';
@@ -165,6 +203,12 @@ class OperationForm extends FormBase {
 			'#required' => FALSE
 		];
 		
+		$form['subform_4'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
+		];
+		$cost_options = $this->getOtherCostsOptions();
+		$cost_options[''] = '-- Select --';
+
 
         $form['actions']['save'] = [
 			'#type' => 'submit',
@@ -175,6 +219,12 @@ class OperationForm extends FormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => [[$this, 'cancelSubmit']],
+			'#limit_validation_errors' => array(),
+		];
+		$form['add_input'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Add Inputs'),
+			'#submit' => [[$this, 'addInput']],
 			'#limit_validation_errors' => array(),
 		];
 
@@ -203,6 +253,10 @@ class OperationForm extends FormBase {
 		return;
 	}
 
+	public function addInput(array &$form, FormStateInterface $form_state) {
+		$form_state->setRedirect('cig_pods.input_form');
+		return;
+	}
     /**
 	* {@inheritdoc}
 	*/

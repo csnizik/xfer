@@ -94,10 +94,19 @@ cig_pods.irrigation_form:
     _form: '\Drupal\cig_pods\Form\IrrigationForm'
   requirements:
     _permission: "access content"
+
 cig_pods.field_assessment_form:
   path: "/create/field_assessment"
   defaults:
     _form: '\Drupal\cig_pods\Form\FieldAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.inputs_form:
+  path: "/create/inputs"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\InputsForm'
     _title: ""
   requirements:
     _permission: "access content"
@@ -190,5 +199,12 @@ cig_pods.edit_irrigation_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\IrrigationForm'
     _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_inputs_form:
+  path: "/edit/inputs/{operation}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\InputsForm'
   requirements:
     _permission: "access content"

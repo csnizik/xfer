@@ -13,14 +13,14 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * )
    */
 class FieldAssessment extends FarmAssetType {
-   
+
    public function buildFieldDefinitions(){
       $fields = parent::buildFieldDefinitions();
 
       // Note that $fields['name'] is already populated at this point
 
       $field_info = [
-         // 'field_assessment_shmu' 
+         // 'field_assessment_shmu'
          'field_assessment_shmu' => [
              'label'=> 'Soil Health Management Unit',
              'type'=> 'entity_reference',
@@ -34,7 +34,7 @@ class FieldAssessment extends FarmAssetType {
              'type'=> 'timestamp',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_soil_cover' => [
              'label'=> 'Soil Cover',
@@ -43,7 +43,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_residue_breakdown' => [
              'label'=> 'Residue Breakdown',
@@ -52,7 +52,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_surface_crusts' => [
              'label'=> 'Surface Crusts',
@@ -61,7 +61,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_ponding' => [
              'label'=> 'Ponding',
@@ -70,7 +70,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_penetration_resistance' => [
              'label'=> 'Penetration Resistance',
@@ -79,7 +79,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_water_stable_aggregates' => [
              'label'=> 'Water Stable Aggregates',
@@ -104,7 +104,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_plant_roots' => [
             'label'=> 'Soil Color',
@@ -113,7 +113,7 @@ class FieldAssessment extends FarmAssetType {
             'target_bundle'=> 'd_assessment_evaluation',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
          'field_assessment_biological_diversity' => [
              'label'=> 'Biological Diversity',
@@ -122,7 +122,7 @@ class FieldAssessment extends FarmAssetType {
              'target_bundle'=> 'd_assessment_evaluation',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_biopores' => [
              'label'=> 'Biopores',
@@ -143,23 +143,29 @@ class FieldAssessment extends FarmAssetType {
              'type'=> 'boolean',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_rc_compaction' => [
              'label'=> 'Compation Resource Concern Identified',
              'type'=> 'boolean',
              'required' => FALSE,
              'description' => '',
-         
+
          ],
          'field_assessment_rc_soil_organism_habitat' => [
              'label'=> 'Soil Organism Habitat Resource Concern Identified',
              'type'=> 'boolean',
              'required' => FALSE,
              'description' => '',
-         
-         ],
 
+         ],
+         'field_field_assessment_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Field Assessment Project ID reference',
+            'description' => $this->t('Field Assessment Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
       ];
     $farmFieldFactory = new FarmFieldFactory();
     foreach($field_info as $name => $info){

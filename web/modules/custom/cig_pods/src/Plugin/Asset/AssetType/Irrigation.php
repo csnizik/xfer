@@ -15,7 +15,7 @@ use Drupal\farm_field\FarmFieldFactory;
    */
 class Irrigation extends FarmAssetType {
 
-    
+
     public function buildFieldDefinitions() {
         $fields = parent::buildFieldDefinitions();
         $field_info = [
@@ -44,43 +44,50 @@ class Irrigation extends FarmAssetType {
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
         'field_shmu_irrigation_total_dissolved_solids' => [
             'label'=> 'Irrigation - Total Disolved Solids',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
         'field_shmu_irrigation_total_alkalinity' => [
             'label'=> 'Irrigation - Total Alkalinity',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
         'field_shmu_irrigation_chlorides' => [
             'label'=> 'Irrigation - Chlorides',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
-        ], 
+
+        ],
         'field_shmu_irrigation_sulfates' => [
             'label'=> 'Irrigation - Sulfates',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
         'field_shmu_irrigation_nitrates' => [
             'label'=> 'Irrigation - Nitrates',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',
-        
+
         ],
+        'field_irrigation_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Irrigation Project ID reference',
+            'description' => $this->t('Irrigation Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
     ];
 
     $farmFieldFactory = new FarmFieldFactory();
@@ -90,7 +97,7 @@ class Irrigation extends FarmAssetType {
 					      -> setDisplayConfigurable('form',TRUE)
 					      -> setDisplayConfigurable('view', TRUE);
       }
-      
+
     return $fields;
     }
 }

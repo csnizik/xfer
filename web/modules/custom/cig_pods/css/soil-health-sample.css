@@ -28,6 +28,16 @@ form#sample-collection-form #edit-add-assessment.button {
   font-size: 16px;
 }
 
+form#sample-collection-form #edit-add-point.button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 form#sample-collection-form div.js-form-item {
   margin-bottom: 41px;
 }
@@ -38,4 +48,20 @@ form#sample-collection-form div.subform-title-container {
 
 form#sample-collection-form div#subform2.subform-title-container {
   margin-top: 104px;
+}
+
+form#sample-collection-form button.ol-edit-polygon{
+  display: none;
+}
+
+form#sample-collection-form button.ol-edit-line{
+  display: none;
+}
+
+form#sample-collection-form button.ol-edit-circle{
+  display: none;
+}
+
+form#sample-collection-form button.ol-edit-modify{
+  display: none;
 }

@@ -63,7 +63,14 @@ class Awardee extends FarmAssetType {
                 'label' => 'inline',
                 'type' => 'options_select'
             ]
-          ],
+        ],
+        'field_awardee_project_id' =>[
+          'type'  => 'fraction',
+          'label' => 'Awarde Project ID reference',
+          'description' => $this->t('Awarde Project ID reference'),
+          'required' => FALSE,
+          'multiple' => FALSE,
+		     ],
         ];
 
       $farmFieldFactory = new FarmFieldFactory();

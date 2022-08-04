@@ -259,6 +259,13 @@ class LabTestingMethod extends FarmAssetType {
             'required' => TRUE,
             'multiple' => FALSE,
         ],
+        'field_lab_method_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Lab Method Project ID reference',
+            'description' => $this->t('Lab Method Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
 
       ];
 

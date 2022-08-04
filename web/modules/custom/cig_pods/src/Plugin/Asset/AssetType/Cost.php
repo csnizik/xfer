@@ -33,7 +33,14 @@ class Cost extends FarmAssetType {
             'target_bundle'=> 'd_cost_type',
             'required' => FALSE,
             'description' => '',
-         ]
+         ],
+         'field_cost_project_id' =>[
+            'type'  => 'fraction',
+            'label' => 'Cost Project ID reference',
+            'description' => $this->t('Cost Project ID reference'),
+            'required' => FALSE,
+            'multiple' => FALSE,
+         ],
       ];
 
       $farmFieldFactory = new FarmFieldFactory();

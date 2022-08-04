@@ -928,7 +928,37 @@ taxonomies:
   d_applicant_type: {  }
   d_assessment_evaluation: {  }
   d_conservation_practice: {  }
-  d_contact_type: {  }
+  d_contact_type:
+    -
+      vid: d_contact_type
+      tid: '4'
+      langcode: en
+      name: 'Awardee Administrative'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+      uuid: 8da5d48a-d067-426e-a36f-9607970cd418
+    -
+      vid: d_contact_type
+      tid: '2'
+      langcode: en
+      name: 'Awardee Principal Contact'
+      description__value: null
+      description__format: null
+      weight: '1'
+      parent: '0'
+      uuid: ece0f949-1683-40fb-8637-d5c91c623429
+    -
+      vid: d_contact_type
+      tid: '3'
+      langcode: en
+      name: 'Awardee Technical Contact'
+      description__value: null
+      description__format: null
+      weight: '2'
+      parent: '0'
+      uuid: 555502fb-83e1-43f3-9f36-5f19bde964cf
   d_cost_type: {  }
   d_cover_crop_species:
     -

@@ -3,6 +3,12 @@ div#block-gin-content {
   margin: auto;
 }
 
+#block-gin-content form .form-element {
+  width: 848px;
+  border: 1px solid #1b1b1b;
+  border-radius: 0;
+}
+
 #block-gin-content form .subtitle-container {
   display: flex;
   align-items: center;

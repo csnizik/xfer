@@ -155,9 +155,15 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_collection_id = $form_state->get('sample_id');
 		$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($sample_collection_id);
 
-		$sample_collection->delete();
-
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		try{
+			$sample_collection->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
 	}
 
    /**

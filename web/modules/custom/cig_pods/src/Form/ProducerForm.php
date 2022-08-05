@@ -126,9 +126,17 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 	$producer_id = $form_state->get('producer_id');
 	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($producer_id);
 
-	$producer->delete();
+	try{
+		$producer->delete();
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	}catch(\Exception $e){
+		$this
+	  ->messenger()
+	  ->addError($this
+	  ->t($e->getMessage()));
+	}
 
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
 
 }
 

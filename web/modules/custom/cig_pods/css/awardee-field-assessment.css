@@ -19,7 +19,7 @@
 }
 
 .fieldset__label, .fieldset__label--group, .form-item__label {
-	font-weight: normal !important; 
+	font-weight: normal !important;
 }
 
 #block-gin-content form .remove-button-container input{
@@ -63,7 +63,7 @@ input#edit-cancel {
     font-size: 16px;
 }
 input#edit-delete {
-	background-color: #d83933;
+    background-color: #d83933;
 	border-radius: 2px;
 	border-color: #d83933 !important;
 	padding: 12 20 12 20;
@@ -73,11 +73,11 @@ input#edit-delete {
 }
 
 input#edit-identify-resource-concerns {
-	background-color: #005ea2;
+    background-color: #ffffff;
     border-radius: 2px;
     border-color: #005ea2 !important;
-    padding: 12 20 12 20 !important;
-    color: white;
+    padding: 12 20 12 20;
+    color: #005ea2;
     font-weight: 600;
     font-size: 16px;
 }

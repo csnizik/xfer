@@ -97,8 +97,6 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$term = $taxonomy_terms[$key];
 			$options[$key] = $term -> getName();
 		}
-		
-		// dpm($options);
 		return $options;
 	}
 
@@ -774,8 +772,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
 
 		$form_values = $form_state->getValues();
-		//dpm("+++++++++++++++++++++++++++++++");
-		//dpm($form_state->getValues());
+		
 		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page

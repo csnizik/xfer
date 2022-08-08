@@ -26,6 +26,18 @@ class OperationForm extends FormBase {
 		return $shmu_options;
 	}
 
+	public function getCostSequenceIdsForOperation($operation){
+		$cost_sequence_target_ids = [];
+
+		$field_shmu_cost_sequence_list = $operation->get('field_cost_sequences'); // Expected type of FieldItemList
+		foreach($field_shmu_cost_sequence_list as $key=>$value){
+			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
+		}
+		return $crop_rotation_target_ids;
+	}
+
+
+
 	public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state){
 
 		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
@@ -33,18 +45,17 @@ class OperationForm extends FormBase {
 		$sequences = [];
 		$i = 0;
 		foreach($cost_seqence_ids as $key=>$cost_seqence_id){
-			$tmp_rotation = $this->getAsset($cost_seqence_id)->toArray();
+			$tmp_sequence = $this->getAsset($cost_seqence_id)->toArray();
 			$sequences[$i] = array();
-			$sequences[$i]['field_shmu_crop_rotation_crop'] = $tmp_rotation['field_shmu_crop_rotation_crop'];
-			$sequences[$i]['field_shmu_crop_rotation_year'] = $tmp_rotation['field_shmu_crop_rotation_year'];
-			$sequences[$i]['field_shmu_crop_rotation_crop_present'] = $tmp_rotation['field_shmu_crop_rotation_crop_present'];
+			$sequences[$i]['field_cost_type'] = $tmp_sequence['field_cost_type'];
+			$sequences[$i]['field_cost'] = $tmp_sequence['field_cost'];
 			$i++;
 		}
-
-		// If rotations is still empty, set a blank crop rotation at index 0
+		dpm($sequences);
+		// If sequences is still empty, set a blank sequence at index 0
 		if($i == 0){
-			$sequences[0]['field_shmu_crop_rotation_year'] = '';
-			$sequences[0]['field_shmu_crop_rotation_year'] = '';
+			$sequences[0]['field_cost_type'] = '';
+			$sequences[0]['field_cost'] = '';
 		}
 		$form_state->set('sequences', $sequences);
 		// dpm($rotations);
@@ -86,11 +97,15 @@ class OperationForm extends FormBase {
 			$form_state->set('operation','edit');
 			$form_state->set('operation_id', $id);
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$shmu_cost_sequences_ids = $this->getCostSequenceIdsForOperation($operation);
 			if(!$form_state->get('load_done')){
+				$this->loadOtherCostsIntoFormState($shmu_cost_sequences_ids, $form_state);
                 $form_state->set('load_done',TRUE);
 			}
+			$form_state->set('original_cost_sequence_ids', $shmu_cost_sequences_ids);
 		} else {
 			if(!$form_state->get('load_done')){
+				$this->loadOtherCostsIntoFormState($shmu_cost_sequences_ids, $form_state);
 				$form_state->set('load_done',TRUE);
 			}
 			$form_state->set('operation','create');
@@ -181,7 +196,7 @@ class OperationForm extends FormBase {
 
 		$field_width_of = $is_edit ? $this-> getDecimalFromSHMUFractionFieldType($operation, 'field_width'): '';
 
-		$form['field_shmu_irrigation_total_alkalinity'] = [
+		$form['field_width'] = [
 			'#type' => 'number',
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
@@ -206,8 +221,79 @@ class OperationForm extends FormBase {
 		$form['subform_4'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
 		];
+
+
+
+		$form['cost_sequence'] = [
+			'#prefix' => '<div id ="cost_sequence">',
+			'#suffix' => '</div>',
+		];
+		// Get Options for Year and Crop Dropdowns
 		$cost_options = $this->getOtherCostsOptions();
-		$cost_options[''] = '-- Select --';
+		$cost_options[''] = '- Select -';
+
+		$fs_cost_sequences = $form_state -> get('sequences');
+
+		$num_cost_sequences = 1;
+
+		if(count($fs_cost_sequences) <> 0){
+			$num_cocst_sequences = count($fs_cost_sequences);
+		}
+
+
+		$form_index = 0; // Not to be confused with rotation
+		foreach($fs_cost_sequences as $fs_index => $sequence  ){
+
+			$cost_type_default_value = ''; // Default value for empty Rotation
+			$cost_default_value = ''; // Default value for empty rotation
+
+			$cost_default_value = $sequence['field_shmu_crop_rotation_crop'][0]['value'];
+			$cost_type_default_value = $sequence['field_shmu_crop_rotation_year'][0]['value'];
+
+			// dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
+
+			$form['cost_sequence'][$fs_index] = [
+				'#prefix' => '<div id="cost_rotation">',
+				'#suffix' => '</div>',
+			];
+
+			$form['cost_sequence'][$fs_index]['field_cost'] = [
+				'#type' => 'number',
+				'#title' => 'Cost',
+				'#default_value' => $cost_default_value,
+			];
+			$form['cost_sequence'][$fs_index]['field_cost_type'] = [
+				'#type' => 'select',
+				'#title' => 'Type',
+				'#options' => $cost_options,
+				'#default_value' => $cost_default_value
+			]; 
+
+			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
+				'#type' => 'submit',
+				'#name' => $fs_index,
+				'#submit' => ['::deleteCostSequence'],
+				'#ajax' => [
+					'callback' => "::deleteCostSequenceCallback",
+					'wrapper' => 'cost_sequence',
+				],
+				'#value' => 'X',
+			];
+
+			// Very important
+			$form_index = $form_index + 1;
+			// End very important
+		}
+
+		// Add another button
+		$form['cost_sequence']['actions']['addCost'] = [
+			'#type' => 'submit',
+			'#submit' => ['::addAnotherCostSequence'],
+			'#ajax' => [
+				'callback' => '::addAnotherCostSequenceCallback',
+			],
+			'#value' => 'Add to Sequence',
+		];
 
 
         $form['actions']['save'] = [
@@ -215,6 +301,9 @@ class OperationForm extends FormBase {
 			'#value' => $this->t('Save'),
 
 		];
+
+
+
 		$form['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
@@ -247,8 +336,8 @@ class OperationForm extends FormBase {
 
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
 		$id = $form_state->get('operation_id'); // TODO: Standardize access
-		$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-		$irrigation->delete();
+		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		$operation->delete();
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		return;
 	}
@@ -262,14 +351,14 @@ class OperationForm extends FormBase {
 	*/
 	public function getFormId() {
 		
-		return 'irrigation_form';
+		return 'operation_form';
 	}
 
     /**
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-
+		$cost_fields = ['sequences', 'cost_sequence','field_cost', 'field_cost_type'];
         $is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
 		$date_fields = ['field_shmu_irrigation_sample_date'];
@@ -295,13 +384,91 @@ class OperationForm extends FormBase {
 				$irrigation->set( $key, strtotime( $value ) ); //Set directly on SHMU object
 				continue;
 			}
+			if(in_array($key, $crop_rotation_fields)){ continue; }
 
             $irrigation->set( $key, $value );
         }
 
+		$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+
+		$cost_options = $this->getOtherCostsOptions();
+
+		$cost_template = [];
+		$cost_template['type'] = 'operation_cost_sequence';
+
+		for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
+
+			// If they did not select a crop for the row, do not include it in the save
+			if($form_values['cost_sequence'][$rotation]['field_cost_type'] == NULL) continue;
+
+			// We alwasys create a new crop rotation asset for each rotation
+			$cost_sequence = Asset::create( $cost_template );
+
+			// read the crop id from select dropdown for given rotation
+			$cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
+			$crop_sequence->set( 'field_cost_type', $cost_id );
+
+			// read the crop rotation year from select dropdown for given rotation
+			$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
+			$cost_sequence->set( 'field_cost', $cost_value );
+
+			#
+
+			$cost_sequence->save();
+			$cost_sequence_ids[] = $cost_sequence -> id(); // Append ID of SHMU Crop Rotation to list
+
+			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
+		}
+
+		$irrigation->set('field_cost_sequences', $cost_sequence_ids);
 		$irrigation->save();
+
+		// Cleanup - remove the old Crop Rotation Assets that are no longer used
+		if($is_edit){
+			$trash_rotation_ids = $form_state->get('original_cost_sequence_ids');
+			foreach($trash_rotation_ids as $key => $id){
+				$cost_sequence_old = Asset::load($id);
+				$cost_sequence_old->delete();
+			}
+		}
 		// Success message done
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
+
+	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
+		// dpm("Adding  new rotation");
+		$sequences = $form_state->get('sequences');
+		$new_cost_sequence = [];
+		$new_cost_sequence['field_cost'][0]['value'] = '';
+		$new_cost_sequence['field_cost_type'][0]['value'] = '';
+
+		$cost_options = $this->getOtherCostsOptions();
+		$sequences[] = $new_cost_sequence;
+		$form_state->set('sequences', $sequences);
+		
+		$form_state->setRebuild(True);
+	}
+
+	public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state){
+		return $form['cost_sequence'];
+	}
+
+
+	public function deleteCostSequence(array &$form, FormStateInterface $form_state){
+	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+
+		$sequences = $form_state->get('sequences');
+
+		unset($sequences[$idx_to_rm]); // Remove the index
+	
+		$form_state->set('sequences',$sequences);
+
+
+		$form_state->setRebuild(True);
+	}
+
+	public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state){
+		return $form['cost_sequence'];
+	}
 }

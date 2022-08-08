@@ -75,17 +75,14 @@ class Operation extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        'field_cost' => [
-            'type' => 'entity_reference',
-            'label' => 'Cost',
-            'target_type' => 'asset',
-            'target_bundle' => 'cost',
-            'required' => FALSE,
-            'multiple' => FALSE,
-            'form_display_options' => [
-               'label' => 'inline',
-               'type' => 'options_select',
-            ],
+        'field_cost_sequences' => [
+            'label'=> 'Cost Sequence',
+             'type'=> 'entity_reference',
+             'target_type'=> 'asset',
+             'target_bundle'=> 'operation_cost_sequence',
+             'required' => FALSE,
+             'multiple' => TRUE,
+             'description' => '',
         ],
         'field_operation_project_id' =>[
             'type'  => 'fraction',

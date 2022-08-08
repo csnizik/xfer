@@ -386,12 +386,17 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_4'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> </div>'
 		];
-		$form['dominant_map_unit_symbol'] = [
+    $form['ssurgo_data_wrapper'] = [
+      '#type' => 'container',
+      '#prefix' => '<div id="ssurgo-data">',
+      '#suffix' => '</div>',
+    ];
+		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Map Unit Symbol'),
       '#description' => $this->t('List the dominant map unit symbols of the SHMU.'),
 		];
-		$form['dominant_surface_texture'] = [
+		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Surface Texture'),
       '#description' => $this->t('List the dominant surface textures of the SHMU.'),

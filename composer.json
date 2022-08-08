@@ -12,7 +12,8 @@
     "oomphinc/composer-installers-extender": "^2.0",
     "farmos/farmos": "2.x-dev",
     "wikimedia/composer-merge-plugin": "^2.0",
-    "drupal/structure_sync": "^2.0"
+    "drupal/structure_sync": "^2.0",
+    "drupal/farm_nrcs": "^2.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

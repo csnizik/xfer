@@ -7,6 +7,7 @@ Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
 Use Drupal\Core\Url;
+use Drupal\geofield\GeoPHP\GeoPHPWrapper;
 
 
 class SoilHealthManagementUnitForm extends FormBase {
@@ -386,6 +387,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['subform_4'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> </div>'
 		];
+    $form['ssurgo_lookup'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Lookup via SSURGO'),
+      '#ajax' => [
+        'callback' => '::ssurgoDataCallback',
+        'wrapper' => 'ssurgo-data',
+      ],
+      '#limit_validation_errors' => [['mymap']],
+      '#submit' => ['::ssurgoDataLookup'],
+    ];
     $form['ssurgo_data_wrapper'] = [
       '#type' => 'container',
       '#prefix' => '<div id="ssurgo-data">',
@@ -394,12 +405,12 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Map Unit Symbol'),
-      '#description' => $this->t('List the dominant map unit symbols of the SHMU.'),
+      '#description' => $this->t('List the dominant map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
 		];
 		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Surface Texture'),
-      '#description' => $this->t('List the dominant surface textures of the SHMU.'),
+      '#description' => $this->t('List the dominant surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
 		];
 
 		// New section (Land Use History)
@@ -905,6 +916,65 @@ class SoilHealthManagementUnitForm extends FormBase {
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 
+  /**
+   * Submit function for looking up soil data from SSURGO.
+   */
+  public function ssurgoDataLookup(array &$form, FormStateInterface $form_state) {
+
+    // Get WKT from the map.
+    $wkt = $form_state->getValue('mymap');
+
+    // Validate the WKT.
+    $valid_geometry = FALSE;
+    if (!empty($wkt)) {
+      $geophp = new GeoPHPWrapper();
+      try {
+        if ($geophp->load($wkt)) {
+          $valid_geometry = TRUE;
+        }
+      } catch (\Exception $e) {
+        $valid_geometry = FALSE;
+      }
+    }
+    if (!$valid_geometry) {
+      return;
+    }
+
+    // Query the NRCS Soil Data Access API for mapunit data.
+    $mapunits = \Drupal::service('nrcs.soil_data_access')->mapunitWktQuery($wkt);
+
+    // If map units were found...
+    if (!empty($mapunits)) {
+
+      // Extract the mapunit symbol(s) and name(s).
+      $musyms = [];
+      $munames = [];
+      foreach ($mapunits as $mapunit) {
+        $musyms[] = $mapunit['musym'];
+        $munames[] = $mapunit['muname'];
+      }
+
+      // Assemble the symbol and texture inputs.
+      $symbols = implode('; ', $musyms);
+      $textures = implode('; ', $munames);
+
+      // In order to replace textfield text, we must alter the raw user input and
+      // trigger a form rebuild. It cannot be done simply with setValue().
+      $input = $form_state->getUserInput();
+      $input['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = $symbols;
+      $input['ssurgo_data_wrapper']['dominant_surface_texture'] = $textures;
+      $form_state->setUserInput($input);
+      $form_state->setRebuild(TRUE);
+    }
+  }
+
+  /**
+   * Ajax callback for the soil names field.
+   */
+  public function ssurgoDataCallback(array &$form, FormStateInterface $form_state) {
+    return $form['ssurgo_data_wrapper'];
+  }
+  
 	// Adds a new row to crop rotation
 	public function addAnotherCropRotation(array &$form, FormStateInterface $form_state){
 		// dpm("Adding  new rotation");

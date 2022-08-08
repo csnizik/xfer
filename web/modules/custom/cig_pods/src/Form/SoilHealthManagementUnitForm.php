@@ -367,6 +367,13 @@ class SoilHealthManagementUnitForm extends FormBase {
 				'zoom_us',
        		 	 'wkt_refresh',
       		],
+      '#map_settings' => [
+        'behaviors' => [
+          'nrcs_soil_survey' => [
+            'visible' => TRUE,
+          ],
+        ],
+      ],
 			'#display_raw_geometry' => TRUE,
 			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
   			// '#default_value' => 'POINT(38.598964 -99.851931)',

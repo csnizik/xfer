@@ -13,7 +13,7 @@ class FieldAssessmentForm extends FormBase {
 
 	public function getAssessmentEvaluationOptions(){
 		$options = [];
-		$options[''] = '-- Select --';
+		$options[''] = '- Select -';
 
 		// TODO: "vid => d_assessment_..." is spelled incorrectly, but need to
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(

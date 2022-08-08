@@ -34,6 +34,8 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Soil Sample'),
           'ifa' => $this
 					->t('Assessment'),
+          'rla' => $this
+					->t('Rangeland Assessment'),
           'ltr' => $this
 					->t('Soil Test Result'),
           'ltm' => $this
@@ -89,6 +91,12 @@ class AwardeeDashboardForm extends FormBase {
       '#type' => 'submit',
       '#value' => $this->t('Assessment(s): '.$entityCount[6]),
       '#submit' => ['::ifaRedirect'],
+    ];
+
+    $form['awardee_rangeland_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Rangeland Assessment(s): '.$entityCount[6]),
+      '#submit' => ['::rlaRedirect'],
     ];
 
 		$form['awardee_lab_result'] = [
@@ -149,6 +157,9 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/field_assessment");
+}
+public function rlaRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/range_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

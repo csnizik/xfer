@@ -101,7 +101,9 @@ class SoilHealthSampleForm extends FormBase {
             '#required' => TRUE,
         ];
 
-    $diameter_default_value = $is_edit ?  $this->convertFractionsToDecimal($sample_collection, 'field_diameter') : NULL;
+    if ($is_edit && isset($sample_collection->get('field_diameter')->numerator)) {
+    	$diameter_default_value = $is_edit ?  $this->convertFractionsToDecimal($sample_collection, 'field_diameter') : NULL;
+    }
   	$form['field_diameter'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Probe Diameter'),

@@ -53,7 +53,7 @@ class Operation extends FarmAssetType {
             'label'=> 'Tractor/Self-Propelled Machine',
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
-            'target_bundle'=> 'd_tractor_self_propelled_machine',
+            'target_bundle'=> 'd_equipment',
             'required' => TRUE,
             'description' => '',
         ],

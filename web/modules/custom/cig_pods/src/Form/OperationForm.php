@@ -184,7 +184,7 @@ class OperationForm extends FormBase {
 		];
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Tractor/Self-Propelled Machine Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Operation Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
 		$field_operation_type = $is_edit ? $operation->get('field_operation'):'';
@@ -405,13 +405,13 @@ class OperationForm extends FormBase {
 		
         if(!$is_edit){
 			$operation_template = [];
-			$operation_template['type'] = 'irrigation';
+			$operation_template['type'] = 'operation';
 			// dpm($operation_template);
 			// dpm("------------");
 			$operation = Asset::create($operation_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+			$id = $form_state->get('operation_id'); // TODO: Standardize access
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 

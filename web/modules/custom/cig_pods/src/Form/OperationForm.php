@@ -26,6 +26,45 @@ class OperationForm extends FormBase {
 		return $shmu_options;
 	}
 
+	public function getEquipmentOptions(){
+		$options = [];
+		$options[''] = '- Select -';
+		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+			['vid' => 'd_equipment']);
+		$keys = array_keys($taxonomy_terms);
+		foreach($keys as $key){
+			$term = $taxonomy_terms[$key];
+			$options[$key] = $term -> getName();
+		}
+		return $options;
+	}
+
+	public function getEquipmentOwnershipOptions(){
+		$options = [];
+		$options[''] = '- Select -';
+		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+			['vid' => 'd_equipment_ownership']);
+		$keys = array_keys($taxonomy_terms);
+		foreach($keys as $key){
+			$term = $taxonomy_terms[$key];
+			$options[$key] = $term -> getName();
+		}
+		return $options;
+	}
+
+	public function getOperationOptions(){
+		$options = [];
+		$options[''] = '- Select -';
+		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+			['vid' => 'd_operation_type']);
+		$keys = array_keys($taxonomy_terms);
+		foreach($keys as $key){
+			$term = $taxonomy_terms[$key];
+			$options[$key] = $term -> getName();
+		}
+		return $options;
+	}
+
 	public function getCostSequenceIdsForOperation($operation){
 		$cost_sequence_target_ids = [];
 
@@ -148,21 +187,21 @@ class OperationForm extends FormBase {
 		];
 
 		$field_operation_type = $is_edit ? $operation->get('field_operation'):'';
-
+		$field_operation_options = $this->getOperationOptions();
 		$form['field_operation'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Operation'),
 			'#default_value' => $field_operation_type,
-			'#options' => $default_options,
+			'#options' => $field_operation_options,
 			'#required' => TRUE
 		];
 
 		$field_ownership_implement = $is_edit ? $operation->get('field_ownership_status'): '';
-
+		$field_ownership_options = $this->getEquipmentOwnershipOptions();
 		$form['field_ownership_status'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Equipment/Implement Ownership Status'),
-			'#options' => $default_options,
+			'#options' => $field_ownership_options,
 			'#default_value' => $field_ownership_implement,
 			'#required' => TRUE
 		];
@@ -172,11 +211,11 @@ class OperationForm extends FormBase {
 		];
 
 		$field_tractor_self = $is_edit ? $operation->get('field_tractor_self_propelled_machine'): '';
-
+		$field_equipment_options = $this->getEquipmentOptions();
 		$form['field_tractor_self_propelled_machine'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Tractor/Self-Propelled Machine'),
-			'#options' => $default_options,
+			'#options' => $field_equipment_options,
 			'#default_value' => $field_tractor_self,
 			'#required' => TRUE
 		];
@@ -361,19 +400,19 @@ class OperationForm extends FormBase {
 		$cost_fields = ['sequences', 'cost_sequence','field_cost', 'field_cost_type'];
         $is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
-		$date_fields = ['field_shmu_irrigation_sample_date'];
+		$date_fields = ['field_operation_date'];
 		$form_values = $form_state->getValues();
 		
         if(!$is_edit){
-			$irrigation_template = [];
-			$irrigation_template['type'] = 'irrigation';
-			// dpm($irrigation_template);
+			$operation_template = [];
+			$operation_template['type'] = 'irrigation';
+			// dpm($operation_template);
 			// dpm("------------");
-			$irrigation = Asset::create($irrigation_template);
+			$operation = Asset::create($operation_template);
 		} else {
 			// Operation is of type Edit
 			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
-			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
         foreach($form_values as $key => $value){
@@ -381,12 +420,12 @@ class OperationForm extends FormBase {
 			if(in_array($key, $ignored_fields)){ continue; }
 			if(in_array($key,$date_fields)){
 				// $value is expected to be a string of format yyyy-mm-dd
-				$irrigation->set( $key, strtotime( $value ) ); //Set directly on SHMU object
+				$operation->set( $key, strtotime( $value ) ); //Set directly on SHMU object
 				continue;
 			}
 			if(in_array($key, $crop_rotation_fields)){ continue; }
 
-            $irrigation->set( $key, $value );
+            $operation->set( $key, $value );
         }
 
 		$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
@@ -420,8 +459,8 @@ class OperationForm extends FormBase {
 			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 
-		$irrigation->set('field_cost_sequences', $cost_sequence_ids);
-		$irrigation->save();
+		$operation->set('field_cost_sequences', $cost_sequence_ids);
+		$operation->save();
 
 		// Cleanup - remove the old Crop Rotation Assets that are no longer used
 		if($is_edit){

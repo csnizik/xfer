@@ -75,199 +75,199 @@ class RangeAssessmentForm extends FormBase {
 
 		];
 
-        $range_assessment_rills_value = $is_edit ? $assessment->get('range_assessment_rills')->target_id : '';
+        $range_assessment_rills_value = $is_edit ? $assessment->get('range_assessment_rills')->value : '';
 
 		$form['range_assessment_rills'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Rills'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_rills_value,
+			'#default_value' => $range_assessment_rills_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->target_id : '';
+		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->value : '';
 
 		$form['range_assessment_water_flow'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Water Flow'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_water_flow_value,
+			'#default_value' => $range_assessment_water_flow_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
                 '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->target_id : '';
+		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->value : '';
 
 		$form['range_assessment_pedestals'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Pedestals and/or Terracettes'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_Pedestals_value,
+			'#default_value' => $range_assessment_pedestals_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->target_id : '';
+		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->value : '';
 
 		$form['range_assessment_bare_ground'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Bare Ground'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_bare_ground_value,
+			'#default_value' => $range_assessment_bare_ground_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
                 '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->target_id : '';
+		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->value : '';
 
 		$form['range_assessment_gullies'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Gullies'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_gullies_value,
+			'#default_value' => $range_assessment_gullies_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->target_id : '';
+		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->value : '';
 
 		$form['range_assessment_wind_scoured'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Wind-Scoured and/or Depositional Areas'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_wind_scoured_value,
+			'#default_value' => $range_assessment_wind_scoured_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
                 '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->target_id : '';
+		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->value : '';
 
 		$form['range_assessment_litter_movement'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Litter Movement (Wind or Water)'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_litter_movement_value,
+			'#default_value' => $range_assessment_litter_movement_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
                 '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->target_id : '';
+		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->value : '';
 
 		$form['range_assessment_soil_surface_resistance'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Surface Resistance to Erosion'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_soil_surface_resistance_value,
+			'#default_value' => $range_assessment_soil_surface_resistance_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->target_id : '';
+		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->value : '';
 
 		$form['range_assessment_soil_surface_loss'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Surface Loss and Degradation'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_soil_surface_loss_value,
+			'#default_value' => $range_assessment_soil_surface_loss_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->target_id : '';
+		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->value : '';
 
 		$form['range_assessment_effects_of_plants'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Effects of Plant Community Composition and Distribution on Infiltration'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_effects_of_plants_value,
+			'#default_value' => $range_assessment_effects_of_plants_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->target_id : '';
+		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->value : '';
 
 		$form['range_assessment_compaction_layer'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Compaction Layer'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_compaction_layer_value,
+			'#default_value' => $range_assessment_compaction_layer_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->target_id : '';
+		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->value : '';
 
 		$form['range_assessment_functional_structural'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Functional/Structural Groups'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_functional_structural_value,
+			'#default_value' => $range_assessment_functional_structural_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->target_id : '';
+		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->value : '';
 
 		$form['range_assessment_dead_plants'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Dead or Dying Plants or Plant Parts (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_dead_plants_value,
+			'#default_value' => $range_assessment_dead_plants_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->target_id : '';
+		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->value : '';
 
 		$form['range_assessment_litter_cover'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Litter Cover and Depth'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_litter_cover_value,
+			'#default_value' => $range_assessment_litter_cover_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->target_id : '';
+		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->value : '';
 
 		$form['range_assessment_annual_production'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Annual Production'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_annual_production_value,
+			'#default_value' => $range_assessment_annual_production_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->target_id : '';
+		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->value : '';
 
 		$form['range_assessment_invasive_plants'] = [
 			'#type' => 'select',
-			'#title' => $this->t('Invasive Plants Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
+			'#title' => $this->t('Invasive Plants'),
 			'#options' => $severity_options,
-			'#default_value' => $field_assessment_invasive_plants_value,
+			'#default_value' => $range_assessment_invasive_plants_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
 
-		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->target_id : '';
+		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
 
 		$form['range_assessment_vigor_plants'] = [
 			'#type' => 'select',
@@ -278,6 +278,12 @@ class RangeAssessmentForm extends FormBase {
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
 		];
+
+		$form['rc_container'] = [
+            '#prefix' => '<div id="rc_container"',
+			'#suffix' => '</div>',
+        ];
+
 		$form['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Identify Resource Concerns'),
@@ -291,15 +297,8 @@ class RangeAssessmentForm extends FormBase {
 
 		];
 
-		$form['rc_container'] = [
-            '#prefix' => '<div id="rc_container"',
-			'#suffix' => '</div>',
-        ];
-
-
-
 		$toDisplay = $form_state->get('rc_display');
-		if (TRUE) {
+		if (count($toDisplay) <> 0) {
 			$form['rc_container']['rc_header'] = [
 				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
 			];
@@ -365,7 +364,7 @@ class RangeAssessmentForm extends FormBase {
 		return array('range_assessment_shmu', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
-		'range_assessment_vigor_plants');
+		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');
 	}
     /**
      * {@inheritdoc}
@@ -388,17 +387,16 @@ class RangeAssessmentForm extends FormBase {
 
         }else{
             $id = $form_state->get('assessment_id');
-            $ranglandAssessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+            $rangelandAssessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
             $elementNames = $this->createElementNames();
 		    foreach($elementNames as $elemName){
-                $ranglandAssessment->set($elemName, $form_state->getValue($elemName));
+                $rangelandAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			v
-            $ranglandAssessment->save();
+			$rangelandAssessment->set('name', 'Rangeland');
+            $rangelandAssessment->save();
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
-     }
 
     }
 

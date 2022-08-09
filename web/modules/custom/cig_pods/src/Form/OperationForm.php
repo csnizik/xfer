@@ -104,6 +104,7 @@ class OperationForm extends FormBase {
 
 	public function getOtherCostsOptions(){
 		$options = [];
+		$options[''] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
 			['vid' => 'd_cost_type']);
 		$keys = array_keys($taxonomy_terms);
@@ -269,7 +270,6 @@ class OperationForm extends FormBase {
 		];
 		// Get Options for Year and Crop Dropdowns
 		$cost_options = $this->getOtherCostsOptions();
-		$cost_options[''] = '- Select -';
 
 		$fs_cost_sequences = $form_state -> get('sequences');
 

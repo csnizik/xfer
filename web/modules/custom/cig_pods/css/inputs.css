@@ -1,10 +1,10 @@
 div#block-gin-content {
-  width: 920px;
+  width: 688px;
   margin: auto;
 }
 
 #block-gin-content form .form-element {
-  width: 848px;
+  width: 648px;
   border: 1px solid #1b1b1b;
   border-radius: 0;
 }
@@ -15,6 +15,12 @@ div#block-gin-content {
   clear: both;
   margin-top: 60px;
   margin-bottom: 30px;
+}
+
+#block-gin-content form .title-container h1 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38px;
 }
 
 #block-gin-content form .subtitle-container h2 {
@@ -28,4 +34,55 @@ div#block-gin-content {
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
+}
+
+#input-input {
+  display: flex;
+}
+
+select#edit-field-input.form-select.form-element.form-element--type-select {
+  width: 407px;
+  margin-right: 8px;
+}
+
+select#edit-field-unit.form-select.form-element.form-element--type-select {
+  width: 225px;
+}
+
+input#edit-field-cost-per-unit.form-text.form-element.form-element--type-text {
+  width: 407px;
+  margin-right: 8px;
+}
+
+select#edit-field-custom-application-unit.form-select.form-element.form-element--type-select {
+  width: 225px;
+}
+
+#cost-per-unit {
+  display: flex;
+}
+
+#other-costs {
+  display: flex;
+}
+select#edit-cost.form-select {
+  width: 315px;
+  margin-right: 8px;
+}
+select#edit-contact-type.form-select {
+  width: 315px;
+}
+
+#block-gin-content form .inline-components {
+  float: left;
+  width: 315px;
+  margin-right: 8px;
+  margin-bottom: 0px;
+}
+
+#block-gin-content form .inline-components-short {
+  float: left;
+  width: 315px;
+  /* margin-right: 8px; */
+  margin-bottom: 0px;
 }

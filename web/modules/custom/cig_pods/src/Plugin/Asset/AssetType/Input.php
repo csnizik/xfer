@@ -90,6 +90,18 @@ class Input extends FarmAssetType {
                'type' => 'options_select',
             ],
         ],
+         'field_cost_type' => [
+            'type' => 'entity_reference',
+            'label' => 'Cost Type',
+            'target_type' => 'taxonomy_term',
+            'target_bundle' => 'd_cost_type',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'form_display_options' => [
+               'label' => 'inline',
+               'type' => 'options_select',
+            ],
+        ],
         'field_input_project_id' =>[
             'type'  => 'fraction',
             'label' => 'Input Project ID reference',

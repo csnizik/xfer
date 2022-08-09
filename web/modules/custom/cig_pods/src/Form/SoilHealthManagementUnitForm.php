@@ -402,16 +402,20 @@ class SoilHealthManagementUnitForm extends FormBase {
       '#prefix' => '<div id="ssurgo-data">',
       '#suffix' => '</div>',
     ];
+    $dominant_map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_dominant_map_unit_symbol')->value: '';
 		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Map Unit Symbol'),
       '#description' => $this->t('List the dominant map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
-		];
+		  '#default_value' => $dominant_map_unit_symbol_value,
+    ];
+    $dominant_surface_texture_value = $is_edit ? $shmu->get('field_shmu_dominant_surface_texture')->value: '';
 		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dominant Surface Texture'),
       '#description' => $this->t('List the dominant surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
-		];
+		  '#default_value' => $dominant_surface_texture_value,
+    ];
 
 		// New section (Land Use History)
 		$form['subform_5'] = [
@@ -803,7 +807,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap','ssurgo_lookup','ssurgo_data_wrapper'];
 
 		$form_values = $form_state->getValues();
 
@@ -856,6 +860,9 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Map submission logic
 		$shmu->set('field_geofield',$form_values['mymap']);
 
+    // Set dominant map unit symbol and surface texture.
+    $shmu->set('field_shmu_dominant_map_unit_symbol', $form_values['ssurgo_data_wrapper']['dominant_map_unit_symbol']);
+    $shmu->set('field_shmu_dominant_surface_texture', $form_values['ssurgo_data_wrapper']['dominant_surface_texture']);
 
 		// TODO: Make Dynamic
 		$num_crop_rotations = count($form_values['crop_sequence']); // TODO: Can be calculate dynamically based off of form submit

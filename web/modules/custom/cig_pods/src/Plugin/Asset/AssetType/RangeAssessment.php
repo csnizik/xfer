@@ -157,6 +157,14 @@ class RangeAssessment extends FarmAssetType {
                 'description' => '',
 
             ],
+            'range_assessment_vigor_plants' => [
+                'label'=> 'Rangeland Vigor Plants',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+
+            ],
+
         ];
         $farmFieldFactory = new FarmFieldFactory();
         foreach($field_info as $name => $info){

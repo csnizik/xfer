@@ -15,7 +15,6 @@ class RangeAssessmentForm extends FormBase {
 			['type' => 'soil_health_management_unit']
 		 );
 		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
 		 $producer_keys = array_keys($producer_assets);
 		 foreach($producer_keys as $producer_key) {
 		   $asset = $producer_assets[$producer_key];
@@ -31,8 +30,11 @@ class RangeAssessmentForm extends FormBase {
     public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
 		$form['#attached']['library'][] = 'cig_pods/range_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#tree'] = TRUE;
 
-		$severity_options = [ 0 => '-Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
+		$form_state->set('rc_display', 0);
+
+		$severity_options = [5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
 
 		$is_edit = $id <> NULL;
 
@@ -64,7 +66,10 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $range_assessment_shmu_value,
-			'#required' => FALSE,
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
+
 		];
 
         $range_assessment_rills_value = $is_edit ? $assessment->get('range_assessment_rills')->target_id : '';
@@ -74,7 +79,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Rills'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_rills_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->target_id : '';
@@ -84,7 +91,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Water Flow'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_water_flow_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->target_id : '';
@@ -94,7 +103,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Pedestals and/or Terracettes'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_Pedestals_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->target_id : '';
@@ -104,7 +115,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Bare Ground'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_bare_ground_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->target_id : '';
@@ -114,7 +127,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Gullies'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_gullies_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->target_id : '';
@@ -124,7 +139,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Wind-Scoured and/or Depositional Areas'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_wind_scoured_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->target_id : '';
@@ -134,7 +151,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Litter Movement (Wind or Water)'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_litter_movement_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->target_id : '';
@@ -144,7 +163,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Soil Surface Resistance to Erosion'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_soil_surface_resistance_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->target_id : '';
@@ -154,7 +175,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Soil Surface Loss and Degradation'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_soil_surface_loss_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->target_id : '';
@@ -164,7 +187,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Effects of Plant Community Composition and Distribution on Infiltration'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_effects_of_plants_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->target_id : '';
@@ -174,7 +199,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Compaction Layer'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_compaction_layer_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->target_id : '';
@@ -184,7 +211,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Functional/Structural Groups'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_functional_structural_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->target_id : '';
@@ -194,7 +223,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Dead or Dying Plants or Plant Parts (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_dead_plants_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->target_id : '';
@@ -204,7 +235,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Litter Cover and Depth'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_litter_cover_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->target_id : '';
@@ -214,7 +247,9 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Annual Production'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_annual_production_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->target_id : '';
@@ -224,9 +259,33 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => $this->t('Invasive Plants Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $field_assessment_invasive_plants_value,
-			'#required' => FALSE
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
 		];
 
+		$form['rc_container'] = [
+            '#prefix' => '<div id="rc_container"',
+			'#suffix' => '</div>',
+        ];
+		$toDisplay = $form_state->get('rc_display');
+		if ($toDisplay === 1) {
+			$form['rc_container']['rc_header'] = [
+				'#markup' => '<h4> <b> Resource Concerns Identified from In-Field Assessment </b> </h4>'
+			];
+			$form['rc_container']['rc_soil'] = [
+				'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p> 
+				<p><b>@soil_score</b></p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state)])
+			];
+			$form['rc_container']['rc_hydrologic'] = [
+				'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p> 
+				<p><b>@hydrolic_score</b></p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state)])
+			];
+			$form['rc_container']['rc_biotic'] = [
+				'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p> 
+				<p><b>@biotic_score</b></p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state)])
+			];
+		}
 		// $form['actions']['identify-resource-concerns'] = [
 		// 	'#type' => 'submit',
 		// 	'#submit' => ['::calcuateResourceConcerns'],
@@ -237,23 +296,29 @@ class RangeAssessmentForm extends FormBase {
 		// ];
 
 		// add resource concern
+		$form['actions']['test'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('test'),
+			'#submit' => ['::displayRcScores'],
+			'#ajax' => [
+				'callback' => '::updateScores',
+				'wrapper' => 'rc_container',
+			],
+			'#prefix' => '<div id="score_button"',
+			'#suffix' => '</div>',
+
+		];
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',
 			'#value' => 'Save'
 		];
+
 		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => ['::dashboardRedirect'],
 			'#limit_validation_errors' => '',
-
-		];
-
-		$form['actions']['test'] = [
-			'#type' => 'submit',
-			'#value' => $this->t('test'),
-			'#submit' => ['::getBioticIntegrity'],
 
 		];
 
@@ -297,49 +362,58 @@ class RangeAssessmentForm extends FormBase {
     }
 
 	public function getSoilSiteStability(array &$form, FormStateInterface $form_state) {
-		$rills = $this->convertSeverities($form_state->getValue('range_assessment_rills'));
-		$water_flow = $this->convertSeverities($form_state->getValue('range_assessment_water_flow'));
-		$pedestals = $this->convertSeverities($form_state->getValue('range_assessment_pedestals'));
-		$bare_ground = $this->convertSeverities($form_state->getValue('range_assessment_bare_ground'));
-		$gullies = $this->convertSeverities($form_state->getValue('range_assessment_gullies'));
-		$wind_scoured = $this->convertSeverities($form_state->getValue('range_assessment_wind_scoured'));
-		$litter_movement = $this->convertSeverities($form_state->getValue('range_assessment_litter_movement'));
-		$soil_surface_resistance = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_resistance'));
-		$soil_surface_loss = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_loss'));
-		$compaction_layer = $this->convertSeverities($form_state->getValue('range_assessment_compaction_layer'));
+		$rills = $form_state->getValue('range_assessment_rills');
+		$water_flow = $form_state->getValue('range_assessment_water_flow');
+		$pedestals = $form_state->getValue('range_assessment_pedestals');
+		$bare_ground = $form_state->getValue('range_assessment_bare_ground');
+		$gullies = $form_state->getValue('range_assessment_gullies');
+		$wind_scoured = $form_state->getValue('range_assessment_wind_scoured');
+		$litter_movement = $form_state->getValue('range_assessment_litter_movement');
+		$soil_surface_resistance = $form_state->getValue('range_assessment_soil_surface_resistance');
+		$soil_surface_loss = $form_state->getValue('range_assessment_soil_surface_loss');
+		$compaction_layer = $form_state->getValue('range_assessment_compaction_layer');
 
 		return ceil(($rills + $water_flow + $pedestals + $bare_ground + $gullies + $wind_scoured + $litter_movement + $soil_surface_loss + $soil_surface_resistance + $compaction_layer) / 10.0);
 	}
 
 	public function getHydrologicFunction(array &$form, FormStateInterface $form_state) {
-		$rills = $this->convertSeverities($form_state->getValue('range_assessment_rills'));
-		$water_flow = $this->convertSeverities($form_state->getValue('range_assessment_water_flow'));
-		$pedestals = $this->convertSeverities($form_state->getValue('range_assessment_pedestals'));
-		$bare_ground = $this->convertSeverities($form_state->getValue('range_assessment_bare_ground'));
-		$gullies = $this->convertSeverities($form_state->getValue('range_assessment_gullies'));
-		$soil_surface_resistance = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_resistance'));
-		$soil_surface_loss = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_loss'));
-		$compaction_layer = $this->convertSeverities($form_state->getValue('range_assessment_compaction_layer'));
-		$effects_of_plants = $this->convertSeverities($form_state->getValue('range_assessment_effects_of_plants'));
-		$litter_cover = $this->convertSeverities($form_state->getValue('range_assessment_litter_cover'));
+		$rills = $form_state->getValue('range_assessment_rills');
+		$water_flow = $form_state->getValue('range_assessment_water_flow');
+		$pedestals = $form_state->getValue('range_assessment_pedestals');
+		$bare_ground = $form_state->getValue('range_assessment_bare_ground');
+		$gullies = $form_state->getValue('range_assessment_gullies');
+		$soil_surface_resistance = $form_state->getValue('range_assessment_soil_surface_resistance');
+		$soil_surface_loss = $form_state->getValue('range_assessment_soil_surface_loss');
+		$compaction_layer = $form_state->getValue('range_assessment_compaction_layer');
+		$effects_of_plants = $form_state->getValue('range_assessment_effects_of_plants');
+		$litter_cover = $form_state->getValue('range_assessment_litter_cover');
 
 		return ceil(($rills + $water_flow + $pedestals + $bare_ground + $gullies + $effects_of_plants + $litter_cover + $soil_surface_loss + $soil_surface_resistance + $compaction_layer) / 10.0);
 	}
 
 	public function getBioticIntegrity(array &$form, FormStateInterface $form_state) {
-		dpm($form_state->getValue('range_assessment_soil_surface_resistance'));
-		// $soil_surface_resistance = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_resistance'));
-		// $soil_surface_loss = $this->convertSeverities($form_state->getValue('range_assessment_soil_surface_loss'));
-		// $compaction_layer = $this->convertSeverities($form_state->getValue('range_assessment_compaction_layer'));
-		// $functional_structural = $this->convertSeverities($form_state->getValue('range_assessment_functional_structural'));
-		// $dead_plants = $this->convertSeverities($form_state->getValue('range_assessment_dead_plants'));
-		// $litter_cover = $this->convertSeverities($form_state->getValue('range_assessment_litter_cover'));
-		// $annual_production = $this->convertSeverities($form_state->getValue('range_assessment_annual_production'));
-		// $invasive_plants = $this->convertSeverities($form_state->getValue('range_assessment_invasive_plants'));
+		$soil_surface_resistance = $form_state->getValue('range_assessment_soil_surface_resistance');
+		$soil_surface_loss = $form_state->getValue('range_assessment_soil_surface_loss');
+		$compaction_layer = $form_state->getValue('range_assessment_compaction_layer');
+		$functional_structural = $form_state->getValue('range_assessment_functional_structural');
+		$dead_plants = $form_state->getValue('range_assessment_dead_plants');
+		$litter_cover = $form_state->getValue('range_assessment_litter_cover');
+		$annual_production = $form_state->getValue('range_assessment_annual_production');
+		$invasive_plants = $form_state->getValue('range_assessment_invasive_plants');
 
-		// //dpm(ceil(($soil_surface_loss + $soil_surface_resistance + $compaction_layer + $functional_structural + $dead_plants + $litter_cover + $annual_production + $invasive_plants) / 8.0));
-		// dpm("soil_surface_loss: ", $soil_surface_loss, "soil_surface_resistance: ", $soil_surface_resistance);
+		dpm(ceil(($soil_surface_loss + $soil_surface_resistance + $compaction_layer + $functional_structural + $dead_plants + $litter_cover + $annual_production + $invasive_plants) / 8.0));
 	}
+
+	public function displayRcScores(array &$form, FormStateInterface $form_state ){
+		$form_state->set('rc_display', 1);
+		$form_state->setRebuild(TRUE);
+	}
+
+	public function updateScores(array &$form, FormStateInterface $form_state){
+
+        return $form['rc_container'];
+    }
+
 
     /**
      * {@inheritdoc}

@@ -67,6 +67,16 @@ class InputsForm extends FormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state, $operation = NULL){
 
+        $is_edit = $id <> NULL;
+
+	if($is_edit){
+			$form_state->set('operation','edit');
+			$form_state->set('awardee_id',$id);
+			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+	} else {
+			$form_state->set('operation','create');
+	}
+
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
 
         $num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
@@ -158,7 +168,8 @@ class InputsForm extends FormBase {
 		];
 
          $form['field_cost_per_unit'] = [
-            '#type' => 'textfield',
+             '#type' => 'number',
+            '#step' => 0.01,
             '#title' => $this->t('Cost Per Unit'),
             '#description' => '',
             '#required' => FALSE,
@@ -208,7 +219,8 @@ class InputsForm extends FormBase {
 				'#prefix' => '<div id="other-costs"',
 			];
 			$form['names_fieldset'][$i]['contact_name'] = [
-				'#type' => 'textfield',
+				 '#type' => 'number',
+                 '#step' => 0.01,
 				'#title' => $this
 				  ->t("Cost"),
 				//'#options' => $contact_name_options,
@@ -341,30 +353,86 @@ class InputsForm extends FormBase {
     }
 
     public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
-        dpm("addContactRowCallback");
+      //  dpm("addContactRowCallback");
     return $form['names_fieldset'];
     }
+
+     public function getFormEntityMapping(){
+	  $mapping = [];
+
+		$mapping['field_input_date'] = 'field_input_date';
+	  $mapping['field_input_category'] = 'field_input_category';
+	  $mapping['field_input'] = 'field_input';
+	  $mapping['field_unit'] = 'field_unit';
+	  $mapping['field_rate_units'] = 'field_rate_units';
+	  $mapping['field_cost_per_unit'] = 'field_cost_per_unit';
+       $mapping['field_custom_application_unit'] = 'field_custom_application_unit';
+
+    return $mapping;
+
+  }
 
     /**
     * {@inheritdoc}
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
-        $this
-            ->messenger()
-            ->addStatus($this
-            ->t('Form submitted for inputform @inputform_name', [
-            '@inputform_name' => $form['inputform_name']['#value'],
-        ]));
-    }
+       $is_create = $form_state->get('operation') === 'create';
+dpm("submit form");
+	if($is_create){
+	$values = $form_state->getValues();
+
+	$mapping = $this->getFormEntityMapping();
+
+	$project_submission = [];
+
+	$project_submission['type'] = 'input';
+
+    //for tessting only
+    // TODO: remove before PR
+    $project_submission['name'] = 'test1';
+
+
+	// Single value fields can be mapped in
+	foreach($mapping as $form_elem_id => $entity_field_id){
+		// If mapping not in form or value is empty string
+		if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+			continue;
+		}
+		$project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
+	}
+
+     // Minus 1 because there is an entry with key 'actions'
+	$num_contacts = count($form['names_fieldset']) - 1;
+
+    $contact_eauth_ids = [];
+	$contact_types = [];
+	for( $i = 0; $i < $num_contacts; $i++ ){
+		$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+		$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+	}
+
+	$project_submission['field_cost'] = $contact_eauth_ids;
+	$project_submission['field_cost_type'] = $contact_types;
+
+
+	$project = Asset::create($project_submission);
+    dpm($project_submission, 'project_submission');
+	$project -> save();
+	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+
+	//return;
+
+}
+}
 
     public function addContactRow(array &$form, FormStateInterface $form_state) {
-        dpm("addContactRow");
+        // dpm("addContactRow");
     $num_contacts = $form_state->get('num_contacts');
 	$num_contact_lines = $form_state->get('num_contact_lines');
     $form_state->set('num_contacts', $num_contacts + 1);
 	$form_state->set('num_contact_lines', $num_contact_lines + 1);
-    dpm($num_contacts, 'num_contacts');
-    dpm($num_contact_lines,'num_contact_lines');
+    // dpm($num_contacts, 'num_contacts');
+    // dpm($num_contact_lines,'num_contact_lines');
     $form_state->setRebuild();
   }
 

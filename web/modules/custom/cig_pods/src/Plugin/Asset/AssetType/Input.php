@@ -81,10 +81,9 @@ class Input extends FarmAssetType {
         'field_cost' => [
             'type' => 'entity_reference',
             'label' => 'Cost',
-            'target_type' => 'asset',
-            'target_bundle' => 'cost',
+             'type'=> 'fraction',
             'required' => FALSE,
-            'multiple' => FALSE,
+            'multiple' => TRUE,
             'form_display_options' => [
                'label' => 'inline',
                'type' => 'options_select',
@@ -96,7 +95,7 @@ class Input extends FarmAssetType {
             'target_type' => 'taxonomy_term',
             'target_bundle' => 'd_cost_type',
             'required' => FALSE,
-            'multiple' => FALSE,
+            'multiple' => TRUE,
             'form_display_options' => [
                'label' => 'inline',
                'type' => 'options_select',

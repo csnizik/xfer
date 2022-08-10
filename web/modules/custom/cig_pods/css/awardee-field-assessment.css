@@ -72,12 +72,12 @@ input#edit-delete {
 	font-size: 16px;
 }
 
-input#edit-identify-resource-concerns {
-    background-color: #ffffff;
+form#field-assessment-form .identify-resource-concerns-button{
+    background-color: #005ea2;
     border-radius: 2px;
     border-color: #005ea2 !important;
-    padding: 12 20 12 20;
-    color: #005ea2;
+    padding: 12 20 12 20 !important;
+    color: white;
     font-weight: 600;
     font-size: 16px;
 }

@@ -224,6 +224,9 @@ class FieldAssessmentForm extends FormBase {
 				'callback' => '::calcuateResourceConcernsCallback',
 				'wrapper' => 'assessment_wrapper'
 			],
+			'#attributes' => [
+				'class' => ['identify-resource-concerns-button']
+			],
 			'#value' => $this->t('Identify Resource Concerns'),
 		];
 

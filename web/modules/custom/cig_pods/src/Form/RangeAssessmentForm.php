@@ -24,6 +24,20 @@ class RangeAssessmentForm extends FormBase {
 		 return $producer_options;
 	}
 
+	public function getLandUseOptions(){
+		$land_use_assets = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
+			['vid' => 'd_land_use']
+		 );
+		 $land_use_options = [];
+		 $land_use_keys = array_keys($land_use_assets);
+		 foreach($land_use_keys as $land_use_key) {
+		   $asset = $land_use_assets[$land_use_key];
+		   $land_use_options[$land_use_key] = $asset -> getName();
+		 }
+
+		 return $land_use_options;
+	}
+
     /**
    * {@inheritdoc}
    */
@@ -69,6 +83,18 @@ class RangeAssessmentForm extends FormBase {
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $range_assessment_shmu_value,
+			'#required' => TRUE,
+			'#empty_option' => '- Select -',
+            '#empty_value' => '- Select -',
+
+		];
+
+		$range_assessment_land_use_value = $is_edit ? $assessment->get('range_assessment_land_use')->target_id : '';
+		$form['range_assessment_land_use'] = [
+			'#type' => 'select',
+			'#title' => 'Land Use',
+			'#options' => $this->getLandUseOptions(),
+			'#default_value' => $range_assessment_land_use_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
             '#empty_value' => '- Select -',
@@ -361,7 +387,7 @@ class RangeAssessmentForm extends FormBase {
 	}
 
 	public function createElementNames(){
-		return array('range_assessment_shmu', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
+		return array('range_assessment_shmu', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
 		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');

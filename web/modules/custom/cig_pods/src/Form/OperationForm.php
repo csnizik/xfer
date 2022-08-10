@@ -72,7 +72,7 @@ class OperationForm extends FormBase {
 		foreach($field_shmu_cost_sequence_list as $key=>$value){
 			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
 		}
-		return $crop_rotation_target_ids;
+		return $cost_sequence_target_ids;
 	}
 
 
@@ -90,7 +90,6 @@ class OperationForm extends FormBase {
 			$sequences[$i]['field_cost'] = $tmp_sequence['field_cost'];
 			$i++;
 		}
-		dpm($sequences);
 		// If sequences is still empty, set a blank sequence at index 0
 		if($i == 0){
 			$sequences[0]['field_cost_type'] = '';
@@ -274,9 +273,9 @@ class OperationForm extends FormBase {
 		$fs_cost_sequences = $form_state -> get('sequences');
 
 		$num_cost_sequences = 1;
-
+		dpm($fs_cost_sequences);
 		if(count($fs_cost_sequences) <> 0){
-			$num_cocst_sequences = count($fs_cost_sequences);
+			$num_cost_sequences = count($fs_cost_sequences);
 		}
 
 
@@ -286,8 +285,8 @@ class OperationForm extends FormBase {
 			$cost_type_default_value = ''; // Default value for empty Rotation
 			$cost_default_value = ''; // Default value for empty rotation
 
-			$cost_default_value = $sequence['field_shmu_crop_rotation_crop'][0]['value'];
-			$cost_type_default_value = $sequence['field_shmu_crop_rotation_year'][0]['value'];
+			$cost_default_value = $sequence['field_cost'][0]['value'];
+			$cost_type_default_value = $sequence['field_cost_type'][0]['value'];
 
 			// dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
@@ -316,6 +315,7 @@ class OperationForm extends FormBase {
 					'callback' => "::deleteCostSequenceCallback",
 					'wrapper' => 'cost_sequence',
 				],
+				'#limit_validation_errors' => [],
 				'#value' => 'X',
 			];
 
@@ -325,12 +325,14 @@ class OperationForm extends FormBase {
 		}
 
 		// Add another button
-		$form['cost_sequence']['actions']['addCost'] = [
+		$form['actions']['addCost'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCostSequence'],
 			'#ajax' => [
 				'callback' => '::addAnotherCostSequenceCallback',
+				'wrapper' => 'cost_sequence',
 			],
+			'#limit_validation_errors' => [],
 			'#value' => 'Add to Sequence',
 		];
 
@@ -399,7 +401,7 @@ class OperationForm extends FormBase {
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 		$cost_fields = ['sequences', 'cost_sequence','field_cost', 'field_cost_type'];
         $is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel', 'add_input'];
 		$date_fields = ['field_operation_date'];
 		$form_values = $form_state->getValues();
 		
@@ -423,7 +425,7 @@ class OperationForm extends FormBase {
 				$operation->set( $key, strtotime( $value ) ); //Set directly on SHMU object
 				continue;
 			}
-			if(in_array($key, $crop_rotation_fields)){ continue; }
+			if(in_array($key, $cost_fields)){ continue; }
 
             $operation->set( $key, $value );
         }
@@ -438,14 +440,14 @@ class OperationForm extends FormBase {
 		for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
 
 			// If they did not select a crop for the row, do not include it in the save
-			if($form_values['cost_sequence'][$rotation]['field_cost_type'] == NULL) continue;
+			if($form_values['cost_sequence'][$sequence]['field_cost_type'] == NULL) continue;
 
 			// We alwasys create a new crop rotation asset for each rotation
 			$cost_sequence = Asset::create( $cost_template );
 
 			// read the crop id from select dropdown for given rotation
 			$cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
-			$crop_sequence->set( 'field_cost_type', $cost_id );
+			$cost_sequence->set( 'field_cost_type', $cost_id );
 
 			// read the crop rotation year from select dropdown for given rotation
 			$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];

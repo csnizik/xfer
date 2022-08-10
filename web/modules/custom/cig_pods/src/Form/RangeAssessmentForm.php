@@ -284,7 +284,7 @@ class RangeAssessmentForm extends FormBase {
 			'#suffix' => '</div>',
         ];
 
-		$form['actions']['identify-resource-concerns'] = [
+		$form['rc_container']['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Identify Resource Concerns'),
 			'#submit' => ['::displayRcScores'],
@@ -292,9 +292,9 @@ class RangeAssessmentForm extends FormBase {
 				'callback' => '::updateScores',
 				'wrapper' => 'rc_container',
 			],
-			'#prefix' => '<div id="score_button"',
-			'#suffix' => '</div>',
-
+			'#attributes' => [
+				'class' => ['score-button-class'],
+			],
 		];
 
 		$toDisplay = $form_state->get('rc_display');
@@ -304,15 +304,15 @@ class RangeAssessmentForm extends FormBase {
 			];
 			$form['rc_container']['rc_soil'] = [
 				'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result: @soil_score</b></p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
+				<p><b>Calculated Result:</b> @soil_score</p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
 			];
 			$form['rc_container']['rc_hydrologic'] = [
 				'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result: @hydrolic_score</b></p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
+				<p><b>Calculated Result:</b> @hydrolic_score</p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
 			];
 			$form['rc_container']['rc_biotic'] = [
 				'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result: @biotic_score</b></p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
+				<p><b>Calculated Result:</b> @biotic_score</p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
 			];
 		}
 
@@ -441,8 +441,10 @@ class RangeAssessmentForm extends FormBase {
 		$litter_cover = $form_state->getValue('range_assessment_litter_cover');
 		$annual_production = $form_state->getValue('range_assessment_annual_production');
 		$invasive_plants = $form_state->getValue('range_assessment_invasive_plants');
+		$vigor_plants = $form_state->getValue('range_assessment_vigor_plants');
 
-		$score = ceil(($soil_surface_loss + $soil_surface_resistance + $compaction_layer + $functional_structural + $dead_plants + $litter_cover + $annual_production + $invasive_plants) / 8.0);
+
+		$score = ceil(($soil_surface_loss + $soil_surface_resistance + $compaction_layer + $functional_structural + $dead_plants + $litter_cover + $annual_production + $invasive_plants + $vigor_plants) / 9.0);
 		return $severity_options[$score];
 	}
 

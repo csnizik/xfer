@@ -96,7 +96,6 @@ class OperationForm extends FormBase {
 			$sequences[0]['field_cost'] = '';
 		}
 		$form_state->set('sequences', $sequences);
-		// dpm($rotations);
 
 		return;
 	}
@@ -130,6 +129,7 @@ class OperationForm extends FormBase {
 			$form_state->set('load_done', FALSE);
 		}
         $form['#attached']['library'][] = 'cig_pods/operation_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
@@ -273,7 +273,6 @@ class OperationForm extends FormBase {
 		$fs_cost_sequences = $form_state -> get('sequences');
 
 		$num_cost_sequences = 1;
-		dpm($fs_cost_sequences);
 		if(count($fs_cost_sequences) <> 0){
 			$num_cost_sequences = count($fs_cost_sequences);
 		}
@@ -288,7 +287,6 @@ class OperationForm extends FormBase {
 			$cost_default_value = $sequence['field_cost'][0]['value'];
 			$cost_type_default_value = $sequence['field_cost_type'][0]['value'];
 
-			// dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
 
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
@@ -325,7 +323,10 @@ class OperationForm extends FormBase {
 		}
 
 		// Add another button
-		$form['actions']['addCost'] = [
+
+		
+	  
+		$form['addCost'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCostSequence'],
 			'#ajax' => [
@@ -336,6 +337,9 @@ class OperationForm extends FormBase {
 			'#value' => 'Add to Sequence',
 		];
 
+		$form['actions'] = [
+			'#type' => 'actions',
+		  ];
 
         $form['actions']['save'] = [
 			'#type' => 'submit',
@@ -343,15 +347,13 @@ class OperationForm extends FormBase {
 
 		];
 
-
-
-		$form['cancel'] = [
+		$form['actions']['cancel'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => [[$this, 'cancelSubmit']],
 			'#limit_validation_errors' => array(),
 		];
-		$form['add_input'] = [
+		$form['actions']['add_input'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Add Inputs'),
 			'#submit' => [[$this, 'addInput']],
@@ -359,7 +361,7 @@ class OperationForm extends FormBase {
 		];
 
 		if($is_edit){
-			$form['delete'] = [
+			$form['actions']['delete'] = [
 				'#type' => 'submit',
 				'#value' => $this->t('Delete'),
 				'#submit' => [[$this, 'deleteSubmit']],
@@ -401,15 +403,13 @@ class OperationForm extends FormBase {
 	public function submitForm(array &$form, FormStateInterface $form_state) {
 		$cost_fields = ['sequences', 'cost_sequence','field_cost', 'field_cost_type'];
         $is_edit = $form_state->get('operation') == 'edit';
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel', 'add_input'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel', 'add_input', 'addCost'];
 		$date_fields = ['field_operation_date'];
 		$form_values = $form_state->getValues();
 		
         if(!$is_edit){
 			$operation_template = [];
 			$operation_template['type'] = 'operation';
-			// dpm($operation_template);
-			// dpm("------------");
 			$operation = Asset::create($operation_template);
 		} else {
 			// Operation is of type Edit
@@ -458,7 +458,6 @@ class OperationForm extends FormBase {
 			$cost_sequence->save();
 			$cost_sequence_ids[] = $cost_sequence -> id(); // Append ID of SHMU Crop Rotation to list
 
-			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 
 		$operation->set('field_cost_sequences', $cost_sequence_ids);
@@ -478,7 +477,6 @@ class OperationForm extends FormBase {
     }
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
-		// dpm("Adding  new rotation");
 		$sequences = $form_state->get('sequences');
 		$new_cost_sequence = [];
 		$new_cost_sequence['field_cost'][0]['value'] = '';

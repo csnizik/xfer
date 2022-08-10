@@ -17,11 +17,11 @@ div#block-gin-content {
     border-radius: 0;
 }
 
-input#edit-cancel {
+input#edit-actions-cancel {
     color: #005fa2;
 }
 
-input#edit-delete {
+input#edit-actions-delete {
     background: #da3737;
 	color: white;
 }
@@ -133,7 +133,7 @@ input#edit-actions-save:hover {
 }
 
 form#operation-form
-  input#edit-actions-addcost.button {
+  input#edit-addcost.button {
   background-color: #ffffff;
   border-radius: 2px;
   border-color: #005ea2 !important;

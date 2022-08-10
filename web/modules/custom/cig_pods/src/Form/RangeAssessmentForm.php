@@ -11,17 +11,18 @@ Use Drupal\Core\Url;
 class RangeAssessmentForm extends FormBase {
 
     public function getSHMUOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
 			['type' => 'soil_health_management_unit']
 		 );
-		 $producer_options = [];
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
+		 $shmu_options = [];
+		 $shmu_options[''] = '- Select -';
+		 $shmu_keys = array_keys($shmu_assets);
+		 foreach($shmu_keys as $shmu_key) {
+		   $asset = $shmu_assets[$shmu_key];
+		   $shmu_options[$shmu_key] = $asset -> getName();
 		 }
 
-		 return $producer_options;
+		 return $shmu_options;
 	}
 
 	public function getLandUseOptions(){
@@ -29,6 +30,7 @@ class RangeAssessmentForm extends FormBase {
 			['vid' => 'd_land_use']
 		 );
 		 $land_use_options = [];
+		 $land_use_options[''] = '- Select -';
 		 $land_use_keys = array_keys($land_use_assets);
 		 foreach($land_use_keys as $land_use_key) {
 		   $asset = $land_use_assets[$land_use_key];
@@ -50,8 +52,7 @@ class RangeAssessmentForm extends FormBase {
 			$form_state->set('rc_display', array());
 		}
 
-
-		$severity_options = [5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
+		$severity_options = ['' => '- Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
 
 		$is_edit = $id <> NULL;
 
@@ -84,9 +85,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $range_assessment_shmu_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
-
 		];
 
 		$range_assessment_land_use_value = $is_edit ? $assessment->get('range_assessment_land_use')->target_id : '';
@@ -96,9 +94,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $this->getLandUseOptions(),
 			'#default_value' => $range_assessment_land_use_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
-
 		];
 
         $range_assessment_rills_value = $is_edit ? $assessment->get('range_assessment_rills')->value : '';
@@ -109,8 +104,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_rills_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->value : '';
@@ -121,8 +114,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_water_flow_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->value : '';
@@ -133,8 +124,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_pedestals_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->value : '';
@@ -145,8 +134,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_bare_ground_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->value : '';
@@ -157,8 +144,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_gullies_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->value : '';
@@ -169,8 +154,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_wind_scoured_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->value : '';
@@ -181,8 +164,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_movement_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->value : '';
@@ -193,8 +174,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_resistance_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->value : '';
@@ -205,8 +184,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_loss_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->value : '';
@@ -217,8 +194,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_effects_of_plants_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->value : '';
@@ -229,8 +204,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_compaction_layer_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->value : '';
@@ -241,8 +214,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_functional_structural_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->value : '';
@@ -253,8 +224,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_dead_plants_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->value : '';
@@ -265,8 +234,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_cover_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->value : '';
@@ -277,8 +244,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_annual_production_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->value : '';
@@ -289,8 +254,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_invasive_plants_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
@@ -301,8 +264,6 @@ class RangeAssessmentForm extends FormBase {
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_vigor_plants_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$form['rc_container'] = [

@@ -19,7 +19,7 @@ class OperationCostSequence extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-        'field_cost_type' => [
+        'field_operation_cost_type' => [
              'label'=> 'Cost Type',
              'type'=> 'entity_reference',
              'target_type'=> 'taxonomy_term',
@@ -27,7 +27,7 @@ class OperationCostSequence extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
         ],
-        'field_cost' => [
+        'field_operation_cost' => [
              'label'=> 'Cost',
              'type'=> 'fraction',
              'required' => FALSE,

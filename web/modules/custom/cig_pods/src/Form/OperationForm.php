@@ -186,7 +186,7 @@ class OperationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Operation Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
-		$field_operation_type = $is_edit ? $operation->get('field_operation'):'';
+		$field_operation_type = $is_edit ? $operation->get('field_operation')->target_id :'';
 		$field_operation_options = $this->getOperationOptions();
 		$form['field_operation'] = [
 			'#type' => 'select',
@@ -196,7 +196,7 @@ class OperationForm extends FormBase {
 			'#required' => TRUE
 		];
 
-		$field_ownership_implement = $is_edit ? $operation->get('field_ownership_status'): '';
+		$field_ownership_implement = $is_edit ? $operation->get('field_ownership_status')->target_id: '';
 		$field_ownership_options = $this->getEquipmentOwnershipOptions();
 		$form['field_ownership_status'] = [
 			'#type' => 'select',
@@ -210,7 +210,7 @@ class OperationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Tractor/Self-Propelled Machine Information</h2><h4>4 Fields | Section 2 of 3</h4></div>'
 		];
 
-		$field_tractor_self = $is_edit ? $operation->get('field_tractor_self_propelled_machine'): '';
+		$field_tractor_self = $is_edit ? $operation->get('field_tractor_self_propelled_machine')->target_id : '';
 		$field_equipment_options = $this->getEquipmentOptions();
 		$form['field_tractor_self_propelled_machine'] = [
 			'#type' => 'select',
@@ -296,6 +296,7 @@ class OperationForm extends FormBase {
 			$form['cost_sequence'][$fs_index]['field_operation_cost'] = [
 				'#type' => 'number',
 				'#title' => 'Cost',
+				'#step' => 0.01,
 				'#default_value' => $cost_default_value,
 			];
 			$form['cost_sequence'][$fs_index]['field_operation_cost_type'] = [

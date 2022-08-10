@@ -18,17 +18,33 @@ div#block-gin-content {
 }
 
 input#edit-cancel {
-    color: #005fa2;
+    background-color: #ffffff;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	padding: 12 20 12 20;
+	color: #005ea2;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 input#edit-delete {
-    background: #da3737;
-	color: white;
+    background-color: #da3737;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	padding: 12 20 12 20;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 input#edit-actions-save {
-    background: #005fa2;
-	color: white;
+    background-color: #ffffff;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	padding: 12 20 12 20;
+	color: #005ea2;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 input#edit-cancel:hover {

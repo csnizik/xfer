@@ -312,8 +312,15 @@ public function deleteFieldAssessment(array &$form, FormStateInterface $form_sta
 
 	$assessment_id = $form_state->get('assessment_id');
 	$labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
-	$labTest->delete();
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	try{
+		$labTest->delete();
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	}catch(\Exception $e){
+		$this
+	  ->messenger()
+	  ->addError($this
+	  ->t($e->getMessage()));
+	}
 }
 
   /**

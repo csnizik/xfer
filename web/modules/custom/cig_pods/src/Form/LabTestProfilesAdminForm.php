@@ -283,8 +283,15 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     $lab_test_id = $form_state->get('lab_test_id');
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 
-    $labTest->delete();
-    $form_state->setRedirect('cig_pods.admin_dashboard_form');
+    try{
+		$labTest->delete();
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+	}catch(\Exception $e){
+		$this
+	  ->messenger()
+	  ->addError($this
+	  ->t($e->getMessage()));
+	}
 }
 
     /**

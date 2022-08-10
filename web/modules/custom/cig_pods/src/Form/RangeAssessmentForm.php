@@ -343,8 +343,16 @@ class RangeAssessmentForm extends FormBase {
 
 		$assessment_id = $form_state->get('assessment_id');
 		$rangeland = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
-		$rangeland->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
+		try{
+            $rangeland->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        }catch(\Exception $e){
+            $this
+          ->messenger()
+          ->addError($this
+          ->t($e->getMessage()));
+        }
 	}
 
 	public function createElementNames(){

@@ -117,6 +117,22 @@ cig_pods.edit_field_assessment_form:
   requirements:
     _permission: "access content"
 
+cig_pods.range_assessment_form:
+  path: "/create/range_assessment"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\RangeAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_range_assessment_form:
+  path: "/edit/range_assessment/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\RangeAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.edit_producer_form:
   path: "/edit/producer/{id}"
   defaults:

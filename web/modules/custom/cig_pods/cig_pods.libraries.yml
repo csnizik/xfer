@@ -96,6 +96,16 @@ field_assessment_form:
     theme:
       css/awardee-field-assessment.css: {}
 
+range_assessment_form:
+  css:
+    theme:
+      css/awardee-range-assessment.css: {}
+
+range_assessment_display:
+  css:
+    theme:
+      css/awardee-rangeland-details-display.css: {}
+
 behavior_wkt_refresh:
   js:
     js/farmOS.map.behaviors.wkt_refresh.js: {}

@@ -5,7 +5,6 @@ dependencies:
     - asset.type.operation
   module:
     - asset
-_core:
 id: display_operation
 label: display-operation
 module: views

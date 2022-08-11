@@ -273,7 +273,7 @@ class OperationForm extends FormBase {
 			'#prefix' => '<div id ="cost_sequence">',
 			'#suffix' => '</div>',
 		];
-		// Get Options for Year and Crop Dropdowns
+		// Get Options
 		$cost_options = $this->getOtherCostsOptions();
 
 		$fs_cost_sequences = $form_state -> get('sequences');
@@ -328,7 +328,6 @@ class OperationForm extends FormBase {
 			// End very important
 		}
 
-		// Add another button
 
 		
 	  
@@ -445,31 +444,31 @@ class OperationForm extends FormBase {
 
 		for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
 
-			// If they did not select a crop for the row, do not include it in the save
+			// If they did not select a cost for the row, do not include it in the save
 			if($form_values['cost_sequence'][$sequence]['field_operation_cost_type'] == NULL) continue;
 
-			// We alwasys create a new crop rotation asset for each rotation
+			// We alwasys create a new cost sequence asset for each rotation
 			$cost_sequence = Asset::create( $cost_template );
 
-			// read the crop id from select dropdown for given rotation
+			// read the cost id from select dropdown for given rotation
 			$cost_id = $form_values['cost_sequence'][$sequence]['field_operation_cost_type'];
 			$cost_sequence->set( 'field_operation_cost_type', $cost_id );
 
-			// read the crop rotation year from select dropdown for given rotation
+			// read the cost rotation year from select dropdown for given rotation
 			$cost_value = $form_values['cost_sequence'][$sequence]['field_operation_cost'];
 			$cost_sequence->set( 'field_operation_cost', $cost_value );
 
 			#
 
 			$cost_sequence->save();
-			$cost_sequence_ids[] = $cost_sequence -> id(); // Append ID of SHMU Crop Rotation to list
+			$cost_sequence_ids[] = $cost_sequence -> id(); // Append ID of SHMU Cost Sequence to list
 
 		}
 
 		$operation->set('field_cost_sequences', $cost_sequence_ids);
 		$operation->save();
 
-		// Cleanup - remove the old Crop Rotation Assets that are no longer used
+		// Cleanup - remove the old cost Sequence Assets that are no longer used
 		if($is_edit){
 			$trash_rotation_ids = $form_state->get('original_cost_sequence_ids');
 			foreach($trash_rotation_ids as $key => $id){

@@ -69,22 +69,28 @@ class OperationForm extends FormBase {
 		$cost_sequence_target_ids = [];
 		
 		$field_shmu_cost_sequence_list = $operation->get('field_cost_sequences'); // Expected type of FieldItemList
+		
 		foreach($field_shmu_cost_sequence_list as $key=>$value){
 			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
 		}
-		return [];
+		return $cost_sequence_target_ids;
 	}
 
+	public function getAsset($id){
+		// We use load instead of load by properties here because we are looking by id
+		$asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		return $asset;
+
+	}
 
 
 	public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state){
 
 		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
-
 		$sequences = [];
 		$i = 0;
-		foreach($cost_seqence_ids as $key=>$cost_seqence_id){
-			$tmp_sequence = $this->getAsset($cost_seqence_id)->toArray();
+		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
+			$tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
 			$sequences[$i] = array();
 			$sequences[$i]['field_operation_cost_type'] = $tmp_sequence['field_operation_cost_type'];
 			$sequences[$i]['field_operation_cost'] = $tmp_sequence['field_operation_cost'];
@@ -95,8 +101,8 @@ class OperationForm extends FormBase {
 			$sequences[0]['field_operation_cost_type'] = '';
 			$sequences[0]['field_operation_cost'] = '';
 		}
+		
 		$form_state->set('sequences', $sequences);
-
 		return;
 	}
 
@@ -155,8 +161,8 @@ class OperationForm extends FormBase {
 
         
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $operation->get('field_shmu')->target_id : $default_options;
-		$form['field_shmu'] = [
+		$shmu_default_value = $is_edit ?  $operation->get('field_operation_shmu')->target_id : $default_options;
+		$form['field_operation_shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,
@@ -280,13 +286,12 @@ class OperationForm extends FormBase {
 
 		$form_index = 0; // Not to be confused with rotation
 		foreach($fs_cost_sequences as $fs_index => $sequence  ){
-
+			
 			$cost_type_default_value = ''; // Default value for empty Rotation
 			$cost_default_value = ''; // Default value for empty rotation
 
-			$cost_default_value = $sequence['field_operation_cost'][0]['value'];
-			$cost_type_default_value = $sequence['field_operation_cost_type'][0]['value'];
-
+			$cost_default_value = $sequence['field_operation_cost'][0]['numerator'] / $sequence['field_operation_cost'][0]['denominator'];
+			$cost_type_default_value = $sequence['field_operation_cost_type'][0]['target_id'];
 
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
@@ -303,7 +308,7 @@ class OperationForm extends FormBase {
 				'#type' => 'select',
 				'#title' => 'Type',
 				'#options' => $cost_options,
-				'#default_value' => $cost_default_value
+				'#default_value' => $cost_type_default_value
 			]; 
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [

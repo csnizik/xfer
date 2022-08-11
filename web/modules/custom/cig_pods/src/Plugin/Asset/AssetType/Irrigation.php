@@ -19,8 +19,8 @@ class Irrigation extends FarmAssetType {
     public function buildFieldDefinitions() {
         $fields = parent::buildFieldDefinitions();
         $field_info = [
-        'field_shmu' => [
-            'label'=> 'SHMU',
+        'field_irrigation_shmu' => [
+            'label'=> 'Irrigation SHMU',
             'type'=> 'entity_reference',
             'target_type'=> 'asset',
             'target_bundle'=> 'soil_health_management_unit',

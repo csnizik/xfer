@@ -218,15 +218,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_assessment_shmu_target_id:
-          id: field_assessment_shmu_target_id
-          table: asset__field_assessment_shmu
-          field: field_assessment_shmu_target_id
+        field_operation_shmu_target_id:
+          id: field_operation_shmu_target_id
+          table: asset__field_operation_shmu
+          field: field_operation_shmu_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_assessment_shmu
+          entity_field: field_operation_shmu
           plugin_id: field
           label: SHMU
           exclude: false
@@ -337,7 +337,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -402,7 +402,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: html_yearless_date
             custom_date_format: ''
             timezone: ''
           group_column: value

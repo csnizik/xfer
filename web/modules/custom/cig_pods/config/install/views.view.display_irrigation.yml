@@ -89,21 +89,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_shmu_target_id:
-          id: field_shmu_target_id
-          table: asset__field_shmu
-          field: field_shmu_target_id
+        field_irrigation_shmu_target_id:
+          id: field_irrigation_shmu_target_id
+          table: asset__field_irrigation_shmu
+          field: field_irrigation_shmu_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_shmu
+          entity_field: field_irrigation_shmu
           plugin_id: field
-          label: 'Water Sample Name'
+          label: 'Irrigation SHMU'
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/irrigation/{{id_1}}">{{field_shmu_target_id}}-Irrigation_Sample-{{id_1}}</a>'
+            text: '<a href="/edit/irrigation/{{id_1}}">{{field_irrigation_shmu_target_id}}-Irrigation_Sample-{{id_1}}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -208,7 +208,7 @@ display:
           click_sort_column: value
           type: timestamp
           settings:
-            date_format: medium
+            date_format: html_yearless_date
             custom_date_format: ''
             timezone: ''
           group_column: value

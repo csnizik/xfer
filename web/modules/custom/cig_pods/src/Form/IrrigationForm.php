@@ -66,8 +66,8 @@ class IrrigationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $irrigation->get('field_shmu')->target_id : '';
-		$form['field_shmu'] = [
+		$shmu_default_value = $is_edit ?  $irrigation->get('field_irrigation_shmu')->target_id : '';
+		$form['field_irrigation_shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,

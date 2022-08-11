@@ -46,6 +46,11 @@ irrigation_form:
     theme:
       css/irrigation.css: {}
 
+operation_form:
+  css:
+    theme:
+      css/operation.css: {}
+
 lab_test_method_admin_form:
   js:
     js/methods.js: {}

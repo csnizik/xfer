@@ -19,18 +19,18 @@ class Operation extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-        'field_shmu' => [
-             'label'=> 'Soil Health Management Unit (SHMU)',
+        'field_operation_shmu' => [
+             'label'=> 'Operation SHMU',
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
-             'target_bundle'=> 'soil_health_management_unit',
-             'required' => FALSE,
+             'target_bundle'=> 'soil_health_management_unit', 
+             'required' => TRUE,
              'description' => '',
         ],
         'field_operation_date' => [
             'label'=> 'Date Of Operation',
             'type'=> 'timestamp',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_operation' => [
@@ -38,7 +38,7 @@ class Operation extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_operation_type',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_ownership_status' => [
@@ -46,15 +46,15 @@ class Operation extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_equipment_ownership',
-            'required' => FALSE,
+            'required' => TRUE,
             'description' => '',
         ],
         'field_tractor_self_propelled_machine' => [
             'label'=> 'Tractor/Self-Propelled Machine',
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
-            'target_bundle'=> 'd_tractor_self_propelled_machine',
-            'required' => FALSE,
+            'target_bundle'=> 'd_equipment',
+            'required' => TRUE,
             'description' => '',
         ],
         'field_row_number' => [
@@ -75,17 +75,14 @@ class Operation extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        'field_cost' => [
-            'type' => 'entity_reference',
-            'label' => 'Cost',
-            'target_type' => 'asset',
-            'target_bundle' => 'cost',
-            'required' => FALSE,
-            'multiple' => FALSE,
-            'form_display_options' => [
-               'label' => 'inline',
-               'type' => 'options_select',
-            ],
+        'field_cost_sequences' => [
+            'label'=> 'Cost Sequence',
+             'type'=> 'entity_reference',
+             'target_type'=> 'asset',
+             'target_bundle'=> 'operation_cost_sequence',
+             'required' => FALSE,
+             'multiple' => TRUE,
+             'description' => '',
         ],
         'field_operation_project_id' =>[
             'type'  => 'fraction',

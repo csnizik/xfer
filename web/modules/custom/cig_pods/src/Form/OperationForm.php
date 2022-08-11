@@ -339,7 +339,7 @@ class OperationForm extends FormBase {
 				'wrapper' => 'cost_sequence',
 			],
 			'#limit_validation_errors' => [],
-			'#value' => 'Add to Sequence',
+			'#value' => 'Add Another Cost',
 		];
 
 		$form['actions'] = [

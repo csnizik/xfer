@@ -320,7 +320,7 @@ class OperationForm extends FormBase {
 					'wrapper' => 'cost_sequence',
 				],
 				'#limit_validation_errors' => [],
-				'#value' => 'X',
+				'#value' => $this->t('Delete'),
 			];
 
 			// Very important

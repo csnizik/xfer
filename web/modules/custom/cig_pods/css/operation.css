@@ -171,38 +171,15 @@ form#operation-form
 
 
 
-#crop_rotation_months .form-checkboxes{
-	display: flex;
-	padding: 0;
-	border: none;
-    overflow: visible;
-}
-#crop_rotation div[class*="form-type--checkbox"] {
-
-}
-
-#crop_rotation_months .form-checkboxes .form-type--checkbox input{
-	position: relative;
-	top: 26px;
-    width: 20px;
-    height: 20px;
-}
-
-#crop_rotation_months .form-checkboxes .form-type--checkbox label{
-	right: 20px;
-	top: -100%;
-}
 
 #cost_rotation input[id*="actions-delete"] {
-	border: 0 !important;
-    box-shadow: 0 0 0 0;
-    color: #b51d09;
-    padding: 0;
-	width: 20px;
-    height: 20px;
-    position: relative;
-    top: 10px;
-	left: 60px;
+	margin-top: 34px;
+	background-color: #da3737;
+	border-radius: 2px;
+	border-color: #005ea2 !important;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 16px;
 }
 
 #crop_rotation input[id*="actions-delete"]:hover {

@@ -57,7 +57,7 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation', 'irrigation' );
+     'soil_health_sample', 'lab_result', 'field_assessment', 'soil_health_management_unit', 'lab_testing_method', 'operation', 'irrigation');
     $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -116,7 +116,7 @@ class AwardeeDashboardForm extends FormBase {
       '#suffix' => '</div>',
     ];
 
-    
+
 
 
 		return $form;

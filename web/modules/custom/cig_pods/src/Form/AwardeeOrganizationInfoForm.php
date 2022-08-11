@@ -112,9 +112,15 @@ class AwardeeOrganizationInfoForm extends FormBase {
 		$awardee_id = $form_state->get('awardee_id');
 		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
 
-		$awardee->delete();
-
-		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		try{
+			$awardee->delete();
+			$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
 
 	}
 

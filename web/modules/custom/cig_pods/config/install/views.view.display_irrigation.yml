@@ -6,7 +6,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
 id: display_irrigation
 label: display-irrigation
 module: views

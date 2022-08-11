@@ -385,8 +385,27 @@ class OperationForm extends FormBase {
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
 		$id = $form_state->get('operation_id'); // TODO: Standardize access
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-		$operation->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
+		try{
+			$operation->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
+		foreach($sequence_ids as $sid) {
+			try{
+				$cost_sequence = \Drupal::entityTypeManager()->getStorage('asset')->load($sid);
+				$cost_sequence->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
+		}
 		return;
 	}
 

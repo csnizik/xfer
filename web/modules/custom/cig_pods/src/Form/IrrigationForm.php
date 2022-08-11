@@ -36,12 +36,13 @@ class IrrigationForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
         $is_edit = $id <> NULL;
 
-        
-		
+
+
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
         $form['#attached']['library'][] = 'cig_pods/irrigation_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
@@ -65,8 +66,8 @@ class IrrigationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $irrigation->get('field_shmu')->target_id : '';
-		$form['field_shmu'] = [
+		$shmu_default_value = $is_edit ?  $irrigation->get('field_irrigation_shmu')->target_id : '';
+		$form['field_irrigation_shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,
@@ -76,7 +77,7 @@ class IrrigationForm extends FormBase {
 
 		if($is_edit){
 			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
-			
+
 			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')->value;
 			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
 		} else {
@@ -213,16 +214,23 @@ class IrrigationForm extends FormBase {
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
 		$id = $form_state->get('irrigation_id'); // TODO: Standardize access
 		$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-		$irrigation->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
-		return;
+
+		try{
+			$irrigation->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
 	}
 
     /**
 	* {@inheritdoc}
 	*/
 	public function getFormId() {
-		
+
 		return 'irrigation_form';
 	}
 
@@ -235,7 +243,7 @@ class IrrigationForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel'];
 		$date_fields = ['field_shmu_irrigation_sample_date'];
 		$form_values = $form_state->getValues();
-		
+
         if(!$is_edit){
 			$irrigation_template = [];
 			$irrigation_template['type'] = 'irrigation';

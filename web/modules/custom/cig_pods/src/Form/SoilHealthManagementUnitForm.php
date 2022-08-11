@@ -735,8 +735,15 @@ class SoilHealthManagementUnitForm extends FormBase {
         $shmu_id = $form_state->get('shmu_id');
         $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
 
-        $shmu->delete();
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        try{
+			$shmu->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
     }
 
 	/**
@@ -772,7 +779,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap'];
 
 		$form_values = $form_state->getValues();
-		
+
 		 // ($form_values);
 
 		// All of the fields that support multi-select checkboxes on the page

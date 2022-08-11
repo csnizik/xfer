@@ -101,7 +101,9 @@ class SoilHealthSampleForm extends FormBase {
             '#required' => TRUE,
         ];
 
-    $diameter_default_value = $is_edit ?  $this->convertFractionsToDecimal($sample_collection, 'field_diameter') : NULL;
+    if ($is_edit && isset($sample_collection->get('field_diameter')->numerator)) {
+    	$diameter_default_value = $is_edit ?  $this->convertFractionsToDecimal($sample_collection, 'field_diameter') : NULL;
+    }
   	$form['field_diameter'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Probe Diameter'),
@@ -155,9 +157,15 @@ class SoilHealthSampleForm extends FormBase {
 		$sample_collection_id = $form_state->get('sample_id');
 		$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($sample_collection_id);
 
-		$sample_collection->delete();
-
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		try{
+			$sample_collection->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
 	}
 
    /**

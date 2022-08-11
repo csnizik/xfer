@@ -44,6 +44,10 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_project_display';
 	}
+	if (isset($view) && ($view->storage->id() == 'display_operation')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/admin_project_display';
+	}
 	if (isset($view) && ($view->storage->id() == 'shmu_display')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_details_display';
@@ -60,6 +64,11 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/awardee_soil_sample_display';
 	}
+	if (isset($view) && ($view->storage->id() == 'rangeland_assessment_display')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/range_assessment_display';
+	}
+
 }
 
 function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {

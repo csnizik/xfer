@@ -485,9 +485,15 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		$awardee_id = $form_state->get('awardee_id');
 		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
 
-		$project->delete();
-
-		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		try{
+			$project->delete();
+			$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
 
 	}
 

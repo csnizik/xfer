@@ -34,6 +34,8 @@ class AwardeeDashboardForm extends FormBase {
 					->t('Soil Sample'),
           'ifa' => $this
 					->t('Assessment'),
+          'rla' => $this
+					->t('Rangeland Assessment'),
           'ltr' => $this
 					->t('Soil Test Result'),
           'ltm' => $this
@@ -57,7 +59,9 @@ class AwardeeDashboardForm extends FormBase {
     ];
 
     $awardeeEntities = array('project', 'awardee', 'producer', 'soil_health_demo_trial',
-     'soil_health_sample', 'lab_result', 'field_assesment', 'soil_health_management_unit', 'lab_testing_method', 'operation', 'irrigation' );
+     'soil_health_sample', 'lab_result', 'field_assessment', 'soil_health_management_unit', 'lab_testing_method', 'operation', 'irrigation'
+     ,'range_assessment' );
+
     $entityCount = array();
 
       for($i = 0; $i < count($awardeeEntities); $i++){
@@ -91,6 +95,12 @@ class AwardeeDashboardForm extends FormBase {
       '#submit' => ['::ifaRedirect'],
     ];
 
+    $form['awardee_rangeland_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Rangeland Assessment(s): '.$entityCount[11]),
+      '#submit' => ['::rlaRedirect'],
+    ];
+
 		$form['awardee_lab_result'] = [
       '#type' => 'submit',
       '#value' => $this->t('Soil Test Result(s): '.$entityCount[5]),
@@ -116,7 +126,7 @@ class AwardeeDashboardForm extends FormBase {
       '#suffix' => '</div>',
     ];
 
-    
+
 
 
 		return $form;
@@ -149,6 +159,9 @@ public function proRedirect (array &$form, FormStateInterface $form_state) {
 }
 public function ifaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/field_assessment");
+}
+public function rlaRedirect (array &$form, FormStateInterface $form_state) {
+  $this->pageRedirect($form_state, "/assets/range_assessment");
 }
 public function ssaRedirect (array &$form, FormStateInterface $form_state) {
   $this->pageRedirect($form_state, "/assets/soil_health_sample");

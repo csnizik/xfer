@@ -36,42 +36,6 @@ class SoilHealthSample extends FarmAssetType {
         'required' => FALSE,
         'multiple' => FALSE,
       ],
-      'field_latitude_1' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Latitude 1',
-        'required' => FALSE,
-        'multiple' => TRUE,
-      ],
-      'field_latitude_2' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Latitude 2',
-        'required' => FALSE,
-        'multiple' => FALSE,
-      ],
-      'field_latitude_3' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Latitude 3',
-        'required' => FALSE,
-        'multiple' => FALSE,
-      ],
-      'field_longtitude_1' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Longtitude 1',
-        'required' => FALSE,
-        'multiple' => FALSE,
-      ],
-      'field_longtitude_2' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Longtitude 2',
-        'required' => FALSE,
-        'multiple' => FALSE,
-      ],
-      'field_longtitude_3' => [
-        'type' => 'fraction',
-        'label' => 'Soil Sample Longtitude 3',
-        'required' => FALSE,
-        'multiple' => FALSE,
-      ],
       'field_plant_stage_at_sampling' => [
         'label'=> 'Soil Sample Plant Stage',
         'type'=> 'entity_reference',
@@ -107,8 +71,13 @@ class SoilHealthSample extends FarmAssetType {
         'type'=> 'geofield',
         'required' => FALSE,
         'description' => '',
-    ],
-    ];
+      ],
+      'field_soil_sample_project_id' => [
+        'label'=> 'Soil Sample Project ID',
+        'type'=> 'fraction',
+        'required'=> FALSE,
+      ],
+      ];
 
     $farmFieldFactory = new FarmFieldFactory();
 

@@ -25,6 +25,13 @@ cig_pods.producer_form:
   requirements:
     _permission: "access content"
 
+cig_pods.operation_form:
+  path: "/create/operation"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\OperationForm'
+  requirements:
+    _permission: "access content"
+
 cig_pods.awardee_dashboard_form:
   path: "/pods_awardee_dashboard"
   defaults:
@@ -173,6 +180,14 @@ cig_pods.edit_soil_health_sample_form:
   path: "/edit/soil_health_sample/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_operation_form:
+  path: "/edit/operation/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\OperationForm'
     _title: ""
   requirements:
     _permission: "access content"

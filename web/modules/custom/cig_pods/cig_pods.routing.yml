@@ -203,7 +203,7 @@ cig_pods.edit_irrigation_form:
     _permission: "access content"
 
 cig_pods.edit_inputs_form:
-  path: "/edit/inputs/{operation}"
+  path: "/edit/inputs/{id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\InputsForm'
   requirements:

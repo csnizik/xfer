@@ -49,7 +49,7 @@ select#edit-field-unit.form-select.form-element.form-element--type-select {
   width: 225px;
 }
 
-input#edit-field-cost-per-unit.form-text.form-element.form-element--type-text {
+input#edit-field-cost-per-unit.form-number.form-element.form-element--type-number {
   width: 407px;
   margin-right: 8px;
 }
@@ -83,6 +83,6 @@ select#edit-contact-type.form-select {
 #block-gin-content form .inline-components-short {
   float: left;
   width: 315px;
-  /* margin-right: 8px; */
+  margin-right: 8px;
   margin-bottom: 0px;
 }

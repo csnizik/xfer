@@ -64,18 +64,26 @@ class InputsForm extends FormBase {
 		return $options;
 	}
 
+    private function convertFraction($fraction){
+        $num = $fraction->getValue()["numerator"];
+        $denom = $fraction->getValue()["denominator"];
+        return $num / $denom;
+    }
 
-    public function buildForm(array $form, FormStateInterface $form_state, $operation = NULL){
+
+
+    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
 
         $is_edit = $id <> NULL;
 
-	if($is_edit){
+	    if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('awardee_id',$id);
 			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-	} else {
+            $input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+	    } else {
 			$form_state->set('operation','create');
-	}
+	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
 
@@ -83,6 +91,19 @@ class InputsForm extends FormBase {
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
 
         $removed_contacts = $form_state->get('removed_contacts');//get removed contacts indexes
+
+        $awardee_org_default_name = $is_edit ? $awardee->get('field_cost') : '';
+
+		if($is_edit){
+			$cname=array();
+			$fraction_count = count($awardee_org_default_name);
+				for( $index = 0; $index < $fraction_count; $index++){
+						$fractionToAdd = $this->convertFraction($awardee_org_default_name[$index]);
+					$cname[] = $fractionToAdd;
+				}
+
+				$ex_count = count($cname);
+		}
 
         if($is_edit){
 
@@ -94,9 +115,6 @@ class InputsForm extends FormBase {
 				$form_state->set('num_contact_lines', $ex_count);
 				$num_contact_lines = $form_state->get('num_contact_lines');
 			}
-
-
-
 		}else{
 				if ($num_contacts === NULL) {//initialize number of contact, set to 1
 					$form_state->set('num_contacts', 1);
@@ -116,71 +134,104 @@ class InputsForm extends FormBase {
         $form['title'] = [
 			'#markup' => '<div class="title-container"><h1>Inputs</h1></div>'
 		];
-   
+
         $form['subtitle_1'] = [
 			'#markup' => '<div class="subtitle-container"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
 		];
+
+        //  $field_operation_value = $is_edit ? $input->get('field_operation')->target_id : '';
+
+        $form['field_operation'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Operation (Determined from the operation you selected for this input)'),
+            '#description' => '',
+            // '#default_value' => $field_operation_value,
+            '#required' => FALSE
+        ];
+
+        // For the Date input fields, we have to convert from UNIX to yyyy-mm-dd
+		if($is_edit){
+			// $field_input_date_value is expected to be a UNIX timestamp
+			$field_input_date_value = $input->get('field_input_date')->value;
+			$default_value_input_date = date("Y-m-d", $field_input_date_value);
+		} else {
+			$default_value_input_date = '';
+		}
 
         $form['field_input_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Date'),
 			'#description' => '',
-			// '#default_value' => $default_value_shmu_date_land_use_changed, // Default value for "date" field type is a string in form of 'yyyy-MM-dd'
-			'#required' => FALSE
+			 '#default_value' => $default_value_input_date, // Default value for "date" field type is a string in form of 'yyyy-MM-dd'
+			'#required' => TRUE
 		];
+
+        $field_input_category_value = $is_edit ? $input->get('field_input_category')->target_id : '';
 
         $form['field_input_category'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input Category'),
 			'#options' => $this->getInputCategoryOptions(),
-			//'#default_value' => $field_shmu_current_land_use_value,
+			'#default_value' => $field_input_category_value,
 			'#required' => FALSE
 		];
+
+        //input disabled untill we can get it working with input_category
+        // $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
 
         $form['field_input'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input'),
 			//'#options' => $this->getInputOptions(),
-			//'#default_value' => $field_shmu_current_land_use_value,
+			//'#default_value' => $field_input_value,
 			'#required' => FALSE,
             '#prefix' => '<div id="input-input"',
-				
 		];
+
+        $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
 
         $form['field_unit'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Unit'),
 			'#options' => $this->getUnitOptions(),
-			//'#default_value' => $field_shmu_current_land_use_value,
+			'#default_value' => $field_unit_value,
 			'#required' => FALSE,
             '#suffix' => '</div>',
 		];
+
+         $field_rate_units_value = $is_edit ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
 
         $form['field_rate_units'] = [
             '#type' => 'textfield',
             '#title' => $this->t('Rate Units/Ac'),
             '#description' => '',
+            '#default_value' => $field_rate_units_value,
             '#required' => FALSE
-        ]; 
+        ];
 
         $form['subtitle_2'] = [
 			'#markup' => '<div class="subtitle-container"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
+
+        $field_cost_per_unit_value = $is_edit ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
 
          $form['field_cost_per_unit'] = [
              '#type' => 'number',
             '#step' => 0.01,
             '#title' => $this->t('Cost Per Unit'),
             '#description' => '',
+            '#default_value' => $field_cost_per_unit_value,
             '#required' => FALSE,
              '#prefix' => '<div id="cost-per-unit"',
-        ]; 
+        ];
+
+        $field_custom_application_unit_value = $is_edit ? $input->get('field_custom_application_unit')->target_id : '';
 
         $form['field_custom_application_unit'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Unit'),
 			'#options' => $this->getUnitOptions(),
-			//'#default_value' => $field_shmu_current_land_use_value,
+			'#default_value' => $field_custom_application_unit_value,
 			'#required' => FALSE,
             '#suffix' => '</div>',
 		];
@@ -196,14 +247,7 @@ class InputsForm extends FormBase {
 		  '#suffix' => '</div>',
 		];
 
-		// $eauth_default_id = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
-		// $contactname=array();
-		// foreach ($eauth_default_id as $checks) {
-		//  $eauth = $checks['value'];
-		// 		$contactname[] = $eauth;
-		// }
-
-		$contact_default_name = $is_edit ? $awardee->get('field_awardee_contact_type')->getValue() : '';
+		$contact_default_name = $is_edit ? $input->get('field_cost_type')->getValue() : '';
 		$contacttype=array();
 			foreach ($contact_default_name as $checks) {
 			 $detail = $checks['target_id'];
@@ -224,13 +268,13 @@ class InputsForm extends FormBase {
 				'#title' => $this
 				  ->t("Cost"),
 				//'#options' => $contact_name_options,
-				'#default_value' => $contactname[$i],
+				'#default_value' => $cname[$i],
 				'attributes' => [
 					'class' => 'something',
 				],
 				'#prefix' => ($num_contact_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
-              
+
 			];
 
 			$form['names_fieldset'][$i]['contact_type'] = [
@@ -239,7 +283,7 @@ class InputsForm extends FormBase {
 				  ->t('Type'),
 				'#options' =>  $this->getCostTypeOptions(),
 			//'#default_value' => $field_shmu_curren,
-				'#default_value' => $costtype[$i],
+				'#default_value' => $contacttype[$i],
 				 '#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
@@ -270,7 +314,6 @@ class InputsForm extends FormBase {
 
 		}
 
-
         $form['actions'] = [
 			'#type' => 'actions',
 		];
@@ -297,9 +340,6 @@ class InputsForm extends FormBase {
 			'#suffix' => '</div>',
 		];
 
-
-
-
         $form_state->setCached(FALSE);
 
 		$form['actions']['save'] = [
@@ -320,23 +360,19 @@ class InputsForm extends FormBase {
 					'#submit' => ['::deleteProject'],
 				];
 			}
-
-
         return $form;
-
     }
 
      public function arrayValuesAreUnique($array){
-	$count_dict = array_count_values($array);
+	    $count_dict = array_count_values($array);
 
-	foreach($count_dict as $key => $value){
-		if($value != 1){
-			return False;
-		}
-	}
-	return True;
-
-  }
+	    foreach($count_dict as $key => $value){
+		    if($value != 1){
+			    return False;
+		    }
+	    }
+	    return True;
+    }
 
     /**
     * {@inheritdoc}
@@ -353,87 +389,107 @@ class InputsForm extends FormBase {
     }
 
     public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
-      //  dpm("addContactRowCallback");
-    return $form['names_fieldset'];
+        return $form['names_fieldset'];
     }
 
      public function getFormEntityMapping(){
-	  $mapping = [];
-
+        $mapping = [];
 		$mapping['field_input_date'] = 'field_input_date';
-	  $mapping['field_input_category'] = 'field_input_category';
-	  $mapping['field_input'] = 'field_input';
-	  $mapping['field_unit'] = 'field_unit';
-	  $mapping['field_rate_units'] = 'field_rate_units';
-	  $mapping['field_cost_per_unit'] = 'field_cost_per_unit';
-       $mapping['field_custom_application_unit'] = 'field_custom_application_unit';
+	    $mapping['field_input_category'] = 'field_input_category';
+        $mapping['field_input'] = 'field_input';
+	    $mapping['field_unit'] = 'field_unit';
+	    $mapping['field_rate_units'] = 'field_rate_units';
+	    $mapping['field_cost_per_unit'] = 'field_cost_per_unit';
+        $mapping['field_custom_application_unit'] = 'field_custom_application_unit';
 
-    return $mapping;
-
-  }
+         return $mapping;
+     }
 
     /**
     * {@inheritdoc}
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
-dpm("submit form");
-	if($is_create){
-	$values = $form_state->getValues();
+        if($is_create){
+	        $values = $form_state->getValues();
 
-	$mapping = $this->getFormEntityMapping();
+            $mapping = $this->getFormEntityMapping();
 
-	$project_submission = [];
+            $project_submission = [];
 
-	$project_submission['type'] = 'input';
+            $project_submission['type'] = 'input';
 
-    //for tessting only
-    // TODO: remove before PR
-    $project_submission['name'] = 'test1';
+                 //for tessting only
+                // TODO: remove before PR
+            $project_submission['name'] = 'test1';
 
 
-	// Single value fields can be mapped in
-	foreach($mapping as $form_elem_id => $entity_field_id){
-		// If mapping not in form or value is empty string
-		if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
-			continue;
-		}
-		$project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
+	        // Single value fields can be mapped in
+	        foreach($mapping as $form_elem_id => $entity_field_id){
+		        // If mapping not in form or value is empty string
+		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+			        continue;
+		        }
+		        $project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
+	        }
+
+            // Minus 1 because there is an entry with key 'actions'
+	        $num_contacts = count($form['names_fieldset']) - 1;
+
+            $contact_eauth_ids = [];
+	        $contact_types = [];
+	        for( $i = 0; $i < $num_contacts; $i++ ){
+		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+		        $contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+	        }
+
+ 	        $project_submission['field_cost'] = $contact_eauth_ids;
+ 	        $project_submission['field_cost_type'] = $contact_types;
+
+            $project_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
+
+	        $project = Asset::create($project_submission);
+	        $project -> save();
+	        $form_state->setRedirect('cig_pods.admin_dashboard_form');
+         } else {
+		    $awardee_id = $form_state->get('awardee_id');
+		    $awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+
+             $mapping = $this->getFormEntityMapping();
+             // Single value fields can be mapped in
+	        foreach($mapping as $form_elem_id => $entity_field_id){
+		        // If mapping not in form or value is empty string
+		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+			        continue;
+		        }
+		        $awardee->set($entity_field_id, $form[$form_elem_id]['#value']);
+	        }
+
+		     // Minus 1 because there is an entry with key 'actions'
+		    $num_contacts = count($form['names_fieldset']) - 1;
+
+		    $contact_eauth_ids = [];
+	        $contact_types = [];
+	        for( $i = 0; $i < $num_contacts; $i++ ){
+		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+		        $contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+	        }
+
+ 	        $awardee->set('field_cost', $contact_eauth_ids);
+ 	        $awardee->set('field_cost_type', $contact_types);
+
+             $awardee->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
+		    $awardee->save();
+		    $form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
-
-     // Minus 1 because there is an entry with key 'actions'
-	$num_contacts = count($form['names_fieldset']) - 1;
-
-    $contact_eauth_ids = [];
-	$contact_types = [];
-	for( $i = 0; $i < $num_contacts; $i++ ){
-		$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-		$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
-	}
-
-	$project_submission['field_cost'] = $contact_eauth_ids;
-	$project_submission['field_cost_type'] = $contact_types;
-
-
-	$project = Asset::create($project_submission);
-    dpm($project_submission, 'project_submission');
-	$project -> save();
-	$form_state->setRedirect('cig_pods.admin_dashboard_form');
-
-	//return;
-
-}
 }
 
     public function addContactRow(array &$form, FormStateInterface $form_state) {
-        // dpm("addContactRow");
-    $num_contacts = $form_state->get('num_contacts');
-	$num_contact_lines = $form_state->get('num_contact_lines');
-    $form_state->set('num_contacts', $num_contacts + 1);
-	$form_state->set('num_contact_lines', $num_contact_lines + 1);
-    // dpm($num_contacts, 'num_contacts');
-    // dpm($num_contact_lines,'num_contact_lines');
-    $form_state->setRebuild();
+        $num_contacts = $form_state->get('num_contacts');
+	    $num_contact_lines = $form_state->get('num_contact_lines');
+        $form_state->set('num_contacts', $num_contacts + 1);
+	    $form_state->set('num_contact_lines', $num_contact_lines + 1);
+        $form_state->setRebuild();
   }
 
   public function removeContactCallback(array &$form, FormStateInterface $form_state) {
@@ -455,16 +511,4 @@ dpm("submit form");
     // Rebuild form_state
     $form_state->setRebuild();
  }
-
- // add to delete code
-//  "try{
-//         $producer->delete();
-//         $form_state->setRedirect('cig_pods.awardee_dashboard_form');
-//     }catch(\Exception $e){
-//         $this
-//       ->messenger()
-//       ->addError($this
-//       ->t($e->getMessage()));
-//     }
-// "
 }

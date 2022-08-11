@@ -79,7 +79,6 @@ class Input extends FarmAssetType {
             'description' => '',
         ],
         'field_cost' => [
-            'type' => 'entity_reference',
             'label' => 'Cost',
              'type'=> 'fraction',
             'required' => FALSE,

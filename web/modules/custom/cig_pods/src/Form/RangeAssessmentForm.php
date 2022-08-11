@@ -58,7 +58,6 @@ class RangeAssessmentForm extends FormBase {
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			// $form_state->set('calculate_rcs',True);
 			$form_state->set('assessment_id', $id);
 			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 

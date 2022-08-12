@@ -39,7 +39,9 @@ class LabTestProfilesAdminForm extends FormBase {
     }
 
 private function createElementNames(){
-  return array('name', 'field_profile_laboratory','field_profile_aggregate_stability_method', 'field_profile_respiratory_incubation_days', 'field_profile_respiration_detection_method', 'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method','iron_method','manganese_method', 'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method');
+  return array('name', 'field_profile_laboratory','field_profile_aggregate_stability_method', 'field_profile_respiratory_incubation_days', 'field_profile_respiration_detection_method',
+  'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method','iron_method','manganese_method',
+  'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method', 'field_profile_aggregate_stability_unit', 'field_lab_profile_infiltration_method');
 
 }
     /**
@@ -70,6 +72,7 @@ private function createElementNames(){
     $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form';
 
     $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
+    $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
     $ec_method = $this->getSoilHealthExtractionOptions("d_ec_method");
     $lab = $this->getSoilHealthExtractionOptions("d_laboratory");
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
@@ -77,6 +80,7 @@ private function createElementNames(){
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
     $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
+    $infiltration_method = $this->getSoilHealthExtractionOptions("d_infiltration_method");
 
     $form['lab_test_title'] = [
         '#markup' => '<h1>Lab Test Profiles</h1>',
@@ -107,6 +111,15 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
 			'#required' => TRUE
 		];
 
+    $aggregate_unit_default_value = $is_edit ? $labTestProfile->get('field_profile_aggregate_stability_unit')->target_id : NULL;
+    $form['field_profile_aggregate_stability_unit'] = [
+            '#type' => 'select',
+            '#title' => 'Aggregate Stability Unit',
+            '#options' => $agg_stab_unit,
+            '#default_value' => $aggregate_unit_default_value,
+            '#required' => TRUE
+        ];
+
     $respiratory_incubation_default_value = $is_edit ? $labTestProfile->get('field_profile_respiratory_incubation_days')->target_id : NULL;
     $form['field_profile_respiratory_incubation_days'] = [
 			'#type' => 'select',
@@ -124,6 +137,15 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             '#default_value' => $respiratory_detection_default_value,
 	 		'#required' => TRUE
 	 	];
+
+    $infiltration_method_default_value =  $is_edit ?  $labTestProfile->get('field_lab_profile_infiltration_method')->target_id : NULL;
+    $form['autoload_container']['field_lab_profile_infiltration_method'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Infiltration Method'),
+        '#options' => $infiltration_method,
+        '#default_value' => $infiltration_method_default_value,
+        '#required' => TRUE
+    ];
 
     $electroconductivity_method_default_value =  $is_edit ?  $labTestProfile->get('electroconductivity_method')->target_id : NULL;
     $form['electroconductivity_method'] = [

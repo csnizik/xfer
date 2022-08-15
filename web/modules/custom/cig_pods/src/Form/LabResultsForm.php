@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
@@ -30,16 +31,14 @@ class LabResultsForm extends PodsFormBase {
     /**
     * {@inheritdoc}
     */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+      $labResults = $asset;
 
-        $labResults = [];
-
-        $is_edit = $id <> NULL;
+        $is_edit = $labResults <> NULL;
 
         if($is_edit){
             $form_state->set('operation','edit');
-            $form_state->set('lab_result_id',$id);
-            $labResults = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+            $form_state->set('lab_result_id',$labResults->id());
         } else {
             $form_state->set('operation','create');
         }

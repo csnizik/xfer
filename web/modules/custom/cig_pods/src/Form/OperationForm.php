@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
@@ -85,8 +86,9 @@ class OperationForm extends PodsFormBase {
 	/**
 	* {@inheritdoc}
 	*/
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        $is_edit = $id <> NULL;
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $operation = $asset;
+        $is_edit = $operation <> NULL;
 		$default_options[''] = '- Select -';
 
 
@@ -99,8 +101,7 @@ class OperationForm extends PodsFormBase {
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('operation_id', $id);
-			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('operation_id', $operation->id());
 			$operation_cost_sequences_ids = $this->getCostSequenceIdsForOperation($operation);
 			if(!$form_state->get('load_done')){
 				$this->loadOtherCostsIntoFormState($operation_cost_sequences_ids, $form_state);

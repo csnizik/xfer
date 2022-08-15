@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
@@ -36,13 +37,10 @@ class LabTestMethodForm extends PodsFormBase {
     /**
     * {@inheritdoc}
     */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+        $labTestMethod  = $asset;
 
-        $labTestMethod  = [];
-
-        $labTestProfile = NULL;
-
-        $is_edit = $id <> NULL;
+        $is_edit = $labTestMethod <> NULL;
 
         if($form_state->get('lab_profile') == NULL){
 
@@ -51,8 +49,7 @@ class LabTestMethodForm extends PodsFormBase {
 
         if($is_edit){
             $form_state->set('operation','edit');
-            $form_state->set('lab_test_id',$id);
-            $labTestMethod = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+            $form_state->set('lab_test_id',$labTestMethod->id());
             $form_state->set('loading', NULL);
 
 

@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\URL;
@@ -83,19 +84,17 @@ class InputsForm extends PodsFormBase {
         return $num / $denom;
     }
 
-    public function buildForm(array $form, FormStateInterface $form_state, $operation_id = NULL, $id = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+      $input = $asset;
 
-        $is_edit = $id <> NULL;
-        $operation_name = "Operation";
-		$operation = [];
+        $is_edit = $asset <> NULL;
 
 		if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
 	    if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('input_id',$id);
-			$input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('input_id',$input->id());
 			$form_state->set('operation_id', $input->get('field_operation')->target_id);
 			$input_cost_sequences_ids = $this->getCostSequenceIdsForInput($input);
 			if(!$form_state->get('load_done')){
@@ -108,7 +107,7 @@ class InputsForm extends PodsFormBase {
 				$form_state->set('load_done',TRUE);
 			}
 			$form_state->set('operation','create');
-			$form_state->set('operation_id', $operation_id);
+			$form_state->set('operation_id', $asset->id());
 	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';

@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
@@ -15,15 +16,14 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		$awardee = [];
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $awardee = $asset;
 		$organization_state_territory = $this->getStateTerritoryOptions();
-		$is_edit = $id <> NULL;
+		$is_edit = $awardee <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('awardee_id',$id);
-			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('awardee_id',$awardee->id());
 		} else {
 			$form_state->set('operation','create');
 		}

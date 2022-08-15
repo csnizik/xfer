@@ -107,7 +107,8 @@ cig_pods.edit_field_assessment_form:
     _form: '\Drupal\cig_pods\Form\FieldAssessmentForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -127,7 +128,8 @@ cig_pods.edit_range_assessment_form:
     _form: '\Drupal\cig_pods\Form\RangeAssessmentForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -147,7 +149,8 @@ cig_pods.edit_pasture_health_assessment_form:
     _form: '\Drupal\cig_pods\Form\PastureHealthAssessmentForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -167,7 +170,8 @@ cig_pods.edit_pasture_assessment_form:
     _form: '\Drupal\cig_pods\Form\PastureAssessmentForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -178,7 +182,8 @@ cig_pods.edit_producer_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\ProducerForm'
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -189,7 +194,8 @@ cig_pods.edit_project_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\ProjectForm'
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -200,7 +206,8 @@ cig_pods.edit_awardee_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -212,7 +219,8 @@ cig_pods.edit_lab_test_form:
     _form: '\Drupal\cig_pods\Form\LabTestProfilesAdminForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -224,7 +232,8 @@ cig_pods.edit_soil_health_management_unit_form:
     _form: '\Drupal\cig_pods\Form\SoilHealthManagementUnitForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -235,7 +244,8 @@ cig_pods.edit_lab_test_method_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\LabTestMethodForm'
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -247,7 +257,8 @@ cig_pods.edit_lab_results_form:
     _form: '\Drupal\cig_pods\Form\LabResultsForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -267,7 +278,8 @@ cig_pods.edit_soil_health_sample_form:
     _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -279,7 +291,8 @@ cig_pods.edit_operation_form:
     _form: '\Drupal\cig_pods\Form\OperationForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -291,7 +304,8 @@ cig_pods.edit_field_assesment_form:
     _form: '\Drupal\cig_pods\Form\SoilHealthSampleForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -303,7 +317,8 @@ cig_pods.edit_irrigation_form:
     _form: '\Drupal\cig_pods\Form\IrrigationForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:
@@ -314,7 +329,8 @@ cig_pods.edit_inputs_form:
   defaults:
     _form: '\Drupal\cig_pods\Form\InputsForm'
   requirements:
-    _permission: "access content"
+    _entity_access: asset.edit
+    asset: \d+
   options:
     parameters:
       asset:

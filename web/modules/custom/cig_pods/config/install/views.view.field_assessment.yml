@@ -8,8 +8,6 @@ dependencies:
   module:
     - asset
     - options
-_core:
-  default_config_hash: 4OP7S_yPTC9ZiiEQ9LbGQEBL7QFwQNtfSnMWIpWgHtk
 id: field_assessment
 label: "Field Assesment"
 module: views

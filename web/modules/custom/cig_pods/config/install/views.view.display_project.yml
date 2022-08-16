@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - asset.type.project
-    - field.storage.asset.field_awardee
+    - asset.type.awardee
   module:
     - asset
     - options
@@ -653,8 +653,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags:
-        - 'config:field.storage.asset.field_awardee'
   page_1:
     id: page_1
     display_title: Page
@@ -668,5 +666,3 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags:
-        - 'config:field.storage.asset.field_awardee'

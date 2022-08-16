@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - asset.type.field_assessment
-    - field.storage.asset.field_soil_health_managment_unit
   module:
     - asset
     - options
@@ -14,7 +13,7 @@ id: field_assessment
 label: "Field Assesment"
 module: views
 description: ""
-tag: ""
+tag: ''
 base_table: asset_field_data
 base_field: id
 display:
@@ -369,7 +368,7 @@ display:
         options: {}
       cache:
         type: tag
-        options: {}
+        options: {  }
       empty: {}
       sorts: {}
       arguments: {}
@@ -438,8 +437,6 @@ display:
       contexts:
         - "languages:language_content"
         - "languages:language_interface"
-      tags:
-        - "config:field.storage.asset.field_soil_health_managment_unit"
   page_1:
     id: page_1
     display_title: Page
@@ -453,5 +450,3 @@ display:
       contexts:
         - "languages:language_content"
         - "languages:language_interface"
-      tags:
-        - "config:field.storage.asset.field_soil_health_managment_unit"

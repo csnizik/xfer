@@ -276,8 +276,20 @@ class PastureAssessmentForm extends FormBase {
 
 		$assessment_id = $form_state->get('assessment_id');
 		$PastureAssessment = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
-		$PastureAssessment->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+
+
+    try{
+      $PastureAssessment->delete();
+  		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+    }catch(\Exception $e){
+              $this
+            ->messenger()
+            ->addError($this
+            ->t($e->getMessage()));
+    }
+
+
+
 	}
 
 	public function createElementNames(){

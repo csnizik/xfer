@@ -56,8 +56,5 @@
       "merge-extra": true,
       "merge-extra-deep": true
     }
-  },
-  "require-dev": {
-    "drupal/config_update_ui": "^1.7"
   }
 }

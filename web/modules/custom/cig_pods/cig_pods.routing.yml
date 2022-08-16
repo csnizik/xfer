@@ -38,7 +38,7 @@ cig_pods.awardee_dashboard_form:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
     _title: ""
   requirements:
-    _permission: "access content"
+    _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAwardee'
 
 cig_pods.admin_dashboard_form:
   path: "/pods_admin_dashboard"
@@ -46,23 +46,7 @@ cig_pods.admin_dashboard_form:
     _form: '\Drupal\cig_pods\Form\AdminDashboardForm'
     _title: ""
   requirements:
-    _permission: "access content"
-
-cig_pods.lab_testing_profile_form:
-  path: "/create/profile"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\LabTestingProfileForm'
-    _title: "Create new Lab Testing Profile"
-  requirements:
-    _permission: "access content"
-
-cig_pods.awardee_form:
-  path: "/create/awardee"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
-    _title: "Create new Awardee"
-  requirements:
-    _permission: "access content"
+    _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAdmin'
 
 cig_pods.lab_test_profiles_admin_form:
   path: "/create/lab_test_profiles_admin"
@@ -239,3 +223,11 @@ cig_pods.edit_irrigation_form:
     _title: ""
   requirements:
     _permission: "access content"
+
+cig_pods.generic_login:
+  path: '/openid-connect/generic'
+  defaults:
+    _form: '\Drupal\cig_pods\Form\Generic'
+    _title: 'Login status'
+  requirements:
+    _access: 'TRUE'

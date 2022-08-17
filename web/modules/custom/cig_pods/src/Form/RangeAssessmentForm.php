@@ -74,7 +74,7 @@ class RangeAssessmentForm extends FormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Rangeland In-Field Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
 		];
 
         $range_assessment_shmu_value = $is_edit ? $assessment->get('range_assessment_shmu')->target_id : '';
@@ -374,7 +374,7 @@ class RangeAssessmentForm extends FormBase {
 
             $rangeland_submission['type'] = 'range_assessment';
             $ranglandAssessment = Asset::create($rangeland_submission);
-			$ranglandAssessment->set('name', 'Rangeland');
+			$ranglandAssessment->set('name', 'IIRH Assessment');
             $ranglandAssessment -> save();
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -387,7 +387,7 @@ class RangeAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $rangelandAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$rangelandAssessment->set('name', 'Rangeland');
+			$rangelandAssessment->set('name', 'IIRH Assessment');
             $rangelandAssessment->save();
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

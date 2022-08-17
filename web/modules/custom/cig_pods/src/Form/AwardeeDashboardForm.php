@@ -33,11 +33,11 @@ class AwardeeDashboardForm extends FormBase {
           'ssa' => $this
 					->t('Soil Sample'),
           'ifa' => $this
-					->t('Assessment'),
+					->t('CIFSH Assessment'),
           'rla' => $this
-					->t('Rangeland Assessment'),
+					->t('IIRH Assessment'),
 					'pst' => $this
-					->t('Pasture Assessment'),
+					->t('PCS Assessment'),
           'ltr' => $this
 					->t('Soil Test Result'),
           'ltm' => $this
@@ -93,19 +93,19 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Assessment(s): '.$entityCount[6]),
+      '#value' => $this->t('CIFSH Assessment(s): '.$entityCount[6]),
       '#submit' => ['::ifaRedirect'],
     ];
 
     $form['awardee_rangeland_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Rangeland Assessment(s): '.$entityCount[11]),
+      '#value' => $this->t('IIRH Assessment(s): '.$entityCount[11]),
       '#submit' => ['::rlaRedirect'],
     ];
 
 		$form['awardee_pasture_assessment'] = [
 		      '#type' => 'submit',
-		      '#value' => $this->t('Pasture Assessment(s): '.$entityCount[15]),
+		      '#value' => $this->t('PCS Assessment(s): '.$entityCount[12]),
 		      '#submit' => ['::rlaRedirect'],
 		    ];
 

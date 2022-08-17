@@ -1,9 +1,11 @@
-uuid: b8e854a5-e4a4-4fd8-93c6-603b0dd3fddc
 langcode: en
 status: true
 dependencies:
   config:
     - asset.type.field_assessment
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

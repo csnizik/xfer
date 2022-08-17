@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.awardee
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

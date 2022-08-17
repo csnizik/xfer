@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.soil_health_management_unit
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

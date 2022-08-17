@@ -3,7 +3,7 @@ status: true
 dependencies:
   enforced:
     module:
-      - farm_map
+      - cig_pods
 id: pods
 label: PODS
 description: "A generic map type for PODS."

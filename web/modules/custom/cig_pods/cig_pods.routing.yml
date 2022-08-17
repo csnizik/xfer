@@ -111,7 +111,7 @@ cig_pods.field_assessment_form:
     _permission: "access content"
 
 cig_pods.inputs_form:
-  path: "/create/inputs"
+  path: "/create/inputs/{operation_id}"
   defaults:
     _form: '\Drupal\cig_pods\Form\InputsForm'
     _title: ""

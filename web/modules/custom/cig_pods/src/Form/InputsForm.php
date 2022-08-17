@@ -5,6 +5,7 @@ namespace Drupal\cig_pods\Form;
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
+Use Drupal\Core\URL;
 
 class InputsForm extends FormBase {
 
@@ -72,20 +73,25 @@ class InputsForm extends FormBase {
 
 
 
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, $operation_id = NULL, $id = NULL){
 
         $is_edit = $id <> NULL;
+        $operation_name = "Test Operation";
+		$operation = [];
 
 	    if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('awardee_id',$id);
 			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
             $input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('operation_id', $input->get('field_operation')->target_id);
 	    } else {
 			$form_state->set('operation','create');
+			$form_state->set('operation_id', $operation_id);
 	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
+		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
         $num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
@@ -102,7 +108,12 @@ class InputsForm extends FormBase {
 					$cname[] = $fractionToAdd;
 				}
 
-				$ex_count = count($cname);
+				if(count($cname) == 0){
+					$ex_count = 1;
+				}else{
+					$ex_count = count($cname);
+				}
+				
 		}
 
         if($is_edit){
@@ -139,15 +150,16 @@ class InputsForm extends FormBase {
 			'#markup' => '<div class="subtitle-container"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
 		];
 
-        //  $field_operation_value = $is_edit ? $input->get('field_operation')->target_id : '';
+        $form['operation_description'] = [
+			'#markup' => '<span class="operation-description"><h4>Operation (Determined from the operation you selected for this input)</h4></span>'
+		];
 
+        // $field_operation_value = $is_edit ? $input->get('field_operation')->target_id : '';
+		$operation_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($current_operation->get('field_operation')->target_id);
+		$form_state->set('current_operation_name', $operation_taxonomy_name-> getName());
         $form['field_operation'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Operation (Determined from the operation you selected for this input)'),
-            '#description' => '',
-            // '#default_value' => $field_operation_value,
-            '#required' => FALSE
-        ];
+            '#markup' => $this->t('<span class="operation"><h4>@operation_name</h4></span>', ['@operation_name' => $operation_taxonomy_name-> getName()])
+		];
 
         // For the Date input fields, we have to convert from UNIX to yyyy-mm-dd
 		if($is_edit){
@@ -173,7 +185,7 @@ class InputsForm extends FormBase {
 			'#title' => $this->t('Input Category'),
 			'#options' => $this->getInputCategoryOptions(),
 			'#default_value' => $field_input_category_value,
-			'#required' => FALSE
+			'#required' => TRUE
 		];
 
         //input disabled untill we can get it working with input_category
@@ -185,7 +197,7 @@ class InputsForm extends FormBase {
 			//'#options' => $this->getInputOptions(),
 			//'#default_value' => $field_input_value,
 			'#required' => FALSE,
-            '#prefix' => '<div id="input-input"',
+            '#prefix' => '<span id="input-input">',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -196,13 +208,14 @@ class InputsForm extends FormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => FALSE,
-            '#suffix' => '</div>',
+            '#suffix' => '</span>',
 		];
 
-         $field_rate_units_value = $is_edit ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
+         $field_rate_units_value = $is_edit && $input->get('field_rate_units')[0] ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
 
         $form['field_rate_units'] = [
-            '#type' => 'textfield',
+            '#type' => 'number',
+			'#step' => 1,
             '#title' => $this->t('Rate Units/Ac'),
             '#description' => '',
             '#default_value' => $field_rate_units_value,
@@ -210,10 +223,10 @@ class InputsForm extends FormBase {
         ];
 
         $form['subtitle_2'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container-custom-app"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
-        $field_cost_per_unit_value = $is_edit ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
+        $field_cost_per_unit_value = $is_edit && $input->get('field_cost_per_unit')[0] ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
 
          $form['field_cost_per_unit'] = [
              '#type' => 'number',
@@ -237,7 +250,7 @@ class InputsForm extends FormBase {
 		];
 
         $form['subtitle_3'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container-costs"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
 
 		// $contact_name_options = $this->getAwardeeContactNameOptions();
@@ -259,6 +272,7 @@ class InputsForm extends FormBase {
 			if (in_array($i, $removed_contacts)) {// Check if field was removed
 				continue;
 			}
+			
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
@@ -282,14 +296,11 @@ class InputsForm extends FormBase {
 				'#title' => $this
 				  ->t('Type'),
 				'#options' =>  $this->getCostTypeOptions(),
-			//'#default_value' => $field_shmu_curren,
 				'#default_value' => $contacttype[$i],
 				 '#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
-            $form['names_fieldset'][$i]['new_line_container2'] = [
-				'#suffix' => '</div>',
-			];
+           
 
 			if($num_contact_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
@@ -302,10 +313,13 @@ class InputsForm extends FormBase {
 					  'wrapper' => 'names-fieldset-wrapper',
 					],
 					"#limit_validation_errors" => array(),
-					'#prefix' => '<div class="remove-button-container">',
-					'#suffix' => '</div>',
+					'#prefix' => '<span class="remove-button-container">',
+					'#suffix' => '</span>',
 				];
 			}
+             $form['names_fieldset'][$i]['new_line_container2'] = [
+				'#suffix' => '</div>',
+			];
 
 			//css space for a new line due to previous items' float left attr
 			$form['names_fieldset'][$i]['new_line_container'] = [
@@ -322,7 +336,7 @@ class InputsForm extends FormBase {
 			'#type' => 'submit',
 			'#button_type' => 'button',
 			'#name' => 'add_contact_button',
-			'#value' => t('Add Another Contact'),
+			'#value' => t('Add Another Cost'),
 			'#submit' => ['::addContactRow'],
 			'#ajax' => [
 				'callback' => '::addContactRowCallback',
@@ -348,16 +362,24 @@ class InputsForm extends FormBase {
 		];
 
 		$form['actions']['cancel'] = [
-			'#type' => 'button',
+            '#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
+			'#submit' => [[$this, 'cancelSubmit']],
+			'#limit_validation_errors' => array(),
 		];
+
+        $form['actions']['save-refresh'] = [
+			'#type' => 'submit',
+			'#value' => $this->t('Add Another Input'),
+            '#submit' => ['::addAnotherInput'],
+		];
+
 
 		if($is_edit){
 				$form['actions']['delete'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
-					'#submit' => ['::deleteProject'],
+					'#submit' => ['::deleteInputs'],
 				];
 			}
         return $form;
@@ -418,10 +440,10 @@ class InputsForm extends FormBase {
             $project_submission = [];
 
             $project_submission['type'] = 'input';
-
-                 //for tessting only
-                // TODO: remove before PR
-            $project_submission['name'] = 'test1';
+                 
+			$operation_taxonomy_name = $form_state->get('current_operation_name');
+			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
+            $project_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
 
 
 	        // Single value fields can be mapped in
@@ -449,8 +471,8 @@ class InputsForm extends FormBase {
             $project_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
 	        $project = Asset::create($project_submission);
-	        $project -> save();
-	        $form_state->setRedirect('cig_pods.admin_dashboard_form');
+			$project->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
+	         $project -> save();
          } else {
 		    $awardee_id = $form_state->get('awardee_id');
 		    $awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
@@ -471,16 +493,34 @@ class InputsForm extends FormBase {
 		    $contact_eauth_ids = [];
 	        $contact_types = [];
 	        for( $i = 0; $i < $num_contacts; $i++ ){
-		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-		        $contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+				$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
+				$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+				//  if($cost_type_value === 0 && $cost_value <> NULL){
+				// 	continue;
+				//  }else{
+				// 	$contact_eauth_ids[$i] = $cost_value;
+				//  }
+				
+
+		        
+				// if(in_array($cost_type_value, $this->getCostTypeOptions())){
+				// 	$contact_types[$i] = $const_type_value;
+				// }
+				
 	        }
 
  	        $awardee->set('field_cost', $contact_eauth_ids);
  	        $awardee->set('field_cost_type', $contact_types);
 
-             $awardee->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
-		    $awardee->save();
-		    $form_state->setRedirect('cig_pods.admin_dashboard_form');
+            $awardee->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
+			$awardee->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
+		     $awardee->save();
+			
+	}
+	if($form_state->get('redirect_input') == TRUE){
+		$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $form_state->get('operation_id')]);
+	}else{
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 }
 
@@ -511,4 +551,28 @@ class InputsForm extends FormBase {
     // Rebuild form_state
     $form_state->setRebuild();
  }
+
+  public function addAnotherInput(array &$form, FormStateInterface $form_state) {
+	$form_state->set('redirect_input', TRUE);
+	 $this->submitForm($form, $form_state);
+  }
+  public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		return;
+	}
+
+    public function deleteInputs(array &$form, FormStateInterface $form_state){
+        $awardee_id = $form_state->get('awardee_id');
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+
+		try{
+			$project->delete();
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
+    }
 }

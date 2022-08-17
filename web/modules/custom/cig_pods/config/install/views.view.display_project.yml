@@ -4,6 +4,9 @@ dependencies:
   config:
     - asset.type.project
     - asset.type.awardee
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

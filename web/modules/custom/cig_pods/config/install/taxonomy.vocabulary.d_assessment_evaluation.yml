@@ -1,6 +1,9 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  enforced:
+    module:
+      - cig_pods
 name: 'Assessment Evaluation'
 vid: d_assessment_evaluation 
 description: 'A taxonomy only containing "Yes", "No" and "N/A" for use in the Assessment Form'

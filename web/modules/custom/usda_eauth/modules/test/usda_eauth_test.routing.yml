@@ -1,31 +1,31 @@
-cig_pods_test.test_zrole:
+usda_eauth_test.test_zrole:
   path: '/test/zrole'
   defaults:
-    _form: '\Drupal\cig_pods_test\Form\TestzRoles'
+    _form: '\Drupal\usda_eauth_test\Form\TestzRoles'
     _title: 'Test zRole'
   requirements:
     _access: 'TRUE'
 
-cig_pods_test.test_set_admin:
+usda_eauth_test.test_set_admin:
   path: '/test/set_admin'
   defaults:
-    _form: '\Drupal\cig_pods_test\Form\TestSetAdmin'
+    _form: '\Drupal\usda_eauth_test\Form\TestSetAdmin'
     _title: 'Test Set Admin'
   requirements:
     _access: 'TRUE'
 
-cig_pods_test.test_set_awardee:
+usda_eauth_test.test_set_awardee:
   path: '/test/set_awardee'
   defaults:
-    _form: '\Drupal\cig_pods_test\Form\TestSetAwardee'
+    _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee'
     _title: 'Test Set Awardee'
   requirements:
     _access: 'TRUE'
 
-cig_pods_test.test_session_values:
+usda_eauth_test.test_session_values:
   path: '/test/session_values'
   defaults:
-    _form: '\Drupal\cig_pods_test\Form\TestSessionValues'
+    _form: '\Drupal\usda_eauth_test\Form\TestSessionValues'
     _title: 'Test Session Values'
   requirements:
     _access: 'TRUE'

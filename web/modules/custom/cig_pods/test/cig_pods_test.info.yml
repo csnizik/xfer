@@ -1,6 +1,0 @@
-name: Producer Operations Data System (PODS) Test
-description: Producer Operations Data System (PODS) Test
-type: module
-core_version_requirement: ^9
-dependencies:
-  - cig_pods

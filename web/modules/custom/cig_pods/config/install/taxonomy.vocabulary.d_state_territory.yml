@@ -6,5 +6,5 @@ dependencies:
       - cig_pods
 name: State Territory
 vid: d_state_territory
-description: 'A list of State Territorys'
+description: 'A list of State Territories'
 weight: 0

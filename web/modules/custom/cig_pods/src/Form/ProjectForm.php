@@ -462,9 +462,11 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		];
 
 		$form['actions']['cancel'] = [
-			'#type' => 'button',
+			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
+			'#limit_validation_errors' => '',
+			'#submit' => ['::dashboardRedirect'],
+
 		];
 
 		if($is_edit){
@@ -549,11 +551,14 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 	return;
   }
 
+  public function dashboardRedirect(array &$form, FormStateInterface $form_state){
+	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+  }
 
   public function getFormEntityMapping(){
 	  $mapping = [];
 
-		$mapping['name'] = 'name';
+	  $mapping['name'] = 'name';
 	  $mapping['field_project_agreement_number'] = 'field_project_agreement_number';
 	  $mapping['field_funding_amount'] = 'field_funding_amount';
 	  $mapping['field_summary'] = 'field_summary';

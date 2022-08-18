@@ -39,6 +39,9 @@ select.addEventListener("change", function handleChange(event) {
     case "rla":
       formPage = "range_assessment";
       break;
+    case "pst":
+    formPage = "pasture_assessment";
+    break;
     case "ltp":
       formPage = "lab_test_profiles_admin";
       break;

@@ -71,8 +71,10 @@ class LabTestingMethod extends FarmAssetType {
             'multiple' => FALSE,
 		],
         'field_lab_method_respiration_incubation_days' =>[
-            'type'  => 'fraction',
+            'type'  => 'entity_reference',
             'label' => 'Respiration Incubation Days',
+            'target_type' => 'taxonomy_term',
+            'target_bundle' => 'd_respiration_incubation',
             'description' => $this->t('Lab Test Method Respiration Incubation Days'),
             'required' => TRUE,
             'multiple' => FALSE,

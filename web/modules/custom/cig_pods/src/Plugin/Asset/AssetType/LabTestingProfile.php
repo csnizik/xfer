@@ -394,6 +394,16 @@ class LabTestingProfile extends FarmAssetType {
             'required' => FALSE,
             'multiple' => FALSE,
          ],
+         'field_lab_profile_infiltration_method' => [
+            'type'  => 'entity_reference',
+            'label' => 'Infiltration Method',
+            'description' => $this->t('Lab Test Method Infiltration Method'),
+			'target_type' => 'taxonomy_term',
+			'target_bundle' => 'd_infiltration_method',
+			'handler' => 'default',
+            'required' => FALSE,
+            'multiple' => FALSE,
+		],
 
       ];
 

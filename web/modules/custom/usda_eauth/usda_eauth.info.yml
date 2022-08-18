@@ -1,0 +1,4 @@
+name: USDA eAuth
+description: Integrates Drupal with USDA's eAuthentication identity provider.
+type: module
+core_version_requirement: ^9

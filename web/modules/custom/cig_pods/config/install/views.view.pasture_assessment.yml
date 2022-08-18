@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.soil_health_management_unit
+    - asset.type.pasture_assessment
   enforced:
     module:
       - cig_pods
   module:
     - asset
     - options
-id: shmu_display
-label: 'SHMU Display'
+id: pasture_assessment
+label: 'Pasture Assessment'
 module: views
 description: ''
 tag: ''
@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Soil Health Management Units (SHMU)'
+      title: 'Manage Pasture Assessments'
       fields:
         id_1:
           id: id_1
@@ -101,11 +101,11 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: SHMU
+          label: 'Pasture Assessment'
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/shmu/{{id_1}}">{{name__value}}</a>'
+            text: '<a href="/edit/pasture_assessment/{{ id_1 }}">{{name__value}}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -307,7 +307,22 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        name:
+          id: name
+          table: asset_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: name
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters:
         type:
@@ -322,7 +337,7 @@ display:
           plugin_id: bundle
           operator: in
           value:
-            soil_health_management_unit: soil_health_management_unit
+            pasture_assessment: pasture_assessment
           group: 1
           exposed: false
           expose:
@@ -354,6 +369,43 @@ display:
             group_items: {  }
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            name: name
+            status: status
+            id: id
+          default: '-1'
+          info:
+            name:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            id:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
         type: fields
       query:
@@ -365,7 +417,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: admin-details-display
+      css_class: admin-project-display
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -382,7 +434,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: assets/soil_health_management_unit
+      path: assets/pasture_assessment
     cache_metadata:
       max-age: -1
       contexts:

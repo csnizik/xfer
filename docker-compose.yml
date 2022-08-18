@@ -16,7 +16,7 @@ services:
     depends_on:
       - db
     volumes:
-      - './web/modules/custom/cig_pods:/opt/drupal/PODS/web/modules/custom/cig_pods'
+      - './web/modules/custom:/opt/drupal/PODS/web/modules/custom'
       - './logs:/var/log/apache2/'
     image: pods:latest
     ports:

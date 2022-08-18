@@ -6,5 +6,5 @@ dependencies:
       - cig_pods
 name: Additional Charges
 vid: d_additional_charges
-description: 'A list of Additional Chargess'
+description: 'A list of Additional Charges'
 weight: 0

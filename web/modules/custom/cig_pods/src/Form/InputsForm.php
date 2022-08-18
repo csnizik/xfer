@@ -81,9 +81,8 @@ class InputsForm extends FormBase {
 
 	    if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('awardee_id',$id);
-			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-            $input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('input_id',$id);
+			$input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 			$form_state->set('operation_id', $input->get('field_operation')->target_id);
 	    } else {
 			$form_state->set('operation','create');
@@ -93,18 +92,18 @@ class InputsForm extends FormBase {
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
-        $num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
-		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
+        $num_input_lines = $form_state->get('num_input_lines');//get num of inputss showing on screen. (1->n exclude:removed indexes)
+		$num_inputs = $form_state->get('num_inputs');//get num of added inputs. (1->n)
 
-        $removed_contacts = $form_state->get('removed_contacts');//get removed contacts indexes
+        $removed_inputs = $form_state->get('removed_inputs');//get removed inputs indexes
 
-        $awardee_org_default_name = $is_edit ? $awardee->get('field_cost') : '';
+        $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
 
 		if($is_edit){
 			$cname=array();
-			$fraction_count = count($awardee_org_default_name);
+			$fraction_count = count($input_org_default_name);
 				for( $index = 0; $index < $fraction_count; $index++){
-						$fractionToAdd = $this->convertFraction($awardee_org_default_name[$index]);
+						$fractionToAdd = $this->convertFraction($input_org_default_name[$index]);
 					$cname[] = $fractionToAdd;
 				}
 
@@ -118,28 +117,28 @@ class InputsForm extends FormBase {
 
         if($is_edit){
 
-			if ($num_contacts === NULL) {//initialize number of contact, set to 1
-				$form_state->set('num_contacts', $ex_count);
-				$num_contacts = $form_state->get('num_contacts');
+			if ($num_inputs === NULL) {//initialize number of input, set to 1
+				$form_state->set('num_inputs', $ex_count);
+				$num_inputs = $form_state->get('num_inputs');
 			}
-			if ($num_contact_lines === NULL) {
-				$form_state->set('num_contact_lines', $ex_count);
-				$num_contact_lines = $form_state->get('num_contact_lines');
+			if ($num_input_lines === NULL) {
+				$form_state->set('num_input_lines', $ex_count);
+				$num_input_lines = $form_state->get('num_input_lines');
 			}
 		}else{
-				if ($num_contacts === NULL) {//initialize number of contact, set to 1
-					$form_state->set('num_contacts', 1);
-					$num_contacts = $form_state->get('num_contacts');
+				if ($num_inputs === NULL) {//initialize number of input, set to 1
+					$form_state->set('num_inputs', 1);
+					$num_inputs = $form_state->get('num_inputs');
 				}
-				if ($num_contact_lines === NULL) {
-					$form_state->set('num_contact_lines', 1);
-					$num_contact_lines = $form_state->get('num_contact_lines');
+				if ($num_input_lines === NULL) {
+					$form_state->set('num_input_lines', 1);
+					$num_input_lines = $form_state->get('num_input_lines');
 				}
 			}
 
-		if ($removed_contacts === NULL) {
-			$form_state->set('removed_contacts', array());//initialize arr
-			$removed_contacts = $form_state->get('removed_contacts');
+		if ($removed_inputs === NULL) {
+			$form_state->set('removed_inputs', array());//initialize arr
+			$removed_inputs = $form_state->get('removed_inputs');
 		}
 
         $form['title'] = [
@@ -253,7 +252,7 @@ class InputsForm extends FormBase {
 			'#markup' => '<div class="subtitle-container-costs"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
 
-		// $contact_name_options = $this->getAwardeeContactNameOptions();
+		// $input_name_options = $this->getAwardeeContactNameOptions();
 		$form['#tree'] = TRUE;
 		$form['names_fieldset'] = [
 		  '#prefix' => '<div id="names-fieldset-wrapper"',
@@ -261,55 +260,55 @@ class InputsForm extends FormBase {
 		];
 
 		$contact_default_name = $is_edit ? $input->get('field_cost_type')->getValue() : '';
-		$contacttype=array();
+		$inputtype=array();
 			foreach ($contact_default_name as $checks) {
 			 $detail = $checks['target_id'];
-			 $contacttype[] = $detail;
+			 $inputtype[] = $detail;
 			}
 
-		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
+		for ($i = 0; $i < $num_inputs; $i++) {//num_inputs: get num of added contacts. (1->n)
 
-			if (in_array($i, $removed_contacts)) {// Check if field was removed
+			if (in_array($i, $removed_inputs)) {// Check if field was removed
 				continue;
 			}
 			
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
-			$form['names_fieldset'][$i]['contact_name'] = [
+			$form['names_fieldset'][$i]['input_name'] = [
 				 '#type' => 'number',
                  '#step' => 0.01,
 				'#title' => $this
 				  ->t("Cost"),
-				//'#options' => $contact_name_options,
+				//'#options' => $input_name_options,
 				'#default_value' => $cname[$i],
 				'attributes' => [
 					'class' => 'something',
 				],
-				'#prefix' => ($num_contact_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+				'#prefix' => ($num_input_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 
 			];
 
-			$form['names_fieldset'][$i]['contact_type'] = [
+			$form['names_fieldset'][$i]['input_type'] = [
 				'#type' => 'select',
 				'#title' => $this
 				  ->t('Type'),
 				'#options' =>  $this->getCostTypeOptions(),
-				'#default_value' => $contacttype[$i],
+				'#default_value' => $inputtype[$i],
 				 '#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
            
 
-			if($num_contact_lines > 1 && $i!=0){
+			if($num_input_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
 					'#name' => $i,
-					'#submit' => ['::removeContactCallback'],
+					'#submit' => ['::removeInputCallback'],
 					'#ajax' => [
-					  'callback' => '::addContactRowCallback',
+					  'callback' => '::addInputRowCallback',
 					  'wrapper' => 'names-fieldset-wrapper',
 					],
 					"#limit_validation_errors" => array(),
@@ -337,16 +336,16 @@ class InputsForm extends FormBase {
 			'#button_type' => 'button',
 			'#name' => 'add_contact_button',
 			'#value' => t('Add Another Cost'),
-			'#submit' => ['::addContactRow'],
+			'#submit' => ['::addInputRow'],
 			'#ajax' => [
-				'callback' => '::addContactRowCallback',
+				'callback' => '::addInputRowCallback',
 				'wrapper' => 'names-fieldset-wrapper',
 			],
 			'#states' => [
 				'visible' => [
-				  ":input[name='names_fieldset[0][contact_name]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][input_name]']" => ['!value' => ''],
 				  "and",
-				  ":input[name='names_fieldset[0][contact_type]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][input_type]']" => ['!value' => ''],
 				],
 			],
 			"#limit_validation_errors" => array(),
@@ -400,6 +399,19 @@ class InputsForm extends FormBase {
     * {@inheritdoc}
     */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$num_cost_entries = count($form['names_fieldset']) - 1;
+		if($num_cost_entries > 1){
+			for($i = 1; $i < $num_cost_entries; $i++){
+				if($form_state->getValue(['names_fieldset', $i, 'input_name']) === ''){
+					$form_state->setError($form['names_fieldset'][$i]['input_name'], $this->t("Please Fill out a Cost for the highlighted field"));
+					return FALSE;
+				}
+				if($form_state->getValue(['names_fieldset', $i, 'input_type']) === ''){
+					$form_state->setError($form['names_fieldset'][$i]['input_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
+					return FALSE;
+				}
+			}
+		}
         return;
     }
 
@@ -410,7 +422,7 @@ class InputsForm extends FormBase {
         return 'inputform';
     }
 
-    public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
+    public function addInputRowCallback(array &$form, FormStateInterface $form_state) {
         return $form['names_fieldset'];
     }
 
@@ -456,17 +468,17 @@ class InputsForm extends FormBase {
 	        }
 
             // Minus 1 because there is an entry with key 'actions'
-	        $num_contacts = count($form['names_fieldset']) - 1;
+	        $num_inputs = count($form['names_fieldset']) - 1;
 
             $contact_eauth_ids = [];
-	        $contact_types = [];
-	        for( $i = 0; $i < $num_contacts; $i++ ){
-		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-		        $contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+	        $input_types = [];
+	        for( $i = 0; $i < $num_inputs; $i++ ){
+		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
+		        $input_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
 	        }
 
  	        $project_submission['field_cost'] = $contact_eauth_ids;
- 	        $project_submission['field_cost_type'] = $contact_types;
+ 	        $project_submission['field_cost_type'] = $input_types;
 
             $project_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
@@ -474,8 +486,8 @@ class InputsForm extends FormBase {
 			$project->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 	         $project -> save();
          } else {
-		    $awardee_id = $form_state->get('awardee_id');
-		    $awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+		    $input_id = $form_state->get('input_id');
+		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
 
              $mapping = $this->getFormEntityMapping();
              // Single value fields can be mapped in
@@ -484,37 +496,25 @@ class InputsForm extends FormBase {
 		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
 			        continue;
 		        }
-		        $awardee->set($entity_field_id, $form[$form_elem_id]['#value']);
+		        $input->set($entity_field_id, $form[$form_elem_id]['#value']);
 	        }
 
 		     // Minus 1 because there is an entry with key 'actions'
-		    $num_contacts = count($form['names_fieldset']) - 1;
+		    $num_inputs = count($form['names_fieldset']) - 1;
 
-		    $contact_eauth_ids = [];
-	        $contact_types = [];
-	        for( $i = 0; $i < $num_contacts; $i++ ){
-				$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-				$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
-				//  if($cost_type_value === 0 && $cost_value <> NULL){
-				// 	continue;
-				//  }else{
-				// 	$contact_eauth_ids[$i] = $cost_value;
-				//  }
-				
-
-		        
-				// if(in_array($cost_type_value, $this->getCostTypeOptions())){
-				// 	$contact_types[$i] = $const_type_value;
-				// }
-				
+		    $input_cost = [];
+	        $input_cost_types = [];
+	        for( $i = 0; $i < $num_inputs; $i++ ){
+				$input_cost[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
+				$input_cost_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
 	        }
 
- 	        $awardee->set('field_cost', $contact_eauth_ids);
- 	        $awardee->set('field_cost_type', $contact_types);
+ 	        $input->set('field_cost', $input_cost);
+ 	        $input->set('field_cost_type', $input_cost_types);
 
-            $awardee->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
-			$awardee->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		     $awardee->save();
+            $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
+			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
+		     $input->save();
 			
 	}
 	if($form_state->get('redirect_input') == TRUE){
@@ -524,17 +524,17 @@ class InputsForm extends FormBase {
 	}
 }
 
-    public function addContactRow(array &$form, FormStateInterface $form_state) {
-        $num_contacts = $form_state->get('num_contacts');
-	    $num_contact_lines = $form_state->get('num_contact_lines');
-        $form_state->set('num_contacts', $num_contacts + 1);
-	    $form_state->set('num_contact_lines', $num_contact_lines + 1);
+    public function addInputRow(array &$form, FormStateInterface $form_state) {
+        $num_inputs = $form_state->get('num_inputs');
+	    $num_input_lines = $form_state->get('num_input_lines');
+        $form_state->set('num_inputs', $num_inputs + 1);
+	    $form_state->set('num_input_lines', $num_input_lines + 1);
         $form_state->setRebuild();
   }
 
-  public function removeContactCallback(array &$form, FormStateInterface $form_state) {
+  public function removeInputCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();
-	$num_line = $form_state->get('num_contact_lines');
+	$num_line = $form_state->get('num_input_lines');
     $indexToRemove = $trigger['#name'];
 
    // Remove the fieldset from $form (the easy way)
@@ -542,11 +542,11 @@ class InputsForm extends FormBase {
 
     // Keep track of removed fields so we can add new fields at the bottom
     // Without this they would be added where a value was removed
-    $removed_contacts = $form_state->get('removed_contacts');
-    $removed_contacts[] = $indexToRemove;
+    $removed_inputs = $form_state->get('removed_inputs');
+    $removed_inputs[] = $indexToRemove;
 
-	$form_state->set('removed_contacts', $removed_contacts);
-	$form_state->set('num_contact_lines', $num_line - 1);
+	$form_state->set('removed_inputs', $removed_inputs);
+	$form_state->set('num_input_lines', $num_line - 1);
 
     // Rebuild form_state
     $form_state->setRebuild();
@@ -562,11 +562,11 @@ class InputsForm extends FormBase {
 	}
 
     public function deleteInputs(array &$form, FormStateInterface $form_state){
-        $awardee_id = $form_state->get('awardee_id');
-		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+        $input_id = $form_state->get('input_id');
+		$input_to_delete = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
 
 		try{
-			$project->delete();
+			$input_to_delete->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
 			$this

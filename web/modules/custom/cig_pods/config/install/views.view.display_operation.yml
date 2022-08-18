@@ -220,21 +220,21 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_operation_shmu_target_id:
-          id: field_operation_shmu_target_id
-          table: asset__field_operation_shmu
-          field: field_operation_shmu_target_id
+        shmu_target_id:
+          id: shmu_target_id
+          table: asset__shmu
+          field: shmu_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_operation_shmu
+          entity_field: shmu
           plugin_id: field
           label: SHMU
           exclude: false
           alter:
             alter_text: true
-            text: '<a href="/edit/shmu/{{ field_operation_shmu_target_id__target_id }}">{{ field_operation_shmu_target_id }}</a>'
+            text: '<a href="/edit/shmu/{{ shmu_target_id__target_id }}">{{ shmu_target_id }}</a>'
             make_link: false
             path: ''
             absolute: false

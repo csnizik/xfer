@@ -161,8 +161,8 @@ class OperationForm extends FormBase {
 
 
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $operation->get('field_operation_shmu')->target_id : $default_options;
-		$form['field_operation_shmu'] = [
+		$shmu_default_value = $is_edit ?  $operation->get('shmu')->target_id : $default_options;
+		$form['shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,

@@ -59,12 +59,12 @@ class PastureAssessmentForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Pasture condition assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
 
-        $pasture_assessment_shmu_value = $is_edit ? $assessment->get('pasture_assessment_shmu')->target_id : '';
-		$form['pasture_assessment_shmu'] = [
+        $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $pasture_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => TRUE,
 
 
@@ -281,7 +281,7 @@ class PastureAssessmentForm extends FormBase {
 	}
 
 	public function createElementNames(){
-		return array('pasture_assessment_shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
+		return array('shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
 		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion','pasture_assessment_soil_compaction');
 	}
 

@@ -7,11 +7,24 @@ Use Drupal\Core\Form\FormStateInterface;
  * Module file for Producer Operation Data Systems (PODS)
  */
 
+/*
+  Implements hook_page_attachments().
+*/
+
+function cig_pods_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'cig_pods/hide_return';
+}
+
 
  /*
 	Implements hook_views_pre_render().
  */
+
+
+
 function cig_pods_views_pre_render(ViewExecutable $view ) {
+	
+
 	if (isset($view) && ($view->storage->id() == 'producer_entry_form')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/producer_entry_form';
@@ -68,7 +81,7 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/range_assessment_display';
 	}
-
+	
 }
 
 function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {

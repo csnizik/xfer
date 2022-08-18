@@ -38,7 +38,8 @@ cig_pods.awardee_dashboard_form:
     _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
     _title: ""
   requirements:
-    _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAwardee'
+    _permission: "access content"
+    # _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAwardee'
 
 cig_pods.admin_dashboard_form:
   path: "/pods_admin_dashboard"
@@ -46,7 +47,8 @@ cig_pods.admin_dashboard_form:
     _form: '\Drupal\cig_pods\Form\AdminDashboardForm'
     _title: ""
   requirements:
-    _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAdmin'
+    _permission: "access content"
+    # _custom_access: '\Drupal\cig_pods\zRolesUtilities::accessIfAdmin'
 
 cig_pods.lab_test_profiles_admin_form:
   path: "/create/lab_test_profiles_admin"

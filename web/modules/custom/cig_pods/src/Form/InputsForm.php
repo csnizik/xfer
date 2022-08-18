@@ -71,8 +71,6 @@ class InputsForm extends FormBase {
         return $num / $denom;
     }
 
-
-
     public function buildForm(array $form, FormStateInterface $form_state, $operation_id = NULL, $id = NULL){
 
         $is_edit = $id <> NULL;
@@ -111,8 +109,7 @@ class InputsForm extends FormBase {
 					$ex_count = 1;
 				}else{
 					$ex_count = count($cname);
-				}
-				
+				}	
 		}
 
         if($is_edit){
@@ -153,7 +150,6 @@ class InputsForm extends FormBase {
 			'#markup' => '<span class="operation-description"><h4>Operation (Determined from the operation you selected for this input)</h4></span>'
 		];
 
-        // $field_operation_value = $is_edit ? $input->get('field_operation')->target_id : '';
 		$operation_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($current_operation->get('field_operation')->target_id);
 		$form_state->set('current_operation_name', $operation_taxonomy_name-> getName());
         $form['field_operation'] = [
@@ -274,7 +270,7 @@ class InputsForm extends FormBase {
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
-			$form['names_fieldset'][$i]['input_name'] = [
+			$form['names_fieldset'][$i]['other_costs_cost'] = [
 				 '#type' => 'number',
                  '#step' => 0.01,
 				'#title' => $this
@@ -285,10 +281,9 @@ class InputsForm extends FormBase {
 				],
 				'#prefix' => ($num_other_costs_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
-
 			];
 
-			$form['names_fieldset'][$i]['input_type'] = [
+			$form['names_fieldset'][$i]['other_costs_type'] = [
 				'#type' => 'select',
 				'#title' => $this
 				  ->t('Type'),
@@ -317,12 +312,6 @@ class InputsForm extends FormBase {
              $form['names_fieldset'][$i]['new_line_container2'] = [
 				'#suffix' => '</div>',
 			];
-
-			//css space for a new line due to previous items' float left attr
-			$form['names_fieldset'][$i]['new_line_container'] = [
-				'#markup' => '<div class="clear-space"></div>'
-			];
-
 		}
 
         $form['actions'] = [
@@ -341,9 +330,9 @@ class InputsForm extends FormBase {
 			],
 			'#states' => [
 				'visible' => [
-				  ":input[name='names_fieldset[0][input_name]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][other_costs_cost]']" => ['!value' => ''],
 				  "and",
-				  ":input[name='names_fieldset[0][input_type]']" => ['!value' => ''],
+				  ":input[name='names_fieldset[0][other_costs_type]']" => ['!value' => ''],
 				],
 			],
 			"#limit_validation_errors" => array(),
@@ -400,12 +389,12 @@ class InputsForm extends FormBase {
 		$num_cost_entries = count($form['names_fieldset']) - 1;
 		if($num_cost_entries > 1){
 			for($i = 1; $i < $num_cost_entries; $i++){
-				if($form_state->getValue(['names_fieldset', $i, 'input_name']) === ''){
-					$form_state->setError($form['names_fieldset'][$i]['input_name'], $this->t("Please Fill out a Cost for the highlighted field"));
+				if($form_state->getValue(['names_fieldset', $i, 'other_costs_cost']) === ''){
+					$form_state->setError($form['names_fieldset'][$i]['other_costs_cost'], $this->t("Please Fill out a Cost for the highlighted field"));
 					return FALSE;
 				}
-				if($form_state->getValue(['names_fieldset', $i, 'input_type']) === ''){
-					$form_state->setError($form['names_fieldset'][$i]['input_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
+				if($form_state->getValue(['names_fieldset', $i, 'other_costs_type']) === ''){
+					$form_state->setError($form['names_fieldset'][$i]['other_costs_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
 					return FALSE;
 				}
 			}
@@ -455,7 +444,6 @@ class InputsForm extends FormBase {
 			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
             $input_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
 
-
 	        // Single value fields can be mapped in
 	        foreach($mapping as $form_elem_id => $entity_field_id){
 		        // If mapping not in form or value is empty string
@@ -471,8 +459,8 @@ class InputsForm extends FormBase {
             $input_cost = [];
 	        $input_cost_types = [];
 	        for( $i = 0; $i < $num_other_costs; $i++ ){
-		        $input_cost[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
-		        $input_cost_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
+		        $input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
+		        $input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
 	        }
 
  	        $input_submission['field_cost'] = $input_cost;
@@ -503,8 +491,8 @@ class InputsForm extends FormBase {
 		    $input_cost = [];
 	        $input_cost_types = [];
 	        for( $i = 0; $i < $num_other_costs; $i++ ){
-				$input_cost[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
-				$input_cost_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
+				$input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
+				$input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
 	        }
 
  	        $input->set('field_cost', $input_cost);

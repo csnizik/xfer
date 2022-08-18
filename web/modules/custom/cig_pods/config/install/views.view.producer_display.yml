@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.producer
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

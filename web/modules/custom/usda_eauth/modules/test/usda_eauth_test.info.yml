@@ -1,0 +1,6 @@
+name: USDA eAuth Test
+description: Module for testing USDA eAuth.
+type: module
+core_version_requirement: ^9
+dependencies:
+  -  usda_eauth:usda_eauth

@@ -6,5 +6,5 @@ dependencies:
       - cig_pods
 name: Sample Status
 vid: d_sample_status
-description: 'A list of Sample Statuss'
+description: 'A list of Sample Status'
 weight: 0

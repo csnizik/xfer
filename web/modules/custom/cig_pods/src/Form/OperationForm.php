@@ -30,7 +30,7 @@ class OperationForm extends FormBase {
 		$options = [];
 		$options[''] = '- Select -';
 		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_equipment']);
+			['vid' => 'd_tractor_self_propelled_machine']);
 		$keys = array_keys($taxonomy_terms);
 		foreach($keys as $key){
 			$term = $taxonomy_terms[$key];

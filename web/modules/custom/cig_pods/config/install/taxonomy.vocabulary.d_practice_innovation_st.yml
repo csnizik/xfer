@@ -6,5 +6,5 @@ dependencies:
       - cig_pods
 name: Practice Innovation Status
 vid: d_practice_innovation_st
-description: 'A list of Practice Innovation Statuss'
+description: 'A list of Practice Innovation Status'
 weight: 0

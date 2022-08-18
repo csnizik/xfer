@@ -76,7 +76,7 @@ class InputsForm extends FormBase {
     public function buildForm(array $form, FormStateInterface $form_state, $operation_id = NULL, $id = NULL){
 
         $is_edit = $id <> NULL;
-        $operation_name = "Test Operation";
+        $operation_name = "Operation";
 		$operation = [];
 
 	    if($is_edit){
@@ -92,10 +92,10 @@ class InputsForm extends FormBase {
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
-        $num_input_lines = $form_state->get('num_input_lines');//get num of inputss showing on screen. (1->n exclude:removed indexes)
-		$num_inputs = $form_state->get('num_inputs');//get num of added inputs. (1->n)
+        $num_other_costs_lines = $form_state->get('num_other_costs_lines');//get num of inputs showing on screen. (1->n exclude:removed indexes)
+		$num_other_costs = $form_state->get('num_other_costs');//get num of added inputs. (1->n)
 
-        $removed_inputs = $form_state->get('removed_inputs');//get removed inputs indexes
+        $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
 
         $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
 
@@ -117,28 +117,28 @@ class InputsForm extends FormBase {
 
         if($is_edit){
 
-			if ($num_inputs === NULL) {//initialize number of input, set to 1
-				$form_state->set('num_inputs', $ex_count);
-				$num_inputs = $form_state->get('num_inputs');
+			if ($num_other_costs === NULL) {//initialize number of input, set to 1
+				$form_state->set('num_other_costs', $ex_count);
+				$num_other_costs = $form_state->get('num_other_costs');
 			}
-			if ($num_input_lines === NULL) {
-				$form_state->set('num_input_lines', $ex_count);
-				$num_input_lines = $form_state->get('num_input_lines');
+			if ($num_other_costs_lines === NULL) {
+				$form_state->set('num_other_costs_lines', $ex_count);
+				$num_other_costs_lines = $form_state->get('num_other_costs_lines');
 			}
 		}else{
-				if ($num_inputs === NULL) {//initialize number of input, set to 1
-					$form_state->set('num_inputs', 1);
-					$num_inputs = $form_state->get('num_inputs');
+				if ($num_other_costs === NULL) {//initialize number of input, set to 1
+					$form_state->set('num_other_costs', 1);
+					$num_other_costs = $form_state->get('num_other_costs');
 				}
-				if ($num_input_lines === NULL) {
-					$form_state->set('num_input_lines', 1);
-					$num_input_lines = $form_state->get('num_input_lines');
+				if ($num_other_costs_lines === NULL) {
+					$form_state->set('num_other_costs_lines', 1);
+					$num_other_costs_lines = $form_state->get('num_other_costs_lines');
 				}
 			}
 
-		if ($removed_inputs === NULL) {
-			$form_state->set('removed_inputs', array());//initialize arr
-			$removed_inputs = $form_state->get('removed_inputs');
+		if ($removed_other_costs === NULL) {
+			$form_state->set('removed_other_costs', array());//initialize arr
+			$removed_other_costs = $form_state->get('removed_other_costs');
 		}
 
         $form['title'] = [
@@ -252,7 +252,6 @@ class InputsForm extends FormBase {
 			'#markup' => '<div class="subtitle-container-costs"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
 
-		// $input_name_options = $this->getAwardeeContactNameOptions();
 		$form['#tree'] = TRUE;
 		$form['names_fieldset'] = [
 		  '#prefix' => '<div id="names-fieldset-wrapper"',
@@ -266,9 +265,9 @@ class InputsForm extends FormBase {
 			 $inputtype[] = $detail;
 			}
 
-		for ($i = 0; $i < $num_inputs; $i++) {//num_inputs: get num of added contacts. (1->n)
+		for ($i = 0; $i < $num_other_costs; $i++) {//num_other_costs: get num of added contacts. (1->n)
 
-			if (in_array($i, $removed_inputs)) {// Check if field was removed
+			if (in_array($i, $removed_other_costs)) {// Check if field was removed
 				continue;
 			}
 			
@@ -280,12 +279,11 @@ class InputsForm extends FormBase {
                  '#step' => 0.01,
 				'#title' => $this
 				  ->t("Cost"),
-				//'#options' => $input_name_options,
 				'#default_value' => $cname[$i],
 				'attributes' => [
 					'class' => 'something',
 				],
-				'#prefix' => ($num_input_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
+				'#prefix' => ($num_other_costs_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 
 			];
@@ -301,14 +299,14 @@ class InputsForm extends FormBase {
 			];
            
 
-			if($num_input_lines > 1 && $i!=0){
+			if($num_other_costs_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
 					'#name' => $i,
-					'#submit' => ['::removeInputCallback'],
+					'#submit' => ['::removeOtherCostsCallback'],
 					'#ajax' => [
-					  'callback' => '::addInputRowCallback',
+					  'callback' => '::addOtherCostsRowCallback',
 					  'wrapper' => 'names-fieldset-wrapper',
 					],
 					"#limit_validation_errors" => array(),
@@ -336,9 +334,9 @@ class InputsForm extends FormBase {
 			'#button_type' => 'button',
 			'#name' => 'add_contact_button',
 			'#value' => t('Add Another Cost'),
-			'#submit' => ['::addInputRow'],
+			'#submit' => ['::addOtherCostsRow'],
 			'#ajax' => [
-				'callback' => '::addInputRowCallback',
+				'callback' => '::addOtherCostsRowCallback',
 				'wrapper' => 'names-fieldset-wrapper',
 			],
 			'#states' => [
@@ -422,7 +420,7 @@ class InputsForm extends FormBase {
         return 'inputform';
     }
 
-    public function addInputRowCallback(array &$form, FormStateInterface $form_state) {
+    public function addOtherCostsRowCallback(array &$form, FormStateInterface $form_state) {
         return $form['names_fieldset'];
     }
 
@@ -449,13 +447,13 @@ class InputsForm extends FormBase {
 
             $mapping = $this->getFormEntityMapping();
 
-            $project_submission = [];
+            $input_submission = [];
 
-            $project_submission['type'] = 'input';
+            $input_submission['type'] = 'input';
                  
 			$operation_taxonomy_name = $form_state->get('current_operation_name');
 			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
-            $project_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
+            $input_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
 
 
 	        // Single value fields can be mapped in
@@ -464,27 +462,27 @@ class InputsForm extends FormBase {
 		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
 			        continue;
 		        }
-		        $project_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
+		        $input_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
 	        }
 
             // Minus 1 because there is an entry with key 'actions'
-	        $num_inputs = count($form['names_fieldset']) - 1;
+	        $num_other_costs = count($form['names_fieldset']) - 1;
 
-            $contact_eauth_ids = [];
-	        $input_types = [];
-	        for( $i = 0; $i < $num_inputs; $i++ ){
-		        $contact_eauth_ids[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
-		        $input_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
+            $input_cost = [];
+	        $input_cost_types = [];
+	        for( $i = 0; $i < $num_other_costs; $i++ ){
+		        $input_cost[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
+		        $input_cost_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
 	        }
 
- 	        $project_submission['field_cost'] = $contact_eauth_ids;
- 	        $project_submission['field_cost_type'] = $input_types;
+ 	        $input_submission['field_cost'] = $input_cost;
+ 	        $input_submission['field_cost_type'] = $input_cost_types;
 
-            $project_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
+            $input_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
-	        $project = Asset::create($project_submission);
-			$project->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-	         $project -> save();
+	        $input_to_save = Asset::create($input_submission);
+			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
+	         $input_to_save -> save();
          } else {
 		    $input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
@@ -500,11 +498,11 @@ class InputsForm extends FormBase {
 	        }
 
 		     // Minus 1 because there is an entry with key 'actions'
-		    $num_inputs = count($form['names_fieldset']) - 1;
+		    $num_other_costs = count($form['names_fieldset']) - 1;
 
 		    $input_cost = [];
 	        $input_cost_types = [];
-	        for( $i = 0; $i < $num_inputs; $i++ ){
+	        for( $i = 0; $i < $num_other_costs; $i++ ){
 				$input_cost[$i] = $form['names_fieldset'][$i]['input_name']['#value'];
 				$input_cost_types[$i] = $form['names_fieldset'][$i]['input_type']['#value'];
 	        }
@@ -524,17 +522,18 @@ class InputsForm extends FormBase {
 	}
 }
 
-    public function addInputRow(array &$form, FormStateInterface $form_state) {
-        $num_inputs = $form_state->get('num_inputs');
-	    $num_input_lines = $form_state->get('num_input_lines');
-        $form_state->set('num_inputs', $num_inputs + 1);
-	    $form_state->set('num_input_lines', $num_input_lines + 1);
+    public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {
+       
+        $num_other_costs = $form_state->get('num_other_costs');
+	    $num_other_costs_lines = $form_state->get('num_other_costs_lines');
+        $form_state->set('num_other_costs', $num_other_costs + 1);
+	    $form_state->set('num_other_costs_lines', $num_other_costs_lines + 1);
         $form_state->setRebuild();
   }
 
-  public function removeInputCallback(array &$form, FormStateInterface $form_state) {
+  public function removeOtherCostsCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();
-	$num_line = $form_state->get('num_input_lines');
+	$num_line = $form_state->get('num_other_costs_lines');
     $indexToRemove = $trigger['#name'];
 
    // Remove the fieldset from $form (the easy way)
@@ -542,11 +541,11 @@ class InputsForm extends FormBase {
 
     // Keep track of removed fields so we can add new fields at the bottom
     // Without this they would be added where a value was removed
-    $removed_inputs = $form_state->get('removed_inputs');
-    $removed_inputs[] = $indexToRemove;
+    $removed_other_costs = $form_state->get('removed_other_costs');
+    $removed_other_costs[] = $indexToRemove;
 
-	$form_state->set('removed_inputs', $removed_inputs);
-	$form_state->set('num_input_lines', $num_line - 1);
+	$form_state->set('removed_other_costs', $removed_other_costs);
+	$form_state->set('num_other_costs_lines', $num_line - 1);
 
     // Rebuild form_state
     $form_state->setRebuild();

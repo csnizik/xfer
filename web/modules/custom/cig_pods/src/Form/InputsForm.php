@@ -202,7 +202,7 @@ class InputsForm extends FormBase {
 			'#title' => $this->t('Unit'),
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
-			'#required' => FALSE,
+			'#required' => TRUE,
             '#suffix' => '</span>',
 		];
 
@@ -214,7 +214,7 @@ class InputsForm extends FormBase {
             '#title' => $this->t('Rate Units/Ac'),
             '#description' => '',
             '#default_value' => $field_rate_units_value,
-            '#required' => FALSE
+            '#required' => TRUE
         ];
 
         $form['subtitle_2'] = [

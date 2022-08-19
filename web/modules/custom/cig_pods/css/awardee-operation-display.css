@@ -18,7 +18,7 @@ h1.page-title {
     width: 100%;
 }
 
-.admin-project-display table th, td {
+.awardee-operation-display table th, td {
     background-color: white;
 }
 
@@ -50,7 +50,7 @@ table  {
     --colorGinTableBorder:rgba(0,0,0,0); /* working*/
 }
 
-table.views-table.views-view-table.cols-7 {
+table.views-table.views-view-table.cols-5 {
     padding-left: 40px;
     width:100%;
     margin-top: 0px;
@@ -88,7 +88,7 @@ th.views-field.views-field-name {
     --colorGinPrimaryActive: #000000;
 }
 
-table.views-table.views-view-table.cols-7 {
+table.views-table.views-view-table.cols-5 {
     --colorGinPrimaryActive: #000000;
      width: auto;
 }

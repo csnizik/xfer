@@ -47,6 +47,7 @@ class Operation extends FarmAssetType {
             'target_type'=> 'asset',
             'target_bundle'=> 'input',
             'required' => TRUE,
+            'multiple' => TRUE,
             'description' => '',
         ],
         'field_ownership_status' => [

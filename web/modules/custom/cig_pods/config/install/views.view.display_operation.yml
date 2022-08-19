@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - asset.type.operation
+  module:
+    - asset
   enforced:
     module:
       - cig_pods
-  module:
-    - asset
 id: display_operation
 label: display-operation
 module: views
@@ -548,7 +548,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: admin-project-display
+      css_class: awardee-operation-display
       header: {  }
       footer: {  }
       display_extenders: {  }

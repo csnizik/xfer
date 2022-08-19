@@ -95,6 +95,10 @@ field_assessment:
   css:
     theme:
       css/field-assesment-display.css: {}
+      # @todo CSS cleanup
+      # Both of these were being applied to field assessment Views originally
+      # so copied this one here when the Views were merged.
+      css/awardee-soil-sample-display.css: {}
 
 field_assessment_form:
   css:

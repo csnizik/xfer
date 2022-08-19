@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.lab_testing_method
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

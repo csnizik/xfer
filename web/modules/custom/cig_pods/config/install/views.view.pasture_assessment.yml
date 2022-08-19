@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.pasture_assessment
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
     - options

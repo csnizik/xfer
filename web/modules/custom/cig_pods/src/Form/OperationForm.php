@@ -361,8 +361,7 @@ class OperationForm extends FormBase {
 		$form['actions']['add_input'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Add Inputs'),
-			'#submit' => [[$this, 'addInput']],
-			'#limit_validation_errors' => array(),
+			'#submit' => ['::addInput'],
 		];
 
 		if($is_edit){
@@ -410,8 +409,8 @@ class OperationForm extends FormBase {
 	}
 
 	public function addInput(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.input_form');
-		return;
+		$form_state->set('input_redirect', TRUE);
+		$this->submitForm($form, $form_state);
 	}
     /**
 	* {@inheritdoc}
@@ -496,8 +495,11 @@ class OperationForm extends FormBase {
 			}
 		}
 		// Success message done
-
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		if($form_state->get('input_redirect')){
+			$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $operation->get('id')->value]);
+		}else{
+			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		}
     }
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){

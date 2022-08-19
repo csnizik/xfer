@@ -68,6 +68,10 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/range_assessment_display';
 	}
+	if (isset($view) && ($view->storage->id() == 'display_pasture_health')) {
+		$view->element['#attached']['library'][] =
+		'cig_pods/pasture_health_display';
+	}
 
 }
 

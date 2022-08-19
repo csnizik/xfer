@@ -117,6 +117,22 @@ cig_pods.edit_range_assessment_form:
   requirements:
     _permission: "access content"
 
+cig_pods.pasture_health_assessment_form:
+  path: "/create/pasture_health_assessment"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\PastureHealthAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
+cig_pods.edit_pasture_health_assessment_form:
+  path: "/edit/pasture_health_assessment/{id}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\PastureHealthAssessmentForm'
+    _title: ""
+  requirements:
+    _permission: "access content"
+
 cig_pods.pasture_assessment_form:
   path: "/create/pasture_assessment"
   defaults:

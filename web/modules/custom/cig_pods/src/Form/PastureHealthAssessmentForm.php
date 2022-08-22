@@ -93,7 +93,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Erosion (Sheet and Rill)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_erosion_sheet_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_erosion_gullies_value = $is_edit ? $assessment->get('pasture_health_assessment_erosion_gullies')->value : '';
@@ -103,7 +103,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Erosion (Gullies if present)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_erosion_gullies_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_erosion_wind_scoured_value = $is_edit ? $assessment->get('pasture_health_assessment_erosion_wind_scoured')->value : '';
@@ -113,7 +113,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Erosion, Wind-Scoured and/or Depositional Areas'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_erosion_wind_scoured_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_erosion_streambank_value = $is_edit ? $assessment->get('pasture_health_assessment_erosion_streambank')->value : '';
@@ -123,7 +123,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Erosion (Streambank or Shoreline)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_erosion_streambank_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_water_flow_patterns_value = $is_edit ? $assessment->get('pasture_health_assessment_water_flow_patterns')->value : '';
@@ -133,7 +133,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Water flow patterns'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_water_flow_patterns_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_bare_ground_value = $is_edit ? $assessment->get('pasture_health_assessment_bare_ground')->value : '';
@@ -143,7 +143,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Bare Ground (Percent)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_bare_ground_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_padestals_value = $is_edit ? $assessment->get('pasture_health_assessment_padestals')->value : '';
@@ -153,7 +153,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Pedestals and/or Terracettes'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_padestals_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_litter_movement_value = $is_edit ? $assessment->get('pasture_health_assessment_litter_movement')->value : '';
@@ -163,7 +163,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Litter movement (Wind or Water)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_litter_movement_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_composition_value = $is_edit ? $assessment->get('pasture_health_assessment_composition')->value : '';
@@ -173,7 +173,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Effects of Plant Community Composition and Distribution on Infiltration and Runoff'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_composition_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_soil_surface_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_surface')->value : '';
@@ -183,7 +183,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Soil surface loss or degratation'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_soil_surface_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_compaction_layer_value = $is_edit ? $assessment->get('pasture_health_assessment_compaction_layer')->value : '';
@@ -193,7 +193,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Compaction Layer'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_compaction_layer_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_live_plant_value = $is_edit ? $assessment->get('pasture_health_assessment_live_plant')->value : '';
@@ -203,7 +203,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Live plant foliar cover (hydrologic and erosion benefits)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_live_plant_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_forage_plant_value = $is_edit ? $assessment->get('pasture_health_assessment_forage_plant')->value : '';
@@ -213,7 +213,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Forage Plant Diversity'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_forage_plant_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_percent_desirable_value = $is_edit ? $assessment->get('pasture_health_assessment_percent_desirable')->value : '';
@@ -223,7 +223,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Percent Desirable Forage Plants (for Identified Livestock Class)'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_percent_desirable_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_invasive_plants_value = $is_edit ? $assessment->get('pasture_health_assessment_invasive_plants')->value : '';
@@ -233,7 +233,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Invasive Plants'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_invasive_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_annual_production_value = $is_edit ? $assessment->get('pasture_health_assessment_annual_production')->value : '';
@@ -243,7 +243,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Annual Production'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_annual_production_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_plant_vigor_value = $is_edit ? $assessment->get('pasture_health_assessment_plant_vigor')->value : '';
@@ -253,7 +253,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Plant Vigor with an Emphasis on Reproductive Capability of Perennial'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_plant_vigor_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_dying_plants_value = $is_edit ? $assessment->get('pasture_health_assessment_dying_plants')->value : '';
@@ -263,7 +263,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Dead or Dying Plants or Plant'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_dying_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_little_cover_value = $is_edit ? $assessment->get('pasture_health_assessment_little_cover')->value : '';
@@ -273,7 +273,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Litter cover and depth'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_little_cover_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_nontoxic_legumes_value = $is_edit ? $assessment->get('pasture_health_assessment_nontoxic_legumes')->value : '';
@@ -283,7 +283,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Percentage Nontoxic legumes'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_nontoxic_legumes_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_uniformity_value = $is_edit ? $assessment->get('pasture_health_assessment_uniformity')->value : '';
@@ -293,7 +293,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Uniformity of Use'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_uniformity_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$pasture_health_assessment_livestock_value = $is_edit ? $assessment->get('pasture_health_assessment_livestock')->value : '';
@@ -303,7 +303,7 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#title' => $this->t('Livestock Concentration Areas'),
 			'#options' => $severity_options,
 			'#default_value' => $pasture_health_assessment_livestock_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$form['actions']['save'] = [

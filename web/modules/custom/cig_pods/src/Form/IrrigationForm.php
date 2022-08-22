@@ -256,6 +256,9 @@ class IrrigationForm extends FormBase {
 			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
+    // Set the irrigation asset name to "Irrigation {{asset-id}}".
+    $irrigation->set('name', 'Irrigation ' . $id);
+
         foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
 			if(in_array($key, $ignored_fields)){ continue; }

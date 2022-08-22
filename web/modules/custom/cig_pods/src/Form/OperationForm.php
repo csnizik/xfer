@@ -440,6 +440,9 @@ class OperationForm extends FormBase {
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
+        // Set the operation asset name to "Operation {{asset-id}}".
+        $operation->set('name', 'Operation ' . $id);
+
         foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
 			if(in_array($key, $ignored_fields)){ continue; }

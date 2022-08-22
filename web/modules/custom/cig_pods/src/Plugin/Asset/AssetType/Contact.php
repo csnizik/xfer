@@ -34,11 +34,13 @@ class Contact extends FarmAssetType {
             'required' => TRUE,
             'description' => '',
          ],
-         'field_contact_project_id' =>[
-            'type'  => 'fraction',
-            'label' => 'Contact Project ID reference',
-            'description' => $this->t('Contact Project ID reference'),
-            'required' => TRUE,
+         'project' =>[
+           'label' => 'Project',
+           'type' => 'entity_reference',
+           'target_type' => 'asset',
+           'target_bundle' => 'project',
+           'required' => TRUE,
+           'multiple' => TRUE,
          ],
       ];
 

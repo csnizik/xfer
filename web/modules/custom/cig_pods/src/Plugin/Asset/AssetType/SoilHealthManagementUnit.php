@@ -210,14 +210,14 @@ class SoilHealthManagementUnit extends FarmAssetType {
             'multiple' => TRUE,
             'description' => '',
         ],
-        'field_shmu_project_id' =>[
-            'type'  => 'fraction',
-            'label' => 'SHMU Project ID reference',
-            'description' => $this->t('SHMU Project ID reference'),
-            'required' => FALSE,
-            'multiple' => FALSE,
-         ],
-
+        'project' =>[
+          'label' => 'Project',
+          'type' => 'entity_reference',
+          'target_type' => 'asset',
+          'target_bundle' => 'project',
+          'required' => TRUE,
+          'multiple' => TRUE,
+        ],
       ];
 
       $farmFieldFactory = new FarmFieldFactory();

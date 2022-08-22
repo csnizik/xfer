@@ -282,7 +282,7 @@ private function convertFractionsToDecimal($soilSample, $field){
 }
 
 public function entityfields(){
-	return array('field_diameter','field_plant_stage_at_sampling','field_sampling_depth','field_shmu_id','field_soil_sample_collection_dat');
+	return array('field_diameter','field_plant_stage_at_sampling','field_sampling_depth','field_shmu_id','field_soil_sample_collection_dat', 'field_equipment_used');
 }
 
 /**

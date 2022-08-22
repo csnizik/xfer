@@ -13,6 +13,7 @@ class PastureAssessmentForm extends FormBase {
 			['type' => 'soil_health_management_unit']
 		 );
 		 $producer_options = [];
+		 $producer_options[''] = '- Select -';
 		 $producer_keys = array_keys($producer_assets);
 		 foreach($producer_keys as $producer_key) {
 		   $asset = $producer_assets[$producer_key];
@@ -33,7 +34,7 @@ class PastureAssessmentForm extends FormBase {
 			$form_state->set('rc_display', array());
 		}
 
-		$severity_options = [5 => '5 point', 4 => '4 Point', 3 => '3 Point', 2 => '2 Point', 1 => '1 Point'];
+		$severity_options = [5 => 5, 4 => 4, 3 => 3, 2 => 2, 1 => 1];
 
 		$is_edit = $id <> NULL;
 
@@ -65,8 +66,7 @@ class PastureAssessmentForm extends FormBase {
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $pasture_assessment_shmu_value,
 			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 
 		];
 
@@ -79,7 +79,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_rills_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_water_flow_value = $is_edit ? $assessment->get('pasture_assessment_Legume_dry_weight')->value : '';
@@ -91,7 +91,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_water_flow_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_pedestals_value = $is_edit ? $assessment->get('pasture_assessment_live_plant_cover')->value : '';
@@ -103,7 +103,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_pedestals_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_effects_of_plants_value = $is_edit ? $assessment->get('pasture_assessment_diversity_dry_weight')->value : '';
@@ -115,7 +115,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_effects_of_plants_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_bare_ground_value = $is_edit ? $assessment->get('pasture_assessment_litter_soil_cover')->value : '';
@@ -127,7 +127,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_bare_ground_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_gullies_value = $is_edit ? $assessment->get('pasture_assessment_grazing_utilization_severity')->value : '';
@@ -139,7 +139,6 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_gullies_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
 		];
 
 		$pasture_assessment_wind_scoured_value = $is_edit ? $assessment->get('pasture_assessment_livestock_concentration')->value : '';
@@ -151,7 +150,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_wind_scoured_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_wind_scoured_value = $is_edit ? $assessment->get('pasture_assessment_soil_compaction')->value : '';
@@ -163,7 +162,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_wind_scoured_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_litter_movement_value = $is_edit ? $assessment->get('pasture_assessment_plant_rigor')->value : '';
@@ -175,7 +174,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_litter_movement_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-                '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('pasture_assessment_erosion')->value : '';
@@ -187,7 +186,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_soil_surface_resistance_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 		];
 
 		$pasture_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('pasture_assessment_condition_store')->value : '';
@@ -199,7 +198,7 @@ class PastureAssessmentForm extends FormBase {
 			'#default_value' => $pasture_assessment_soil_surface_loss_value,
 			'#required' => TRUE,
 			'#empty_option' => '- Select -',
-            '#empty_value' => '- Select -',
+
 		];
 
 
@@ -210,7 +209,7 @@ class PastureAssessmentForm extends FormBase {
 
 		$form['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
-			'#value' => $this->t('Identify Resource Concerns'),
+			'#value' => $this->t('Calculate score.'),
 			'#submit' => ['::displayRcScores'],
 			'#ajax' => [
 				'callback' => '::updateScores',
@@ -224,7 +223,7 @@ class PastureAssessmentForm extends FormBase {
 			$toDisplay = $form_state->get('rc_display');
 		if (count($toDisplay) <> 0) {
 			$form['rc_container']['rc_header'] = [
-				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
+				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment. </h5>'
 			];
 			$form['rc_container']['rc_soil'] = [
 				'#markup' => $this->t('<p classname="Soil"> <b> Calculated from in-field assessments</b></p>

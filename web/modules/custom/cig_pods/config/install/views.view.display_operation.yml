@@ -3,6 +3,9 @@ status: true
 dependencies:
   config:
     - asset.type.operation
+  enforced:
+    module:
+      - cig_pods
   module:
     - asset
 id: display_operation

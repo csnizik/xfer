@@ -116,6 +116,11 @@ range_assessment_display:
     theme:
       css/awardee-rangeland-details-display.css: {}
 
+hide_return:
+  css:
+    theme:
+      css/hide_return.css: {}
+
 behavior_wkt_refresh:
   js:
     js/farmOS.map.behaviors.wkt_refresh.js: {}
@@ -136,12 +141,17 @@ behavior_zoom_us:
 
 behavior_latlon_add:
   js:
-    js/farmOS.map.behaviors.latlon_add.js: { }
+    js/farmOS.map.behaviors.latlon_add.js: {}
   dependencies:
     - farm_map/farm_map
 
 behavior_latlon_refresh:
   js:
-    js/farmOS.map.behaviors.latlon_refresh.js: { }
+    js/farmOS.map.behaviors.latlon_refresh.js: {}
   dependencies:
     - farm_map/farm_map
+
+inputs_form:
+  css:
+    theme:
+      css/inputs.css: {}

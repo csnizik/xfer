@@ -67,7 +67,3 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
     }
   }
 }
-
-function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-
-}

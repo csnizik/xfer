@@ -30,6 +30,14 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
       $result = AccessResult::allowed();
     }
 
+    // Awardees only have access to assets in a project that their eAuth ID
+    // is associated with.
+    elseif ($zrole == 'CIG_NSHDS') {
+      if (in_array($entity->id(), $this->eAuthIdAssets($eauth_id, $entity->bundle()))) {
+        $result = AccessResult::allowed();
+      }
+    }
+
     // Ensure that access is evaluated again when the entity changes.
     return $result->addCacheableDependency($entity);
   }

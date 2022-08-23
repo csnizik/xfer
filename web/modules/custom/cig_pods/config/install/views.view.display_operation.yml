@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - asset.type.operation
+  module:
+    - asset
   enforced:
     module:
       - cig_pods
-  module:
-    - asset
 id: display_operation
 label: display-operation
 module: views
@@ -168,8 +168,8 @@ display:
           label: Inputs
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<a href="/edit/inputs/{{ field_input_target_id__target_id }}">{{ field_input_target_id }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -209,7 +209,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -233,8 +233,8 @@ display:
           label: SHMU
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: '<a href="/edit/shmu/{{ field_operation_shmu_target_id__target_id }}">{{ field_operation_shmu_target_id }}</a>'
             make_link: false
             path: ''
             absolute: false
@@ -274,7 +274,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -548,7 +548,7 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      css_class: admin-project-display
+      css_class: awardee-operation-display
       header: {  }
       footer: {  }
       display_extenders: {  }

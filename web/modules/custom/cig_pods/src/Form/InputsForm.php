@@ -6,6 +6,7 @@ Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\URL;
+use Drupal\Core\Field\EntityReferenceFieldItemList;
 
 class InputsForm extends FormBase {
 
@@ -65,6 +66,14 @@ class InputsForm extends FormBase {
 		return $options;
 	}
 
+	public function getInputCosts(EntityReferenceFieldItemList $costs){
+		$cost_array_to_return = [];
+		for($i = 0; $i < count($costs); $i ++){
+			$cost_array_to_return[$i] = \Drupal::entityTypeManager()->getStorage('asset')->load($costs[$i]->target_id);
+		}
+		return $cost_array_to_return;
+	}
+
     private function convertFraction($fraction){
         $num = $fraction->getValue()["numerator"];
         $denom = $fraction->getValue()["denominator"];
@@ -92,27 +101,20 @@ class InputsForm extends FormBase {
 
         $num_other_costs_lines = $form_state->get('num_other_costs_lines');//get num of inputs showing on screen. (1->n exclude:removed indexes)
 		$num_other_costs = $form_state->get('num_other_costs');//get num of added inputs. (1->n)
+		//($num_other_costs);
 
         $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
 
         $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
 
-		if($is_edit){
-			$cname=array();
-			$fraction_count = count($input_org_default_name);
-				for( $index = 0; $index < $fraction_count; $index++){
-						$fractionToAdd = $this->convertFraction($input_org_default_name[$index]);
-					$cname[] = $fractionToAdd;
-				}
 
-				if(count($cname) == 0){
-					$ex_count = 1;
-				}else{
-					$ex_count = count($cname);
-				}	
-		}
 
         if($is_edit){
+			$cost_field_array = $this->getInputCosts($input->get('field_cost'));
+			$ex_count = count($cost_field_array);
+			if($ex_count === 0){
+				$ex_count = 1;
+			}
 
 			if ($num_other_costs === NULL) {//initialize number of input, set to 1
 				$form_state->set('num_other_costs', $ex_count);
@@ -270,26 +272,28 @@ class InputsForm extends FormBase {
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
+			 $other_costs_value = $is_edit && $cost_field_array[$i]->get('field_cost_amount')[0] !== NULL ? $this->convertFraction($cost_field_array[$i]->get('field_cost_amount')[0]) : '';
 			$form['names_fieldset'][$i]['other_costs_cost'] = [
 				 '#type' => 'number',
                  '#step' => 0.01,
 				'#title' => $this
 				  ->t("Cost"),
-				'#default_value' => $cname[$i],
-				'attributes' => [
-					'class' => 'something',
-				],
+				'#default_value' => $other_costs_value,
+				// 'attributes' => [
+				// 	'class' => 'something',
+				// ],
 				'#prefix' => ($num_other_costs_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 			];
 
+			$cost_type_value = $is_edit ? $cost_field_array[$i]->get('field_cost_type')->target_id : '';
 			$form['names_fieldset'][$i]['other_costs_type'] = [
 				'#type' => 'select',
 				'#title' => $this
 				  ->t('Type'),
 				'#options' =>  $this->getCostTypeOptions(),
-				'#default_value' => $inputtype[$i],
-				 '#prefix' => '<div class="inline-components"',
+				'#default_value' => $cost_type_value,
+				 '#prefix' => '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 			];
            
@@ -410,6 +414,8 @@ class InputsForm extends FormBase {
     }
 
     public function addOtherCostsRowCallback(array &$form, FormStateInterface $form_state) {
+		dpm("addOtherCostsRowCallback");
+		 dpm(hrtime(false));
         return $form['names_fieldset'];
     }
 
@@ -426,11 +432,35 @@ class InputsForm extends FormBase {
          return $mapping;
      }
 
+	 public function submitCosts(array &$form, FormStateInterface $form_state) {
+		  // Minus 1 because there is an entry with key 'actions'
+	        $num_other_costs = $form_state->get('num_other_costs');
+
+            $input_costs = [];
+			$cost_creation['type'] = 'cost';
+			$cost_creation['name'] = 'Cost'.$form['field_input_date'];
+	        //$input_cost_types = [];
+			
+	        for( $i = 0; $i < $num_other_costs; $i++ ){
+				
+		        $input_cost = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
+		        $input_cost_type = $form['names_fieldset'][$i]['other_costs_type']['#value'];
+				if($input_cost === NULL && $input_cost_type === NULL){continue;}
+				$current_cost = Asset::create($cost_creation);
+				$current_cost->set('field_cost_amount', $input_cost);
+				$current_cost->set('field_cost_type', $input_cost_type);
+				$input_costs[$i] = $current_cost;
+
+	        }
+			return $input_costs;
+	 }
+
     /**
     * {@inheritdoc}
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
+	   $input_costs = $this->submitCosts($form, $form_state);
         if($is_create){
 	        $values = $form_state->getValues();
 
@@ -453,18 +483,20 @@ class InputsForm extends FormBase {
 		        $input_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
 	        }
 
-            // Minus 1 because there is an entry with key 'actions'
-	        $num_other_costs = count($form['names_fieldset']) - 1;
+			$input_submission['field_cost'] = $input_costs;
 
-            $input_cost = [];
-	        $input_cost_types = [];
-	        for( $i = 0; $i < $num_other_costs; $i++ ){
-		        $input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-		        $input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        }
+            // // Minus 1 because there is an entry with key 'actions'
+	        // $num_other_costs = count($form['names_fieldset']) - 1;
 
- 	        $input_submission['field_cost'] = $input_cost;
- 	        $input_submission['field_cost_type'] = $input_cost_types;
+            // $input_cost = [];
+	        // $input_cost_types = [];
+	        // for( $i = 0; $i < $num_other_costs; $i++ ){
+		    //     $input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
+		    //     $input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
+	        // }
+
+ 	        // $input_submission['field_cost'] = $input_cost;
+ 	        // $input_submission['field_cost_type'] = $input_cost_types;
 
             $input_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
@@ -486,21 +518,22 @@ class InputsForm extends FormBase {
 	        }
 
 		     // Minus 1 because there is an entry with key 'actions'
-		    $num_other_costs = count($form['names_fieldset']) - 1;
+		    // $num_other_costs = count($form['names_fieldset']) - 1;
 
-		    $input_cost = [];
-	        $input_cost_types = [];
-	        for( $i = 0; $i < $num_other_costs; $i++ ){
-				$input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-				$input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        }
+		    // $input_cost = [];
+	        // $input_cost_types = [];
+	        // for( $i = 0; $i < $num_other_costs; $i++ ){
+			// 	$input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
+			// 	$input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
+	        // }
 
- 	        $input->set('field_cost', $input_cost);
- 	        $input->set('field_cost_type', $input_cost_types);
+ 	        // $input->set('field_cost', $input_cost);
+ 	        // $input->set('field_cost_type', $input_cost_types);
+			$input->set('field_cost', $input_costs);
 
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		     $input->save();
+		    $input->save();
 			
 	}
 	if($form_state->get('redirect_input') == TRUE){
@@ -511,15 +544,17 @@ class InputsForm extends FormBase {
 }
 
     public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {
-       
+       dpm("addOtherCostsRow");
+	   dpm(hrtime(false));
         $num_other_costs = $form_state->get('num_other_costs');
-	    $num_other_costs_lines = $form_state->get('num_other_costs_lines');
-        $form_state->set('num_other_costs', $num_other_costs + 1);
-	    $form_state->set('num_other_costs_lines', $num_other_costs_lines + 1);
-        $form_state->setRebuild();
+	     $num_other_costs_lines = $form_state->get('num_other_costs_lines');
+         $form_state->set('num_other_costs', $num_other_costs + 1);
+	     $form_state->set('num_other_costs_lines', $num_other_costs_lines + 1);
+          $form_state->setRebuild();
   }
 
   public function removeOtherCostsCallback(array &$form, FormStateInterface $form_state) {
+	dpm("removeOtherCostsCallback");
     $trigger = $form_state->getTriggeringElement();
 	$num_line = $form_state->get('num_other_costs_lines');
     $indexToRemove = $trigger['#name'];

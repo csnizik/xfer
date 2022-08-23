@@ -50,8 +50,17 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
 
-    // @todo Add access logic. Allow access for now.
-    $result = AccessResult::allowed();
+    // Assume forbidden.
+    $result = AccessResult::forbidden();
+
+    // Get the user's zRole.
+    $session = \Drupal::request()->getSession();
+    $zrole = $session->get('ApplicationRoleEnumeration');
+
+    // Admins can create any asset.
+    if ($zrole == 'CIG_App_Admin') {
+      $result = AccessResult::allowed();
+    }
 
     // Return the result.
     return $result;

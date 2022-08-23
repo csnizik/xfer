@@ -60,10 +60,6 @@ table.views-table.views-view-table.cols-5 td:nth-child(2) {
     width: 120%;
 }
 
-th#view-field-input-target-id-table-column{
-   width: 120%;
-}
-
 .sticky-shadow{
     display: none;
 }

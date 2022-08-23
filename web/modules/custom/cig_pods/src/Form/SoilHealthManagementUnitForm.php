@@ -13,16 +13,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 
 	public function getShmuTypeOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_shmu_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_shmu_type');
+		return ['' => '- Select -'] + $options;
 	}
 	public function getExperimentalDesignOptions(){
 		$options = [];
@@ -113,18 +105,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function getProducerOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'producer']
-		 );
-		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
-		 }
-
-		 return $producer_options;
+    $options = $this->entityOptions('asset', 'producer');
+    return ['' => '- Select -'] + $options;
 	}
 	public function getLandUseModifierOptions(){
 		$options = [];

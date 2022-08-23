@@ -39,7 +39,7 @@ class AwardeeDashboardForm extends FormBase {
 					'pst' => $this
 					->t('PCS Assessment'),
           'phst' => $this
-					->t('Pasture Health Assessment'),
+					->t('DIPH Assessment'),
           'ltr' => $this
 					->t('Soil Test Result'),
           'ltm' => $this
@@ -113,7 +113,7 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_pasture_health_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Pasture Health Assessment(s): '.$entityCount[13]),
+      '#value' => $this->t('DIPH Assessment(s): '.$entityCount[13]),
       '#submit' => ['::phstRedirect'],
     ];
 

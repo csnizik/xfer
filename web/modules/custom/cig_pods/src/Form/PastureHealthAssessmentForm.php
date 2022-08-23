@@ -379,7 +379,7 @@ class PastureHealthAssessmentForm extends FormBase {
 
             $pasture_health_submission['type'] = 'pasture_health_assessment';
             $pastureAssessment = Asset::create($pasture_health_submission);
-			$pastureAssessment->set('name', 'Pasture Health');
+			$pastureAssessment->set('name', 'DIPH Assessment');
             $pastureAssessment -> save();
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -392,7 +392,7 @@ class PastureHealthAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $pastureHealthAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$pastureHealthAssessment->set('name', 'Pasture Health');
+			$pastureHealthAssessment->set('name', 'DIPH Assessment');
             $pastureHealthAssessment->save();
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

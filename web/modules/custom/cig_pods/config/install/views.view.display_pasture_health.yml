@@ -20,7 +20,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Pasture Health'
+      title: 'Manage Determining Indicators of Pastureland Health Assessment'
       fields:
         id_1:
           id: id_1
@@ -98,7 +98,7 @@ display:
           entity_type: asset
           entity_field: name
           plugin_id: field
-          label: 'Pasture Health Assessment'
+          label: Assessment
           exclude: false
           alter:
             alter_text: true

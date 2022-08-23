@@ -17,8 +17,18 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
 
-    // @todo Add access logic. Allow access for now.
-    $result = AccessResult::allowed();
+    // Assume forbidden.
+    $result = AccessResult::forbidden();
+
+    // Get the user's eAuthID and zRole.
+    $session = \Drupal::request()->getSession();
+    $eauth_id = $session->get('eAuthId');
+    $zrole = $session->get('ApplicationRoleEnumeration');
+
+    // Admins can create any asset.
+    if ($zrole == 'CIG_App_Admin') {
+      $result = AccessResult::allowed();
+    }
 
     // Ensure that access is evaluated again when the entity changes.
     return $result->addCacheableDependency($entity);

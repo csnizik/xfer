@@ -109,7 +109,7 @@ class AwardeeDashboardForm extends FormBase {
 		$form['awardee_pasture_assessment'] = [
 		      '#type' => 'submit',
 		      '#value' => $this->t('Pasture Assessment(s): '.$entityCount['pasture_assessment']),
-		      '#submit' => ['::rlaRedirect'],
+		      '#submit' => ['::pstRedirect'],
 		    ];
 
     $form['awardee_pasture_health_assessment'] = [

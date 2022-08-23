@@ -121,6 +121,11 @@ hide_return:
     theme:
       css/hide_return.css: {}
 
+pasture_assessment_form:
+  css:
+    theme:
+      css/pasture-assessment.css: {}
+
 behavior_wkt_refresh:
   js:
     js/farmOS.map.behaviors.wkt_refresh.js: {}

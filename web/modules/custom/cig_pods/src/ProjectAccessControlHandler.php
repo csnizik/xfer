@@ -62,6 +62,27 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
       $result = AccessResult::allowed();
     }
 
+    // Awardees can only create certain asset types.
+    elseif ($zrole == 'CIG_NSHDS') {
+      $allowed_types = [
+        'producer',
+        'soil_health_management_unit',
+        'soil_health_sample',
+        'field_assessment',
+        'range_assessment',
+        'pasture_assessment',
+        'pasture_health_assessment',
+        'lab_result',
+        'lab_testing_method',
+        'operation',
+        'irrigation',
+        'input',
+      ];
+      if (in_array($entity_bundle, $allowed_types)) {
+        $result = AccessResult::allowed();
+      }
+    }
+
     // Return the result.
     return $result;
   }

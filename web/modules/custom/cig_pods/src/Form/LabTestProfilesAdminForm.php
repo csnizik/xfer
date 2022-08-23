@@ -2,11 +2,10 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
-class LabTestProfilesAdminForm extends FormBase {
+class LabTestProfilesAdminForm extends PodsFormBase {
 
     public function getSoilHealthExtractionOptions($bundle){
         $shde_options = [];

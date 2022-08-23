@@ -2,11 +2,10 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
-class LabResultsForm extends FormBase {
+class LabResultsForm extends PodsFormBase {
 
     public function getLabInterpretationOptions($bundle){
         $shde_options = [];

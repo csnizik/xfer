@@ -57,6 +57,10 @@ table.views-table.views-view-table.cols-5 {
     margin-bottom: 0px;
 }
 
+th#view-field-input-target-id-table-column{
+   width: 120%;
+}
+
 .sticky-shadow{
     display: none;
 }

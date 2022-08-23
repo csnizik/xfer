@@ -432,7 +432,6 @@ class InputsForm extends FormBase {
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
 	   $operation_reference = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
-	   dpm($operation_reference);
         if($is_create){
 	        $values = $form_state->getValues();
 
@@ -473,8 +472,7 @@ class InputsForm extends FormBase {
 	        $input_to_save = Asset::create($input_submission);
 			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 	        $input_to_save -> save();
-			// dpm($operation);
-			$operation_reference->set('field_input', $input_to_save->get('id')->value);
+			$operation_reference->get('field_input')[] = $input_to_save->id();
 			$operation_reference->save();
          } else {
 		    $input_id = $form_state->get('input_id');
@@ -506,9 +504,8 @@ class InputsForm extends FormBase {
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 		    $input->save();
-			$operation_reference->set('field_input', $input->get('id')->value);
+			$operation_reference->get('field_input')[] = $input->id();
 			$operation_reference->save();
-
 	}
 	if($form_state->get('redirect_input') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $form_state->get('operation_id')]);

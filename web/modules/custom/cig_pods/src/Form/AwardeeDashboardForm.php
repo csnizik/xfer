@@ -83,61 +83,61 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_soil_health_management_unit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('SHMU(s): '.$entityCount[7]),
+      '#value' => $this->t('SHMU(s): '.$entityCount[6]),
       '#submit' => ['::shmuRedirect'],
     ];
 
     $form['awardee_soil_health_sample'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Soil Sample(s): '.$entityCount[4]),
+      '#value' => $this->t('Soil Sample(s): '.$entityCount[3]),
       '#submit' => ['::ssaRedirect'],
     ];
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('CIFSH Assessment(s): '.$entityCount[6]),
+      '#value' => $this->t('CIFSH Assessment(s): '.$entityCount[5]),
       '#submit' => ['::ifaRedirect'],
     ];
 
     $form['awardee_rangeland_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('IIRH Assessment(s): '.$entityCount[11]),
+      '#value' => $this->t('IIRH Assessment(s): '.$entityCount[10]),
       '#submit' => ['::rlaRedirect'],
     ];
 
 		$form['awardee_pasture_assessment'] = [
 		      '#type' => 'submit',
-		      '#value' => $this->t('PCS Assessment(s): '.$entityCount[12]),
+		      '#value' => $this->t('PCS Assessment(s): '.$entityCount[11]),
 		      '#submit' => ['::pstRedirect'],
 		];
 
     $form['awardee_pasture_health_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('DIPH Assessment(s): '.$entityCount[13]),
+      '#value' => $this->t('DIPH Assessment(s): '.$entityCount[12]),
       '#submit' => ['::phstRedirect'],
     ];
 
 		$form['awardee_lab_result'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Soil Test Result(s): '.$entityCount[5]),
+      '#value' => $this->t('Soil Test Result(s): '.$entityCount[4]),
       '#submit' => ['::labresRedirect'],
     ];
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Method(s): '.$entityCount[8]),
+      '#value' => $this->t('Method(s): '.$entityCount[7]),
       '#submit' => ['::labRedirect'],
     ];
 
     $form['awardee_irrigation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Irrigation(s): '.$entityCount[10]),
+      '#value' => $this->t('Irrigation(s): '.$entityCount[9]),
       '#submit' => ['::irrRedirect'],
     ];
 
     $form['awardee_operation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Operation(s): '.$entityCount[9]),
+      '#value' => $this->t('Operation(s): '.$entityCount[8]),
       '#submit' => ['::operRedirect'],
       '#suffix' => '</div>',
     ];

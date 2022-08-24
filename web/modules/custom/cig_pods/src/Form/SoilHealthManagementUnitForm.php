@@ -17,28 +17,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		return ['' => '- Select -'] + $options;
 	}
 	public function getExperimentalDesignOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_experimental_design']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_experimental_design');
+		return array_merge(['' => '- Select -'], (array)$options);
+
 }
 	public function getTillageSystemOptions(){
-		$options = [];
-		 $options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_tillage_system']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_tillage_system');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getYearOptions(){
@@ -56,68 +42,35 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function getMajorResourceConcernOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_major_resource_concern']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_major_resource_concern');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getResourceConcernOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_resource_concern']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_resource_concern');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getLandUseOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_land_use']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_land_use');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getPracticesAddressedOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_practice']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_practice');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getProducerOptions(){
     $options = $this->entityOptions('asset', 'producer');
-    return ['' => '- Select -'] + $options;
+    return array_merge(['' => '- Select -'], $options);
 	}
+
 	public function getLandUseModifierOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_land_use_modifiers']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_land_user_modifiers');
+		return array_merge(['' => '- Select -'], $options);
 	}
 
 	public function getCropRotationYearOptions(){

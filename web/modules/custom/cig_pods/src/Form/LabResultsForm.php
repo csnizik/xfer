@@ -8,32 +8,14 @@ Use Drupal\asset\Entity\Asset;
 class LabResultsForm extends PodsFormBase {
 
     public function getLabInterpretationOptions($bundle){
-        $shde_options = [];
-        $shde_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-            [
-                'vid' => $bundle,
-            ]
-        );
-        $shde_keys = array_keys($shde_terms);
-        foreach($shde_keys as $shde_key){
-            $term = $shde_terms[$shde_key];
-            $sdhe_options[$shde_key] = $term -> getName();
-        }
-        return $sdhe_options;
+        $options = $this->entityOptions('taxonomy_term', $bundle);
+		return array_merge(['' => '- Select -'], $options);
     }
 
     private function getSoilSampleOptions(){
-        $soil_health_sample_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_sample']
-		);
-		$soil_health_sample_options = array();
-		$soil_health_sample_keys = array_keys($soil_health_sample_assets);
-		foreach($soil_health_sample_keys as $soil_health_sample_key) {
-		  $asset = $soil_health_sample_assets[$soil_health_sample_key];
-		  $soil_health_sample_options[$soil_health_sample_key] = $asset->getName();
-		}
-
-		return $soil_health_sample_options;
+        $options = $this->entityOptions('asset', 'soil_health_sample');
+		return array_merge(['' => '- Select -'], (array)$options);
+        
 	}
 
     private function convertFractionsToDecimal($is_edit, $labResults, $field){

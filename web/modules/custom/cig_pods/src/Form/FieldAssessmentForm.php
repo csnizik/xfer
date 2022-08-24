@@ -11,34 +11,16 @@ Use Drupal\Core\Url;
 class FieldAssessmentForm extends PodsFormBase {
 
 	public function getAssessmentEvaluationOptions(){
-		$options = [];
-		$options[''] = '- Select -';
 
-		// TODO: "vid => d_assessment_..." is spelled incorrectly, but need to
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_assessment_evaluation']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
+		return array_merge(['' => '- Select -'], $options);
+		
 	}
 
 
 	public function getSHMUOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_management_unit']
-		 );
-		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
-		 }
-
-		 return $producer_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return array_merge(['' => '- Select -'], $options);
 	}
    /**
    * {@inheritdoc}

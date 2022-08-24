@@ -11,18 +11,8 @@ Use Drupal\Core\Url;
 class IrrigationForm extends PodsFormBase {
 
 	public function getSHMUOptions() {
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'soil_health_management_unit']
-		);
-		$shmu_options = [];
-		$shmu_options[''] = '- Select -';
-		$shmu_keys = array_keys($shmu_assets);
-		foreach($shmu_keys as $shmu_key) {
-		  $asset = $shmu_assets[$shmu_key];
-		  $shmu_options[$shmu_key] = $asset -> getName();
-		}
-
-		return $shmu_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return array_merge(['' => '- Select -'], $options);
 	}
 
 	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){

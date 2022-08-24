@@ -9,17 +9,8 @@ Use Drupal\Core\Url;
 class ProducerForm extends PodsFormBase {
 
 	private function getAssetOptions($assetType){
-        $project_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => $assetType]
-		);
-		$project_options = array();
-		$project_keys = array_keys($project_assets);
-		foreach($project_keys as $project_key) {
-		  $asset = $project_assets[$project_key];
-		  $project_options[$project_key] = $asset->getName();
-		}
-
-		return $project_options;
+		$options = $this->entityOptions('asset', $assetType);
+		return array_merge(['' => '- Select -'], (array)$options);
 	}
 
    /**

@@ -11,57 +11,24 @@ Use Drupal\Core\Url;
 class OperationForm extends PodsFormBase {
 
 	public function getSHMUOptions() {
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'soil_health_management_unit']
-		);
-		$shmu_options = [];
-		$shmu_options[''] = '- Select -';
-		$shmu_keys = array_keys($shmu_assets);
-		foreach($shmu_keys as $shmu_key) {
-		  $asset = $shmu_assets[$shmu_key];
-		  $shmu_options[$shmu_key] = $asset -> getName();
-		}
-
-		return $shmu_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return array_merge(['' => '- Select -'], (array)$options);
 	}
 
 	public function getEquipmentOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_tractor_self_propelled_machine']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_tractor_self_propelled_machine');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getEquipmentOwnershipOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_equipment_ownership']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_equipment_ownership');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getOperationOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_operation_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_operation_type');
+		return array_merge(['' => '- Select -'], (array)$options);
 	}
 
 	public function getCostSequenceIdsForOperation($operation){

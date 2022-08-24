@@ -209,7 +209,7 @@ class PastureAssessmentForm extends FormBase {
 
 		$form['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
-			'#value' => $this->t('Calculate score.'),
+			'#value' => $this->t('Calculate Score'),
 			'#submit' => ['::displayRcScores'],
 			'#ajax' => [
 				'callback' => '::updateScores',

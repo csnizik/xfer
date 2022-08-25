@@ -3,12 +3,12 @@ status: true
 dependencies:
   config:
     - asset.type.range_assessment
-  enforced:
-    module:
-      - cig_pods
   module:
     - asset
     - options
+  enforced:
+    module:
+      - cig_pods
 id: rangeland_assessment_display
 label: 'Rangeland Assessment Display'
 module: views
@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Interpreting Indicators of Range Health Assessments'
+      title: 'Manage Interpreting Indicators of Range Health Assessment'
       fields:
         id_1:
           id: id_1

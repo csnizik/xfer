@@ -23,7 +23,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Manage Pasture Assessments'
+      title: 'Manage Pasture Conditon Score Assessment'
       fields:
         id_1:
           id: id_1
@@ -101,7 +101,7 @@ display:
           entity_type: asset
           entity_field: name
           plugin_id: field
-          label: 'Pasture Assessment'
+          label: Assessment
           exclude: false
           alter:
             alter_text: true

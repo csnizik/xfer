@@ -494,19 +494,6 @@ class InputsForm extends FormBase {
 
 			$input_submission['field_cost'] = $input_costs;
 
-            // // Minus 1 because there is an entry with key 'actions'
-	        // $num_other_costs = count($form['names_fieldset']) - 1;
-
-            // $input_cost = [];
-	        // $input_cost_types = [];
-	        // for( $i = 0; $i < $num_other_costs; $i++ ){
-		    //     $input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-		    //     $input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        // }
-
- 	        // $input_submission['field_cost'] = $input_cost;
- 	        // $input_submission['field_cost_type'] = $input_cost_types;
-
             $input_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
 	        $input_to_save = Asset::create($input_submission);
@@ -525,19 +512,6 @@ class InputsForm extends FormBase {
 		        }
 		        $input->set($entity_field_id, $form[$form_elem_id]['#value']);
 	        }
-
-		     // Minus 1 because there is an entry with key 'actions'
-		    // $num_other_costs = count($form['names_fieldset']) - 1;
-
-		    // $input_cost = [];
-	        // $input_cost_types = [];
-	        // for( $i = 0; $i < $num_other_costs; $i++ ){
-			// 	$input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-			// 	$input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        // }
-
- 	        // $input->set('field_cost', $input_cost);
- 	        // $input->set('field_cost_type', $input_cost_types);
 			$input->set('field_cost', $input_costs);
 
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
@@ -550,6 +524,15 @@ class InputsForm extends FormBase {
 	}else{
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
+
+	// if(count($input_costs) > 0){
+	// 	$numCosts = count($input_costs);
+	// 	for($i = 0; i < $numCosts; $i++){
+	// 		$input_costs[$i]->delete();
+	// 	}
+	// }
+	// dpm("inputCosts");
+	// dpm($input_costs);
 }
 
     public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {

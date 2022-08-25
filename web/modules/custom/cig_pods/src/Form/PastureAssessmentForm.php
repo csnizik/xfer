@@ -313,6 +313,8 @@ class PastureAssessmentForm extends FormBase {
 			$pasturAssessment->set('name', 'Pasture');
             $pasturAssessment -> save();
 
+			$this->setProjectReference($pasturAssessment, $pasturAssessment->get('pasture_assessment_shmu')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
@@ -325,10 +327,20 @@ class PastureAssessmentForm extends FormBase {
             }
 			$pastureAssessment->set('name', 'Pasture');
             $pastureAssessment->save();
+
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_assessment_shmu')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
 
     }
+
+	public function setProjectReference($assetReference, $shmuReference){
+		$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 
 
     	public function getPastureCondition(array &$form, FormStateInterface $form_state, $severity_options) {

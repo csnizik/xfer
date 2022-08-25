@@ -765,8 +765,11 @@ class SoilHealthManagementUnitForm extends FormBase {
         // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $shmu_id = $form_state->get('shmu_id');
         $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
+		$crop_rotation = $shmu->get('field_shmu_crop_rotation_sequence');
+		// dpm($crop_rotation);
 
         try{
+			$crop_rotation->delete();
 			$shmu->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
@@ -912,15 +915,16 @@ class SoilHealthManagementUnitForm extends FormBase {
 			}
 		}
 		// Cleanup done
+		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
+		$this->setProjectReference($shmu, $producer->get('project')->target_id);
 
-		// Send success message to the user
-		$this
-			->messenger()
-			->addStatus($this
-			->t('Form submitted for Soil Health Management Unit', []));
-		// Success message done
+		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	}
 
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	public function setProjectReference($assetReference, $projectReference){
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
+		$assetReference->set('project', $project);
+		$assetReference->save();
 	}
 
   /**
@@ -981,7 +985,7 @@ class SoilHealthManagementUnitForm extends FormBase {
   public function ssurgoDataCallback(array &$form, FormStateInterface $form_state) {
     return $form['ssurgo_data_wrapper'];
   }
-  
+
 	// Adds a new row to crop rotation
 	public function addAnotherCropRotation(array &$form, FormStateInterface $form_state){
 		// dpm("Adding  new rotation");

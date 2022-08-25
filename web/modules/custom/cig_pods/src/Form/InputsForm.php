@@ -109,7 +109,7 @@ class InputsForm extends FormBase {
 					$ex_count = 1;
 				}else{
 					$ex_count = count($cname);
-				}	
+				}
 		}
 
         if($is_edit){
@@ -266,7 +266,7 @@ class InputsForm extends FormBase {
 			if (in_array($i, $removed_other_costs)) {// Check if field was removed
 				continue;
 			}
-			
+
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
@@ -292,7 +292,7 @@ class InputsForm extends FormBase {
 				 '#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
-           
+
 
 			if($num_other_costs_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
@@ -439,7 +439,7 @@ class InputsForm extends FormBase {
             $input_submission = [];
 
             $input_submission['type'] = 'input';
-                 
+
 			$operation_taxonomy_name = $form_state->get('current_operation_name');
 			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
             $input_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
@@ -470,7 +470,9 @@ class InputsForm extends FormBase {
 
 	        $input_to_save = Asset::create($input_submission);
 			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-	         $input_to_save -> save();
+	        $input_to_save -> save();
+
+			$this->setProjectReference($input_to_save, $input_to_save->get('field_operation')->target_id);
          } else {
 		    $input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
@@ -500,8 +502,10 @@ class InputsForm extends FormBase {
 
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		     $input->save();
-			
+		    $input->save();
+
+			$this->setProjectReference($input, $input->get('field_operation')->target_id);
+
 	}
 	if($form_state->get('redirect_input') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $form_state->get('operation_id')]);
@@ -510,8 +514,15 @@ class InputsForm extends FormBase {
 	}
 }
 
+public function setProjectReference($assetReference, $operationReference){
+	$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
+	$project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
+	$assetReference->set('project', $project);
+	$assetReference->save();
+}
+
     public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {
-       
+
         $num_other_costs = $form_state->get('num_other_costs');
 	    $num_other_costs_lines = $form_state->get('num_other_costs_lines');
         $form_state->set('num_other_costs', $num_other_costs + 1);

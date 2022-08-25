@@ -269,8 +269,17 @@ class IrrigationForm extends FormBase {
         }
 
 		$irrigation->save();
+
+		$this->setProjectReference($irrigation, $irrigation->get('field_irrigation_shmu')->target_id);
 		// Success message done
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
     }
+
+	public function setProjectReference($assetReference, $shmuReference){
+		$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 }

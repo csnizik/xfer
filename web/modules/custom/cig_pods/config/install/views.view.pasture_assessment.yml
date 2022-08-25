@@ -434,7 +434,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: assets/pasture_assessment
+      path: assets/pasture_assessments
     cache_metadata:
       max-age: -1
       contexts:

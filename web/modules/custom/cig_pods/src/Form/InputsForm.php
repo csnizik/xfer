@@ -272,8 +272,14 @@ class InputsForm extends FormBase {
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
-			 $other_costs_value = $is_edit && $cost_field_array[$i]->get('field_cost_amount')[0] !== NULL ? $this->convertFraction($cost_field_array[$i]->get('field_cost_amount')[0]) : '';
-			$form['names_fieldset'][$i]['other_costs_cost'] = [
+
+      // The cost value should be pulled from an existing cost item if available,
+      // otherwise, we assume it's a new one, so it should be blank.
+      $other_costs_value = '';
+      if (!empty($cost_field_array[$i]) && $cost_field_array[$i]->get('field_cost_amount')[0] !== NULL) {
+        $other_costs_value = $this->convertFraction($cost_field_array[$i]->get('field_cost_amount')[0]);
+      }
+      $form['names_fieldset'][$i]['other_costs_cost'] = [
 				 '#type' => 'number',
                  '#step' => 0.01,
 				'#title' => $this
@@ -286,7 +292,10 @@ class InputsForm extends FormBase {
 		  		'#suffix' => '</div>',
 			];
 
-			$cost_type_value = $is_edit ? $cost_field_array[$i]->get('field_cost_type')->target_id : '';
+      $cost_type_value = '';
+      if (!empty($cost_field_array[$i])) {
+        $cost_type_value = $cost_field_array[$i]->get('field_cost_type')->target_id;
+      }
 			$form['names_fieldset'][$i]['other_costs_type'] = [
 				'#type' => 'select',
 				'#title' => $this

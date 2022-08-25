@@ -76,12 +76,12 @@ class FieldAssessmentForm extends FormBase {
 		];
 
 
-		$field_assessment_shmu_value = $is_edit ? $assessment->get('field_assessment_shmu')->target_id : '';
-		$form['field_assessment_shmu'] = [
+		$shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $field_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => FALSE,
 		];
 
@@ -365,7 +365,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	$form_values = $form_state -> getValues();
 
 	// TODO: fix naming
-	$related_shmu_id = $form_values['field_assessment_shmu'];
+	$related_shmu_id = $form_values['shmu'];
 	$date = $form_values['field_assessment_date'];
 	$related_shmu = Asset::load($related_shmu_id);
 	if($related_shmu <> NULL) {

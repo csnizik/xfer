@@ -189,17 +189,6 @@ class PastureAssessmentForm extends FormBase {
 
 		];
 
-		$pasture_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('pasture_assessment_condition_store')->value : '';
-
-		$form['pasture_assessment_condition_store'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Pasture Condition Score'),
-			'#options' => $severity_options,
-			'#default_value' => $pasture_assessment_soil_surface_loss_value,
-			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-
-		];
 
 
 		$form['rc_container'] = [
@@ -209,7 +198,7 @@ class PastureAssessmentForm extends FormBase {
 
 		$form['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
-			'#value' => $this->t('Calculate score.'),
+			'#value' => $this->t('Calculate Score'),
 			'#submit' => ['::displayRcScores'],
 			'#ajax' => [
 				'callback' => '::updateScores',
@@ -293,7 +282,7 @@ class PastureAssessmentForm extends FormBase {
 
 	public function createElementNames(){
 		return array('pasture_assessment_shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
-		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion', 'pasture_assessment_condition_store','pasture_assessment_soil_compaction');
+		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion','pasture_assessment_soil_compaction');
 	}
 
     /**
@@ -342,9 +331,8 @@ class PastureAssessmentForm extends FormBase {
 		$pasture_assessment_soil_compaction = $form_state->getValue('pasture_assessment_soil_compaction');
 		$plant_rigor = $form_state->getValue('pasture_assessment_plant_rigor');
 		$erosion = $form_state->getValue('pasture_assessment_erosion');
-		$condition_store = $form_state->getValue('pasture_assessment_condition_store');
 
-		$score = $desirable_plants + $water_flow + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor + $condition_store;
+		$score = $desirable_plants + $Legume_dry_weight + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor;
 		return $score;
 	}
 

@@ -23,7 +23,7 @@ function cig_pods_page_attachments(array &$attachments) {
 
 
 function cig_pods_views_pre_render(ViewExecutable $view ) {
-	
+
 
 	if (isset($view) && ($view->storage->id() == 'producer_entry_form')) {
 		$view->element['#attached']['library'][] =
@@ -59,8 +59,12 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 	}
 	if (isset($view) && ($view->storage->id() == 'display_operation')) {
 		$view->element['#attached']['library'][] =
-		'cig_pods/admin_project_display';
+		'cig_pods/operation_display';
 	}
+  if (isset($view) && ($view->storage->id() == 'pasture_assessment_display')) {
+    $view->element['#attached']['library'][] =
+    'cig_pods/admin_project_display';
+  }
 	if (isset($view) && ($view->storage->id() == 'shmu_display')) {
 		$view->element['#attached']['library'][] =
 		'cig_pods/admin_details_display';

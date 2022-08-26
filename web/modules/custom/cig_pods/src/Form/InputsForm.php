@@ -97,6 +97,7 @@ class InputsForm extends FormBase {
 	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
+
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
         $num_other_costs_lines = $form_state->get('num_other_costs_lines');//get num of inputs showing on screen. (1->n exclude:removed indexes)
@@ -104,10 +105,6 @@ class InputsForm extends FormBase {
 		//($num_other_costs);
 
         $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
-
-        $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
-
-
 
         if($is_edit){
 			$cost_field_array = $this->getInputCosts($input->get('field_cost'));
@@ -382,17 +379,6 @@ class InputsForm extends FormBase {
 				];
 			}
         return $form;
-    }
-
-     public function arrayValuesAreUnique($array){
-	    $count_dict = array_count_values($array);
-
-	    foreach($count_dict as $key => $value){
-		    if($value != 1){
-			    return False;
-		    }
-	    }
-	    return True;
     }
 
     /**

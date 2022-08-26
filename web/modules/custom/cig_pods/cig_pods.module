@@ -7,83 +7,63 @@ Use Drupal\Core\Form\FormStateInterface;
  * Module file for Producer Operation Data Systems (PODS)
  */
 
-/*
-  Implements hook_page_attachments().
-*/
-
+/**
+ * Implements hook_page_attachments().
+ */
 function cig_pods_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'cig_pods/hide_return';
 }
 
-
- /*
-	Implements hook_views_pre_render().
+/**
+ * Implements hook_views_pre_render().
  */
-
-
-
 function cig_pods_views_pre_render(ViewExecutable $view ) {
-	
 
-	if (isset($view) && ($view->storage->id() == 'producer_entry_form')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/producer_entry_form';
-	}
-	if (isset($view) && ($view->storage->id() == 'display_project')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_project_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'producer_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_details_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'awardee_organization_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_details_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'lab_test_profiles_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_details_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'field_assessment')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/field_assessment';
-	}
-	if (isset($view) && ($view->storage->id() == 'methods_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/awardee_methods_details_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'display_irrigation')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_project_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'display_operation')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_project_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'shmu_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/admin_details_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'lab_results_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/awardee_lab_results_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'soil_health_sample_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/awardee_soil_sample_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'field_assessment')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/awardee_soil_sample_display';
-	}
-	if (isset($view) && ($view->storage->id() == 'rangeland_assessment_display')) {
-		$view->element['#attached']['library'][] =
-		'cig_pods/range_assessment_display';
-	}
-	
-}
+  // Attach custom CSS libraries to PODS Asset List Views.
+  if ($view->id() == 'pods_asset_lists') {
+    $library = FALSE;
+    switch ($view->current_display) {
 
-function cig_pods_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+      // Apply admin_details_display library.
+      case 'awardee':
+      case 'lab_testing_profile':
+      case 'producer':
+      case 'soil_health_management_unit':
+        $library = 'admin_details_display';
+        break;
 
+      // Apply admin_project_display library.
+      case 'irrigation':
+      case 'pasture_assessment':
+      case 'project':
+        $library = 'admin_project_display';
+        break;
+
+      // Apply misc libraries...
+      case 'field_assessment':
+        $library = 'field_assessment';
+        break;
+      case 'lab_result':
+        $library = 'awardee_lab_results_display';
+        break;
+      case 'lab_testing_method':
+        $library = 'awardee_methods_details_display';
+        break;
+      case 'operation':
+        $library = 'operation_display';
+        break;
+      case 'pasture_health_assessment':
+        $library = 'pasture_health_display';
+        break;
+      case 'range_assessment':
+        $library = 'range_assessment_display';
+        break;
+      case 'soil_health_sample':
+        $library = 'awardee_soil_sample_display';
+        break;
+    }
+    if ($library) {
+      $view->element['#attached']['library'][] = 'cig_pods/' . $library;
+    }
+  }
 }

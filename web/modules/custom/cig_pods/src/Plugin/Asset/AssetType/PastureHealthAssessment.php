@@ -8,11 +8,11 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
    * Provides the CIG Project asset type.
    *
    * @AssetType(
-   * id = "range_assessment",
-   * label = @Translation("Range Assessment"),
+   * id = "pasture_health_assessment",
+   * label = @Translation("Pasture Health Assessment"),
    * )
    */
-class RangeAssessment extends FarmAssetType {
+class PastureHealthAssessment extends FarmAssetType {
 
     public function buildFieldDefinitions(){
         $fields = parent::buildFieldDefinitions();
@@ -20,156 +20,153 @@ class RangeAssessment extends FarmAssetType {
         // Note that $fields['name'] is already populated at this point
 
         $field_info = [
-            // 'shmu'
             'shmu' => [
-                'label'=> 'Soil Health Management Unit',
-                'type'=> 'entity_reference',
-                'target_type'=> 'asset',
-                'target_bundle'=> 'soil_health_management_unit',
-                'required' => TRUE,
-                'description' => '',
+              'label'=> 'Soil Health Management Unit',
+              'type'=> 'entity_reference',
+              'target_type'=> 'asset',
+              'target_bundle'=> 'soil_health_management_unit',
+              'required' => TRUE,
+              'description' => '',
             ],
-            'range_assessment_land_use' => [
+            'pasture_health_assessment_land_use' => [
                 'label'=> 'Land Use',
                 'type'=> 'entity_reference',
                 'target_type'=> 'taxonomy_term',
                 'target_bundle'=> 'd_land_use',
                 'required' => TRUE,
                 'description' => '',
-
             ],
-            'range_assessment_rills' => [
-                'label'=> 'Rills',
-                'type'=> 'string',
-                'required' => FALSE,
-                'description' => '',
-
-            ],
-            'range_assessment_water_flow' => [
-                'label'=> 'Water Flow Patterns',
-                'type'=> 'string',
-                'required' => FALSE,
-                'description' => '',
-
-            ],
-            'range_assessment_pedestals' => [
-                'label'=> 'Pedetals and/or Terracettes',
-                'type'=> 'string',
-                'required' => FALSE,
-                'description' => '',
-
-            ],
-            'range_assessment_bare_ground' => [
-                'label'=> 'Bare Ground',
+            'pasture_health_assessment_erosion_sheet' => [
+                'label'=> 'Erosion (Sheet and Rill)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_gullies' => [
-                'label'=> 'Gullies',
+            'pasture_health_assessment_erosion_gullies' => [
+                'label'=> 'Erosion (Gullies if present)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_wind_scoured' => [
-                'label'=> 'Wind-Scoured and/or Depositional Areas',
+            'pasture_health_assessment_erosion_wind_scoured' => [
+                'label'=> 'Erosion, Wind-Scoured and/or Depositional Areas',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_litter_movement' => [
-                'label'=> 'Litter Movement',
+            'pasture_health_assessment_erosion_streambank' => [
+                'label'=> 'Erosion (Streambank or Shoreline)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_soil_surface_resistance' => [
-                'label'=> 'Soil Surface Resistance to Erosion',
+            'pasture_health_assessment_water_flow_patterns' => [
+                'label'=> 'Water flow patterns',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_soil_surface_loss' => [
-                'label'=> 'Soil Surface Loss and Degradation',
+            'pasture_health_assessment_bare_ground' => [
+                'label'=> 'Bare Ground (Percent)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_effects_of_plants' => [
-                'label'=> 'Effects of Plant Community Composition and Distribution on Infiltration',
+            'pasture_health_assessment_padestals' => [
+                'label'=> 'Pedestals and/or Terracettes',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_compaction_layer' => [
+            'pasture_health_assessment_litter_movement' => [
+                'label'=> 'Litter movement (Wind or Water)',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+            ],
+            'pasture_health_assessment_composition' => [
+                'label'=> 'Effects of Plant Community Composition and Distribution on Infiltration and Runoff',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+            ],
+            'pasture_health_assessment_soil_surface' => [
+                'label'=> 'Soil surface loss or degratation',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+            ],
+            'pasture_health_assessment_compaction_layer' => [
                 'label'=> 'Compaction Layer',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_functional_structural' => [
-                'label'=> 'Functional/Structural Groups',
+            'pasture_health_assessment_live_plant' => [
+                'label'=> 'Live plant foliar cover (hydrologic and erosion benefits)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_dead_plants' => [
-                'label'=> 'Dead or Dying Plants or Plant Parts',
+            'pasture_health_assessment_forage_plant' => [
+                'label'=> 'Forage Plant Diversity',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_litter_cover' => [
-                'label'=> 'Litter Cover and Depth',
+            'pasture_health_assessment_percent_desirable' => [
+                'label'=> 'Percent Desirable Forage Plants (for Identified Livestock Class)',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_annual_production' => [
+            'pasture_health_assessment_invasive_plants' => [
+                'label'=> 'Invasive Plants',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+            ],
+            'pasture_health_assessment_annual_production' => [
                 'label'=> 'Annual Production',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_invasive_plants' => [
-                'label'=> 'Invasive Plants Vigor',
+            'pasture_health_assessment_plant_vigor' => [
+                'label'=> 'Plant Vigor with an Emphasis on Reproductive Capability of Perennial',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_rc_soil_site_stability' => [
-                'label'=> 'Soil/Site Stability',
+            'pasture_health_assessment_dying_plants' => [
+                'label'=> 'Dead or Dying Plants or Plant',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
             ],
-            'range_assessment_rc_hydrologic_function' => [
-                'label'=> 'Hydrologic Function',
+            'pasture_health_assessment_little_cover' => [
+                'label'=> 'Litter cover and depth',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
-
             ],
-            'range_assessment_rc_biotic_integrity' => [
-                'label'=> 'Biotic Integrity',
+            'pasture_health_assessment_nontoxic_legumes' => [
+                'label'=> 'Percentage Nontoxic legumes',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
-
             ],
-            'range_assessment_vigor_plants' => [
-                'label'=> 'Rangeland Vigor Plants',
+            'pasture_health_assessment_uniformity' => [
+                'label'=> 'Uniformity of Use',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
-
             ],
-            'field_range_assessment_project_id' => [
-                'label'=> 'Rangeland Project ID',
-                'type'=> 'fraction',
+            'pasture_health_assessment_livestock' => [
+                'label'=> 'Livestock Concentration Areas',
+                'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
-
             ],
 
         ];

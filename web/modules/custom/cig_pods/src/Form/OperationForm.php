@@ -67,9 +67,9 @@ class OperationForm extends FormBase {
 
 	public function getCostSequenceIdsForOperation($operation){
 		$cost_sequence_target_ids = [];
-		
+
 		$field_shmu_cost_sequence_list = $operation->get('field_cost_sequences'); // Expected type of FieldItemList
-		
+
 		foreach($field_shmu_cost_sequence_list as $key=>$value){
 			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
 		}
@@ -101,7 +101,7 @@ class OperationForm extends FormBase {
 			$sequences[0]['field_operation_cost_type'] = '';
 			$sequences[0]['field_operation_cost'] = '';
 		}
-		
+
 		$form_state->set('sequences', $sequences);
 		return;
 	}
@@ -129,8 +129,8 @@ class OperationForm extends FormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
         $is_edit = $id <> NULL;
 		$default_options[''] = '- Select -';
-        
-		
+
+
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
@@ -159,10 +159,10 @@ class OperationForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h1>Operation</h1></div>'
 		];
 
-        
+
 		$shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $operation->get('field_operation_shmu')->target_id : $default_options;
-		$form['field_operation_shmu'] = [
+		$shmu_default_value = $is_edit ?  $operation->get('shmu')->target_id : $default_options;
+		$form['shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,
@@ -172,7 +172,7 @@ class OperationForm extends FormBase {
 
 		if($is_edit){
 			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
-			
+
 			$field_operation_timestamp = $operation->get('field_operation_date')->value;
 			$field_operation_timestamp_default_value = date("Y-m-d", $field_operation_timestamp);
 		} else {
@@ -262,7 +262,7 @@ class OperationForm extends FormBase {
 			'#default_value' => $field_horsepower_of,
 			'#required' => FALSE
 		];
-		
+
 		$form['subform_4'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
 		];
@@ -286,7 +286,7 @@ class OperationForm extends FormBase {
 
 		$form_index = 0; // Not to be confused with rotation
 		foreach($fs_cost_sequences as $fs_index => $sequence  ){
-			
+
 			$cost_type_default_value = ''; // Default value for empty Rotation
 			$cost_default_value = ''; // Default value for empty rotation
 
@@ -309,7 +309,7 @@ class OperationForm extends FormBase {
 				'#title' => 'Type',
 				'#options' => $cost_options,
 				'#default_value' => $cost_type_default_value
-			]; 
+			];
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
@@ -329,8 +329,8 @@ class OperationForm extends FormBase {
 		}
 
 
-		
-	  
+
+
 		$form['addCost'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCostSequence'],
@@ -416,7 +416,7 @@ class OperationForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function getFormId() {
-		
+
 		return 'operation_form';
 	}
 
@@ -429,7 +429,7 @@ class OperationForm extends FormBase {
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel', 'add_input', 'addCost'];
 		$date_fields = ['field_operation_date'];
 		$form_values = $form_state->getValues();
-		
+
         if(!$is_edit){
 			$operation_template = [];
 			$operation_template['type'] = 'operation';
@@ -439,6 +439,9 @@ class OperationForm extends FormBase {
 			$id = $form_state->get('operation_id'); // TODO: Standardize access
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
+
+        // Set the operation asset name to "Operation {{asset-id}}".
+        $operation->set('name', 'Operation ' . $id);
 
         foreach($form_values as $key => $value){
 			// If it is an ignored field, skip the loop
@@ -511,7 +514,7 @@ class OperationForm extends FormBase {
 		$cost_options = $this->getOtherCostsOptions();
 		$sequences[] = $new_cost_sequence;
 		$form_state->set('sequences', $sequences);
-		
+
 		$form_state->setRebuild(True);
 	}
 
@@ -526,7 +529,7 @@ class OperationForm extends FormBase {
 		$sequences = $form_state->get('sequences');
 
 		unset($sequences[$idx_to_rm]); // Remove the index
-	
+
 		$form_state->set('sequences',$sequences);
 
 

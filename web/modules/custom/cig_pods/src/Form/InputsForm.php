@@ -106,12 +106,24 @@ class InputsForm extends FormBase {
 
         $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
 
+        $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
+
+		if($is_edit){
+			$cname=array();
+			$fraction_count = count($input_org_default_name);
+				for( $index = 0; $index < $fraction_count; $index++){
+						$fractionToAdd = $this->convertFraction($input_org_default_name[$index]);
+					$cname[] = $fractionToAdd;
+				}
+
+				if(count($cname) == 0){
+					$ex_count = 1;
+				}else{
+					$ex_count = count($cname);
+				}	
+		}
+
         if($is_edit){
-			$cost_field_array = $this->getInputCosts($input->get('field_cost'));
-			$ex_count = count($cost_field_array);
-			if($ex_count === 0){
-				$ex_count = 1;
-			}
 
 			if ($num_other_costs === NULL) {//initialize number of input, set to 1
 				$form_state->set('num_other_costs', $ex_count);
@@ -265,7 +277,7 @@ class InputsForm extends FormBase {
 			if (in_array($i, $removed_other_costs)) {// Check if field was removed
 				continue;
 			}
-			
+
             $form['names_fieldset'][$i]['new_line_container1'] = [
 				'#prefix' => '<div id="other-costs"',
 			];
@@ -302,7 +314,7 @@ class InputsForm extends FormBase {
 				 '#prefix' => '<div class="inline-components">',
 		  		'#suffix' => '</div>',
 			];
-           
+
 
 			if($num_other_costs_lines > 1 && $i!=0){
 				$form['names_fieldset'][$i]['actions'] = [
@@ -455,7 +467,6 @@ class InputsForm extends FormBase {
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
-	   $input_costs = $this->submitCosts($form, $form_state);
         if($is_create){
 	        $values = $form_state->getValues();
 
@@ -464,7 +475,7 @@ class InputsForm extends FormBase {
             $input_submission = [];
 
             $input_submission['type'] = 'input';
-                 
+
 			$operation_taxonomy_name = $form_state->get('current_operation_name');
 			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
             $input_submission['name'] = $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value'];
@@ -484,7 +495,9 @@ class InputsForm extends FormBase {
 
 	        $input_to_save = Asset::create($input_submission);
 			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-	         $input_to_save -> save();
+	        $input_to_save -> save();
+			$operation_reference->get('field_input')[] = $input_to_save->id();
+			$operation_reference->save();
          } else {
 		    $input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
@@ -502,7 +515,7 @@ class InputsForm extends FormBase {
 
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		    $input->save();
+		     $input->save();
 			
 	}
 	if($form_state->get('redirect_input') == TRUE){
@@ -522,8 +535,7 @@ class InputsForm extends FormBase {
 }
 
     public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {
-       dpm("addOtherCostsRow");
-	   dpm(hrtime(false));
+       
         $num_other_costs = $form_state->get('num_other_costs');
 	     $num_other_costs_lines = $form_state->get('num_other_costs_lines');
          $form_state->set('num_other_costs', $num_other_costs + 1);

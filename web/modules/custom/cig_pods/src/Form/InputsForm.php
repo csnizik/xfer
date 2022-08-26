@@ -106,24 +106,12 @@ class InputsForm extends FormBase {
 
         $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
 
-        $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
-
-		if($is_edit){
-			$cname=array();
-			$fraction_count = count($input_org_default_name);
-				for( $index = 0; $index < $fraction_count; $index++){
-						$fractionToAdd = $this->convertFraction($input_org_default_name[$index]);
-					$cname[] = $fractionToAdd;
-				}
-
-				if(count($cname) == 0){
-					$ex_count = 1;
-				}else{
-					$ex_count = count($cname);
-				}	
-		}
-
         if($is_edit){
+			$cost_field_array = $this->getInputCosts($input->get('field_cost'));
+			$ex_count = count($cost_field_array);
+			if($ex_count === 0){
+				$ex_count = 1;
+			}
 
 			if ($num_other_costs === NULL) {//initialize number of input, set to 1
 				$form_state->set('num_other_costs', $ex_count);

@@ -770,7 +770,7 @@ display:
     display_plugin: page
     position: 2
     display_options:
-      title: 'Manage Soil Samples and Assessment'
+      title: 'Manage Cropland In-Field Soil Health Assessment'
       fields:
         id:
           id: id
@@ -3546,7 +3546,7 @@ display:
     display_plugin: page
     position: 8
     display_options:
-      title: 'Manage Pasture Assessments'
+      title: 'Manage Pasture Conditon Score Assessment'
       fields:
         id:
           id: id
@@ -3624,7 +3624,7 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: 'Pasture Assessment'
+          label: Assessment
           exclude: false
           alter:
             alter_text: false
@@ -4000,7 +4000,7 @@ display:
     display_plugin: page
     position: 9
     display_options:
-      title: 'Manage Pasture Health'
+      title: 'Manage Determining Indicators of Pastureland Health Assessment'
       fields:
         id:
           id: id
@@ -4078,7 +4078,7 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: 'Pasture Health Assessment'
+          label: Assessment
           exclude: false
           alter:
             alter_text: false
@@ -5528,7 +5528,7 @@ display:
     display_plugin: page
     position: 12
     display_options:
-      title: 'Manage Rangeland Assessments'
+      title: 'Manage Interpreting Indicators of Range Health Assessment'
       fields:
         id:
           id: id
@@ -5606,7 +5606,7 @@ display:
           entity_type: null
           entity_field: name
           plugin_id: field
-          label: 'Rangeland Assessment'
+          label: Assessment
           exclude: false
           alter:
             alter_text: false

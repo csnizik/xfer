@@ -33,13 +33,13 @@ class AwardeeDashboardForm extends FormBase {
           'ssa' => $this
 					->t('Soil Sample'),
           'ifa' => $this
-					->t('Assessment'),
+					->t('CIFSH Assessment'),
           'rla' => $this
-					->t('Rangeland Assessment'),
+					->t('IIRH Assessment'),
 					'pst' => $this
-					->t('Pasture Assessment'),
+					->t('PCS Assessment'),
           'phst' => $this
-					->t('Pasture Health Assessment'),
+					->t('DIPH Assessment'),
           'ltr' => $this
 					->t('Soil Test Result'),
           'ltm' => $this
@@ -96,25 +96,25 @@ class AwardeeDashboardForm extends FormBase {
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Assessment(s): '.$entityCount['field_assessment']),
+      '#value' => $this->t('CIFSH Assessment(s): '.$entityCount['field_assessment']),
       '#submit' => ['::ifaRedirect'],
     ];
 
     $form['awardee_rangeland_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Rangeland Assessment(s): '.$entityCount['range_assessment']),
+      '#value' => $this->t('IIRH Assessment(s): '.$entityCount['range_assessment']),
       '#submit' => ['::rlaRedirect'],
     ];
 
 		$form['awardee_pasture_assessment'] = [
 		      '#type' => 'submit',
-		      '#value' => $this->t('Pasture Assessment(s): '.$entityCount['pasture_assessment']),
+		      '#value' => $this->t('PCS Assessment(s): '.$entityCount['pasture_assessment']),
 		      '#submit' => ['::pstRedirect'],
 		    ];
 
     $form['awardee_pasture_health_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Pasture Health Assessment(s): '.$entityCount['pasture_health_assessment']),
+      '#value' => $this->t('DIPH Assessment(s): '.$entityCount['pasture_health_assessment']),
       '#submit' => ['::phstRedirect'],
     ];
 

@@ -56,7 +56,7 @@ class PastureAssessmentForm extends FormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Pasture condition assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -299,7 +299,7 @@ class PastureAssessmentForm extends FormBase {
 
             $pasture_submission['type'] = 'pasture_assessment';
             $pasturAssessment = Asset::create($pasture_submission);
-			$pasturAssessment->set('name', 'Pasture');
+			$pasturAssessment->set('name', 'PCS Assessment');
             $pasturAssessment -> save();
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -312,7 +312,7 @@ class PastureAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $pastureAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$pastureAssessment->set('name', 'Pasture');
+			$pastureAssessment->set('name', 'PCS Assessment');
             $pastureAssessment->save();
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

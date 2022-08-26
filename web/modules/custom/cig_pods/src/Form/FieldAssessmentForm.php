@@ -65,23 +65,23 @@ class FieldAssessmentForm extends FormBase {
 
 
 		$form['#tree'] = False; // No hierarchy needed for this form.
-		$form['#attached']['library'][] = 'cig_pods/producer_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$form['producer_title'] = [
 			'#markup' => '<h1> <b> Assessments </b> </h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Cropland In-Field Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Cropland In-Field Soil Health Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
 		];
 
 
-		$field_assessment_shmu_value = $is_edit ? $assessment->get('field_assessment_shmu')->target_id : '';
-		$form['field_assessment_shmu'] = [
+		$shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $field_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => FALSE,
 		];
 
@@ -365,7 +365,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	$form_values = $form_state -> getValues();
 
 	// TODO: fix naming
-	$related_shmu_id = $form_values['field_assessment_shmu'];
+	$related_shmu_id = $form_values['shmu'];
 	$date = $form_values['field_assessment_date'];
 	$related_shmu = Asset::load($related_shmu_id);
 	if($related_shmu <> NULL) {
@@ -373,7 +373,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	} else {
 		$related_shmu_name = '';
 	}
-	$assessment->set('name', $related_shmu_name." Assesment (".$date.")");
+	$assessment->set('name', "CIFSH Assessment");
 
 	foreach( $form_values as $key => $value ){
 		if(in_array($key,$ignored_fields)) continue;

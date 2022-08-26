@@ -19,8 +19,8 @@ class Operation extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-        'field_operation_shmu' => [
-             'label'=> 'Operation SHMU',
+        'shmu' => [
+             'label'=> 'Soil Health Management Unit',
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
              'target_bundle'=> 'soil_health_management_unit',

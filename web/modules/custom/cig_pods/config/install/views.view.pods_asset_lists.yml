@@ -3546,7 +3546,7 @@ display:
     display_plugin: page
     position: 8
     display_options:
-      title: 'Manage Pasture Conditon Score Assessment'
+      title: 'Manage Pasture Condition Score Assessment'
       fields:
         id:
           id: id

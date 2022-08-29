@@ -68,8 +68,7 @@ class OperationForm extends FormBase {
 	public function getCostSequenceIdsForOperation($operation){
 		$cost_sequence_target_ids = [];
 
-		$field_shmu_cost_sequence_list = $operation->get('field_cost_sequences'); // Expected type of FieldItemList
-
+		$field_shmu_cost_sequence_list = $operation->get('field_operation_cost_sequences'); // Expected type of FieldItemList
 		foreach($field_shmu_cost_sequence_list as $key=>$value){
 			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
 		}
@@ -88,21 +87,23 @@ class OperationForm extends FormBase {
 
 		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
 		$sequences = [];
+		
 		$i = 0;
 		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
 			$tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
 			$sequences[$i] = array();
-			$sequences[$i]['field_operation_cost_type'] = $tmp_sequence['field_operation_cost_type'];
-			$sequences[$i]['field_operation_cost'] = $tmp_sequence['field_operation_cost'];
+			$sequences[$i]['field_cost_type'] = $tmp_sequence['field_cost_type'];
+			$sequences[$i]['field_cost'] = $tmp_sequence['field_cost'];
 			$i++;
 		}
 		// If sequences is still empty, set a blank sequence at index 0
 		if($i == 0){
-			$sequences[0]['field_operation_cost_type'] = '';
-			$sequences[0]['field_operation_cost'] = '';
+			$sequences[0]['field_cost_type'] = '';
+			$sequences[0]['field_cost'] = '';
 		}
 
 		$form_state->set('sequences', $sequences);
+	
 		return;
 	}
 
@@ -290,21 +291,22 @@ class OperationForm extends FormBase {
 			$cost_type_default_value = ''; // Default value for empty Rotation
 			$cost_default_value = ''; // Default value for empty rotation
 
-			$cost_default_value = $sequence['field_operation_cost'][0]['numerator'] / $sequence['field_operation_cost'][0]['denominator'];
-			$cost_type_default_value = $sequence['field_operation_cost_type'][0]['target_id'];
-
+			$cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
+			
+			$cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
+			
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
 				'#suffix' => '</div>',
 			];
 
-			$form['cost_sequence'][$fs_index]['field_operation_cost'] = [
+			$form['cost_sequence'][$fs_index]['field_cost'] = [
 				'#type' => 'number',
 				'#title' => 'Cost',
 				'#step' => 0.01,
 				'#default_value' => $cost_default_value,
 			];
-			$form['cost_sequence'][$fs_index]['field_operation_cost_type'] = [
+			$form['cost_sequence'][$fs_index]['field_cost_type'] = [
 				'#type' => 'select',
 				'#title' => 'Type',
 				'#options' => $cost_options,
@@ -424,7 +426,7 @@ class OperationForm extends FormBase {
 	* {@inheritdoc}
 	*/
 	public function submitForm(array &$form, FormStateInterface $form_state) {
-		$cost_fields = ['sequences', 'cost_sequence','field_operation_cost', 'field_operation_cost_type'];
+		$cost_fields = ['sequences', 'cost_sequence','field_cost', 'field_cost_type'];
         $is_edit = $form_state->get('operation') == 'edit';
 		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions', 'delete', 'cancel', 'add_input', 'addCost'];
 		$date_fields = ['field_operation_date'];
@@ -461,23 +463,23 @@ class OperationForm extends FormBase {
 		$cost_options = $this->getOtherCostsOptions();
 
 		$cost_template = [];
-		$cost_template['type'] = 'operation_cost_sequence';
+		$cost_template['type'] = 'cost_sequence';
 
 		for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
 
 			// If they did not select a cost for the row, do not include it in the save
-			if($form_values['cost_sequence'][$sequence]['field_operation_cost_type'] == NULL) continue;
+			if($form_values['cost_sequence'][$sequence]['field_cost_type'] == NULL) continue;
 
 			// We alwasys create a new cost sequence asset for each rotation
 			$cost_sequence = Asset::create( $cost_template );
 
 			// read the cost id from select dropdown for given rotation
-			$cost_id = $form_values['cost_sequence'][$sequence]['field_operation_cost_type'];
-			$cost_sequence->set( 'field_operation_cost_type', $cost_id );
+			$cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
+			$cost_sequence->set( 'field_cost_type', $cost_id );
 
 			// read the cost rotation year from select dropdown for given rotation
-			$cost_value = $form_values['cost_sequence'][$sequence]['field_operation_cost'];
-			$cost_sequence->set( 'field_operation_cost', $cost_value );
+			$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
+			$cost_sequence->set( 'field_cost', $cost_value );
 
 			#
 
@@ -486,7 +488,7 @@ class OperationForm extends FormBase {
 
 		}
 
-		$operation->set('field_cost_sequences', $cost_sequence_ids);
+		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);
 		$operation->save();
 
 		// Cleanup - remove the old cost Sequence Assets that are no longer used
@@ -507,18 +509,20 @@ class OperationForm extends FormBase {
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
 		$sequences = $form_state->get('sequences');
+		
 		$new_cost_sequence = [];
-		$new_cost_sequence['field_operation_cost'][0]['value'] = '';
-		$new_cost_sequence['field_operation_cost_type'][0]['value'] = '';
+		$new_cost_sequence['field_cost'][0]['value'] = '';
+		$new_cost_sequence['field_cost_type'][0]['value'] = '';
 
 		$cost_options = $this->getOtherCostsOptions();
 		$sequences[] = $new_cost_sequence;
 		$form_state->set('sequences', $sequences);
-
+	
 		$form_state->setRebuild(True);
 	}
 
 	public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state){
+		
 		return $form['cost_sequence'];
 	}
 

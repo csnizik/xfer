@@ -7,8 +7,6 @@ Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
-
-
 class ProducerForm extends FormBase {
 	private function getAssetOptions($assetType){
         $project_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
@@ -51,7 +49,7 @@ class ProducerForm extends FormBase {
 
 		$projects = $this->getAssetOptions('project');
 
-		$producer_project_default_value = $is_edit ? $producer->get('field_producer_project')->target_id : NULL;
+		$producer_project_default_value = $is_edit ? $producer->get('project')->target_id : NULL;
         $form['field_producer_project'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Producer project'),
@@ -167,12 +165,14 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 		$producer_submission['field_producer_first_name'] = $form_state -> getValue('field_producer_first_name');
 		$producer_submission['field_producer_last_name'] = $form_state -> getValue('field_producer_last_name');
 		$producer_submission['field_producer_headquarter'] = $form_state -> getValue('field_producer_headquarter');
-		$producer_submission['field_producer_project'] = $form_state -> getValue('field_producer_project');
+		$producer_submission['project'] = $form_state -> getValue('field_producer_project');
 		$producer_submission['type'] = 'producer';
 		$producer_submission['name'] = $producer_submission['field_producer_first_name']." ".$producer_submission['field_producer_last_name'];
 
 		$producer = Asset::create($producer_submission);
 		$producer->save();
+
+		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	} else {
@@ -188,24 +188,23 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 		$producer->set('field_producer_first_name', $fn);
 		$producer->set('field_producer_last_name', $ln);
 		$producer->set('field_producer_headquarter', $hq);
-		$producer->set('field_producer_project', $pp);
+		$producer->set('project', $pp);
 		$producer->set('name', $full_n);
 
 		$producer->save();
+
+		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
+
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
 	}
-	// Have to identify whether it is an edit or it is a create new
+}
 
-	// $asset = Asset::create([
-	// 	'type' => 'producer',
-	// 	'name' => $form['producer_name']['#value']
-	// ]);
-
-	// $asset->save();
-
-
-  }
+public function setProjectReference($assetReference, $projectReference){
+	$project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
+	$assetReference->set('project', $project);
+	$assetReference->save();
+}
 
   /**
    * {@inheritdoc}

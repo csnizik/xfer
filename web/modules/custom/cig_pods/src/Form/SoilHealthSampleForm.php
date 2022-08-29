@@ -307,6 +307,8 @@ public function entityfields(){
 		$sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));
 		$sample_collection->save();
 
+		$this->setProjectReference($sample_collection, $sample_collection->get('field_shmu_id')->target_id);
+
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	} else {
 		$id = $form_state->get('sample_id');
@@ -319,11 +321,21 @@ public function entityfields(){
 		$sample_collection->set('name', $form_state->getValue('soil_sample_id'));
 
 		$sample_collection->save();
+
+		$this->setProjectReference($sample_collection, $sample_collection->get('field_shmu_id')->target_id);
+
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}
 
 	return;
   }
+
+  public function setProjectReference($assetReference, $shmuReference){
+	$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
+	$project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+	$assetReference->set('project', $project);
+	$assetReference->save();
+}
 
   /**
    * {@inheritdoc}

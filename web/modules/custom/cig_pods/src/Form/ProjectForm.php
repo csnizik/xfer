@@ -622,6 +622,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 
 	$project = Asset::create($project_submission);
 	$project -> save();
+	$this->setProjectReference($form_state->getValue('field_awardee'), $project);
 	$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	return;
@@ -672,8 +673,16 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		$awardee->set('field_awardee_contact_type', $contact_types);
 		$awardee->set('field_grant_type', $field_grant_type);
 		$awardee->save();
+		$this->setProjectReference($form_state->getValue('field_awardee'), $awardee);
 		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
+}
+
+public function setProjectReference($assetReference, $projectReference){
+	$awardeeOrg = \Drupal::entityTypeManager()->getStorage('asset')->load($assetReference);
+	$awardeeOrg->get('project')[] = $projectReference->id();
+	$awardeeOrg->save();
+
 }
 
   /**

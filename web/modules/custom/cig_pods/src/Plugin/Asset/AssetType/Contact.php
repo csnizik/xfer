@@ -20,9 +20,9 @@ class Contact extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-         'field_eauth_id' => [
+         'eauth_id' => [
             'label'=> 'Eauth ID',
-            'type'=> 'fraction',
+            'type'=> 'string',
             'required' => TRUE,
             'description' => '',
          ],

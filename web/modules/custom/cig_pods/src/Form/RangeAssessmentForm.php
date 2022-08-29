@@ -74,15 +74,15 @@ class RangeAssessmentForm extends FormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Rangeland In-Field Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
 		];
 
-        $range_assessment_shmu_value = $is_edit ? $assessment->get('range_assessment_shmu')->target_id : '';
-		$form['range_assessment_shmu'] = [
+        $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $range_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => TRUE,
 		];
 
@@ -355,7 +355,7 @@ class RangeAssessmentForm extends FormBase {
 	}
 
 	public function createElementNames(){
-		return array('range_assessment_shmu', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
+		return array('shmu', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
 		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');
@@ -374,7 +374,7 @@ class RangeAssessmentForm extends FormBase {
 
             $rangeland_submission['type'] = 'range_assessment';
             $ranglandAssessment = Asset::create($rangeland_submission);
-			$ranglandAssessment->set('name', 'Rangeland');
+			$ranglandAssessment->set('name', 'IIRH Assessment');
             $ranglandAssessment -> save();
 
 			$this->setProjectReference($ranglandAssessment, $ranglandAssessment->get('range_assessment_shmu')->target_id);
@@ -389,7 +389,7 @@ class RangeAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $rangelandAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$rangelandAssessment->set('name', 'Rangeland');
+			$rangelandAssessment->set('name', 'IIRH Assessment');
             $rangelandAssessment->save();
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('range_assessment_shmu')->target_id);

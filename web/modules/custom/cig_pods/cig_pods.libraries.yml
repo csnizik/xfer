@@ -51,6 +51,11 @@ operation_form:
     theme:
       css/operation.css: {}
 
+operation_display:
+  css:
+    theme:
+      css/awardee-operation-display.css: {}
+
 lab_test_method_admin_form:
   js:
     js/methods.js: {}
@@ -90,6 +95,10 @@ field_assessment:
   css:
     theme:
       css/field-assesment-display.css: {}
+      # @todo CSS cleanup
+      # Both of these were being applied to field assessment Views originally
+      # so copied this one here when the Views were merged.
+      css/awardee-soil-sample-display.css: {}
 
 field_assessment_form:
   css:

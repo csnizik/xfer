@@ -19,11 +19,11 @@ class Operation extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-        'field_operation_shmu' => [
-             'label'=> 'Operation SHMU',
+        'shmu' => [
+             'label'=> 'Soil Health Management Unit',
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
-             'target_bundle'=> 'soil_health_management_unit', 
+             'target_bundle'=> 'soil_health_management_unit',
              'required' => TRUE,
              'description' => '',
         ],
@@ -39,6 +39,15 @@ class Operation extends FarmAssetType {
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_operation_type',
             'required' => TRUE,
+            'description' => '',
+        ],
+        'field_input' => [
+            'label'=> 'Input Reference',
+            'type'=> 'entity_reference',
+            'target_type'=> 'asset',
+            'target_bundle'=> 'input',
+            'required' => TRUE,
+            'multiple' => TRUE,
             'description' => '',
         ],
         'field_ownership_status' => [

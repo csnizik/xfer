@@ -68,12 +68,12 @@ class PastureHealthAssessmentForm extends FormBase {
 			'#markup' => '<div class="subform-title-container"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>'
 		];
 
-        $pasture_health_assessment_shmu_value = $is_edit ? $assessment->get('pasture_health_assessment_shmu')->target_id : '';
-		$form['pasture_health_assessment_shmu'] = [
+        $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $pasture_health_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => TRUE,
 		];
 
@@ -358,13 +358,14 @@ class PastureHealthAssessmentForm extends FormBase {
 	}
 
 	public function createElementNames(){
-		return array('pasture_health_assessment_shmu', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
+		return array('shmu', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
 		'pasture_health_assessment_erosion_wind_scoured', 'pasture_health_assessment_erosion_streambank', 'pasture_health_assessment_water_flow_patterns', 'pasture_health_assessment_bare_ground',
 		'pasture_health_assessment_padestals', 'pasture_health_assessment_litter_movement', 'pasture_health_assessment_composition', 'pasture_health_assessment_soil_surface',
 		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable',
 		'pasture_health_assessment_invasive_plants', 'pasture_health_assessment_annual_production', 'pasture_health_assessment_plant_vigor', 'pasture_health_assessment_dying_plants',
 		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock');
 	}
+
     /**
      * {@inheritdoc}
      */
@@ -379,7 +380,7 @@ class PastureHealthAssessmentForm extends FormBase {
 
             $pasture_health_submission['type'] = 'pasture_health_assessment';
             $pastureAssessment = Asset::create($pasture_health_submission);
-			$pastureAssessment->set('name', 'Pasture Health');
+			$pastureAssessment->set('name', 'DIPH Assessment');
             $pastureAssessment -> save();
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
@@ -394,7 +395,7 @@ class PastureHealthAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $pastureHealthAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$pastureHealthAssessment->set('name', 'Pasture Health');
+			$pastureHealthAssessment->set('name', 'DIPH Assessment');
             $pastureHealthAssessment->save();
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);

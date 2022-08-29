@@ -68,8 +68,8 @@ class SoilHealthSampleForm extends FormBase {
 		];
 
         $shmu_options = $this->getSHMUOptions();
-		$shmu_default_value = $is_edit ?  $sample_collection->get('field_shmu_id')->target_id : '';
-		$form['field_shmu_id'] = [
+		$shmu_default_value = $is_edit ?  $sample_collection->get('shmu')->target_id : '';
+		$form['shmu'] = [
 		  '#type' => 'select',
 		  '#title' => t('Select a Soil Health Management Unit (SHMU)'),
 		  '#options' => $shmu_options,
@@ -282,7 +282,7 @@ private function convertFractionsToDecimal($soilSample, $field){
 }
 
 public function entityfields(){
-	return array('field_diameter','field_plant_stage_at_sampling','field_sampling_depth','field_shmu_id','field_soil_sample_collection_dat', 'field_equipment_used');
+	return array('field_diameter','field_plant_stage_at_sampling','field_sampling_depth','shmu','field_soil_sample_collection_dat', 'field_equipment_used');
 }
 
 /**

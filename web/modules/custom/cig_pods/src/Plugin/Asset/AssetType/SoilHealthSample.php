@@ -50,13 +50,12 @@ class SoilHealthSample extends FarmAssetType {
         'required' => FALSE,
         'multiple' => FALSE,
       ],
-      'field_shmu_id' => [
+      'shmu' => [
         'type'  => 'entity_reference',
-        'label' => 'Soil Sample SHMU ID',
+        'label' => 'Soil Health Management Unit',
         'description' => $this->t('Soil Sample SHMU ID'),
         'target_type' => 'asset',
         'target_bundle' => 'soil_health_management_unit',
-        'handler' => 'default',
         'required' => TRUE,
         'multiple' => FALSE,
       ],

@@ -18,7 +18,7 @@ h1.page-title {
     width: 100%;
 }
 
-.awardee-rangeland-details-display table th, td {
+.awardee-operation-display table th, td {
     background-color: white;
 }
 
@@ -32,7 +32,7 @@ h1.page-title {
 {
     background-color: white;
     margin-left: 0;
-    width: 675px
+    width: 650px
 }
 
 .layout-container::after {
@@ -50,11 +50,14 @@ table  {
     --colorGinTableBorder:rgba(0,0,0,0); /* working*/
 }
 
-table.views-table.views-view-table.cols-4 {
+table.views-table.views-view-table.cols-5 {
     padding-left: 40px;
-    width:100%;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+table.views-table.views-view-table.cols-5 td:nth-child(2) {
+    width: 120%;
 }
 
 .sticky-shadow{
@@ -62,6 +65,9 @@ table.views-table.views-view-table.cols-4 {
 }
 .content-header {
     display: none;
+}
+.page-content {
+    margin-top: -40px;
 }
 .gin-secondary-toolbar.layout-container {
     display: none;
@@ -85,11 +91,11 @@ th.views-field.views-field-name {
     --colorGinPrimaryActive: #000000;
 }
 
-table.views-table.views-view-table.cols-4 {
+table.views-table.views-view-table.cols-5 {
     --colorGinPrimaryActive: #000000;
      width: auto;
+     min-width: 120%;
 }
-
 td.views-field.views-field-name {
     width: max-content;
     max-width: 250px;

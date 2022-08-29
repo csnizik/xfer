@@ -20,14 +20,13 @@ class PastureHealthAssessment extends FarmAssetType {
         // Note that $fields['name'] is already populated at this point
 
         $field_info = [
-            // 'pasture_health_assessment_shmu'
-            'pasture_health_assessment_shmu' => [
-                'label'=> 'Soil Health Management Unit',
-                'type'=> 'entity_reference',
-                'target_type'=> 'asset',
-                'target_bundle'=> 'soil_health_management_unit',
-                'required' => TRUE,
-                'description' => '',
+            'shmu' => [
+              'label'=> 'Soil Health Management Unit',
+              'type'=> 'entity_reference',
+              'target_type'=> 'asset',
+              'target_bundle'=> 'soil_health_management_unit',
+              'required' => TRUE,
+              'description' => '',
             ],
             'pasture_health_assessment_land_use' => [
                 'label'=> 'Land Use',

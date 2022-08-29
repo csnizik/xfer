@@ -21,7 +21,7 @@ class PastureAssessment extends FarmAssetType {
 
         $field_info = [
             
-            'pasture_assessment_shmu' => [
+            'shmu' => [
                 'label'=> 'Soil Health Management Unit',
                 'type'=> 'entity_reference',
                 'target_type'=> 'asset',

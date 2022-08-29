@@ -431,6 +431,7 @@ class InputsForm extends FormBase {
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
+	   $operation_reference = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
         if($is_create){
 	        $values = $form_state->getValues();
 
@@ -473,6 +474,10 @@ class InputsForm extends FormBase {
 	        $input_to_save -> save();
 
 			$this->setProjectReference($input_to_save, $input_to_save->get('field_operation')->target_id);
+
+			$operation_reference->get('field_input')[] = $input_to_save->id();
+			$operation_reference->save();
+
          } else {
 		    $input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
@@ -505,6 +510,9 @@ class InputsForm extends FormBase {
 		    $input->save();
 
 			$this->setProjectReference($input, $input->get('field_operation')->target_id);
+
+			$operation_reference->get('field_input')[] = $input->id();
+			$operation_reference->save();
 
 	}
 	if($form_state->get('redirect_input') == TRUE){

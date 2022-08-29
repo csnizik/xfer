@@ -56,15 +56,15 @@ class PastureAssessmentForm extends FormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Pasture condition assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
 
-        $pasture_assessment_shmu_value = $is_edit ? $assessment->get('pasture_assessment_shmu')->target_id : '';
-		$form['pasture_assessment_shmu'] = [
+        $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
+		$form['shmu'] = [
 			'#type' => 'select',
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
-			'#default_value' => $pasture_assessment_shmu_value,
+			'#default_value' => $shmu_value,
 			'#required' => TRUE,
 
 
@@ -189,17 +189,6 @@ class PastureAssessmentForm extends FormBase {
 
 		];
 
-		$pasture_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('pasture_assessment_condition_store')->value : '';
-
-		$form['pasture_assessment_condition_store'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Pasture Condition Score'),
-			'#options' => $severity_options,
-			'#default_value' => $pasture_assessment_soil_surface_loss_value,
-			'#required' => TRUE,
-			'#empty_option' => '- Select -',
-
-		];
 
 
 		$form['rc_container'] = [
@@ -209,7 +198,7 @@ class PastureAssessmentForm extends FormBase {
 
 		$form['actions']['identify-resource-concerns'] = [
 			'#type' => 'submit',
-			'#value' => $this->t('Calculate score.'),
+			'#value' => $this->t('Calculate Score'),
 			'#submit' => ['::displayRcScores'],
 			'#ajax' => [
 				'callback' => '::updateScores',
@@ -292,8 +281,8 @@ class PastureAssessmentForm extends FormBase {
 	}
 
 	public function createElementNames(){
-		return array('pasture_assessment_shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
-		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion', 'pasture_assessment_condition_store','pasture_assessment_soil_compaction');
+		return array('shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
+		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion','pasture_assessment_soil_compaction');
 	}
 
     /**
@@ -310,7 +299,7 @@ class PastureAssessmentForm extends FormBase {
 
             $pasture_submission['type'] = 'pasture_assessment';
             $pasturAssessment = Asset::create($pasture_submission);
-			$pasturAssessment->set('name', 'Pasture');
+			$pasturAssessment->set('name', 'PCS Assessment');
             $pasturAssessment -> save();
 
 			$this->setProjectReference($pasturAssessment, $pasturAssessment->get('pasture_assessment_shmu')->target_id);
@@ -325,7 +314,7 @@ class PastureAssessmentForm extends FormBase {
 		    foreach($elementNames as $elemName){
                 $pastureAssessment->set($elemName, $form_state->getValue($elemName));
             }
-			$pastureAssessment->set('name', 'Pasture');
+			$pastureAssessment->set('name', 'PCS Assessment');
             $pastureAssessment->save();
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_assessment_shmu')->target_id);
@@ -354,9 +343,8 @@ class PastureAssessmentForm extends FormBase {
 		$pasture_assessment_soil_compaction = $form_state->getValue('pasture_assessment_soil_compaction');
 		$plant_rigor = $form_state->getValue('pasture_assessment_plant_rigor');
 		$erosion = $form_state->getValue('pasture_assessment_erosion');
-		$condition_store = $form_state->getValue('pasture_assessment_condition_store');
 
-		$score = $desirable_plants + $water_flow + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor + $condition_store;
+		$score = $desirable_plants + $Legume_dry_weight + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor;
 		return $score;
 	}
 

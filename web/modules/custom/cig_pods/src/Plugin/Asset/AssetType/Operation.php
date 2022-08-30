@@ -84,11 +84,11 @@ class Operation extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        'field_cost_sequences' => [
+        'field_operation_cost_sequences' => [
             'label'=> 'Cost Sequence',
              'type'=> 'entity_reference',
              'target_type'=> 'asset',
-             'target_bundle'=> 'operation_cost_sequence',
+             'target_bundle'=> 'cost_sequence',
              'required' => FALSE,
              'multiple' => TRUE,
              'description' => '',

@@ -6,6 +6,7 @@ Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\URL;
+use Drupal\Core\Field\EntityReferenceFieldItemList;
 
 class InputsForm extends FormBase {
 
@@ -39,19 +40,6 @@ class InputsForm extends FormBase {
 		return $options;
 	}
 
-    public function getCostTypeOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_cost_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
-	}
-
     public function getUnitOptions(){
 		$options = [];
 		$options[""] = '- Select -';
@@ -65,6 +53,58 @@ class InputsForm extends FormBase {
 		return $options;
 	}
 
+	public function getCostSequenceIdsForInput($input){
+		$cost_sequence_target_ids = [];
+
+		$field_cost_sequence_list = $input->get('field_input_cost_sequences'); // Expected type of FieldItemList
+		foreach($field_cost_sequence_list as $key=>$value){
+			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
+		}
+		return $cost_sequence_target_ids;
+	}
+
+	public function getAsset($id){
+		// We use load instead of load by properties here because we are looking by id
+		$asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+		return $asset;
+
+	}
+
+
+	public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state){
+		$sequences = [];
+		$i = 0;
+		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
+			$tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
+			$sequences[$i] = array();
+			$sequences[$i]['field_cost_type'] = $tmp_sequence['field_cost_type'];
+			$sequences[$i]['field_cost'] = $tmp_sequence['field_cost'];
+			$i++;
+		}
+		// If sequences is still empty, set a blank sequence at index 0
+		if($i == 0){
+			$sequences[0]['field_cost_type'] = '';
+			$sequences[0]['field_cost'] = '';
+		}
+		
+		$form_state->set('sequences', $sequences);
+		return;
+	}
+
+	public function getOtherCostsOptions(){
+		$options = [];
+		$options[''] = '- Select -';
+		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
+			['vid' => 'd_cost_type']);
+		$keys = array_keys($taxonomy_terms);
+		foreach($keys as $key){
+			$term = $taxonomy_terms[$key];
+			$options[$key] = $term -> getName();
+		}
+		return $options;
+	}
+
+
     private function convertFraction($fraction){
         $num = $fraction->getValue()["numerator"];
         $denom = $fraction->getValue()["denominator"];
@@ -77,66 +117,31 @@ class InputsForm extends FormBase {
         $operation_name = "Operation";
 		$operation = [];
 
+		if ($form_state->get('load_done') == NULL){
+			$form_state->set('load_done', FALSE);
+		}
 	    if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('input_id',$id);
 			$input = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 			$form_state->set('operation_id', $input->get('field_operation')->target_id);
+			$input_cost_sequences_ids = $this->getCostSequenceIdsForInput($input);
+			if(!$form_state->get('load_done')){
+				$this->loadOtherCostsIntoFormState($input_cost_sequences_ids, $form_state);
+				$form_state->set('load_done',TRUE);
+			}
 	    } else {
+			if(!$form_state->get('load_done')){
+				$this->loadOtherCostsIntoFormState([], $form_state);
+				$form_state->set('load_done',TRUE);
+			}
 			$form_state->set('operation','create');
 			$form_state->set('operation_id', $operation_id);
 	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';
+
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
-
-        $num_other_costs_lines = $form_state->get('num_other_costs_lines');//get num of inputs showing on screen. (1->n exclude:removed indexes)
-		$num_other_costs = $form_state->get('num_other_costs');//get num of added inputs. (1->n)
-
-        $removed_other_costs = $form_state->get('removed_other_costs');//get removed inputs indexes
-
-        $input_org_default_name = $is_edit ? $input->get('field_cost') : '';
-
-		if($is_edit){
-			$cname=array();
-			$fraction_count = count($input_org_default_name);
-				for( $index = 0; $index < $fraction_count; $index++){
-						$fractionToAdd = $this->convertFraction($input_org_default_name[$index]);
-					$cname[] = $fractionToAdd;
-				}
-
-				if(count($cname) == 0){
-					$ex_count = 1;
-				}else{
-					$ex_count = count($cname);
-				}
-		}
-
-        if($is_edit){
-
-			if ($num_other_costs === NULL) {//initialize number of input, set to 1
-				$form_state->set('num_other_costs', $ex_count);
-				$num_other_costs = $form_state->get('num_other_costs');
-			}
-			if ($num_other_costs_lines === NULL) {
-				$form_state->set('num_other_costs_lines', $ex_count);
-				$num_other_costs_lines = $form_state->get('num_other_costs_lines');
-			}
-		}else{
-				if ($num_other_costs === NULL) {//initialize number of input, set to 1
-					$form_state->set('num_other_costs', 1);
-					$num_other_costs = $form_state->get('num_other_costs');
-				}
-				if ($num_other_costs_lines === NULL) {
-					$form_state->set('num_other_costs_lines', 1);
-					$num_other_costs_lines = $form_state->get('num_other_costs_lines');
-				}
-			}
-
-		if ($removed_other_costs === NULL) {
-			$form_state->set('removed_other_costs', array());//initialize arr
-			$removed_other_costs = $form_state->get('removed_other_costs');
-		}
 
         $form['title'] = [
 			'#markup' => '<div class="title-container"><h1>Inputs</h1></div>'
@@ -183,7 +188,7 @@ class InputsForm extends FormBase {
 			'#required' => TRUE
 		];
 
-        //input disabled untill we can get it working with input_category
+        //input disabled until we can get it working with input_category
         // $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
 
         $form['field_input'] = [
@@ -249,98 +254,80 @@ class InputsForm extends FormBase {
 		];
 
 		$form['#tree'] = TRUE;
-		$form['names_fieldset'] = [
-		  '#prefix' => '<div id="names-fieldset-wrapper"',
-		  '#suffix' => '</div>',
+
+		$form['cost_sequence'] = [
+			'#prefix' => '<div id ="cost_sequence">',
+			'#suffix' => '</div>',
 		];
 
-		$contact_default_name = $is_edit ? $input->get('field_cost_type')->getValue() : '';
-		$inputtype=array();
-			foreach ($contact_default_name as $checks) {
-			 $detail = $checks['target_id'];
-			 $inputtype[] = $detail;
-			}
 
-		for ($i = 0; $i < $num_other_costs; $i++) {//num_other_costs: get num of added contacts. (1->n)
+		$cost_options = $this->getOtherCostsOptions();
 
-			if (in_array($i, $removed_other_costs)) {// Check if field was removed
-				continue;
-			}
+		$fs_cost_sequences = $form_state->get('sequences');
 
-            $form['names_fieldset'][$i]['new_line_container1'] = [
-				'#prefix' => '<div id="other-costs"',
-			];
-			$form['names_fieldset'][$i]['other_costs_cost'] = [
-				 '#type' => 'number',
-                 '#step' => 0.01,
-				'#title' => $this
-				  ->t("Cost"),
-				'#default_value' => $cname[$i],
-				'attributes' => [
-					'class' => 'something',
-				],
-				'#prefix' => ($num_other_costs_lines > 1) ? '<div class="inline-components-short">' : '<div class="inline-components">',
-		  		'#suffix' => '</div>',
-			];
+		$num_cost_sequences = 1;
+		if(count($fs_cost_sequences) <> 0){
+			$num_cost_sequences = count($fs_cost_sequences);
+		}
 
-			$form['names_fieldset'][$i]['other_costs_type'] = [
-				'#type' => 'select',
-				'#title' => $this
-				  ->t('Type'),
-				'#options' =>  $this->getCostTypeOptions(),
-				'#default_value' => $inputtype[$i],
-				 '#prefix' => '<div class="inline-components"',
-		  		'#suffix' => '</div>',
-			];
+		$form_index = 0; // Not to be confused with rotation
+		foreach($fs_cost_sequences as $fs_index => $sequence  ){
+			$cost_type_default_value = ''; // Default value for empty Rotation
+			$cost_default_value = ''; // Default value for empty rotation
 
+			 $cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
 
-			if($num_other_costs_lines > 1 && $i!=0){
-				$form['names_fieldset'][$i]['actions'] = [
-					'#type' => 'submit',
-					'#value' => $this->t('Delete'),
-					'#name' => $i,
-					'#submit' => ['::removeOtherCostsCallback'],
-					'#ajax' => [
-					  'callback' => '::addOtherCostsRowCallback',
-					  'wrapper' => 'names-fieldset-wrapper',
-					],
-					"#limit_validation_errors" => array(),
-					'#prefix' => '<span class="remove-button-container">',
-					'#suffix' => '</span>',
-				];
-			}
-             $form['names_fieldset'][$i]['new_line_container2'] = [
+			$cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
+			
+			$form['cost_sequence'][$fs_index] = [
+				'#prefix' => '<div id="cost_rotation">',
 				'#suffix' => '</div>',
 			];
+
+			$form['cost_sequence'][$fs_index]['field_cost'] = [
+				'#type' => 'number',
+				'#title' => 'Cost',
+				'#step' => 0.01,
+				'#default_value' => $cost_default_value,
+			];
+			$form['cost_sequence'][$fs_index]['field_cost_type'] = [
+				'#type' => 'select',
+				'#title' => 'Type',
+				'#options' => $cost_options,
+				'#default_value' => $cost_type_default_value,
+			];
+
+			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
+				'#type' => 'submit',
+				'#name' => $fs_index,
+				'#submit' => ['::deleteCostSequence'],
+				'#ajax' => [
+					'callback' => "::deleteCostSequenceCallback",
+					'wrapper' => 'cost_sequence',
+				],
+				'#limit_validation_errors' => [],
+				'#value' => $this->t('Delete'),
+			];
+
+			// Very important
+			$form_index = $form_index + 1;
+			// End very important
 		}
+
+		$form['addCost'] = [
+			'#type' => 'submit',
+			'#submit' => ['::addAnotherCostSequence'],
+			'#ajax' => [
+				'callback' => '::addAnotherCostSequenceCallback',
+				'wrapper' => 'cost_sequence',
+			],
+			'#limit_validation_errors' => [],
+			'#value' => 'Add Another Cost',
+		];
 
         $form['actions'] = [
 			'#type' => 'actions',
 		];
-
-		$form['names_fieldset']['actions']['add_name'] = [
-			'#type' => 'submit',
-			'#button_type' => 'button',
-			'#name' => 'add_contact_button',
-			'#value' => t('Add Another Cost'),
-			'#submit' => ['::addOtherCostsRow'],
-			'#ajax' => [
-				'callback' => '::addOtherCostsRowCallback',
-				'wrapper' => 'names-fieldset-wrapper',
-			],
-			'#states' => [
-				'visible' => [
-				  ":input[name='names_fieldset[0][other_costs_cost]']" => ['!value' => ''],
-				  "and",
-				  ":input[name='names_fieldset[0][other_costs_type]']" => ['!value' => ''],
-				],
-			],
-			"#limit_validation_errors" => array(),
-			'#prefix' => '<div id="addmore-button-container">',
-			'#suffix' => '</div>',
-		];
-
-        $form_state->setCached(FALSE);
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',
@@ -371,30 +358,19 @@ class InputsForm extends FormBase {
         return $form;
     }
 
-     public function arrayValuesAreUnique($array){
-	    $count_dict = array_count_values($array);
-
-	    foreach($count_dict as $key => $value){
-		    if($value != 1){
-			    return False;
-		    }
-	    }
-	    return True;
-    }
-
     /**
     * {@inheritdoc}
     */
     public function validateForm(array &$form, FormStateInterface $form_state){
-		$num_cost_entries = count($form['names_fieldset']) - 1;
+		$num_cost_entries = count($form['cost_sequence']);
 		if($num_cost_entries > 1){
 			for($i = 1; $i < $num_cost_entries; $i++){
-				if($form_state->getValue(['names_fieldset', $i, 'other_costs_cost']) === ''){
-					$form_state->setError($form['names_fieldset'][$i]['other_costs_cost'], $this->t("Please Fill out a Cost for the highlighted field"));
+				if($form_state->getValue(['cost_sequence', $i, 'field_cost']) === ''){
+					$form_state->setError($form['cost_sequence'][$i]['field_cost'], $this->t("Please Fill out a Cost for the highlighted field"));
 					return FALSE;
 				}
-				if($form_state->getValue(['names_fieldset', $i, 'other_costs_type']) === ''){
-					$form_state->setError($form['names_fieldset'][$i]['other_costs_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
+				if($form_state->getValue(['cost_sequence', $i, 'field_cost_type']) === ''){
+					$form_state->setError($form['cost_sequence'][$i]['field_cost_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
 					return FALSE;
 				}
 			}
@@ -402,15 +378,16 @@ class InputsForm extends FormBase {
         return;
     }
 
+	public function addAnotherInput(array &$form, FormStateInterface $form_state) {
+		$form_state->set('input_redirect', TRUE);
+		$this->submitForm($form, $form_state);
+	}
+
     /**
     * {@inheritdoc}
     */
     public function getFormId() {
         return 'inputform';
-    }
-
-    public function addOtherCostsRowCallback(array &$form, FormStateInterface $form_state) {
-        return $form['names_fieldset'];
     }
 
      public function getFormEntityMapping(){
@@ -422,7 +399,8 @@ class InputsForm extends FormBase {
 	    $mapping['field_rate_units'] = 'field_rate_units';
 	    $mapping['field_cost_per_unit'] = 'field_cost_per_unit';
         $mapping['field_custom_application_unit'] = 'field_custom_application_unit';
-
+		$mapping['field_cost'] = 'field_cost';
+		$mapping['field_cost_type'] = 'field_cost_type';
          return $mapping;
      }
 
@@ -432,9 +410,8 @@ class InputsForm extends FormBase {
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
 	   $operation_reference = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
+	  $form_values = $form_state->getValues();
         if($is_create){
-	        $values = $form_state->getValues();
-
             $mapping = $this->getFormEntityMapping();
 
             $input_submission = [];
@@ -448,74 +425,98 @@ class InputsForm extends FormBase {
 	        // Single value fields can be mapped in
 	        foreach($mapping as $form_elem_id => $entity_field_id){
 		        // If mapping not in form or value is empty string
-		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === '' || $form[$form_elem_id] === 'field_cost' ||$form[$form_elem_id] === 'field_cost_type' ){
 			        continue;
 		        }
 		        $input_submission[$entity_field_id] = $form[$form_elem_id]['#value'];
 	        }
 
-            // Minus 1 because there is an entry with key 'actions'
-	        $num_other_costs = count($form['names_fieldset']) - 1;
-
-            $input_cost = [];
-	        $input_cost_types = [];
-	        for( $i = 0; $i < $num_other_costs; $i++ ){
-		        $input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-		        $input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        }
-
- 	        $input_submission['field_cost'] = $input_cost;
- 	        $input_submission['field_cost_type'] = $input_cost_types;
-
             $input_submission['field_input_date'] = strtotime( $form['field_input_date']['#value'] );
 
 	        $input_to_save = Asset::create($input_submission);
+
+			$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+			$all_cost_sequences = $form_values['cost_sequence'];
+			$cost_options = $this->getOtherCostsOptions();
+
+			$cost_template = [];
+			$cost_template['type'] = 'cost_sequence';
+
+			foreach($all_cost_sequences as $sequence){
+				 if($sequence['field_cost_type'] == NULL) continue;
+				// We alwasys create a new cost sequence asset for each rotation
+				$cost_sequence = Asset::create( $cost_template );
+
+				// read the cost id from select dropdown for given rotation
+				$cost_id = $sequence['field_cost_type'];
+				$cost_sequence->set( 'field_cost_type', $cost_id );
+
+				// read the cost rotation year from select dropdown for given rotation
+				$cost_value = $sequence['field_cost'];
+				$cost_sequence->set( 'field_cost', $cost_value );
+				$cost_sequence->save();
+
+				$cost_sequence_ids[] = $cost_sequence -> id(); 
+			}
+			
+			$input_to_save->set('field_input_cost_sequences', $cost_sequence_ids);
+
 			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 	        $input_to_save -> save();
-
 			$this->setProjectReference($input_to_save, $input_to_save->get('field_operation')->target_id);
 
 			$operation_reference->get('field_input')[] = $input_to_save->id();
 			$operation_reference->save();
-
          } else {
 		    $input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
-
              $mapping = $this->getFormEntityMapping();
              // Single value fields can be mapped in
 	        foreach($mapping as $form_elem_id => $entity_field_id){
 		        // If mapping not in form or value is empty string
-		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === ''){
+		        if($form[$form_elem_id] === NULL || $form[$form_elem_id] === '' || $form[$form_elem_id] === 'field_cost' ||$form[$form_elem_id] === 'field_cost_type' ){
 			        continue;
 		        }
 		        $input->set($entity_field_id, $form[$form_elem_id]['#value']);
 	        }
 
-		     // Minus 1 because there is an entry with key 'actions'
-		    $num_other_costs = count($form['names_fieldset']) - 1;
+			$num_cost_sequences = count($form_values['cost_sequence']);
+			$all_cost_sequences = $form_values['cost_sequence'];
+			$cost_options = $this->getOtherCostsOptions();
 
-		    $input_cost = [];
-	        $input_cost_types = [];
-	        for( $i = 0; $i < $num_other_costs; $i++ ){
-				$input_cost[$i] = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-				$input_cost_types[$i] = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-	        }
+			$cost_template = [];
+			$cost_template['type'] = 'cost_sequence';
+		
+			foreach($all_cost_sequences as $sequence){
+				 if($sequence['field_cost_type'] == NULL) continue;
+				// We always create a new cost sequence asset for each rotation
+				$cost_sequence = Asset::create( $cost_template );
 
- 	        $input->set('field_cost', $input_cost);
- 	        $input->set('field_cost_type', $input_cost_types);
+				// read the cost id from select dropdown for given rotation
+				// $cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
+				$cost_id = $sequence['field_cost_type'];
+				$cost_sequence->set( 'field_cost_type', $cost_id );
 
+				// read the cost rotation year from select dropdown for given rotation
+				//$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
+				$cost_value = $sequence['field_cost'];
+				$cost_sequence->set( 'field_cost', $cost_value );
+				$cost_sequence->save();
+
+				$cost_sequence_ids[] = $cost_sequence -> id(); 
+			}
+
+			$input->set('field_input_cost_sequences', $cost_sequence_ids);
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		    $input->save();
-
+		     $input->save();
 			$this->setProjectReference($input, $input->get('field_operation')->target_id);
 
 			$operation_reference->get('field_input')[] = $input->id();
 			$operation_reference->save();
-
 	}
-	if($form_state->get('redirect_input') == TRUE){
+	
+	if($form_state->get('input_redirect') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $form_state->get('operation_id')]);
 	}else{
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -529,40 +530,7 @@ public function setProjectReference($assetReference, $operationReference){
 	$assetReference->save();
 }
 
-    public function addOtherCostsRow(array &$form, FormStateInterface $form_state) {
-
-        $num_other_costs = $form_state->get('num_other_costs');
-	    $num_other_costs_lines = $form_state->get('num_other_costs_lines');
-        $form_state->set('num_other_costs', $num_other_costs + 1);
-	    $form_state->set('num_other_costs_lines', $num_other_costs_lines + 1);
-        $form_state->setRebuild();
-  }
-
-  public function removeOtherCostsCallback(array &$form, FormStateInterface $form_state) {
-    $trigger = $form_state->getTriggeringElement();
-	$num_line = $form_state->get('num_other_costs_lines');
-    $indexToRemove = $trigger['#name'];
-
-   // Remove the fieldset from $form (the easy way)
-    unset($form['names_fieldset'][$indexToRemove]);
-
-    // Keep track of removed fields so we can add new fields at the bottom
-    // Without this they would be added where a value was removed
-    $removed_other_costs = $form_state->get('removed_other_costs');
-    $removed_other_costs[] = $indexToRemove;
-
-	$form_state->set('removed_other_costs', $removed_other_costs);
-	$form_state->set('num_other_costs_lines', $num_line - 1);
-
-    // Rebuild form_state
-    $form_state->setRebuild();
- }
-
-  public function addAnotherInput(array &$form, FormStateInterface $form_state) {
-	$form_state->set('redirect_input', TRUE);
-	 $this->submitForm($form, $form_state);
-  }
-  public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+ 	 public function cancelSubmit(array &$form, FormStateInterface $form_state) {
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		return;
 	}
@@ -570,7 +538,7 @@ public function setProjectReference($assetReference, $operationReference){
     public function deleteInputs(array &$form, FormStateInterface $form_state){
         $input_id = $form_state->get('input_id');
 		$input_to_delete = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
-
+		$sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
 		try{
 			$input_to_delete->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
@@ -580,5 +548,45 @@ public function setProjectReference($assetReference, $operationReference){
 		  ->addError($this
 		  ->t($e->getMessage()));
 		}
+		foreach($sequence_ids as $sid) {
+			try{
+				$cost_sequence = \Drupal::entityTypeManager()->getStorage('asset')->load($sid);
+				$cost_sequence->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
+		}
     }
+	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
+		$sequences = $form_state->get('sequences');
+		$new_cost_sequence = [];
+		$new_cost_sequence['field_cost'][0]['value'] = '';
+		$new_cost_sequence['field_cost_type'][0]['value'] = '';
+		$cost_options = $this->getOtherCostsOptions();
+		$sequences[] = $new_cost_sequence;
+		$form_state->set('sequences', $sequences);
+		$form_state->setRebuild(True);
+	}
+
+	public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state){
+		return $form['cost_sequence'];
+	}
+
+
+	public function deleteCostSequence(array &$form, FormStateInterface $form_state){
+	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+		$sequences = $form_state->get('sequences');
+		unset($sequences[$idx_to_rm]); // Remove the index
+		$form_state->set('sequences',$sequences);
+
+		$form_state->setRebuild(True);
+	}
+
+	public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state){
+		return $form['cost_sequence'];
+	}
+
 }

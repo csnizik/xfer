@@ -218,7 +218,7 @@ input#edit-actions-save.button {
   margin-right: 18px;
 }
 
-form#inputform input#edit-addcost.button {
+form#inputform input[id*="edit-addcost"] {
   background-color: #ffffff;
   border-radius: 2px;
   border-color: #005ea2 !important;
@@ -226,6 +226,18 @@ form#inputform input#edit-addcost.button {
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
+  margin-top: -10px;
+}
+
+form#inputform input#edit-addcost.button .button:not(:focus) {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: -10px;
 }
 
 #cost_rotation input[id*="actions-delete"] {
@@ -258,6 +270,7 @@ input#edit-actions-save-refresh.button {
   font-size: 16px;
 }
 
+input#edit-addcost:hover,
 input#edit-actions-save:hover,
 input#edit-actions-cancel:hover,
 input#edit-actions-save-refresh:hover {

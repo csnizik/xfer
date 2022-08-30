@@ -459,33 +459,29 @@ class OperationForm extends FormBase {
         }
 
 		$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
-
+		$all_cost_sequences = $form_values['cost_sequence'];
 		$cost_options = $this->getOtherCostsOptions();
 
 		$cost_template = [];
 		$cost_template['type'] = 'cost_sequence';
 
-		for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
-
+		foreach($all_cost_sequences as $sequence){
 			// If they did not select a cost for the row, do not include it in the save
-			if($form_values['cost_sequence'][$sequence]['field_cost_type'] == NULL) continue;
-
+			 if($sequence['field_cost_type'] == NULL) continue;
 			// We alwasys create a new cost sequence asset for each rotation
 			$cost_sequence = Asset::create( $cost_template );
 
 			// read the cost id from select dropdown for given rotation
-			$cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
+			$cost_id = $sequence['field_cost_type'];
 			$cost_sequence->set( 'field_cost_type', $cost_id );
 
 			// read the cost rotation year from select dropdown for given rotation
-			$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
+			$cost_value = $sequence['field_cost'];
 			$cost_sequence->set( 'field_cost', $cost_value );
 
-			#
-
 			$cost_sequence->save();
-			$cost_sequence_ids[] = $cost_sequence -> id(); // Append ID of SHMU Cost Sequence to list
 
+			$cost_sequence_ids[] = $cost_sequence -> id(); 
 		}
 
 		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);

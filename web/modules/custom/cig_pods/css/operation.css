@@ -81,7 +81,6 @@ input#edit-actions-save:hover {
   display: flex;
   align-items: center;
   clear: both;
-  margin-top: 40px;
 }
 
 #block-gin-content form .subform-title-container h2 {
@@ -92,8 +91,8 @@ input#edit-actions-save:hover {
 }
 
 #block-gin-content form .subform-title-container h1 {
-  font-size: 26px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 500;
   line-height: 26px;
   flex: 50%;
 }

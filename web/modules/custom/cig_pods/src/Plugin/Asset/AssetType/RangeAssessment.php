@@ -164,13 +164,14 @@ class RangeAssessment extends FarmAssetType {
                 'description' => '',
 
             ],
-            'field_range_assessment_project_id' => [
-                'label'=> 'Rangeland Project ID',
-                'type'=> 'fraction',
-                'required' => FALSE,
-                'description' => '',
-
-            ],
+          'project' =>[
+            'label' => 'Project',
+            'type' => 'entity_reference',
+            'target_type' => 'asset',
+            'target_bundle' => 'project',
+            'required' => TRUE,
+            'multiple' => TRUE,
+          ],
 
         ];
         $farmFieldFactory = new FarmFieldFactory();

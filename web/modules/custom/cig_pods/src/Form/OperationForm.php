@@ -487,6 +487,8 @@ class OperationForm extends FormBase {
 		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);
 		$operation->save();
 
+		$this->setProjectReference($operation, $operation->get('field_operation_shmu')->target_id);
+
 		// Cleanup - remove the old cost Sequence Assets that are no longer used
 		if($is_edit){
 			$trash_rotation_ids = $form_state->get('original_cost_sequence_ids');
@@ -502,6 +504,13 @@ class OperationForm extends FormBase {
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}
     }
+
+	public function setProjectReference($assetReference, $shmuReference){
+		$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
 		$sequences = $form_state->get('sequences');

@@ -515,6 +515,8 @@ class LabTestMethodForm extends FormBase {
             $method = Asset::create($method_submission);
             $method -> save();
 
+            $this->setProjectReference($method, $method->get('field_lab_method_soil_sample')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
@@ -537,7 +539,17 @@ class LabTestMethodForm extends FormBase {
             $labTestMethod->set('name', 'Methods');
 
             $labTestMethod->save();
+
+            $this->setProjectReference($labTestMethod, $labTestMethod->get('field_lab_method_soil_sample')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
      }
+
+     public function setProjectReference($assetReference, $sampleReference){
+		$soilSample = \Drupal::entityTypeManager()->getStorage('asset')->load($sampleReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($soilSample->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 }

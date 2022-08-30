@@ -159,13 +159,14 @@ class FieldAssessment extends FarmAssetType {
              'description' => '',
 
          ],
-         'field_field_assessment_project_id' =>[
-            'type'  => 'fraction',
-            'label' => 'Field Assessment Project ID reference',
-            'description' => $this->t('Field Assessment Project ID reference'),
-            'required' => FALSE,
-            'multiple' => FALSE,
-         ],
+        'project' =>[
+          'label' => 'Project',
+          'type' => 'entity_reference',
+          'target_type' => 'asset',
+          'target_bundle' => 'project',
+          'required' => TRUE,
+          'multiple' => TRUE,
+        ],
       ];
     $farmFieldFactory = new FarmFieldFactory();
     foreach($field_info as $name => $info){

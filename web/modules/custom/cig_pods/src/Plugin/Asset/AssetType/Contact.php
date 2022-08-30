@@ -20,9 +20,9 @@ class Contact extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-         'field_eauth_id' => [
+         'eauth_id' => [
             'label'=> 'Eauth ID',
-            'type'=> 'fraction',
+            'type'=> 'string',
             'required' => TRUE,
             'description' => '',
          ],
@@ -34,11 +34,13 @@ class Contact extends FarmAssetType {
             'required' => TRUE,
             'description' => '',
          ],
-         'field_contact_project_id' =>[
-            'type'  => 'fraction',
-            'label' => 'Contact Project ID reference',
-            'description' => $this->t('Contact Project ID reference'),
-            'required' => TRUE,
+         'project' =>[
+           'label' => 'Project',
+           'type' => 'entity_reference',
+           'target_type' => 'asset',
+           'target_bundle' => 'project',
+           'required' => TRUE,
+           'multiple' => TRUE,
          ],
       ];
 

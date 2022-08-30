@@ -24,15 +24,13 @@ class Producer extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-         'field_producer_project' => [
+         'project' => [
             'type' => 'entity_reference',
-            'label' => 'Producer Project',
-            'description' => $this->t('Producer project'),
+            'label' => 'Project',
             'target_type' => 'asset',
             'target_bundle' => 'project',
-            'handler' => 'default',
             'required' => TRUE,
-            'multiple' => FALSE,
+            'multiple' => TRUE,
          ],
          'field_producer_first_name' => [
             'type' => 'string',

@@ -107,6 +107,14 @@ class PastureAssessment extends FarmAssetType {
                 'required' => FALSE,
                 'description' => '',
             ],
+          'project' =>[
+            'label' => 'Project',
+            'type' => 'entity_reference',
+            'target_type' => 'asset',
+            'target_bundle' => 'project',
+            'required' => TRUE,
+            'multiple' => TRUE,
+          ],
 
         ];
         $farmFieldFactory = new FarmFieldFactory();

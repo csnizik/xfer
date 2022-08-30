@@ -359,12 +359,13 @@ class PastureHealthAssessmentForm extends FormBase {
 
 	public function createElementNames(){
 		return array('shmu', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
-		'pasture_health_assessment_erosion_wind_scoured', 'pasture_health_assessment_erosion_streambank', 'pasture_health_assessment_water_flow_patterns', 'pasture_health_assessment_bare_ground', 
+		'pasture_health_assessment_erosion_wind_scoured', 'pasture_health_assessment_erosion_streambank', 'pasture_health_assessment_water_flow_patterns', 'pasture_health_assessment_bare_ground',
 		'pasture_health_assessment_padestals', 'pasture_health_assessment_litter_movement', 'pasture_health_assessment_composition', 'pasture_health_assessment_soil_surface',
-		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable', 
-		'pasture_health_assessment_invasive_plants', 'pasture_health_assessment_annual_production', 'pasture_health_assessment_plant_vigor', 'pasture_health_assessment_dying_plants', 
+		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable',
+		'pasture_health_assessment_invasive_plants', 'pasture_health_assessment_annual_production', 'pasture_health_assessment_plant_vigor', 'pasture_health_assessment_dying_plants',
 		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock');
 	}
+
     /**
      * {@inheritdoc}
      */
@@ -382,6 +383,8 @@ class PastureHealthAssessmentForm extends FormBase {
 			$pastureAssessment->set('name', 'DIPH Assessment');
             $pastureAssessment -> save();
 
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
         }else{
@@ -394,9 +397,19 @@ class PastureHealthAssessmentForm extends FormBase {
             }
 			$pastureHealthAssessment->set('name', 'DIPH Assessment');
             $pastureHealthAssessment->save();
+
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
     }
+
+	public function setProjectReference($assetReference, $shmuReference){
+		$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 
     /**
      * {@inheritdoc}

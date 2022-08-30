@@ -10,8 +10,8 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Url;
 use Drupal\Tests\farm_test\Functional\FarmBrowserTestBase;
-use Drupal\Core\Routing; 
-use Drupal\Core\DrupalKernel; 
+use Drupal\Core\Routing;
+use Drupal\Core\DrupalKernel;
 use Drupal\redirect\Entity\Redirect;
 use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,17 +24,17 @@ class TestzRoles extends FormBase {
     public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
         $form['actions'] = [
-            '#type' => 
+            '#type' =>
             'actions',
         ];
 
         $form['actions']['cancel'] = [
-            '#type' => 
+            '#type' =>
             'submit',
-            '#value' => 
+            '#value' =>
               $this->t('Cancel'),
         ];
-        
+
          /* Display the users that have Admin zRole */
          $role = 'CIG_App_Admin';
 
@@ -50,7 +50,7 @@ class TestzRoles extends FormBase {
                zRolesUtilities::printUserInfo ($user);
             }
          }
-         
+
          /* Display the users that have data steward zRole */
          $role = 'CIG_NSHDS';
          $userInfo = zRolesUtilities::getListByzRole($role);
@@ -64,7 +64,7 @@ class TestzRoles extends FormBase {
                zRolesUtilities::printUserInfo ($user);
             }
          }
-          
+
       /* Display the users that have CIG_NCDS zRole */
          $role = 'CIG_NCDS';
          $userInfo = zRolesUtilities::getListByzRole($role);
@@ -72,13 +72,41 @@ class TestzRoles extends FormBase {
          if (count($userInfo) == 1) {
             zRolesUtilities::printUserInfo ($userInfo);
             }
-         else 
+         else
             {
             foreach ($userInfo as $user) {
                zRolesUtilities::printUserInfo ($user);
             }
          }
-           
+
+          /* Display the users that have CIG_APT zRole */
+          $role = 'CIG_APT';
+          $userInfo = zRolesUtilities::getListByzRole($role);
+          print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
+          if (count($userInfo) == 1) {
+             zRolesUtilities::printUserInfo ($userInfo);
+             }
+          else
+             {
+             foreach ($userInfo as $user) {
+                zRolesUtilities::printUserInfo ($user);
+             }
+          }
+
+          /* Display the users that have CIG_NCDS zRole */
+          $role = 'CIG_APA';
+          $userInfo = zRolesUtilities::getListByzRole($role);
+          print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
+          if (count($userInfo) == 1) {
+             zRolesUtilities::printUserInfo ($userInfo);
+             }
+          else
+             {
+             foreach ($userInfo as $user) {
+                zRolesUtilities::printUserInfo ($user);
+             }
+          }
+
 
       return $form;
     }

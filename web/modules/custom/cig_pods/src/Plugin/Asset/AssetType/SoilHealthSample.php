@@ -71,10 +71,13 @@ class SoilHealthSample extends FarmAssetType {
         'required' => FALSE,
         'description' => '',
       ],
-      'field_soil_sample_project_id' => [
-        'label'=> 'Soil Sample Project ID',
-        'type'=> 'fraction',
-        'required'=> FALSE,
+      'project' =>[
+        'label' => 'Project',
+        'type' => 'entity_reference',
+        'target_type' => 'asset',
+        'target_bundle' => 'project',
+        'required' => TRUE,
+        'multiple' => TRUE,
       ],
       ];
 

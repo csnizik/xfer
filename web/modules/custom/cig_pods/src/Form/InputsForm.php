@@ -409,7 +409,7 @@ class InputsForm extends FormBase {
     */
     public function submitForm(array &$form, FormStateInterface $form_state) {
        $is_create = $form_state->get('operation') === 'create';
-	   
+	   $operation_reference = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 	  $form_values = $form_state->getValues();
         if($is_create){
             $mapping = $this->getFormEntityMapping();

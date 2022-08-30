@@ -487,7 +487,7 @@ class OperationForm extends FormBase {
 		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);
 		$operation->save();
 
-		$this->setProjectReference($operation, $operation->get('field_operation_shmu')->target_id);
+		$this->setProjectReference($operation, $operation->get('shmu')->target_id);
 
 		// Cleanup - remove the old cost Sequence Assets that are no longer used
 		if($is_edit){

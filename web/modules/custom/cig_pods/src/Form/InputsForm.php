@@ -53,14 +53,6 @@ class InputsForm extends FormBase {
 		return $options;
 	}
 
-	// public function getInputCosts(EntityReferenceFieldItemList $costs){
-	// 	$cost_array_to_return = [];
-	// 	for($i = 0; $i < count($costs); $i ++){
-	// 		$cost_array_to_return[$i] = \Drupal::entityTypeManager()->getStorage('asset')->load($costs[$i]->target_id);
-	// 	}
-	// 	return $cost_array_to_return;
-	// }
-
 	public function getCostSequenceIdsForInput($input){
 		$cost_sequence_target_ids = [];
 
@@ -80,8 +72,6 @@ class InputsForm extends FormBase {
 
 
 	public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state){
-		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
-
 		$sequences = [];
 		$i = 0;
 		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
@@ -198,7 +188,7 @@ class InputsForm extends FormBase {
 			'#required' => TRUE
 		];
 
-        //input disabled untill we can get it working with input_category
+        //input disabled until we can get it working with input_category
         // $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
 
         $form['field_input'] = [
@@ -264,6 +254,7 @@ class InputsForm extends FormBase {
 		];
 
 		$form['#tree'] = TRUE;
+
 		$form['cost_sequence'] = [
 			'#prefix' => '<div id ="cost_sequence">',
 			'#suffix' => '</div>',
@@ -322,9 +313,6 @@ class InputsForm extends FormBase {
 			$form_index = $form_index + 1;
 			// End very important
 		}
-
-
-
 
 		$form['addCost'] = [
 			'#type' => 'submit',
@@ -416,26 +404,6 @@ class InputsForm extends FormBase {
          return $mapping;
      }
 
-	 public function submitCosts(array &$form, FormStateInterface $form_state) {
-		
-	        $num_other_costs = $form_state->get('num_other_costs');
-
-            $input_costs = [];
-			$cost_creation['type'] = 'cost';
-			$cost_creation['name'] = 'Cost'.$form['field_input_date'];
-			
-	        for( $i = 0; $i < $num_other_costs; $i++ ){	
-		        $input_cost = $form['names_fieldset'][$i]['other_costs_cost']['#value'];
-		        $input_cost_type = $form['names_fieldset'][$i]['other_costs_type']['#value'];
-				if($input_cost === NULL && $input_cost_type === NULL){continue;}
-				$current_cost = Asset::create($cost_creation);
-				$current_cost->set('field_cost_amount', $input_cost);
-				$current_cost->set('field_cost_type', $input_cost_type);
-				$input_costs[$i] = $current_cost;
-	        }
-			return $input_costs;
-	 }
-
     /**
     * {@inheritdoc}
     */
@@ -468,30 +436,30 @@ class InputsForm extends FormBase {
 	        $input_to_save = Asset::create($input_submission);
 
 			$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
-		$all_cost_sequences = $form_values['cost_sequence'];
-		$cost_options = $this->getOtherCostsOptions();
+			$all_cost_sequences = $form_values['cost_sequence'];
+			$cost_options = $this->getOtherCostsOptions();
 
-		$cost_template = [];
-		$cost_template['type'] = 'cost_sequence';
+			$cost_template = [];
+			$cost_template['type'] = 'cost_sequence';
 
-		foreach($all_cost_sequences as $sequence){
-			 if($sequence['field_cost_type'] == NULL) continue;
-			// We alwasys create a new cost sequence asset for each rotation
-			$cost_sequence = Asset::create( $cost_template );
+			foreach($all_cost_sequences as $sequence){
+				 if($sequence['field_cost_type'] == NULL) continue;
+				// We alwasys create a new cost sequence asset for each rotation
+				$cost_sequence = Asset::create( $cost_template );
 
-			// read the cost id from select dropdown for given rotation
-			$cost_id = $sequence['field_cost_type'];
-			$cost_sequence->set( 'field_cost_type', $cost_id );
+				// read the cost id from select dropdown for given rotation
+				$cost_id = $sequence['field_cost_type'];
+				$cost_sequence->set( 'field_cost_type', $cost_id );
 
-			// read the cost rotation year from select dropdown for given rotation
-			$cost_value = $sequence['field_cost'];
-			$cost_sequence->set( 'field_cost', $cost_value );
-			$cost_sequence->save();
+				// read the cost rotation year from select dropdown for given rotation
+				$cost_value = $sequence['field_cost'];
+				$cost_sequence->set( 'field_cost', $cost_value );
+				$cost_sequence->save();
 
-			$cost_sequence_ids[] = $cost_sequence -> id(); 
-		}
-
-		$input_to_save->set('field_input_cost_sequences', $cost_sequence_ids);
+				$cost_sequence_ids[] = $cost_sequence -> id(); 
+			}
+			
+			$input_to_save->set('field_input_cost_sequences', $cost_sequence_ids);
 
 			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 	        $input_to_save -> save();
@@ -509,36 +477,30 @@ class InputsForm extends FormBase {
 	        }
 
 			$num_cost_sequences = count($form_values['cost_sequence']);
-			$test_cost_sequences = $form_values['cost_sequence'];
+			$all_cost_sequences = $form_values['cost_sequence'];
 			$cost_options = $this->getOtherCostsOptions();
 
 			$cost_template = [];
-		$cost_template['type'] = 'cost_sequence';
-		// for($sequence = 0; $sequence < $num_cost_sequences; $sequence++ ){
-			foreach($test_cost_sequences as $sequence){
+			$cost_template['type'] = 'cost_sequence';
+		
+			foreach($all_cost_sequences as $sequence){
+				 if($sequence['field_cost_type'] == NULL) continue;
+				// We always create a new cost sequence asset for each rotation
+				$cost_sequence = Asset::create( $cost_template );
 
-// if(!$form_values['cost_sequence'][$sequence]){
-// 	continue;
-// }
-			// If they did not select a cost for the row, do not include it in the save
-			// if($form_values['cost_sequence'][$sequence]['field_cost_type'] == NULL) continue;
-			 if($sequence['field_cost_type'] == NULL) continue;
-			// We alwasys create a new cost sequence asset for each rotation
-			$cost_sequence = Asset::create( $cost_template );
+				// read the cost id from select dropdown for given rotation
+				// $cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
+				$cost_id = $sequence['field_cost_type'];
+				$cost_sequence->set( 'field_cost_type', $cost_id );
 
-			// read the cost id from select dropdown for given rotation
-			// $cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];
-			$cost_id = $sequence['field_cost_type'];
-			$cost_sequence->set( 'field_cost_type', $cost_id );
+				// read the cost rotation year from select dropdown for given rotation
+				//$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
+				$cost_value = $sequence['field_cost'];
+				$cost_sequence->set( 'field_cost', $cost_value );
+				$cost_sequence->save();
 
-			// read the cost rotation year from select dropdown for given rotation
-			//$cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];
-			$cost_value = $sequence['field_cost'];
-			$cost_sequence->set( 'field_cost', $cost_value );
-			$cost_sequence->save();
-
-			$cost_sequence_ids[] = $cost_sequence -> id(); 
-		}
+				$cost_sequence_ids[] = $cost_sequence -> id(); 
+			}
 
 			$input->set('field_input_cost_sequences', $cost_sequence_ids);
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
@@ -554,7 +516,7 @@ class InputsForm extends FormBase {
 	}
 }
 
-  public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+ 	 public function cancelSubmit(array &$form, FormStateInterface $form_state) {
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		return;
 	}

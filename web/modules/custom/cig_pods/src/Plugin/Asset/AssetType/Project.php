@@ -23,7 +23,7 @@ class Project extends FarmAssetType {
 
     public function buildFieldDefinitions() {
 
-      // 
+      //
       $fields = parent::buildFieldDefinitions();
 
       // We do not add a "Name" field because we inherit that from the FarmAssetType class
@@ -119,33 +119,8 @@ class Project extends FarmAssetType {
             'multiple' => TRUE,
             'required' => FALSE,
          ],
-         'field_awardee_contact_type' => [
-               'type'  => 'entity_reference',
-               'label' => 'Awardee Contact Types',
-               'target_type' => 'taxonomy_term',
-               'target_bundle' => 'd_contact_type',
-               'handler' => 'default',
-               'required' => FALSE,
-               'multiple' => TRUE,
-               'form_display_options' => [
-                  'label' => 'inline',
-                  'type' => 'options_select',
-               ],
-         ],
-         'field_producer_contact_name' => [
-            'type' => 'entity_reference',
-            'label' => 'Producer Contact Name',
-            'target_type' => 'asset',
-            'target_bundle' => 'producer',
-            'multiple' => TRUE,
-            'required' => FALSE,
-            'form_display_options' => [
-               'label' => 'inline',
-               'type' => 'options_select',
-            ],
-         ],
       ];
-      
+
       $farmFieldFactory = new FarmFieldFactory();
       foreach($field_info as $name => $info){
 
@@ -153,7 +128,7 @@ class Project extends FarmAssetType {
 					      -> setDisplayConfigurable('form',TRUE)
 					      -> setDisplayConfigurable('view', TRUE);
       }
-      
+
 
       return $fields;
     }

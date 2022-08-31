@@ -19,6 +19,13 @@ class ProjectForm extends PodsFormBase {
     return ['' => '- Select -'] + $options;
 	}
 
+	public function getReferencedContacts(array $form, FormStateInterface $form_state, $project_id){
+		$contacts = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+			['type' => 'contact', 'project' => $project_id]
+		);
+		$form_state->set('contacts', $contacts);
+	}
+
 
 	# Eventually, this function will get replaced with a call to EAuth to find registered users.
 	public function getAwardeeContactNameOptions(){
@@ -115,6 +122,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 	if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('awardee_id',$awardee->id());
+			$this->getReferencedContacts($form, $form_state, $awardee->id());
 	} else {
 			$form_state->set('operation','create');
 	}
@@ -123,18 +131,16 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
 		$removed_contacts = $form_state->get('removed_contacts');//get removed contacts indexes
-		$awardee_org_default_name = $is_edit ? $awardee->get('field_awardee_eauth_id')->getValue() : '';
-		$cname=array();
-			foreach ($awardee_org_default_name as $checks) {
-			 $eauth = $checks['value'];
-					$cname[] = $eauth;
+		$contact_default = $is_edit ? $form_state->get('contacts') : '';
+		$contacts=array();
+			foreach ($contact_default as $contact) {
+					$contacts[] = $contact;
 
 			}
 
-			$ex_count = count($cname);
+			$ex_count = count($contacts);
 
 		if($is_edit){
-
 			if ($num_contacts === NULL) {//initialize number of contact, set to 1
 				$form_state->set('num_contacts', $ex_count);
 				$num_contacts = $form_state->get('num_contacts');
@@ -291,25 +297,21 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				$contactname[] = $eauth;
 		}
 
-		$contact_default_name = $is_edit ? $awardee->get('field_awardee_contact_type')->getValue() : '';
-		$contacttype=array();
-			foreach ($contact_default_name as $checks) {
-			 $detail = $checks['target_id'];
-			 $contacttype[] = $detail;
-			}
-
 		for ($i = 0; $i < $num_contacts; $i++) {//num_contacts: get num of added contacts. (1->n)
 
 			if (in_array($i, $removed_contacts)) {// Check if field was removed
 				continue;
 			}
 
+			$default_name = $is_edit && !empty($contacts[$i]) ? $contacts[$i]->get('name')->value : NULL;
+			$default_type = $is_edit && !empty($contacts[$i]) ? $contacts[$i]->get('field_contact_type')->target_id: NULL;
+
 			$form['names_fieldset'][$i]['contact_name'] = [
 				'#type' => 'select',
 				'#title' => $this
 				  ->t("Contact Name"),
 				'#options' => $contact_name_options,
-				'#default_value' => $contactname[$i],
+				'#default_value' => $default_name,
 				'attributes' => [
 					'class' => 'something',
 				],
@@ -322,7 +324,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 				'#title' => $this
 				  ->t('Contact Type'),
 				'#options' => $contact_type_options,
-				'#default_value' => $contacttype[$i],
+				'#default_value' => $default_type,
 				'#prefix' => '<div class="inline-components"',
 		  		'#suffix' => '</div>',
 			];
@@ -376,73 +378,6 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 			'#suffix' => '</div>',
 		];
 
-		/* Producers Information */
-		// $form['subform_3'] = [
-		// 	'#markup' => '<div class="subform-title-container"><h2>Producers</h2><h4>Section 3 of 3</h4></div>'
-		// ];
-		//
-		//
-		// $form['producers_fieldset'] = [
-		// 	'#prefix' => '<div id="producers-fieldset-wrapper"',
-		// 	'#suffix' => '</div>',
-		//   ];
-		// for($i = 0; $i < $num_producers; $i++){
-		// 	if(in_array($i,$removed_producers)){
-		// 		continue;
-		// 	}
-		//
-		// 	$form['producers_fieldset'][$i]['producer_name'] = [
-		// 		'#type' => 'select',
-		// 		'#title' => $this->t("Producer Name"),
-		// 		'#options' => $producer_options,
-		// 		'#prefix' => ($num_producer_lines > 1 && $i != 0) ? '<div class="inline-components-short">' : '<div class="inline-components">',
-		// 		'#suffix' => '</div>',
-		// 	];
-		//
-		//
-		// 	if($num_producer_lines > 1 && $i != 0){
-		// 		$form['producers_fieldset'][$i]['actions'] = [
-		// 			'#type' => 'submit',
-		// 			'#value' => $this->t('Delete'),
-		// 			'#name' => $i,
-		// 			'#submit' => ['::removeProducerCallback'],
-		// 			'#ajax' => [
-		// 			  'callback' => '::addProducerRowCallback',
-		// 			  'wrapper' => 'producers-fieldset-wrapper',
-		// 			],
-		// 			"#limit_validation_errors" => array(),
-		// 			'#prefix' => '<div class="remove-button-container">',
-		// 			'#suffix' => '</div>',
-		// 		];
-		// 	}
-		//
-		// 	$form['producers_fieldset'][$i]['new_line_container'] = [
-		// 		'#markup' => '<div class="clear-space"></div>'
-		// 	];
-		// }
-		// $form['producers_fieldset']['actions']['add_producer'] = [
-		// 	'#type' => 'submit',
-		// 	'#button_type' => 'button',
-		// 	'#name' => 'add_producer_button',
-		// 	'#value' => t('Add Another Producer'),
-		// 	'#submit' => ['::addProducerRow'],
-		// 	'#ajax' => [
-		// 		'callback' => '::addProducerRowCallback',
-		// 		'wrapper' => 'producers-fieldset-wrapper',
-		// 	],
-		// 	'#states' => [
-		// 		'visible' => [
-		// 		  ":input[name='producers_fieldset[0][producer_name]']" => ['!value' => ''],
-		// 		],
-		// 	],
-		// 	"#limit_validation_errors" => array(),
-		// 	'#prefix' => '<div id="addmore-button-container">',
-		// 	'#suffix' => '</div>',
-		// ];
-
-		/* Producers Information Ends*/
-
-
 		$form_state->setCached(FALSE);
 
 		$form['actions']['save'] = [
@@ -473,8 +408,8 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 
 		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
 
-		$awardee_id = $form_state->get('awardee_id');
-		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+		$project_id = $form_state->get('project_id');
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
 
 		try{
 			$project->delete();
@@ -598,52 +533,80 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 	$project_submission['field_producer_contact_name'] = $producers;
 
 
-	$contact_eauth_ids = [];
-	$contact_types = [];
+	$contacts = [];
+
 	for( $i = 0; $i < $num_contacts; $i++ ){
-		$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-		$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+		$contact_submission['type'] = 'contact';
+
+		$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
+		$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
+
+		if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
+			continue;
+		}
+
+		$contact_submission['field_contact_type'] = $contact_type;
+		$contact_submission['name'] = $contact_name;
+		$contact = Asset::create($contact_submission);
+		// $conctact_submision['eauth_id'] = $i.'';
+
+		array_push($contacts, $contact);
 	}
 
-	$project_submission['field_awardee_eauth_id'] = $contact_eauth_ids;
-	$project_submission['field_awardee_contact_type'] = $contact_types;
+	// $project_submission['field_contact'] = $contacts;
 
 
 	$project = Asset::create($project_submission);
 	$project -> save();
-	$this->setProjectReference($form_state->getValue('field_awardee'), $project);
+
+	foreach($contacts as $contact){
+		// $cur_contact = \Drupal::entityTypeManager()->getStorage('asset')->load($contact);
+		$contact->set('project', $project->id());
+		$contact->save();
+	}
+
 	$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	return;
 
 } else {
-		$awardee_id = $form_state->get('awardee_id');
-		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
+		$project_id = $form_state->get('project_id');
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
 
 		$num_producers = count($form['producers_fieldset']) - 1; // Minus 1 because there is an entry with key 'actions'
 		$num_contacts = count($form['names_fieldset']) - 1; // As above
 
-		$producers = [];
-		for( $i = 0; $i < $num_producers; $i++ ){
-			$producers[$i] = $form['producers_fieldset'][$i]['producer_name']['#value'];
-		}
-
 		$project_submission['field_producer_contact_name'] = $producers;
 
-		$contact_eauth_ids = [];
-		$contact_types = [];
+		$contacts = [];
 		for( $i = 0; $i < $num_contacts; $i++ ){
-			$contact_eauth_ids[$i] = $form['names_fieldset'][$i]['contact_name']['#value'];
-			$contact_types[$i] = $form['names_fieldset'][$i]['contact_type']['#value'];
+			$contact_submission['type'] = 'contact';
+
+		$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
+		$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
+
+		if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
+			continue;
 		}
 
+		$contact_submission['field_contact_type'] = $contact_type;
+		$contact_submission['name'] = $contact_name;
+		$contact = Asset::create($contact_submission);
+		// $conctact_submision['eauth_id'] = $i.'';
 
-		$project_submission['field_awardee_eauth_id'] = $contact_eauth_ids;
-		$project_submission['field_awardee_contact_type'] = $contact_types;
+		array_push($contacts, $contact);
+		}
 
+		foreach($contacts as $contact){
+			// $cur_contact = \Drupal::entityTypeManager()->getStorage('asset')->load($contact);
+			$contact->set('project', $project->id());
+			$contact->save();
+		}
 
+		$pre_existsing_contacts = $form_state->get('contacts');
+		$this->deleteContacts($pre_existsing_contacts);
 
-		$awardee_name = $form_state->getValue('name');
+		$project_name = $form_state->getValue('name');
 		$agreement_number = $form_state->getValue('field_project_agreement_number');
 		$field_resource_concerns = $form_state->getValue('field_resource_concerns');
 		$field_funding_amount = $form_state->getValue('field_funding_amount');
@@ -652,25 +615,31 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
 		$field_grant_type = $form_state->getValue('field_grant_type');
 
 
-		$awardee->set('name', $awardee_name);
-		$awardee->set('field_project_agreement_number', $agreement_number);
-		$awardee->set('field_resource_concerns', $field_resource_concerns);
-		$awardee->set('field_funding_amount', $field_funding_amount);
-		$awardee->set('field_summary', $summary);
-		$awardee->set('field_awardee', $field_awardee);
-		$awardee->set('field_awardee_eauth_id', $contact_eauth_ids);
-		$awardee->set('field_awardee_contact_type', $contact_types);
-		$awardee->set('field_grant_type', $field_grant_type);
-		$awardee->save();
-		$this->setProjectReference($form_state->getValue('field_awardee'), $awardee);
+		$project->set('name', $project_name);
+		$project->set('field_project_agreement_number', $agreement_number);
+		$project->set('field_resource_concerns', $field_resource_concerns);
+		$project->set('field_funding_amount', $field_funding_amount);
+		$project->set('field_summary', $summary);
+		$project->set('field_awardee', $field_awardee);
+		$project->set('field_awardee_eauth_id', $contact_eauth_ids);
+		$project->set('field_grant_type', $field_grant_type);
+		$project->save();
 		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
 }
 
-public function setProjectReference($assetReference, $projectReference){
-	$awardeeOrg = \Drupal::entityTypeManager()->getStorage('asset')->load($assetReference);
-	$awardeeOrg->get('project')[] = $projectReference->id();
-	$awardeeOrg->save();
+public function deleteContacts(array $pre_existsing_contacts){
+
+	try{
+		foreach($pre_existsing_contacts as $contact){
+			$contact->delete();
+		}
+	}catch(\Exception $e){
+		$this
+	  ->messenger()
+	  ->addError($this
+	  ->t($e->getMessage()));
+	}
 
 }
 
@@ -683,9 +652,6 @@ public function setProjectReference($assetReference, $projectReference){
 
   public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
     return $form['names_fieldset'];
-  }
-  public function addProducerRowCallback(array &$form, FormStateInterface $form_state) {
-    return $form['producers_fieldset'];
   }
 
   public function addProducerRow(array &$form, FormStateInterface $form_state){
@@ -702,7 +668,7 @@ public function setProjectReference($assetReference, $projectReference){
 	$num_contact_lines = $form_state->get('num_contact_lines');
     $form_state->set('num_contacts', $num_contacts + 1);
 	$form_state->set('num_contact_lines', $num_contact_lines + 1);
-    $form_state->setRebuild();
+    $form_state->setRebuild(True);
   }
 
   public function removeContactCallback(array &$form, FormStateInterface $form_state) {

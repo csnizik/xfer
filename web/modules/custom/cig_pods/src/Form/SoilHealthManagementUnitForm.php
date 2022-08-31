@@ -69,7 +69,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function getLandUseModifierOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_land_user_modifiers');
+		$options = $this->entityOptions('taxonomy_term', 'd_land_use_modifiers');
 		return ['' => '- Select -'] + $options;
 	}
 

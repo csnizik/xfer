@@ -499,10 +499,10 @@ class InputsForm extends FormBase {
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
 			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 		     $input->save();
-			$this->setProjectReference($input, $input->get('field_operation')->target_id);
+			// $this->setProjectReference($input, $input->get('field_operation')->target_id);
 
-			$operation_reference->get('field_input')[] = $input->id();
-			$operation_reference->save();
+			//$operation_reference->get('field_input')[] = $input->id();
+			//$operation_reference->save();
 	}
 	
 	if($form_state->get('input_redirect') == TRUE){
@@ -528,8 +528,24 @@ public function setProjectReference($assetReference, $operationReference){
         $input_id = $form_state->get('input_id');
 		$input_to_delete = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
 		$sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
+		$operation_reference =  \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
+		$input_list = $operation_reference->get('field_input')->getValue();
+		$updated_inputs = [];
+		dpm("input_id:");
+dpm($input_id);
+		foreach($input_list as $input){
+			dpm("target_id:");
+			dpm($input['target_id']);
+			if($input['target_id'] != $input_id){
+				$updated_inputs[] = $input;
+			}
+		}
+		dpm($updated_inputs);
+
 		try{
 			$input_to_delete->delete();
+			$operation_reference->set('field_input', $updated_inputs);
+			$operation_reference->save();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
 			$this

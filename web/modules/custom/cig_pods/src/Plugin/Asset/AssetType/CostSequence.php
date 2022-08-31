@@ -13,7 +13,7 @@ use Drupal\farm_field\FarmFieldFactory;
    * label = @Translation("Cost Sequence"),
    * )
    */
-class OperationCostSequence extends FarmAssetType {
+class CostSequence extends FarmAssetType {
 
    public function buildFieldDefinitions() {
       $fields = parent::buildFieldDefinitions();

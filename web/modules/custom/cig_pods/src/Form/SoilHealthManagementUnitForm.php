@@ -765,11 +765,10 @@ class SoilHealthManagementUnitForm extends FormBase {
         // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $shmu_id = $form_state->get('shmu_id');
         $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
-		$crop_rotation = $shmu->get('field_shmu_crop_rotation_sequence');
+		$crop_rotation_ids = $this->getCropRotationIdsForShmu($shmu);
 		// dpm($crop_rotation);
 
         try{
-			$crop_rotation->delete();
 			$shmu->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
@@ -777,6 +776,18 @@ class SoilHealthManagementUnitForm extends FormBase {
 		  ->messenger()
 		  ->addError($this
 		  ->t($e->getMessage()));
+		}
+
+		foreach($crop_rotation_ids as $crop_rotation_id) {
+			try{
+				$crop_rotation = \Drupal::entityTypeManager()->getStorage('asset')->load($crop_rotation_id);
+				$crop_rotation->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
 		}
     }
 

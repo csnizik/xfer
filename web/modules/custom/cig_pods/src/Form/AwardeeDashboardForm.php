@@ -2,10 +2,9 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 
-class AwardeeDashboardForm extends FormBase {
+class AwardeeDashboardForm extends PodsFormBase {
 
 
    /**
@@ -69,10 +68,10 @@ class AwardeeDashboardForm extends FormBase {
 
     $entityCount = array();
 
-      for($i = 0; $i < count($awardeeEntities); $i++){
-        $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[$i]);
-        $entityCount[$awardeeEntities[$i]] = $query->count()->execute();
-      }
+    foreach ($awardeeEntities as $bundle) {
+      $entities = $this->entityOptions('asset', $bundle);
+      $entityCount[$bundle] = count($entities);
+    }
 
 
 

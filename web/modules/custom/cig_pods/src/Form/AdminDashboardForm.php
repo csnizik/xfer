@@ -2,10 +2,9 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 
-class AdminDashboardForm extends FormBase {
+class AdminDashboardForm extends PodsFormBase {
 
 
    /**
@@ -49,9 +48,9 @@ class AdminDashboardForm extends FormBase {
     $awardeeEntities = array('project', 'awardee', 'lab_testing_profile' );
     $entityCount = array();
 
-    for($i = 0; $i < count($awardeeEntities); $i++){
-      $query = \Drupal::entityQuery('asset')->condition('type',$awardeeEntities[$i]);
-      array_push($entityCount, $query->count()->execute());
+    foreach ($awardeeEntities as $bundle) {
+      $entities = $this->entityOptions('asset', $bundle);
+      $entityCount[] = count($entities);
     }
 
     $form['awardee_proj'] = [

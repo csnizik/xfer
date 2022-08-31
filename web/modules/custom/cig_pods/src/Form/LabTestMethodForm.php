@@ -11,14 +11,14 @@ Use Drupal\Core\Url;
 class LabTestMethodForm extends PodsFormBase {
 
     public function getTaxonomyOptions($bundle){
-        $options = $this->entityOptions('taxonomy_term', $bundle);
-		return ['' => '- Select -'] + $options;
+      $options = $this->entityOptions('taxonomy_term', $bundle);
+		  return ['' => '- Select -'] + $options;
     }
 
     private function getAssetOptions($assetType){
-        $options = $this->entityOptions('asset', $assetType);
-		return array_merge(['' => '- Select -'], (array)$options);
-	}
+      $options = $this->entityOptions('asset', $assetType);
+		  return ['' => '- Select -'] + $options;
+	  }
 
     private function convertFractionsToDecimal($labTestMethod, $field){
         $num = $labTestMethod->get($field)[0]->getValue()["numerator"];

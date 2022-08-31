@@ -40,6 +40,7 @@ class PodsFormBase extends FormBase {
    *   Returns an associative array of entity names, keyed by entity ID.
    */
   protected function entityOptions(string $entity_type, string $bundle) {
+    $options = [];
     $selection_options = [
       'handler' => 'default:' . $entity_type,
       'target_type' => $entity_type,
@@ -47,7 +48,10 @@ class PodsFormBase extends FormBase {
     ];
     $selection_handler = \Drupal::service('plugin.manager.entity_reference_selection')->getInstance($selection_options);
     $referenceable_entities = $selection_handler->getReferenceableEntities();
-    return $referenceable_entities[$bundle];
+    if (!empty($referenceable_entities[$bundle])) {
+      $options = $referenceable_entities[$bundle];
+    }
+    return $options;
   }
 
 }

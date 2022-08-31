@@ -13,14 +13,14 @@ class FieldAssessmentForm extends PodsFormBase {
 	public function getAssessmentEvaluationOptions(){
 
 		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 		
 	}
 
 
 	public function getSHMUOptions(){
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 	}
    /**
    * {@inheritdoc}

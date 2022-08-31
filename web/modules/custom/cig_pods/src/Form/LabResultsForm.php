@@ -8,15 +8,14 @@ Use Drupal\asset\Entity\Asset;
 class LabResultsForm extends PodsFormBase {
 
     public function getLabInterpretationOptions($bundle){
-        $options = $this->entityOptions('taxonomy_term', $bundle);
-		return array_merge(['' => '- Select -'], $options);
+      $options = $this->entityOptions('taxonomy_term', $bundle);
+		  return ['' => '- Select -'] + $options;
     }
 
     private function getSoilSampleOptions(){
-        $options = $this->entityOptions('asset', 'soil_health_sample');
-		return array_merge(['' => '- Select -'], (array)$options);
-        
-	}
+      $options = $this->entityOptions('asset', 'soil_health_sample');
+		  return ['' => '- Select -'] + $options;
+  	}
 
     private function convertFractionsToDecimal($is_edit, $labResults, $field){
         if($is_edit){

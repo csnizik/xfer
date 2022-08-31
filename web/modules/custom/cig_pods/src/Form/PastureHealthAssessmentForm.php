@@ -11,12 +11,12 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
     public function getSHMUOptions(){
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getLandUseOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_land_use');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 	}
 
     /**

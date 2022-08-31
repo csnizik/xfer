@@ -12,7 +12,7 @@ class OperationForm extends PodsFormBase {
 
 	public function getSHMUOptions() {
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
-		return array_merge(['' => '- Select -'], (array)$options);
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getEquipmentOptions(){
@@ -28,7 +28,7 @@ class OperationForm extends PodsFormBase {
 
 	public function getOperationOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_operation_type');
-		return array_merge(['' => '- Select -'], (array)$options);
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getCostSequenceIdsForOperation($operation){

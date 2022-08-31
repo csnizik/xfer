@@ -12,7 +12,7 @@ class IrrigationForm extends PodsFormBase {
 
 	public function getSHMUOptions() {
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){

@@ -10,7 +10,7 @@ class ProducerForm extends PodsFormBase {
 
 	private function getAssetOptions($assetType){
 		$options = $this->entityOptions('asset', $assetType);
-		return array_merge(['' => '- Select -'], (array)$options);
+		return ['' => '- Select -'] + $options;
 	}
 
    /**

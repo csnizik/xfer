@@ -18,7 +18,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 	public function getExperimentalDesignOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_experimental_design');
-		return array_merge(['' => '- Select -'], (array)$options);
+		return ['' => '- Select -'] + $options;
 
 }
 	public function getTillageSystemOptions(){
@@ -65,12 +65,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 	public function getProducerOptions(){
     $options = $this->entityOptions('asset', 'producer');
-    return array_merge(['' => '- Select -'], $options);
+    return ['' => '- Select -'] + $options;
 	}
 
 	public function getLandUseModifierOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_land_user_modifiers');
-		return array_merge(['' => '- Select -'], $options);
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getCropRotationYearOptions(){

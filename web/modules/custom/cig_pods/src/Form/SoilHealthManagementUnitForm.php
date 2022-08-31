@@ -216,7 +216,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		// If rotations is still empty, set a blank crop rotation at index 0
 		if($i == 0){
-			$rotations[0]['field_shmu_crop_rotation_year'] = '';
+			$rotations[0]['field_shmu_crop_rotation_crop'] = '';
 			$rotations[0]['field_shmu_crop_rotation_year'] = '';
 			$rotations[0]['field_shmu_crop_rotation_crop_present'] = [];
 		}
@@ -584,6 +584,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 					'callback' => "::deleteCropRotationCallback",
 					'wrapper' => 'crop_sequence',
 				],
+				'#limit_validation_errors' => [],
 				'#value' => 'X',
 			];
 
@@ -593,13 +594,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		}
 
 		// Add another button
-		$form['crop_sequence']['actions']['addCrop'] = [
+		$form['addCrop'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCropRotation'],
 			'#ajax' => [
 				'callback' => '::addAnotherCropRotationCallback',
 				'wrapper' => 'crop_sequence',
 			],
+			'#limit_validation_errors' =>[],
 			'#value' => 'Add to Sequence',
 		];
 

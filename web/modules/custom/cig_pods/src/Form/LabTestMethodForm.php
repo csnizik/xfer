@@ -12,6 +12,9 @@ class LabTestMethodForm extends PodsFormBase {
 
     public function getTaxonomyOptions($bundle){
       $options = $this->entityOptions('taxonomy_term', $bundle);
+      foreach ($options as $key => $option) {
+        $options[$key] = html_entity_decode($option);
+      }
 		  return ['' => '- Select -'] + $options;
     }
 

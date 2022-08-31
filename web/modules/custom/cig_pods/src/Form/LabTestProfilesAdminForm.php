@@ -8,18 +8,8 @@ Use Drupal\asset\Entity\Asset;
 class LabTestProfilesAdminForm extends PodsFormBase {
 
     public function getSoilHealthExtractionOptions($bundle){
-        $shde_options = [];
-        $shde_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-            [
-                'vid' => $bundle,
-            ]
-        );
-        $shde_keys = array_keys($shde_terms);
-        foreach($shde_keys as $shde_key){
-            $term = $shde_terms[$shde_key];
-            $sdhe_options[$shde_key] = $term -> getName();
-        }
-        return $sdhe_options;
+      $options = $this->entityOptions('taxonomy_term', $bundle);
+      return ['' => '- Select -'] + $options;
     }
 
        private function pageLookup(string $path) {

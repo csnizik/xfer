@@ -85,15 +85,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		return $options;
 	}
 	public function getCropOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_crop']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_crop');
+    return ['' => '- Select -'] + $options;
 	}
 
 	// goal is to replace this logic

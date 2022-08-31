@@ -364,19 +364,6 @@ class InputsForm extends FormBase {
     * {@inheritdoc}
     */
     public function validateForm(array &$form, FormStateInterface $form_state){
-		$num_cost_entries = count($form['cost_sequence']);
-		if($num_cost_entries > 1){
-			for($i = 1; $i < $num_cost_entries; $i++){
-				if($form_state->getValue(['cost_sequence', $i, 'field_cost']) === ''){
-					$form_state->setError($form['cost_sequence'][$i]['field_cost'], $this->t("Please Fill out a Cost for the highlighted field"));
-					return FALSE;
-				}
-				if($form_state->getValue(['cost_sequence', $i, 'field_cost_type']) === ''){
-					$form_state->setError($form['cost_sequence'][$i]['field_cost_type'], $this->t('Please Fill out a Cost Type for the highlighted field'));
-					return FALSE;
-				}
-			}
-		}
         return;
     }
 

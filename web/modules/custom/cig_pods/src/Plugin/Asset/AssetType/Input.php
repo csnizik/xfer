@@ -78,26 +78,6 @@ class Input extends FarmAssetType {
             'required' => FALSE,
             'description' => '',
         ],
-        // 'field_cost' => [
-        //     'type'=> 'entity_reference',
-        //     'label' => 'Cost',
-        //     'target_type' => 'asset',
-        //     'target_bundle' => 'cost',
-        //     'required' => FALSE,
-        //     'multiple' => TRUE,
-        // ],
-        //  'field_cost_type' => [
-        //     'type' => 'entity_reference',
-        //     'label' => 'Cost Type',
-        //     'target_type' => 'taxonomy_term',
-        //     'target_bundle' => 'd_cost_type',
-        //     'required' => FALSE,
-        //     'multiple' => TRUE,
-        //     'form_display_options' => [
-        //        'label' => 'inline',
-        //        'type' => 'options_select',
-        //     ],
-        // ],
         'field_input_cost_sequences' => [
             'label'=> 'Cost Sequence',
              'type'=> 'entity_reference',

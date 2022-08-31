@@ -4,8 +4,8 @@ dependencies:
   enforced:
     module:
       - cig_pods
-id: operation_cost_sequence
-label: Operation Cost Sequence
-description: Operation Cost Sequence
+id: cost_sequence
+label: Cost Sequence
+description: Cost Sequence
 workflow: asset_default
 new_revision: true

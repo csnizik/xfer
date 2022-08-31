@@ -289,12 +289,14 @@ class InputsForm extends FormBase {
 				'#title' => 'Cost',
 				'#step' => 0.01,
 				'#default_value' => $cost_default_value,
+				'#required' => $form_index > 0,
 			];
 			$form['cost_sequence'][$fs_index]['field_cost_type'] = [
 				'#type' => 'select',
 				'#title' => 'Type',
 				'#options' => $cost_options,
 				'#default_value' => $cost_type_default_value,
+				'#required' => $form_index > 0,
 			];
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [

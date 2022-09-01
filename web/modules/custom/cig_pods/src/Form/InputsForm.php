@@ -432,7 +432,7 @@ class InputsForm extends FormBase {
 			$cost_template['type'] = 'cost_sequence';
 
 			foreach($all_cost_sequences as $sequence){
-				 if($sequence['field_cost_type'] == NULL) continue;
+				 if($sequence['field_cost_type'] == NULL && $sequence['field_cost'] == NULL) continue;
 				// We alwasys create a new cost sequence asset for each rotation
 				$cost_sequence = Asset::create( $cost_template );
 
@@ -477,7 +477,7 @@ class InputsForm extends FormBase {
 			$cost_template['type'] = 'cost_sequence';
 		
 			foreach($all_cost_sequences as $sequence){
-				 if($sequence['field_cost_type'] == NULL) continue;
+				 if($sequence['field_cost_type'] == NULL && $sequence['field_cost'] == NULL) continue;
 				// We always create a new cost sequence asset for each rotation
 				$cost_sequence = Asset::create( $cost_template );
 

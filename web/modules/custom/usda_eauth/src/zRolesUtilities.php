@@ -15,7 +15,7 @@ public static function accessIfAdmin(AccountInterface $account) {
    // Check permissions and combine that with any custom access checking needed.
    $session = \Drupal::request()->getSession();
    $sessionID = $session->get('ApplicationRoleEnumeration');
-   if ($sessionID == 'CIG_App_Admin')
+   if ($sessionID == 'CIG_App_Admin' || $session='CIG_APA')
       {
         $result = True;
       }
@@ -33,7 +33,7 @@ public static function accessIfAwardee(AccountInterface $account) {
    // Check permissions and combine that with any custom access checking needed.
    $session = \Drupal::request()->getSession();
    $sessionID = $session->get('ApplicationRoleEnumeration');
-   if ($sessionID == 'CIG_NSHDS')
+   if ($sessionID == 'CIG_NSHDS' || $sessionID == 'CIG_APT')
       {
         $result = True;
       }
@@ -154,6 +154,8 @@ public static function getListByzRole(String $zRole) {
             echo "cURL Error #:" . $err;
            }
     
+        //the next 6 lines correct the first part of $response and removes unnecessary xml code"
+
         $ResLen = strlen($response);
         $pos2 = strpos($response, '<soap:Body>');
         $len = $ResLen -$pos2+1;

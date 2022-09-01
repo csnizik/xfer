@@ -320,7 +320,7 @@ display:
           role:
             authenticated: authenticated
       cache:
-        type: tag
+        type: none
         options: {  }
       empty: {  }
       sorts: {  }

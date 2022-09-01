@@ -2,55 +2,35 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\URL;
 use Drupal\Core\Field\EntityReferenceFieldItemList;
 
-class InputsForm extends FormBase {
+class InputsForm extends PodsFormBase {
 
     /**
     * {@inheritdoc}
     */
 
     public function getInputCategoryOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_input_category']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_input_category');
+		return ['' => '- Select -'] + $options;
 	}
 
     public function getInputOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_input']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_input');
+		return ['' => '- Select -'] + $options;
+	}
+
+    public function getCostTypeOptions(){
+		$options = $this->entityOptions('taxonomy_term', 'd_cost_type');
+		return ['' => '- Select -'] + $options;
 	}
 
     public function getUnitOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_unit']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_unit');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getCostSequenceIdsForInput($input){
@@ -92,16 +72,8 @@ class InputsForm extends FormBase {
 	}
 
 	public function getOtherCostsOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_cost_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_cost_type');
+    return ['' => '- Select -'] + $options;
 	}
 
 

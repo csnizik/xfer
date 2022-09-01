@@ -2,60 +2,25 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
-class SoilHealthSampleForm extends FormBase {
+class SoilHealthSampleForm extends PodsFormBase {
 
     public function getSHMUOptions() {
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'soil_health_management_unit']
-		);
-		$shmu_options = [];
-		$shmu_options[''] = '- Select -';
-		$shmu_keys = array_keys($shmu_assets);
-		foreach($shmu_keys as $shmu_key) {
-		  $asset = $shmu_assets[$shmu_key];
-		  $shmu_options[$shmu_key] = $asset -> getName();
-		}
-
-		return $shmu_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getEquipmentUsedOptions(){
-		$equipment_used_options = array();
-		$equipment_used_options[''] = ' - Select -';
-    $equipment_used_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-   			['vid' => 'd_equipment']
-   		);
-
-   		$equipment_used_keys = array_keys($equipment_used_terms);
-
-   		 foreach($equipment_used_keys as $equipment_used_key) {
-   		   $term = $equipment_used_terms[$equipment_used_key];
-   		   $equipment_used_options[$equipment_used_key] = $term -> getName();
-   		 }
-
-		return $equipment_used_options;
+		$options = $this->entityOptions('taxonomy_term', 'd_equipment');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getPlantOptions() {
-		$plant_stage_options = [];
-		$plant_stage_options[''] = ' - Select -';
-		$plant_stage_terms = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-			['vid' => 'd_plant_stage']
-		);
-
-		 $plant_stage_keys = array_keys($plant_stage_terms);
-
-		 foreach($plant_stage_keys as $plant_stage_key) {
-		   $term = $plant_stage_terms[$plant_stage_key];
-		   $plant_stage_options[$plant_stage_key] = $term -> getName();
-		 }
-
-		return $plant_stage_options;
+		$options = $this->entityOptions('taxonomy_term', 'd_plant_stage');
+		return ['' => '- Select -'] + $options;
 	}
 
     public function buildSampleInformationSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){

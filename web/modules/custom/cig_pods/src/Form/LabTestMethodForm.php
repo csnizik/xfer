@@ -2,43 +2,26 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 // use Drupal\Core\Ajax\AjaxResponse;
 // use Drupal\Core\Ajax\ReplaceCommand;
 
-class LabTestMethodForm extends FormBase {
+class LabTestMethodForm extends PodsFormBase {
 
     public function getTaxonomyOptions($bundle){
-        $shde_options = [];
-        $shde_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-            [
-                'vid' => $bundle,
-            ]
-        );
-        $shde_keys = array_keys($shde_terms);
-        foreach($shde_keys as $shde_key){
-            $term = $shde_terms[$shde_key];
-            $sdhe_options[$shde_key] = $term -> getName();
-        }
-        return $sdhe_options;
+      $options = $this->entityOptions('taxonomy_term', $bundle);
+      foreach ($options as $key => $option) {
+        $options[$key] = html_entity_decode($option);
+      }
+		  return ['' => '- Select -'] + $options;
     }
 
     private function getAssetOptions($assetType){
-        $soil_health_sample_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => $assetType]
-		);
-		$soil_health_sample_options = array();
-		$soil_health_sample_keys = array_keys($soil_health_sample_assets);
-		foreach($soil_health_sample_keys as $soil_health_sample_key) {
-		  $asset = $soil_health_sample_assets[$soil_health_sample_key];
-		  $soil_health_sample_options[$soil_health_sample_key] = $asset->getName();
-		}
-
-		return $soil_health_sample_options;
-	}
+      $options = $this->entityOptions('asset', $assetType);
+		  return ['' => '- Select -'] + $options;
+	  }
 
     private function convertFractionsToDecimal($labTestMethod, $field){
         $num = $labTestMethod->get($field)[0]->getValue()["numerator"];

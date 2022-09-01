@@ -2,7 +2,6 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
@@ -10,22 +9,13 @@ Use Drupal\Core\Url;
 
 
 
-class ProjectForm extends FormBase {
+class ProjectForm extends PodsFormBase {
 
 
 
 	public function getAwardeeOptions(){
-		$awardee_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'awardee']
-		);
-		$awardee_options = array();
-		$awardee_keys = array_keys($awardee_assets);
-		foreach($awardee_keys as $awardee_key) {
-		  $asset = $awardee_assets[$awardee_key];
-		  $awardee_options[$awardee_key] = $asset->getName();
-		}
-
-		return $awardee_options;
+    $options = $this->entityOptions('asset', 'awardee');
+    return ['' => '- Select -'] + $options;
 	}
 
 

@@ -29,6 +29,8 @@
     }
   },
   "extra": {
+    "composer-exit-on-patch-failure": true,
+    "enable-patching": true,
     "installer-paths": {
       "web/core": [
         "type:drupal-core"
@@ -56,6 +58,11 @@
       ],
       "merge-extra": true,
       "merge-extra-deep": true
+    },
+    "patches": {
+      "drupal/openid_connect": {
+        "Eddie's changes": "patches/openid_connect/eddies-changes.patch"
+      }
     }
   }
 }

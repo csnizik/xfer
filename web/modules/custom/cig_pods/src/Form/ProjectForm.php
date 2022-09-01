@@ -30,45 +30,19 @@ class ProjectForm extends PodsFormBase {
 
 	# Eventually, this function will get replaced with a call to EAuth to find registered users.
 	public function getAwardeeContactNameOptions(array &$form, FormStateInterface $form_state){
-		$session = \Drupal::request()->getSession();
-
-		$eAuthId = '28200310160021007137';
-        $email =  'Thomas.Gust@ia.usda.gov';
-        $firstName =  'THOMAS';
-        $lastName =  'GUST';
-        $roleId = '5200';
-        $roleName =  'CIG App Admin';
-        $roleEnum =  'CIG_App_Admin';
-        $roleDisplay =  'CIG App Admin';
-
-        $session->set('eAuthId', $eAuthId);
-        $session->set('EmailAddress', $email);
-        $session->set('FirstName', $firstName);
-        $session->set('LastName', $lastName);
-        $session->set('ApplicationRoleId', $roleId);
-        $session->set('ApplicationRoleName', $roleName);
-        $session->set('ApplicationRoleEnumeration', $roleEnum);
-        $session->set('ApplicationRoleDisplay', $roleDisplay);
-
-
-		$sessionEA = $session->get('eAuthId');
-		$sessionEM = $session->get('EmailAddress');
-		$sessionFN = $session->get('FirstName');
-		$sessionLN = $session->get('LastName');
-		$sessionID = $session->get('ApplicationRoleId');
-		$sessionRN = $session->get('ApplicationRoleName');
-		$sessionRE = $session->get('ApplicationRoleEnumeration');
-		$sessionRD = $session->get('ApplicationRoleDisplay');
-
 		$contact_options_email = array();
-		$contact_options_email[$sessionEA] = $sessionEM;
-		$form_state->set('contact_emails', $cointact_options_email);
 
 
 		$contact_name_options = array();
 		$contact_name_options[''] = ' - Select -';
-		$contact_name_options[$sessionEA]= $sessionFN + $sessionLN;
+    	$zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole('CIG_NSHDS');
 
+		foreach($zRoleContacts as $zContacts){
+			$contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;
+			$contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
+		}
+
+		$form_state->set('contact_emails', $contact_options_email);
 
 		return $contact_name_options;
 	}
@@ -338,7 +312,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 				continue;
 			}
 
-			$default_name = $is_edit && !empty($contacts[$i]) ? $contacts[$i]->get('name')->value : NULL;
+			$default_name = $is_edit && !empty($contacts[$i]) ? $contacts[$i]->get('eauth_id')->value : NULL;
 			$default_type = $is_edit && !empty($contacts[$i]) ? $contacts[$i]->get('field_contact_type')->target_id: NULL;
 
 			$form['names_fieldset'][$i]['contact_name'] = [
@@ -533,6 +507,8 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 	$is_create = $form_state->get('operation') === 'create';
+	$contact_emails = $form_state->get('contact_emails');
+	$contact_options = $form['names_fieldset'][0]['contact_name']['#options'];
 
 	if($is_create){
 	$values = $form_state->getValues();
@@ -575,13 +551,17 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 		$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
 		$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
+		$contact_eauth_id = $form['names_fieldset'][$i]['contact_name']['#value'];
 
 		if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
 			continue;
 		}
 
 		$contact_submission['field_contact_type'] = $contact_type;
-		$contact_submission['name'] = $contact_name;
+		$contact_submission['name'] = $contact_options[$contact_eauth_id];
+		$contact_submission['eauth_id'] = $contact_eauth_id;
+		$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
+
 		$contact = Asset::create($contact_submission);
 		// $conctact_submision['eauth_id'] = $i.'';
 
@@ -617,19 +597,23 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		for( $i = 0; $i < $num_contacts; $i++ ){
 			$contact_submission['type'] = 'contact';
 
-		$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
-		$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
+			$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
+			$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
+			$contact_eauth_id = $form['names_fieldset'][$i]['contact_name']['#value'];
 
-		if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
-			continue;
-		}
+			if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
+				continue;
+			}
 
-		$contact_submission['field_contact_type'] = $contact_type;
-		$contact_submission['name'] = $contact_name;
-		$contact = Asset::create($contact_submission);
-		// $conctact_submision['eauth_id'] = $i.'';
+			$contact_submission['field_contact_type'] = $contact_type;
+			$contact_submission['name'] = $contact_options[$contact_eauth_id];
+			$contact_submission['eauth_id'] = $contact_eauth_id;
+			$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
 
-		array_push($contacts, $contact);
+			$contact = Asset::create($contact_submission);
+			// $conctact_submision['eauth_id'] = $i.'';
+
+			array_push($contacts, $contact);
 		}
 
 		foreach($contacts as $contact){

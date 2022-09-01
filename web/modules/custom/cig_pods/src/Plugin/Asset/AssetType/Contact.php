@@ -26,10 +26,10 @@ class Contact extends FarmAssetType {
             'required' => TRUE,
             'description' => '',
          ],
-         'field_contact_name' => [
-            'label'=> 'Contact Name',
+         'field_contact_email' => [
+            'label'=> 'Contact Email',
             'type'=> 'string',
-            'required' => TRUE,
+            'required' => FALSE,
             'description' => '',
          ],
          'field_contact_type' => [
@@ -37,7 +37,7 @@ class Contact extends FarmAssetType {
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
             'target_bundle'=> 'd_contact_type',
-            'required' => TRUE,
+            'required' => FALSE,
             'description' => '',
          ],
          'project' =>[

@@ -94,17 +94,21 @@ class generic extends FormBase {
          /* eAuthId is held in the sub part of the array */
          $eAuthId = $resp['sub'];
 
+         // Get the zRoles utility service.
+         /** @var \Drupal\usda_eauth\zRolesUtilitiesInterface $zroles_util */
+         $zroles_util = \Drupal::service('usda_eauth.zroles');
+
         /* Make a soap call to get the zRole info using the eAuth Id */
-         $response = zRolesUtilities::getUserAccessRolesAndScopes( $eAuthId);
+         $response = $zroles_util->getUserAccessRolesAndScopes( $eAuthId);
 
          /* Get the user info from zRoles response */
-         $email = zRolesUtilities::getTokenValue ($response, 'EmailAddress');
-         $firstName = zRolesUtilities::getTokenValue ($response, 'FirstName');
-         $lastName = zRolesUtilities::getTokenValue ($response, 'LastName');
-         $roleId = zRolesUtilities::getTokenValue ($response, 'ApplicationRoleId');
-         $roleName = zRolesUtilities::getTokenValue ($response, 'ApplicationRoleName');
-         $roleEnum = zRolesUtilities::getTokenValue ($response, 'ApplicationRoleEnumeration');
-         $roleDisplay = zRolesUtilities::getTokenValue ($response, 'ApplicationRoleDisplay');
+         $email = $zroles_util->getTokenValue ($response, 'EmailAddress');
+         $firstName = $zroles_util->getTokenValue ($response, 'FirstName');
+         $lastName = $zroles_util->getTokenValue ($response, 'LastName');
+         $roleId = $zroles_util->getTokenValue ($response, 'ApplicationRoleId');
+         $roleName = $zroles_util->getTokenValue ($response, 'ApplicationRoleName');
+         $roleEnum = $zroles_util->getTokenValue ($response, 'ApplicationRoleEnumeration');
+         $roleDisplay = $zroles_util->getTokenValue ($response, 'ApplicationRoleDisplay');
 
          /*Store the user info in the session */
          $session = \Drupal::request()->getSession();

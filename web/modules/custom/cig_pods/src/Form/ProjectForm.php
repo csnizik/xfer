@@ -7,6 +7,7 @@ Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
 Use Drupal\Core\Url;
+Use Drupal\usda_eauth\zRolesUtilities;
 
 
 
@@ -28,12 +29,46 @@ class ProjectForm extends PodsFormBase {
 
 
 	# Eventually, this function will get replaced with a call to EAuth to find registered users.
-	public function getAwardeeContactNameOptions(){
+	public function getAwardeeContactNameOptions(array &$form, FormStateInterface $form_state){
+		$session = \Drupal::request()->getSession();
+
+		$eAuthId = '28200310160021007137';
+        $email =  'Thomas.Gust@ia.usda.gov';
+        $firstName =  'THOMAS';
+        $lastName =  'GUST';
+        $roleId = '5200';
+        $roleName =  'CIG App Admin';
+        $roleEnum =  'CIG_App_Admin';
+        $roleDisplay =  'CIG App Admin';
+
+        $session->set('eAuthId', $eAuthId);
+        $session->set('EmailAddress', $email);
+        $session->set('FirstName', $firstName);
+        $session->set('LastName', $lastName);
+        $session->set('ApplicationRoleId', $roleId);
+        $session->set('ApplicationRoleName', $roleName);
+        $session->set('ApplicationRoleEnumeration', $roleEnum);
+        $session->set('ApplicationRoleDisplay', $roleDisplay);
+
+
+		$sessionEA = $session->get('eAuthId');
+		$sessionEM = $session->get('EmailAddress');
+		$sessionFN = $session->get('FirstName');
+		$sessionLN = $session->get('LastName');
+		$sessionID = $session->get('ApplicationRoleId');
+		$sessionRN = $session->get('ApplicationRoleName');
+		$sessionRE = $session->get('ApplicationRoleEnumeration');
+		$sessionRD = $session->get('ApplicationRoleDisplay');
+
+		$contact_options_email = array();
+		$contact_options_email[$sessionEA] = $sessionEM;
+		$form_state->set('contact_emails', $cointact_options_email);
+
+
 		$contact_name_options = array();
 		$contact_name_options[''] = ' - Select -';
-		$contact_name_options['Agatha Wallace'] = 'Agatha Wallace';
-		$contact_name_options['Prescott Olehui'] = 'Prescott Olehui';
-		$contact_name_options['Rachel Rutherford'] = 'Rachel Rutherford';
+		$contact_name_options[$sessionEA]= $sessionFN + $sessionLN;
+
 
 		return $contact_name_options;
 	}
@@ -265,7 +300,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 	//	$this->buildProjectInformationSection($form, $form_state);
 
 		$awardee_options = $this->getAwardeeOptions();
-		$contact_name_options = $this->getAwardeeContactNameOptions();
+		$contact_name_options = $this->getAwardeeContactNameOptions($form, $form_state);
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		$producer_options = $this->getProducerOptions();
 		/* Awardee Information */

@@ -7,8 +7,9 @@ RUN apt-get update \
 # Make a directory to build our codebase in.
 RUN mkdir /pods
 
-# Copy the composer.json.
+# Copy the composer.json and patches.
 COPY composer.json /pods/composer.json
+COPY patches /pods/patches
 
 # Run composer install.
 WORKDIR /pods

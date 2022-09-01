@@ -4,8 +4,9 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 PARENTPATH="$(dirname $SCRIPTPATH)"
 
-# Temporarily copy composer.json to this directory.
+# Temporarily copy composer.json and patches to this directory.
 cp "${SCRIPTPATH}/../composer.json" ./
+cp -r "${SCRIPTPATH}/../patches" ./
 
 # Build the Docker container.
 sudo docker build -t pods-build . --no-cache
@@ -21,3 +22,4 @@ sudo chown ${UID}:${UID} codebase.tar.gz
 # Cleanup (stop the container and remove the temporary composer.json).
 sudo docker stop pods-build
 rm "${SCRIPTPATH}/composer.json"
+rm -r "${SCRIPTPATH}/patches"

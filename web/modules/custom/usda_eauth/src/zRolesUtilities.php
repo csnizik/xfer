@@ -1,27 +1,16 @@
 <?php
 
 namespace Drupal\usda_eauth;
-Use Drupal\Core\Form\FormBase;
-Use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\Email;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\user\Entity\User;
-use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Url;
-use Drupal\Tests\farm_test\Functional\FarmBrowserTestBase;
-use Drupal\Core\Routing; 
-use Drupal\Core\DrupalKernel; 
-use Drupal\redirect\Entity\Redirect;
-use Drupal\Core\Entity\EntityInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use \SimpleXMLElement;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Site\Settings;  //used to access Settings
 
-class zRolesUtilities  {
+class zRolesUtilities implements zRolesUtilitiesInterface {
 
-
+/**
+ * {@inheritdoc}
+ */
 public static function accessIfAdmin(AccountInterface $account) {
    // Check permissions and combine that with any custom access checking needed.
    $session = \Drupal::request()->getSession();
@@ -37,6 +26,9 @@ public static function accessIfAdmin(AccountInterface $account) {
    return AccessResult::allowedIf($result);
  }
 
+/**
+ * {@inheritdoc}
+ */
 public static function accessIfAwardee(AccountInterface $account) {
    // Check permissions and combine that with any custom access checking needed.
    $session = \Drupal::request()->getSession();
@@ -52,6 +44,9 @@ public static function accessIfAwardee(AccountInterface $account) {
    return AccessResult::allowedIf($result);
  }
 
+/**
+ * {@inheritdoc}
+ */
 public static function getUserAccessRolesAndScopes(String $eAuthId){
 
         /* Make a soap call to get the zRole info using the eAuth Id */ 
@@ -104,9 +99,11 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
 }
 
 
-
-/* This function only works in the USDA environment */
+/**
+ * {@inheritdoc}
+ */
 public static function getListByzRole(String $zRole) {
+    /* This function only works in the USDA environment */
     // Get a list of employees having the zRole passed in 
 
         $endpoint = Settings::get('zroles_url', '');
@@ -170,8 +167,9 @@ public static function getListByzRole(String $zRole) {
         return $result;
   }
 
-/* Use strpos and substr to get the value of a token from an XML string. */
-/* Used to get around problerms with non-breaking spaces */
+/**
+ * {@inheritdoc}
+ */
 public static function getTokenValue ($xmlString, $token) 
        {
          $tokenLen = strlen($token)+2;
@@ -189,7 +187,9 @@ public static function getTokenValue ($xmlString, $token)
        return $value;
 }
 
-/* Debug Only - function to print out the user information using print_r */
+  /**
+   * {@inheritdoc}
+   */
   public static function printUserInfo ($user) {
              if (gettype($user->{'UsdaeAuthenticationId'})=='string') { $userID = $user->{'UsdaeAuthenticationId'};}
               else {$userID ='NA';};

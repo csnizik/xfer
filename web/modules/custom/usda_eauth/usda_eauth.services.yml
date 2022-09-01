@@ -1,0 +1,3 @@
+services:
+  usda_eauth.zroles:
+    class: Drupal\usda_eauth\zRolesUtilities

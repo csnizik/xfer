@@ -79,7 +79,12 @@ class LabTestMethodForm extends PodsFormBase {
 
         $soil_sample = $this->getAssetOptions('soil_health_sample');
         $lab_test_profile = $this->getAssetOptions('lab_testing_profile');
-
+        if (empty($form_state->getValue('field_lab_soil_test_laboratory'))) {
+             $selected_family = key($s_he_test_laboratory);
+        }
+        else {
+             $selected_family = $form_state->getValue('field_lab_soil_test_laboratory');
+        }
         $form['lab_test_title'] = [
             '#markup' => '<h1>Methods</h1>',
         ];
@@ -96,24 +101,50 @@ class LabTestMethodForm extends PodsFormBase {
         $form['lab_form_header'] = [
 			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
+    if($is_edit){
+            $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
+            $form['field_lab_soil_test_laboratory'] = [
+                '#type' => 'select',
+                '#title' => 'Soil Health Test Laboratory',
+                '#options' => $s_he_test_laboratory,
+                '#default_value' => $lab_default,
+                '#required' => TRUE,
+            ];
 
-        $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
-        $form['field_lab_soil_test_laboratory'] = [
-			'#type' => 'select',
-			'#title' => 'Soil Health Test Laboratory',
-			'#options' => $s_he_test_laboratory,
-            '#default_value' => $lab_default,
-			'#required' => TRUE,
-		];
+            $lab_profile_default = $is_edit ? $labTestMethod->get('field_lab_method_lab_test_profile')->target_id : NULL;
+            $form['field_lab_method_lab_test_profile'] = [
+                '#type' => 'select',
+                '#title' => 'Soil Health Test Methods',
+                '#options' => $lab_test_profile,
+                '#default_value' => $lab_profile_default,
+                '#required' => TRUE,
+            ];
 
-        $lab_profile_default = $is_edit ? $labTestMethod->get('field_lab_method_lab_test_profile')->target_id : NULL;
-        $form['field_lab_method_lab_test_profile'] = [
-			'#type' => 'select',
-			'#title' => 'Soil Health Test Methods',
-			'#options' => $lab_test_profile,
-            '#default_value' => $lab_profile_default,
-			'#required' => TRUE,
-		];
+            }else{
+            $form['field_lab_soil_test_laboratory'] = [
+                '#type' => 'select',
+                '#title' => t('Soil Health Test Laboratory'),
+                '#description' => t('Soil Health Test Laboratory'),
+                '#required' => TRUE,
+                '#validated' => TRUE,
+                '#options' => $s_he_test_laboratory,
+                '#ajax' => [
+                    'callback' => '::reloadProfile',
+                    'wrapper' => 'field_lab_method_lab_test_profile',
+                ],
+            ];
+
+            $form['field_lab_method_lab_test_profile'] = [
+                '#title' => t('Soil Health Test Methods'),
+                '#type' => 'select',
+                '#required' => TRUE,
+                '#validated' => TRUE,
+                '#description' => t('Soil Health Test Methods'),
+                '#prefix' => '<div id="field_lab_method_lab_test_profile">',
+                '#suffix' => '</div>',
+                '#options' => static::getProfileOptions($selected_family),
+                ];
+            }
 
         $form['autoload_container'] = [
             '#prefix' => '<div id="autoload_container"',
@@ -390,7 +421,33 @@ class LabTestMethodForm extends PodsFormBase {
 
         return $form;
     }
+    public function reloadProfile(array $form, FormStateInterface $form_state) {
+            return $form['field_lab_method_lab_test_profile'];
+        }
 
+        public static function getProfileOptions($key = '') {
+
+              $node1 = \Drupal::entityTypeManager()
+                ->getStorage('asset')
+                ->loadByProperties([
+                  'field_profile_laboratory' => $key, 'type' => 'lab_testing_profile'
+                ]);
+
+                $nids = $node1;
+
+                $node_data = [];
+
+             if( $key == 'none' ){
+                 $node_data['none'] = 'none';
+             }
+
+               foreach( $nids as $nid ){
+                  $node_data[$nid->id()] = $nid->label();
+                }
+                $options = $node_data;
+
+        return $options;
+      }
     public function loadProfileData(array &$form, FormStateInterface $form_state){
 
         $form_state->set('loading', 1);

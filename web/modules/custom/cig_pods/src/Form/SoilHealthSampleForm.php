@@ -272,7 +272,7 @@ public function entityfields(){
 		$sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));
 		$sample_collection->save();
 
-		$this->setProjectReference($sample_collection, $sample_collection->get('field_shmu_id')->target_id);
+		$this->setProjectReference($sample_collection, $sample_collection->get('shmu')->target_id);
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	} else {

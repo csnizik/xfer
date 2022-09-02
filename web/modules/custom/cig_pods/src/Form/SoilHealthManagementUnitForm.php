@@ -44,12 +44,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 	public function getMajorResourceConcernOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_major_resource_concern');
-		return ['' => '- Select -'] + $options;
+		return $options;
 	}
 
 	public function getResourceConcernOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_resource_concern');
-		return ['' => '- Select -'] + $options;
+		return $options;
 	}
 
 	public function getLandUseOptions(){
@@ -60,7 +60,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 	public function getPracticesAddressedOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_practice');
-		return ['' => '- Select -'] + $options;
+		return $options;
 
 	}
 
@@ -71,7 +71,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 	public function getLandUseModifierOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_land_use_modifiers');
-		return ['' => '- Select -'] + $options;
+		return $options;
 	}
 
 	public function getCropRotationYearOptions(){
@@ -87,7 +87,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 	public function getCropOptions(){
     $options = $this->entityOptions('taxonomy_term', 'd_crop');
-    return ['' => '- Select -'] + $options;
+    return $options;
 	}
 
 	// goal is to replace this logic
@@ -750,7 +750,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap','ssurgo_lookup','ssurgo_data_wrapper'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap','ssurgo_lookup','ssurgo_data_wrapper','addCrop'];
 
 		$form_values = $form_state->getValues();
 

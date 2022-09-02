@@ -27,13 +27,13 @@ class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInte
       <GetAuthorizedUsersResponse xmlns="http://zRoles.sc.egov.usda.gov">
          <GetAuthorizedUsersResult>
             <UserSummary>
-               <UsdaeAuthenticationId>28200310160021007137</UsdaeAuthenticationId>
-               <FirstName>THOMAS</FirstName>
-               <LastName>GUST</LastName>
-               <AuthoritativeId>37011</AuthoritativeId>
+               <UsdaeAuthenticationId>28200711150011206144332</UsdaeAuthenticationId>
+               <FirstName>WILLIAM</FirstName>
+               <LastName>MAY</LastName>
+               <AuthoritativeId>5202</AuthoritativeId>
                <TypeCode>E</TypeCode>
                <SubtypeCode/>
-               <EmailAddress>Thomas.Gust@ia.usda.gov</EmailAddress>
+               <EmailAddress>William.May.usda.gov</EmailAddress>
                <PhoneNUmber/>
                <OfficeID/>
                <TypeDisplay>Employee</TypeDisplay>

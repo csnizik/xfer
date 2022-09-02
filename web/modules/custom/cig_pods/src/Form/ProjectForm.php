@@ -42,6 +42,14 @@ class ProjectForm extends PodsFormBase {
 			$contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
 		}
 
+		$zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole('CIG_APT');
+
+		foreach($zRoleContacts as $zContacts){
+			if(array_key_exists($contact_name_options, $zContacts->UsdaeAuthenticationId)){continue;}
+			$contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;
+			$contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
+		}
+
 		$form_state->set('contact_emails', $contact_options_email);
 
 		return $contact_name_options;
@@ -106,20 +114,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		return $resource_concern_options;
 	}
 
-	public function getProducerOptions() {
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'producer']
-		);
-		$producer_options = [];
-		$producer_options[''] = '- Select -';
-		$producer_keys = array_keys($producer_assets);
-		foreach($producer_keys as $producer_key) {
-		  $asset = $producer_assets[$producer_key];
-		  $producer_options[$producer_key] = $asset -> getName();
-		}
-
-		return $producer_options;
-	}
 
    /**
    * {@inheritdoc}
@@ -276,7 +270,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$awardee_options = $this->getAwardeeOptions();
 		$contact_name_options = $this->getAwardeeContactNameOptions($form, $form_state);
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
-		$producer_options = $this->getProducerOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
@@ -419,8 +412,14 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 		$project_id = $form_state->get('project_id');
 		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
+		$contacts = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+			['type' => 'contact', 'project' => $project_id]
+		);
 
 		try{
+			foreach($contacts as $contact){
+				$contact->delete();
+			}
 			$project->delete();
 			$form_state->setRedirect('cig_pods.admin_dashboard_form');
 		}catch(\Exception $e){
@@ -549,11 +548,10 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 	for( $i = 0; $i < $num_contacts; $i++ ){
 		$contact_submission['type'] = 'contact';
 
-		$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
 		$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
 		$contact_eauth_id = $form['names_fieldset'][$i]['contact_name']['#value'];
 
-		if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
+		if($contact_eauth_id === '' || $contact_type === '' || $contact_eauth_id === NULL || $contact_type === NULL){
 			continue;
 		}
 
@@ -563,7 +561,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
 
 		$contact = Asset::create($contact_submission);
-		// $conctact_submision['eauth_id'] = $i.'';
 
 		array_push($contacts, $contact);
 	}
@@ -597,11 +594,10 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		for( $i = 0; $i < $num_contacts; $i++ ){
 			$contact_submission['type'] = 'contact';
 
-			$contact_name = $form['names_fieldset'][$i]['contact_name']['#value'];
 			$contact_type = $form['names_fieldset'][$i]['contact_type']['#value'];
 			$contact_eauth_id = $form['names_fieldset'][$i]['contact_name']['#value'];
 
-			if($contact_name === '' || $contact_type === '' || $contact_name === NULL || $contact_type === NULL){
+			if($contact_eauth_id === '' || $contact_type === '' || $contact_eauth_id === NULL || $contact_type === NULL){
 				continue;
 			}
 
@@ -611,13 +607,11 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
 
 			$contact = Asset::create($contact_submission);
-			// $conctact_submision['eauth_id'] = $i.'';
 
 			array_push($contacts, $contact);
 		}
 
 		foreach($contacts as $contact){
-			// $cur_contact = \Drupal::entityTypeManager()->getStorage('asset')->load($contact);
 			$contact->set('project', $project->id());
 			$contact->save();
 		}

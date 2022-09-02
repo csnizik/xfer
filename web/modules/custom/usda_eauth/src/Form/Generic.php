@@ -60,7 +60,7 @@ class generic extends FormBase {
         $client_secret = Settings::get('client_secret', '');
 
         /* Make a curl call to get the token using 'code' from eAuth via Url  */
-         $getTokenUrl = 'client_id=' . $client_id . '&state=' . $state .'&client_secret=' .$client_secret  .  '=&code=' . $code . '&grant_type=authorization_code';
+         $getTokenUrl = 'client_id=' . $client_id . '&state=' . $state .'&client_secret=' .$client_secret  .  '&code=' . $code . '&grant_type=authorization_code';
 
          $curl = curl_init();
 

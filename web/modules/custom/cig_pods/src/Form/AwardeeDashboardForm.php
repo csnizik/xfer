@@ -77,7 +77,7 @@ class AwardeeDashboardForm extends PodsFormBase {
 
     $form['awardee_producer'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Producer(s): '.$entityCount['awardee']),
+      '#value' => $this->t('Producer(s): '.$entityCount['producer']),
       '#submit' => ['::proRedirect'],
     ];
 

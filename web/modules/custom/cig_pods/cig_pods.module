@@ -8,6 +8,16 @@ Use Drupal\Core\Form\FormStateInterface;
  */
 
 /**
+ * Implements hook_entity_type_alter().
+ */
+function cig_pods_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+
+  // Override the access handler for asset entities.
+  $entity_types['asset']->setAccessClass('Drupal\cig_pods\ProjectAccessControlHandler');
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function cig_pods_page_attachments(array &$attachments) {

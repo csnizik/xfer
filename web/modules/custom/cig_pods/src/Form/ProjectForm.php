@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
@@ -107,15 +108,13 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL, $id = Null){
-
-	$awardee = [];
-	$is_edit = $id <> NULL;
+	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL, AssetInterface $asset = Null){
+	  $awardee = $asset;
+	$is_edit = $project <> NULL;
 
 	if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('awardee_id',$id);
-			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('awardee_id',$awardee->id());
 	} else {
 			$form_state->set('operation','create');
 	}

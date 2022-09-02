@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
@@ -157,11 +158,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	/**
 	* {@inheritdoc}
 	*/
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $shmu = $asset;
 		// dpm("building form");
-		$is_edit = $id <> NULL;
+		$is_edit = $shmu <> NULL;
 		$irrigating = false;
-		$shmu = NULL;
 
 		if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
@@ -170,8 +171,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		// Determine if it is an edit process. If it is, load SHMU into local variable.
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('shmu_id', $id);
-			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('shmu_id', $shmu->id());
 			$shmu_db_crop_rotations = $this->getCropRotationIdsForShmu($shmu);
 			if(!$form_state->get('load_done')){
 				// dpm("Performing initial load of Crop rotations");

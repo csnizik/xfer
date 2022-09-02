@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
@@ -36,16 +37,14 @@ private function createElementNames(){
     /**
     * {@inheritdoc}
     */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+      $labTestProfile = $asset;
 
-        $labTestProfile = [];
-
-         $is_edit = $id <> NULL;
+         $is_edit = $labTestProfile <> NULL;
 
         if($is_edit){
             $form_state->set('operation','edit');
-            $form_state->set('lab_test_id',$id);
-            $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+            $form_state->set('lab_test_id',$labTestProfile->id());
 
 
         } else {

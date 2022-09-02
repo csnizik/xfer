@@ -26,13 +26,13 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $zrole = $session->get('ApplicationRoleEnumeration');
 
     // Admins can create any asset.
-    if ($zrole == 'CIG_App_Admin') {
+    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
       $result = AccessResult::allowed();
     }
 
     // Awardees only have access to assets in a project that their eAuth ID
     // is associated with.
-    elseif ($zrole == 'CIG_NSHDS') {
+    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
       if (in_array($entity->id(), $this->eAuthIdAssets($eauth_id, $entity->bundle()))) {
         $result = AccessResult::allowed();
       }
@@ -58,12 +58,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $zrole = $session->get('ApplicationRoleEnumeration');
 
     // Admins can create any asset.
-    if ($zrole == 'CIG_App_Admin') {
+    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
       $result = AccessResult::allowed();
     }
 
     // Awardees can only create certain asset types.
-    elseif ($zrole == 'CIG_NSHDS') {
+    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
       $allowed_types = [
         'producer',
         'soil_health_management_unit',

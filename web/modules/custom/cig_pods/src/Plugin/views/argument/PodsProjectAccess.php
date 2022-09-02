@@ -23,12 +23,12 @@ class PodsProjectAccess extends ArgumentPluginBase {
     $zrole = $session->get('ApplicationRoleEnumeration');
 
     // If this is an admin, don't apply any additional filters.
-    if ($zrole == 'CIG_App_Admin') {
+    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
       return;
     }
 
     // If this is an awardee, filter out assets that they do not have access to.
-    elseif ($zrole == 'CIG_NSHDS') {
+    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
 
       // First query for a list of asset IDs that the awardee has access to
       // (based on their eAuth ID), then use this list to filter the current

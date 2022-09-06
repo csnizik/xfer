@@ -110,7 +110,7 @@ private function convertFractionsToDecimal($is_edit, $awardee, $field){
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL, AssetInterface $asset = Null){
 	  $awardee = $asset;
-	$is_edit = $project <> NULL;
+	$is_edit = $awardee <> NULL;
 
 	if($is_edit){
 			$form_state->set('operation','edit');

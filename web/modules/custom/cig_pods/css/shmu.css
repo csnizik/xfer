@@ -175,6 +175,16 @@ div#edit-irrigation-radios {
   top: -100%;
 }
 
+form#soil-health-management-unit-form input#edit-addcrop.button {
+  background-color: #ffffff;
+  border-radius: 2px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 #crop_rotation input[id*="actions-delete"] {
   border: 0 !important;
   box-shadow: 0 0 0 0;

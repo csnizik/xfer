@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
@@ -22,19 +23,20 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     /**
    * {@inheritdoc}
    */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
+      $assessment = $asset;
+
 		$form['#attached']['library'][] = 'cig_pods/pasture_health_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
 
 		$severity_options = ['' => '- Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
 
-		$is_edit = $id <> NULL;
+		$is_edit = $assessment <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			$form_state->set('assessment_id', $id);
-			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('assessment_id', $assessment->id());
 		} else {
 			$form_state->set('operation', 'create');
 		}

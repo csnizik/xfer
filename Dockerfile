@@ -12,6 +12,8 @@ COPY composer.json composer.json
 COPY config/sync config/sync
 # COPY web/sites/default/ web/sites/default/
 
+COPY patches patches
+
 # Do I need to case on different environments here?
 # TODO: Change back to sfi.dev to serve? Or it's okay because Docker?
 COPY pods.conf /etc/apache2/sites-available/pods.conf

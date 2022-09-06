@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
@@ -136,16 +137,15 @@ class SoilHealthSampleForm extends PodsFormBase {
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $sample_collection = $asset;
 		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
-		$sample_collection = [];
-		$is_edit = $id <> NULL;
+		$is_edit = $sample_collection <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';
 
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('sample_id',$id);
-			$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('sample_id',$sample_collection->id());
 		} else {
 			$form_state->set('operation','create');
 		}

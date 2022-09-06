@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
@@ -16,15 +17,14 @@ class ProducerForm extends PodsFormBase {
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		$producer = [];
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+		$producer = $asset;
 
-		$is_edit = $id <> NULL;
+		$is_edit = $producer <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('producer_id',$id);
-			$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('producer_id',$producer->id());
 		} else {
 			$form_state->set('operation','create');
 		}

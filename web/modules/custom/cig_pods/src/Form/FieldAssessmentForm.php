@@ -2,6 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
@@ -25,16 +26,16 @@ class FieldAssessmentForm extends PodsFormBase {
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
 
-		$is_edit = $id <> NULL;
+		$is_edit = $assessment <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
 			// $form_state->set('calculate_rcs',True);
-			$form_state->set('assessment_id', $id);
-			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
 			$form_state->set('operation', 'create');

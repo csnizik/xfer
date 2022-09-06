@@ -63,6 +63,9 @@ private function createElementNames(){
     $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
     $ec_method = $this->getSoilHealthExtractionOptions("d_ec_method");
     $lab = $this->getSoilHealthExtractionOptions("d_laboratory");
+    foreach ($lab as $key => $item) {
+        $lab[$key] = html_entity_decode($item);
+    }
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
     $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");

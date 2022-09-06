@@ -1,0 +1,88 @@
+diff --git a/config/install/openid_connect.settings.yml b/config/install/openid_connect.settings.yml
+index 2ca7012..fd78785 100644
+--- a/config/install/openid_connect.settings.yml
++++ b/config/install/openid_connect.settings.yml
+@@ -2,8 +2,8 @@ always_save_userinfo: true
+ connect_existing_users: false
+ override_registration_settings: false
+ end_session_enabled: true
+-user_login_display: 'hidden'
+-redirect_login: 'user'
++user_login_display: 'above'
++redirect_login: '/OPENID-CONNECT/GENERIC'
+ redirect_logout: ''
+ userinfo_mappings:
+   timezone: zoneinfo
+diff --git a/openid_connect.info.yml b/openid_connect.info.yml
+index 71364a9..2cc5e0e 100644
+--- a/openid_connect.info.yml
++++ b/openid_connect.info.yml
+@@ -1,6 +1,6 @@
+ name: OpenID Connect
+ type: module
+-description: A pluggable client implementation for the OpenID Connect protocol.
++description: A pluggable client implementation for the OpenID Connect protocol (edited).
+ core_version_requirement: ^8.8 || ^9
+ package: 'User authentication'
+ configure: entity.openid_connect_client.list
+diff --git a/src/Form/OpenIDConnectSettingsForm.php b/src/Form/OpenIDConnectSettingsForm.php
+index 1cca16d..5ed08cc 100644
+--- a/src/Form/OpenIDConnectSettingsForm.php
++++ b/src/Form/OpenIDConnectSettingsForm.php
+@@ -190,7 +190,8 @@ class OpenIDConnectSettingsForm extends ConfigFormBase {
+     $form['role_mappings'] = [
+       '#title' => 'EXPERIMENTAL - ' . $this->t('User role mapping'),
+       '#type' => 'fieldset',
+-      '#description' => $this->t('For each Drupal role, provide the sets of equivalent external groups, separated by spaces. A user belonging to one of the provided groups will be assigned the configured Drupal role. Use client_id.group to limit a group to a specific client.'),
++      '#description' => $this->t('For each Drupal role, provide the sets of equivalent external groups, separated by spaces. A user belonging to one of the provided groups will be assigned the configured Drupal role.') .
++                        $this->t("<br/><strong>Note:</strong> The module will not update user roles with no mapped external groups. If all mappings to one of the roles are removd, users will keep that role until it is removed in the Drupal user administration."),
+       '#tree' => TRUE,
+     ];
+ 
+diff --git a/src/OpenIDConnect.php b/src/OpenIDConnect.php
+index 95942d4..c4a39a3 100644
+--- a/src/OpenIDConnect.php
++++ b/src/OpenIDConnect.php
+@@ -343,6 +343,7 @@ class OpenIDConnect {
+     else {
+       // Check whether the e-mail address is valid.
+       $email = $context['userinfo']['email'] ?? '';
++	  $email = 'eddie.ironsmith@spatialfront.com';
+       if (!$this->emailValidator->isValid($email)) {
+         $this->messenger->addError($this->t('The e-mail address is not valid: @email', [
+           '@email' => $email,
+@@ -675,8 +676,13 @@ class OpenIDConnect {
+       $role_mappings = $this->configFactory->get('openid_connect.settings')->get('role_mappings');
+       foreach ($role_mappings as $role => $mappings) {
+         if (!empty(array_intersect($mappings, $userinfo['groups']))) {
++          // User has a mapped role. Add it to their account.
+           $account->addRole($role);
+         }
++        else {
++          // User doesn't have a mapped role. Remove it from their account.
++          $account->removeRole($role);
++        }
+       }
+     }
+ 
+diff --git a/src/Plugin/OpenIDConnectClientBase.php b/src/Plugin/OpenIDConnectClientBase.php
+index d5e59ff..0875dbc 100644
+--- a/src/Plugin/OpenIDConnectClientBase.php
++++ b/src/Plugin/OpenIDConnectClientBase.php
+@@ -267,6 +267,16 @@ abstract class OpenIDConnectClientBase extends PluginBase implements OpenIDConne
+    */
+   public function authorize(string $scope = 'openid email'): Response {
+     $redirect_uri = $this->getRedirectUrl()->toString(TRUE);
++    
++    /*fix for https on USDA */
++    $temp = $redirect_uri->getGeneratedUrl();
++    $pos = strpos($temp, 'http:');
++    if ($pos !== false) {
++       $temp = substr_replace($temp, 'https:', $pos, strlen('http:'));
++       $redirect_uri->setGeneratedUrl($temp);
++    } 
++    /*End fix for https on USDA */
++
+     $url_options = $this->getUrlOptions($scope, $redirect_uri);
+ 
+     $endpoints = $this->getEndpoints();

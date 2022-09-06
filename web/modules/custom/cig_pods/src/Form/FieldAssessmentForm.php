@@ -2,58 +2,40 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
 
 
-class FieldAssessmentForm extends FormBase {
+class FieldAssessmentForm extends PodsFormBase {
 
 	public function getAssessmentEvaluationOptions(){
-		$options = [];
-		$options[''] = '- Select -';
 
-		// TODO: "vid => d_assessment_..." is spelled incorrectly, but need to
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_assessment_evaluation']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
+		return ['' => '- Select -'] + $options;
+		
 	}
 
 
 	public function getSHMUOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_management_unit']
-		 );
-		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
-		 }
-
-		 return $producer_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return ['' => '- Select -'] + $options;
 	}
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
 
-		$is_edit = $id <> NULL;
+		$is_edit = $assessment <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
 			// $form_state->set('calculate_rcs',True);
-			$form_state->set('assessment_id', $id);
-			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
 			$form_state->set('operation', 'create');

@@ -2,38 +2,29 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
-class ProducerForm extends FormBase {
-	private function getAssetOptions($assetType){
-        $project_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => $assetType]
-		);
-		$project_options = array();
-		$project_keys = array_keys($project_assets);
-		foreach($project_keys as $project_key) {
-		  $asset = $project_assets[$project_key];
-		  $project_options[$project_key] = $asset->getName();
-		}
+class ProducerForm extends PodsFormBase {
 
-		return $project_options;
+	private function getAssetOptions($assetType){
+		$options = $this->entityOptions('asset', $assetType);
+		return ['' => '- Select -'] + $options;
 	}
 
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		$producer = [];
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+		$producer = $asset;
 
-		$is_edit = $id <> NULL;
+		$is_edit = $producer <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('producer_id',$id);
-			$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('producer_id',$producer->id());
 		} else {
 			$form_state->set('operation','create');
 		}

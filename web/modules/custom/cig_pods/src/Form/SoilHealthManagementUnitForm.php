@@ -2,7 +2,7 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
@@ -10,44 +10,22 @@ Use Drupal\Core\Url;
 use Drupal\geofield\GeoPHP\GeoPHPWrapper;
 
 
-class SoilHealthManagementUnitForm extends FormBase {
+class SoilHealthManagementUnitForm extends PodsFormBase {
 
 
 	public function getShmuTypeOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_shmu_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_shmu_type');
+		return ['' => '- Select -'] + $options;
 	}
 	public function getExperimentalDesignOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_experimental_design']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_experimental_design');
+		return ['' => '- Select -'] + $options;
+
 }
 	public function getTillageSystemOptions(){
-		$options = [];
-		 $options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_tillage_system']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_tillage_system');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getYearOptions(){
@@ -65,77 +43,34 @@ class SoilHealthManagementUnitForm extends FormBase {
 	}
 
 	public function getMajorResourceConcernOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_major_resource_concern']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
+		$options = $this->entityOptions('taxonomy_term', 'd_major_resource_concern');
 		return $options;
 	}
 
 	public function getResourceConcernOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_resource_concern']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
+		$options = $this->entityOptions('taxonomy_term', 'd_resource_concern');
 		return $options;
 	}
 
 	public function getLandUseOptions(){
-		$options = [];
-		$options[""] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_land_use']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_land_use');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getPracticesAddressedOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_practice']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
+		$options = $this->entityOptions('taxonomy_term', 'd_practice');
 		return $options;
+
 	}
 
 	public function getProducerOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'producer']
-		 );
-		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
-		 }
-
-		 return $producer_options;
+    $options = $this->entityOptions('asset', 'producer');
+    return ['' => '- Select -'] + $options;
 	}
+
 	public function getLandUseModifierOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_land_use_modifiers']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
+		$options = $this->entityOptions('taxonomy_term', 'd_land_use_modifiers');
 		return $options;
 	}
 
@@ -151,15 +86,8 @@ class SoilHealthManagementUnitForm extends FormBase {
 		return $options;
 	}
 	public function getCropOptions(){
-		$options = [];
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_crop']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_crop');
+    return $options;
 	}
 
 	// goal is to replace this logic
@@ -216,7 +144,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 
 		// If rotations is still empty, set a blank crop rotation at index 0
 		if($i == 0){
-			$rotations[0]['field_shmu_crop_rotation_year'] = '';
+			$rotations[0]['field_shmu_crop_rotation_crop'] = '';
 			$rotations[0]['field_shmu_crop_rotation_year'] = '';
 			$rotations[0]['field_shmu_crop_rotation_crop_present'] = [];
 		}
@@ -230,11 +158,11 @@ class SoilHealthManagementUnitForm extends FormBase {
 	/**
 	* {@inheritdoc}
 	*/
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $shmu = $asset;
 		// dpm("building form");
-		$is_edit = $id <> NULL;
+		$is_edit = $shmu <> NULL;
 		$irrigating = false;
-		$shmu = NULL;
 
 		if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
@@ -243,8 +171,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Determine if it is an edit process. If it is, load SHMU into local variable.
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('shmu_id', $id);
-			$shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('shmu_id', $shmu->id());
 			$shmu_db_crop_rotations = $this->getCropRotationIdsForShmu($shmu);
 			if(!$form_state->get('load_done')){
 				// dpm("Performing initial load of Crop rotations");
@@ -584,6 +511,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 					'callback' => "::deleteCropRotationCallback",
 					'wrapper' => 'crop_sequence',
 				],
+				'#limit_validation_errors' => [],
 				'#value' => 'X',
 			];
 
@@ -593,13 +521,14 @@ class SoilHealthManagementUnitForm extends FormBase {
 		}
 
 		// Add another button
-		$form['crop_sequence']['actions']['addCrop'] = [
+		$form['addCrop'] = [
 			'#type' => 'submit',
 			'#submit' => ['::addAnotherCropRotation'],
 			'#ajax' => [
 				'callback' => '::addAnotherCropRotationCallback',
 				'wrapper' => 'crop_sequence',
 			],
+			'#limit_validation_errors' =>[],
 			'#value' => 'Add to Sequence',
 		];
 
@@ -765,11 +694,10 @@ class SoilHealthManagementUnitForm extends FormBase {
         // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $shmu_id = $form_state->get('shmu_id');
         $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
-		$crop_rotation = $shmu->get('field_shmu_crop_rotation_sequence');
+		$crop_rotation_ids = $this->getCropRotationIdsForShmu($shmu);
 		// dpm($crop_rotation);
 
         try{
-			$crop_rotation->delete();
 			$shmu->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
@@ -777,6 +705,18 @@ class SoilHealthManagementUnitForm extends FormBase {
 		  ->messenger()
 		  ->addError($this
 		  ->t($e->getMessage()));
+		}
+
+		foreach($crop_rotation_ids as $crop_rotation_id) {
+			try{
+				$crop_rotation = \Drupal::entityTypeManager()->getStorage('asset')->load($crop_rotation_id);
+				$crop_rotation->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
 		}
     }
 
@@ -810,7 +750,7 @@ class SoilHealthManagementUnitForm extends FormBase {
 		// Tracked in $ignored_fields
 		$is_edit = $form_state->get('operation') == 'edit';
 
-		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap','ssurgo_lookup','ssurgo_data_wrapper'];
+		$ignored_fields = ['send','form_build_id','form_token','form_id','op','actions','irrigation_radios','subform_etc','mymap','ssurgo_lookup','ssurgo_data_wrapper','addCrop'];
 
 		$form_values = $form_state->getValues();
 

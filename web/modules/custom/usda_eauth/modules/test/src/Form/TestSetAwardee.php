@@ -1,22 +1,10 @@
 <?php
 
 namespace Drupal\usda_eauth_test\Form;
+
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\Email;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\user\Entity\User;
-use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Url;
-use Drupal\Tests\farm_test\Functional\FarmBrowserTestBase;
-use Drupal\Core\Routing; 
-use Drupal\Core\DrupalKernel; 
-use Drupal\redirect\Entity\Redirect;
-use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use \SimpleXMLElement;
-use Drupal\Core\Access\AccessResult;
 
 
 class TestSetAwardee extends FormBase {
@@ -24,17 +12,17 @@ class TestSetAwardee extends FormBase {
     public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
         $form['actions'] = [
-            '#type' => 
+            '#type' =>
             'actions',
         ];
 
         $form['actions']['cancel'] = [
-            '#type' => 
+            '#type' =>
             'submit',
-            '#value' => 
+            '#value' =>
               $this->t('Cancel'),
         ];
-        
+
 
         $eAuthId = '28200711150011206144332';
         $email =  'william.may@oh.usda.go';
@@ -56,15 +44,18 @@ class TestSetAwardee extends FormBase {
         $session->set('ApplicationRoleEnumeration', $roleEnum);
         $session->set('ApplicationRoleDisplay', $roleDisplay);
 
-         /* redirect to the proper route based on role */    
-         switch ($roleEnum) 
+         /* redirect to the proper route based on role */
+         switch ($roleEnum)
            {
             case 'CIG_App_Admin':
-		            (new RedirectResponse('/pods_admin_dashboard'))->send();	
+		            (new RedirectResponse('/pods_admin_dashboard'))->send();
 	            	break;
             case 'CIG_NSHDS':
                 (new RedirectResponse('/pods_awardee_dashboard'))->send();
                 break;
+            case 'CIG_APT':
+              (new RedirectResponse('/pods_awardee_dashboard'))->send();
+              break;
             case 'CIG_NCDS':
                 (new RedirectResponse('/pods_awardee_dashboard'))->send();
                 break;
@@ -77,7 +68,7 @@ class TestSetAwardee extends FormBase {
                 break;
             }
          return $form;
-           
+
 
       return $form;
     }

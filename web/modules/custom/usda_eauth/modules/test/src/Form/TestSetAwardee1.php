@@ -7,30 +7,31 @@ Use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-class TestSetAdmin extends FormBase {
+class TestSetAwardee1 extends FormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
         $form['actions'] = [
-            '#type' => 
+            '#type' =>
             'actions',
         ];
 
         $form['actions']['cancel'] = [
-            '#type' => 
+            '#type' =>
             'submit',
-            '#value' => 
+            '#value' =>
               $this->t('Cancel'),
         ];
-        
-        $eAuthId = '28200310160021007137';
-        $email =  'Thomas.Gust@ia.usda.gov';
-        $firstName =  'THOMAS';
-        $lastName =  'GUST';
-        $roleId = '5200';
-        $roleName =  'CIG App Admin';
-        $roleEnum =  'CIG_App_Admin';
-        $roleDisplay =  'CIG App Admin';
+
+
+        $eAuthId = '2';
+        $email =  'Evan.Kelley.usda.gov';
+        $firstName =  'EVAN';
+        $lastName =  'KELLEY';
+        $roleId = '5202';
+        $roleName =  'NRCS Soil Health Data Steward';
+        $roleEnum =  'CIG_APT';
+        $roleDisplay =  'NRCS Soil Health Data Steward';
 
         /*Store the user info in the session */
         $session = \Drupal::request()->getSession();
@@ -43,15 +44,18 @@ class TestSetAdmin extends FormBase {
         $session->set('ApplicationRoleEnumeration', $roleEnum);
         $session->set('ApplicationRoleDisplay', $roleDisplay);
 
-         /* redirect to the proper route based on role */    
-         switch ($roleEnum) 
+         /* redirect to the proper route based on role */
+         switch ($roleEnum)
            {
             case 'CIG_App_Admin':
-		            (new RedirectResponse('/pods_admin_dashboard'))->send();	
+		            (new RedirectResponse('/pods_admin_dashboard'))->send();
 	            	break;
             case 'CIG_NSHDS':
                 (new RedirectResponse('/pods_awardee_dashboard'))->send();
                 break;
+            case 'CIG_APT':
+              (new RedirectResponse('/pods_awardee_dashboard'))->send();
+              break;
             case 'CIG_NCDS':
                 (new RedirectResponse('/pods_awardee_dashboard'))->send();
                 break;
@@ -63,7 +67,8 @@ class TestSetAdmin extends FormBase {
                 \Drupal::messenger()->addStatus(t('Login Failed'));
                 break;
             }
-           
+         return $form;
+
 
       return $form;
     }
@@ -71,22 +76,24 @@ class TestSetAdmin extends FormBase {
   /**
    * {@inheritdoc}
    */
+
   public function validateForm(array &$form, FormStateInterface $form_state){
   }
 
   /**
    * {@inheritdoc}
    */
+
   public function submitForm(array &$form, FormStateInterface $form_state) {
      (new RedirectResponse('/user/login'))->send();
   }
 
-
   /**
    * {@inheritdoc}
    */
+
   public function getFormId() {
-    return 'test_set_admin';
+    return 'test_set_awardee';
   }
 
 }

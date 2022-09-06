@@ -2,60 +2,41 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
 
-class PastureHealthAssessmentForm extends FormBase {
+class PastureHealthAssessmentForm extends PodsFormBase {
 
     public function getSHMUOptions(){
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_management_unit']
-		 );
-		 $shmu_options = [];
-		 $shmu_options[''] = '- Select -';
-		 $shmu_keys = array_keys($shmu_assets);
-		 foreach($shmu_keys as $shmu_key) {
-		   $asset = $shmu_assets[$shmu_key];
-		   $shmu_options[$shmu_key] = $asset -> getName();
-		 }
-
-		 return $shmu_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getLandUseOptions(){
-		$land_use_assets = \Drupal::entityTypeManager() -> getStorage('taxonomy_term') -> loadByProperties(
-			['vid' => 'd_land_use']
-		 );
-		 $land_use_options = [];
-		 $land_use_options[''] = '- Select -';
-		 $land_use_keys = array_keys($land_use_assets);
-		 foreach($land_use_keys as $land_use_key) {
-		   $asset = $land_use_assets[$land_use_key];
-		   $land_use_options[$land_use_key] = $asset -> getName();
-		 }
-
-		 return $land_use_options;
+		$options = $this->entityOptions('taxonomy_term', 'd_land_use');
+		return ['' => '- Select -'] + $options;
 	}
 
     /**
    * {@inheritdoc}
    */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
+      $assessment = $asset;
+
 		$form['#attached']['library'][] = 'cig_pods/pasture_health_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
 
 		$severity_options = ['' => '- Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
 
-		$is_edit = $id <> NULL;
+		$is_edit = $assessment <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			$form_state->set('assessment_id', $id);
-			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('assessment_id', $assessment->id());
 		} else {
 			$form_state->set('operation', 'create');
 		}

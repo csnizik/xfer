@@ -2,30 +2,21 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Url;
 
-class PastureAssessmentForm extends FormBase {
+class PastureAssessmentForm extends PodsFormBase {
     public function getSHMUOptions(){
-		$producer_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-			['type' => 'soil_health_management_unit']
-		 );
-		 $producer_options = [];
-		 $producer_options[''] = '- Select -';
-		 $producer_keys = array_keys($producer_assets);
-		 foreach($producer_keys as $producer_key) {
-		   $asset = $producer_assets[$producer_key];
-		   $producer_options[$producer_key] = $asset -> getName();
-		 }
-
-		 return $producer_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return ['' => '- Select -'] + $options;
 	}
     /**
    * {@inheritdoc}
    */
-    public function buildForm(array $form, FormStateInterface $form_state, $id = NULL) {
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
+      $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/pasture_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -36,13 +27,12 @@ class PastureAssessmentForm extends FormBase {
 
 		$severity_options = [5 => 5, 4 => 4, 3 => 3, 2 => 2, 1 => 1];
 
-		$is_edit = $id <> NULL;
+		$is_edit = $assessment <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
 			// $form_state->set('calculate_rcs',True);
-			$form_state->set('assessment_id', $id);
-			$assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
 			$form_state->set('operation', 'create');

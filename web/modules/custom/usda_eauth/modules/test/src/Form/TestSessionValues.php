@@ -1,22 +1,10 @@
 <?php
 
 namespace Drupal\usda_eauth_test\Form;
+
 Use Drupal\Core\Form\FormBase;
 Use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element\Email;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\user\Entity\User;
-use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\Core\Url;
-use Drupal\Tests\farm_test\Functional\FarmBrowserTestBase;
-use Drupal\Core\Routing; 
-use Drupal\Core\DrupalKernel; 
-use Drupal\redirect\Entity\Redirect;
-use Drupal\Core\Entity\EntityInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use \SimpleXMLElement;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Site\Settings;  //used to access Settings
 
 

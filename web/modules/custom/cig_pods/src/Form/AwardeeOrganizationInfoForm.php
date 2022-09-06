@@ -2,39 +2,28 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 
-class AwardeeOrganizationInfoForm extends FormBase {
+class AwardeeOrganizationInfoForm extends PodsFormBase {
 
-	private function getStateTerritoryOptions($bundle){
-        $state_territory_options = [];
-        $state_territory_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-            [
-                'vid' => $bundle,
-            ]
-        );
-        $state_territory_keys = array_keys($state_territory_terms);
-        foreach($state_territory_keys as $state_territory_key){
-            $term = $state_territory_terms[$state_territory_key];
-            $state_territory_options[$state_territory_key] = $term -> getName();
-        }
-        return $state_territory_options;
-    }
+	private function getStateTerritoryOptions(){
+    $options = $this->entityOptions('taxonomy_term', 'd_state_territory');
+    return ['' => '- Select -'] + $options;
+  }
 
    /**
    * {@inheritdoc}
    */
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-		$awardee = [];
-		$organization_state_territory = $this->getStateTerritoryOptions("d_state_territory");
-		$is_edit = $id <> NULL;
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $awardee = $asset;
+		$organization_state_territory = $this->getStateTerritoryOptions();
+		$is_edit = $awardee <> NULL;
 
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('awardee_id',$id);
-			$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('awardee_id',$awardee->id());
 		} else {
 			$form_state->set('operation','create');
 		}

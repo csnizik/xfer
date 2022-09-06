@@ -2,67 +2,34 @@
 
 namespace Drupal\cig_pods\Form;
 
-Use Drupal\Core\Form\FormBase;
+use Drupal\asset\Entity\AssetInterface;
 Use Drupal\Core\Form\FormStateInterface;
 Use Drupal\asset\Entity\Asset;
 Use Drupal\Core\Render\Element\Checkboxes;
 Use Drupal\Core\Url;
 
 
-class OperationForm extends FormBase {
+class OperationForm extends PodsFormBase {
 
 	public function getSHMUOptions() {
-		$shmu_assets = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-		   ['type' => 'soil_health_management_unit']
-		);
-		$shmu_options = [];
-		$shmu_options[''] = '- Select -';
-		$shmu_keys = array_keys($shmu_assets);
-		foreach($shmu_keys as $shmu_key) {
-		  $asset = $shmu_assets[$shmu_key];
-		  $shmu_options[$shmu_key] = $asset -> getName();
-		}
-
-		return $shmu_options;
+		$options = $this->entityOptions('asset', 'soil_health_management_unit');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getEquipmentOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_tractor_self_propelled_machine']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_tractor_self_propelled_machine');
+		return ['' => '- Select -'] + $options;
+
 	}
 
 	public function getEquipmentOwnershipOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_equipment_ownership']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_equipment_ownership');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getOperationOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_operation_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+		$options = $this->entityOptions('taxonomy_term', 'd_operation_type');
+		return ['' => '- Select -'] + $options;
 	}
 
 	public function getCostSequenceIdsForOperation($operation){
@@ -108,16 +75,8 @@ class OperationForm extends FormBase {
 	}
 
 	public function getOtherCostsOptions(){
-		$options = [];
-		$options[''] = '- Select -';
-		$taxonomy_terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(
-			['vid' => 'd_cost_type']);
-		$keys = array_keys($taxonomy_terms);
-		foreach($keys as $key){
-			$term = $taxonomy_terms[$key];
-			$options[$key] = $term -> getName();
-		}
-		return $options;
+    $options = $this->entityOptions('taxonomy_term', 'd_cost_type');
+    return ['' => '- Select -'] + $options;
 	}
 
 	public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name){
@@ -127,8 +86,9 @@ class OperationForm extends FormBase {
 	/**
 	* {@inheritdoc}
 	*/
-	public function buildForm(array $form, FormStateInterface $form_state, $id = NULL){
-        $is_edit = $id <> NULL;
+	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    $operation = $asset;
+        $is_edit = $operation <> NULL;
 		$default_options[''] = '- Select -';
 
 
@@ -141,8 +101,7 @@ class OperationForm extends FormBase {
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
 			$form_state->set('operation','edit');
-			$form_state->set('operation_id', $id);
-			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
+			$form_state->set('operation_id', $operation->id());
 			$operation_cost_sequences_ids = $this->getCostSequenceIdsForOperation($operation);
 			if(!$form_state->get('load_done')){
 				$this->loadOtherCostsIntoFormState($operation_cost_sequences_ids, $form_state);

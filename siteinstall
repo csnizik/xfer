@@ -1,7 +1,8 @@
 #!/bin/bash
 DOCKERID=$(docker ps | awk 'NR > 1 {print $1; exit}')
 docker exec $DOCKERID vendor/bin/drush site-install -y --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
-docker exec $DOCKERID vendor/bin/drush en -y field_ui layout_builder field_layout structure_sync farm_map_mapbox cig_pods views_ui
+docker exec $DOCKERID vendor/bin/drush en -y structure_sync farm_map_mapbox cig_pods
+docker exec $DOCKERID vendor/bin/drush en -y field_ui views_ui
 docker exec $DOCKERID vendor/bin/drush -y import:taxonomies --choice=safe
 docker exec -it $DOCKERID vendor/bin/drush -y config-set system.performance css.preprocess 0
 docker exec -it $DOCKERID vendor/bin/drush -y config-set system.performance js.preprocess 0

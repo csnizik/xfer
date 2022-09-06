@@ -7,7 +7,7 @@ Use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
-class TestSetAwardee extends FormBase {
+class TestSetAwardee1 extends FormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
@@ -24,13 +24,13 @@ class TestSetAwardee extends FormBase {
         ];
 
 
-        $eAuthId = '28200711150011206144332';
-        $email =  'william.may@oh.usda.go';
-        $firstName =  'William';
-        $lastName =  'May';
+        $eAuthId = '2';
+        $email =  'Evan.Kelley.usda.gov';
+        $firstName =  'EVAN';
+        $lastName =  'KELLEY';
         $roleId = '5202';
         $roleName =  'NRCS Soil Health Data Steward';
-        $roleEnum =  'CIG_NSHDS';
+        $roleEnum =  'CIG_APT';
         $roleDisplay =  'NRCS Soil Health Data Steward';
 
         /*Store the user info in the session */

@@ -22,6 +22,30 @@ usda_eauth_test.test_set_awardee:
   requirements:
     _access: 'TRUE'
 
+usda_eauth_test.test_set_awardee_1:
+  path: '/test/set_awardee_1'
+  defaults:
+    _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee1'
+    _title: 'Test Set Awardee'
+  requirements:
+    _access: 'TRUE'
+
+usda_eauth_test.test_set_awardee_2:
+  path: '/test/set_awardee_2'
+  defaults:
+    _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee2'
+    _title: 'Test Set Awardee'
+  requirements:
+    _access: 'TRUE'
+
+usda_eauth_test.test_set_awardee_3:
+  path: '/test/set_awardee_3'
+  defaults:
+    _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee3'
+    _title: 'Test Set Awardee'
+  requirements:
+    _access: 'TRUE'
+
 usda_eauth_test.test_session_values:
   path: '/test/session_values'
   defaults:

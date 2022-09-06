@@ -19,7 +19,7 @@ public static function accessIfAdmin(AccountInterface $account) {
       {
         $result = True;
       }
-   else 
+   else
       {
         $result = False;
       }
@@ -49,7 +49,7 @@ public static function accessIfAwardee(AccountInterface $account) {
  */
 public static function getUserAccessRolesAndScopes(String $eAuthId){
 
-        /* Make a soap call to get the zRole info using the eAuth Id */ 
+        /* Make a soap call to get the zRole info using the eAuth Id */
         $endpoint = Settings::get('zroles_url', '');
         $nrtApplicationId = Settings::get('nrtApplicationId', '');
         $wsSecuredToken = Settings::get('wsSecuredToken', '');
@@ -70,7 +70,7 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
             </GetUserAccessRolesAndScopes>
           </soap:Body>
         </soap:Envelope>';
-		
+
          $curl = curl_init();
 
          curl_setopt_array($curl, [
@@ -104,12 +104,12 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
  */
 public static function getListByzRole(String $zRole) {
     /* This function only works in the USDA environment */
-    // Get a list of employees having the zRole passed in 
+    // Get a list of employees having the zRole passed in
 
         $endpoint = Settings::get('zroles_url', '');
         $nrtApplicationId = Settings::get('nrtApplicationId', '');
         $wsSecuredToken = Settings::get('wsSecuredToken', '');
-         
+
         $xml = '<?xml version="1.0" encoding="utf-8"?>
         <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Header>
@@ -153,9 +153,8 @@ public static function getListByzRole(String $zRole) {
          if ($err) {
             echo "cURL Error #:" . $err;
            }
-    
-        //the next 6 lines correct the first part of $response and removes unnecessary xml code"
 
+        //the next 6 lines correct the first part of $response and removes unnecessary xml code
         $ResLen = strlen($response);
         $pos2 = strpos($response, '<soap:Body>');
         $len = $ResLen -$pos2+1;
@@ -165,25 +164,25 @@ public static function getListByzRole(String $zRole) {
         $data = new SimpleXMLElement($value );
         $data = json_decode(json_encode($data));
         $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
-  
+
         return $result;
   }
 
 /**
  * {@inheritdoc}
  */
-public static function getTokenValue ($xmlString, $token) 
+public static function getTokenValue ($xmlString, $token)
        {
          $tokenLen = strlen($token)+2;
          $pos1 = strpos($xmlString, '<'. $token .'>')+$tokenLen;
          $pos2 = strpos($xmlString, '</'. $token .'>')-1;
          $len = $pos2 -$pos1+1;
-         if ( ($pos1 > -1) and ($pos2 > -1) ) 
+         if ( ($pos1 > -1) and ($pos2 > -1) )
             {
               $value = substr($xmlString,$pos1,$len);
             }
          else
-            { 
+            {
             $value = 'NA';
             }
        return $value;
@@ -201,6 +200,6 @@ public static function getTokenValue ($xmlString, $token)
               else {$userLN ='NA';};
              print_r( $userFN . '  ' . $userLN . ' ' . $userID . '  ' . '<br>');
              return;
-             } 
+             }
 
 }

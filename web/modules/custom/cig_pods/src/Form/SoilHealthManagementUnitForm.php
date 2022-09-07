@@ -469,14 +469,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_year'] = [
 				'#type' => 'select',
 				'#title' => 'Year',
-				'#required' => TRUE,
+				'#required' => FALSE,
 				'#options' => $crop_rotation_years_options,
 				'#default_value' => $crop_years_default_value,
 			];
 			$form['crop_sequence'][$fs_index]['field_shmu_crop_rotation_crop'] = [
 				'#type' => 'select',
 				'#title' => 'Crop',
-				'#required' => TRUE,
+				'#required' => FALSE,
 				'#options' => $crop_options,
 				'#default_value' => $crop_default_value
 			];
@@ -503,17 +503,20 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 				'#options' => $month_options,
 				'#default_value' => $crop_months_present_lookup, // List of months present on that db
 			];
-			$form['crop_sequence'][$fs_index]['actions']['delete'] = [
-				'#type' => 'submit',
-				'#name' => $fs_index,
-				'#submit' => ['::deleteCropRotation'],
-				'#ajax' => [
-					'callback' => "::deleteCropRotationCallback",
-					'wrapper' => 'crop_sequence',
-				],
-				'#limit_validation_errors' => [],
-				'#value' => 'X',
-			];
+
+			if ($fs_index <> 0) {
+				$form['crop_sequence'][$fs_index]['actions']['delete'] = [
+					'#type' => 'submit',
+					'#name' => $fs_index,
+					'#submit' => ['::deleteCropRotation'],
+					'#ajax' => [
+						'callback' => "::deleteCropRotationCallback",
+						'wrapper' => 'crop_sequence',
+					],
+					'#limit_validation_errors' => [],
+					'#value' => 'X',
+				];
+			}
 
 			// Very important
 			$form_index = $form_index + 1;

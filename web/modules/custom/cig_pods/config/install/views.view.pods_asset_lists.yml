@@ -2335,23 +2335,23 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_lab_method_soil_sample_target_id:
-          id: field_lab_method_soil_sample_target_id
-          table: asset__field_lab_method_soil_sample
-          field: field_lab_method_soil_sample_target_id
+        field_lab_method_project_target_id:
+          id: field_lab_method_project_target_id
+          table: asset__field_lab_method_project
+          field: field_lab_method_project_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_lab_method_soil_sample
+          entity_field: field_lab_method_project
           plugin_id: field
-          label: 'Soil Sample ID'
+          label: Project
           exclude: false
           alter:
             alter_text: false
             text: ''
             make_link: true
-            path: 'edit/soil_health_sample/{{ field_lab_method_soil_sample_target_id__target_id }}'
+            path: 'edit/lab_testing_method/{{id}}'
             absolute: false
             external: false
             replace_spaces: false

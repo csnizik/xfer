@@ -283,7 +283,15 @@ class LabResult extends FarmAssetType {
             'target_bundle'=> 'soil_health_sample',
             'required' => TRUE,
             'description' => $this->t('Lab Result Soil Sample'),
-        ],
+         ],
+         'field_lab_result_method' => [
+            'label'=> 'Lab Testing Method',
+            'type'=> 'entity_reference',
+            'target_type'=> 'asset',
+            'target_bundle'=> 'lab_testing_method',
+            'required' => TRUE,
+            'description' => $this->t('Lab Result Method'),
+         ],
         'project' =>[
           'label' => 'Project',
           'type' => 'entity_reference',

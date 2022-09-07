@@ -5,10 +5,33 @@
  * Install, update and uninstall functions for the USDA eAuth module.
  */
 
+use Drupal\openid_connect\Entity\OpenIDConnectClientEntity;
+
 /**
  * Implements hook_install().
  */
 function usda_eauth_install() {
+
+  // Create an OpenID Connect client config entity.
+  $client = OpenIDConnectClientEntity::create([
+    'id' => 'generic',
+    'label' => 'USDA eAuth',
+    'plugin' => 'generic',
+    'settings' => [
+      'client_id' => '',
+      'client_secret' => '',
+      'issuer_url' => '',
+      'authorization_endpoint' => '',
+      'token_endpoint' => '',
+      'userinfo_endpoint' => '',
+      'end_session_endpoint' => '',
+      'scopes' => [
+        'openid',
+        'email',
+      ],
+    ],
+  ]);
+  $client->save();
 
   // Load the OpenID Connect module's configuration settings.
   $config = \Drupal::configFactory()->getEditable('openid_connect.settings');

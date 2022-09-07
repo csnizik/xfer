@@ -30,7 +30,7 @@ class LabTestMethodForm extends PodsFormBase {
         return $num / $denom;
     }
     private function createElementNames(){
-        return array('field_lab_method_soil_sample', 'field_lab_soil_test_laboratory', 'field_lab_method_lab_test_profile');
+        return array('field_lab_method_name', 'field_lab_method_project', 'field_lab_soil_test_laboratory', 'field_lab_method_lab_test_profile');
 
     }
 
@@ -74,7 +74,7 @@ class LabTestMethodForm extends PodsFormBase {
         $s_he_extract = $this->getTaxonomyOptions("d_soil_health_extraction");
         $s_he_test_laboratory = $this->getTaxonomyOptions("d_laboratory");
 
-        $soil_sample = $this->getAssetOptions('soil_health_sample');
+        $project = $this->getAssetOptions('project');
         $lab_test_profile = $this->getAssetOptions('lab_testing_profile');
         if (empty($form_state->getValue('field_lab_soil_test_laboratory'))) {
              $selected_family = key($s_he_test_laboratory);
@@ -86,13 +86,21 @@ class LabTestMethodForm extends PodsFormBase {
             '#markup' => '<h1>Methods</h1>',
         ];
 
-        $soil_sample_default_id = $is_edit ? $labTestMethod->get('field_lab_method_soil_sample')->target_id : NULL;
-        $form['field_lab_method_soil_sample'] = [
+        $method_name_default = $is_edit ? $labTestMethod->get('field_lab_method_name')->value : '';
+        $form['field_lab_method_name'] = [
+            '#type' => 'textfield',
+            '#title' => 'Name',
+            '#default_value' => $method_name_default,
+            '#required' => TRUE,
+        ];
+
+        $project_default = $is_edit ? $labTestMethod->get('field_lab_method_project')->target_id : NULL;
+        $form['field_lab_method_project'] = [
 			'#type' => 'select',
-			'#title' => 'Soil Sample ID',
-			'#options' => $soil_sample,
-            '#default_value' => $soil_sample_default_id,
-			'#required' => TRUE
+			'#title' => 'Project',
+			'#options' => $project,
+            '#default_value' => $project_default,
+			'#required' => TRUE,
 		];
 
         $form['lab_form_header'] = [
@@ -193,7 +201,7 @@ class LabTestMethodForm extends PodsFormBase {
                 $molybdenum_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_molybdenum_method')->target_id : NULL;
                 $aggregate_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_method')->target_id : NULL;
                 $aggregate_unit_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aggregate_stability_unit')->target_id : NULL;
-                $respiratory_incubation_default_value = $is_edit ? $this->convertFractionsToDecimal($labTestMethod, 'field_lab_method_respiration_incubation_days') : NULL;
+                $respiratory_incubation_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_incubation_days')->target_id : NULL;
                 $respiratory_detection_default_value = $is_edit ? $labTestMethod->get('field_lab_method_respiration_detection_method')->target_id : NULL;
                 $electroconductivity_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_electroconductivity_method')->target_id : NULL;
                 $nitrate_n_method_default_value =  $is_edit ?  $labTestMethod->get('field_lab_method_nitrate_n_method')->target_id : NULL;
@@ -546,13 +554,13 @@ class LabTestMethodForm extends PodsFormBase {
 
             $this->saveProfileFields($method_submission, $form_state);
 
-            $method_submission['name'] = 'Methods';
+            $method_submission['name'] = $method_submission['field_lab_method_name'];
 
             $method_submission['type'] = 'lab_testing_method';
             $method = Asset::create($method_submission);
             $method -> save();
 
-            $this->setProjectReference($method, $method->get('field_lab_method_soil_sample')->target_id);
+            $this->setProjectReference($method, $method->get('field_lab_method_project')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -573,19 +581,18 @@ class LabTestMethodForm extends PodsFormBase {
                 $labTestMethod->set($key, $value);
             }
 
-            $labTestMethod->set('name', 'Methods');
+            $labTestMethod->set('name', $labTestMethod->get('field_lab_method_name')->value);
 
             $labTestMethod->save();
 
-            $this->setProjectReference($labTestMethod, $labTestMethod->get('field_lab_method_soil_sample')->target_id);
+            $this->setProjectReference($labTestMethod, $labTestMethod->get('field_lab_method_project')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }
      }
 
-     public function setProjectReference($assetReference, $sampleReference){
-		$soilSample = \Drupal::entityTypeManager()->getStorage('asset')->load($sampleReference);
-		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($soilSample->get('project')->target_id);
+     public function setProjectReference($assetReference, $projectReference){
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
 		$assetReference->set('project', $project);
 		$assetReference->save();
 	}

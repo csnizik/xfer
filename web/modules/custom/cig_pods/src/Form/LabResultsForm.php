@@ -18,6 +18,11 @@ class LabResultsForm extends PodsFormBase {
 		  return ['' => '- Select -'] + $options;
   	}
 
+    private function getLabMethodOptions(){
+        $options = $this->entityOptions('asset', 'lab_testing_method');
+        return ['' => '- Select -'] + $options;
+    }
+
     private function convertFractionsToDecimal($is_edit, $labResults, $field){
         if($is_edit){
             $num = $labResults->get($field)[0]->getValue()["numerator"];
@@ -49,6 +54,8 @@ class LabResultsForm extends PodsFormBase {
 
         $soil_sample = $this->getSoilSampleOptions();
 
+        $lab_method = $this->getLabMethodOptions();
+
         $form['title'] = [
          '#markup' => '<h1 id="form-title">Soil Test Results</h1',
         ];
@@ -59,6 +66,15 @@ class LabResultsForm extends PodsFormBase {
             '#title' => $this->t('Soil Sample ID'),
             '#options' => $soil_sample,
             '#default_value' => $soil_sample_default_id,
+            '#required' => TRUE,
+        ];
+
+        $lab_method_default = $is_edit ? $labResults->get('field_lab_result_method')->target_id : NULL;
+        $form['field_lab_result_method'] = [
+            '#type' => 'select',
+            '#title' => $this->t('Lab Method'),
+            '#options' => $lab_method,
+            '#default_value' => $lab_method_default,
             '#required' => TRUE,
         ];
 

@@ -30,16 +30,22 @@ class LabTestingMethod extends FarmAssetType {
 
 
       $field_info = [
-        'field_lab_method_soil_sample' => [
-            'type'  => 'entity_reference',
-            'label' => 'Soil Sample ID',
-            'description' => $this->t('Lab Test Method Soil Sample ID'),
-			'target_type' => 'asset',
-			'target_bundle' => 'soil_health_sample',
-			'handler' => 'default',
+        'field_lab_method_name' => [
+            'type'  => 'string',
+            'label' => 'Lab Method Name',
+            'description' => $this->t('Lab Test Method Name'),
+            'required' => TRUE,
+		],
+        'field_lab_method_project' => [
+            'type' => 'entity_reference',
+            'label' => 'Lab Method Project',
+            'description' => $this->t('Lab Test Method Project'),
+            'target_type' => 'asset',
+            'target_bundle' => 'project',
+            'handler' => 'default',
             'required' => TRUE,
             'multiple' => FALSE,
-		],
+        ],
         'field_lab_method_lab_test_profile' => [
             'type'  => 'entity_reference',
             'label' => 'Lab Test Profile',

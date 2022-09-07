@@ -473,7 +473,7 @@ class InputsForm extends PodsFormBase {
 	}
 	
 	if($form_state->get('input_redirect') == TRUE){
-		$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $form_state->get('operation_id')]);
+		$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $form_state->get('operation_id')]);
 	}else{
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 	}

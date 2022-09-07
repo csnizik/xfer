@@ -295,3 +295,9 @@ input#edit-actions-delete:hover {
   background: #b51d09;
   color: white;
 }
+
+.fieldset__label,
+.fieldset__label--group,
+.form-item__label {
+  font-weight: normal !important;
+}

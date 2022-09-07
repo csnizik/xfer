@@ -458,7 +458,7 @@ class OperationForm extends PodsFormBase {
 		}
 		// Success message done
 		if($form_state->get('input_redirect')){
-			$form_state->setRedirect('cig_pods.inputs_form', ['operation_id' => $operation->get('id')->value]);
+			$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $operation->get('id')->value]);
 		}else{
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}

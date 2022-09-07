@@ -403,10 +403,10 @@ class PastureHealthAssessmentForm extends PodsFormBase {
                 $pastureHealthAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$pastureHealthAssessment->set('name', 'DIPH Assessment');
-			$pastureAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
+			$pastureHealthAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
             $pastureHealthAssessment->save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
+			$this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

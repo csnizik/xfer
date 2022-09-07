@@ -263,7 +263,7 @@ class IrrigationForm extends PodsFormBase {
 
 		$irrigation->save();
 
-		$this->setProjectReference($irrigation, $irrigation->get('field_irrigation_shmu')->target_id);
+		$this->setProjectReference($irrigation, $irrigation->get('shmu')->target_id);
 		// Success message done
 
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');

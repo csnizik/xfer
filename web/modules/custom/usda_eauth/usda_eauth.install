@@ -13,6 +13,9 @@ use Drupal\openid_connect\Entity\OpenIDConnectClientEntity;
 function usda_eauth_install() {
 
   // Create an OpenID Connect client config entity.
+  // Many of these values (including client_id, client_secret, and endpoints)
+  // will be overridden with values from settings.php.
+  // @see Drupal\usda_eauth\Config\UsdaEAuthConfigOverride::loadOverrides()
   $client = OpenIDConnectClientEntity::create([
     'id' => 'generic',
     'label' => 'USDA eAuth',

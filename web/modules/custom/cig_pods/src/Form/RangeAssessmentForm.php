@@ -261,42 +261,42 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-		$form['rc_container'] = [
-            '#prefix' => '<div id="rc_container"',
-			'#suffix' => '</div>',
-        ];
+		// $form['rc_container'] = [
+        //     '#prefix' => '<div id="rc_container"',
+		// 	'#suffix' => '</div>',
+        // ];
 
-		$form['rc_container']['actions']['identify-resource-concerns'] = [
-			'#type' => 'submit',
-			'#value' => $this->t('Identify Resource Concerns'),
-			'#submit' => ['::displayRcScores'],
-			'#ajax' => [
-				'callback' => '::updateScores',
-				'wrapper' => 'rc_container',
-			],
-			'#attributes' => [
-				'class' => ['score-button-class'],
-			],
-		];
+		// $form['rc_container']['actions']['identify-resource-concerns'] = [
+		// 	'#type' => 'submit',
+		// 	'#value' => $this->t('Identify Resource Concerns'),
+		// 	'#submit' => ['::displayRcScores'],
+		// 	'#ajax' => [
+		// 		'callback' => '::updateScores',
+		// 		'wrapper' => 'rc_container',
+		// 	],
+		// 	'#attributes' => [
+		// 		'class' => ['score-button-class'],
+		// 	],
+		// ];
 
-		$toDisplay = $form_state->get('rc_display');
-		if (count($toDisplay) <> 0) {
-			$form['rc_container']['rc_header'] = [
-				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
-			];
-			$form['rc_container']['rc_soil'] = [
-				'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @soil_score</p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
-			];
-			$form['rc_container']['rc_hydrologic'] = [
-				'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @hydrolic_score</p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
-			];
-			$form['rc_container']['rc_biotic'] = [
-				'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @biotic_score</p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
-			];
-		}
+		// $toDisplay = $form_state->get('rc_display');
+		// if (count($toDisplay) <> 0) {
+		// 	$form['rc_container']['rc_header'] = [
+		// 		'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
+		// 	];
+		// 	$form['rc_container']['rc_soil'] = [
+		// 		'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p>
+		// 		<p><b>Calculated Result:</b> @soil_score</p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
+		// 	];
+		// 	$form['rc_container']['rc_hydrologic'] = [
+		// 		'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p>
+		// 		<p><b>Calculated Result:</b> @hydrolic_score</p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
+		// 	];
+		// 	$form['rc_container']['rc_biotic'] = [
+		// 		'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p>
+		// 		<p><b>Calculated Result:</b> @biotic_score</p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
+		// 	];
+		// }
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',
@@ -457,15 +457,15 @@ class RangeAssessmentForm extends PodsFormBase {
 		return $severity_options[$score];
 	}
 
-	public function displayRcScores(array &$form, FormStateInterface $form_state ){
-		$form_state->set('rc_display', array(1,2,3,4));
-		$form_state->setRebuild(TRUE);
-	}
+	// public function displayRcScores(array &$form, FormStateInterface $form_state ){
+	// 	$form_state->set('rc_display', array(1,2,3,4));
+	// 	$form_state->setRebuild(TRUE);
+	// }
 
-	public function updateScores(array &$form, FormStateInterface $form_state){
+	// public function updateScores(array &$form, FormStateInterface $form_state){
 
-        return $form['rc_container'];
-    }
+    //     return $form['rc_container'];
+    // }
 
 
     /**

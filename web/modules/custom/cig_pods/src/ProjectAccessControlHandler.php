@@ -11,6 +11,28 @@ use Drupal\views\Plugin\views\ViewsHandlerInterface;
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
 
   /**
+   * Helper method for getting the current session zRole.
+   *
+   * @return string
+   *   The zRole.
+   */
+  protected static function getZRole() {
+    $session = \Drupal::request()->getSession();
+    return $session->get('ApplicationRoleEnumeration');
+  }
+
+  /**
+   * Helper method for getting the current session eAuth ID.
+   *
+   * @return string
+   *   The zRole.
+   */
+  protected static function getEAuthId() {
+    $session = \Drupal::request()->getSession();
+    return $session->get('eAuthId');
+  }
+
+  /**
    * {@inheritdoc}
    *
    * Link the activities to the permissions. checkAccess is called with the
@@ -22,9 +44,8 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $result = AccessResult::forbidden();
 
     // Get the user's eAuthID and zRole.
-    $session = \Drupal::request()->getSession();
-    $eauth_id = $session->get('eAuthId');
-    $zrole = $session->get('ApplicationRoleEnumeration');
+    $eauth_id = $this->getEAuthId();
+    $zrole = $this->getZRole();
 
     // Admins can create any asset.
     if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
@@ -55,8 +76,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $result = AccessResult::forbidden();
 
     // Get the user's zRole.
-    $session = \Drupal::request()->getSession();
-    $zrole = $session->get('ApplicationRoleEnumeration');
+    $zrole = $this->getZRole();
 
     // Admins can create any asset.
     if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
@@ -198,9 +218,8 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   public static function viewsArgumentQueryAlter(ViewsHandlerInterface $handler) {
 
     // Get the user's eAuthID and zRole.
-    $session = \Drupal::request()->getSession();
-    $eauth_id = $session->get('eAuthId');
-    $zrole = $session->get('ApplicationRoleEnumeration');
+    $eauth_id = ProjectAccessControlHandler::getEAuthId();
+    $zrole = ProjectAccessControlHandler::getZRole();
 
     // If this is an admin, don't apply any additional filters.
     if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {

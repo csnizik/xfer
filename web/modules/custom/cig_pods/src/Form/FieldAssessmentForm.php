@@ -485,7 +485,6 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	$soil_organism_habitat_count = 0;
 
 	foreach($soil_organism_habitat_keys as $key){
-		dpm($form_values[$key]);
 		if($form_values[$key] == 0){
 			$soil_organism_habitat_count += 1;
 		}

@@ -98,7 +98,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Rills'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_rills_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->value : '';
@@ -108,7 +108,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Water Flow'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_water_flow_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->value : '';
@@ -118,7 +118,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Pedestals and/or Terracettes'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_pedestals_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->value : '';
@@ -128,7 +128,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Bare Ground'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_bare_ground_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->value : '';
@@ -138,7 +138,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Gullies'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_gullies_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->value : '';
@@ -148,7 +148,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Wind-Scoured and/or Depositional Areas'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_wind_scoured_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->value : '';
@@ -158,7 +158,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Litter Movement (Wind or Water)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_movement_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->value : '';
@@ -168,7 +168,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Soil Surface Resistance to Erosion'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_resistance_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->value : '';
@@ -178,7 +178,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Soil Surface Loss and Degradation'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_loss_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->value : '';
@@ -188,7 +188,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Effects of Plant Community Composition and Distribution on Infiltration'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_effects_of_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->value : '';
@@ -198,7 +198,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Compaction Layer'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_compaction_layer_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->value : '';
@@ -208,7 +208,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Functional/Structural Groups'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_functional_structural_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->value : '';
@@ -218,7 +218,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Dead or Dying Plants or Plant Parts (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_dead_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->value : '';
@@ -228,7 +228,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Litter Cover and Depth'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_cover_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->value : '';
@@ -238,7 +238,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Annual Production'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_annual_production_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->value : '';
@@ -248,7 +248,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Invasive Plants'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_invasive_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
@@ -258,7 +258,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_vigor_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$form['rc_container'] = [

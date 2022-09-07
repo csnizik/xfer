@@ -73,7 +73,10 @@ class AwardeeDashboardForm extends PodsFormBase {
       $entityCount[$bundle] = count($entities);
     }
 
-
+    // If no projects are assigned, display a warning.
+    if (empty($entityCount['project'])) {
+      $this->messenger()->addWarning($this->t('You are not currently assigned to any projects. You must be assigned as a project contact in order to create or edit records.'));
+    }
 
     $form['awardee_producer'] = [
       '#type' => 'submit',

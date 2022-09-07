@@ -359,7 +359,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			$ranglandAssessment->set('name', 'IIRH Assessment');
             $ranglandAssessment -> save();
 
-			$this->setProjectReference($ranglandAssessment, $ranglandAssessment->get('range_assessment_shmu')->target_id);
+			$this->setProjectReference($ranglandAssessment, $ranglandAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -374,7 +374,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			$rangelandAssessment->set('name', 'IIRH Assessment');
             $rangelandAssessment->save();
 
-			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('range_assessment_shmu')->target_id);
+			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

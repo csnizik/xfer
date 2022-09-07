@@ -69,19 +69,17 @@ class FieldAssessmentForm extends PodsFormBase {
 
 		// Date field requires some special handling.
 		if($is_edit){
-			// $field_shhmu_date_land_use_changed_value is expected to be a UNIX timestamp
-			$field_assessment_shmu_date_value = $assessment->get('field_assessment_date')[0]->value;
-			$field_assessment_shmu_date_form_value = date("Y-m-d", $field_assessment_shmu_date_value);
+			$date_value = $assessment->get('field_assessment_date')->value;
+			$field_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$field_assessment_shmu_date_form_value = '2022-01-01'; // Use this as default because otherwise it will default to Jan 1 1969
+			$field_timestamp_default_value = ''; // TODO: Check behavior
 		}
-
 		$form['field_assessment_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Date'),
 			'#description' => '',
-			'#default_value' => $field_assessment_shmu_date_form_value, // Default value for "date" field type is a string in form of 'yyyy-MM-dd'
-			'#required' => FALSE
+			'#default_value' => $field_timestamp_default_value,
+			'#required' => TRUE
 		];
 
 		$form['assessment_wrapper'] = [
@@ -287,6 +285,11 @@ class FieldAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state){
+	$date_timestamp = strtotime($form_state->getValue('field_assessment_date'));
+	$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+	if ($date_timestamp > $current_timestamp) {
+		$form_state->setError($form, 'Error: Invalid Date');
+	}
 	return;
 }
 
@@ -381,7 +384,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	$assessment->save();
 
-	$this->setProjectReference($assessment, $assessment->get('field_assessment_shmu')->target_id);
+	$this->setProjectReference($assessment, $assessment->get('shmu')->target_id);
 
 	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
   }

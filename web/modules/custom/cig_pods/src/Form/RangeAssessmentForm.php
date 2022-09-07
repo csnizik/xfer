@@ -68,6 +68,20 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => TRUE,
 		];
 
+		if($is_edit){
+			$date_value = $assessment->get('range_assessment_date')->value;
+			$rangeland_timestamp_default_value = date("Y-m-d", $date_value);
+		} else {
+			$rangeland_timestamp_default_value = ''; // TODO: Check behavior
+		}
+		$form['range_assessment_date'] = [
+			'#type' => 'date',
+			'#title' => $this->t('Date'),
+			'#description' => '',
+			'#default_value' => $rangeland_timestamp_default_value,
+			'#required' => TRUE
+		];
+
 		$range_assessment_land_use_value = $is_edit ? $assessment->get('range_assessment_land_use')->target_id : '';
 		$form['range_assessment_land_use'] = [
 			'#type' => 'select',
@@ -312,6 +326,11 @@ class RangeAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$date_timestamp = strtotime($form_state->getValue('range_assessment_date'));
+		$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+		if ($date_timestamp > $current_timestamp) {
+			$form_state->setError($form, 'Error: Invalid Date');
+		}
         return;
     }
 
@@ -337,7 +356,7 @@ class RangeAssessmentForm extends PodsFormBase {
 	}
 
 	public function createElementNames(){
-		return array('shmu', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
+		return array('shmu', 'range_assessment_date', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
 		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');
@@ -355,11 +374,12 @@ class RangeAssessmentForm extends PodsFormBase {
             }
 
             $rangeland_submission['type'] = 'range_assessment';
-            $ranglandAssessment = Asset::create($rangeland_submission);
-			$ranglandAssessment->set('name', 'IIRH Assessment');
-            $ranglandAssessment -> save();
+            $rangelandAssessment = Asset::create($rangeland_submission);
+			$rangelandAssessment->set('name', 'IIRH Assessment');
+			$rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
+            $rangelandAssessment -> save();
 
-			$this->setProjectReference($ranglandAssessment, $ranglandAssessment->get('range_assessment_shmu')->target_id);
+			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -372,9 +392,10 @@ class RangeAssessmentForm extends PodsFormBase {
                 $rangelandAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$rangelandAssessment->set('name', 'IIRH Assessment');
+			$rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
             $rangelandAssessment->save();
 
-			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('range_assessment_shmu')->target_id);
+			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

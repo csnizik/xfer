@@ -58,6 +58,25 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			'#required' => TRUE,
 		];
 
+		if($is_edit){
+			$date_value = $assessment->get('pasture_health_assessment_date')->value;
+			$pasture_health_timestamp_default_value = date("Y-m-d", $date_value);
+		} else {
+			$pasture_health_timestamp_default_value = ''; // TODO: Check behavior
+		}
+		$form['pasture_health_assessment_date'] = [
+			'#type' => 'date',
+			'#title' => $this->t('Date'),
+			'#description' => '',
+			'#default_value' => $pasture_health_timestamp_default_value,
+			'#attributes' => [
+				'type' => 'date',
+				'min' => '-25 years',
+				'max' => 'now',
+			],
+			'#required' => TRUE,
+		];
+
 		$pasture_health_assessment_land_use_value = $is_edit ? $assessment->get('pasture_health_assessment_land_use')->target_id : '';
 		$form['pasture_health_assessment_land_use'] = [
 			'#type' => 'select',
@@ -315,6 +334,11 @@ class PastureHealthAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$date_timestamp = strtotime($form_state->getValue('pasture_health_assessment_date'));
+      	$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+      	if ($date_timestamp > $current_timestamp) {
+        	$form_state->setError($form, 'Error: Invalid Date');
+      	}
         return;
     }
 
@@ -339,7 +363,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 	}
 
 	public function createElementNames(){
-		return array('shmu', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
+		return array('shmu', 'pasture_health_assessment_date', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
 		'pasture_health_assessment_erosion_wind_scoured', 'pasture_health_assessment_erosion_streambank', 'pasture_health_assessment_water_flow_patterns', 'pasture_health_assessment_bare_ground',
 		'pasture_health_assessment_padestals', 'pasture_health_assessment_litter_movement', 'pasture_health_assessment_composition', 'pasture_health_assessment_soil_surface',
 		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable',
@@ -351,6 +375,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
      * {@inheritdoc}
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
+		$date_fields = ['pasture_health_assessment_date'];
 
 		$pasture_health_submission = [];
         if($form_state->get('operation') === 'create'){
@@ -362,9 +387,10 @@ class PastureHealthAssessmentForm extends PodsFormBase {
             $pasture_health_submission['type'] = 'pasture_health_assessment';
             $pastureAssessment = Asset::create($pasture_health_submission);
 			$pastureAssessment->set('name', 'DIPH Assessment');
+			$pastureAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
             $pastureAssessment -> save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -377,9 +403,10 @@ class PastureHealthAssessmentForm extends PodsFormBase {
                 $pastureHealthAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$pastureHealthAssessment->set('name', 'DIPH Assessment');
+			$pastureAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
             $pastureHealthAssessment->save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

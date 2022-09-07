@@ -28,6 +28,12 @@ class PastureHealthAssessment extends FarmAssetType {
               'required' => TRUE,
               'description' => '',
             ],
+            'pasture_health_assessment_date' => [
+                'label'=> 'Date',
+                'type'=> 'timestamp',
+                'required' => TRUE,
+                'description' => '',
+            ],
             'pasture_health_assessment_land_use' => [
                 'label'=> 'Land Use',
                 'type'=> 'entity_reference',

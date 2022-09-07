@@ -29,6 +29,12 @@ class RangeAssessment extends FarmAssetType {
                 'required' => TRUE,
                 'description' => '',
             ],
+            'range_assessment_date' => [
+                'label'=> 'Date',
+                'type'=> 'timestamp',
+                'required' => TRUE,
+                'description' => '',
+            ],
             'range_assessment_land_use' => [
                 'label'=> 'Land Use',
                 'type'=> 'entity_reference',

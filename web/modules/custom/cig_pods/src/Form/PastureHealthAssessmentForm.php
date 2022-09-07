@@ -364,7 +364,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			$pastureAssessment->set('name', 'DIPH Assessment');
             $pastureAssessment -> save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -379,7 +379,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			$pastureHealthAssessment->set('name', 'DIPH Assessment');
             $pastureHealthAssessment->save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_health_assessment_shmu')->target_id);
+			$this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

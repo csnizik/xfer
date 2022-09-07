@@ -381,7 +381,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	$assessment->save();
 
-	$this->setProjectReference($assessment, $assessment->get('field_assessment_shmu')->target_id);
+	$this->setProjectReference($assessment, $assessment->get('shmu')->target_id);
 
 	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
   }

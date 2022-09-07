@@ -91,8 +91,8 @@ cig_pods.field_assessment_form:
     _entity_create_access: 'asset:field_assessment'
 
 cig_pods.inputs_form:
-  # {asset} is the operation asset in this case, which the new input asset is being added to.
-  path: "/create/inputs/{asset}"
+  # {operation} is the operation asset which the new input asset is being added to.
+  path: "/create/inputs/{operation}"
   defaults:
     _form: '\Drupal\cig_pods\Form\InputsForm'
     _title: ""
@@ -101,11 +101,11 @@ cig_pods.inputs_form:
     # operation can be viewed (so the user has access to associate an input
     # to it.
     _entity_create_access: 'asset:input'
-    _entity_access: asset.view
+    _entity_access: operation.view
     asset: \d+
   options:
     parameters:
-      asset:
+      operation:
         type: entity:asset
 
 cig_pods.edit_field_assessment_form:

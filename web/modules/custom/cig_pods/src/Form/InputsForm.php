@@ -84,7 +84,7 @@ class InputsForm extends PodsFormBase {
         return $num / $denom;
     }
 
-    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
+    public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL, AssetInterface $operation = NULL){
       $input = $asset;
 
         $is_edit = $asset <> NULL;
@@ -107,7 +107,7 @@ class InputsForm extends PodsFormBase {
 				$form_state->set('load_done',TRUE);
 			}
 			$form_state->set('operation','create');
-			$form_state->set('operation_id', $asset->id());
+			$form_state->set('operation_id', $operation->id());
 	    }
 
         $form['#attached']['library'][] = 'cig_pods/inputs_form';

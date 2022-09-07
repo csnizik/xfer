@@ -45,3 +45,13 @@ function usda_eauth_install() {
   // Save config.
   $config->save();
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function usda_eauth_uninstall() {
+
+  // Delete the generic OpenID Connect client.
+  $client = OpenIDConnectClientEntity::load('generic');
+  $client->delete();
+}

@@ -15,7 +15,7 @@ public static function accessIfAdmin(AccountInterface $account) {
    // Check permissions and combine that with any custom access checking needed.
    $session = \Drupal::request()->getSession();
    $sessionID = $session->get('ApplicationRoleEnumeration');
-   if ($sessionID == 'CIG_App_Admin' || $session='CIG_APA')
+   if ($sessionID == 'CIG_App_Admin' || $session == 'CIG_APA')
       {
         $result = True;
       }

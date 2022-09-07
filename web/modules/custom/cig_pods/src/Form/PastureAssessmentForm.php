@@ -292,7 +292,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			$pasturAssessment->set('name', 'PCS Assessment');
             $pasturAssessment -> save();
 
-			$this->setProjectReference($pasturAssessment, $pasturAssessment->get('pasture_assessment_shmu')->target_id);
+			$this->setProjectReference($pasturAssessment, $pasturAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -307,7 +307,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			$pastureAssessment->set('name', 'PCS Assessment');
             $pastureAssessment->save();
 
-			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('pasture_assessment_shmu')->target_id);
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
         }

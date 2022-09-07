@@ -19,6 +19,7 @@ dependencies:
     - user.role.authenticated
   module:
     - asset
+    - cig_pods
     - options
     - user
 id: pods_asset_lists
@@ -319,11 +320,44 @@ display:
           role:
             authenticated: authenticated
       cache:
-        type: tag
+        type: none
         options: {  }
       empty: {  }
       sorts: {  }
-      arguments: {  }
+      arguments:
+        pods_project_access:
+          id: pods_project_access
+          table: asset
+          field: pods_project_access
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          plugin_id: pods_project_access
+          default_action: default
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: current_user
+          default_argument_options: {  }
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: false
+          validate:
+            type: none
+            fail: 'not found'
+          validate_options: {  }
       filters: {  }
       style:
         type: table
@@ -373,6 +407,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   awardee:
@@ -762,6 +798,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   field_assessment:
@@ -1224,6 +1262,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   irrigation:
@@ -1688,6 +1728,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   lab_result:
@@ -2150,6 +2192,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   lab_testing_method:
@@ -2612,6 +2656,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   lab_testing_profile:
@@ -3001,6 +3047,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   operation:
@@ -3538,6 +3586,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   pasture_assessment:
@@ -3992,6 +4042,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   pasture_health_assessment:
@@ -4454,6 +4506,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   producer:
@@ -4843,6 +4897,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   project:
@@ -5520,6 +5576,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   range_assessment:
@@ -5982,6 +6040,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   soil_health_management_unit:
@@ -6371,6 +6431,8 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }
   soil_health_sample:
@@ -6833,5 +6895,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
+        - user
         - user.roles
       tags: {  }

@@ -88,6 +88,48 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   }
 
   /**
+   * Query to find projects that an eAuth ID has access to.
+   *
+   * @param $eauth_id
+   *   The eAuth ID.
+   *
+   * @return array
+   *   Returns an array of projectasset IDs.
+   */
+  public static function eAuthIdProjects($eauth_id) {
+
+    // Query the asset table
+    $query = \Drupal::database()->select('asset', 'a');
+
+    // Select the asset entity IDs.
+    $query->addField('a', 'id');
+
+    // Filter to project assets.
+    $query->condition('a.type', 'project');
+
+    // Join the asset__project table to find contacts that reference the project.
+    $query->join('asset__project', 'ap', "a.id = ap.project_target_id AND ap.bundle = 'contact' AND ap.deleted != 1");
+
+    // Join the asset__eauth_id table, which assigns eAuth IDs to contact assets.
+    $query->join('asset__eauth_id', 'aei', "ap.entity_id = aei.entity_id AND aei.deleted != 1");
+
+    // Filter by the eAuth ID field on the contact asset.
+    $query->condition('aei.eauth_id_value', $eauth_id);
+
+    // Execute the query.
+    $result = $query->execute();
+
+    // Return an array of unique asset IDs.
+    $asset_ids = [];
+    foreach ($result as $row) {
+      if (!empty($row->id)) {
+        $asset_ids[] = $row->id;
+      }
+    }
+    return $asset_ids;
+  }
+
+  /**
    * Query to find assets that an eAuth ID has access to.
    *
    * @param $eauth_id
@@ -99,6 +141,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    *   Returns an array of asset IDs.
    */
   public static function eAuthIdAssets($eauth_id, string $asset_type = NULL) {
+
+    // If the asset type is "project", then we need a slightly different query.
+    // Delegate to the eAuthIdProjects() method instead.
+    if ($asset_type == 'project') {
+      return ProjectAccessControlHandler::eAuthIdProjects($eauth_id);
+    }
 
     // Query the asset__project table, where each row is a relationship between
     // an asset and a project.

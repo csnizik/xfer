@@ -30,6 +30,20 @@ class PodsProjectAccess extends ArgumentPluginBase {
     // If this is an awardee, filter out assets that they do not have access to.
     elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
 
+      // Try to determine the asset type from arguments.
+      // The pods_asset_er View uses asset type as the first argument, so we
+      // look for a non-numeric argument there. If one is not found, we default
+      // to NULL so that no additional asset type filtering is performed. This
+      // is fine in most cases because downstream code will filter it (eg: the
+      // pods_asset_lists View).
+      // The only time this could cause brittleness is when you are trying to
+      // get project assets, which require a slightly different query JOIN.
+      // @see ProjectAccessControlHandler::eAuthIdAssets()
+      $asset_type = NULL;
+      if (!empty($this->view->args[0]) && !is_numeric($this->view->args[0])) {
+        $asset_type = $this->view->args[0];
+      }
+
       // First query for a list of asset IDs that the awardee has access to
       // (based on their eAuth ID), then use this list to filter the current
       // View.
@@ -37,7 +51,7 @@ class PodsProjectAccess extends ArgumentPluginBase {
       // query modifications very simple. It only needs the condition:
       // "WHERE asset.id IN (:asset_ids)", rather than add a bunch of extra
       // JOINs (and duplicate the logic in the helper method).
-      $asset_ids = ProjectAccessControlHandler::eAuthIdAssets($eauth_id);
+      $asset_ids = ProjectAccessControlHandler::eAuthIdAssets($eauth_id, $asset_type);
 
       // If there are no asset IDs, add 0 to ensure the array is not empty.
       if (empty($asset_ids)) {

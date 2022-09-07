@@ -91,7 +91,8 @@ class FieldAssessmentForm extends PodsFormBase {
 
 		$field_assessment_soil_cover_value = $is_edit ? $assessment->get('field_assessment_soil_cover')->target_id : '';
 
-		$assessment_evaluations_options = $this->getAssessmentEvaluationOptions();
+		$assessment_evaluations_options = ['' => '- Select -', 0 => 'Yes', 1 => 'No', 2 => 'N/A'];
+
 		$form['assessment_wrapper']['field_assessment_soil_cover'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Soil Cover'),
@@ -408,8 +409,8 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	];
 	// List of fields in consideration for calculating the presence of Soil organic matter depletion
 	$soil_organic_keys = [
-						'field_soil_cover',
-						'field_residue_breakdown',
+						'field_assessment_soil_cover',
+						'field_assessment_residue_breakdown',
 						'field_assessment_water_stable_aggregates',
 						'field_assessment_soil_structure',
 						'field_assessment_soil_color',
@@ -419,8 +420,8 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	];
 	// List of fields in consideration for calculating the presence of Soil Organism Habitat Loss Or Degradation
 	$soil_organism_habitat_keys = [
-						'field_soil_cover',
-						'field_residue_breakdown',
+						'field_assessment_soil_cover',
+						'field_assessment_residue_breakdown',
 						'field_assessment_surface_crusts',
 						'field_assessment_water_stable_aggregates',
 						'field_assessment_soil_structure',
@@ -431,7 +432,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	// List of Fields in consideration for calcuating the presence of Aggregate Instability.
 	$aggregate_instability_keys = [
-						'field_soil_cover',
+						'field_assessment_soil_cover',
 						'field_assessment_surface_crusts',
 						'field_assessment_ponding',
 						'field_assessment_water_stable_aggregates',
@@ -442,75 +443,54 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 	];
 	$assessment_options = $this->getAssessmentEvaluationOptions();
 
-
-	// Identify the options
-	$yes_taxonomy_id = NULL;
-	$no_taxonomy_id = NULL;
-	$n_a_taxonomy_id = NULL;
-
-	// Important: If the dropdowns change value in the db, this code needs to be changed to reflect the new values.
-	foreach($assessment_options as $key => $value){
-		if($value == 'Yes') $yes_taxonomy_id = $key;
-		if($value == 'No') $no_taxonomy_id = $key;
-		if($value == 'N/A') $n_a_taxonomy_id = $key;
-	}
-
 	// Start: Compaction
 	$compaction_rc_present = NULL;
+	$compaction_count = 0;
 
-	$compaction_keys_false_count = 0;
 	foreach($compaction_keys as $key){
-		if($form_values[$key] == $no_taxonomy_id){
-				$compaction_keys_false_count += 1;
+		if($form_values[$key] == 0){
+			$compaction_count += 1;
 		}
 	}
-	$compaction_rc_present = $compaction_keys_false_count >= 2 || $form_values['field_soil_structure'] == $no_taxonomy_id;
-
+	$compaction_rc_present = $compaction_count >= 2 || $form_values['field_assessment_soil_structure'] == 0;
 	// End: Compaction
 
 	// Start: Soil Organic Matter Deplete Resource Concern calculation
+	$soil_organic_matter_rc_present = NULL;
+	$soil_organic_matter_count = 0;
 
-	// tracks the number of fields with keys in "soil_organic_keys" that have "No" as their response
-	$soil_organic_matter_false_count = 0;
-
+	// tracks the number of fields with keys in "soil_organic_keys" that have "Yes" as their response
 	foreach($soil_organic_keys as $key){
-		if($form_values[$key] == $no_taxonomy_id){
-			$soil_organic_matter_false_count += 1;
+		if($form_values[$key] == 0){
+			$soil_organic_matter_count += 1;
 		}
 	}
-
-	$soil_organic_matter_rc_present  = $soil_organic_matter_false_count >= 3;
+	$soil_organic_matter_rc_present  = $soil_organic_matter_count >= 3;
 	// End: Soil Organic Matter Deplete Resource Concern calculation
 
 	// Begin: Aggregate Instability Resource concern calculation
-
 	$aggregate_instability_rc_present = NULL;
-
-	$aggregate_instability_false_count = 0;
+	$aggregate_instability_count = 0;
 
 	foreach($aggregate_instability_keys as $key){
-		if($form_values[$key] == $no_taxonomy_id){
-			$aggregate_instability_false_count += 1;
+		if($form_values[$key] == 0){
+			$aggregate_instability_count += 1;
 		}
 	}
-
-	$aggregate_instability_rc_present = $aggregate_instability_false_count >= 2 || $form_values['field_assessment_water_stable_aggregates'] == $no_taxonomy_id;
-
+	$aggregate_instability_rc_present = $aggregate_instability_count >= 2 || $form_values['field_assessment_water_stable_aggregates'] == 0;
 	// End: Aggregate Instability Resource concern calculation
 
 	// Begin: Soil Organism Habitat Resource Concern calculation
-
 	$soil_organism_habitat_rc_present = NULL;
+	$soil_organism_habitat_count = 0;
 
-	$soil_organism_habitat_false_count = 0;
-
-	foreach($soil_organic_keys as $key){
-		if($form_values[$key] == $no_taxonomy_id){
-			$soil_organism_habitat_false_count += 1;
+	foreach($soil_organism_habitat_keys as $key){
+		dpm($form_values[$key]);
+		if($form_values[$key] == 0){
+			$soil_organism_habitat_count += 1;
 		}
 	}
-	$soil_organism_habitat_rc_present = $soil_organic_matter_false_count >= 2;
-
+	$soil_organism_habitat_rc_present = $soil_organism_habitat_count >= 2;
 	// End: Soil Organism Habitat Resource Concern calculation
 
 	// Start: Save calculated values into form state.

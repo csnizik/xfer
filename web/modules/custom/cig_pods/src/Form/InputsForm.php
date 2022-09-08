@@ -13,14 +13,29 @@ class InputsForm extends PodsFormBase {
     /**
     * {@inheritdoc}
     */
+    public function getInputOptions($parent = NULL){
+      $options = [];
 
-    public function getInputCategoryOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_input_category');
-		return ['' => '- Select -'] + $options;
-	}
+      // Mock:
+      if ($parent == NULL) {
+        $options = [
+          1 => 'Antimicrobial',
+          2 => 'Bacteriocide',
+        ];
+      }
+      elseif ($parent == 1) {
+        $options = [
+          'Borax (B4Na2O7.10H2O)',
+          'Copper Carbonate',
+        ];
+      }
+      elseif ($parent == 2) {
+        $options = [
+          'Acetic Acid',
+          'Azoxystrobin',
+        ];
+      }
 
-    public function getInputOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_input');
 		return ['' => '- Select -'] + $options;
 	}
 
@@ -154,21 +169,27 @@ class InputsForm extends PodsFormBase {
         $form['field_input_category'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input Category'),
-			'#options' => $this->getInputCategoryOptions(),
+			'#options' => $this->getInputOptions(),
 			'#default_value' => $field_input_category_value,
-			'#required' => TRUE
+			'#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::inputCategoryCallback',
+        'wrapper' => 'input-type',
+      ],
 		];
 
-        //input disabled until we can get it working with input_category
-        // $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
+      // Populate the options based on the selected category.
+      $input_category = $form_state->getValue('field_input_category');
+      $input_options = !empty($input_category) ? $this->getInputOptions($input_category) : [];
 
         $form['field_input'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input'),
-			//'#options' => $this->getInputOptions(),
+			'#options' => $input_options,
 			//'#default_value' => $field_input_value,
 			'#required' => FALSE,
-            '#prefix' => '<span id="input-input">',
+      '#prefix' => '<div id="input-type">',
+      '#suffix' => '</div>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -179,7 +200,6 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
-            '#suffix' => '</span>',
 		];
 
          $field_rate_units_value = $is_edit && $input->get('field_rate_units')[0] ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
@@ -551,6 +571,10 @@ public function setProjectReference($assetReference, $operationReference){
 
 		$form_state->setRebuild(True);
 	}
+
+  public function inputCategoryCallback(array &$form, FormStateInterface $form_state){
+    return $form['field_input'];
+  }
 
 	public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state){
 		return $form['cost_sequence'];

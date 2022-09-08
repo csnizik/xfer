@@ -13,27 +13,19 @@ class InputsForm extends PodsFormBase {
     /**
     * {@inheritdoc}
     */
-    public function getInputOptions($parent = NULL){
+    public function getInputOptions($parent = 0){
       $options = [];
 
-      // Mock:
-      if ($parent == NULL) {
-        $options = [
-          1 => 'Antimicrobial',
-          2 => 'Bacteriocide',
-        ];
-      }
-      elseif ($parent == 1) {
-        $options = [
-          'Borax (B4Na2O7.10H2O)',
-          'Copper Carbonate',
-        ];
-      }
-      elseif ($parent == 2) {
-        $options = [
-          'Acetic Acid',
-          'Azoxystrobin',
-        ];
+      // Load terms (with optional parent).
+      $term_storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
+      $terms = $term_storage->loadByProperties([
+        'vid' => 'd_input',
+        'parent' => $parent,
+      ]);
+
+      // Populate options.
+      foreach ($terms as $term) {
+        $options[$term->id()] = $term->label();
       }
 
 		return ['' => '- Select -'] + $options;

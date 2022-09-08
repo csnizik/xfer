@@ -174,14 +174,19 @@ class InputsForm extends PodsFormBase {
       $input_category = $form_state->getValue('field_input_category');
       $input_options = !empty($input_category) ? $this->getInputOptions($input_category) : [];
 
+      $form['input_prefix'] = [
+        '#type' => 'markup',
+        '#markup' => '<span id="input-input">',
+      ];
+
         $form['field_input'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input'),
 			'#options' => $input_options,
 			//'#default_value' => $field_input_value,
 			'#required' => FALSE,
-      '#prefix' => '<div id="input-type">',
-      '#suffix' => '</div>',
+      '#prefix' => '<span id="input-type">',
+      '#suffix' => '</span>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -192,7 +197,14 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
+      '#prefix' => '<span>',
+      '#suffix' => '</span>',
 		];
+
+      $form['input_suffix'] = [
+        '#type' => 'markup',
+        '#markup' => '</span>',
+      ];
 
          $field_rate_units_value = $is_edit && $input->get('field_rate_units')[0] ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
 

@@ -89,7 +89,7 @@ div#block-gin-content {
   margin-bottom: 18px;
 }
 
-select#edit-field-input.form-select.form-element.form-element--type-select {
+#block-gin-content form select[name="field_input"].form-element {
   width: 407px;
   margin-right: 8px;
 }

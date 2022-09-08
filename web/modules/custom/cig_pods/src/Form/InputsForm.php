@@ -171,7 +171,14 @@ class InputsForm extends PodsFormBase {
 		];
 
       // Populate the options based on the selected category.
-      $input_category = $form_state->getValue('field_input_category');
+	  $input_category = [];
+	  if ($form_state->getValue('field_input_category') ) {
+		  $input_category = $form_state->getValue('field_input_category');
+	  }
+	  elseif ($field_input_category_value) {
+		  $input_category = $field_input_category_value;
+	  }
+	  
       $input_options = !empty($input_category) ? $this->getInputOptions($input_category) : [];
 
       $form['input_prefix'] = [
@@ -179,11 +186,13 @@ class InputsForm extends PodsFormBase {
         '#markup' => '<span id="input-input">',
       ];
 
+	  $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
+
         $form['field_input'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input'),
 			'#options' => $input_options,
-			//'#default_value' => $field_input_value,
+			'#default_value' => $field_input_value,
 			'#required' => FALSE,
       '#prefix' => '<span id="input-type">',
       '#suffix' => '</span>',

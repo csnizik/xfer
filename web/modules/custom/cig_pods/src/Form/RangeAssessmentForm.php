@@ -252,17 +252,17 @@ class RangeAssessmentForm extends PodsFormBase {
 		];
 
 			
-
+		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
 		$form['range_assessment_vigor_plants'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
-			'#default_value' => "",
+			'#default_value' => $range_assessment_vigor_plants_value,
 			'#required' => FALSE,
 		];
 
-		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Resource Concerns Identified from In-Field Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+		$form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
 		];
 
 		$range_assessment_rc_soil_site_stability_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability')->value : '';
@@ -275,13 +275,13 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-		// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';
+		 $range_assessment_rc_soil_site_stability_justification_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability_justification')->getValue()[0]['value'] : '';
 			$form['range_assessment_rc_soil_site_stability_justification'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Soil and Site Stability Assessment Justification'),
 				'$description' => 'Soil and Site Stability Assessment Justification',
 				'#required' => FALSE,
-				'#default_value' => "",
+				'#default_value' => $range_assessment_rc_soil_site_stability_justification_value,
 			];
 
 			$range_assessment_rc_hydrologic_function_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function')->value : '';
@@ -294,13 +294,13 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-			// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';	
+			 $range_assessment_rc_hydrologic_function_justification_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function_justification')->getValue()[0]['value'] : '';	
 			$form['range_assessment_rc_hydrologic_function_justification'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Hydrological Function Assessment Justification'),
 				'$description' => 'Hydrological Function Assessment Justification',
 				'#required' => FALSE,
-				'#default_value' => "",
+				'#default_value' => $range_assessment_rc_hydrologic_function_justification_value,
 			];
 
 			$range_assessment_rc_biotic_integrity_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity')->value : '';
@@ -313,13 +313,13 @@ class RangeAssessmentForm extends PodsFormBase {
 				'#required' => FALSE,
 			];
 
-			// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';	
+			 $range_assessment_rc_biotic_integrity_justification_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity_justification')->getValue()[0]['value'] : '';	
 			$form['range_assessment_rc_biotic_integrity_justification'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Biotic Integrity Assessment Justification'),
 				'$description' => 'Biotic Integrity Assessment Justification',
 				'#required' => FALSE,
-				'#default_value' => "",
+				'#default_value' => $range_assessment_rc_biotic_integrity_justification_value,
 			];
 
 		$form['actions']['save'] = [
@@ -383,7 +383,9 @@ class RangeAssessmentForm extends PodsFormBase {
 		return array('shmu', 'range_assessment_date', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
-		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');
+		'range_assessment_vigor_plants', 'range_assessment_invasive_plants', 
+		'range_assessment_rc_soil_site_stability','range_assessment_rc_soil_site_stability_justification', 'range_assessment_rc_hydrologic_function', 'range_assessment_rc_hydrologic_function_justification', 'range_assessment_rc_biotic_integrity', 'range_assessment_rc_biotic_integrity_justification'
+);
 	}
     /**
      * {@inheritdoc}

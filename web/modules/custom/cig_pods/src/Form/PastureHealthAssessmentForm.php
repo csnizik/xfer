@@ -306,6 +306,89 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
+		$form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
+		];
+
+		$pasture_health_assessment_soil_site_stability_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stability')->value : '';
+
+		$form['pasture_health_assessment_soil_site_stability'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil and Site Stability Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $pasture_health_assessment_soil_site_stability_value,
+			'#required' => FALSE,
+		];
+
+		 $pasture_health_assessment_soil_site_stability_justification_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stability_justification')->getValue()[0]['value'] : '';
+
+			$form['pasture_health_assessment_soil_site_stability_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Soil and Site Stability Assessment Justification'),
+				'$description' => 'Soil and Site Stability Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_soil_site_stability_justification_value,
+			];
+
+			$pasture_health_assessment_hydrologic_function_value = $is_edit ? $assessment->get('pasture_health_assessment_hydrologic_function')->value : '';
+
+		$form['pasture_health_assessment_hydrologic_function'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Hydrologic Function Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $pasture_health_assessment_hydrologic_function_value,
+			'#required' => FALSE,
+		];
+
+			 $range_assessment_rc_hydrologic_function_justification_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function_justification')->getValue()[0]['value'] : '';	
+			$form['range_assessment_rc_hydrologic_function_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Hydrological Function Assessment Justification'),
+				'$description' => 'Hydrological Function Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $range_assessment_rc_hydrologic_function_justification_value,
+			];
+
+			$pasture_health_assessment_biological_integrity_value = $is_edit ? $assessment->get('pasture_health_assessment_biological_integrity')->value : '';
+
+			$form['pasture_health_assessment_biological_integrity'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biological Integrity Attribute Rating'),
+				'#options' => $severity_options,
+				'#default_value' => $pasture_health_assessment_biological_integrity_value,
+				'#required' => FALSE,
+			];
+
+			 $pasture_health_assessment_biological_integrity_justification_value = $is_edit ? $assessment->get('pasture_health_assessment_biological_integrity_justification')->getValue()[0]['value'] : '';	
+
+			$form['pasture_health_assessment_biological_integrity_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biological Integrity Assessment Justification'),
+				'$description' => 'Biological Integrity Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_biological_integrity_justification_value,
+			];
+
+			 $pasture_health_assessment_biological_integrity_quality_value = $is_edit ? $assessment->get('pasture_health_assessment_biological_integrity_quality')->getValue()[0]['value'] : '';
+
+			$form['pasture_health_assessment_biological_integrity_quality'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biological Integrity Quality Factor Attribute Rating'),
+				'#options' => $severity_options,
+				'#default_value' => $pasture_health_assessment_biological_integrity_quality_value,
+				'#required' => FALSE,
+			];
+
+			 $pasture_health_assessment_biological_integrity_quality_justification_value = $is_edit ? $assessment->get('pasture_health_assessment_biological_integrity_quality_justification')->getValue()[0]['value'] : '';	
+
+			$form['pasture_health_assessment_biological_integrity_quality_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biological Integrity Quality Factor Assessment Justification'),
+				'$description' => 'Biological Integrity Quality Factor Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_biological_integrity_quality_justificationn_value,
+			];
+
 		$form['actions']['save'] = [
 			'#type' => 'submit',
 			'#value' => 'Save'

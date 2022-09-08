@@ -174,6 +174,86 @@ class PastureHealthAssessment extends FarmAssetType {
                 'required' => FALSE,
                 'description' => '',
             ],
+            'pasture_health_assessment_soil_site_stability' => [
+                'label'=> 'Soil and Site Stability Attribute Rating',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+
+            ],
+            'pasture_health_assessment_hydrologic_function' => [
+                'label'=> 'Hydrologic Function Attribute Rating',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+
+            ],
+            'pasture_health_assessment_biological_integrity' => [
+                'label'=> 'Biological Integrity Attribute Rating',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+
+            ],
+            'pasture_health_assessment_biological_integrity_quality' => [
+                'label'=> 'Biological Integrity Quality Factor Attribute Rating',
+                'type'=> 'string',
+                'required' => FALSE,
+                'description' => '',
+
+            ],
+            'pasture_health_assessment_soil_site_stability_justification' => [
+            'type' => 'string_long',
+            'label' => 'Soil and Site Stability Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
+         'pasture_health_assessment_hydrologic_function_justification' => [
+            'type' => 'string_long',
+            'label' => 'Hydrologic Function Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
+         'pasture_health_assessment_biological_integrity_justification' => [
+            'type' => 'string_long',
+            'label' => 'Biological Integrity Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
+          'pasture_health_assessment_biological_integrity_quality_justification' => [
+            'type' => 'string_long',
+            'label' => 'Biological Integrity Quality Factor Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
           'project' =>[
             'label' => 'Project',
             'type' => 'entity_reference',

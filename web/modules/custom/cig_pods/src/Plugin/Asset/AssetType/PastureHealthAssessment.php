@@ -174,35 +174,35 @@ class PastureHealthAssessment extends FarmAssetType {
                 'required' => FALSE,
                 'description' => '',
             ],
-            'pasture_health_assessment_soil_site_stability' => [
+            'pasture_health_assessment_soil_site_stab' => [
                 'label'=> 'Soil and Site Stability Attribute Rating',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
 
             ],
-            'pasture_health_assessment_hydrologic_function' => [
+            'pasture_health_assessment_hydro_func' => [
                 'label'=> 'Hydrologic Function Attribute Rating',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
 
             ],
-            'pasture_health_assessment_biological_integrity' => [
+            'pasture_health_assessment_bio_integ' => [
                 'label'=> 'Biological Integrity Attribute Rating',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
 
             ],
-            'pasture_health_assessment_biological_integrity_quality' => [
+            'pasture_health_assessment_bio_integ_qual' => [
                 'label'=> 'Biological Integrity Quality Factor Attribute Rating',
                 'type'=> 'string',
                 'required' => FALSE,
                 'description' => '',
 
             ],
-            'pasture_health_assessment_soil_site_stability_justification' => [
+            'pasture_health_assessment_soil_site_stab_just' => [
             'type' => 'string_long',
             'label' => 'Soil and Site Stability Assessment Justification',
             'required' => FALSE,
@@ -215,7 +215,7 @@ class PastureHealthAssessment extends FarmAssetType {
                'label' => 'inline',
             ]
          ],
-         'pasture_health_assessment_hydrologic_function_justification' => [
+         'pasture_health_assessment_hydro_func_just' => [
             'type' => 'string_long',
             'label' => 'Hydrologic Function Assessment Justification',
             'required' => FALSE,
@@ -228,7 +228,7 @@ class PastureHealthAssessment extends FarmAssetType {
                'label' => 'inline',
             ]
          ],
-         'pasture_health_assessment_biological_integrity_justification' => [
+         'pasture_health_assessment_bio_integ_just' => [
             'type' => 'string_long',
             'label' => 'Biological Integrity Assessment Justification',
             'required' => FALSE,
@@ -241,7 +241,7 @@ class PastureHealthAssessment extends FarmAssetType {
                'label' => 'inline',
             ]
          ],
-          'pasture_health_assessment_biological_integrity_quality_justification' => [
+          'pasture_health_assessment_bio_integ_qual_just' => [
             'type' => 'string_long',
             'label' => 'Biological Integrity Quality Factor Assessment Justification',
             'required' => FALSE,

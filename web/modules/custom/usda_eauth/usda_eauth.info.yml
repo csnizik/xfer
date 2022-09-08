@@ -3,4 +3,4 @@ description: Integrates Drupal with USDA's eAuthentication identity provider.
 type: module
 core_version_requirement: ^9
 dependencies:
-  # - openid_connect:openid_connect
+  - openid_connect:openid_connect

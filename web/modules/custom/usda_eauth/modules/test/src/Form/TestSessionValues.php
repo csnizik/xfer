@@ -49,7 +49,7 @@ class TestSessionValues extends FormBase {
           $nrtApplicationId = Settings::get('nrtApplicationId', 'd2');
           $wsSecuredToken = Settings::get('wsSecuredToken', 'd3');
 
-          $eAuthTokenUrl = Settings::get('eAuthTokenUrl', 'd5');
+          $eAuthTokenUrl = Settings::get('eAuthBaseUrl', 'd5') . '/token';
           $client_id = Settings::get('client_id', 'd6');
           $client_secret = Settings::get('client_secret', 'd7');
 

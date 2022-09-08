@@ -1,3 +1,8 @@
 services:
   usda_eauth.zroles:
     class: Drupal\usda_eauth\zRolesUtilities
+  usda_eauth.overrider:
+    class: Drupal\usda_eauth\Config\UsdaEAuthConfigOverride
+    arguments: ['@settings']
+    tags:
+      - { name: config.factory.override, priority: 5 }

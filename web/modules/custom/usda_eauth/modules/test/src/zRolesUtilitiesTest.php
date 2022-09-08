@@ -2,6 +2,7 @@
 
 namespace Drupal\usda_eauth_test;
 
+use Drupal\Core\Site\Settings;
 use Drupal\usda_eauth\zRolesUtilities;
 use Drupal\usda_eauth\zRolesUtilitiesInterface;
 use \SimpleXMLElement;
@@ -15,6 +16,13 @@ class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInte
    * {@inheritdoc}
    */
   public static function getUserAccessRolesAndScopes(string $eAuthId){
+
+    // If usda_eauth_test_mock is not set to FALSE in settings.php, then mock
+    // the response. Otherwise, delegate to the parent method.
+    if (!Settings::get('usda_eauth_test_mock', TRUE)) {
+      return parent::getUserAccessRolesAndScopes($eAuthId);
+    }
+
     return [];
   }
 
@@ -22,6 +30,12 @@ class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInte
    * {@inheritdoc}
    */
   public static function getListByzRole(String $zRole) {
+
+    // If usda_eauth_test_mock is not set to FALSE in settings.php, then mock
+    // the response. Otherwise, delegate to the parent method.
+    if (!Settings::get('usda_eauth_test_mock', TRUE)) {
+      return parent::getListByzRole($zRole);
+    }
 
     $response = '<soap:Body>
       <GetAuthorizedUsersResponse xmlns="http://zRoles.sc.egov.usda.gov">

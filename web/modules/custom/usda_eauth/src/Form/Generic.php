@@ -55,7 +55,7 @@ class generic extends FormBase {
            }
 
         /* Get environment values from Settings */
-        $eAuthTokenUrl = Settings::get('eAuthTokenUrl', '');
+        $eAuthTokenUrl = Settings::get('eAuthBaseUrl', '') . '/token';
         $client_id = Settings::get('client_id', '');
         $client_secret = Settings::get('client_secret', '');
 

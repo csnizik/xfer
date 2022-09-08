@@ -251,52 +251,76 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
+			
 
 		$form['range_assessment_vigor_plants'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
-			'#default_value' => $range_assessment_vigor_plants_value,
+			'#default_value' => "",
 			'#required' => FALSE,
 		];
 
-		// $form['rc_container'] = [
-        //     '#prefix' => '<div id="rc_container"',
-		// 	'#suffix' => '</div>',
-        // ];
+		$form['subform_1'] = [
+			'#markup' => '<div class="subform-title-container"><h2>Resource Concerns Identified from In-Field Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+		];
 
-		// $form['rc_container']['actions']['identify-resource-concerns'] = [
-		// 	'#type' => 'submit',
-		// 	'#value' => $this->t('Identify Resource Concerns'),
-		// 	'#submit' => ['::displayRcScores'],
-		// 	'#ajax' => [
-		// 		'callback' => '::updateScores',
-		// 		'wrapper' => 'rc_container',
-		// 	],
-		// 	'#attributes' => [
-		// 		'class' => ['score-button-class'],
-		// 	],
-		// ];
+		$range_assessment_rc_soil_site_stability_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability')->value : '';
 
-		// $toDisplay = $form_state->get('rc_display');
-		// if (count($toDisplay) <> 0) {
-		// 	$form['rc_container']['rc_header'] = [
-		// 		'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
-		// 	];
-		// 	$form['rc_container']['rc_soil'] = [
-		// 		'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p>
-		// 		<p><b>Calculated Result:</b> @soil_score</p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
-		// 	];
-		// 	$form['rc_container']['rc_hydrologic'] = [
-		// 		'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p>
-		// 		<p><b>Calculated Result:</b> @hydrolic_score</p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
-		// 	];
-		// 	$form['rc_container']['rc_biotic'] = [
-		// 		'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p>
-		// 		<p><b>Calculated Result:</b> @biotic_score</p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
-		// 	];
-		// }
+		$form['range_assessment_rc_soil_site_stability'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil and Site Stability Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $range_assessment_rc_soil_site_stability_value,
+			'#required' => FALSE,
+		];
+
+		// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';
+			$form['range_assessment_rc_soil_site_stability_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Soil and Site Stability Assessment Justification'),
+				'$description' => 'Soil and Site Stability Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => "",
+			];
+
+			$range_assessment_rc_hydrologic_function_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function')->value : '';
+
+		$form['range_assessment_rc_hydrologic_function'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Hydrologic Function'),
+			'#options' => $severity_options,
+			'#default_value' => $range_assessment_rc_hydrologic_function_value,
+			'#required' => FALSE,
+		];
+
+			// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';	
+			$form['range_assessment_rc_hydrologic_function_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Hydrological Function Assessment Justification'),
+				'$description' => 'Hydrological Function Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => "",
+			];
+
+			$range_assessment_rc_biotic_integrity_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity')->value : '';
+
+			$form['range_assessment_rc_biotic_integrity'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biotic Integrity'),
+				'#options' => $severity_options,
+				'#default_value' => $range_assessment_rc_biotic_integrity_value,
+				'#required' => FALSE,
+			];
+
+			// $summary_default = $is_edit ? $project->get('field_summary')->getValue()[0]['value'] : '';	
+			$form['range_assessment_rc_biotic_integrity_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biotic Integrity Assessment Justification'),
+				'$description' => 'Biotic Integrity Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => "",
+			];
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',

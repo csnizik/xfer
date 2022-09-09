@@ -274,7 +274,7 @@ class OperationForm extends PodsFormBase {
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
-				'#name' => $fs_index,
+				'#name' => 'delete-cost-' . $fs_index,
 				'#submit' => ['::deleteCostSequence'],
 				'#ajax' => [
 					'callback' => "::deleteCostSequenceCallback",
@@ -346,7 +346,14 @@ class OperationForm extends PodsFormBase {
 		$id = $form_state->get('operation_id'); // TODO: Standardize access
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
+		$inputs = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+            ['type' => 'input', 'field_operation' => $id]
+        );
+		
 		try{
+			foreach($inputs as $input){
+            	$input->delete();
+			}
 			$operation->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
@@ -492,7 +499,7 @@ class OperationForm extends PodsFormBase {
 
 
 	public function deleteCostSequence(array &$form, FormStateInterface $form_state){
-	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+	    $idx_to_rm = str_replace('delete-cost-', '', $form_state->getTriggeringElement()['#name']);
 
 		$sequences = $form_state->get('sequences');
 

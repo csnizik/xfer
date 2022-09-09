@@ -13,14 +13,21 @@ class InputsForm extends PodsFormBase {
     /**
     * {@inheritdoc}
     */
+    public function getInputOptions($parent = 0){
+      $options = [];
 
-    public function getInputCategoryOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_input_category');
-		return ['' => '- Select -'] + $options;
-	}
+      // Load terms (with optional parent).
+      $term_storage = \Drupal::service('entity_type.manager')->getStorage('taxonomy_term');
+      $terms = $term_storage->loadByProperties([
+        'vid' => 'd_input',
+        'parent' => $parent,
+      ]);
 
-    public function getInputOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_input');
+      // Populate options.
+      foreach ($terms as $term) {
+        $options[$term->id()] = $term->label();
+      }
+
 		return ['' => '- Select -'] + $options;
 	}
 
@@ -154,21 +161,41 @@ class InputsForm extends PodsFormBase {
         $form['field_input_category'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input Category'),
-			'#options' => $this->getInputCategoryOptions(),
+			'#options' => $this->getInputOptions(),
 			'#default_value' => $field_input_category_value,
-			'#required' => TRUE
+			'#required' => TRUE,
+      '#ajax' => [
+        'callback' => '::inputCategoryCallback',
+        'wrapper' => 'input-type',
+      ],
 		];
 
-        //input disabled until we can get it working with input_category
-        // $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
+      // Populate the options based on the selected category.
+	  $input_category = [];
+	  if ($form_state->getValue('field_input_category') ) {
+		  $input_category = $form_state->getValue('field_input_category');
+	  }
+	  elseif ($field_input_category_value) {
+		  $input_category = $field_input_category_value;
+	  }
+	  
+      $input_options = !empty($input_category) ? $this->getInputOptions($input_category) : [];
+
+      $form['input_prefix'] = [
+        '#type' => 'markup',
+        '#markup' => '<span id="input-input">',
+      ];
+
+	  $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
 
         $form['field_input'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Input'),
-			//'#options' => $this->getInputOptions(),
-			//'#default_value' => $field_input_value,
+			'#options' => $input_options,
+			'#default_value' => $field_input_value,
 			'#required' => FALSE,
-            '#prefix' => '<span id="input-input">',
+      '#prefix' => '<span id="input-type">',
+      '#suffix' => '</span>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -179,8 +206,14 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
-            '#suffix' => '</span>',
+      '#prefix' => '<span>',
+      '#suffix' => '</span>',
 		];
+
+      $form['input_suffix'] = [
+        '#type' => 'markup',
+        '#markup' => '</span>',
+      ];
 
          $field_rate_units_value = $is_edit && $input->get('field_rate_units')[0] ? $this->convertFraction($input->get('field_rate_units')[0]) : '';
 
@@ -272,7 +305,7 @@ class InputsForm extends PodsFormBase {
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
-				'#name' => $fs_index,
+				'#name' => 'delete-cost-' . $fs_index,
 				'#submit' => ['::deleteCostSequence'],
 				'#ajax' => [
 					'callback' => "::deleteCostSequenceCallback",
@@ -428,8 +461,11 @@ class InputsForm extends PodsFormBase {
 			$operation_reference->get('field_input')[] = $input_to_save->id();
 			$operation_reference->save();
          } else {
-		    $input_id = $form_state->get('input_id');
+			$operation_taxonomy_name = $form_state->get('current_operation_name');
+			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
+			$input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
+			$input->set('name', $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value']);
              $mapping = $this->getFormEntityMapping();
              // Single value fields can be mapped in
 	        foreach($mapping as $form_elem_id => $entity_field_id){
@@ -479,14 +515,14 @@ class InputsForm extends PodsFormBase {
 	}
 }
 
-public function setProjectReference($assetReference, $operationReference){
-	$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
-	$project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
-	$assetReference->set('project', $project);
-	$assetReference->save();
-}
+	public function setProjectReference($assetReference, $operationReference){
+		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 
- 	 public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+ 	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		return;
 	}
@@ -544,12 +580,16 @@ public function setProjectReference($assetReference, $operationReference){
 
 
 	public function deleteCostSequence(array &$form, FormStateInterface $form_state){
-	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+	    $idx_to_rm = str_replace('delete-cost-', '', $form_state->getTriggeringElement()['#name']);
 		$sequences = $form_state->get('sequences');
 		unset($sequences[$idx_to_rm]); // Remove the index
 		$form_state->set('sequences',$sequences);
 
 		$form_state->setRebuild(True);
+	}
+
+	public function inputCategoryCallback(array &$form, FormStateInterface $form_state){
+		return $form['field_input'];
 	}
 
 	public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state){

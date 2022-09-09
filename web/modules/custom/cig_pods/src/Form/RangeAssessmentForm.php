@@ -288,7 +288,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 		$form['range_assessment_rc_hydrologic_function'] = [
 			'#type' => 'select',
-			'#title' => $this->t('Hydrologic Function'),
+			'#title' => $this->t('Hydrologic Function Attribute Rating'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_rc_hydrologic_function_value,
 			'#required' => FALSE,
@@ -307,7 +307,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 			$form['range_assessment_rc_biotic_integrity'] = [
 				'#type' => 'select',
-				'#title' => $this->t('Biotic Integrity'),
+				'#title' => $this->t('Biotic Integrity Attribute Rating'),
 				'#options' => $severity_options,
 				'#default_value' => $range_assessment_rc_biotic_integrity_value,
 				'#required' => FALSE,

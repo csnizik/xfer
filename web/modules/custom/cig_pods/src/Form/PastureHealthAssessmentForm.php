@@ -451,7 +451,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		'pasture_health_assessment_padestals', 'pasture_health_assessment_litter_movement', 'pasture_health_assessment_composition', 'pasture_health_assessment_soil_surface',
 		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable',
 		'pasture_health_assessment_invasive_plants', 'pasture_health_assessment_annual_production', 'pasture_health_assessment_plant_vigor', 'pasture_health_assessment_dying_plants',
-		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock');
+		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock','pasture_health_assessment_soil_site_stab', 'pasture_health_assessment_soil_site_stab_just', 'pasture_health_assessment_hydro_func', 'pasture_health_assessment_hydro_func_just', 'pasture_health_assessment_bio_integ', 'pasture_health_assessment_bio_integ_just', 'pasture_health_assessment_bio_integ_qual', 'pasture_health_assessment_bio_integ_qual_just');
 	}
 
     /**

@@ -704,20 +704,4 @@ public function deleteContacts(array $pre_existsing_contacts){
     $form_state->setRebuild();
   }
 
-  public function removeProducerCallback(array &$form, FormStateInterface $form_state){
-    $trigger = $form_state->getTriggeringElement();
-	$num_producer_lines = $form_state->get('num_producer_lines');
-	$indexToRemove = $trigger['#name'];
-
-	unset($form['producers_fieldset'][$indexToRemove]);
-
-	$removed_producers = $form_state->get('removed_producers');
-	$removed_producers[] = $indexToRemove;
-
-	$form_state->set('removed_producers',$removed_producers);
-	$form_state->set('num_producer_lines', $num_producer_lines);
-
-	$form_state->setRebuild();
-
-  }
 }

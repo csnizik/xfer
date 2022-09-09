@@ -42,7 +42,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		}
 
         $form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1> Assessments </h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
@@ -55,6 +55,25 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			'#title' => 'Select a Soil Health Management Unit (SHMU)',
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $shmu_value,
+			'#required' => TRUE,
+		];
+
+		if($is_edit){
+			$date_value = $assessment->get('pasture_health_assessment_date')->value;
+			$pasture_health_timestamp_default_value = date("Y-m-d", $date_value);
+		} else {
+			$pasture_health_timestamp_default_value = ''; // TODO: Check behavior
+		}
+		$form['pasture_health_assessment_date'] = [
+			'#type' => 'date',
+			'#title' => $this->t('Date'),
+			'#description' => '',
+			'#default_value' => $pasture_health_timestamp_default_value,
+			'#attributes' => [
+				'type' => 'date',
+				'min' => '-25 years',
+				'max' => 'now',
+			],
 			'#required' => TRUE,
 		];
 
@@ -287,6 +306,89 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
+		$form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
+		];
+
+		$pasture_health_assessment_soil_site_stab_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stab')->value : '';
+
+		$form['pasture_health_assessment_soil_site_stab'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil and Site Stability Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $pasture_health_assessment_soil_site_stab_value,
+			'#required' => FALSE,
+		];
+
+		 $pasture_health_assessment_soil_site_stab_just_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stab_just')->getValue()[0]['value'] : '';
+
+			$form['pasture_health_assessment_soil_site_stab_just'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Soil and Site Stability Assessment Justification'),
+				'$description' => 'Soil and Site Stability Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_soil_site_stab_just_value,
+			];
+
+			$pasture_health_assessment_hydro_func_value = $is_edit ? $assessment->get('pasture_health_assessment_hydro_func')->value : '';
+
+		$form['pasture_health_assessment_hydro_func'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Hydrologic Function Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $pasture_health_assessment_hydro_func_value,
+			'#required' => FALSE,
+		];
+
+			 $pasture_health_assessment_hydro_func_just_value = $is_edit ? $assessment->get('pasture_health_assessment_hydro_func_just')->getValue()[0]['value'] : '';	
+			$form['pasture_health_assessment_hydro_func_just'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Hydrological Function Assessment Justification'),
+				'$description' => 'Hydrological Function Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_hydro_func_just_value,
+			];
+
+			$pasture_health_assessment_bio_integ_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ')->value : '';
+
+			$form['pasture_health_assessment_bio_integ'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biological Integrity Attribute Rating'),
+				'#options' => $severity_options,
+				'#default_value' => $pasture_health_assessment_bio_integ_value,
+				'#required' => FALSE,
+			];
+
+			 $pasture_health_assessment_bio_integ_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_just')->getValue()[0]['value'] : '';	
+
+			$form['pasture_health_assessment_bio_integ_just'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biological Integrity Assessment Justification'),
+				'$description' => 'Biological Integrity Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_bio_integ_just_value,
+			];
+
+			 $pasture_health_assessment_bio_integ_qual_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_qual')->getValue()[0]['value'] : '';
+
+			$form['pasture_health_assessment_bio_integ_qual'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biological Integrity Quality Factor Attribute Rating'),
+				'#options' => $severity_options,
+				'#default_value' => $pasture_health_assessment_bio_integ_qual_value,
+				'#required' => FALSE,
+			];
+
+			 $pasture_health_assessment_bio_integ_qual_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_qual_just')->getValue()[0]['value'] : '';	
+
+			$form['pasture_health_assessment_bio_integ_qual_just'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biological Integrity Quality Factor Assessment Justification'),
+				'$description' => 'Biological Integrity Quality Factor Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $pasture_health_assessment_bio_integ_qual_just_value,
+			];
+
 		$form['actions']['save'] = [
 			'#type' => 'submit',
 			'#value' => 'Save'
@@ -315,6 +417,11 @@ class PastureHealthAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$date_timestamp = strtotime($form_state->getValue('pasture_health_assessment_date'));
+      	$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+      	if ($date_timestamp > $current_timestamp) {
+        	$form_state->setError($form, 'Error: Invalid Date');
+      	}
         return;
     }
 
@@ -339,18 +446,19 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 	}
 
 	public function createElementNames(){
-		return array('shmu', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
+		return array('shmu', 'pasture_health_assessment_date', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
 		'pasture_health_assessment_erosion_wind_scoured', 'pasture_health_assessment_erosion_streambank', 'pasture_health_assessment_water_flow_patterns', 'pasture_health_assessment_bare_ground',
 		'pasture_health_assessment_padestals', 'pasture_health_assessment_litter_movement', 'pasture_health_assessment_composition', 'pasture_health_assessment_soil_surface',
 		'pasture_health_assessment_compaction_layer', 'pasture_health_assessment_live_plant', 'pasture_health_assessment_forage_plant', 'pasture_health_assessment_percent_desirable',
 		'pasture_health_assessment_invasive_plants', 'pasture_health_assessment_annual_production', 'pasture_health_assessment_plant_vigor', 'pasture_health_assessment_dying_plants',
-		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock');
+		'pasture_health_assessment_little_cover', 'pasture_health_assessment_nontoxic_legumes', 'pasture_health_assessment_uniformity', 'pasture_health_assessment_livestock','pasture_health_assessment_soil_site_stab', 'pasture_health_assessment_soil_site_stab_just', 'pasture_health_assessment_hydro_func', 'pasture_health_assessment_hydro_func_just', 'pasture_health_assessment_bio_integ', 'pasture_health_assessment_bio_integ_just', 'pasture_health_assessment_bio_integ_qual', 'pasture_health_assessment_bio_integ_qual_just');
 	}
 
     /**
      * {@inheritdoc}
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
+		$date_fields = ['pasture_health_assessment_date'];
 
 		$pasture_health_submission = [];
         if($form_state->get('operation') === 'create'){
@@ -362,6 +470,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
             $pasture_health_submission['type'] = 'pasture_health_assessment';
             $pastureAssessment = Asset::create($pasture_health_submission);
 			$pastureAssessment->set('name', 'DIPH Assessment');
+			$pastureAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
             $pastureAssessment -> save();
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
@@ -377,6 +486,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
                 $pastureHealthAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$pastureHealthAssessment->set('name', 'DIPH Assessment');
+			$pastureHealthAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
             $pastureHealthAssessment->save();
 
 			$this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);

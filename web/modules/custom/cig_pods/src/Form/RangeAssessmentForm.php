@@ -52,7 +52,7 @@ class RangeAssessmentForm extends PodsFormBase {
 		}
 
         $form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1> Assessments </h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
@@ -66,6 +66,20 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $shmu_value,
 			'#required' => TRUE,
+		];
+
+		if($is_edit){
+			$date_value = $assessment->get('range_assessment_date')->value;
+			$rangeland_timestamp_default_value = date("Y-m-d", $date_value);
+		} else {
+			$rangeland_timestamp_default_value = ''; // TODO: Check behavior
+		}
+		$form['range_assessment_date'] = [
+			'#type' => 'date',
+			'#title' => $this->t('Date'),
+			'#description' => '',
+			'#default_value' => $rangeland_timestamp_default_value,
+			'#required' => TRUE
 		];
 
 		$range_assessment_land_use_value = $is_edit ? $assessment->get('range_assessment_land_use')->target_id : '';
@@ -84,7 +98,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Rills'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_rills_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_water_flow_value = $is_edit ? $assessment->get('range_assessment_water_flow')->value : '';
@@ -94,7 +108,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Water Flow'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_water_flow_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_pedestals_value = $is_edit ? $assessment->get('range_assessment_pedestals')->value : '';
@@ -104,7 +118,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Pedestals and/or Terracettes'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_pedestals_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_bare_ground_value = $is_edit ? $assessment->get('range_assessment_bare_ground')->value : '';
@@ -114,7 +128,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Bare Ground'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_bare_ground_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_gullies_value = $is_edit ? $assessment->get('range_assessment_gullies')->value : '';
@@ -124,7 +138,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Gullies'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_gullies_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_wind_scoured_value = $is_edit ? $assessment->get('range_assessment_wind_scoured')->value : '';
@@ -134,7 +148,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Wind-Scoured and/or Depositional Areas'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_wind_scoured_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_litter_movement_value = $is_edit ? $assessment->get('range_assessment_litter_movement')->value : '';
@@ -144,7 +158,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Litter Movement (Wind or Water)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_movement_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_soil_surface_resistance_value = $is_edit ? $assessment->get('range_assessment_soil_surface_resistance')->value : '';
@@ -154,7 +168,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Soil Surface Resistance to Erosion'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_resistance_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_soil_surface_loss_value = $is_edit ? $assessment->get('range_assessment_soil_surface_loss')->value : '';
@@ -164,7 +178,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Soil Surface Loss and Degradation'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_soil_surface_loss_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_effects_of_plants_value = $is_edit ? $assessment->get('range_assessment_effects_of_plants')->value : '';
@@ -174,7 +188,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Effects of Plant Community Composition and Distribution on Infiltration'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_effects_of_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_compaction_layer_value = $is_edit ? $assessment->get('range_assessment_compaction_layer')->value : '';
@@ -184,7 +198,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Compaction Layer'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_compaction_layer_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_functional_structural_value = $is_edit ? $assessment->get('range_assessment_functional_structural')->value : '';
@@ -194,7 +208,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Functional/Structural Groups'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_functional_structural_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_dead_plants_value = $is_edit ? $assessment->get('range_assessment_dead_plants')->value : '';
@@ -204,7 +218,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Dead or Dying Plants or Plant Parts (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_dead_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_litter_cover_value = $is_edit ? $assessment->get('range_assessment_litter_cover')->value : '';
@@ -214,7 +228,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Litter Cover and Depth'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_litter_cover_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_annual_production_value = $is_edit ? $assessment->get('range_assessment_annual_production')->value : '';
@@ -224,7 +238,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Annual Production'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_annual_production_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
 		$range_assessment_invasive_plants_value = $is_edit ? $assessment->get('range_assessment_invasive_plants')->value : '';
@@ -234,55 +248,79 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#title' => $this->t('Invasive Plants'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_invasive_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
+			
 		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
-
 		$form['range_assessment_vigor_plants'] = [
 			'#type' => 'select',
 			'#title' => $this->t('Vigor with an Emphasis on Reproductive Capability of Perennial Plants (dominant, subdominant, and minor functional/structural groups)'),
 			'#options' => $severity_options,
 			'#default_value' => $range_assessment_vigor_plants_value,
-			'#required' => TRUE,
+			'#required' => FALSE,
 		];
 
-		$form['rc_container'] = [
-            '#prefix' => '<div id="rc_container"',
-			'#suffix' => '</div>',
-        ];
-
-		$form['rc_container']['actions']['identify-resource-concerns'] = [
-			'#type' => 'submit',
-			'#value' => $this->t('Identify Resource Concerns'),
-			'#submit' => ['::displayRcScores'],
-			'#ajax' => [
-				'callback' => '::updateScores',
-				'wrapper' => 'rc_container',
-			],
-			'#attributes' => [
-				'class' => ['score-button-class'],
-			],
+		$form['subform_2'] = [
+			'#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
 		];
 
-		$toDisplay = $form_state->get('rc_display');
-		if (count($toDisplay) <> 0) {
-			$form['rc_container']['rc_header'] = [
-				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment </h5>'
+		$range_assessment_rc_soil_site_stability_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability')->value : '';
+
+		$form['range_assessment_rc_soil_site_stability'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Soil and Site Stability Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $range_assessment_rc_soil_site_stability_value,
+			'#required' => FALSE,
+		];
+
+		 $range_assessment_rc_soil_site_stability_justification_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability_justification')->getValue()[0]['value'] : '';
+			$form['range_assessment_rc_soil_site_stability_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Soil and Site Stability Assessment Justification'),
+				'$description' => 'Soil and Site Stability Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $range_assessment_rc_soil_site_stability_justification_value,
 			];
-			$form['rc_container']['rc_soil'] = [
-				'#markup' => $this->t('<p classname="Soil"> <b> Soil/Site Stability </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @soil_score</p>', ['@soil_score' => $this->getSoilSiteStability($form, $form_state, $severity_options)])
+
+			$range_assessment_rc_hydrologic_function_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function')->value : '';
+
+		$form['range_assessment_rc_hydrologic_function'] = [
+			'#type' => 'select',
+			'#title' => $this->t('Hydrologic Function Attribute Rating'),
+			'#options' => $severity_options,
+			'#default_value' => $range_assessment_rc_hydrologic_function_value,
+			'#required' => FALSE,
+		];
+
+			 $range_assessment_rc_hydrologic_function_justification_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function_justification')->getValue()[0]['value'] : '';	
+			$form['range_assessment_rc_hydrologic_function_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Hydrological Function Assessment Justification'),
+				'$description' => 'Hydrological Function Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $range_assessment_rc_hydrologic_function_justification_value,
 			];
-			$form['rc_container']['rc_hydrologic'] = [
-				'#markup' => $this->t('<p classname="Hydrologic"> <b> Hydrologic Function </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @hydrolic_score</p>', ['@hydrolic_score' => $this->getHydrologicFunction($form, $form_state, $severity_options)])
+
+			$range_assessment_rc_biotic_integrity_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity')->value : '';
+
+			$form['range_assessment_rc_biotic_integrity'] = [
+				'#type' => 'select',
+				'#title' => $this->t('Biotic Integrity Attribute Rating'),
+				'#options' => $severity_options,
+				'#default_value' => $range_assessment_rc_biotic_integrity_value,
+				'#required' => FALSE,
 			];
-			$form['rc_container']['rc_biotic'] = [
-				'#markup' => $this->t('<p classname="Biotic"> <b> Biotic Integrity </b>(Calculated from in-field assessments)</p>
-				<p><b>Calculated Result:</b> @biotic_score</p>', ['@biotic_score' => $this->getBioticIntegrity($form, $form_state, $severity_options)])
+
+			 $range_assessment_rc_biotic_integrity_justification_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity_justification')->getValue()[0]['value'] : '';	
+			$form['range_assessment_rc_biotic_integrity_justification'] = [
+				'#type' => 'textarea',
+				'#title' => $this->t('Biotic Integrity Assessment Justification'),
+				'$description' => 'Biotic Integrity Assessment Justification',
+				'#required' => FALSE,
+				'#default_value' => $range_assessment_rc_biotic_integrity_justification_value,
 			];
-		}
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',
@@ -312,6 +350,11 @@ class RangeAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$date_timestamp = strtotime($form_state->getValue('range_assessment_date'));
+		$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+		if ($date_timestamp > $current_timestamp) {
+			$form_state->setError($form, 'Error: Invalid Date');
+		}
         return;
     }
 
@@ -337,10 +380,12 @@ class RangeAssessmentForm extends PodsFormBase {
 	}
 
 	public function createElementNames(){
-		return array('shmu', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
+		return array('shmu', 'range_assessment_date', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
-		'range_assessment_vigor_plants', 'range_assessment_invasive_plants');
+		'range_assessment_vigor_plants', 'range_assessment_invasive_plants', 
+		'range_assessment_rc_soil_site_stability','range_assessment_rc_soil_site_stability_justification', 'range_assessment_rc_hydrologic_function', 'range_assessment_rc_hydrologic_function_justification', 'range_assessment_rc_biotic_integrity', 'range_assessment_rc_biotic_integrity_justification'
+);
 	}
     /**
      * {@inheritdoc}
@@ -355,11 +400,12 @@ class RangeAssessmentForm extends PodsFormBase {
             }
 
             $rangeland_submission['type'] = 'range_assessment';
-            $ranglandAssessment = Asset::create($rangeland_submission);
-			$ranglandAssessment->set('name', 'IIRH Assessment');
-            $ranglandAssessment -> save();
+            $rangelandAssessment = Asset::create($rangeland_submission);
+			$rangelandAssessment->set('name', 'IIRH Assessment');
+			$rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
+            $rangelandAssessment -> save();
 
-			$this->setProjectReference($ranglandAssessment, $ranglandAssessment->get('shmu')->target_id);
+			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -372,6 +418,7 @@ class RangeAssessmentForm extends PodsFormBase {
                 $rangelandAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$rangelandAssessment->set('name', 'IIRH Assessment');
+			$rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
             $rangelandAssessment->save();
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
@@ -436,15 +483,15 @@ class RangeAssessmentForm extends PodsFormBase {
 		return $severity_options[$score];
 	}
 
-	public function displayRcScores(array &$form, FormStateInterface $form_state ){
-		$form_state->set('rc_display', array(1,2,3,4));
-		$form_state->setRebuild(TRUE);
-	}
+	// public function displayRcScores(array &$form, FormStateInterface $form_state ){
+	// 	$form_state->set('rc_display', array(1,2,3,4));
+	// 	$form_state->setRebuild(TRUE);
+	// }
 
-	public function updateScores(array &$form, FormStateInterface $form_state){
+	// public function updateScores(array &$form, FormStateInterface $form_state){
 
-        return $form['rc_container'];
-    }
+    //     return $form['rc_container'];
+    // }
 
 
     /**

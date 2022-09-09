@@ -29,6 +29,12 @@ class RangeAssessment extends FarmAssetType {
                 'required' => TRUE,
                 'description' => '',
             ],
+            'range_assessment_date' => [
+                'label'=> 'Date',
+                'type'=> 'timestamp',
+                'required' => TRUE,
+                'description' => '',
+            ],
             'range_assessment_land_use' => [
                 'label'=> 'Land Use',
                 'type'=> 'entity_reference',
@@ -164,6 +170,45 @@ class RangeAssessment extends FarmAssetType {
                 'description' => '',
 
             ],
+            'range_assessment_rc_soil_site_stability_justification' => [
+            'type' => 'string_long',
+            'label' => 'Soil and Site Stability Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
+         'range_assessment_rc_hydrologic_function_justification' => [
+            'type' => 'string_long',
+            'label' => 'Hydrologic Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
+         'range_assessment_rc_biotic_integrity_justification' => [
+            'type' => 'string_long',
+            'label' => 'Biotic Integrity Assessment Justification',
+            'required' => FALSE,
+            'multiple' => FALSE,
+            'settings' => [
+               'max_length' => 1000,
+               'size' => 60,
+            ],
+            'form_display_options' => [
+               'label' => 'inline',
+            ]
+         ],
           'project' =>[
             'label' => 'Project',
             'type' => 'entity_reference',

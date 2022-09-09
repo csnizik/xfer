@@ -60,6 +60,20 @@ class PastureAssessmentForm extends PodsFormBase {
 
 		];
 
+		if($is_edit){
+			$date_value = $assessment->get('pasture_assessment_date')->value;
+			$pasture_timestamp_default_value = date("Y-m-d", $date_value);
+		} else {
+			$pasture_timestamp_default_value = ''; // TODO: Check behavior
+		}
+		$form['pasture_assessment_date'] = [
+			'#type' => 'date',
+			'#title' => $this->t('Date'),
+			'#description' => '',
+			'#default_value' => $pasture_timestamp_default_value,
+			'#required' => TRUE
+		];
+
         $pasture_assessment_rills_value = $is_edit ? $assessment->get('pasture_assessment_desirable_plants')->value : '';
 
 		$form['pasture_assessment_desirable_plants'] = [
@@ -242,6 +256,11 @@ class PastureAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
     public function validateForm(array &$form, FormStateInterface $form_state){
+		$date_timestamp = strtotime($form_state->getValue('pasture_assessment_date'));
+		$current_timestamp = strtotime(date('Y-m-d', \Drupal::time()->getCurrentTime()));
+		if ($date_timestamp > $current_timestamp) {
+			$form_state->setError($form, 'Error: Invalid Date');
+		}
         return;
     }
 
@@ -271,7 +290,7 @@ class PastureAssessmentForm extends PodsFormBase {
 	}
 
 	public function createElementNames(){
-		return array('shmu', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
+		return array('shmu', 'pasture_assessment_date', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
 		'pasture_assessment_grazing_utilization_severity', 'pasture_assessment_livestock_concentration', 'pasture_assessment_plant_rigor', 'pasture_assessment_erosion','pasture_assessment_soil_compaction');
 	}
 
@@ -288,11 +307,12 @@ class PastureAssessmentForm extends PodsFormBase {
             }
 
             $pasture_submission['type'] = 'pasture_assessment';
-            $pasturAssessment = Asset::create($pasture_submission);
-			$pasturAssessment->set('name', 'PCS Assessment');
-            $pasturAssessment -> save();
+            $pastureAssessment = Asset::create($pasture_submission);
+			$pastureAssessment->set('name', 'PCS Assessment');
+			$pastureAssessment->set('pasture_assessment_date', strtotime($form['pasture_assessment_date']['#value']));
+            $pastureAssessment -> save();
 
-			$this->setProjectReference($pasturAssessment, $pasturAssessment->get('shmu')->target_id);
+			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
             $form_state->setRedirect('cig_pods.awardee_dashboard_form');
 
@@ -305,6 +325,7 @@ class PastureAssessmentForm extends PodsFormBase {
                 $pastureAssessment->set($elemName, $form_state->getValue($elemName));
             }
 			$pastureAssessment->set('name', 'PCS Assessment');
+			$pastureAssessment->set('pasture_assessment_date', strtotime($form['pasture_assessment_date']['#value']));
             $pastureAssessment->save();
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);

@@ -335,7 +335,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 				$form['names_fieldset'][$i]['actions'] = [
 					'#type' => 'submit',
 					'#value' => $this->t('Delete'),
-					'#name' => $i,
+					'#name' => 'delete-contact-' . $i,
 					'#submit' => ['::removeContactCallback'],
 					'#ajax' => [
 					  'callback' => '::addContactRowCallback',
@@ -687,7 +687,7 @@ public function deleteContacts(array $pre_existsing_contacts){
   public function removeContactCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();
 	$num_line = $form_state->get('num_contact_lines');
-    $indexToRemove = $trigger['#name'];
+    $indexToRemove = str_replace('delete-contact-', '', $trigger['#name']);
 
     // Remove the fieldset from $form (the easy way)
     unset($form['names_fieldset'][$indexToRemove]);

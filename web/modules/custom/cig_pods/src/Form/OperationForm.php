@@ -274,7 +274,7 @@ class OperationForm extends PodsFormBase {
 
 			$form['cost_sequence'][$fs_index]['actions']['delete'] = [
 				'#type' => 'submit',
-				'#name' => $fs_index,
+				'#name' => 'delete-cost-' . $fs_index,
 				'#submit' => ['::deleteCostSequence'],
 				'#ajax' => [
 					'callback' => "::deleteCostSequenceCallback",
@@ -492,7 +492,7 @@ class OperationForm extends PodsFormBase {
 
 
 	public function deleteCostSequence(array &$form, FormStateInterface $form_state){
-	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+	    $idx_to_rm = str_replace('delete-cost-', '', $form_state->getTriggeringElement()['#name']);
 
 		$sequences = $form_state->get('sequences');
 

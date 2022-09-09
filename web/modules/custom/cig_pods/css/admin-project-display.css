@@ -50,6 +50,7 @@ table  {
     --colorGinTableBorder:rgba(0,0,0,0); /* working*/
 }
 
+table.views-table.views-view-table.cols-5,
 table.views-table.views-view-table.cols-7 {
     padding-left: 40px;
     width:100%;
@@ -88,6 +89,7 @@ th.views-field.views-field-name {
     --colorGinPrimaryActive: #000000;
 }
 
+table.views-table.views-view-table.cols-5,
 table.views-table.views-view-table.cols-7 {
     --colorGinPrimaryActive: #000000;
      width: auto;

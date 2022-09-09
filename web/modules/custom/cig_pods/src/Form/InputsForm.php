@@ -461,8 +461,11 @@ class InputsForm extends PodsFormBase {
 			$operation_reference->get('field_input')[] = $input_to_save->id();
 			$operation_reference->save();
          } else {
-		    $input_id = $form_state->get('input_id');
+			$operation_taxonomy_name = $form_state->get('current_operation_name');
+			$input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($form['field_input_category']['#value']);
+			$input_id = $form_state->get('input_id');
 		    $input = \Drupal::entityTypeManager()->getStorage('asset')->load($input_id);
+			$input->set('name', $operation_taxonomy_name."_".$input_taxonomy_name-> getName()."_".$form['field_input_date']['#value']);
              $mapping = $this->getFormEntityMapping();
              // Single value fields can be mapped in
 	        foreach($mapping as $form_elem_id => $entity_field_id){
@@ -512,14 +515,14 @@ class InputsForm extends PodsFormBase {
 	}
 }
 
-public function setProjectReference($assetReference, $operationReference){
-	$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
-	$project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
-	$assetReference->set('project', $project);
-	$assetReference->save();
-}
+	public function setProjectReference($assetReference, $operationReference){
+		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
+		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
+		$assetReference->set('project', $project);
+		$assetReference->save();
+	}
 
- 	 public function cancelSubmit(array &$form, FormStateInterface $form_state) {
+ 	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
 		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		return;
 	}
@@ -585,9 +588,9 @@ public function setProjectReference($assetReference, $operationReference){
 		$form_state->setRebuild(True);
 	}
 
-  public function inputCategoryCallback(array &$form, FormStateInterface $form_state){
-    return $form['field_input'];
-  }
+	public function inputCategoryCallback(array &$form, FormStateInterface $form_state){
+		return $form['field_input'];
+	}
 
 	public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state){
 		return $form['cost_sequence'];

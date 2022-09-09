@@ -346,7 +346,14 @@ class OperationForm extends PodsFormBase {
 		$id = $form_state->get('operation_id'); // TODO: Standardize access
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
+		$inputs = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+            ['type' => 'input', 'field_operation' => $id]
+        );
+		
 		try{
+			foreach($inputs as $input){
+            	$input->delete();
+			}
 			$operation->delete();
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){

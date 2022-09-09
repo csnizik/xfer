@@ -42,7 +42,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		}
 
         $form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1> Assessments </h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
@@ -307,7 +307,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		];
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
+			'#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>'
 		];
 
 		$pasture_health_assessment_soil_site_stab_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stab')->value : '';

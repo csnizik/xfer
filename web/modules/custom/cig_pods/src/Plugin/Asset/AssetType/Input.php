@@ -38,7 +38,7 @@ class Input extends FarmAssetType {
             'label'=> 'Input Category',
             'type'=> 'entity_reference',
             'target_type'=> 'taxonomy_term',
-            'target_bundle'=> 'd_input_category',
+            'target_bundle'=> 'd_input',
             'required' => FALSE,
             'description' => '',
         ],

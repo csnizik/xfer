@@ -507,7 +507,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			if ($fs_index <> 0) {
 				$form['crop_sequence'][$fs_index]['actions']['delete'] = [
 					'#type' => 'submit',
-					'#name' => $fs_index,
+					'#name' => 'delete-crop-sequence-' . $fs_index,
 					'#submit' => ['::deleteCropRotation'],
 					'#ajax' => [
 						'callback' => "::deleteCropRotationCallback",
@@ -966,7 +966,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function deleteCropRotation(array &$form, FormStateInterface $form_state){
-	    $idx_to_rm = $form_state->getTriggeringElement()['#name'];
+	    $idx_to_rm = str_replace('delete-crop-sequence-', '', $form_state->getTriggeringElement()['#name']);
 
 		$rotations = $form_state->get('rotations');
 		// dpm("old rotations:");

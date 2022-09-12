@@ -42,6 +42,16 @@ class OperationForm extends PodsFormBase {
 		return $cost_sequence_target_ids;
 	}
 
+	public function getCostSequenceIdsForInput($input){
+		$cost_sequence_target_ids = [];
+
+		$field_cost_sequence_list = $input->get('field_input_cost_sequences'); // Expected type of FieldItemList
+		foreach($field_cost_sequence_list as $key=>$value){
+			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
+		}
+		return $cost_sequence_target_ids;
+	}
+
 	public function getAsset($id){
 		// We use load instead of load by properties here because we are looking by id
 		$asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -54,7 +64,7 @@ class OperationForm extends PodsFormBase {
 
 		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
 		$sequences = [];
-		
+
 		$i = 0;
 		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
 			$tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
@@ -70,7 +80,7 @@ class OperationForm extends PodsFormBase {
 		}
 
 		$form_state->set('sequences', $sequences);
-	
+
 		return;
 	}
 
@@ -251,9 +261,9 @@ class OperationForm extends PodsFormBase {
 			$cost_default_value = ''; // Default value for empty rotation
 
 			$cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
-			
+
 			$cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
-			
+
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
 				'#suffix' => '</div>',
@@ -346,15 +356,14 @@ class OperationForm extends PodsFormBase {
 		$id = $form_state->get('operation_id'); // TODO: Standardize access
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
-		$inputs = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-            ['type' => 'input', 'field_operation' => $id]
-        );
-		
+		$inputs = $operation->get('field_input')->referencedEntities();
+		dpm($inputs);
+
 		try{
-			foreach($inputs as $input){
-            	$input->delete();
-			}
 			$operation->delete();
+			foreach($inputs as $input){
+            	$this->deleteInputs($input);
+			}
 			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
 		}catch(\Exception $e){
 			$this
@@ -375,6 +384,30 @@ class OperationForm extends PodsFormBase {
 		}
 		return;
 	}
+
+	public function deleteInputs($input_to_delete){
+		$sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
+		try{
+			//todo
+			$input_to_delete->delete();
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
+		foreach($sequence_ids as $sid) {
+			try{
+				$cost_sequence = \Drupal::entityTypeManager()->getStorage('asset')->load($sid);
+				$cost_sequence->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
+		}
+    }
 
 	public function addInput(array &$form, FormStateInterface $form_state) {
 		$form_state->set('input_redirect', TRUE);
@@ -447,7 +480,7 @@ class OperationForm extends PodsFormBase {
 
 			$cost_sequence->save();
 
-			$cost_sequence_ids[] = $cost_sequence -> id(); 
+			$cost_sequence_ids[] = $cost_sequence -> id();
 		}
 
 		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);
@@ -480,7 +513,7 @@ class OperationForm extends PodsFormBase {
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
 		$sequences = $form_state->get('sequences');
-		
+
 		$new_cost_sequence = [];
 		$new_cost_sequence['field_cost'][0]['value'] = '';
 		$new_cost_sequence['field_cost_type'][0]['value'] = '';
@@ -488,12 +521,12 @@ class OperationForm extends PodsFormBase {
 		$cost_options = $this->getOtherCostsOptions();
 		$sequences[] = $new_cost_sequence;
 		$form_state->set('sequences', $sequences);
-	
+
 		$form_state->setRebuild(True);
 	}
 
 	public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state){
-		
+
 		return $form['cost_sequence'];
 	}
 

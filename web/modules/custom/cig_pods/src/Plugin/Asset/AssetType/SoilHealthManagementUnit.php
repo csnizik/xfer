@@ -78,15 +78,15 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          ],
 
-        'field_shmu_dominant_map_unit_symbol' => [
-          'label'=> 'Dominant Map Unit Symbol',
+        'field_shmu_map_unit_symbol' => [
+          'label'=> 'Map Unit Symbol',
           'type'=> 'string_long',
           'required' => FALSE,
           'description' => '',
         ],
 
-        'field_shmu_dominant_surface_texture' => [
-          'label'=> 'Dominant Surface Texture',
+        'field_shmu_surface_texture' => [
+          'label'=> 'Surface Texture',
           'type'=> 'string_long',
           'required' => FALSE,
           'description' => '',

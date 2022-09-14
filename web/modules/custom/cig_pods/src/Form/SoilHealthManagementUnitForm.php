@@ -329,19 +329,19 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#prefix' => '<div id="ssurgo-data">',
       '#suffix' => '</div>',
     ];
-    $dominant_map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_dominant_map_unit_symbol')->value: '';
-		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
+    $map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_map_unit_symbol')->value: '';
+		$form['ssurgo_data_wrapper']['map_unit_symbol'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Map Unit Symbol'),
-      '#description' => $this->t('List the map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
-		  '#default_value' => $dominant_map_unit_symbol_value,
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
+		  '#default_value' => $map_unit_symbol_value,
     ];
-    $dominant_surface_texture_value = $is_edit ? $shmu->get('field_shmu_dominant_surface_texture')->value: '';
-		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
+    $surface_texture_value = $is_edit ? $shmu->get('field_shmu_surface_texture')->value: '';
+		$form['ssurgo_data_wrapper']['surface_texture'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Surface Texture'),
-      '#description' => $this->t('List the surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
-		  '#default_value' => $dominant_surface_texture_value,
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
+		  '#default_value' => $surface_texture_value,
     ];
 
 		// New section (Land Use History)
@@ -806,9 +806,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		// Map submission logic
 		$shmu->set('field_geofield',$form_values['mymap']);
 
-    // Set dominant map unit symbol and surface texture.
-    $shmu->set('field_shmu_dominant_map_unit_symbol', $form_values['ssurgo_data_wrapper']['dominant_map_unit_symbol']);
-    $shmu->set('field_shmu_dominant_surface_texture', $form_values['ssurgo_data_wrapper']['dominant_surface_texture']);
+    // Set map unit symbol and surface texture.
+    $shmu->set('field_shmu_map_unit_symbol', $form_values['ssurgo_data_wrapper']['map_unit_symbol']);
+    $shmu->set('field_shmu_surface_texture', $form_values['ssurgo_data_wrapper']['surface_texture']);
 
 		// TODO: Make Dynamic
 		$num_crop_rotations = count($form_values['crop_sequence']); // TODO: Can be calculate dynamically based off of form submit
@@ -915,8 +915,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       // In order to replace textfield text, we must alter the raw user input and
       // trigger a form rebuild. It cannot be done simply with setValue().
       $input = $form_state->getUserInput();
-      $input['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = $symbols;
-      $input['ssurgo_data_wrapper']['dominant_surface_texture'] = $textures;
+      $input['ssurgo_data_wrapper']['map_unit_symbol'] = $symbols;
+      $input['ssurgo_data_wrapper']['surface_texture'] = $textures;
       $form_state->setUserInput($input);
       $form_state->setRebuild(TRUE);
     }

@@ -20,14 +20,6 @@ class Input extends FarmAssetType {
       $fields = parent::buildFieldDefinitions();
 
       $field_info = [
-        'field_operation' => [
-            'label'=> 'Operation',
-            'type'=> 'entity_reference',
-            'target_type'=> 'asset',
-            'target_bundle'=> 'operation',
-            'required' => FALSE,
-            'description' => '',
-        ],
         'field_input_date' => [
            'label'=> 'Date',
            'type'=> 'timestamp',

@@ -357,8 +357,6 @@ class OperationForm extends PodsFormBase {
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
 		$inputs = $operation->get('field_input')->referencedEntities();
-		dpm($inputs);
-
 		try{
 			$operation->delete();
 			foreach($inputs as $input){

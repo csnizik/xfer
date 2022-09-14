@@ -331,16 +331,16 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     ];
     $dominant_map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_dominant_map_unit_symbol')->value: '';
 		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Dominant Map Unit Symbol'),
-      '#description' => $this->t('List the dominant map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
+      '#type' => 'textarea',
+      '#title' => $this->t('Map Unit Symbol'),
+      '#description' => $this->t('List the map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
 		  '#default_value' => $dominant_map_unit_symbol_value,
     ];
     $dominant_surface_texture_value = $is_edit ? $shmu->get('field_shmu_dominant_surface_texture')->value: '';
 		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Dominant Surface Texture'),
-      '#description' => $this->t('List the dominant surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above.'),
+      '#type' => 'textarea',
+      '#title' => $this->t('Surface Texture'),
+      '#description' => $this->t('List the surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
 		  '#default_value' => $dominant_surface_texture_value,
     ];
 

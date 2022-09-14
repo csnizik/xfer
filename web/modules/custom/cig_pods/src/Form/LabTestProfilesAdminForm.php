@@ -291,8 +291,6 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
-
-    // TODO: we probably want a confirm stage on the delete button. Implementations exist online
     $lab_test_id = $form_state->get('lab_test_id');
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 

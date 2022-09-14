@@ -141,15 +141,14 @@ class OperationForm extends PodsFormBase {
 		];
 
 		if($is_edit){
-			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
+			// $ field_operation_timestamp is expected to be a UNIX timestamp
 
 			$field_operation_timestamp = $operation->get('field_operation_date')->value;
 			$field_operation_timestamp_default_value = date("Y-m-d", $field_operation_timestamp);
 		} else {
-			$field_operation_timestamp_default_value = ''; // TODO: Check behavior
+			$field_operation_timestamp_default_value = '';
 		}
 
-		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_operation_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Operation Date'),
@@ -353,7 +352,7 @@ class OperationForm extends PodsFormBase {
 	}
 
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
-		$id = $form_state->get('operation_id'); // TODO: Standardize access
+		$id = $form_state->get('operation_id'); 
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
 		$inputs = $operation->get('field_input')->referencedEntities();
@@ -386,7 +385,6 @@ class OperationForm extends PodsFormBase {
 	public function deleteInputs($input_to_delete){
 		$sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
 		try{
-			//todo
 			$input_to_delete->delete();
 		}catch(\Exception $e){
 			$this
@@ -435,7 +433,7 @@ class OperationForm extends PodsFormBase {
 			$operation = Asset::create($operation_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('operation_id'); // TODO: Standardize access
+			$id = $form_state->get('operation_id'); 
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
@@ -455,7 +453,7 @@ class OperationForm extends PodsFormBase {
             $operation->set( $key, $value );
         }
 
-		$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+		$num_cost_sequences = count($form_values['cost_sequence']); 
 		$all_cost_sequences = $form_values['cost_sequence'];
 		$cost_options = $this->getOtherCostsOptions();
 

@@ -31,7 +31,6 @@ class PastureAssessmentForm extends PodsFormBase {
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			// $form_state->set('calculate_rcs',True);
 			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
@@ -44,7 +43,6 @@ class PastureAssessmentForm extends PodsFormBase {
         $form['producer_title'] = [
 			'#markup' => '<h1> <b> Assessments </b> </h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
@@ -64,7 +62,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('pasture_assessment_date')->value;
 			$pasture_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$pasture_timestamp_default_value = ''; // TODO: Check behavior
+			$pasture_timestamp_default_value = '';
 		}
 		$form['pasture_assessment_date'] = [
 			'#type' => 'date',

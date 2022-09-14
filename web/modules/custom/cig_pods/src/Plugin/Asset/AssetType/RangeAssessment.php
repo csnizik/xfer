@@ -20,7 +20,6 @@ class RangeAssessment extends FarmAssetType {
         // Note that $fields['name'] is already populated at this point
 
         $field_info = [
-            // 'shmu'
             'shmu' => [
                 'label'=> 'Soil Health Management Unit',
                 'type'=> 'entity_reference',

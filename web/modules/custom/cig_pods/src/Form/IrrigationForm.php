@@ -71,10 +71,9 @@ class IrrigationForm extends PodsFormBase {
 			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')->value;
 			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
 		} else {
-			$field_shmu_irrigation_sample_date_timestamp_default_value = ''; // TODO: Check behavior
+			$field_shmu_irrigation_sample_date_timestamp_default_value = ''; 
 		}
 
-		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_shmu_irrigation_sample_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Sample Date'),
@@ -202,7 +201,7 @@ class IrrigationForm extends PodsFormBase {
 	}
 
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
-		$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+		$id = $form_state->get('irrigation_id'); 
 		$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
 		try{
@@ -237,12 +236,10 @@ class IrrigationForm extends PodsFormBase {
         if(!$is_edit){
 			$irrigation_template = [];
 			$irrigation_template['type'] = 'irrigation';
-			// dpm($irrigation_template);
-			// dpm("------------");
 			$irrigation = Asset::create($irrigation_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+			$id = $form_state->get('irrigation_id');  
 			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 

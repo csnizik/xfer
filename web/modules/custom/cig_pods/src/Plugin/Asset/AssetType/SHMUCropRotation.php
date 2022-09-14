@@ -33,8 +33,6 @@ class SHMUCropRotation extends FarmAssetType {
              'required' => FALSE,
              'description' => '',
         ],
-
-        // TODO: Add constraints (between 0 and 11)
         'field_shmu_crop_rotation_crop_present' => [
              'label'=> 'Months Planted',
              'type'=> 'fraction', // TRUE if Crop is present in that month

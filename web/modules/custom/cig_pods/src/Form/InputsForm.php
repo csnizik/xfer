@@ -436,7 +436,7 @@ class InputsForm extends PodsFormBase {
 
 	        $input_to_save = Asset::create($input_submission);
 
-			$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+			$num_cost_sequences = count($form_values['cost_sequence']); 
 			$all_cost_sequences = $form_values['cost_sequence'];
 			$cost_options = $this->getOtherCostsOptions();
 

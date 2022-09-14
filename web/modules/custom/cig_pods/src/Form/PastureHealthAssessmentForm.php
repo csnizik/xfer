@@ -44,7 +44,6 @@ class PastureHealthAssessmentForm extends PodsFormBase {
         $form['producer_title'] = [
 			'#markup' => '<h1> Assessments </h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>'
 		];
@@ -62,7 +61,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('pasture_health_assessment_date')->value;
 			$pasture_health_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$pasture_health_timestamp_default_value = ''; // TODO: Check behavior
+			$pasture_health_timestamp_default_value = '';
 		}
 		$form['pasture_health_assessment_date'] = [
 			'#type' => 'date',

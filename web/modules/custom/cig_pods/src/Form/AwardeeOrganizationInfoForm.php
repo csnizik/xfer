@@ -96,8 +96,6 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 	}
 
 	public function deleteAwardee(array &$form, FormStateInterface $form_state){
-
-		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
 		$awardee_id = $form_state->get('awardee_id');
 		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
 

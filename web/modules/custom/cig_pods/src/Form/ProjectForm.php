@@ -265,8 +265,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 		/* Variables declaration end*/
 
-	//	$this->buildProjectInformationSection($form, $form_state);
-
 		$awardee_options = $this->getAwardeeOptions();
 		$contact_name_options = $this->getAwardeeContactNameOptions($form, $form_state);
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
@@ -284,8 +282,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			'#default_value' => $awardee_default_name,
 		];
 
-
-		// $contact_name_options = $this->getAwardeeContactNameOptions();
 		$form['#tree'] = TRUE;
 		$form['names_fieldset'] = [
 		  '#prefix' => '<div id="names-fieldset-wrapper"',
@@ -407,9 +403,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 
 	public function deleteProject(array &$form, FormStateInterface $form_state){
-
-		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
-
 		$project_id = $form_state->get('project_id');
 		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
 		$contacts = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
@@ -565,14 +558,10 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		array_push($contacts, $contact);
 	}
 
-	// $project_submission['field_contact'] = $contacts;
-
-
 	$project = Asset::create($project_submission);
 	$project -> save();
 
 	foreach($contacts as $contact){
-		// $cur_contact = \Drupal::entityTypeManager()->getStorage('asset')->load($contact);
 		$contact->set('project', $project->id());
 		$contact->save();
 	}

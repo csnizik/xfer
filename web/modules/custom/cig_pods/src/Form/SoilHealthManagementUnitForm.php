@@ -333,14 +333,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		$form['ssurgo_data_wrapper']['map_unit_symbol'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Map Unit Symbol'),
-      '#description' => $this->t('List the map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
 		  '#default_value' => $map_unit_symbol_value,
     ];
     $surface_texture_value = $is_edit ? $shmu->get('field_shmu_surface_texture')->value: '';
 		$form['ssurgo_data_wrapper']['surface_texture'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Surface Texture'),
-      '#description' => $this->t('List the surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
 		  '#default_value' => $surface_texture_value,
     ];
 

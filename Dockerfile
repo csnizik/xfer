@@ -14,6 +14,8 @@ COPY config/sync config/sync
 
 COPY patches patches
 
+COPY phpcs.xml phpcs.xml
+
 # Do I need to case on different environments here?
 # TODO: Change back to sfi.dev to serve? Or it's okay because Docker?
 COPY pods.conf /etc/apache2/sites-available/pods.conf

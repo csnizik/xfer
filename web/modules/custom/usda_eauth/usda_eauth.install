@@ -42,6 +42,9 @@ function usda_eauth_install() {
   // Display OpenID buttons above user login form.
   $config->set('user_login_display', 'above');
 
+  // Allow OpenID Connect to register new users.
+  $config->set('override_registration_settings', TRUE);
+
   // Save config.
   $config->save();
 }

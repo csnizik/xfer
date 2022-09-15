@@ -74,9 +74,10 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 		];
 
 		$form['actions']['cancel'] = [
-			'#type' => 'button',
+			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
-			'#attributes' => array('onClick' => 'window.location.href="/pods_admin_dashboard"'),
+			'#limit_validation_errors' => '',
+			'#submit' => ['::dashboardRedirect'],
 		];
 
 		if($is_edit){

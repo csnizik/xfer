@@ -42,9 +42,6 @@ function usda_eauth_install() {
   // Display OpenID buttons above user login form.
   $config->set('user_login_display', 'above');
 
-  // Redirect to the generic login form provided by this module.
-  $config->set('redirect_login', 'openid-connect/generic');
-
   // Save config.
   $config->save();
 }

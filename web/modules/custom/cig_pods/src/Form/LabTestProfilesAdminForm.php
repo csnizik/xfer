@@ -57,7 +57,7 @@ private function createElementNames(){
         }
 
 
-    $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form';
+    $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form'; // Attach proper CSS to form
 
     $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
     $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");

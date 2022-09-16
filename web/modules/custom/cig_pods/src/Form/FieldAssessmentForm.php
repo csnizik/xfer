@@ -44,7 +44,7 @@ class FieldAssessmentForm extends PodsFormBase {
 
 
 		$form['#tree'] = False; // No hierarchy needed for this form.
-		$form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form'; // Attach proper CSS to form
 
 		$form['producer_title'] = [
 			'#markup' => '<h1> <b> Assessments </b> </h1>',

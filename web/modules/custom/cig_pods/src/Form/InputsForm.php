@@ -125,7 +125,7 @@ class InputsForm extends PodsFormBase {
 			$form_state->set('operation_id', $operation->id());
 	    }
 
-        $form['#attached']['library'][] = 'cig_pods/inputs_form';
+        $form['#attached']['library'][] = 'cig_pods/inputs_form'; // Attach proper CSS to form
 
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 

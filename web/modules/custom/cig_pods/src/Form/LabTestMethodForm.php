@@ -59,7 +59,7 @@ class LabTestMethodForm extends PodsFormBase {
         }
 
 
-        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form';
+        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form'; // Attach proper CSS to form
         $form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
 

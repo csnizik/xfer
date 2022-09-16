@@ -139,6 +139,7 @@ class SoilHealthSampleForm extends PodsFormBase {
    */
 	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
     $sample_collection = $asset;
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$is_edit = $sample_collection <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';

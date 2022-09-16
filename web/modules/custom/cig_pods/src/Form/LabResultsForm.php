@@ -48,7 +48,7 @@ class LabResultsForm extends PodsFormBase {
             $form_state->set('operation','create');
         }
 
-        $form['#attached']['library'][] = 'cig_pods/lab_results_form';
+        $form['#attached']['library'][] = 'cig_pods/lab_results_form'; // Attach proper CSS to form
 
         $lab_interpretation = $this->getLabInterpretationOptions("d_lab_interpretation");
 

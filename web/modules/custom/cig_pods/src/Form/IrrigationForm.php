@@ -32,6 +32,7 @@ class IrrigationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
+		// Attach proper CSS to form
         $form['#attached']['library'][] = 'cig_pods/irrigation_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;

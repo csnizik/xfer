@@ -105,6 +105,7 @@ class OperationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
+		// Attach proper CSS to form
         $form['#attached']['library'][] = 'cig_pods/operation_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -245,7 +246,7 @@ class OperationForm extends PodsFormBase {
 		// Get Options
 		$cost_options = $this->getOtherCostsOptions();
 
-		$fs_cost_sequences = $form_state -> get('sequences');
+		$fs_cost_sequences = $form_state -> get('sequences'); 
 
 		$num_cost_sequences = 1;
 		if(count($fs_cost_sequences) <> 0){

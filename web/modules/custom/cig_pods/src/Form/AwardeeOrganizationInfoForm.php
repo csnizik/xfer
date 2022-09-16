@@ -28,7 +28,7 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 
-
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/awardee_organization_form';
 
 		$form['form_title'] = [
@@ -122,13 +122,6 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-	// $this
-	// ->messenger()
-	// ->addStatus($this
-	// ->t('Form submitted for awardee org info @org_name', [
-	// '@org_name' => $form['awardee_org_name']['#value'],
-	// ]));
-
 	$is_create = $form_state->get('operation') === 'create';
 
 	if($is_create){

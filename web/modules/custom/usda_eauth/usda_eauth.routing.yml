@@ -1,7 +1,0 @@
-usda_eauth.generic_login:
-  path: '/openid-connect/generic'
-  defaults:
-    _form: '\Drupal\usda_eauth\Form\Generic'
-    _title: 'Login status'
-  requirements:
-    _access: 'TRUE'

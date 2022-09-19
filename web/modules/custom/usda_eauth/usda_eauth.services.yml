@@ -6,3 +6,7 @@ services:
     arguments: ['@settings']
     tags:
       - { name: config.factory.override, priority: 5 }
+  usda_eauth.route_subscriber:
+    class: Drupal\usda_eauth\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

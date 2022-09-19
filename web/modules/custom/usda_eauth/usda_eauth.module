@@ -5,6 +5,7 @@
  * Module file for USDA eAuth.
  */
 
+use Drupal\usda_eauth\UserLoginBlock;
 use Drupal\user\UserInterface;
 
 /**
@@ -57,5 +58,16 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
   }
   if (!empty($destination)) {
     $session->set('openid_connect_destination', $destination);
+  }
+}
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function usda_eauth_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+
+  // Remove the "Reset your password" link from user login block.
+  if ($block->getBaseId() === 'user_login_block') {
+    $build['#pre_render'][] = [UserLoginBlock::class, 'preRender'];
   }
 }

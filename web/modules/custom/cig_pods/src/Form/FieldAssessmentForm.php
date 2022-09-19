@@ -61,7 +61,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#title' => 'Select a Soil Health Management Unit',
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $shmu_value,
-			'#required' => FALSE,
+			'#required' => TRUE,
 		];
 
 		// Date field requires some special handling.

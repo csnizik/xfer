@@ -36,6 +36,14 @@ class InputsForm extends PodsFormBase {
 		return ['' => '- Select -'] + $options;
 	}
 
+	public function getOperationReferenceID($input_id){
+		$operation_query = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
+            ['type' => 'operation', 'field_input' => $input_id]
+        );
+		$operation = reset($operation_query);
+		return $operation->id();
+	}
+
     public function getUnitOptions(){
 		$options = $this->entityOptions('taxonomy_term', 'd_unit');
 		return ['' => '- Select -'] + $options;
@@ -74,7 +82,7 @@ class InputsForm extends PodsFormBase {
 			$sequences[0]['field_cost_type'] = '';
 			$sequences[0]['field_cost'] = '';
 		}
-		
+
 		$form_state->set('sequences', $sequences);
 		return;
 	}
@@ -102,7 +110,7 @@ class InputsForm extends PodsFormBase {
 	    if($is_edit){
 			$form_state->set('operation','edit');
 			$form_state->set('input_id',$input->id());
-			$form_state->set('operation_id', $input->get('field_operation')->target_id);
+			$form_state->set('operation_id', $this->getOperationReferenceID($input->id()));
 			$input_cost_sequences_ids = $this->getCostSequenceIdsForInput($input);
 			if(!$form_state->get('load_done')){
 				$this->loadOtherCostsIntoFormState($input_cost_sequences_ids, $form_state);
@@ -178,7 +186,7 @@ class InputsForm extends PodsFormBase {
 	  elseif ($field_input_category_value) {
 		  $input_category = $field_input_category_value;
 	  }
-	  
+
       $input_options = !empty($input_category) ? $this->getInputOptions($input_category) : [];
 
       $form['input_prefix'] = [
@@ -282,7 +290,7 @@ class InputsForm extends PodsFormBase {
 			 $cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
 
 			$cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
-			
+
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
 				'#suffix' => '</div>',
@@ -449,14 +457,13 @@ class InputsForm extends PodsFormBase {
 				$cost_sequence->set( 'field_cost', $cost_value );
 				$cost_sequence->save();
 
-				$cost_sequence_ids[] = $cost_sequence -> id(); 
+				$cost_sequence_ids[] = $cost_sequence -> id();
 			}
-			
+
 			$input_to_save->set('field_input_cost_sequences', $cost_sequence_ids);
 
-			$input_to_save->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
 	        $input_to_save -> save();
-			$this->setProjectReference($input_to_save, $input_to_save->get('field_operation')->target_id);
+			$this->setProjectReference($input_to_save, $operation_reference->id());
 
 			$operation_reference->get('field_input')[] = $input_to_save->id();
 			$operation_reference->save();
@@ -482,7 +489,7 @@ class InputsForm extends PodsFormBase {
 
 			$cost_template = [];
 			$cost_template['type'] = 'cost_sequence';
-		
+
 			foreach($all_cost_sequences as $sequence){
 				 if($sequence['field_cost_type'] == NULL && $sequence['field_cost'] == NULL) continue;
 				// We always create a new cost sequence asset for each rotation
@@ -499,15 +506,14 @@ class InputsForm extends PodsFormBase {
 				$cost_sequence->set( 'field_cost', $cost_value );
 				$cost_sequence->save();
 
-				$cost_sequence_ids[] = $cost_sequence -> id(); 
+				$cost_sequence_ids[] = $cost_sequence -> id();
 			}
 
 			$input->set('field_input_cost_sequences', $cost_sequence_ids);
             $input->set('field_input_date', strtotime( $form['field_input_date']['#value'] ));
-			$input->set('field_operation', \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id')));
-		     $input->save();
+		    $input->save();
 	}
-	
+
 	if($form_state->get('input_redirect') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $form_state->get('operation_id')]);
 	}else{

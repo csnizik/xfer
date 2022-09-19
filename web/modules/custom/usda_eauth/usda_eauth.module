@@ -62,6 +62,23 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
 }
 
 /**
+ * Implements hook_openid_connect_userinfo_alter().
+ */
+function usda_eauth_openid_connect_userinfo_alter(array &$userinfo, array $context) {
+
+  // If an email address isn't set, generate one automatically from the
+  // eAuth ID and hostname.
+  if (empty($userinfo['email'])) {
+    $host = \Drupal::request()->getHost();
+    $eauth_id = $context['user_data']['sub'];
+    if (empty($eauth_id)) {
+      return $userinfo;
+    }
+    $userinfo['email'] = $eauth_id . '@' . $host;
+  }
+}
+
+/**
  * Implements hook_block_view_alter().
  */
 function usda_eauth_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {

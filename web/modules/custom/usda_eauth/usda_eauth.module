@@ -43,6 +43,13 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
   $session->set('ApplicationRoleEnumeration', $roleEnum);
   $session->set('ApplicationRoleDisplay', $roleDisplay);
 
+  // Set the account username and email address, if available.
+  if (!empty($email)) {
+    $account->setUsername($email);
+    $account->setEmail($email);
+    $account->save();
+  }
+
   // Redirect to the proper route based on role.
   $destination = NULL;
   switch ($roleEnum) {

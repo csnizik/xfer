@@ -71,7 +71,7 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
 /**
  * Implements hook_openid_connect_userinfo_alter().
  */
-function usda_eauth_openid_connect_userinfo_alter(array &$userinfo, array $context) {
+function usda_eauth_openid_connect_userinfo_alter(&$userinfo, array $context) {
 
   // If an email address isn't set, generate one automatically from the
   // eAuth ID and hostname.

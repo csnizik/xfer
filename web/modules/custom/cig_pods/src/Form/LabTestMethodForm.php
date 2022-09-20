@@ -56,6 +56,7 @@ class LabTestMethodForm extends PodsFormBase {
 
         } else {
             $form_state->set('operation','create');
+            $form_state->set('profile_loaded', FALSE);
         }
 
 
@@ -116,15 +117,6 @@ class LabTestMethodForm extends PodsFormBase {
                 '#required' => TRUE,
             ];
 
-            $lab_profile_default = $is_edit ? $labTestMethod->get('field_lab_method_lab_test_profile')->target_id : NULL;
-            $form['field_lab_method_lab_test_profile'] = [
-                '#type' => 'select',
-                '#title' => 'Soil Health Test Methods',
-                '#options' => $lab_test_profile,
-                '#default_value' => $lab_profile_default,
-                '#required' => TRUE,
-            ];
-
             }else{
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
@@ -162,6 +154,9 @@ class LabTestMethodForm extends PodsFormBase {
                 '#submit' => ['::loadProfileData'],
                 '#limit_validation_errors' => '',
                 '#value' => $this->t('Load Selected Profile'),
+                // '#attributes' => [
+                //     'class' => ['method-button']
+                // ],
                 '#ajax' => [
                     'callback' => '::updateProfile',
                     'wrapper' => 'autoload_container',
@@ -457,6 +452,8 @@ class LabTestMethodForm extends PodsFormBase {
 
         $form_state->set('loading', 1);
 
+        $form_state->set('profile_loaded', FALSE);
+
         $lab_profile_db = \Drupal::entityTypeManager()->getStorage('asset')->load($form['field_lab_method_lab_test_profile']['#value'])->toArray();
 
         $lab_profile = []; // Array to be populated into form state
@@ -507,6 +504,17 @@ class LabTestMethodForm extends PodsFormBase {
     * {@inheritdoc}
     */
     public function validateForm(array &$form, FormStateInterface $form_state){
+        $loaded = $form_state->get('loading') <> NULL;
+        $is_create = $form_state->get('operation') === 'create';
+
+        if (!$loaded && $is_create){
+            $form_state->setError(
+                $form['actions']['update_profile'],
+                $this->t('Please Select and load a Soil Health Test Method'),
+            );
+        }else{
+            return;
+        }
         return;
     }
 

@@ -120,7 +120,6 @@ class LabTestMethodForm extends PodsFormBase {
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
                 '#title' => t('Soil Health Test Laboratory'),
-                '#description' => t('Soil Health Test Laboratory'),
                 '#required' => TRUE,
                 '#validated' => TRUE,
                 '#options' => $s_he_test_laboratory,
@@ -135,7 +134,6 @@ class LabTestMethodForm extends PodsFormBase {
                 '#type' => 'select',
                 '#required' => TRUE,
                 '#validated' => TRUE,
-                '#description' => t('Soil Health Test Methods'),
                 '#prefix' => '<div id="field_lab_method_lab_test_profile">',
                 '#suffix' => '</div>',
                 '#options' => static::getProfileOptions($selected_family),

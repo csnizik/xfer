@@ -30,7 +30,7 @@ class LabTestMethodForm extends PodsFormBase {
         return $num / $denom;
     }
     private function createElementNames(){
-        return array('field_lab_method_name', 'field_lab_method_project', 'field_lab_soil_test_laboratory', 'field_lab_method_lab_test_profile');
+        return array('field_lab_method_name', 'field_lab_method_project', 'field_lab_soil_test_laboratory');
 
     }
 
@@ -154,9 +154,6 @@ class LabTestMethodForm extends PodsFormBase {
                 '#submit' => ['::loadProfileData'],
                 '#limit_validation_errors' => '',
                 '#value' => $this->t('Load Selected Profile'),
-                // '#attributes' => [
-                //     'class' => ['method-button']
-                // ],
                 '#ajax' => [
                     'callback' => '::updateProfile',
                     'wrapper' => 'autoload_container',

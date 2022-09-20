@@ -27,7 +27,7 @@ class RangeAssessmentForm extends PodsFormBase {
     public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
       $assessment = $asset;
 
-		x// Attach proper CSS to form
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/range_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;

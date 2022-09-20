@@ -194,8 +194,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// Attach the SHMU css library
 		$form['#attached']['library'][] = 'cig_pods/soil_health_management_unit_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
+		$form['title'] = [
+			'#markup' => '<div class="title-container"><h1>Soil Health Management Unit (SHMU) Details</h1></div>'
+		];
 		// First section
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 11</h4></div>'

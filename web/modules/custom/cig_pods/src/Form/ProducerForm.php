@@ -33,9 +33,10 @@ class ProducerForm extends PodsFormBase {
 
 
 		$form['#attached']['library'][] = 'cig_pods/producer_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$form['producer_title'] = [
-            '#markup' => '<h1>Producer Information</h1>',
+            '#markup' => '<h1 id="producer-title">Producer Information</h1>',
         ];
 
 		$projects = $this->getAssetOptions('project');

@@ -30,9 +30,10 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 
 
 		$form['#attached']['library'][] = 'cig_pods/awardee_organization_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$form['form_title'] = [
-			'#markup' => '<h1 id="form-title">Awardee Organization Information</h1>'
+			'#markup' => '<h1>Awardee Organization Information</h1>'
 		];
 
 		$awardee_org_default_name = $is_edit ? $awardee->get('name')->value : '';

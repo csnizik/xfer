@@ -117,7 +117,9 @@ class InputsForm extends PodsFormBase {
 			$form_state->set('operation_id', $operation->id());
 	    }
 
-        $form['#attached']['library'][] = 'cig_pods/inputs_form';
+       
+		 $form['#attached']['library'][] = 'cig_pods/css_form';
+		  $form['#attached']['library'][] = 'cig_pods/inputs_form';
 
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
@@ -194,8 +196,8 @@ class InputsForm extends PodsFormBase {
 			'#options' => $input_options,
 			'#default_value' => $field_input_value,
 			'#required' => FALSE,
-      '#prefix' => '<span id="input-type">',
-      '#suffix' => '</span>',
+    //    '#prefix' => '<span id="input-type">',
+    //   '#suffix' => '</span>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -206,8 +208,8 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
-      '#prefix' => '<span>',
-      '#suffix' => '</span>',
+    //   '#prefix' => '<span>',
+    //    '#suffix' => '</span>',
 		];
 
       $form['input_suffix'] = [
@@ -225,9 +227,16 @@ class InputsForm extends PodsFormBase {
             '#default_value' => $field_rate_units_value,
             '#required' => TRUE
         ];
+		 $form['spacer_1'] = [
+			'#markup' => '<div class="spacer1"></div>'
+		];
 
         $form['subtitle_2'] = [
-			'#markup' => '<div class="subtitle-container-custom-app"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+		];
+
+		 $form['spacer_2'] = [
+			'#markup' => '<div class="spacer2"></div>'
 		];
 
         $field_cost_per_unit_value = $is_edit && $input->get('field_cost_per_unit')[0] ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
@@ -253,9 +262,17 @@ class InputsForm extends PodsFormBase {
             '#suffix' => '</div>',
 		];
 
+		//  $form['spacer_3'] = [
+		// 	'#markup' => '<div class="spacer3"></div>'
+		// ];
+
         $form['subtitle_3'] = [
-			'#markup' => '<div class="subtitle-container-costs"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
+			'#markup' => '<div id="other-costs-spacer " class="subtitle-container"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
+
+		//  $form['spacer_4'] = [
+		// 	'#markup' => '<div class="spacer4"></div>'
+		// ];
 
 		$form['#tree'] = TRUE;
 

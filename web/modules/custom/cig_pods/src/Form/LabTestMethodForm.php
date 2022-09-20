@@ -56,7 +56,6 @@ class LabTestMethodForm extends PodsFormBase {
 
         } else {
             $form_state->set('operation','create');
-            $form_state->set('profile_loaded', FALSE);
         }
 
 
@@ -448,8 +447,6 @@ class LabTestMethodForm extends PodsFormBase {
     public function loadProfileData(array &$form, FormStateInterface $form_state){
 
         $form_state->set('loading', 1);
-
-        $form_state->set('profile_loaded', FALSE);
 
         $lab_profile_db = \Drupal::entityTypeManager()->getStorage('asset')->load($form['field_lab_method_lab_test_profile']['#value'])->toArray();
 

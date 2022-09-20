@@ -506,8 +506,6 @@ class LabTestMethodForm extends PodsFormBase {
                 $form['actions']['update_profile'],
                 $this->t('Please Select and load a Soil Health Test Method'),
             );
-        }else{
-            return;
         }
         return;
     }

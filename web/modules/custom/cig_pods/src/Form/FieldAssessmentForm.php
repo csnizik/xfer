@@ -15,7 +15,7 @@ class FieldAssessmentForm extends PodsFormBase {
 
 		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
 		return ['' => '- Select -'] + $options;
-		
+
 	}
 
 
@@ -64,7 +64,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#title' => 'Select a Soil Health Management Unit',
 			'#options' => $this->getSHMUOptions(),
 			'#default_value' => $shmu_value,
-			'#required' => FALSE,
+			'#required' => TRUE,
 		];
 
 		// Date field requires some special handling.
@@ -268,6 +268,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => ['::dashboardRedirect'],
+			'#limit_validation_errors' => array(),
 
 		];
 

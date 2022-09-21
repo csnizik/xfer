@@ -263,12 +263,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => TRUE
 		];
-		$form['static_0']['label'] = [
-			'#markup' => '<div> Project Summary <b> (Will be populated with related project summary once Drupal roles are established) </b> </div>'
-		];
-		$form['static_0']['content'] = [
-			'#markup' => '<div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique senectus et. Volutpat sed cras ornare arcu dui vivamus. Pellentesque id nibh tortor id aliquet lectus proin. Accumsan lacus vel facilisis volutpat est velit egestas. In massa tempor nec feugiat nisl pretium. Neque egestas congue quisque egestas diam in arcu cursus euismod. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Tellus orci ac auctor augue mauris augue neque. Diam sit amet nisl suscipit.</div>'
-		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 11</h4> </div>'

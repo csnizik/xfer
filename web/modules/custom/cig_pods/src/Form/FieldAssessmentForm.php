@@ -12,10 +12,8 @@ Use Drupal\Core\Url;
 class FieldAssessmentForm extends PodsFormBase {
 
 	public function getAssessmentEvaluationOptions(){
-
 		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
 		return ['' => '- Select -'] + $options;
-
 	}
 
 
@@ -34,7 +32,6 @@ class FieldAssessmentForm extends PodsFormBase {
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			// $form_state->set('calculate_rcs',True);
 			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
@@ -47,12 +44,12 @@ class FieldAssessmentForm extends PodsFormBase {
 
 
 		$form['#tree'] = False; // No hierarchy needed for this form.
-		$form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form'; // Attach proper CSS to form
 
 		$form['producer_title'] = [
 			'#markup' => '<h1> <b> Assessments </b> </h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
+
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Cropland In-Field Soil Health Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
 		];
@@ -72,7 +69,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('field_assessment_date')->value;
 			$field_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$field_timestamp_default_value = ''; // TODO: Check behavior
+			$field_timestamp_default_value = '';
 		}
 		$form['field_assessment_date'] = [
 			'#type' => 'date',
@@ -350,7 +347,6 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	$form_values = $form_state -> getValues();
 
-	// TODO: fix naming
 	$related_shmu_id = $form_values['shmu'];
 	$date = $form_values['field_assessment_date'];
 	$related_shmu = Asset::load($related_shmu_id);
@@ -400,7 +396,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
   public function calcuateResourceConcerns(array &$form, FormStateInterface $form_state){
 
-	$form_values = $form_state->getValues(); //
+	$form_values = $form_state->getValues();
 
 	// List of fields in consideration for calculating the presence of compaction
 	$compaction_keys = [

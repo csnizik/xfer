@@ -43,7 +43,7 @@ div#block-gin-content {
 
 #block-gin-content form .subform-title-container{
     display: flex;
-    align-items: center;
+    align-items: baseline;
 	clear: both;
 	margin-top: 40px;
 }

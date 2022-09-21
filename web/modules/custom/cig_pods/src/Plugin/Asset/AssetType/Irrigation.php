@@ -40,7 +40,7 @@ class Irrigation extends FarmAssetType {
             'description' => '',
         ],
         'field_shmu_irrigation_sodium_absorption_ratio' => [
-            'label'=> 'Irrigation - Sodium Absorption Ratio', //TODO: Fix spelling
+            'label'=> 'Irrigation - Sodium Absorption Ratio',
             'type'=> 'fraction',
             'required' => FALSE,
             'description' => '',

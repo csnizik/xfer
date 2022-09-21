@@ -48,7 +48,7 @@ class LabResultsForm extends PodsFormBase {
             $form_state->set('operation','create');
         }
 
-        $form['#attached']['library'][] = 'cig_pods/lab_results_form';
+        $form['#attached']['library'][] = 'cig_pods/lab_results_form'; // Attach proper CSS to form
 
         $lab_interpretation = $this->getLabInterpretationOptions("d_lab_interpretation");
 
@@ -499,8 +499,6 @@ class LabResultsForm extends PodsFormBase {
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
-
-        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         try{
             $lab_result_id = $form_state->get('lab_result_id');
             $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_result_id);

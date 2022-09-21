@@ -58,7 +58,6 @@ class LabResult extends FarmAssetType {
              'required' => FALSE,
              'description' => '(Inches per Hour)',
          ],
-         // TODO: May need changed to enforce significant figures
          'field_lab_result_sf_ph_value' => [
              'label'=> 'pH',
              'type'=> 'fraction',

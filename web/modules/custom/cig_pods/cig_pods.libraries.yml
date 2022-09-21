@@ -1,3 +1,5 @@
+# Set proper CSS to forms and views pages.
+
 project_entry_form:
   css:
     theme:

@@ -12,6 +12,7 @@ class AdminDashboardForm extends PodsFormBase {
    */
 	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
+    // Attach proper CSS to form
     $form['#attached']['library'][] = 'cig_pods/awardee_dashboard_form';
 
     $form['h2'] = [
@@ -91,6 +92,7 @@ class AdminDashboardForm extends PodsFormBase {
    $form_state->setRedirect($match["_route"]);
   }
 
+// Set the appropriate place where created entities are managed from.
 public function projectRedirect (array &$form, FormStateInterface $form_state) {
    $this->pageRedirect($form_state, "/assets/project");
 }

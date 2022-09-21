@@ -45,7 +45,7 @@ class SoilHealthSampleForm extends PodsFormBase {
 
 		$date_default_value = '';
 		if($is_edit && $sample_collection){
-            // $field_shhmu_date_land_use_changed_value is expected to be a UNIX timestamp
+            // $prev_date_value is expected to be a UNIX timestamp
             $prev_date_value = $sample_collection->get('field_soil_sample_collection_dat')[0]->value;
             $date_default_value = date("Y-m-d", $prev_date_value);
         }
@@ -139,6 +139,7 @@ class SoilHealthSampleForm extends PodsFormBase {
    */
 	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
     $sample_collection = $asset;
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$is_edit = $sample_collection <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';

@@ -57,7 +57,7 @@ private function createElementNames(){
         }
 
 
-    $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form';
+    $form['#attached']['library'][] = 'cig_pods/lab_test_profiles_admin_form'; // Attach proper CSS to form
 
     $agg_stab_method = $this->getSoilHealthExtractionOptions("d_aggregate_stability_me");
     $agg_stab_unit = $this->getSoilHealthExtractionOptions("d_aggregate_stability_un");
@@ -291,8 +291,6 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
-
-    // TODO: we probably want a confirm stage on the delete button. Implementations exist online
     $lab_test_id = $form_state->get('lab_test_id');
     $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 

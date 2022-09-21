@@ -59,7 +59,7 @@ class LabTestMethodForm extends PodsFormBase {
         }
 
 
-        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form';
+        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form'; // Attach proper CSS to form
         $form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
 
@@ -487,8 +487,6 @@ class LabTestMethodForm extends PodsFormBase {
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
-
-        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $lab_test_id = $form_state->get('lab_test_id');
         $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 

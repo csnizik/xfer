@@ -49,6 +49,7 @@ class LabResultsForm extends PodsFormBase {
         }
 
         $form['#attached']['library'][] = 'cig_pods/lab_results_form';
+        $form['#attached']['library'][] = 'cig_pods/css_form';
 
         $lab_interpretation = $this->getLabInterpretationOptions("d_lab_interpretation");
 
@@ -57,7 +58,7 @@ class LabResultsForm extends PodsFormBase {
         $lab_method = $this->getLabMethodOptions();
 
         $form['title'] = [
-         '#markup' => '<h1 id="form-title">Soil Test Results</h1',
+         '#markup' => '<h1>Soil Test Results</h1',
         ];
 
         $soil_sample_default_id = $is_edit ? $labResults->get('field_lab_result_soil_sample')->target_id : NULL;

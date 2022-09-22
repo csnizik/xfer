@@ -95,8 +95,9 @@ class OperationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
-        $form['#attached']['library'][] = 'cig_pods/operation_form';
+
 		$form['#attached']['library'][] = 'cig_pods/css_form';
+        $form['#attached']['library'][] = 'cig_pods/operation_form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){

@@ -42,7 +42,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			$form_state->set('calculate_rcs', False);
 		}
         $form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1>Assessments</h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [

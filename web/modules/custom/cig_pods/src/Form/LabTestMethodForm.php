@@ -58,8 +58,9 @@ class LabTestMethodForm extends PodsFormBase {
             $form_state->set('operation','create');
         }
 
-
+        $form['#attached']['library'][] = 'cig_pods/css_form';  
         $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form';
+        
         $form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
 
@@ -104,7 +105,7 @@ class LabTestMethodForm extends PodsFormBase {
 		];
 
         $form['lab_form_header'] = [
-			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subtitle-container"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
     if($is_edit){
             $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;

@@ -29,6 +29,7 @@ class FieldAssessmentForm extends PodsFormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
     $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$is_edit = $assessment <> NULL;
 
@@ -47,10 +48,9 @@ class FieldAssessmentForm extends PodsFormBase {
 
 
 		$form['#tree'] = False; // No hierarchy needed for this form.
-		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1>Assessments</h1>',
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [

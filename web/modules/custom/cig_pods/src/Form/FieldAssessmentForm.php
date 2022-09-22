@@ -10,13 +10,6 @@ Use Drupal\Core\Url;
 
 
 class FieldAssessmentForm extends PodsFormBase {
-
-	public function getAssessmentEvaluationOptions(){
-		$options = $this->entityOptions('taxonomy_term', 'd_assessment_evaluation');
-		return ['' => '- Select -'] + $options;
-	}
-
-
 	public function getSHMUOptions(){
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
 		return ['' => '- Select -'] + $options;
@@ -84,7 +77,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#suffix' => '</div>',
 		];
 
-		$field_assessment_soil_cover_value = $is_edit ? $assessment->get('field_assessment_soil_cover')->target_id : '';
+		$field_assessment_soil_cover_value = $is_edit ? $assessment->get('field_assessment_soil_cover')->value : '';
 
 		$assessment_evaluations_options = ['' => '- Select -', 0 => 'Yes', 1 => 'No', 2 => 'N/A'];
 
@@ -96,7 +89,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_residue_breakdown_value = $is_edit ? $assessment->get('field_assessment_residue_breakdown')->target_id : '';
+		$field_assessment_residue_breakdown_value = $is_edit ? $assessment->get('field_assessment_residue_breakdown')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_residue_breakdown'] = [
 			'#type' => 'select',
@@ -106,7 +99,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_surface_crusts_value = $is_edit ? $assessment->get('field_assessment_surface_crusts')->target_id : '';
+		$field_assessment_surface_crusts_value = $is_edit ? $assessment->get('field_assessment_surface_crusts')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_surface_crusts'] = [
 			'#type' => 'select',
@@ -115,7 +108,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#default_value' => $field_assessment_surface_crusts_value,
 			'#required' => FALSE
 		];
-		$field_assessment_ponding_value = $is_edit ? $assessment->get('field_assessment_ponding')->target_id : '';
+		$field_assessment_ponding_value = $is_edit ? $assessment->get('field_assessment_ponding')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_ponding'] = [
 			'#type' => 'select',
@@ -125,7 +118,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_penetration_resistance_value = $is_edit ? $assessment->get('field_assessment_penetration_resistance')->target_id : '';
+		$field_assessment_penetration_resistance_value = $is_edit ? $assessment->get('field_assessment_penetration_resistance')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_penetration_resistance'] = [
 			'#type' => 'select',
@@ -134,7 +127,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#default_value' => $field_assessment_penetration_resistance_value,
 			'#required' => FALSE
 		];
-		$field_assessment_water_stable_aggregates_value = $is_edit ? $assessment->get('field_assessment_water_stable_aggregates')->target_id : '';
+		$field_assessment_water_stable_aggregates_value = $is_edit ? $assessment->get('field_assessment_water_stable_aggregates')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_water_stable_aggregates'] = [
 			'#type' => 'select',
@@ -144,7 +137,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_soil_structure_value = $is_edit ? $assessment->get('field_assessment_soil_structure')->target_id : '';
+		$field_assessment_soil_structure_value = $is_edit ? $assessment->get('field_assessment_soil_structure')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_soil_structure'] = [
 			'#type' => 'select',
@@ -154,7 +147,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_soil_color_value = $is_edit ? $assessment->get('field_assessment_soil_color')->target_id : '';
+		$field_assessment_soil_color_value = $is_edit ? $assessment->get('field_assessment_soil_color')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_soil_color'] = [
 			'#type' => 'select',
@@ -164,7 +157,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_plant_roots_value = $is_edit ? $assessment->get('field_assessment_plant_roots')->target_id : '';
+		$field_assessment_plant_roots_value = $is_edit ? $assessment->get('field_assessment_plant_roots')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_plant_roots'] = [
 			'#type' => 'select',
@@ -174,7 +167,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 
-		$field_assessment_biological_diversity_value = $is_edit ? $assessment->get('field_assessment_biological_diversity')->target_id : '';
+		$field_assessment_biological_diversity_value = $is_edit ? $assessment->get('field_assessment_biological_diversity')->value : '';
 
 		$form['assessment_wrapper']['field_assessment_biological_diversity'] = [
 			'#type' => 'select',
@@ -183,7 +176,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#default_value' => $field_assessment_biological_diversity_value,
 			'#required' => FALSE
 		];
-		$field_assessment_biopores_value = $is_edit ? $assessment->get('field_assessment_biopores')->target_id : '';
+		$field_assessment_biopores_value = $is_edit ? $assessment->get('field_assessment_biopores')->value : '';
 
 
 		$form['assessment_wrapper']['field_assessment_biopores'] = [
@@ -440,7 +433,6 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 						'field_assessment_biological_diversity',
 						'field_assessment_biopores',
 	];
-	$assessment_options = $this->getAssessmentEvaluationOptions();
 
 	// Start: Compaction
 	$compaction_rc_present = NULL;

@@ -112,7 +112,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     }
 
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 
 	/**
@@ -125,7 +125,7 @@ class SoilHealthSampleForm extends PodsFormBase {
 
 		try{
 			$sample_collection->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -275,7 +275,7 @@ public function entityfields(){
 
 		$this->setProjectReference($sample_collection, $sample_collection->get('shmu')->target_id);
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	} else {
 		$id = $form_state->get('sample_id');
 		$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -290,7 +290,7 @@ public function entityfields(){
 
 		$this->setProjectReference($sample_collection, $sample_collection->get('shmu')->target_id);
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 
 	return;

@@ -115,7 +115,7 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 
 	try{
 		$producer->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}catch(\Exception $e){
 		$this
 	  ->messenger()
@@ -128,7 +128,7 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 }
 
 public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
 }
 
 
@@ -162,7 +162,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 
 		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	} else {
 		$id = $form_state->get('producer_id');
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -183,7 +183,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 
 		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 
 	}
 }

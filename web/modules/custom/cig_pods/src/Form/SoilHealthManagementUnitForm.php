@@ -656,7 +656,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteShmu(array &$form, FormStateInterface $form_state){
@@ -666,7 +666,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
         try{
 			$shmu->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -813,7 +813,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
 		$this->setProjectReference($shmu, $producer->get('project')->target_id);
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 
 	public function setProjectReference($assetReference, $projectReference){

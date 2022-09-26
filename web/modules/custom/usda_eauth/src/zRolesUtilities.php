@@ -1,48 +1,10 @@
 <?php
 
 namespace Drupal\usda_eauth;
-use Drupal\Core\Session\AccountInterface;
 use \SimpleXMLElement;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Site\Settings;  //used to access Settings
 
 class zRolesUtilities implements zRolesUtilitiesInterface {
-
-/**
- * {@inheritdoc}
- */
-public static function accessIfAdmin(AccountInterface $account) {
-   // Check permissions and combine that with any custom access checking needed.
-   $session = \Drupal::request()->getSession();
-   $sessionID = $session->get('ApplicationRoleEnumeration');
-   if ($sessionID == 'CIG_App_Admin' || $session == 'CIG_APA')
-      {
-        $result = True;
-      }
-   else
-      {
-        $result = False;
-      }
-   return AccessResult::allowedIf($result);
- }
-
-/**
- * {@inheritdoc}
- */
-public static function accessIfAwardee(AccountInterface $account) {
-   // Check permissions and combine that with any custom access checking needed.
-   $session = \Drupal::request()->getSession();
-   $sessionID = $session->get('ApplicationRoleEnumeration');
-   if ($sessionID == 'CIG_NSHDS' || $sessionID == 'CIG_APT')
-      {
-        $result = True;
-      }
-   else
-      {
-        $result = False;
-      }
-   return AccessResult::allowedIf($result);
- }
 
 /**
  * {@inheritdoc}

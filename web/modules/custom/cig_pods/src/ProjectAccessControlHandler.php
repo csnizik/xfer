@@ -11,6 +11,22 @@ use Drupal\views\Plugin\views\ViewsHandlerInterface;
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
 
   /**
+   * Define admin zRoles.
+   */
+  const ADMIN_ZROLES = [
+    'CIG_App_Admin',
+    'CIG_APA',
+  ];
+
+  /**
+   * Define awardee zRoles.
+   */
+  const AWARDEE_ZROLES = [
+    'CIG_NSHDS',
+    'CIG_APT',
+  ];
+
+  /**
    * Helper method for getting the current session zRole.
    *
    * @return string
@@ -33,6 +49,26 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   }
 
   /**
+   * Checks to see if the user is an admin.
+   *
+   * @return bool
+   *   Returns TRUE if the user has an admin zRole. FALSE otherwise.
+   */
+  public static function isAdmin() {
+    return in_array(self::getZRole(), self::ADMIN_ZROLES);
+  }
+
+  /**
+   * Checks to see if the user is an awardee.
+   *
+   * @return bool
+   *   Returns TRUE if the user has an awardee zRole. FALSE otherwise.
+   */
+  public static function isAwardee() {
+    return in_array(self::getZRole(), self::AWARDEE_ZROLES);
+  }
+
+  /**
    * {@inheritdoc}
    *
    * Link the activities to the permissions. checkAccess is called with the
@@ -48,13 +84,13 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $zrole = $this->getZRole();
 
     // Admins can create any asset.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       $result = AccessResult::allowed();
     }
 
     // Awardees only have access to assets in a project that their eAuth ID
     // is associated with.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
       if (in_array($entity->id(), $this->eAuthIdAssets($eauth_id, $entity->bundle()))) {
         $result = AccessResult::allowed();
       }
@@ -79,12 +115,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $zrole = $this->getZRole();
 
     // Admins can create any asset.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       $result = AccessResult::allowed();
     }
 
     // Awardees can only create certain asset types.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
       $allowed_types = [
         'producer',
         'soil_health_management_unit',
@@ -222,12 +258,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     $zrole = ProjectAccessControlHandler::getZRole();
 
     // If this is an admin, don't apply any additional filters.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       return;
     }
 
     // If this is an awardee, filter out assets that they do not have access to.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
 
       // Try to determine the asset type from arguments.
       // The pods_asset_er View uses asset type as the first argument, so we

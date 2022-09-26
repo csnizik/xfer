@@ -426,7 +426,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     }
 
     public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
@@ -436,7 +436,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 		try{
             $pasturehealth->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
           ->messenger()
@@ -475,7 +475,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('assessment_id');
@@ -491,7 +491,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
     }
 

@@ -414,7 +414,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 				$contact->delete();
 			}
 			$project->delete();
-			$form_state->setRedirect('cig_pods.admin_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -477,7 +477,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
   }
 
   public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
   }
 
   public function getFormEntityMapping(){
@@ -566,7 +566,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$contact->save();
 	}
 
-	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
 
 	return;
 
@@ -626,7 +626,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$project->set('field_awardee_eauth_id', $contact_eauth_ids);
 		$project->set('field_grant_type', $field_grant_type);
 		$project->save();
-		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 }
 

@@ -1,4 +1,7 @@
-# Set proper CSS to forms and views pages.
+dashboard:
+  css:
+    theme:
+      css/dashboard.css: {}
 
 project_entry_form:
   css:
@@ -11,12 +14,6 @@ producer_entry_form:
     theme:
       css/producer.css: {}
       css/project.js: {}
-awardee_dashboard_form:
-  js:
-    js/dashboard.js: {}
-  css:
-    theme:
-      css/awardee_dashboard.css: {}
 
 admin_details_display:
   css:

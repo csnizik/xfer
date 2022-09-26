@@ -517,7 +517,7 @@ class InputsForm extends PodsFormBase {
 	if($form_state->get('input_redirect') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $form_state->get('operation_id')]);
 	}else{
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 }
 
@@ -529,7 +529,7 @@ class InputsForm extends PodsFormBase {
 	}
 
  	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 		return;
 	}
 
@@ -550,7 +550,7 @@ class InputsForm extends PodsFormBase {
 			$input_to_delete->delete();
 			$operation_reference->set('field_input', $updated_inputs);
 			$operation_reference->save();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()

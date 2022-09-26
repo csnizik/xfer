@@ -44,31 +44,8 @@ class TestSetAwardee1 extends FormBase {
         $session->set('ApplicationRoleEnumeration', $roleEnum);
         $session->set('ApplicationRoleDisplay', $roleDisplay);
 
-         /* redirect to the proper route based on role */
-         switch ($roleEnum)
-           {
-            case 'CIG_App_Admin':
-		            (new RedirectResponse('/pods_admin_dashboard'))->send();
-	            	break;
-            case 'CIG_NSHDS':
-                (new RedirectResponse('/pods_awardee_dashboard'))->send();
-                break;
-            case 'CIG_APT':
-              (new RedirectResponse('/pods_awardee_dashboard'))->send();
-              break;
-            case 'CIG_NCDS':
-                (new RedirectResponse('/pods_awardee_dashboard'))->send();
-                break;
-            case 'NA':
-                //(new RedirectResponse('/user/login'))->send();
-                \Drupal::messenger()->addError(t('You do not have a valid zRole assigned. Please see your administrator'));
-                break;
-            default:
-                \Drupal::messenger()->addStatus(t('Login Failed'));
-                break;
-            }
-         return $form;
-
+      // Redirect to the PODS dashboard.
+      (new RedirectResponse('/pods'))->send();
 
       return $form;
     }

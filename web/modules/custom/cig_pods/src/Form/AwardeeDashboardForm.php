@@ -13,7 +13,7 @@ class AwardeeDashboardForm extends PodsFormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, $options = NULL){
 
     // Attach proper CSS to form
-    $form['#attached']['library'][] = 'cig_pods/awardee_dashboard_form';
+    $form['#attached']['library'][] = 'cig_pods/dashboard';
 
     $form['h2'] = [
       '#markup' => 'Dashboard',

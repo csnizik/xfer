@@ -5,6 +5,7 @@ namespace Drupal\cig_pods\Form;
 use Drupal\cig_pods\ProjectAccessControlHandler;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * PODS Dashboard form for admins and awardees.
@@ -59,11 +60,27 @@ class PodsDashboardForm extends PodsFormBase {
       '#type' => 'select',
       '#options' => [
         '' => $this->t('Create New'),
-        'awo' => $this->t('Awardee Org'),
-        'proj' => $this->t('Project'),
-        'ltp' => $this->t('Lab Test Profile'),
+        'create_awardee' => $this->t('Awardee Org'),
+        'create_project' => $this->t('Project'),
+        'create_lab_test_profile' => $this->t('Lab Test Profile'),
+      ],
+      '#attributes' => [
+        'onchange' => 'this.form.submit();',
       ],
       '#prefix' => '<div id="top-form">',
+    ];
+
+    // Create a hidden submit button that will be used when an item is
+    // selected from the dropdown. This is necessary because we are using
+    // this.form.submit() and if Drupal can't detect the triggering element,
+    // it will assume the first button was clicked.
+    $form['create'] = [
+      '#type' => 'submit',
+      '#value' => 'Submit',
+      '#name' => 'create',
+      '#attributes' => [
+        'style' => 'display: none;',
+      ],
     ];
 
     $form['form_body'] = [
@@ -87,20 +104,20 @@ class PodsDashboardForm extends PodsFormBase {
     $form['awardee_proj'] = [
       '#type' => 'submit',
       '#value' => $this->t('Projects(s): ' . $entityCount[0]),
-      '#submit' => ['::projectRedirect'],
+      '#name' => 'project',
       '#class="button-container">',
     ];
 
     $form['awardee_org'] = [
       '#type' => 'submit',
       '#value' => $this->t('Awardee Organization(s): ' . $entityCount[1]),
-      '#submit' => ['::orgRedirect'],
+      '#name' => 'awardee',
     ];
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
       '#value' => $this->t('Lab Test Profile(s): ' . $entityCount[2]),
-      '#submit' => ['::profileRedirect'],
+      '#name' => 'lab_profile',
       '#suffix' => '</div>',
     ];
 
@@ -116,19 +133,35 @@ class PodsDashboardForm extends PodsFormBase {
       '#type' => 'select',
       '#options' => [
         '' => $this->t('Create New'),
-        'pro' => $this->t('Producer'),
-        'shmu' => $this->t('SHMU'),
-        'ssa' => $this->t('Soil Sample'),
-        'ifa' => $this->t('CIFSH Assessment'),
-        'rla' => $this->t('IIRH Assessment'),
-        'pst' => $this->t('PCS Assessment'),
-        'phst' => $this->t('DIPH Assessment'),
-        'ltr' => $this->t('Soil Test Result'),
-        'ltm' => $this->t('Methods'),
-        'oper' => $this->t('Operation'),
-        'irr' => $this->t('Irrigation'),
+        'create_producer' => $this->t('Producer'),
+        'create_soil_health_management_unit' => $this->t('SHMU'),
+        'create_soil_health_sample' => $this->t('Soil Sample'),
+        'create_field_assessment' => $this->t('CIFSH Assessment'),
+        'create_range_assessment' => $this->t('IIRH Assessment'),
+        'create_pasture_assessment' => $this->t('PCS Assessment'),
+        'create_pasture_health_assessment' => $this->t('DIPH Assessment'),
+        'create_lab_result' => $this->t('Soil Test Result'),
+        'create_lab_testing_method' => $this->t('Methods'),
+        'create_operation' => $this->t('Operation'),
+        'create_irrigation' => $this->t('Irrigation'),
+      ],
+      '#attributes' => [
+        'onchange' => 'this.form.submit();',
       ],
       '#prefix' => '<div id="top-form">',
+    ];
+
+    // Create a hidden submit button that will be used when an item is
+    // selected from the dropdown. This is necessary because we are using
+    // this.form.submit() and if Drupal can't detect the triggering element,
+    // it will assume the first button was clicked.
+    $form['create'] = [
+      '#type' => 'submit',
+      '#value' => 'Submit',
+      '#name' => 'create',
+      '#attributes' => [
+        'style' => 'display: none;',
+      ],
     ];
 
     $form['form_body'] = [
@@ -172,67 +205,67 @@ class PodsDashboardForm extends PodsFormBase {
     $form['awardee_producer'] = [
       '#type' => 'submit',
       '#value' => $this->t('Producer(s): ' . $entityCount['producer']),
-      '#submit' => ['::proRedirect'],
+      '#name' => 'producer',
     ];
 
     $form['awardee_soil_health_management_unit'] = [
       '#type' => 'submit',
       '#value' => $this->t('SHMU(s): ' . $entityCount['soil_health_management_unit']),
-      '#submit' => ['::shmuRedirect'],
+      '#name' => 'soil_health_management_unit',
     ];
 
     $form['awardee_soil_health_sample'] = [
       '#type' => 'submit',
       '#value' => $this->t('Soil Sample(s): ' . $entityCount['soil_health_sample']),
-      '#submit' => ['::ssaRedirect'],
+      '#name' => 'soil_health_sample',
     ];
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
       '#value' => $this->t('CIFSH Assessment(s): ' . $entityCount['field_assessment']),
-      '#submit' => ['::ifaRedirect'],
+      '#name' => 'field_assessment',
     ];
 
     $form['awardee_rangeland_assessment'] = [
       '#type' => 'submit',
       '#value' => $this->t('IIRH Assessment(s): ' . $entityCount['range_assessment']),
-      '#submit' => ['::rlaRedirect'],
+      '#name' => 'range_assessment',
     ];
 
     $form['awardee_pasture_assessment'] = [
       '#type' => 'submit',
       '#value' => $this->t('PCS Assessment(s): ' . $entityCount['pasture_assessment']),
-      '#submit' => ['::pstRedirect'],
+      '#name' => 'pasture_assessment',
     ];
 
     $form['awardee_pasture_health_assessment'] = [
       '#type' => 'submit',
       '#value' => $this->t('DIPH Assessment(s): ' . $entityCount['pasture_health_assessment']),
-      '#submit' => ['::phstRedirect'],
+      '#name' => 'pasture_health_assessment',
     ];
 
     $form['awardee_lab_result'] = [
       '#type' => 'submit',
       '#value' => $this->t('Soil Test Result(s): ' . $entityCount['lab_result']),
-      '#submit' => ['::labresRedirect'],
+      '#name' => 'lab_result',
     ];
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
       '#value' => $this->t('Method(s): ' . $entityCount['lab_testing_method']),
-      '#submit' => ['::labRedirect'],
+      '#name' => 'lab_testing_method',
     ];
 
     $form['awardee_irrigation'] = [
       '#type' => 'submit',
       '#value' => $this->t('Irrigation(s): ' . $entityCount['irrigation']),
-      '#submit' => ['::irrRedirect'],
+      '#name' => 'irrigation',
     ];
 
     $form['awardee_operation'] = [
       '#type' => 'submit',
       '#value' => $this->t('Operation(s): ' . $entityCount['operation']),
-      '#submit' => ['::operRedirect'],
+      '#name' => 'operation',
       '#suffix' => '</div>',
     ];
 
@@ -240,126 +273,69 @@ class PodsDashboardForm extends PodsFormBase {
   }
 
   /**
-   *
-   */
-  private function pageRedirect(FormStateInterface $form_state, string $path) {
-    $match = [];
-    $path2 = $path;
-    $router = \Drupal::service('router.no_access_checks');
-
-    try {
-      $match = $router->match($path2);
-    }
-    catch (\Exception $e) {
-      // The route using that path hasn't been found,
-      // or the HTTP method isn't allowed for that route.
-    }
-    $form_state->setRedirect($match["_route"]);
-  }
-
-  /**
-   * Set the appropriate place where created entities are managed from.
-   */
-  public function projectRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/project");
-  }
-
-  /**
-   *
-   */
-  public function orgRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/awardee");
-  }
-
-  /**
-   *
-   */
-  public function profileRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/lab_testing_profile");
-  }
-
-  /**
-   * Set the appropriate place where created entities are managed from.
-   */
-  public function labRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/lab_testing_method");
-  }
-
-  /**
-   *
-   */
-  public function labresRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/lab_result");
-  }
-
-  /**
-   *
-   */
-  public function proRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/producer");
-  }
-
-  /**
-   *
-   */
-  public function ifaRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/field_assessment");
-  }
-
-  /**
-   *
-   */
-  public function rlaRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/range_assessment");
-  }
-
-  /**
-   *
-   */
-  public function pstRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/pasture_assessment");
-  }
-
-  /**
-   *
-   */
-  public function phstRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/pasture_health_assessment");
-  }
-
-  /**
-   *
-   */
-  public function ssaRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/soil_health_sample");
-  }
-
-  /**
-   *
-   */
-  public function shmuRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/soil_health_management_unit");
-  }
-
-  /**
-   *
-   */
-  public function operRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/operation");
-  }
-
-  /**
-   *
-   */
-  public function irrRedirect(array &$form, FormStateInterface $form_state) {
-    $this->pageRedirect($form_state, "/assets/irrigation");
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
+    // Define redirect paths based on asset type.
+    $redirects = [
+
+      // Admin asset creation paths:
+      'create_project' => '/create/project',
+      'create_awardee' => '/create/awardee_org',
+      'create_lab_test_profile' => '/create/lab_test_profiles_admin',
+
+      // Admin asset list paths:
+      'project' => '/assets/project',
+      'awardee' => '/assets/awardee',
+      'lab_profile' => '/assets/lab_testing_profile',
+
+      // Awardee asset creation paths:
+      'create_producer' => '/create/producer',
+      'create_soil_health_management_unit' => '/create/shmu',
+      'create_soil_health_sample' => '/create/soil_health_sample',
+      'create_field_assessment' => '/create/field_assessment',
+      'create_range_assessment' => '/create/range_assessment',
+      'create_pasture_assessment' => '/create/pasture_assessment',
+      'create_pasture_health_assessment' => '/create/pasture_health_assessment',
+      'create_lab_result' => '/create/lab_results',
+      'create_lab_testing_method' => '/create/lab_testing_method',
+      'create_irrigation' => '/create/irrigation',
+      'create_operation' => '/create/operation',
+
+      // Awardee asset list paths:
+      'producer' => '/assets/producer',
+      'soil_health_management_unit' => '/assets/soil_health_management_unit',
+      'soil_health_sample' => '/assets/soil_health_sample',
+      'field_assessment' => '/assets/field_assessment',
+      'range_assessment' => '/assets/range_assessment',
+      'pasture_assessment' => '/assets/pasture_assessment',
+      'pasture_health_assessment' => '/assets/pasture_health_assessment',
+      'lab_result' => '/assets/lab_result',
+      'lab_testing_method' => '/assets/lab_testing_method',
+      'irrigation' => '/assets/irrigation',
+      'operation' => '/assets/operation',
+    ];
+
+    // Get the triggering element name and redirect accordingly.
+    // This will either be "create" or a specific asset type. If it is "create"
+    // then we know that the "Create new" select box was changed, and we can
+    // get the submitted value and redirect to the asset creation form.
+    // Otherwise, one of the asset type buttons was clicked, so we redirect to
+    // the asset list page.
+    $triggering_element = $form_state->getTriggeringElement();
+    if (!empty($triggering_element['#name'])) {
+      $name = $triggering_element['#name'];
+      if ($name == 'create') {
+        $type = $form_state->getValue('create_new');
+        if (isset($redirects[$type])) {
+          $form_state->setRedirectUrl(Url::fromUri('internal:' . $redirects[$type]));
+        }
+      }
+      elseif (isset($redirects[$name])) {
+        $form_state->setRedirectUrl(Url::fromUri('internal:' . $redirects[$name]));
+      }
+    }
   }
 
 }

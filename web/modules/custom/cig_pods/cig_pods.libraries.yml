@@ -1,6 +1,4 @@
 dashboard:
-  js:
-    js/dashboard.js: {}
   css:
     theme:
       css/dashboard.css: {}

@@ -10,28 +10,6 @@ use Drupal\Core\Session\AccountInterface;
 interface zRolesUtilitiesInterface {
 
   /**
-   * Check if a user has admin access.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User entity.
-   *
-   * @return \Drupal\Core\Access\AccessResultInterface
-   *   Returns an access result.
-   */
-  public static function accessIfAdmin(AccountInterface $account);
-
-  /**
-   * Check if a user has awardee access.
-   *
-   * @param \Drupal\Core\Session\AccountInterface $account
-   *   User entity.
-   *
-   * @return \Drupal\Core\Access\AccessResultInterface
-   *   Returns an access result.
-   */
-  public static function accessIfAwardee(AccountInterface $account);
-
-  /**
    * Get roles and scopes for an eAuthID.
    *
    * @param string $eAuthId

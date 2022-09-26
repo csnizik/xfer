@@ -5,3 +5,8 @@
 form#lab-results-form #edit-save.button {
   margin-top: 51px;
 }
+
+form#lab-results-form.lab-results-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

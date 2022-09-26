@@ -1,17 +1,15 @@
-#block-gin-content form .form-title {
+form#irrigation-form.irrigation-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+/* #block-gin-content form .form-title {
   font-weight: 500;
   font-size: 32px;
   line-height: 38px;
-}
+} */
 
-.form-checkboxes {
-  max-height: 396px;
-  overflow-y: overlay;
-  border: 1px solid #1b1b1b;
-  border-radius: 0;
-  padding: 10px 0px 10px 16px;
-}
-
+/* 
 #crop_rotation_months {
   display: flex;
 }
@@ -66,4 +64,4 @@
 
 #crop_rotation input[id*="actions-delete"]:hover {
   background-color: transparent !important;
-}
+} */

@@ -29,3 +29,17 @@
   margin-top: 43px;
   margin-bottom: 65px;
 }
+
+form#pasture-health-assessments-form.pasture-health-assessments-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+#block-gin-content form .subform-title-container.subtitle-spacing {
+  margin-top: 21px;
+  margin-bottom: 29px;
+}
+
+.form-item:last-of-type {
+  margin-bottom: 64px !important;
+}

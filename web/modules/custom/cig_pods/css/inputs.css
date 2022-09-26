@@ -213,3 +213,7 @@ div#other-costs-spacer {
   margin-top: 68px;
   margin-bottom: 7px;
 }
+form#inputform.inputform {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

@@ -31,7 +31,7 @@
 
 #block-gin-content form .remove-button-container {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 #block-gin-content form .clear-space {
@@ -40,14 +40,8 @@
 
 #block-gin-content form #addmore-button-container input {
   margin: 8px 0 0 0;
-  background-color: #ffffff;
-  color: #005ea2;
-  border-color: #005ea2 !important;
-}
-
-#block-gin-content form #addmore-button-container input:hover {
-  background-color: #005ea2 !important;
-  color: white !important;
+  background-color: #005ea2;
+  color: #ffffff;
   border-color: #005ea2 !important;
 }
 
@@ -55,17 +49,37 @@
   background-color: #205493 !important;
 }
 
-fieldset#edit-field-resource-concerns--wrapper {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px 0px 20px 16px;
-  gap: 10px;
-  width: auto;
-  height: auto;
-  left: 0.5px;
-  top: 0px;
-  background: #ffffff;
+form#project-create-form.project-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+.form-checkboxes {
+  max-height: 396px;
+  overflow-y: overlay;
   border: 1px solid #1b1b1b;
+  border-radius: 0;
+  padding: 10px 0px 10px 16px;
+}
+
+.subform-title-container.awardee-info-spacing {
+  margin-top: 105px;
+  margin-bottom: 29px;
+}
+
+.form-checkboxes .form-type--checkbox {
+  position: relative;
+  top: 20px;
+  bottom: 20px;
+  margin-bottom: 10px !important;
+}
+
+div[id="names-fieldset-wrapper"] div:nth-last-child(3) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(4) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(5) .js-form-item {
+  margin-bottom: 8px !important;
+}
+
+div[id="addmore-button-container"] {
+  margin-bottom: 64px;
 }

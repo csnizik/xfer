@@ -27,3 +27,8 @@
 .subform-title-container-assessment h2 {
   font-size: 22px;
 }
+
+form#range-assessments-form.range-assessments-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

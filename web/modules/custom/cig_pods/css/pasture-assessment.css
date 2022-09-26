@@ -17,3 +17,8 @@ form#pasture-assessments-form #edit-actions-identify-resource-concerns:hover {
   font-weight: 600;
   font-size: 16px;
 }
+
+form#pasture-assessments-form.pasture-assessments-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

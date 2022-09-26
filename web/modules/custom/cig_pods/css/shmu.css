@@ -198,3 +198,8 @@ form#soil-health-management-unit-form input#edit-addcrop:hover {
 #crop_rotation input[id*="actions-delete"]:hover {
   background-color: transparent !important;
 }
+
+form#soil-health-management-unit-form.soil-health-management-unit-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

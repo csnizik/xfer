@@ -17,3 +17,8 @@ form#lab-test-methods-admin #edit-actions-update-profile:hover {
   font-weight: 600;
   font-size: 16px;
 }
+
+form#lab-test-methods-admin.lab-test-methods-admin {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

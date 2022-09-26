@@ -45,3 +45,8 @@ form#sample-collection-form button.ol-edit-circle {
 form#sample-collection-form button.ol-edit-modify {
   display: none;
 }
+
+form#sample-collection-form.sample-collection-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

@@ -46,7 +46,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subtitle-spacing"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';

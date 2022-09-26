@@ -49,11 +49,11 @@ class IrrigationForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h1>Water Testing</h1></div>'
+			'#markup' => '<div><h1>Water Testing</h1></div>'
 		];
 
         $form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
 		$shmu_default_value = $is_edit ?  $irrigation->get('shmu')->target_id : '';

@@ -46,3 +46,8 @@ h1#producer-title {
 input#edit-field-producer-headquarter {
   margin-bottom: 28px;
 }
+
+form#producer-create-form.producer-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

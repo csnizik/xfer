@@ -3,9 +3,9 @@ div#block-gin-content {
   margin: auto;
 }
 
-#block-gin-content form .js-form-item {
+/* #block-gin-content form .js-form-item {
   margin-bottom: 35px;
-}
+} */
 
 #block-gin-content form .fieldgroup .js-form-item {
   margin-bottom: 0.5em;
@@ -25,6 +25,7 @@ div#block-gin-content {
   font-size: 32px;
   font-weight: 500;
   line-height: 38px;
+  margin-top: 20px;
 }
 
 #block-gin-content form h2 {
@@ -67,7 +68,12 @@ div#block-gin-content {
   display: flex;
   align-items: center;
   clear: both;
-  margin-top: 40px;
+  /* margin-top: 40px; */
+}
+
+#block-gin-content form .subform-title-container.subform-title-container-top {
+  margin-top: 24px;
+  margin-bottom: 33px;
 }
 
 #block-gin-content form .subform-title-container h2 {
@@ -103,6 +109,11 @@ div#block-gin-content {
 .fieldset__label--group,
 .form-item__label {
   font-weight: normal !important;
+}
+
+.form-item {
+  margin-top: 0px !important;
+  margin-bottom: 40px !important;
 }
 
 input#edit-cancel.button,

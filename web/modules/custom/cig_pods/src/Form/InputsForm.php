@@ -227,16 +227,9 @@ class InputsForm extends PodsFormBase {
             '#default_value' => $field_rate_units_value,
             '#required' => TRUE
         ];
-		 $form['spacer_1'] = [
-			'#markup' => '<div class="spacer1"></div>'
-		];
 
         $form['subtitle_2'] = [
 			'#markup' => '<div class="subtitle-container"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
-		];
-
-		 $form['spacer_2'] = [
-			'#markup' => '<div class="spacer2"></div>'
 		];
 
         $field_cost_per_unit_value = $is_edit && $input->get('field_cost_per_unit')[0] ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
@@ -262,17 +255,9 @@ class InputsForm extends PodsFormBase {
             '#suffix' => '</div>',
 		];
 
-		//  $form['spacer_3'] = [
-		// 	'#markup' => '<div class="spacer3"></div>'
-		// ];
-
         $form['subtitle_3'] = [
 			'#markup' => '<div id="other-costs-spacer " class="subtitle-container"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
-
-		//  $form['spacer_4'] = [
-		// 	'#markup' => '<div class="spacer4"></div>'
-		// ];
 
 		$form['#tree'] = TRUE;
 

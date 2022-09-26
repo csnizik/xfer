@@ -26,7 +26,7 @@ class SoilHealthSampleForm extends PodsFormBase {
 
     public function buildSampleInformationSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){
 		$form['form_title'] = [
-			'#markup' => '<h1 id="form-title">Sample Collection</h1>'
+			'#markup' => '<h1>Sample Collection</h1>'
 		];
 
 		$form['subform_1'] = [

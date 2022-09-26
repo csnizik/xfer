@@ -273,7 +273,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container awardee-info-spacing"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
 		];
 
 		$awardee_default_name = $is_edit ? $project->get('field_awardee')->target_id : NULL;

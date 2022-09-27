@@ -76,8 +76,14 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
 
-    // Assume forbidden.
-    $result = AccessResult::forbidden();
+    // First delegate to the parent method.
+    $result = parent::checkAccess($entity, $operation, $account);
+
+    // Only proceed if access was not determined. We will use eAuth ID + zRole
+    // to check if the user should have access.
+    if (!$result->isNeutral()) {
+      return $result;
+    }
 
     // Get the user's eAuthID and zRole.
     $eauth_id = $this->getEAuthId();
@@ -108,8 +114,14 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
 
-    // Assume forbidden.
-    $result = AccessResult::forbidden();
+    // First delegate to the parent method.
+    $result = parent::checkCreateAccess($account, $context, $entity_bundle);
+
+    // Only proceed if access was not determined. We will use zRole to check if
+    // the user should have access.
+    if (!$result->isNeutral()) {
+      return $result;
+    }
 
     // Get the user's zRole.
     $zrole = $this->getZRole();

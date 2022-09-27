@@ -197,7 +197,7 @@ class IrrigationForm extends PodsFormBase {
     }
 
 	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 		return;
 	}
 
@@ -207,7 +207,7 @@ class IrrigationForm extends PodsFormBase {
 
 		try{
 			$irrigation->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -264,7 +264,7 @@ class IrrigationForm extends PodsFormBase {
 		$this->setProjectReference($irrigation, $irrigation->get('shmu')->target_id);
 		// Success message done
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function setProjectReference($assetReference, $shmuReference){

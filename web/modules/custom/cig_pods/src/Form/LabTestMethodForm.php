@@ -483,7 +483,7 @@ class LabTestMethodForm extends PodsFormBase {
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
@@ -492,7 +492,7 @@ class LabTestMethodForm extends PodsFormBase {
 
         try{
             $labTest->delete();
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
           ->messenger()
@@ -560,7 +560,7 @@ class LabTestMethodForm extends PodsFormBase {
 
             $this->setProjectReference($method, $method->get('field_lab_method_project')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $elementsToUpdate = [];
@@ -585,7 +585,7 @@ class LabTestMethodForm extends PodsFormBase {
 
             $this->setProjectReference($labTestMethod, $labTestMethod->get('field_lab_method_project')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
      }
 

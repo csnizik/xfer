@@ -285,7 +285,7 @@ class FieldAssessmentForm extends PodsFormBase {
 }
 
 public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
 }
 public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
 
@@ -293,7 +293,7 @@ public function deleteFieldAssessment(array &$form, FormStateInterface $form_sta
 	$labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
 	try{
 		$labTest->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}catch(\Exception $e){
 		$this
 	  ->messenger()
@@ -376,7 +376,7 @@ public function submitForm(array &$form, FormStateInterface $form_state) {
 
 	$this->setProjectReference($assessment, $assessment->get('shmu')->target_id);
 
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
   }
 
   public function setProjectReference($assetReference, $shmuReference){

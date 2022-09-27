@@ -287,7 +287,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.admin_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
@@ -296,7 +296,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
 
     try{
 		$labTest->delete();
-		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}catch(\Exception $e){
 		$this
 	  ->messenger()
@@ -334,7 +334,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             $profile = Asset::create($profile_submission);
             $profile -> save();
 
-            $form_state->setRedirect('cig_pods.admin_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('lab_test_id');
@@ -347,7 +347,7 @@ $profile_name = $is_edit ?  $labTestProfile->get('name')->value : "";
             }
 
             $labTestProfile->save();
-            $form_state->setRedirect('cig_pods.admin_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
      }
 }

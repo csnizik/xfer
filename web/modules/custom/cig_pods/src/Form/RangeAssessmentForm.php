@@ -360,7 +360,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 
     public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
@@ -370,7 +370,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 		try{
             $rangeland->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
           ->messenger()
@@ -407,7 +407,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('assessment_id');
@@ -423,7 +423,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
 
     }

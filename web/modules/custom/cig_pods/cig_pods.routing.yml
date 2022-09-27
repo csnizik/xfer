@@ -1,4 +1,10 @@
-# Set correct routes when creating a entity
+cig_pods.dashboard:
+  path: '/pods'
+  defaults:
+    _form: '\Drupal\cig_pods\Form\PodsDashboardForm'
+    _title: ''
+  requirements:
+    _custom_access: '\Drupal\cig_pods\Form\PodsDashboardForm::access'
 
 cig_pods.project_form:
   path: "/create/project"
@@ -27,23 +33,6 @@ cig_pods.operation_form:
     _form: '\Drupal\cig_pods\Form\OperationForm'
   requirements:
     _entity_create_access: 'asset:operation'
-
-cig_pods.awardee_dashboard_form:
-  path: "/pods_awardee_dashboard"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\AwardeeDashboardForm'
-    _title: ""
-  requirements:
-    _custom_access: '\Drupal\usda_eauth\zRolesUtilities::accessIfAwardee'
-
-
-cig_pods.admin_dashboard_form:
-  path: "/pods_admin_dashboard"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\AdminDashboardForm'
-    _title: ""
-  requirements:
-    _custom_access: '\Drupal\usda_eauth\zRolesUtilities::accessIfAdmin'
 
 cig_pods.lab_test_profiles_admin_form:
   path: "/create/lab_test_profiles_admin"

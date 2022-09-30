@@ -128,7 +128,7 @@ class InputsForm extends PodsFormBase {
 		];
 
         $form['subtitle_1'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container section1-subheading"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
 		];
 
         $form['operation_description'] = [
@@ -229,7 +229,7 @@ class InputsForm extends PodsFormBase {
         ];
 
         $form['subtitle_2'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container second-section-subheader-spacer"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
         $field_cost_per_unit_value = $is_edit && $input->get('field_cost_per_unit')[0] ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
@@ -256,7 +256,7 @@ class InputsForm extends PodsFormBase {
 		];
 
         $form['subtitle_3'] = [
-			'#markup' => '<div id="other-costs-spacer " class="subtitle-container"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
+			'#markup' => '<div id="other-costs-spacer " class="subtitle-container third-section-subheader-spacer"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
 
 		$form['#tree'] = TRUE;

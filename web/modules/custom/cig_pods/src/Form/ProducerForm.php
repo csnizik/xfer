@@ -74,10 +74,9 @@ class ProducerForm extends PodsFormBase {
 			'#default_value' => $producer_headquarter_default_value,
 		];
 
-		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
 		$form['actions']['save'] = [
 			'#type' => 'submit',
-			'#value' => $button_save_label,
+			'#value' =>  $this->t('Save'),
 		  ];
 
 		$form['actions']['cancel'] = [

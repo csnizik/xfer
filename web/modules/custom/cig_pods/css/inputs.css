@@ -134,17 +134,19 @@ input#edit-actions-save-refresh:hover {
   background-color: #005ea2 !important;
   color: white !important;
   border-color: #005ea2 !important;
+  margin-bottom: 50px;
 }
 
 form#inputform input[id*="edit-addcost"] {
   background-color: #ffffff;
+  margin-top: 10px !important;
   border-radius: 4px;
   border-color: #005ea2 !important;
   padding: 12 20 12 20;
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
-  margin-top: -10px;
+  margin-bottom: 50px;
 }
 
 form#inputform input#edit-addcost.button .button:not(:focus) {
@@ -155,16 +157,24 @@ form#inputform input#edit-addcost.button .button:not(:focus) {
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
-  margin-top: -10px;
 }
 #cost_rotation input[id*="actions-delete"] {
-  margin-top: 32px;
+  margin-bottom: 0px;
+  margin-top: -12px;
   background-color: #da3737;
   border-radius: 4px;
   border-color: #da3737 !important;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
+}
+
+#cost_sequence > div:last-of-type > input {
+  margin-top: 26px !important;
+}
+
+#cost_sequence > div:last-of-type > div {
+  margin-bottom: 0px !important;
 }
 
 select#edit-field-unit.form-select.form-element.form-element--type-select {
@@ -194,8 +204,8 @@ select#edit-field-custom-application-unit.form-select.form-element.form-element-
 }
 
 span#input-input {
-  margin-top: -27px;
-  margin-bottom: -25px;
+  margin-top: -5px;
+  margin-bottom: -5px;
 }
 .spacer1 {
   height: 80px;
@@ -216,4 +226,19 @@ div#other-costs-spacer {
 form#inputform.inputform {
   padding-top: 0px;
   padding-bottom: 3px;
+}
+
+.subtitle-container.section1-subheading {
+  margin-top: 25px;
+  margin-bottom: 24px;
+}
+
+.subtitle-container.second-section-subheader-spacer {
+  margin-top: 105px;
+  margin-bottom: 30px;
+}
+
+.subtitle-container.third-section-subheader-spacer {
+  margin-top: 65px;
+  margin-bottom: 30px;
 }

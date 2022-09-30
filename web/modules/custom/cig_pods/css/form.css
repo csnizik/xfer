@@ -156,3 +156,12 @@ input#edit-actions-delete.button {
   font-weight: 600;
   font-size: 16px;
 }
+
+span.operation-description h4 {
+  margin-bottom: 0px;
+}
+
+span.operation h4 {
+  margin-top: 5px;
+  margin-bottom: 46px;
+}

@@ -56,7 +56,7 @@ class RangeAssessmentForm extends PodsFormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';

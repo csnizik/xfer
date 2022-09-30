@@ -54,7 +54,7 @@ class FieldAssessmentForm extends PodsFormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Cropland In-Field Soil Health Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subform1-spacer"><h2>Cropland In-Field Soil Health Assessment </h2><h4>13 Fields | Section 1 of 1</h4></div>'
 		];
 
 
@@ -212,52 +212,61 @@ class FieldAssessmentForm extends PodsFormBase {
 		];
 
 		if( $form_state -> get( 'calculate_rcs' )){
+		$form['assessment_wrapper']['resource_concerns_subheading'] = [
+			'#markup' => $this->t('<h2 class="resource-concerns-spacer">Resource Concerns Identified from In-Field Assessment </h2>')
+		];
 
 			// Invariant: If calculate RCS is True, then all ***_rc_present vars will have a value
 			$soil_organic_matter_rc = $form_state -> get('soil_organic_matter_rc_present') ? 'Present' : 'Not Present';
-			$form['assessment_wrapper']['field_assessment_rc_soil_organic_matter'] = [
-				'#type' => 'textfield',
-				'#title' => 'Soil Organic Matter Depletion Resource Concern',
-				'#required' => FALSE,
-				'#disabled' => TRUE,
-				'#value' => $soil_organic_matter_rc,
-				'#prefix' => '<div class="calculated_field_container">',
-				'#suffix' => '</div>',
-			];
+
+		$form['assessment_wrapper']['organic_matter_title'] = [
+			'#markup' => $this->t('<span>Soil Organic Matter Depletion Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+			'#prefix' => '<div class="calculated_field_container">',
+		];
+
+		$form['assessment_wrapper']['field_assessment_rc_soil_organic_matter']  = [
+			'#markup' => $this->t('<div>@organic_matter_assessment</div>', ['@organic_matter_assessment' => $soil_organic_matter_rc]),
+			'#suffix' => '</div>',
+		];
+
 
 			$agg_instability_val = $form_state -> get('aggregate_instability_rc_present')  ? 'Present' : 'Not Present';
 
-			$form['assessment_wrapper']['field_assessment_rc_aggregate_instability'] = [
-				'#type' => 'textfield',
-				'#title' => 'Aggregate Instability Resource Concern',
-				'#required' => FALSE,
-				'#disabled' => TRUE,
-				'#value' => $agg_instability_val,
-				'#prefix' => '<div class="calculated_field_container">',
-				'#suffix' => '</div>',
-			];
+		$form['assessment_wrapper']['agg_instability_title'] = [
+			'#markup' => $this->t('<span>Aggregate Instability Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+			'#prefix' => '<div class="calculated_field_container">',
+		];
+
+		$form['assessment_wrapper']['field_assessment_rc_aggregate_instability']  = [
+			'#markup' => $this->t('<div>@agg_instability_assessment</div>', ['@agg_instability_assessment' => $agg_instability_val]),
+			'#suffix' => '</div>',
+		];
+
+
 			$compaction_val = $form_state -> get('compaction_rc_present')  ? 'Present' : 'Not Present';
 
-			$form['assessment_wrapper']['field_assessment_rc_compaction'] = [
-				'#type' => 'textfield',
-				'#title' => 'Compaction Resource Concern',
-				'#required' => FALSE,
-				'#disabled' => TRUE,
-				'#value' => $compaction_val,
-				'#prefix' => '<div class="calculated_field_container">',
-				'#suffix' => '</div>',
-			];
-			$cfsoh_val = $form_state -> get('soil_organism_habitat_rc_present')  ? 'Present' : 'Not Present';
-			$form['assessment_wrapper']['field_assessment_rc_soil_organism_habitat'] = [
-				'#type' => 'textfield',
-				'#title' => 'Soil Organism Habitat Resource Concern',
-				'#required' => FALSE,
-				'#disabled' => TRUE,
-				'#value' => $cfsoh_val,
-				'#prefix' => '<div class="calculated_field_container">',
-				'#suffix' => '</div>',
-			];
+		$form['assessment_wrapper']['compaction_title'] = [
+			'#markup' => $this->t('<span>Compaction Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+			'#prefix' => '<div class="calculated_field_container">',
+		];
 
+		$form['assessment_wrapper']['field_assessment_rc_compaction']  = [
+			'#markup' => $this->t('<div>@compaction_assessment</div>', ['@compaction_assessment' => $compaction_val]),
+			'#suffix' => '</div>',
+		];
+
+
+			$cfsoh_val = $form_state -> get('soil_organism_habitat_rc_present')  ? 'Present' : 'Not Present';
+
+		$form['assessment_wrapper']['organism_title'] = [
+			'#markup' => $this->t('<span>Soil Organism Habitat Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+			'#prefix' => '<div class="calculated_field_container">',
+		];
+
+		$form['assessment_wrapper']['field_assessment_rc_soil_organism_habitat']  = [
+			'#markup' => $this->t('<div>@organism_assessment</div>', ['@organism_assessment' => $cfsoh_val]),
+			'#suffix' => '</div>',
+		];
 		}
 
 		$form['actions']['save'] = [

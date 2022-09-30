@@ -32,3 +32,12 @@ form#range-assessments-form.range-assessments-form {
   padding-top: 0px;
   padding-bottom: 3px;
 }
+
+.subform-title-container.assessment-top-spacing {
+  margin-top: 26px;
+  margin-bottom: 31px;
+}
+
+.form-item:last-of-type {
+  margin-bottom: 64px !important;
+}

@@ -25,22 +25,28 @@ form#field-assessment-form.field-assessment-form {
   margin-bottom: 23px !important;
 }
 
-input#edit-save.button.js-form-submit.form-submit {
-  background-color: #ffffff !important;
-  color: #005ea2 !important;
-  border-color: #005ea2 !important;
-  border-radius: 4px;
-  padding: 12 20 12 20;
-  font-weight: 600;
-  font-size: 16px;
+.subform-title-container.subform1-spacer {
+  margin-top: 27px;
+  margin-bottom: 31px;
 }
 
-input#edit-save.button.js-form-submit.form-submit:hover {
-  background-color: #005ea2 !important;
-  color: #ffffff !important;
-  border-color: #005ea2 !important;
-  border-radius: 4px;
-  padding: 12 20 12 20;
-  font-weight: 600;
-  font-size: 16px;
+.calculated_field_container {
+  margin-bottom: 36px;
+}
+
+h2.resource-concerns-spacer {
+  margin-top: 30px !important;
+  margin-bottom: 36px !important;
+}
+
+#assessment_wrapper > div:last-of-type {
+  margin-bottom: 20px !important;
+}
+
+.grey-note {
+  color: #71767a;
+}
+
+input#edit-cancel.button {
+  margin-top: 66px;
 }

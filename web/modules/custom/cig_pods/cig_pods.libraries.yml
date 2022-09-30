@@ -45,6 +45,11 @@ irrigation_form:
     theme:
       css/irrigation.css: {}
 
+irrigation_display:
+  css:
+    theme:
+      css/irrigation_display.css: {}
+
 operation_form:
   css:
     theme:

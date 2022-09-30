@@ -46,7 +46,7 @@ class PastureAssessmentForm extends PodsFormBase {
 		];
 		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subform1-spacer"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -200,7 +200,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			'#suffix' => '</div>',
         ];
 
-		$form['actions']['identify-resource-concerns'] = [
+		$form['identify-resource-concerns'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Calculate Score'),
 			'#submit' => ['::displayRcScores'],
@@ -216,15 +216,16 @@ class PastureAssessmentForm extends PodsFormBase {
 			$toDisplay = $form_state->get('rc_display');
 		if (count($toDisplay) <> 0) {
 			$form['rc_container']['rc_header'] = [
-				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment. </h5>'
+				'#markup' => '<h2 class="resource-concerns-spacer">Resource Concerns Identified from In-Field Assessment </h2>'
 			];
 			$form['rc_container']['rc_soil'] = [
-				'#markup' => $this->t('<p classname="Soil"> <b> Calculated from in-field assessments</b></p>
-				<p><b>Pasture Condition Score: @soil_score</b></p>', ['@soil_score' => $this->getPastureCondition($form, $form_state, $severity_options)])
+				'#markup' => $this->t('<div class="pasture-condition"><span>Pasture Condition Score: @soil_score</span> <span class="grey-note"> (Calculated from in-field assessments)</span></div>', ['@soil_score' => $this->getPastureCondition($form, $form_state, $severity_options)],)
 			];
 
 		}
-
+		$form['actions'] = [
+			'#type' => 'actions',
+		];
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',

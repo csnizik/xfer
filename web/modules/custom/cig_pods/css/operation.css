@@ -51,6 +51,8 @@ form#operation-form input#edit-addcost.button {
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 48px;
 }
 
 form#operation-form input#edit-addcost:hover {
@@ -61,11 +63,13 @@ form#operation-form input#edit-addcost:hover {
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 48px;
 }
 
 #cost_rotation input[id*="actions-delete"] {
-  margin-top: 34px;
   background-color: #da3737;
+  margin-top: -2px;
   border-radius: 4px;
   border-color: #da3737 !important;
   color: #ffffff;
@@ -73,7 +77,24 @@ form#operation-form input#edit-addcost:hover {
   font-size: 16px;
 }
 
+#cost_sequence > div:last-of-type > div {
+  margin-bottom: 10px !important;
+}
+#cost_sequence > div:last-of-type > input {
+  margin-top: 26px !important;
+  margin-bottom: 10px !important;
+}
+
 form#operation-form.operation-form {
   padding-top: 0px;
   padding-bottom: 3px;
+}
+
+.subform-title-container.title-spacer {
+  margin-bottom: 28px;
+}
+
+.subform-title-container.subheader-spacer {
+  margin-top: 104px;
+  margin-bottom: 29px;
 }

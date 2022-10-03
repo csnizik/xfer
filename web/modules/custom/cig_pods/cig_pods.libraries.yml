@@ -16,11 +16,6 @@ awardee_dashboard_form:
     theme:
       css/awardee_dashboard.css: {}
 
-admin_details_display:
-  css:
-    theme:
-      css/admin-details-display.css: {}
-
 awardee_methods_details_display:
   css:
     theme:

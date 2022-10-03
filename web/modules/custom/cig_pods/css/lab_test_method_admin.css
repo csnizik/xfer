@@ -22,3 +22,16 @@ form#lab-test-methods-admin.lab-test-methods-admin {
   padding-top: 0px;
   padding-bottom: 3px;
 }
+
+#block-gin-content form h1 {
+  margin-bottom: 46px;
+}
+
+.subtitle-container.section1 {
+  margin-top: 100px;
+  margin-bottom: 33px;
+}
+
+div.form-item {
+  margin-bottom: 23px !important;
+}

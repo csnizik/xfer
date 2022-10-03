@@ -105,14 +105,14 @@ class LabTestMethodForm extends PodsFormBase {
 		];
 
         $form['lab_form_header'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
     if($is_edit){
             $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
                 '#title' => 'Soil Health Test Laboratory',
-                '#options' => $s_he_test_laboratory,
+                 '#options' => $s_he_test_laboratory,
                 '#default_value' => $lab_default,
                 '#required' => TRUE,
             ];
@@ -121,7 +121,7 @@ class LabTestMethodForm extends PodsFormBase {
             $form['field_lab_method_lab_test_profile'] = [
                 '#type' => 'select',
                 '#title' => 'Soil Health Test Methods',
-                '#options' => $lab_test_profile,
+                 '#options' => $lab_test_profile,
                 '#default_value' => $lab_profile_default,
                 '#required' => TRUE,
             ];
@@ -130,7 +130,6 @@ class LabTestMethodForm extends PodsFormBase {
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
                 '#title' => t('Soil Health Test Laboratory'),
-                '#description' => t('Soil Health Test Laboratory'),
                 '#required' => TRUE,
                 '#validated' => TRUE,
                 '#options' => $s_he_test_laboratory,
@@ -145,7 +144,6 @@ class LabTestMethodForm extends PodsFormBase {
                 '#type' => 'select',
                 '#required' => TRUE,
                 '#validated' => TRUE,
-                '#description' => t('Soil Health Test Methods'),
                 '#prefix' => '<div id="field_lab_method_lab_test_profile">',
                 '#suffix' => '</div>',
                 '#options' => static::getProfileOptions($selected_family),

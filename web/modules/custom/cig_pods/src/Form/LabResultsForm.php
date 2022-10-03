@@ -496,18 +496,16 @@ class LabResultsForm extends PodsFormBase {
     }
 
     public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
-
-        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         try{
             $lab_result_id = $form_state->get('lab_result_id');
             $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_result_id);
 
             $labTest->delete();
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
                 ->messenger()
@@ -536,7 +534,7 @@ class LabResultsForm extends PodsFormBase {
 
             $this->setProjectReference($profile, $profile->get('field_lab_result_soil_sample')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('lab_result_id');
@@ -555,7 +553,7 @@ class LabResultsForm extends PodsFormBase {
 
             $this->setProjectReference($labTestProfile, $labTestProfile->get('field_lab_result_soil_sample')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
     }
 

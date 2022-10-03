@@ -36,6 +36,8 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 
       // Apply admin_project_display library.
       case 'irrigation':
+      $library = 'irrigation_display';
+        break;
       case 'pasture_assessment':
       case 'project':
         $library = 'admin_project_display';

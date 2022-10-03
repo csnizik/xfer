@@ -26,6 +26,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
       $assessment = $asset;
 
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/pasture_health_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -44,7 +45,6 @@ class PastureHealthAssessmentForm extends PodsFormBase {
         $form['producer_title'] = [
 			'#markup' => '<h1> Assessments </h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container subtitle-spacing"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>'
 		];
@@ -62,7 +62,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('pasture_health_assessment_date')->value;
 			$pasture_health_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$pasture_health_timestamp_default_value = ''; // TODO: Check behavior
+			$pasture_health_timestamp_default_value = '';
 		}
 		$form['pasture_health_assessment_date'] = [
 			'#type' => 'date',
@@ -426,7 +426,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     }
 
     public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
@@ -436,7 +436,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 		try{
             $pasturehealth->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
           ->messenger()
@@ -475,7 +475,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('assessment_id');
@@ -491,7 +491,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
     }
 

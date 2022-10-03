@@ -58,7 +58,6 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
 
          ],
-         // TODO: add 'field_shmu_farmos_map'
          'field_shmu_latitude' => [
              'label'=> 'Latitude',
              'type'=> 'fraction',
@@ -78,16 +77,16 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'description' => '',
          ],
 
-        'field_shmu_dominant_map_unit_symbol' => [
-          'label'=> 'Dominant Map Unit Symbol',
-          'type'=> 'string',
+        'field_shmu_map_unit_symbol' => [
+          'label'=> 'Map Unit Symbol',
+          'type'=> 'string_long',
           'required' => FALSE,
           'description' => '',
         ],
 
-        'field_shmu_dominant_surface_texture' => [
-          'label'=> 'Dominant Surface Texture',
-          'type'=> 'string',
+        'field_shmu_surface_texture' => [
+          'label'=> 'Surface Texture',
+          'type'=> 'string_long',
           'required' => FALSE,
           'description' => '',
         ],
@@ -142,7 +141,6 @@ class SoilHealthManagementUnit extends FarmAssetType {
              'multiple' => TRUE,
              'description' => '',
          ],
-         // TODO: Currently skipping Production System pending re-design from Justin
          'field_current_tillage_system' => [
              'label'=> 'Current Tillage System',
              'type'=> 'entity_reference',

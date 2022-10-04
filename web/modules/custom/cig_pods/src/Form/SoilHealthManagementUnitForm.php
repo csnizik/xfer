@@ -75,7 +75,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function getCropRotationYearOptions(){
-		// TODO: Use this to test adding config value
 		$max_years = 20; // Maximum number of years for crop rotations.
 
 		$options=[];
@@ -149,18 +148,15 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			$rotations[0]['field_shmu_crop_rotation_crop_present'] = [];
 		}
 		$form_state->set('rotations', $rotations);
-		// dpm($rotations);
 
 		return;
 	}
 
-	// TODO: check that producer reference saves correctly
 	/**
 	* {@inheritdoc}
 	*/
 	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
     $shmu = $asset;
-		// dpm("building form");
 		$is_edit = $shmu <> NULL;
 		$irrigating = false;
 
@@ -174,28 +170,27 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			$form_state->set('shmu_id', $shmu->id());
 			$shmu_db_crop_rotations = $this->getCropRotationIdsForShmu($shmu);
 			if(!$form_state->get('load_done')){
-				// dpm("Performing initial load of Crop rotations");
 				$this->loadCropRotationsIntoFormState($shmu_db_crop_rotations, $form_state);
 				$form_state->set('load_done',TRUE);
 			}
-			// dpm("Current rotations:");
-			// dpm($form_state->get('rotations'));
 			// The list of Crop Rotation assets that
 			$form_state->set('original_crop_rotation_ids', $shmu_db_crop_rotations);
 		} else {
 			if(!$form_state->get('load_done')){
-				// dpm("Performing initial load of Crop rotations");
 				$this->loadCropRotationsIntoFormState([], $form_state);
 				$form_state->set('load_done',TRUE);
 			}
-			// $this->loadCropRotationsIntoFormState([], $form_state);
 			$form_state->set('operation','create');
 		}
 
 		// Attach the SHMU css library
 		$form['#attached']['library'][] = 'cig_pods/soil_health_management_unit_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
+		$form['title'] = [
+			'#markup' => '<div class="title-container"><h1>Soil Health Management Unit (SHMU) Details</h1></div>'
+		];
 		// First section
 		$form['subform_1'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 11</h4></div>'
@@ -272,12 +267,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			'#default_value' => $field_shmu_experimental_design_value,
 			'#required' => TRUE
 		];
-		$form['static_0']['label'] = [
-			'#markup' => '<div> Project Summary <b> (Will be populated with related project summary once Drupal roles are established) </b> </div>'
-		];
-		$form['static_0']['content'] = [
-			'#markup' => '<div> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Adipiscing elit pellentesque habitant morbi tristique senectus et. Volutpat sed cras ornare arcu dui vivamus. Pellentesque id nibh tortor id aliquet lectus proin. Accumsan lacus vel facilisis volutpat est velit egestas. In massa tempor nec feugiat nisl pretium. Neque egestas congue quisque egestas diam in arcu cursus euismod. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Tellus orci ac auctor augue mauris augue neque. Diam sit amet nisl suscipit.</div>'
-		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
 			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 11</h4> </div>'
@@ -304,11 +293,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       ],
 			'#display_raw_geometry' => TRUE,
 			'#default_value' => $is_edit ? $shmu->get('field_geofield')->value : '',
-  			// '#default_value' => 'POINT(38.598964 -99.851931)',
 		];
-
-		// TODO: Add read only of project summary (Ask Justin)
-		// TODO: Refine with Justin whether Lat/Longs are appropriate
 
 		// New section (Soil and Treatment Identification)
 		$form['subform_4'] = [
@@ -329,19 +314,19 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#prefix' => '<div id="ssurgo-data">',
       '#suffix' => '</div>',
     ];
-    $dominant_map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_dominant_map_unit_symbol')->value: '';
-		$form['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = [
+    $map_unit_symbol_value = $is_edit ? $shmu->get('field_shmu_map_unit_symbol')->value: '';
+		$form['ssurgo_data_wrapper']['map_unit_symbol'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Map Unit Symbol'),
-      '#description' => $this->t('List the map unit symbols of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
-		  '#default_value' => $dominant_map_unit_symbol_value,
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
+		  '#default_value' => $map_unit_symbol_value,
     ];
-    $dominant_surface_texture_value = $is_edit ? $shmu->get('field_shmu_dominant_surface_texture')->value: '';
-		$form['ssurgo_data_wrapper']['dominant_surface_texture'] = [
+    $surface_texture_value = $is_edit ? $shmu->get('field_shmu_surface_texture')->value: '';
+		$form['ssurgo_data_wrapper']['surface_texture'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Surface Texture'),
-      '#description' => $this->t('List the surface textures of the SHMU. Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
-		  '#default_value' => $dominant_surface_texture_value,
+      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
+		  '#default_value' => $surface_texture_value,
     ];
 
 		// New section (Land Use History)
@@ -372,7 +357,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// For the Date input fields, we have to convert from UNIX to yyyy-mm-dd
 		if($is_edit){
-			// $field_shhmu_date_land_use_changed_value is expected to be a UNIX timestamp
+			// $field_shmu_date_land_use_changed_value is expected to be a UNIX timestamp
 			$field_shmu_date_land_use_changed_value = $shmu->get('field_shmu_date_land_use_changed')[0]->value;
 			$default_value_shmu_date_land_use_changed = date("Y-m-d", $field_shmu_date_land_use_changed_value);
 		} else {
@@ -459,8 +444,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 				$crop_months_present_lookup[] = $value['numerator']; // Array of values, where val maintains 0 <= val < 12 for val in values
 			}
 
-			// dpm("Rotation with fs_index:$fs_index is being shown at form_index:$fs_index");
-
 			$form['crop_sequence'][$fs_index] = [
 				'#prefix' => '<div id="crop_rotation">',
 				'#suffix' => '</div>',
@@ -484,17 +467,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 				'#prefix' => '<div id="crop_rotation_months"',
 				'#suffix' => '</div>',
 			];
-			// for( $month = 0; $month < 12 ; $month++ ){
-			// 	$form['crop_sequence'][$fs_index]['month_wrapper'][$month]['is_present'] = [
-			// 		'#title' => $month_lookup[$month],
-			// 		'#title_display' => 'before', // TODO: ask if we want to hide on subsequent sections
-			// 		'#type' => 'checkbox',
-			// 		'#return_value' => True,
-			// 		'#default_value' => in_array($month, $crop_months_present_lookup),
-			// 	];
-			// }
-
-			// dpm($crop_months_present_lookup);
 
 			$form['crop_sequence'][$fs_index]['month_wrapper']['field_shmu_crop_rotation_crop_present'] = [
 				'#type' => 'checkboxes',
@@ -536,7 +508,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		];
 
 		// New section (Cover Crop History)
-		// TODO: Add "Years of cover Cropping Field"
 		$form['subform_7'] = [
 			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'
 		];
@@ -689,20 +660,17 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	}
 
 	public function redirectAfterCancel(array $form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteShmu(array &$form, FormStateInterface $form_state){
-
-        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $shmu_id = $form_state->get('shmu_id');
         $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu_id);
 		$crop_rotation_ids = $this->getCropRotationIdsForShmu($shmu);
-		// dpm($crop_rotation);
 
         try{
 			$shmu->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -727,12 +695,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	* {@inheritdoc}
 	*/
 	public function validateForm(array &$form, FormStateInterface $form_state){
-		// commented out until farmOS bug with map validation is fixed
-		//  parent::validateForm($form, $form_state);
- 		//  $values = $form_state->getValues();
- 		//  if ($values['mymap'] == '' || $values['mymap'] == "GEOMETRYCOLLECTION EMPTY") {
-      	// 	$form_state->setErrorByName('mymap', $this->t('The map is required!'));
-   		// }
 		return;
 	}
 
@@ -757,8 +719,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		$form_values = $form_state->getValues();
 
-		 // ($form_values);
-
 		// All of the fields that support multi-select checkboxes on the page
 		$checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
 						   'field_shmu_current_land_use_modifiers',
@@ -766,7 +726,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 						   'field_shmu_resource_concern',
 							'field_shmu_practices_addressed'];
 		// All of the fields that support date input on the page
-		// TODO: This field is not saving on submit
 		$date_fields = ['field_shmu_date_land_use_changed','field_shmu_irrigation_sample_date'];
 
 		// Specialty crop rotation section fields
@@ -779,7 +738,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			$shmu = Asset::create($shmu_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('shmu_id'); // TODO: Standardize access
+			$id = $form_state->get('shmu_id');
 			$shmu = Asset::load($id);
 		}
 		foreach($form_values as $key => $value){
@@ -806,12 +765,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		// Map submission logic
 		$shmu->set('field_geofield',$form_values['mymap']);
 
-    // Set dominant map unit symbol and surface texture.
-    $shmu->set('field_shmu_dominant_map_unit_symbol', $form_values['ssurgo_data_wrapper']['dominant_map_unit_symbol']);
-    $shmu->set('field_shmu_dominant_surface_texture', $form_values['ssurgo_data_wrapper']['dominant_surface_texture']);
+    // Set map unit symbol and surface texture.
+    $shmu->set('field_shmu_map_unit_symbol', $form_values['ssurgo_data_wrapper']['map_unit_symbol']);
+    $shmu->set('field_shmu_surface_texture', $form_values['ssurgo_data_wrapper']['surface_texture']);
 
-		// TODO: Make Dynamic
-		$num_crop_rotations = count($form_values['crop_sequence']); // TODO: Can be calculate dynamically based off of form submit
+		$num_crop_rotations = count($form_values['crop_sequence']); 
 
 		$crop_options = $this->getCropOptions();
 
@@ -842,8 +800,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			$crop_rotation->set('name',$crop_rotation_name);
 			$crop_rotation->save();
 			$crop_rotation_ids[] = $crop_rotation -> id(); // Append ID of SHMU Crop Rotation to list
-
-			// dpm("Created new Crop rotation with ID:"); // Commented for debugging
 		}
 
 		$shmu->set('field_shmu_crop_rotation_sequence', $crop_rotation_ids);
@@ -861,7 +817,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
 		$this->setProjectReference($shmu, $producer->get('project')->target_id);
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 
 	public function setProjectReference($assetReference, $projectReference){
@@ -915,8 +871,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       // In order to replace textfield text, we must alter the raw user input and
       // trigger a form rebuild. It cannot be done simply with setValue().
       $input = $form_state->getUserInput();
-      $input['ssurgo_data_wrapper']['dominant_map_unit_symbol'] = $symbols;
-      $input['ssurgo_data_wrapper']['dominant_surface_texture'] = $textures;
+      $input['ssurgo_data_wrapper']['map_unit_symbol'] = $symbols;
+      $input['ssurgo_data_wrapper']['surface_texture'] = $textures;
       $form_state->setUserInput($input);
       $form_state->setRebuild(TRUE);
     }
@@ -931,7 +887,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 	// Adds a new row to crop rotation
 	public function addAnotherCropRotation(array &$form, FormStateInterface $form_state){
-		// dpm("Adding  new rotation");
 		$rotations = $form_state->get('rotations');
 		$new_crop_rotation = [];
 		$new_crop_rotation['field_shmu_crop_rotation_crop'] = array();
@@ -939,26 +894,10 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		$new_crop_rotation['field_shmu_crop_rotation_year'][0]['numerator'] = '';
 		$new_crop_rotation['field_shmu_crop_rotation_crop_present'] = [];
 
-		// dpm($new_crop_rotation);
 		$crop_options = $this->getCropOptions();
 		$rotations[] = $new_crop_rotation;
 		$form_state->set('rotations', $rotations);
-		//dpm("new indices");
-		//dpm(array_keys($rotations));
 		$form_state->setRebuild(True);
-
-		// foreach($rotations as $key=>$rotation){
-		// 	if($rotation[0]['target_id'] <> ''){
-		// 		dpm($crop_options[$rotation[0]['target_id']]);
-		// 	} else {
-		// 		dpm('No target ID');
-		// 	}
-		// 	dpm($crop_options[$value[]]);
-		// 	dpm($this->getAsset($value['id'])->getName());
-		// }
-		// dpm("New value for rotations in form state");
-		// dpm($rotations);
-		// dpm("button clicked");
 	}
 
 	public function addAnotherCropRotationCallback(array &$form, FormStateInterface $form_state){
@@ -969,45 +908,10 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 	    $idx_to_rm = str_replace('delete-crop-sequence-', '', $form_state->getTriggeringElement()['#name']);
 
 		$rotations = $form_state->get('rotations');
-		// dpm("old rotations:");
-		// dpm($rotations);
-		// dpm("old rotations");
-		// dpm(array_keys($rotations));
-		// dpm($rotations);
-		// dpm("Removing rotation with index ".$idx_to_rm);
 
 		unset($rotations[$idx_to_rm]); // Remove the index
-		// dpm("new rotation");
-		// dpm($rotations);
 
-		// dpm(array_keys($rotations));
-		// $rotations = array
-		// dpm($rotations);
 		$form_state->set('rotations',$rotations);
-
-		// dpm("Num rotations");
-		// dpm(count($rotations));
-		// // dpm("Rotations:");
-		// // dpm($rotations);
-		// dpm("Removing rotation at index ".$idx_to_rm);
-
-		// $new_rotations = [];
-		// foreach($rotations as $index=> $rotation){
-		// 	dpm("Trying");
-		// 	dpm($index);
-		// 	if($index != $idx_to_rm){
-		// 		$new_rotations[] = $rotation;
-		// 	} else {
-		// 		dpm($rotation);
-		// 	}
-		// }
-		// // dpm("Rotations 2:");
-		// // dpm($rotations);
-		// // $rotations = array_values($rotations); // Re-index to 0,1,2,3... continuous
-		// // dpm("Rotations 3:");
-		// // dpm($rotations);
-		// // dpm("New rotations");
-		// dpm($new_rotations);
 
 		$form_state->setRebuild(True);
 	}

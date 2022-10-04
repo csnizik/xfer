@@ -1,209 +1,85 @@
-div#block-gin-content {
-    width: 688px;
-    margin: auto;
+#block-gin-content form input#edit-create-organization {
+  display: block;
+  margin-top: -22px;
 }
 
-#block-gin-content form .js-form-item{
-	margin-bottom: 30px;
+#block-gin-content form #names-fieldset-wrapper {
+  width: 648px;
 }
 
-#block-gin-content form .fieldgroup .js-form-item{
-	margin-bottom: 0.5em;
+#block-gin-content form .inline-components {
+  float: left;
+  width: 316px;
+  margin-right: 8px;
+  margin-bottom: 0px;
 }
 
-#block-gin-content form .form-element{
-	width: 648px;
-	border: 1px solid #1B1B1B;
-    border-radius: 0;
+#block-gin-content form .inline-components-short {
+  float: left;
+  width: 205px;
+  margin-right: 8px;
+  margin-bottom: 0px;
 }
 
-#edit-resource-concern{
-	max-height: 396px;
-	max-width: 630px;
-	overflow-y: overlay;
-	border: 1px solid #1B1B1B;
-    border-radius: 0;
-	padding: 10px 0px 10px 16px;
+#block-gin-content form .inline-components .js-form-item {
+  margin-bottom: 0;
 }
 
-#block-gin-content form #edit-resource-concerns--wrapper .fieldset__label{
-	margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
+#block-gin-content form .inline-components-short .js-form-item {
+  margin-bottom: 0;
 }
 
-/*Scrollbar CSS Start*/
-/*===================*/
-::-webkit-scrollbar {
-	width: 7px;
+#block-gin-content form .remove-button-container {
+  display: inline-block;
+  margin-top: 10px;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: #DCDEE0;
-	border-radius: 4px;
+#block-gin-content form .clear-space {
+  clear: both;
 }
 
-::-webkit-scrollbar-thumb:hover {
-	background: #71767A;
-}
-/*Scrollbar CSS End*/
-/*===================*/
-
-#block-gin-content form .form-title{
-	font-weight: 500;
-	font-size: 32px;
-	line-height: 38px;
+#block-gin-content form #addmore-button-container input {
+  margin: 8px 0 0 0;
+  background-color: #005ea2;
+  color: #ffffff;
+  border-color: #005ea2 !important;
 }
 
-#block-gin-content form .subform-title-container{
-    display: flex;
-    align-items: center;
-	clear: both;
-	margin-top: 40px;
+.form-boolean--type-checkbox:checked {
+  background-color: #205493 !important;
 }
 
-#block-gin-content form .subform-title-container h2{
-	font-size: 22px;
-	font-weight: 400;
-	line-height: 26px;
-    flex: 50%;
+form#project-create-form.project-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
 }
 
-#block-gin-content form .subform-title-container h4{
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 20px;
+.form-checkboxes {
+  max-height: 396px;
+  overflow-y: overlay;
+  border: 1px solid #1b1b1b;
+  border-radius: 0;
+  padding: 10px 0px 10px 16px;
 }
 
-#block-gin-content form input#edit-create-organization{
-	display: block;
-	margin-top: -22px;
+.subform-title-container.awardee-info-spacing {
+  margin-top: 105px;
+  margin-bottom: 29px;
 }
 
-#block-gin-content form button{
-	color: #005EA2;
-    border: 2px solid #005EA2 !important;
+.form-checkboxes .form-type--checkbox {
+  position: relative;
+  top: 20px;
+  bottom: 20px;
+  margin-bottom: 10px !important;
 }
 
-#block-gin-content form #names-fieldset-wrapper{
-	width: 648px;
+div[id="names-fieldset-wrapper"] div:nth-last-child(3) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(4) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(5) .js-form-item {
+  margin-bottom: 8px !important;
 }
 
-#block-gin-content form .inline-components{
-	float: left;
-	width: 316px;
-	margin-right: 8px;
-	margin-bottom: 0px;
+div[id="addmore-button-container"] {
+  margin-bottom: 64px;
 }
-
-#block-gin-content form .inline-components-short{
-	float: left;
-	width: 205px;
-	margin-right: 8px;
-	margin-bottom: 0px;
-}
-
-#block-gin-content form .inline-components .js-form-item{
-	margin-bottom: 0;
-}
-
-#block-gin-content form  .inline-components-short .js-form-item{
-	margin-bottom: 0;
-}
-
-#block-gin-content form  .remove-button-container{
-	display: inline-block;
-	margin-top: 30px;
-}
-
-#block-gin-content form .remove-button-container input{
-	margin-bottom: 0px;
-	color: white;
-	background-color: #d83933;
-	border-color: #d83933 !important;
-}
-
-#block-gin-content form .remove-button-container input:hover{
-	background-color: #b51d09;
-	border-color: #b51d09 !important;
-}
-
-#block-gin-content form .clear-space{
-	clear: both;
-}
-
-#block-gin-content form #addmore-button-container input{
-	margin: 8px 0 0 0 ;
-  background-color: #FFFFFF;
-  color: #005EA2;
-  border-color: #005EA2 !important;
-}
-
-form#project-create-form #edit-actions-save.button {
-	background-color: #ffffff;
-	border-radius: 2px;
-	border-color: #005ea2 !important;
-	padding: 12 20 12 20;
-	color: #005ea2;
-	font-weight: 600;
-	font-size: 16px;
-  }
-
-  form#project-create-form #edit-actions-cancel{
-	background-color: #ffffff;
-	border-radius: 2px;
-	border-color: #005ea2 !important;
-	padding: 12 20 12 20;
-	color: #005ea2;
-	font-weight: 600;
-	font-size: 16px;
-  }
-
-  #block-gin-content form #edit-actions-save input{
-  background-color: #005EA2 !important;
-  color: white !important;
-  border-color: #005EA2 !important;
-  }
-
-  input#edit-actions-save, input#edit-actions-cancel, input#edit-actions-delete{
-    background-color: #FFFFFF;
-    color: #005EA2;
-    border-color: #005EA2 !important;
-  }
-
-  input#edit-actions-save:hover, input#edit-actions-cancel:hover{
-    background-color: #005EA2 !important;
-    color: white !important;
-    border-color: #005EA2 !important;
-  }
-
-  #block-gin-content form #addmore-button-container input:hover{
-    background-color: #005EA2 !important;
-    color: white !important;
-    border-color: #005EA2 !important;
-  }
-
-  input#edit-actions-delete:hover{
-    background-color: #D83933;
-    color: white;
-    border-color: #D83933 !important;
-  }
-
-  .form-boolean--type-checkbox:checked {
-      background-color: #205493 !important;
-  }
-
-  fieldset#edit-field-resource-concerns--wrapper {
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 20px 0px 20px 16px;
-      gap: 10px;
-      width: auto;
-      height: auto;
-      left: 0.5px;
-      top: 0px;
-      background: #FFFFFF;
-      border: 1px solid #1B1B1B;
-  }

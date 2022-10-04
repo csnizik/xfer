@@ -1,41 +1,20 @@
-div#block-gin-content {
-  width: 688px;
-  margin: auto;
-}
-
-#block-gin-content form .form-element {
-  width: 648px;
-  border: 1px solid #1b1b1b;
-  border-radius: 0;
-}
+/* 
 
 #block-gin-content form .subtitle-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   clear: both;
   margin-top: 23px;
   margin-bottom: 30px;
 }
 
-#block-gin-content form .subtitle-container-custom-app {
+/* #block-gin-content form .subtitle-container-custom-app {
   display: flex;
   align-items: center;
   clear: both;
   margin-top: 23px;
   margin-bottom: 4px;
-}
-
-#block-gin-content form .subtitle-container-custom-app h2 {
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 26px;
-  flex: 50%;
-}
-
-#block-gin-content form .subtitle-container-custom-app h4 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
 }
 
 #block-gin-content form .subtitle-container-costs {
@@ -59,57 +38,19 @@ div#block-gin-content {
   line-height: 20px;
 }
 
-#block-gin-content form .title-container h1 {
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 38px;
-  margin-top: 0px;
-}
 
-#block-gin-content form .subtitle-container h2 {
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 26px;
-  flex: 50%;
-}
 
-#block-gin-content form .subtitle-container h4 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-}
 
-#input-input {
-  display: flex;
-  margin-top: 0px;
-}
 
 #input-input div {
   margin-top: 14px;
   margin-bottom: 18px;
 }
 
-#block-gin-content form select[name="field_input"].form-element {
-  width: 407px;
-  margin-right: 8px;
-}
 
-select#edit-field-unit.form-select.form-element.form-element--type-select {
-  width: 225px;
-}
 
-input#edit-field-cost-per-unit.form-number.form-element.form-element--type-number {
-  width: 407px;
-  margin-right: 8px;
-}
 
-select#edit-field-custom-application-unit.form-select.form-element.form-element--type-select {
-  width: 225px;
-}
 
-#cost-per-unit {
-  display: flex;
-}
 
 #other-costs {
   display: flex;
@@ -161,47 +102,8 @@ select#edit-field-input-category {
   margin-bottom: 0px;
 }
 
-#block-gin-content form .remove-button-container {
-  display: inline-block;
-  margin-top: 30px;
-}
 
-#block-gin-content form .remove-button-container input {
-  margin-bottom: 0px;
-  color: white;
-  background-color: #d83933;
-  border-color: #d83933 !important;
-}
-
-#block-gin-content form .remove-button-container input:hover {
-  background-color: #b51d09;
-  border-color: #b51d09 !important;
-}
-
-#block-gin-content form #addmore-button-container input {
-  margin: 0 0 0 0;
-  background-color: #ffffff;
-  color: #005ea2;
-  border-color: #005ea2 !important;
-  border-radius: 2px;
-}
-
-#block-gin-content form #addmore-button-container input:hover {
-  background-color: #005ea2 !important;
-  color: white !important;
-  border-color: #005ea2 !important;
-  border-radius: 2px;
-}
-
-input#edit-actions-save.button {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-}
+*/
 
 #cost_rotation {
   display: flex;
@@ -218,86 +120,125 @@ input#edit-actions-save.button {
   margin-right: 18px;
 }
 
-form#inputform input[id*="edit-addcost"] {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: -10px;
-}
-
-form#inputform input#edit-addcost.button .button:not(:focus) {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-  margin-top: -10px;
-}
-
-#cost_rotation input[id*="actions-delete"] {
-  margin-top: 40px;
-  background-color: #da3737;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-input#edit-actions-cancel.button {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-}
-
 input#edit-actions-save-refresh.button {
   background-color: #ffffff;
-  border-radius: 2px;
+  border-radius: 4px;
   border-color: #005ea2 !important;
   padding: 12 20 12 20;
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
 }
-
 input#edit-addcost:hover,
-input#edit-actions-save:hover,
-input#edit-actions-cancel:hover,
 input#edit-actions-save-refresh:hover {
   background-color: #005ea2 !important;
   color: white !important;
   border-color: #005ea2 !important;
+  margin-bottom: 50px;
 }
 
-input#edit-actions-delete.button {
-  background-color: #da3737;
-  border-radius: 2px;
+form#inputform input[id*="edit-addcost"] {
+  background-color: #ffffff;
+  margin-top: 10px !important;
+  border-radius: 4px;
   border-color: #005ea2 !important;
   padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+form#inputform input#edit-addcost.button .button:not(:focus) {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2;
+  font-weight: 600;
+  font-size: 16px;
+}
+#cost_rotation input[id*="actions-delete"] {
+  margin-bottom: 0px;
+  margin-top: -12px;
+  background-color: #da3737;
+  border-radius: 4px;
+  border-color: #da3737 !important;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
 }
 
-input#edit-actions-delete:hover {
-  border-width: thick;
-  border-color: #005fa2;
-  background: #b51d09;
-  color: white;
+#cost_sequence > div:last-of-type > input {
+  margin-top: 26px !important;
 }
 
-.fieldset__label,
-.fieldset__label--group,
-.form-item__label {
-  font-weight: normal !important;
+#cost_sequence > div:last-of-type > div {
+  margin-bottom: 0px !important;
+}
+
+select#edit-field-unit.form-select.form-element.form-element--type-select {
+  width: 225px;
+}
+
+input#edit-field-cost-per-unit.form-number.form-element.form-element--type-number {
+  width: 407px;
+  margin-right: 8px;
+}
+
+select#edit-field-custom-application-unit.form-select.form-element.form-element--type-select {
+  width: 225px;
+}
+
+#cost-per-unit {
+  display: flex;
+}
+
+#block-gin-content form select[name="field_input"].form-element {
+  width: 407px;
+  margin-right: 8px;
+}
+#input-input {
+  display: flex;
+  margin-top: 0px;
+}
+
+span#input-input {
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+.spacer1 {
+  height: 80px;
+}
+.spacer2 {
+  height: 3px;
+}
+.spacer3 {
+  height: 68px;
+}
+.spacer4 {
+  height: 7px;
+}
+div#other-costs-spacer {
+  margin-top: 68px;
+  margin-bottom: 7px;
+}
+form#inputform.inputform {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+.subtitle-container.section1-subheading {
+  margin-top: 25px;
+  margin-bottom: 24px;
+}
+
+.subtitle-container.second-section-subheader-spacer {
+  margin-top: 105px;
+  margin-bottom: 30px;
+}
+
+.subtitle-container.third-section-subheader-spacer {
+  margin-top: 65px;
+  margin-bottom: 30px;
 }

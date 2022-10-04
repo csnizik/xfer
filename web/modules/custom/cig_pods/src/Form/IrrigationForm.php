@@ -32,6 +32,7 @@ class IrrigationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
+		// Attach proper CSS to form
         $form['#attached']['library'][] = 'cig_pods/irrigation_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -49,11 +50,11 @@ class IrrigationForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h1>Water Testing</h1></div>'
+			'#markup' => '<div><h1>Water Testing</h1></div>'
 		];
 
         $form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Irrigation</h2><h4>Section 1 of 1</h4></div>'
 		];
 		$shmu_options = $this->getSHMUOptions();
 		$shmu_default_value = $is_edit ?  $irrigation->get('shmu')->target_id : '';
@@ -71,10 +72,9 @@ class IrrigationForm extends PodsFormBase {
 			$field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')->value;
 			$field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
 		} else {
-			$field_shmu_irrigation_sample_date_timestamp_default_value = ''; // TODO: Check behavior
+			$field_shmu_irrigation_sample_date_timestamp_default_value = ''; 
 		}
 
-		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_shmu_irrigation_sample_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Sample Date'),
@@ -102,8 +102,7 @@ class IrrigationForm extends PodsFormBase {
 			'#type' => 'number',
 			'#min_value' => 0,
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Sodium Absorption Ratio'),
-			'#description' => '(Unit meq/L)',
+			'#title' => $this->t('Sodium Absorption Ratio (Unit meq/L)'),
 			'#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
 			'#required' => FALSE
 		];
@@ -115,8 +114,7 @@ class IrrigationForm extends PodsFormBase {
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Total Dissolved Solids'),
-			'#description' => '(Unit ppm)',
+			'#title' => $this->t('Total Dissolved Solids (Unit ppm)'),
 			'#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
 			'#required' => FALSE
 		];
@@ -129,8 +127,7 @@ class IrrigationForm extends PodsFormBase {
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Total Alkalinity'),
-			'#description' => '(Unit ppm CaCO3)',
+			'#title' => $this->t('Total Alkalinity (Unit ppm CaCO3)'),
 			'#default_value' => $field_shmu_irrigation_total_alkalinity_value,
 			'#required' => FALSE
 		];
@@ -142,8 +139,7 @@ class IrrigationForm extends PodsFormBase {
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Chlorides'),
-			'#description' => '(Unit ppm)',
+			'#title' => $this->t('Chlorides (Unit ppm)'),
 			'#default_value' => $field_shmu_irrigation_chlorides_value,
 			'#required' => FALSE
 		];
@@ -153,8 +149,7 @@ class IrrigationForm extends PodsFormBase {
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Sulfates'),
-			'#description' => '(Unit ppm)',
+			'#title' => $this->t('Sulfates (Unit ppm)'),
 			'#default_value' => $field_shmu_irrigation_sulfates_value,
 			'#required' => FALSE
 		];
@@ -166,8 +161,7 @@ class IrrigationForm extends PodsFormBase {
 			'#min_value' => 0,
 			'#max_value' => 1000000, // Capped at 1 million because you can't have more than 1 million parts per million
 			'#step' => 0.01, // Float
-			'#title' => $this->t('Nitrates'),
-			'#description' => '(Unit ppm)',
+			'#title' => $this->t('Nitrates (Unit ppm)'),
 			'#default_value' => $field_shmu_irrigation_nitrates_value,
 			'#required' => FALSE
 		];
@@ -197,17 +191,17 @@ class IrrigationForm extends PodsFormBase {
     }
 
 	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 		return;
 	}
 
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
-		$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+		$id = $form_state->get('irrigation_id'); 
 		$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
 		try{
 			$irrigation->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -237,12 +231,10 @@ class IrrigationForm extends PodsFormBase {
         if(!$is_edit){
 			$irrigation_template = [];
 			$irrigation_template['type'] = 'irrigation';
-			// dpm($irrigation_template);
-			// dpm("------------");
 			$irrigation = Asset::create($irrigation_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('irrigation_id'); // TODO: Standardize access
+			$id = $form_state->get('irrigation_id');  
 			$irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
@@ -266,7 +258,7 @@ class IrrigationForm extends PodsFormBase {
 		$this->setProjectReference($irrigation, $irrigation->get('shmu')->target_id);
 		// Success message done
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function setProjectReference($assetReference, $shmuReference){

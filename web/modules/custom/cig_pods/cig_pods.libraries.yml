@@ -1,3 +1,8 @@
+dashboard:
+  css:
+    theme:
+      css/dashboard.css: {}
+
 project_entry_form:
   css:
     theme:
@@ -9,17 +14,6 @@ producer_entry_form:
     theme:
       css/producer.css: {}
       css/project.js: {}
-awardee_dashboard_form:
-  js:
-    js/dashboard.js: {}
-  css:
-    theme:
-      css/awardee_dashboard.css: {}
-
-admin_details_display:
-  css:
-    theme:
-      css/admin-details-display.css: {}
 
 awardee_methods_details_display:
   css:
@@ -45,6 +39,11 @@ irrigation_form:
   css:
     theme:
       css/irrigation.css: {}
+
+irrigation_display:
+  css:
+    theme:
+      css/irrigation_display.css: {}
 
 operation_form:
   css:

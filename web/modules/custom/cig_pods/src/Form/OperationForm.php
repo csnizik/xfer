@@ -42,6 +42,16 @@ class OperationForm extends PodsFormBase {
 		return $cost_sequence_target_ids;
 	}
 
+	public function getCostSequenceIdsForInput($input){
+		$cost_sequence_target_ids = [];
+
+		$field_cost_sequence_list = $input->get('field_input_cost_sequences'); // Expected type of FieldItemList
+		foreach($field_cost_sequence_list as $key=>$value){
+			$cost_sequence_target_ids[] = $value->target_id; // $value is of type EntityReferenceItem (has access to value through target_id)
+		}
+		return $cost_sequence_target_ids;
+	}
+
 	public function getAsset($id){
 		// We use load instead of load by properties here because we are looking by id
 		$asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -54,7 +64,7 @@ class OperationForm extends PodsFormBase {
 
 		$ignored_fields = ['uuid','revision_id','langcode','type','revision_user','revision_log_message','uid','name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
 		$sequences = [];
-		
+
 		$i = 0;
 		foreach($cost_sequence_ids as $key=>$cost_sequence_id){
 			$tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
@@ -70,7 +80,7 @@ class OperationForm extends PodsFormBase {
 		}
 
 		$form_state->set('sequences', $sequences);
-	
+
 		return;
 	}
 
@@ -95,8 +105,9 @@ class OperationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
-        $form['#attached']['library'][] = 'cig_pods/operation_form';
+
 		$form['#attached']['library'][] = 'cig_pods/css_form';
+        $form['#attached']['library'][] = 'cig_pods/operation_form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
@@ -116,7 +127,7 @@ class OperationForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h1>Operation</h1></div>'
+			'#markup' => '<div class="subform-title-container title-spacer"><h1>Operation</h1></div>'
 		];
 
 
@@ -131,15 +142,14 @@ class OperationForm extends PodsFormBase {
 		];
 
 		if($is_edit){
-			// $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
+			// $ field_operation_timestamp is expected to be a UNIX timestamp
 
 			$field_operation_timestamp = $operation->get('field_operation_date')->value;
 			$field_operation_timestamp_default_value = date("Y-m-d", $field_operation_timestamp);
 		} else {
-			$field_operation_timestamp_default_value = ''; // TODO: Check behavior
+			$field_operation_timestamp_default_value = '';
 		}
 
-		// $field_shmu_irrigation_sample_date_value = $is_edit ? $shmu->get('field_shmu_irrigation_sample_date')->value : '';
 		$form['field_operation_date'] = [
 			'#type' => 'date',
 			'#title' => $this->t('Operation Date'),
@@ -149,7 +159,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Operation Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Operation Information</h2><h4>2 Fields | Section 1 of 3</h4></div>'
 		];
 
 		$field_operation_type = $is_edit ? $operation->get('field_operation')->target_id :'';
@@ -173,7 +183,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Tractor/Self-Propelled Machine Information</h2><h4>4 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Tractor/Self-Propelled Machine Information</h2><h4>4 Fields | Section 2 of 3</h4></div>'
 		];
 
 		$field_tractor_self = $is_edit ? $operation->get('field_tractor_self_propelled_machine')->target_id : '';
@@ -224,7 +234,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_4'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
 		];
 
 
@@ -236,7 +246,7 @@ class OperationForm extends PodsFormBase {
 		// Get Options
 		$cost_options = $this->getOtherCostsOptions();
 
-		$fs_cost_sequences = $form_state -> get('sequences');
+		$fs_cost_sequences = $form_state -> get('sequences'); 
 
 		$num_cost_sequences = 1;
 		if(count($fs_cost_sequences) <> 0){
@@ -251,9 +261,9 @@ class OperationForm extends PodsFormBase {
 			$cost_default_value = ''; // Default value for empty rotation
 
 			$cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
-			
+
 			$cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
-			
+
 			$form['cost_sequence'][$fs_index] = [
 				'#prefix' => '<div id="cost_rotation">',
 				'#suffix' => '</div>',
@@ -338,24 +348,21 @@ class OperationForm extends PodsFormBase {
     }
 
 	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 		return;
 	}
 
 	public function deleteSubmit(array &$form, FormStateInterface $form_state) {
-		$id = $form_state->get('operation_id'); // TODO: Standardize access
+		$id = $form_state->get('operation_id'); 
 		$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		$sequence_ids = $this->getCostSequenceIdsForOperation($operation);
-		$inputs = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
-            ['type' => 'input', 'field_operation' => $id]
-        );
-		
+		$inputs = $operation->get('field_input')->referencedEntities();
 		try{
-			foreach($inputs as $input){
-            	$input->delete();
-			}
 			$operation->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			foreach($inputs as $input){
+            	$this->deleteInputs($input);
+			}
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -375,6 +382,29 @@ class OperationForm extends PodsFormBase {
 		}
 		return;
 	}
+
+	public function deleteInputs($input_to_delete){
+		$sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
+		try{
+			$input_to_delete->delete();
+		}catch(\Exception $e){
+			$this
+		  ->messenger()
+		  ->addError($this
+		  ->t($e->getMessage()));
+		}
+		foreach($sequence_ids as $sid) {
+			try{
+				$cost_sequence = \Drupal::entityTypeManager()->getStorage('asset')->load($sid);
+				$cost_sequence->delete();
+			}catch(\Exception $e){
+				$this
+			  ->messenger()
+			  ->addError($this
+			  ->t($e->getMessage()));
+			}
+		}
+    }
 
 	public function addInput(array &$form, FormStateInterface $form_state) {
 		$form_state->set('input_redirect', TRUE);
@@ -404,7 +434,7 @@ class OperationForm extends PodsFormBase {
 			$operation = Asset::create($operation_template);
 		} else {
 			// Operation is of type Edit
-			$id = $form_state->get('operation_id'); // TODO: Standardize access
+			$id = $form_state->get('operation_id'); 
 			$operation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 		}
 
@@ -424,7 +454,7 @@ class OperationForm extends PodsFormBase {
             $operation->set( $key, $value );
         }
 
-		$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+		$num_cost_sequences = count($form_values['cost_sequence']); 
 		$all_cost_sequences = $form_values['cost_sequence'];
 		$cost_options = $this->getOtherCostsOptions();
 
@@ -447,7 +477,7 @@ class OperationForm extends PodsFormBase {
 
 			$cost_sequence->save();
 
-			$cost_sequence_ids[] = $cost_sequence -> id(); 
+			$cost_sequence_ids[] = $cost_sequence -> id();
 		}
 
 		$operation->set('field_operation_cost_sequences', $cost_sequence_ids);
@@ -467,7 +497,7 @@ class OperationForm extends PodsFormBase {
 		if($form_state->get('input_redirect')){
 			$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $operation->get('id')->value]);
 		}else{
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}
     }
 
@@ -480,7 +510,7 @@ class OperationForm extends PodsFormBase {
 
 	public function addAnotherCostSequence(array &$form, FormStateInterface $form_state){
 		$sequences = $form_state->get('sequences');
-		
+
 		$new_cost_sequence = [];
 		$new_cost_sequence['field_cost'][0]['value'] = '';
 		$new_cost_sequence['field_cost_type'][0]['value'] = '';
@@ -488,12 +518,12 @@ class OperationForm extends PodsFormBase {
 		$cost_options = $this->getOtherCostsOptions();
 		$sequences[] = $new_cost_sequence;
 		$form_state->set('sequences', $sequences);
-	
+
 		$form_state->setRebuild(True);
 	}
 
 	public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state){
-		
+
 		return $form['cost_sequence'];
 	}
 

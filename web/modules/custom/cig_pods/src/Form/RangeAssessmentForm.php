@@ -27,6 +27,7 @@ class RangeAssessmentForm extends PodsFormBase {
     public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
       $assessment = $asset;
 
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/range_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -54,9 +55,8 @@ class RangeAssessmentForm extends PodsFormBase {
         $form['producer_title'] = [
 			'#markup' => '<h1> Assessments </h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -72,7 +72,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('range_assessment_date')->value;
 			$rangeland_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$rangeland_timestamp_default_value = ''; // TODO: Check behavior
+			$rangeland_timestamp_default_value = '';
 		}
 		$form['range_assessment_date'] = [
 			'#type' => 'date',
@@ -360,7 +360,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 
     public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
@@ -370,7 +370,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 		try{
             $rangeland->delete();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
         }catch(\Exception $e){
             $this
           ->messenger()
@@ -407,7 +407,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('assessment_id');
@@ -423,7 +423,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
 
     }
@@ -482,17 +482,6 @@ class RangeAssessmentForm extends PodsFormBase {
 		$score = ceil(($soil_surface_loss + $soil_surface_resistance + $compaction_layer + $functional_structural + $dead_plants + $litter_cover + $annual_production + $invasive_plants + $vigor_plants) / 9.0);
 		return $severity_options[$score];
 	}
-
-	// public function displayRcScores(array &$form, FormStateInterface $form_state ){
-	// 	$form_state->set('rc_display', array(1,2,3,4));
-	// 	$form_state->setRebuild(TRUE);
-	// }
-
-	// public function updateScores(array &$form, FormStateInterface $form_state){
-
-    //     return $form['rc_container'];
-    // }
-
 
     /**
      * {@inheritdoc}

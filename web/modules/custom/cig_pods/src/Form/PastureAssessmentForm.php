@@ -17,6 +17,7 @@ class PastureAssessmentForm extends PodsFormBase {
    */
     public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
       $assessment = $asset;
+		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/pasture_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE;
@@ -31,7 +32,6 @@ class PastureAssessmentForm extends PodsFormBase {
 
 		if($is_edit){
 			$form_state->set('operation', 'edit');
-			// $form_state->set('calculate_rcs',True);
 			$form_state->set('assessment_id', $assessment->id());
 
 		} else {
@@ -42,11 +42,10 @@ class PastureAssessmentForm extends PodsFormBase {
 			$form_state->set('calculate_rcs', False);
 		}
         $form['producer_title'] = [
-			'#markup' => '<h1> <b> Assessments </b> </h1>',
+			'#markup' => '<h1>Assessments</h1>',
 		];
-		// TOOD: Attach appropriate CSS for this to display correctly
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subform-title-container subform1-spacer"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>'
 		];
 
         $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -64,7 +63,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			$date_value = $assessment->get('pasture_assessment_date')->value;
 			$pasture_timestamp_default_value = date("Y-m-d", $date_value);
 		} else {
-			$pasture_timestamp_default_value = ''; // TODO: Check behavior
+			$pasture_timestamp_default_value = '';
 		}
 		$form['pasture_assessment_date'] = [
 			'#type' => 'date',
@@ -200,7 +199,7 @@ class PastureAssessmentForm extends PodsFormBase {
 			'#suffix' => '</div>',
         ];
 
-		$form['actions']['identify-resource-concerns'] = [
+		$form['identify-resource-concerns'] = [
 			'#type' => 'submit',
 			'#value' => $this->t('Calculate Score'),
 			'#submit' => ['::displayRcScores'],
@@ -216,15 +215,16 @@ class PastureAssessmentForm extends PodsFormBase {
 			$toDisplay = $form_state->get('rc_display');
 		if (count($toDisplay) <> 0) {
 			$form['rc_container']['rc_header'] = [
-				'#markup' => '<h5> Resource Concerns Identified from In-Field Assessment. </h5>'
+				'#markup' => '<h2 class="resource-concerns-spacer">Resource Concerns Identified from In-Field Assessment </h2>'
 			];
 			$form['rc_container']['rc_soil'] = [
-				'#markup' => $this->t('<p classname="Soil"> <b> Calculated from in-field assessments</b></p>
-				<p><b>Pasture Condition Score: @soil_score</b></p>', ['@soil_score' => $this->getPastureCondition($form, $form_state, $severity_options)])
+				'#markup' => $this->t('<div class="pasture-condition"><span>Pasture Condition Score: @soil_score</span> <span class="grey-note"> (Calculated from in-field assessments)</span></div>', ['@soil_score' => $this->getPastureCondition($form, $form_state, $severity_options)],)
 			];
 
 		}
-
+		$form['actions'] = [
+			'#type' => 'actions',
+		];
 
 		$form['actions']['save'] = [
 			'#type' => 'submit',
@@ -266,7 +266,7 @@ class PastureAssessmentForm extends PodsFormBase {
 
 
     public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-        $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+        $form_state->setRedirect('cig_pods.dashboard');
     }
 
 	public function deleteFieldAssessment(array &$form, FormStateInterface $form_state){
@@ -277,7 +277,7 @@ class PastureAssessmentForm extends PodsFormBase {
 
     try{
       $PastureAssessment->delete();
-  		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+  		$form_state->setRedirect('cig_pods.dashboard');
     }catch(\Exception $e){
               $this
             ->messenger()
@@ -314,7 +314,7 @@ class PastureAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
 
         }else{
             $id = $form_state->get('assessment_id');
@@ -330,7 +330,7 @@ class PastureAssessmentForm extends PodsFormBase {
 
 			$this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
-            $form_state->setRedirect('cig_pods.awardee_dashboard_form');
+            $form_state->setRedirect('cig_pods.dashboard');
         }
 
     }

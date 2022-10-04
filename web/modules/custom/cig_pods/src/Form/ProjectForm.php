@@ -130,6 +130,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			$form_state->set('operation','create');
 	}
 	$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+	$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
@@ -265,14 +266,12 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 		/* Variables declaration end*/
 
-	//	$this->buildProjectInformationSection($form, $form_state);
-
 		$awardee_options = $this->getAwardeeOptions();
 		$contact_name_options = $this->getAwardeeContactNameOptions($form, $form_state);
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container awardee-info-spacing"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
 		];
 
 		$awardee_default_name = $is_edit ? $project->get('field_awardee')->target_id : NULL;
@@ -284,8 +283,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			'#default_value' => $awardee_default_name,
 		];
 
-
-		// $contact_name_options = $this->getAwardeeContactNameOptions();
 		$form['#tree'] = TRUE;
 		$form['names_fieldset'] = [
 		  '#prefix' => '<div id="names-fieldset-wrapper"',
@@ -407,9 +404,6 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 
 
 	public function deleteProject(array &$form, FormStateInterface $form_state){
-
-		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
-
 		$project_id = $form_state->get('project_id');
 		$project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
 		$contacts = \Drupal::entityTypeManager() -> getStorage('asset') -> loadByProperties(
@@ -421,7 +415,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 				$contact->delete();
 			}
 			$project->delete();
-			$form_state->setRedirect('cig_pods.admin_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -484,7 +478,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
   }
 
   public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
   }
 
   public function getFormEntityMapping(){
@@ -565,19 +559,15 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		array_push($contacts, $contact);
 	}
 
-	// $project_submission['field_contact'] = $contacts;
-
-
 	$project = Asset::create($project_submission);
 	$project -> save();
 
 	foreach($contacts as $contact){
-		// $cur_contact = \Drupal::entityTypeManager()->getStorage('asset')->load($contact);
 		$contact->set('project', $project->id());
 		$contact->save();
 	}
 
-	$form_state->setRedirect('cig_pods.admin_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
 
 	return;
 
@@ -637,7 +627,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$project->set('field_awardee_eauth_id', $contact_eauth_ids);
 		$project->set('field_grant_type', $field_grant_type);
 		$project->save();
-		$form_state->setRedirect('cig_pods.admin_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 }
 

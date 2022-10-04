@@ -169,3 +169,9 @@ inputs_form:
   css:
     theme:
       css/inputs.css: {}
+
+main:
+  version: VERSION
+  css:
+    theme:
+      scss/newtheme.scss: { }

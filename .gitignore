@@ -53,3 +53,7 @@ Thumbs.db
 
 #db folder
 db/
+
+# vim <3
+.*.sw?
+*.sw?

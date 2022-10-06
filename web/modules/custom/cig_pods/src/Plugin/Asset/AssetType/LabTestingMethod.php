@@ -23,7 +23,6 @@ class LabTestingMethod extends FarmAssetType {
 
     public function buildFieldDefinitions() {
 
-      //
       $fields = parent::buildFieldDefinitions();
 
       // We do not add a "Name" field because we inherit that from the FarmAssetType class

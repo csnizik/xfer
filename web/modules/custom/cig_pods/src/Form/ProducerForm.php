@@ -32,7 +32,7 @@ class ProducerForm extends PodsFormBase {
 
 
 
-		$form['#attached']['library'][] = 'cig_pods/producer_form';
+		$form['#attached']['library'][] = 'cig_pods/producer_form'; // Attach proper CSS to form
 
 		$form['producer_title'] = [
             '#markup' => '<h1>Producer Information</h1>',
@@ -53,7 +53,7 @@ class ProducerForm extends PodsFormBase {
 		$form['field_producer_first_name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Producer First Name'),
-			'#required' => TRUE, // Do Not Change
+			'#required' => TRUE, 
 			'#default_value' => $producer_first_name_default_value,
 		];
 
@@ -61,7 +61,7 @@ class ProducerForm extends PodsFormBase {
 		$form['field_producer_last_name'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Producer Last Name'),
-			'#required' => TRUE, // Do Not Change
+			'#required' => TRUE,
 			'#default_value' => $producer_last_name_default_value,
 		];
 
@@ -69,7 +69,7 @@ class ProducerForm extends PodsFormBase {
 		$form['field_producer_headquarter'] = [
 			'#type' => 'textfield',
 			'#title' => $this->t('Producer Headquarter Location'),
-			'#required' => FALSE, // Do Not Change
+			'#required' => FALSE, 
 			'#default_value' => $producer_headquarter_default_value,
 		];
 
@@ -110,14 +110,12 @@ class ProducerForm extends PodsFormBase {
  * Deletes the producer that is currently being viewed.
  */
 public function deleteProducer(array &$form, FormStateInterface $form_state){
-
-	// TODO: we probably want a confirm stage on the delete button. Implementations exist online
 	$producer_id = $form_state->get('producer_id');
 	$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($producer_id);
 
 	try{
 		$producer->delete();
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}catch(\Exception $e){
 		$this
 	  ->messenger()
@@ -130,7 +128,7 @@ public function deleteProducer(array &$form, FormStateInterface $form_state){
 }
 
 public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-	$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+	$form_state->setRedirect('cig_pods.dashboard');
 }
 
 
@@ -147,7 +145,6 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 	]));
 
 	$is_create = $form_state->get('operation') === 'create';
-	// dpm(gettype($operation));
 
 	// PHP: '1' == 1 is True but '1' === 1 is False
 
@@ -165,7 +162,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 
 		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	} else {
 		$id = $form_state->get('producer_id');
 		$producer = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
@@ -186,7 +183,7 @@ public function dashboardRedirect(array &$form, FormStateInterface $form_state){
 
 		$this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
 
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 
 	}
 }

@@ -125,7 +125,7 @@ class InputsForm extends PodsFormBase {
 			$form_state->set('operation_id', $operation->id());
 	    }
 
-        $form['#attached']['library'][] = 'cig_pods/inputs_form';
+        $form['#attached']['library'][] = 'cig_pods/inputs_form'; // Attach proper CSS to form
 
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
@@ -436,7 +436,7 @@ class InputsForm extends PodsFormBase {
 
 	        $input_to_save = Asset::create($input_submission);
 
-			$num_cost_sequences = count($form_values['cost_sequence']); // TODO: Can be calculate dynamically based off of form submit
+			$num_cost_sequences = count($form_values['cost_sequence']); 
 			$all_cost_sequences = $form_values['cost_sequence'];
 			$cost_options = $this->getOtherCostsOptions();
 
@@ -517,7 +517,7 @@ class InputsForm extends PodsFormBase {
 	if($form_state->get('input_redirect') == TRUE){
 		$form_state->setRedirect('cig_pods.inputs_form', ['operation' => $form_state->get('operation_id')]);
 	}else{
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 	}
 }
 
@@ -529,7 +529,7 @@ class InputsForm extends PodsFormBase {
 	}
 
  	public function cancelSubmit(array &$form, FormStateInterface $form_state) {
-		$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+		$form_state->setRedirect('cig_pods.dashboard');
 		return;
 	}
 
@@ -550,7 +550,7 @@ class InputsForm extends PodsFormBase {
 			$input_to_delete->delete();
 			$operation_reference->set('field_input', $updated_inputs);
 			$operation_reference->save();
-			$form_state->setRedirect('cig_pods.awardee_dashboard_form');
+			$form_state->setRedirect('cig_pods.dashboard');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()

@@ -130,6 +130,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			$form_state->set('operation','create');
 	}
 	$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+	$form['#attached']['library'][] = 'core/drupal.form';
 
 		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)

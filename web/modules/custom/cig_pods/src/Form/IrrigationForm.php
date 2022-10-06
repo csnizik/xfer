@@ -34,6 +34,7 @@ class IrrigationForm extends PodsFormBase {
 		}
         $form['#attached']['library'][] = 'cig_pods/irrigation_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){

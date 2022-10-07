@@ -9,16 +9,6 @@
   border-radius: 0;
 }
 
-/* form#producer-create-form #edit-save.button {
-	background-color: #ffffff;
-	border-radius: 2px;
-	border-color: #005ea2 !important;
-	padding: 12 20 12 20;
-	color: #005ea2;
-	font-weight: 600;
-	font-size: 16px;
-  } */
-
 form#producer-create-form #edit-cancel {
   background-color: #ffffff;
   border-radius: 2px;

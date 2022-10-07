@@ -3,10 +3,6 @@ div#block-gin-content {
   margin: auto;
 }
 
-/* #block-gin-content form .js-form-item {
-  margin-bottom: 35px;
-} */
-
 #block-gin-content form .fieldgroup .js-form-item {
   margin-bottom: 0.5em;
 }

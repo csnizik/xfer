@@ -237,3 +237,7 @@ form#soil-health-management-unit-form.soil-health-management-unit-form {
 fieldset#edit-field-shmu-practices-addressed--wrapper:last-of-type {
   margin-bottom: 59px !important;
 }
+
+.form-item__label {
+  margin-top: 15px !important;
+}

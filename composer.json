@@ -14,7 +14,8 @@
     "wikimedia/composer-merge-plugin": "^2.0",
     "drupal/structure_sync": "^2.0",
     "drupal/farm_nrcs": "^2.1",
-    "drupal/openid_connect": "2.0.0-alpha12"
+    "drupal/openid_connect": "2.0.0-alpha12",
+    "twig/twig": "2.15.2"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

@@ -194,6 +194,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// Attach the SHMU css library
 		$form['#attached']['library'][] = 'cig_pods/soil_health_management_unit_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 		$form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
 		// First section

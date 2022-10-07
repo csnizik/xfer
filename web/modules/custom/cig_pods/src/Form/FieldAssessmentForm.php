@@ -29,6 +29,7 @@ class FieldAssessmentForm extends PodsFormBase {
 	public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL){
     $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		$is_edit = $assessment <> NULL;
 

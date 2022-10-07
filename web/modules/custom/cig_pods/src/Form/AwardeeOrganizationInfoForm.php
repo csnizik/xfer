@@ -30,6 +30,7 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 
 
 		$form['#attached']['library'][] = 'cig_pods/awardee_organization_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		$form['form_title'] = [
 			'#markup' => '<h1 id="form-title">Awardee Organization Information</h1>'

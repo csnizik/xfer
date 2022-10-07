@@ -13,7 +13,7 @@ class RangeAssessmentForm extends PodsFormBase {
     public function getSHMUOptions(){
 		$options = $this->entityOptions('asset', 'soil_health_management_unit');
 		return ['' => '- Select -'] + $options;
-		
+
 	}
 
 	public function getLandUseOptions(){
@@ -29,6 +29,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
 		$form['#attached']['library'][] = 'cig_pods/range_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 		$form['#tree'] = TRUE;
 
 		if($form_state->get('rc_display') == NULL){
@@ -251,7 +252,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-			
+
 		$range_assessment_vigor_plants_value = $is_edit ? $assessment->get('range_assessment_vigor_plants')->value : '';
 		$form['range_assessment_vigor_plants'] = [
 			'#type' => 'select',
@@ -294,7 +295,7 @@ class RangeAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-			 $range_assessment_rc_hydrologic_function_justification_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function_justification')->getValue()[0]['value'] : '';	
+			 $range_assessment_rc_hydrologic_function_justification_value = $is_edit ? $assessment->get('range_assessment_rc_hydrologic_function_justification')->getValue()[0]['value'] : '';
 			$form['range_assessment_rc_hydrologic_function_justification'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Hydrological Function Assessment Justification'),
@@ -313,7 +314,7 @@ class RangeAssessmentForm extends PodsFormBase {
 				'#required' => FALSE,
 			];
 
-			 $range_assessment_rc_biotic_integrity_justification_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity_justification')->getValue()[0]['value'] : '';	
+			 $range_assessment_rc_biotic_integrity_justification_value = $is_edit ? $assessment->get('range_assessment_rc_biotic_integrity_justification')->getValue()[0]['value'] : '';
 			$form['range_assessment_rc_biotic_integrity_justification'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Biotic Integrity Assessment Justification'),
@@ -383,7 +384,7 @@ class RangeAssessmentForm extends PodsFormBase {
 		return array('shmu', 'range_assessment_date', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
 		'range_assessment_wind_scoured', 'range_assessment_litter_movement', 'range_assessment_soil_surface_resistance', 'range_assessment_soil_surface_loss', 'range_assessment_effects_of_plants',
 		'range_assessment_compaction_layer', 'range_assessment_functional_structural', 'range_assessment_dead_plants', 'range_assessment_litter_cover', 'range_assessment_annual_production',
-		'range_assessment_vigor_plants', 'range_assessment_invasive_plants', 
+		'range_assessment_vigor_plants', 'range_assessment_invasive_plants',
 		'range_assessment_rc_soil_site_stability','range_assessment_rc_soil_site_stability_justification', 'range_assessment_rc_hydrologic_function', 'range_assessment_rc_hydrologic_function_justification', 'range_assessment_rc_biotic_integrity', 'range_assessment_rc_biotic_integrity_justification'
 );
 	}

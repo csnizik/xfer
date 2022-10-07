@@ -6,6 +6,8 @@ form#lab-test-methods-admin #edit-actions-update-profile.button {
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 6px;
+  margin-bottom: 63px;
 }
 
 form#lab-test-methods-admin #edit-actions-update-profile:hover {
@@ -32,6 +34,11 @@ form#lab-test-methods-admin.lab-test-methods-admin {
   margin-bottom: 33px;
 }
 
-div.form-item {
+/* div.form-item {
   margin-bottom: 23px !important;
+} */
+
+.line {
+  background: #000000;
+  width: 648px;
 }

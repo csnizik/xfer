@@ -1,147 +1,31 @@
-div#block-gin-content {
-  width: 920px;
-  margin: auto;
-}
-
-#block-gin-content form .js-form-item {
-  margin-bottom: 30px;
-}
-
-#block-gin-content form .fieldgroup .js-form-item {
-  margin-bottom: 0.5em;
-}
-
-#block-gin-content form .form-element {
-  width: 848px;
-  border: 1px solid #1b1b1b;
-  border-radius: 0;
-}
-
-input#edit-actions-cancel {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-}
-
 input#edit-actions-add-input {
   background-color: #005ea2;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-input#edit-actions-delete {
-  background-color: #da3737;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-input#edit-actions-save {
-  background-color: #ffffff;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
-  padding: 12 20 12 20;
-  color: #005ea2;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-input#edit-cancel:hover {
-  border-width: thick;
-  border-color: #005fa2;
-  color: #005fa2;
-}
-
-input#edit-delete:hover {
-  border-width: thick;
-  border-color: #005fa2;
-  background: #b51d09;
-  color: white;
-}
-
-input#edit-actions-save:hover {
-  border-width: thick;
-  border-color: #005fa2;
-  background: #005fa2;
-  color: white;
-}
-
-#block-gin-content form .subform-title-container {
-  display: flex;
-  align-items: center;
-  clear: both;
-}
-
-#block-gin-content form .subform-title-container h2 {
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 26px;
-  flex: 50%;
-}
-
-#block-gin-content form .subform-title-container h1 {
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 26px;
-  flex: 50%;
-}
-
-#block-gin-content form .subform-title-container h4 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-}
-
-#block-gin-content form .form-title {
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 38px;
-}
-
-/*Scrollbar CSS Start*/
-/*===================*/
-::-webkit-scrollbar {
-  width: 7px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #dcdee0;
   border-radius: 4px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #71767a;
-}
-/*Scrollbar CSS End*/
-/*===================*/
-
-.form-checkboxes {
-  max-height: 396px;
-  overflow-y: overlay;
-  border: 1px solid #1b1b1b;
-  border-radius: 0;
-  padding: 10px 0px 10px 16px;
-}
-.fieldset__label,
-.fieldset__label--group,
-.form-item__label {
-  font-weight: normal !important;
+form#operation-form.operation-form input#edit-actions-save {
+  background-color: #ffffff !important;
+  border-radius: 4px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #005ea2 !important;
+  font-weight: 600;
+  font-size: 16px;
 }
 
-#crop_rotation_months {
-  display: flex;
+form#operation-form.operation-form input#edit-actions-save:hover {
+  background-color: #005ea2 !important;
+  border-radius: 4px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 16px;
 }
 
 #cost_rotation {
@@ -161,24 +45,56 @@ input#edit-actions-save:hover {
 
 form#operation-form input#edit-addcost.button {
   background-color: #ffffff;
-  border-radius: 2px;
+  border-radius: 4px;
   border-color: #005ea2 !important;
   padding: 12 20 12 20;
   color: #005ea2;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 48px;
+}
+
+form#operation-form input#edit-addcost:hover {
+  background-color: #005ea2;
+  border-radius: 4px;
+  border-color: #005ea2 !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 48px;
 }
 
 #cost_rotation input[id*="actions-delete"] {
-  margin-top: 34px;
   background-color: #da3737;
-  border-radius: 2px;
-  border-color: #005ea2 !important;
+  margin-top: -2px;
+  border-radius: 4px;
+  border-color: #da3737 !important;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
 }
 
-#crop_rotation input[id*="actions-delete"]:hover {
-  background-color: transparent !important;
+#cost_sequence > div:last-of-type > div {
+  margin-bottom: 10px !important;
+}
+#cost_sequence > div:last-of-type > input {
+  margin-top: 26px !important;
+  margin-bottom: 10px !important;
+}
+
+form#operation-form.operation-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+.subform-title-container.title-spacer {
+  margin-bottom: 28px;
+}
+
+.subform-title-container.subheader-spacer {
+  margin-top: 104px;
+  margin-bottom: 29px;
 }

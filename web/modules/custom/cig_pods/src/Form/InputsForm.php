@@ -125,7 +125,9 @@ class InputsForm extends PodsFormBase {
 			$form_state->set('operation_id', $operation->id());
 	    }
 
-        $form['#attached']['library'][] = 'cig_pods/inputs_form'; // Attach proper CSS to form
+       
+		 $form['#attached']['library'][] = 'cig_pods/css_form';
+		  $form['#attached']['library'][] = 'cig_pods/inputs_form';
 
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
@@ -134,7 +136,7 @@ class InputsForm extends PodsFormBase {
 		];
 
         $form['subtitle_1'] = [
-			'#markup' => '<div class="subtitle-container"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container section1-subheading"><h2>Input Information</h2><h4>5 Fields | Section 1 of 3</h4></div>'
 		];
 
         $form['operation_description'] = [
@@ -202,8 +204,8 @@ class InputsForm extends PodsFormBase {
 			'#options' => $input_options,
 			'#default_value' => $field_input_value,
 			'#required' => FALSE,
-      '#prefix' => '<span id="input-type">',
-      '#suffix' => '</span>',
+    //    '#prefix' => '<span id="input-type">',
+    //   '#suffix' => '</span>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -214,8 +216,8 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
-      '#prefix' => '<span>',
-      '#suffix' => '</span>',
+    //   '#prefix' => '<span>',
+    //    '#suffix' => '</span>',
 		];
 
       $form['input_suffix'] = [
@@ -235,7 +237,7 @@ class InputsForm extends PodsFormBase {
         ];
 
         $form['subtitle_2'] = [
-			'#markup' => '<div class="subtitle-container-custom-app"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subtitle-container second-section-subheader-spacer"><h2>Custom Application</h2><h4>2 Fields | Section 2 of 3</h4></div>'
 		];
 
         $field_cost_per_unit_value = $is_edit && $input->get('field_cost_per_unit')[0] ? $this->convertFraction($input->get('field_cost_per_unit')[0]) : '';
@@ -262,7 +264,7 @@ class InputsForm extends PodsFormBase {
 		];
 
         $form['subtitle_3'] = [
-			'#markup' => '<div class="subtitle-container-costs"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
+			'#markup' => '<div id="other-costs-spacer " class="subtitle-container third-section-subheader-spacer"><h2>Other Costs</h2><h4>Section 3 of 3</h4></div>'
 		];
 
 		$form['#tree'] = TRUE;

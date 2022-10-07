@@ -185,11 +185,15 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// Attach the SHMU css library
 		$form['#attached']['library'][] = 'cig_pods/soil_health_management_unit_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
+		$form['title'] = [
+			'#markup' => '<div class="title-container"><h1>Soil Health Management Unit (SHMU) Details</h1></div>'
+		];
 		// First section
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section1"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 10</h4></div>'
 		];
 
 		$field_shmu_involved_producer_value = '';
@@ -251,7 +255,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section2"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 10</h4></div>'
 		];
 
 		$field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id: '';
@@ -265,11 +269,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 		];
 		// New section (Geometry entry)
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container section3"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 10</h4> </div>'
 		];
 
 		$form['static_1']['content'] = [
-			'#markup' => '<div>Draw your SHMU on the Map</div>',
+			'#markup' => '<div class="draw">Draw your SHMU on the Map</div>',
 		];
 
 		$form['mymap'] = [
@@ -293,7 +297,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Soil and Treatment Identification)
 		$form['subform_4'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container section4"><h2>Soil and Treatment Identification</h2><h4>2 Fields | Section 4 of 10</h4> </div>'
 		];
     $form['ssurgo_lookup'] = [
       '#type' => 'submit',
@@ -327,7 +331,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Land Use History)
 		$form['subform_5'] = [
-			'#markup' => '<div class="subform-title-container"><h2> Land Use History </h2><h4> 5 Fields | Section 5 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section5"><h2> Land Use History </h2><h4> 5 Fields | Section 5 of 10</h4></div>'
 		];
 		$field_shmu_prev_land_use_value = $is_edit ? $shmu->get('field_shmu_prev_land_use')->target_id : '';
 		$land_use_options = $this->getLandUseOptions();
@@ -390,7 +394,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Overview of the Production System)
 		$form['subform_6'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container section6"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 10</h4> </div>'
 		];
 
 
@@ -505,7 +509,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Cover Crop History)
 		$form['subform_7'] = [
-			'#markup' => '<div class="subform-title-container"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 11</h4> </div>'
+			'#markup' => '<div class="subform-title-container section7"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 10</h4> </div>'
 		];
 
 		$field_shmu_initial_crops_planted = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_initial_crops_planted') : [];
@@ -520,7 +524,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Tillage Type)
 		$form['subform_8'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Tillage Type</h2><h4> 4 Fields | Section 8 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section8"><h2>Tillage Type</h2><h4> 4 Fields | Section 8 of 10</h4></div>'
 		];
 
 		$field_current_tillage_system_value = $is_edit ? $shmu->get('field_current_tillage_system')->target_id : '';
@@ -591,7 +595,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
 		// New section (Additional Concerns or Impacts)
 		$form['subform_10'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Additional Concerns or Impacts</h2><h4> 2 Fields | Section 10 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section9"><h2>Additional Concerns or Impacts</h2><h4> 2 Fields | Section 9 of 10</h4></div>'
 		];
 
 		$major_resource_concerns_options = $this->getMajorResourceConcernOptions();
@@ -617,7 +621,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 			'#required' => FALSE
 		];
 		$form['subform_11'] = [
-			'#markup' => '<div class="subform-title-container"><h2>NRCS Practices</h2><h4> 1 Field | Section 11 of 11</h4></div>'
+			'#markup' => '<div class="subform-title-container section10"><h2>NRCS Practices</h2><h4> 1 Field | Section 10 of 10</h4></div>'
 		];
 
 		$field_shmu_practices_addressed_values = $is_edit ? $this-> getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_practices_addressed') : [];

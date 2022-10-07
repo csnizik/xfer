@@ -26,11 +26,11 @@ class SoilHealthSampleForm extends PodsFormBase {
 
     public function buildSampleInformationSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL){
 		$form['form_title'] = [
-			'#markup' => '<h1 id="form-title">Sample Collection</h1>'
+			'#markup' => '<h1>Sample Collection</h1>'
 		];
 
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Sample Information</h2><h4>6 Fields | Section 1 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container section1-subtitle-spacer"><h2>Sample Information</h2><h4>6 Fields | Section 1 of 2</h4></div>'
 		];
 
         $shmu_options = $this->getSHMUOptions();
@@ -157,6 +157,22 @@ class SoilHealthSampleForm extends PodsFormBase {
 			'#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>'
 		];
 
+		$form['create_points_prompt'] = [
+			'#markup' => '<div class="create-prompt-spacer"><h4>Create Your GPS Points</h4></div>'
+		];
+		
+
+		$form['field_map'] = [
+			'#type' => 'farm_map_input',
+			'#map_type' => 'pods',
+			 '#behaviors' => [
+				'latlon_add',
+				'zoom_us',
+       		 	'wkt_refresh_soil_sample',
+      		],
+			'#display_raw_geometry' => TRUE,
+			'#default_value' => $is_edit ? $sample_collection->get('field_soil_sample_geofield')->value : '',
+		];
 		$form['lat_long_div'] = [
 			'#prefix' => '<div id="lat-long"',
 			'#suffix' => '</div>',
@@ -180,29 +196,16 @@ class SoilHealthSampleForm extends PodsFormBase {
 
 		$form['lat_long_div']['add_point'] = [
 			'#type' => 'button',
-			'#value' => $this->t('Add point to map'),
+			'#value' => $this->t('Add Point'),
 			'#attributes' => [
 				'onclick' => 'event.preventDefault();',
 			],
 		];
 
-		$form['field_map'] = [
-			'#type' => 'farm_map_input',
-			'#map_type' => 'pods',
-			 '#behaviors' => [
-				'latlon_add',
-				'zoom_us',
-       		 	'wkt_refresh_soil_sample',
-      		],
-			'#display_raw_geometry' => TRUE,
-			'#default_value' => $is_edit ? $sample_collection->get('field_soil_sample_geofield')->value : '',
-		];
-
 		// Add submit button
-		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
 		$form['actions']['save'] = array(
 			'#type' => 'submit',
-			'#value' => $button_save_label,
+			'#value' =>  $this->t('Save'),
 		);
 
 		$form['actions']['cancel'] = [

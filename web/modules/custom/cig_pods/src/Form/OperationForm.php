@@ -105,9 +105,9 @@ class OperationForm extends PodsFormBase {
         if ($form_state->get('load_done') == NULL){
 			$form_state->set('load_done', FALSE);
 		}
-		// Attach proper CSS to form
-        $form['#attached']['library'][] = 'cig_pods/operation_form';
+
 		$form['#attached']['library'][] = 'cig_pods/css_form';
+        $form['#attached']['library'][] = 'cig_pods/operation_form';
 		$form['#tree'] = TRUE;
 		// Determine if it is an edit process. If it is, load irrigation into local variable.
 		if($is_edit){
@@ -127,7 +127,7 @@ class OperationForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 		$form['subform_1'] = [
-			'#markup' => '<div class="subform-title-container"><h1>Operation</h1></div>'
+			'#markup' => '<div class="subform-title-container title-spacer"><h1>Operation</h1></div>'
 		];
 
 
@@ -159,7 +159,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Operation Information</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Operation Information</h2><h4>2 Fields | Section 1 of 3</h4></div>'
 		];
 
 		$field_operation_type = $is_edit ? $operation->get('field_operation')->target_id :'';
@@ -183,7 +183,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_3'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Tractor/Self-Propelled Machine Information</h2><h4>4 Fields | Section 2 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Tractor/Self-Propelled Machine Information</h2><h4>4 Fields | Section 2 of 3</h4></div>'
 		];
 
 		$field_tractor_self = $is_edit ? $operation->get('field_tractor_self_propelled_machine')->target_id : '';
@@ -234,7 +234,7 @@ class OperationForm extends PodsFormBase {
 		];
 
 		$form['subform_4'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
+			'#markup' => '<div class="subform-title-container subheader-spacer"><h2>Other Costs</h2><h4>2 Fields | Section 3 of 3</h4></div>'
 		];
 
 

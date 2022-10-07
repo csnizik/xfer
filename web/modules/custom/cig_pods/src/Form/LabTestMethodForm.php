@@ -58,8 +58,9 @@ class LabTestMethodForm extends PodsFormBase {
             $form_state->set('operation','create');
         }
 
-
-        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form'; // Attach proper CSS to form
+        $form['#attached']['library'][] = 'cig_pods/css_form';  
+        $form['#attached']['library'][] = 'cig_pods/lab_test_method_admin_form';
+        
         $form['#tree'] = TRUE; // Allows getting at the values hierarchy in form state
 
 
@@ -104,14 +105,14 @@ class LabTestMethodForm extends PodsFormBase {
 		];
 
         $form['lab_form_header'] = [
-			'#markup' => '<div class="lab-form-header"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Methods</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
     if($is_edit){
             $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
                 '#title' => 'Soil Health Test Laboratory',
-                '#options' => $s_he_test_laboratory,
+                 '#options' => $s_he_test_laboratory,
                 '#default_value' => $lab_default,
                 '#required' => TRUE,
             ];
@@ -120,7 +121,7 @@ class LabTestMethodForm extends PodsFormBase {
             $form['field_lab_method_lab_test_profile'] = [
                 '#type' => 'select',
                 '#title' => 'Soil Health Test Methods',
-                '#options' => $lab_test_profile,
+                 '#options' => $lab_test_profile,
                 '#default_value' => $lab_profile_default,
                 '#required' => TRUE,
             ];
@@ -129,7 +130,6 @@ class LabTestMethodForm extends PodsFormBase {
             $form['field_lab_soil_test_laboratory'] = [
                 '#type' => 'select',
                 '#title' => t('Soil Health Test Laboratory'),
-                '#description' => t('Soil Health Test Laboratory'),
                 '#required' => TRUE,
                 '#validated' => TRUE,
                 '#options' => $s_he_test_laboratory,
@@ -143,14 +143,14 @@ class LabTestMethodForm extends PodsFormBase {
                 '#title' => t('Soil Health Test Methods'),
                 '#type' => 'select',
                 '#required' => TRUE,
-                '#validated' => TRUE,
-                '#description' => t('Soil Health Test Methods'),
+                '#validated' => TRUE,     
                 '#prefix' => '<div id="field_lab_method_lab_test_profile">',
                 '#suffix' => '</div>',
                 '#options' => static::getProfileOptions($selected_family),
                 ];
             }
 
+         
         $form['autoload_container'] = [
             '#prefix' => '<div id="autoload_container"',
 			'#suffix' => '</div>',
@@ -171,7 +171,9 @@ class LabTestMethodForm extends PodsFormBase {
             ];
         }
 
-
+        $form['autoload_container']['lab_test_line'] = [
+            '#markup' => '<hr class="line"/>',
+        ];
         $fs_lab_profile = $form_state->get('lab_profile');
         if(count($fs_lab_profile) <> 0 || $is_edit){
 
@@ -487,6 +489,8 @@ class LabTestMethodForm extends PodsFormBase {
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
+
+        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $lab_test_id = $form_state->get('lab_test_id');
         $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 

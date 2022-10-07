@@ -32,10 +32,11 @@ class ProducerForm extends PodsFormBase {
 
 
 
-		$form['#attached']['library'][] = 'cig_pods/producer_form'; // Attach proper CSS to form
+		$form['#attached']['library'][] = 'cig_pods/producer_form';
+		$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$form['producer_title'] = [
-            '#markup' => '<h1>Producer Information</h1>',
+            '#markup' => '<h1 id="producer-title">Producer Information</h1>',
         ];
 
 		$projects = $this->getAssetOptions('project');
@@ -73,10 +74,9 @@ class ProducerForm extends PodsFormBase {
 			'#default_value' => $producer_headquarter_default_value,
 		];
 
-		$button_save_label = $is_edit ? $this->t('Save Changes') : $this->t('Save');
 		$form['actions']['save'] = [
 			'#type' => 'submit',
-			'#value' => $button_save_label,
+			'#value' =>  $this->t('Save'),
 		  ];
 
 		$form['actions']['cancel'] = [

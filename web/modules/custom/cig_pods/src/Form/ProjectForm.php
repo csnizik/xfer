@@ -129,7 +129,8 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 	} else {
 			$form_state->set('operation','create');
 	}
-	$form['#attached']['library'][] = 'cig_pods/project_entry_form'; // Attach proper CSS to form
+	$form['#attached']['library'][] = 'cig_pods/project_entry_form';
+	$form['#attached']['library'][] = 'cig_pods/css_form';
 
 		$num_contact_lines = $form_state->get('num_contact_lines');//get num of contacts showing on screen. (1->n exclude:removed indexes)
 		$num_contacts = $form_state->get('num_contacts');//get num of added contacts. (1->n)
@@ -270,7 +271,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$contact_type_options = $this->getAwardeeContactTypeOptions();
 		/* Awardee Information */
 		$form['subform_2'] = [
-			'#markup' => '<div class="subform-title-container"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
+			'#markup' => '<div class="subform-title-container awardee-info-spacing"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>'
 		];
 
 		$awardee_default_name = $is_edit ? $project->get('field_awardee')->target_id : NULL;

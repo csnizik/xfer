@@ -48,7 +48,8 @@ class LabResultsForm extends PodsFormBase {
             $form_state->set('operation','create');
         }
 
-        $form['#attached']['library'][] = 'cig_pods/lab_results_form'; // Attach proper CSS to form
+        $form['#attached']['library'][] = 'cig_pods/lab_results_form';
+        $form['#attached']['library'][] = 'cig_pods/css_form';
 
         $lab_interpretation = $this->getLabInterpretationOptions("d_lab_interpretation");
 
@@ -57,7 +58,7 @@ class LabResultsForm extends PodsFormBase {
         $lab_method = $this->getLabMethodOptions();
 
         $form['title'] = [
-         '#markup' => '<h1 id="form-title">Soil Test Results</h1',
+         '#markup' => '<h1>Soil Test Results</h1',
         ];
 
         $soil_sample_default_id = $is_edit ? $labResults->get('field_lab_result_soil_sample')->target_id : NULL;
@@ -79,7 +80,7 @@ class LabResultsForm extends PodsFormBase {
         ];
 
         $form['sub_title_1'] = [
-            '#markup' => '<div class="subform-title-container"><h2>Soil Health Raw Values</h2><h4>6 Fields | Section 1 of 3</h4></div>',
+            '#markup' => '<div class="subform-title-container raw-values-subheading"><h2>Soil Health Raw Values</h2><h4>6 Fields | Section 1 of 3</h4></div>',
         ];
 
         $organic_carbon_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'field_lab_result_raw_soil_organic_carbon');
@@ -133,7 +134,7 @@ class LabResultsForm extends PodsFormBase {
         ];
 
         $form['subform_2'] = [
-                '#markup' => '<div class="subform-title-container"><h2>Soil Function</h2><h4>2 Fields | Section 2 of 3</h4></div>'
+                '#markup' => '<div class="subform-title-container function-subheading"><h2>Soil Function</h2><h4>2 Fields | Section 2 of 3</h4></div>'
             ];
 
         $bulk_density_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'field_lab_result_sf_bulk_density_dry_weight');
@@ -157,7 +158,7 @@ class LabResultsForm extends PodsFormBase {
         ];
 
         $form['subform_3'] = [
-                '#markup' => '<div class="subform-title-container"><h2>Soil Fertility</h2><h4>31 Fields | Section 3 of 3</h4></div>'
+                '#markup' => '<div class="subform-title-container fertility-subheading"><h2>Soil Fertility</h2><h4>31 Fields | Section 3 of 3</h4></div>'
             ];
 
         $ph_results = $this->convertFractionsToDecimal($is_edit,$labResults, 'field_lab_result_sf_ph_value');

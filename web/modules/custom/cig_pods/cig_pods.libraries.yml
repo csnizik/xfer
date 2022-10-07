@@ -15,11 +15,6 @@ producer_entry_form:
       css/producer.css: {}
       css/project.js: {}
 
-admin_details_display:
-  css:
-    theme:
-      css/admin-details-display.css: {}
-
 awardee_methods_details_display:
   css:
     theme:

@@ -142,6 +142,7 @@ class SoilHealthSampleForm extends PodsFormBase {
 		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$is_edit = $sample_collection <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		if($is_edit){
 			$form_state->set('operation','edit');

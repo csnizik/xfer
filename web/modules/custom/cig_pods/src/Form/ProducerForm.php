@@ -33,6 +33,7 @@ class ProducerForm extends PodsFormBase {
 
 
 		$form['#attached']['library'][] = 'cig_pods/producer_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		$form['producer_title'] = [
             '#markup' => '<h1>Producer Information</h1>',

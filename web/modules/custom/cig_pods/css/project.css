@@ -43,6 +43,7 @@
   background-color: #005ea2;
   color: #ffffff;
   border-color: #005ea2 !important;
+  border-radius: 4px;
 }
 
 .form-boolean--type-checkbox:checked {

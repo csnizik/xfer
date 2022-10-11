@@ -105,7 +105,7 @@ class LabTestMethodForm extends PodsFormBase {
 		];
 
         $form['lab_form_header'] = [
-			'#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Method Set</h2><h4>23 Fields | Section 1 of 1</h4></div>'
+			'#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Methods</h2><h4>23 Fields | Section 1 of 1</h4></div>'
 		];
     if($is_edit){
             $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;
@@ -143,13 +143,14 @@ class LabTestMethodForm extends PodsFormBase {
                 '#title' => t('Soil Health Test Methods'),
                 '#type' => 'select',
                 '#required' => TRUE,
-                '#validated' => TRUE,
+                '#validated' => TRUE,     
                 '#prefix' => '<div id="field_lab_method_lab_test_profile">',
                 '#suffix' => '</div>',
                 '#options' => static::getProfileOptions($selected_family),
                 ];
             }
 
+         
         $form['autoload_container'] = [
             '#prefix' => '<div id="autoload_container"',
 			'#suffix' => '</div>',
@@ -170,7 +171,9 @@ class LabTestMethodForm extends PodsFormBase {
             ];
         }
 
-
+        $form['autoload_container']['lab_test_line'] = [
+            '#markup' => '<hr class="line"/>',
+        ];
         $fs_lab_profile = $form_state->get('lab_profile');
         if(count($fs_lab_profile) <> 0 || $is_edit){
 
@@ -486,6 +489,8 @@ class LabTestMethodForm extends PodsFormBase {
     }
 
     public function deleteLabTest(array &$form, FormStateInterface $form_state){
+
+        // TODO: we probably want a confirm stage on the delete button. Implementations exist online
         $lab_test_id = $form_state->get('lab_test_id');
         $labTest = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_test_id);
 

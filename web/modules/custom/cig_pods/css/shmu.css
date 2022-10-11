@@ -1,35 +1,55 @@
-div#block-gin-content {
-  width: 920px;
-  margin: auto;
-}
-
-#block-gin-content form .js-form-item {
+.subform-title-container.section1 {
+  margin-top: 27px;
   margin-bottom: 30px;
 }
 
-#block-gin-content form .fieldgroup .js-form-item {
-  margin-bottom: 0.5em;
+.subform-title-container.section2 {
+  margin-top: 101px;
+  margin-bottom: 32px;
 }
 
-#block-gin-content form .form-element {
-  width: 848px;
-  border: 1px solid #1b1b1b;
-  border-radius: 0;
+.subform-title-container.section3 {
+  margin-top: 109px;
+  margin-bottom: 57px;
 }
 
-#block-gin-content form .subform-title-container {
-  display: flex;
-  align-items: center;
-  clear: both;
-  margin-top: 60px;
-  margin-bottom: 30px;
+.subform-title-container.section4 {
+  margin-top: 99px;
+  margin-bottom: 9px;
 }
 
-#block-gin-content form .subform-title-container h2 {
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 26px;
-  flex: 50%;
+.subform-title-container.section5 {
+  margin-top: 62px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section6 {
+  margin-top: 103px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section7 {
+  margin-top: 90px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section8 {
+  margin-top: 105px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section9 {
+  margin-top: 67px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section10 {
+  margin-top: 104px;
+  margin-bottom: 23px;
+}
+
+.draw {
+  margin-bottom: 20px;
 }
 
 #block-gin-content form .subform-title-container h4 {
@@ -53,6 +73,7 @@ form#soil-health-management-unit-form
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
+  margin-bottom: 10px !important;
 }
 
 form#soil-health-management-unit-form #edit-ssurgo-lookup.button {
@@ -102,14 +123,14 @@ div#edit-irrigation-radios {
 /*===================*/
 
 .form-checkboxes {
-  max-height: 396px;
+  max-height: 298px;
   overflow-y: overlay;
   border: 1px solid #1b1b1b;
   border-radius: 0;
   padding: 10px 0px 10px 16px;
 }
-.js-form-type-checkbox.form-type--checkbox {
-  /* margin-left: 16px; */
+div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
+  margin-bottom: 10px !important;
 }
 
 .fieldset__label,
@@ -202,4 +223,21 @@ form#soil-health-management-unit-form input#edit-addcrop:hover {
 form#soil-health-management-unit-form.soil-health-management-unit-form {
   padding-top: 0px;
   padding-bottom: 3px;
+}
+
+#block-gin-content form h1 {
+  font-size: 31px !important;
+}
+
+.form-item.form-item--irrigation-radios:first-of-type {
+  margin-top: 21px !important;
+  margin-bottom: 14px !important;
+}
+
+fieldset#edit-field-shmu-practices-addressed--wrapper:last-of-type {
+  margin-bottom: 59px !important;
+}
+
+.form-item__label {
+  margin-top: 15px !important;
 }

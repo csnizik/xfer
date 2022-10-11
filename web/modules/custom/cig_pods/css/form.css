@@ -3,16 +3,12 @@ div#block-gin-content {
   margin: auto;
 }
 
-/* #block-gin-content form .js-form-item {
-  margin-bottom: 35px;
-} */
-
 #block-gin-content form .fieldgroup .js-form-item {
   margin-bottom: 0.5em;
 }
 
 #block-gin-content form .form-element {
-  width: 648px;
+  width: 648px !important;
   border: 1px solid #1b1b1b;
   border-radius: 0;
 }
@@ -164,4 +160,9 @@ span.operation-description h4 {
 span.operation h4 {
   margin-top: 5px;
   margin-bottom: 46px;
+}
+
+form {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }

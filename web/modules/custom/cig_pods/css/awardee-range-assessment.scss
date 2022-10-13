@@ -1,3 +1,4 @@
+@import "variables";
 .subform-title-container {
   display: flex;
   align-items: center;
@@ -9,13 +10,12 @@
 #block-gin-content form .js-form-type-textarea.form-type--textarea {
   margin-top: 43px;
   margin-bottom: 85px;
+  &:last-of-type {
+    margin-top: 43px;
+    margin-bottom: 65px;
+  }
 }
-#block-gin-content
-  form
-  .js-form-type-textarea.form-type--textarea:last-of-type {
-  margin-top: 43px;
-  margin-bottom: 65px;
-}
+
 .subform-title-container-assessment {
   display: flex;
   align-items: center;
@@ -23,9 +23,10 @@
   margin-top: 100px;
   margin-bottom: 10px;
   justify-content: space-between;
-}
-.subform-title-container-assessment h2 {
-  font-size: 22px;
+  h2 {
+    font-size: 22px;
+  }
+  
 }
 
 form#range-assessments-form.range-assessments-form {

@@ -14,7 +14,8 @@
     "wikimedia/composer-merge-plugin": "^2.0",
     "drupal/structure_sync": "^2.0",
     "drupal/farm_nrcs": "^2.1",
-    "drupal/openid_connect": "2.0.0-alpha12"
+    "drupal/openid_connect": "2.0.0-alpha12",
+    "drupal/scss_compiler": "^1.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -33,6 +34,9 @@
     "composer-exit-on-patch-failure": true,
     "enable-patching": true,
     "installer-paths": {
+      "web/libraries/scssphp": [
+        "scssphp/scssphp"
+      ],
       "web/core": [
         "type:drupal-core"
       ],

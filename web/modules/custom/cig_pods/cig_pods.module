@@ -22,7 +22,6 @@ function cig_pods_entity_type_alter(array &$entity_types) {
  */
 function cig_pods_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'cig_pods/hide_return';
-  $attachments['#attached']['library'][] = 'cig_pods/main';
 }
 
 

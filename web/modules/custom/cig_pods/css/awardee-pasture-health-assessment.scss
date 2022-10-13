@@ -1,3 +1,4 @@
+@import "variables";
 .subform-title-container {
   display: flex;
   align-items: center;
@@ -13,21 +14,19 @@
   margin-top: 100px;
   margin-bottom: 10px;
   justify-content: space-between;
+  h2 {
+    font-size: 22px;
+  }
 }
 
-.subform-title-container-assessment h2 {
-  font-size: 22px;
-}
 
 #block-gin-content form .js-form-type-textarea.form-type--textarea {
   margin-top: 43px;
   margin-bottom: 85px;
-}
-#block-gin-content
-  form
-  .js-form-type-textarea.form-type--textarea:last-of-type {
-  margin-top: 43px;
-  margin-bottom: 65px;
+  &:last-of-type {
+    margin-top: 43px;
+    margin-bottom: 65px;
+  }
 }
 
 form#pasture-health-assessments-form.pasture-health-assessments-form {

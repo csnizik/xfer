@@ -267,7 +267,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => ['::dashboardRedirect'],
-
+			'#limit_validation_errors' => array(),
 		];
 
         if($is_edit){

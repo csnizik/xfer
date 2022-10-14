@@ -39,7 +39,14 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     $form['#attached']['library'][] = 'core/drupal.form';
     $form['#tree'] = TRUE;
 
-    $severity_options = ['' => '- Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
+    $severity_options = [
+      '' => '- Select -',
+      5 => 'Extreme to Total',
+      4 => 'Moderate to Extreme',
+      3 => 'Moderate',
+      2 => 'Slight to Moderate',
+      1 => 'None to Slight',
+    ];
 
     $is_edit = $assessment <> NULL;
 

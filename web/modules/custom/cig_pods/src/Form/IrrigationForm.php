@@ -253,7 +253,16 @@ class IrrigationForm extends PodsFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
     $is_edit = $form_state->get('operation') == 'edit';
-    $ignored_fields = ['send', 'form_build_id', 'form_token', 'form_id', 'op', 'actions', 'delete', 'cancel'];
+    $ignored_fields = [
+      'send',
+      'form_build_id',
+      'form_token',
+      'form_id',
+      'op',
+      'actions',
+      'delete',
+      'cancel',
+    ];
     $date_fields = ['field_shmu_irrigation_sample_date'];
     $form_values = $form_state->getValues();
 

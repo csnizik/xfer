@@ -461,9 +461,25 @@ class OperationForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $cost_fields = ['sequences', 'cost_sequence', 'field_cost', 'field_cost_type'];
+    $cost_fields = [
+      'sequences',
+      'cost_sequence',
+      'field_cost',
+      'field_cost_type',
+    ];
     $is_edit = $form_state->get('operation') == 'edit';
-    $ignored_fields = ['send', 'form_build_id', 'form_token', 'form_id', 'op', 'actions', 'delete', 'cancel', 'add_input', 'addCost'];
+    $ignored_fields = [
+      'send',
+      'form_build_id',
+      'form_token',
+      'form_id',
+      'op',
+      'actions',
+      'delete',
+      'cancel',
+      'add_input',
+      'addCost',
+    ];
     $date_fields = ['field_operation_date'];
     $form_values = $form_state->getValues();
 

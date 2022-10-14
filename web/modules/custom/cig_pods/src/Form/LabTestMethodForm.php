@@ -43,8 +43,11 @@ class LabTestMethodForm extends PodsFormBase {
    * Create element names.
    */
   private function createElementNames() {
-    return ['field_lab_method_name', 'field_lab_method_project', 'field_lab_soil_test_laboratory'];
-
+    return [
+      'field_lab_method_name',
+      'field_lab_method_project',
+      'field_lab_soil_test_laboratory',
+    ];
   }
 
   /**
@@ -468,7 +471,38 @@ class LabTestMethodForm extends PodsFormBase {
     // Array to be populated into form state.
     $lab_profile = [];
 
-    $ignored_fields = ['id', 'is_fixed', 'uuid', 'revision_id', 'langcode', 'type', 'revision_created', 'revision_user', 'revision_log_message', 'uid', 'name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default', 'revision_translation_affected', 'data', 'file', 'image', 'notes', 'parent', 'flag', 'id_tag', 'location', 'geometry', 'intrinsic_geometry', 'is_location', 'is_fixed'];
+    $ignored_fields = [
+      'id',
+      'is_fixed',
+      'uuid',
+      'revision_id',
+      'langcode',
+      'type',
+      'revision_created',
+      'revision_user',
+      'revision_log_message',
+      'uid',
+      'name',
+      'status',
+      'created',
+      'changed',
+      'archived',
+      'default_langcode',
+      'revision_default',
+      'revision_translation_affected',
+      'data',
+      'file',
+      'image',
+      'notes',
+      'parent',
+      'flag',
+      'id_tag',
+      'location',
+      'geometry',
+      'intrinsic_geometry',
+      'is_location',
+      'is_fixed',
+    ];
     foreach ($lab_profile_db as $key => $value) {
       // Skip ignored fields.
       if (in_array($key, $ignored_fields)) {

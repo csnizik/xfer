@@ -266,7 +266,14 @@ class SoilHealthSampleForm extends PodsFormBase {
    * Entity fields.
    */
   public function entityfields() {
-    return ['field_diameter', 'field_plant_stage_at_sampling', 'field_sampling_depth', 'shmu', 'field_soil_sample_collection_dat', 'field_equipment_used'];
+    return [
+      'field_diameter',
+      'field_plant_stage_at_sampling',
+      'field_sampling_depth',
+      'shmu',
+      'field_soil_sample_collection_dat',
+      'field_equipment_used',
+    ];
   }
 
   /**

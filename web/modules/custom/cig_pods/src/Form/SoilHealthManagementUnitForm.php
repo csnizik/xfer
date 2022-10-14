@@ -768,22 +768,46 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     // Tracked in $ignored_fields.
     $is_edit = $form_state->get('operation') == 'edit';
 
-    $ignored_fields = ['send', 'form_build_id', 'form_token', 'form_id', 'op', 'actions', 'irrigation_radios', 'subform_etc', 'mymap', 'ssurgo_lookup', 'ssurgo_data_wrapper', 'addCrop'];
+    $ignored_fields = [
+      'send',
+      'form_build_id',
+      'form_token',
+      'form_id',
+      'op',
+      'actions',
+      'irrigation_radios',
+      'subform_etc',
+      'mymap',
+      'ssurgo_lookup',
+      'ssurgo_data_wrapper',
+      'addCrop',
+    ];
 
     $form_values = $form_state->getValues();
 
     // All of the fields that support multi-select checkboxes on the page.
-    $checkboxes_fields = ['field_shmu_prev_land_use_modifiers',
+    $checkboxes_fields = [
+      'field_shmu_prev_land_use_modifiers',
       'field_shmu_current_land_use_modifiers',
       'field_shmu_major_resource_concern',
       'field_shmu_resource_concern',
       'field_shmu_practices_addressed',
     ];
     // All of the fields that support date input on the page.
-    $date_fields = ['field_shmu_date_land_use_changed', 'field_shmu_irrigation_sample_date'];
+    $date_fields = [
+      'field_shmu_date_land_use_changed',
+      'field_shmu_irrigation_sample_date',
+    ];
 
     // Specialty crop rotation section fields.
-    $crop_rotation_fields = ['crop_sequence', 'crop_rotation', 'field_shmu_crop_rotation_crop', 'field_shmu_crop_rotation_year', 'is_present', 'field_shmu_crop_rotation_sequence'/*, 'field_shmu_initial_crops_planted'*/];
+    $crop_rotation_fields = [
+      'crop_sequence',
+      'crop_rotation',
+      'field_shmu_crop_rotation_crop',
+      'field_shmu_crop_rotation_year',
+      'is_present',
+      'field_shmu_crop_rotation_sequence',
+    ];
 
     $shmu = NULL;
     if (!$is_edit) {

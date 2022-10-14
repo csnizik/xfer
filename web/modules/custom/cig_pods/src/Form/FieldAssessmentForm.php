@@ -86,7 +86,12 @@ class FieldAssessmentForm extends PodsFormBase {
 
     $field_assessment_soil_cover_value = $is_edit ? $assessment->get('field_assessment_soil_cover')->value : '';
 
-    $assessment_evaluations_options = ['' => '- Select -', 0 => 'Yes', 1 => 'No', 2 => 'N/A'];
+    $assessment_evaluations_options = [
+      '' => '- Select -',
+      0 => 'Yes',
+      1 => 'No',
+      2 => 'N/A',
+    ];
 
     $form['assessment_wrapper']['field_assessment_soil_cover'] = [
       '#type' => 'select',

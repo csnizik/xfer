@@ -5,17 +5,16 @@ namespace Drupal\usda_eauth_test;
 use Drupal\Core\Site\Settings;
 use Drupal\usda_eauth\zRolesUtilities;
 use Drupal\usda_eauth\zRolesUtilitiesInterface;
-use \SimpleXMLElement;
 
 /**
- * zRoles utilities for testing purposes.
+ * ZRoles utilities for testing purposes.
  */
 class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInterface {
 
   /**
    * {@inheritdoc}
    */
-  public static function getUserAccessRolesAndScopes(string $eAuthId){
+  public static function getUserAccessRolesAndScopes(string $eAuthId) {
 
     // If usda_eauth_test_mock is not set to FALSE in settings.php, then mock
     // the response. Otherwise, delegate to the parent method.
@@ -104,7 +103,8 @@ class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInte
 
     $data = json_decode(json_encode($data));
 
-    $result = $data->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};;
+    $result = $data->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
+    ;
 
     return $result;
   }

@@ -4,6 +4,9 @@ namespace Drupal\usda_eauth;
 
 use Drupal\Core\Security\TrustedCallbackInterface;
 
+/**
+ *
+ */
 class UserLoginBlock implements TrustedCallbackInterface {
 
   /**

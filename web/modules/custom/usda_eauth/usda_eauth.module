@@ -15,7 +15,7 @@ use Drupal\user\UserInterface;
 function usda_eauth_openid_connect_post_authorize(UserInterface $account, array $context) {
 
   // Get the zRoles utility service.
-  /** @var \Drupal\usda_eauth\zRolesUtilitiesInterface $zroles_util */
+  /** @var \Drupal\usda_eauth\ZRolesUtilitiesInterface $zroles_util */
   $zroles_util = \Drupal::service('usda_eauth.zroles');
 
   // eAuthId should be in $context['sub'].

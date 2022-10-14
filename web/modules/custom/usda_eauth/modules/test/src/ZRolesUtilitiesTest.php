@@ -3,13 +3,13 @@
 namespace Drupal\usda_eauth_test;
 
 use Drupal\Core\Site\Settings;
-use Drupal\usda_eauth\zRolesUtilities;
-use Drupal\usda_eauth\zRolesUtilitiesInterface;
+use Drupal\usda_eauth\ZRolesUtilities;
+use Drupal\usda_eauth\ZRolesUtilitiesInterface;
 
 /**
  * ZRoles utilities for testing purposes.
  */
-class zRolesUtilitiesTest extends zRolesUtilities implements zRolesUtilitiesInterface {
+class ZRolesUtilitiesTest extends ZRolesUtilities implements ZRolesUtilitiesInterface {
 
   /**
    * {@inheritdoc}

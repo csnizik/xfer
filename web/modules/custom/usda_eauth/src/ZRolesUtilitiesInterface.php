@@ -3,9 +3,9 @@
 namespace Drupal\usda_eauth;
 
 /**
- * ZRoles utilities interface.
+ * Utilities service interface for zRoles.
  */
-interface zRolesUtilitiesInterface {
+interface ZRolesUtilitiesInterface {
 
   /**
    * Get roles and scopes for an eAuthID.

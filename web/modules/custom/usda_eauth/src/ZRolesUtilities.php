@@ -8,7 +8,7 @@ use Drupal\Core\Site\Settings;
 /**
  * Utilities service for zRoles.
  */
-class zRolesUtilities implements zRolesUtilitiesInterface {
+class ZRolesUtilities implements ZRolesUtilitiesInterface {
 
   /**
    * {@inheritdoc}

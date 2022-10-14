@@ -29,7 +29,7 @@ class TestzRoles extends FormBase {
     ];
 
     // Get the zRoles utility service.
-    /** @var \Drupal\usda_eauth\zRolesUtilitiesInterface $zroles_util */
+    /** @var \Drupal\usda_eauth\ZRolesUtilitiesInterface $zroles_util */
     $zroles_util = \Drupal::service('usda_eauth.zroles');
 
     /* Display the users that have Admin zRole */

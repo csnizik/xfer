@@ -219,7 +219,6 @@ class IrrigationForm extends PodsFormBase {
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
-    return;
   }
 
   /**

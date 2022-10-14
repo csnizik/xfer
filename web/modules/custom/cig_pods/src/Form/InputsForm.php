@@ -104,7 +104,6 @@ class InputsForm extends PodsFormBase {
     }
 
     $form_state->set('sequences', $sequences);
-    return;
   }
 
   /**
@@ -572,7 +571,6 @@ class InputsForm extends PodsFormBase {
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
-    return;
   }
 
   /**

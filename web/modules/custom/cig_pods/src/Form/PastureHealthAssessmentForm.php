@@ -432,7 +432,6 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     if ($date_timestamp > $current_timestamp) {
       $form_state->setError($form, 'Error: Invalid Date');
     }
-    return;
   }
 
   /**

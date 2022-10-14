@@ -320,8 +320,6 @@ class SoilHealthSampleForm extends PodsFormBase {
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
-
-    return;
   }
 
   /**

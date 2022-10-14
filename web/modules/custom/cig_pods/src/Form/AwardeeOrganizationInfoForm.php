@@ -130,13 +130,6 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $is_create = $form_state->get('operation') === 'create';
 

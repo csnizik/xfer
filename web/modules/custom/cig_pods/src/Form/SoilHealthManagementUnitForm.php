@@ -204,8 +204,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       $rotations[0]['field_shmu_crop_rotation_crop_present'] = [];
     }
     $form_state->set('rotations', $rotations);
-
-    return;
   }
 
   /**
@@ -767,13 +765,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
             ->t($e->getMessage()));
       }
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
   }
 
   /**

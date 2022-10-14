@@ -110,8 +110,6 @@ class OperationForm extends PodsFormBase {
     }
 
     $form_state->set('sequences', $sequences);
-
-    return;
   }
 
   /**
@@ -393,7 +391,6 @@ class OperationForm extends PodsFormBase {
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
-    return;
   }
 
   /**
@@ -429,7 +426,6 @@ class OperationForm extends PodsFormBase {
             ->t($e->getMessage()));
       }
     }
-    return;
   }
 
   /**

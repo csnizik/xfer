@@ -103,13 +103,6 @@ class ProducerForm extends PodsFormBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
-  }
-
-  /**
    * Deletes the producer that is currently being viewed.
    */
   public function deleteProducer(array &$form, FormStateInterface $form_state) {

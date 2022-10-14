@@ -537,7 +537,6 @@ class LabTestMethodForm extends PodsFormBase {
             $this->t('Please Select and load a Soil Health Test Method'),
         );
     }
-    return;
   }
 
   /**

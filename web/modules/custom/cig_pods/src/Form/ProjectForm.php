@@ -505,8 +505,6 @@ class ProjectForm extends PodsFormBase {
       $this->t('Each contact name selection must be unique'),
       );
     }
-
-    return;
   }
 
   /**
@@ -606,9 +604,6 @@ class ProjectForm extends PodsFormBase {
       }
 
       $form_state->setRedirect('cig_pods.dashboard');
-
-      return;
-
     }
     else {
       $project_id = $form_state->get('project_id');

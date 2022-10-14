@@ -502,13 +502,6 @@ class LabResultsForm extends PodsFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getFormId() {
     return 'lab_results_form';
   }

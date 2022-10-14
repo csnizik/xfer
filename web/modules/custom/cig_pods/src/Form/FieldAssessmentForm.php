@@ -211,7 +211,8 @@ class FieldAssessmentForm extends PodsFormBase {
         '#markup' => $this->t('<h2 class="resource-concerns-spacer">Resource Concerns Identified from In-Field Assessment </h2>'),
       ];
 
-      // Invariant: If calculate RCS is True, then all ***_rc_present vars will have a value.
+      // Invariant: If calculate RCS is True, then all ***_rc_present vars will
+      // have a value.
       $soil_organic_matter_rc = $form_state->get('soil_organic_matter_rc_present') ? 'Present' : 'Not Present';
 
       $form['assessment_wrapper']['organic_matter_title'] = [
@@ -420,7 +421,8 @@ class FieldAssessmentForm extends PodsFormBase {
 
     $form_values = $form_state->getValues();
 
-    // List of fields in consideration for calculating the presence of compaction.
+    // List of fields in consideration for calculating the presence of
+    // compaction.
     $compaction_keys = [
       'field_assessment_ponding',
       'field_assessment_penetration_resistance',
@@ -428,7 +430,8 @@ class FieldAssessmentForm extends PodsFormBase {
       'field_assessment_soil_structure',
       'field_assessment_plant_roots',
     ];
-    // List of fields in consideration for calculating the presence of Soil organic matter depletion.
+    // List of fields in consideration for calculating the presence of Soil
+    // organic matter depletion.
     $soil_organic_keys = [
       'field_assessment_soil_cover',
       'field_assessment_residue_breakdown',
@@ -439,7 +442,8 @@ class FieldAssessmentForm extends PodsFormBase {
       'field_assessment_biological_diversity',
       'field_assessment_biopores',
     ];
-    // List of fields in consideration for calculating the presence of Soil Organism Habitat Loss Or Degradation.
+    // List of fields in consideration for calculating the presence of Soil
+    // Organism Habitat Loss Or Degradation.
     $soil_organism_habitat_keys = [
       'field_assessment_soil_cover',
       'field_assessment_residue_breakdown',
@@ -451,7 +455,8 @@ class FieldAssessmentForm extends PodsFormBase {
       'field_assessment_biopores',
     ];
 
-    // List of Fields in consideration for calcuating the presence of Aggregate Instability.
+    // List of Fields in consideration for calcuating the presence of Aggregate
+    // Instability.
     $aggregate_instability_keys = [
       'field_assessment_soil_cover',
       'field_assessment_surface_crusts',
@@ -478,7 +483,8 @@ class FieldAssessmentForm extends PodsFormBase {
     $soil_organic_matter_rc_present = NULL;
     $soil_organic_matter_count = 0;
 
-    // Tracks the number of fields with keys in "soil_organic_keys" that have "Yes" as their response.
+    // Tracks the number of fields with keys in "soil_organic_keys" that have
+    // "Yes" as their response.
     foreach ($soil_organic_keys as $key) {
       if ($form_values[$key] == 0) {
         $soil_organic_matter_count += 1;

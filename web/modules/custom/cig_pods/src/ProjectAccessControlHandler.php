@@ -179,10 +179,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // Filter to project assets.
     $query->condition('a.type', 'project');
 
-    // Join the asset__project table to find contacts that reference the project.
+    // Join the asset__project table to find contacts that reference the
+    // project.
     $query->join('asset__project', 'ap', "a.id = ap.project_target_id AND ap.bundle = 'contact' AND ap.deleted != 1");
 
-    // Join the asset__eauth_id table, which assigns eAuth IDs to contact assets.
+    // Join the asset__eauth_id table, which assigns eAuth IDs to contact
+    // assets.
     $query->join('asset__eauth_id', 'aei', "ap.entity_id = aei.entity_id AND aei.deleted != 1");
 
     // Filter by the eAuth ID field on the contact asset.
@@ -239,7 +241,8 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // reference the same project.
     $query->join('asset__project', 'apc', "ap.project_target_id = apc.project_target_id AND apc.bundle = 'contact' AND apc.deleted != 1");
 
-    // Join the asset__eauth_id table, which assigns eAuth IDs to contact assets.
+    // Join the asset__eauth_id table, which assigns eAuth IDs to contact
+    // assets.
     $query->join('asset__eauth_id', 'aei', "apc.entity_id = aei.entity_id AND aei.deleted != 1");
 
     // Filter by the eAuth ID field on the contact asset.

@@ -24,7 +24,8 @@ class LabTestingMethod extends FarmAssetType {
 
     $fields = parent::buildFieldDefinitions();
 
-    // We do not add a "Name" field because we inherit that from the FarmAssetType class.
+    // We do not add a "Name" field because we inherit that from the
+    // FarmAssetType class.
     $field_info = [
       'field_lab_method_name' => [
         'type'  => 'string',
@@ -267,7 +268,8 @@ class LabTestingMethod extends FarmAssetType {
     $farmFieldFactory = new FarmFieldFactory();
 
     foreach ($field_info as $name => $info) {
-      // Check if it is one of the default fields that we want to disable (I.e. Images ,)
+      // Check if it is one of the default fields that we want to disable
+      // (I.e. Images)
       $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
         ->setDisplayConfigurable('form', TRUE)
         ->setDisplayConfigurable('view', TRUE);

@@ -31,7 +31,10 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   * Eventually, this function will get replaced with a call to EAuth to find registered users.
+   * Get awardee contact name options.
+   *
+   * Eventually, this function will get replaced with a call to EAuth to find
+   * registered users.
    */
   public function getAwardeeContactNameOptions(array &$form, FormStateInterface $form_state) {
     $contact_options_email = [];
@@ -470,7 +473,8 @@ class ProjectForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Minus 1 because there is an entry with key 'actions' for the "Add Another Producer Button".
+    // Minus 1 because there is an entry with key 'actions' for the "Add Another
+    // Producer Button".
     $num_producers = count($form['producers_fieldset']) - 1;
     // Minus 1 as above.
     $num_contacts = count($form['names_fieldset']) - 1;

@@ -118,7 +118,8 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       echo "cURL Error #:" . $err;
     }
 
-    // The next 6 lines correct the first part of $response and removes unnecessary xml code.
+    // The next 6 lines correct the first part of $response and removes
+    // unnecessary xml code.
     $ResLen = strlen($response);
     $pos2 = strpos($response, '<soap:Body>');
     $len = $ResLen - $pos2 + 1;

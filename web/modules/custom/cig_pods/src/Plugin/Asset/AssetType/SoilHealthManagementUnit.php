@@ -223,7 +223,8 @@ class SoilHealthManagementUnit extends FarmAssetType {
 
     $farmFieldFactory = new FarmFieldFactory();
     foreach ($field_info as $name => $info) {
-      // Check if it is one of the default fields that we want to disable (I.e. Images ,)
+      // Check if it is one of the default fields that we want to disable
+      // (I.e. Images)
       $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
         ->setDisplayConfigurable('form', TRUE)
         ->setDisplayConfigurable('view', TRUE);

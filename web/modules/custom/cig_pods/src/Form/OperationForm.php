@@ -53,7 +53,8 @@ class OperationForm extends PodsFormBase {
     // Expected type of FieldItemList.
     $field_shmu_cost_sequence_list = $operation->get('field_operation_cost_sequences');
     foreach ($field_shmu_cost_sequence_list as $key => $value) {
-      // $value is of type EntityReferenceItem (has access to value through target_id)
+      // $value is of type EntityReferenceItem (has access to value through
+      // target_id)
       $cost_sequence_target_ids[] = $value->target_id;
     }
     return $cost_sequence_target_ids;
@@ -68,7 +69,8 @@ class OperationForm extends PodsFormBase {
     // Expected type of FieldItemList.
     $field_cost_sequence_list = $input->get('field_input_cost_sequences');
     foreach ($field_cost_sequence_list as $key => $value) {
-      // $value is of type EntityReferenceItem (has access to value through target_id)
+      // $value is of type EntityReferenceItem (has access to value through
+      // target_id)
       $cost_sequence_target_ids[] = $value->target_id;
     }
     return $cost_sequence_target_ids;
@@ -78,7 +80,8 @@ class OperationForm extends PodsFormBase {
    * Get asset.
    */
   public function getAsset($id) {
-    // We use load instead of load by properties here because we are looking by id.
+    // We use load instead of load by properties here because we are looking by
+    // id.
     $asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
     return $asset;
 
@@ -142,7 +145,8 @@ class OperationForm extends PodsFormBase {
     $form['#attached']['library'][] = 'cig_pods/operation_form';
     $form['#attached']['library'][] = 'core/drupal.form';
     $form['#tree'] = TRUE;
-    // Determine if it is an edit process. If it is, load irrigation into local variable.
+    // Determine if it is an edit process. If it is, load irrigation into local
+    // variable.
     if ($is_edit) {
       $form_state->set('operation', 'edit');
       $form_state->set('operation_id', $operation->id());
@@ -233,9 +237,10 @@ class OperationForm extends PodsFormBase {
 
     $form['field_row_number'] = [
       '#type' => 'number',
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#min_value' => 0,
-    // Float.
+      // Float.
       '#step' => 1,
       '#title' => $this->t('Number of Rows'),
       '#default_value' => $field_number_of_rows,
@@ -247,9 +252,10 @@ class OperationForm extends PodsFormBase {
     $form['field_width'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Width'),
       '#default_value' => $field_width_of,
@@ -261,9 +267,10 @@ class OperationForm extends PodsFormBase {
     $form['field_horsepower'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Horsepower'),
       '#default_value' => $field_horsepower_of,
@@ -519,7 +526,8 @@ class OperationForm extends PodsFormBase {
     $cost_template['type'] = 'cost_sequence';
 
     foreach ($all_cost_sequences as $sequence) {
-      // If they did not select a cost for the row, do not include it in the save.
+      // If they did not select a cost for the row, do not include it in the
+      // save.
       if ($sequence['field_cost_type'] == NULL) {
         continue;
       }

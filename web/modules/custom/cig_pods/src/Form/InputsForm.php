@@ -68,7 +68,8 @@ class InputsForm extends PodsFormBase {
     // Expected type of FieldItemList.
     $field_cost_sequence_list = $input->get('field_input_cost_sequences');
     foreach ($field_cost_sequence_list as $key => $value) {
-      // $value is of type EntityReferenceItem (has access to value through target_id)
+      // $value is of type EntityReferenceItem (has access to value through
+      // target_id)
       $cost_sequence_target_ids[] = $value->target_id;
     }
     return $cost_sequence_target_ids;
@@ -78,7 +79,6 @@ class InputsForm extends PodsFormBase {
    * Get asset.
    */
   public function getAsset($id) {
-    // We use load instead of load by properties here because we are looking by id.
     $asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
     return $asset;
 
@@ -532,13 +532,11 @@ class InputsForm extends PodsFormBase {
         // We always create a new cost sequence asset for each rotation.
         $cost_sequence = Asset::create($cost_template);
 
-        // Read the cost id from select dropdown for given rotation
-        // $cost_id = $form_values['cost_sequence'][$sequence]['field_cost_type'];.
+        // Read the cost id from select dropdown for given rotation.
         $cost_id = $sequence['field_cost_type'];
         $cost_sequence->set('field_cost_type', $cost_id);
 
-        // Read the cost rotation year from select dropdown for given rotation
-        // $cost_value = $form_values['cost_sequence'][$sequence]['field_cost'];.
+        // Read the cost rotation year from select dropdown for given rotation.
         $cost_value = $sequence['field_cost'];
         $cost_sequence->set('field_cost', $cost_value);
         $cost_sequence->save();

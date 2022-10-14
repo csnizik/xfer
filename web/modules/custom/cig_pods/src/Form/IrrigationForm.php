@@ -41,7 +41,8 @@ class IrrigationForm extends PodsFormBase {
     $form['#attached']['library'][] = 'cig_pods/css_form';
     $form['#attached']['library'][] = 'core/drupal.form';
     $form['#tree'] = TRUE;
-    // Determine if it is an edit process. If it is, load irrigation into local variable.
+    // Determine if it is an edit process. If it is, load irrigation into local
+    // variable.
     if ($is_edit) {
       $form_state->set('operation', 'edit');
       $form_state->set('irrigation_id', $irrigation->id());
@@ -73,7 +74,8 @@ class IrrigationForm extends PodsFormBase {
     ];
 
     if ($is_edit) {
-      // $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX timestamp
+      // $ field_shmu_irrigation_sample_date_timestamp is expected to be a UNIX
+      // timestamp
       $field_shmu_irrigation_sample_date_timestamp = $irrigation->get('field_shmu_irrigation_sample_date')->value;
       $field_shmu_irrigation_sample_date_timestamp_default_value = date("Y-m-d", $field_shmu_irrigation_sample_date_timestamp);
     }
@@ -96,7 +98,7 @@ class IrrigationForm extends PodsFormBase {
       '#title' => $this->t('Water pH'),
       '#min_value' => 1,
       '#max_value' => 14,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#description' => '',
       '#default_value' => $field_shmu_irrigation_water_ph_value,
@@ -108,7 +110,7 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_sodium_absorption_ratio'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Sodium Absorption Ratio (Unit meq/L)'),
       '#default_value' => $field_shmu_irrigation_sodium_adsorption_ratio_value,
@@ -120,9 +122,10 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_total_dissolved_solids'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Total Dissolved Solids (Unit ppm)'),
       '#default_value' => $field_shmu_irrigation_total_dissolved_solids_value,
@@ -134,9 +137,10 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_total_alkalinity'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Total Alkalinity (Unit ppm CaCO3)'),
       '#default_value' => $field_shmu_irrigation_total_alkalinity_value,
@@ -148,9 +152,10 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_chlorides'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Chlorides (Unit ppm)'),
       '#default_value' => $field_shmu_irrigation_chlorides_value,
@@ -160,9 +165,10 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_sulfates'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Sulfates (Unit ppm)'),
       '#default_value' => $field_shmu_irrigation_sulfates_value,
@@ -174,9 +180,10 @@ class IrrigationForm extends PodsFormBase {
     $form['field_shmu_irrigation_nitrates'] = [
       '#type' => 'number',
       '#min_value' => 0,
-    // Capped at 1 million because you can't have more than 1 million parts per million.
+      // Capped at 1 million because you can't have more than 1 million parts
+      // per million.
       '#max_value' => 1000000,
-    // Float.
+      // Float.
       '#step' => 0.01,
       '#title' => $this->t('Nitrates (Unit ppm)'),
       '#default_value' => $field_shmu_irrigation_nitrates_value,

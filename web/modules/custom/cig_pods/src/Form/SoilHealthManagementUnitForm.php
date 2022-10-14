@@ -128,9 +128,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     return $options;
   }
 
-  // Goal is to replace this logic
-  // $field_shmu_irrigation_water_ph_value = $is_edit ? $shmu->get('field_shmu_irrigation_water_ph')->numerator : '';.
-
   /**
    * SHMU is a reference to SoilHealthManagmentUnit entity.
    */
@@ -138,10 +135,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
-  // Returns array of options suitable to be passed into '#default_value' for the checkboxes type.
-
   /**
-   * Field_name must be a string relating to a field witn "multiple -> TRUE" in its definition.
+   * Get default values array from multivalue SHMU field.
+   *
+   * Field_name must be a string relating to a field witn "multiple -> TRUE" in
+   * its definition.
    */
   public function getDefaultValuesArrayFromMultivaluedSHMUField(object $shmu, string $field_name) {
     $field_iter = $shmu->get($field_name);
@@ -158,7 +156,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    * Get asset.
    */
   public function getAsset($id) {
-    // We use load instead of load by properties here because we are looking by id.
+    // We use load instead of load by properties here because we are looking by
+    // id.
     $asset = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
     return $asset;
 
@@ -173,7 +172,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     // Expected type of FieldItemList.
     $field_shmu_crop_rotation_list = $shmu->get('field_shmu_crop_rotation_sequence');
     foreach ($field_shmu_crop_rotation_list as $key => $value) {
-      // $value is of type EntityReferenceItem (has access to value through target_id)
+      // $value is of type EntityReferenceItem (has access to value through
+      // target_id).
       $crop_rotation_target_ids[] = $value->target_id;
     }
     return $crop_rotation_target_ids;
@@ -220,7 +220,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       $form_state->set('load_done', FALSE);
     }
 
-    // Determine if it is an edit process. If it is, load SHMU into local variable.
+    // Determine if it is an edit process. If it is, load SHMU into local
+    // variable.
     if ($is_edit) {
       $form_state->set('operation', 'edit');
       $form_state->set('shmu_id', $shmu->id());
@@ -417,7 +418,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     // For the Date input fields, we have to convert from UNIX to yyyy-mm-dd.
     if ($is_edit) {
-      // $field_shmu_date_land_use_changed_value is expected to be a UNIX timestamp
+      // $field_shmu_date_land_use_changed_value is expected to be a UNIX
+      // timestamp.
       $field_shmu_date_land_use_changed_value = $shmu->get('field_shmu_date_land_use_changed')[0]->value;
       $default_value_shmu_date_land_use_changed = date("Y-m-d", $field_shmu_date_land_use_changed_value);
     }
@@ -786,7 +788,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // We aren't interested in some of the attributes that $form_state->getValues() gives us.
+    // We aren't interested in some of the attributes that
+    // $form_state->getValues() gives us.
     // Tracked in $ignored_fields.
     $is_edit = $form_state->get('operation') == 'edit';
 
@@ -861,7 +864,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     for ($rotation = 0; $rotation < $num_crop_rotations; $rotation++) {
 
-      // If they did not select a crop for the row, do not include it in the save.
+      // If they did not select a crop for the row, do not include it in the
+      // save.
       if ($form_values['crop_sequence'][$rotation]['field_shmu_crop_rotation_crop'] == NULL) {
         continue;
       }
@@ -957,8 +961,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       $symbols = implode('; ', $musyms);
       $textures = implode('; ', $munames);
 
-      // In order to replace textfield text, we must alter the raw user input and
-      // trigger a form rebuild. It cannot be done simply with setValue().
+      // In order to replace textfield text, we must alter the raw user input
+      // and trigger a form rebuild. It cannot be done simply with setValue().
       $input = $form_state->getUserInput();
       $input['ssurgo_data_wrapper']['map_unit_symbol'] = $symbols;
       $input['ssurgo_data_wrapper']['surface_texture'] = $textures;

@@ -4,6 +4,7 @@ usda_eauth_test.test_zrole:
     _form: '\Drupal\usda_eauth_test\Form\TestzRoles'
     _title: 'Test zRole'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_set_admin:
@@ -12,6 +13,7 @@ usda_eauth_test.test_set_admin:
     _form: '\Drupal\usda_eauth_test\Form\TestSetAdmin'
     _title: 'Test Set Admin'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_set_awardee:
@@ -20,6 +22,7 @@ usda_eauth_test.test_set_awardee:
     _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee'
     _title: 'Test Set Awardee'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_set_awardee_1:
@@ -28,6 +31,7 @@ usda_eauth_test.test_set_awardee_1:
     _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee1'
     _title: 'Test Set Awardee'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_set_awardee_2:
@@ -36,6 +40,7 @@ usda_eauth_test.test_set_awardee_2:
     _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee2'
     _title: 'Test Set Awardee'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_set_awardee_3:
@@ -44,6 +49,7 @@ usda_eauth_test.test_set_awardee_3:
     _form: '\Drupal\usda_eauth_test\Form\TestSetAwardee3'
     _title: 'Test Set Awardee'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'
 
 usda_eauth_test.test_session_values:
@@ -52,4 +58,5 @@ usda_eauth_test.test_session_values:
     _form: '\Drupal\usda_eauth_test\Form\TestSessionValues'
     _title: 'Test Session Values'
   requirements:
+    # This is only used for testing.
     _access: 'TRUE'

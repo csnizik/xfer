@@ -2,6 +2,7 @@
 
 /**
  * @file
+ * CIG PODS module.
  */
 
 use Drupal\views\ViewExecutable;

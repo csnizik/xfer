@@ -120,9 +120,9 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
 
     // The next 6 lines correct the first part of $response and removes
     // unnecessary xml code.
-    $ResLen = strlen($response);
+    $res_len = strlen($response);
     $pos2 = strpos($response, '<soap:Body>');
-    $len = $ResLen - $pos2 + 1;
+    $len = $res_len - $pos2 + 1;
     $value = substr($response, $pos2, $len);
     $value = '<?xml version="1.0" encoding="UTF-8"?><soap:Envelope>' . $value;
 

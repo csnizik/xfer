@@ -175,7 +175,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       $userLN = 'NA';
 
     };
-    print_r($userFN . '  ' . $userLN . ' ' . $userID . '  ' . '<br>');
+    print_r("$userFN $userLN $userID<br>");
   }
 
 }

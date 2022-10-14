@@ -41,15 +41,15 @@ class TestSessionValues extends FormBase {
     $sessionRE = $session->get('ApplicationRoleEnumeration');
     $sessionRD = $session->get('ApplicationRoleDisplay');
 
-    print_r('Current user info: <br>' .
-                ' eAuthId = ' . $sessionEA . '<br>' .
-                ' Email = ' . $sessionEM . '<br>' .
-                ' First Name = ' . $sessionFN . '<br>' .
-                ' Last Name = ' . $sessionLN . '<br>' .
-                ' Role ID  = ' . $sessionID . '<br>' .
-                ' Role Name  = ' . $sessionRN . '<br>' .
-                ' Role Enum = ' . $sessionRE . '<br>' .
-                ' Role Display Name = ' . $sessionRD . '<br>');
+    print_r("Current user info:<br>
+      eAuthId = $sessionEA<br>
+      Email = $sessionEM<br>
+      First Name = $sessionFN<br>
+      Last Name = $sessionLN<br>
+      Role ID  = $sessionID<br>
+      Role Name  = $sessionRN<br>
+      Role Enum = $sessionRE<br>
+      Role Display Name = $sessionRD<br>");
 
     $endpoint = Settings::get('zroles_url', 'd1');
     $nrtApplicationId = Settings::get('nrtApplicationId', 'd2');
@@ -59,13 +59,13 @@ class TestSessionValues extends FormBase {
     $client_id = Settings::get('client_id', 'd6');
     $client_secret = Settings::get('client_secret', 'd7');
 
-    print_r('<br> Current settings info: <br>' .
-                ' endpoint = ' . $endpoint . '<br>' .
-                ' nrtApplicationId = ' . $nrtApplicationId . '<br>' .
-                ' wsSecuredToken = ' . $wsSecuredToken . '<br>' .
-                ' eAuthTokenUrl = ' . $eAuthTokenUrl . '<br>' .
-                ' client_id = ' . $client_id . '<br>' .
-                ' client_secret = ' . $client_secret . '<br>');
+    print_r("<br> Current settings info: <br>
+      endpoint = $endpoint<br>
+      nrtApplicationId = $nrtApplicationId<br>
+      wsSecuredToken = $wsSecuredToken<br>
+      eAuthTokenUrl = $eAuthTokenUrl<br>
+      client_id = $client_id<br>
+      client_secret = $client_secret<br>");
 
     return $form;
   }

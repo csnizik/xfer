@@ -243,13 +243,6 @@ class SoilHealthSampleForm extends PodsFormBase {
         '#suffix' => '</div>',
       ];
     }
-    // Commented out because not part of mvp
-    // but will be used latter.
-    // $form['actions']['add_assessment'] = array(
-    //     '#type' => 'submit',
-    //     '#value' => $this->t('Next: Add Assessment'),
-    //     '#submit' => ['::dashboardRedirect'],
-    // );.
     return $form;
   }
 

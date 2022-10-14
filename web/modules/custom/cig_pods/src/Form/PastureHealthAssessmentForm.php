@@ -477,8 +477,6 @@ class PastureHealthAssessmentForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $date_fields = ['pasture_health_assessment_date'];
-
     $pasture_health_submission = [];
     if ($form_state->get('operation') === 'create') {
       $elementNames = $this->createElementNames();

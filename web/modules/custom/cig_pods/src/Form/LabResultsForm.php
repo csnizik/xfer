@@ -558,8 +558,6 @@ class LabResultsForm extends PodsFormBase {
     else {
       $id = $form_state->get('lab_result_id');
       $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-
-      $profile_assets = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'lab_result']);
       foreach ($elementNames as $elemName) {
         if (strpos($elemName, "field_") === 0) {
           $labTestProfile->set($elemName, $form_state->getValue($elemName));

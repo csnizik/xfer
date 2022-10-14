@@ -361,15 +361,6 @@ class FieldAssessmentForm extends PodsFormBase {
 
     $form_values = $form_state->getValues();
 
-    $related_shmu_id = $form_values['shmu'];
-    $date = $form_values['field_assessment_date'];
-    $related_shmu = Asset::load($related_shmu_id);
-    if ($related_shmu <> NULL) {
-      $related_shmu_name = $related_shmu->getName();
-    }
-    else {
-      $related_shmu_name = '';
-    }
     $assessment->set('name', "CIFSH Assessment");
 
     foreach ($form_values as $key => $value) {

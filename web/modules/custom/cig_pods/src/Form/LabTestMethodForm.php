@@ -81,14 +81,12 @@ class LabTestMethodForm extends PodsFormBase {
     $infiltration_method = $this->getTaxonomyOptions("d_infiltration_method");
     $ec_method = $this->getTaxonomyOptions("d_ec_method");
     $nitrate_method = $this->getTaxonomyOptions("d_nitrate_n_method");
-    $ph_method = $this->getTaxonomyOptions("d_ph_method");
     $resp_detect = $this->getTaxonomyOptions("d_respiration_detection_");
     $respiration_incubation = $this->getTaxonomyOptions("d_respiration_incubation");
     $s_he_extract = $this->getTaxonomyOptions("d_soil_health_extraction");
     $s_he_test_laboratory = $this->getTaxonomyOptions("d_laboratory");
 
     $project = $this->getAssetOptions('project');
-    $lab_test_profile = $this->getAssetOptions('lab_testing_profile');
     if (empty($form_state->getValue('field_lab_soil_test_laboratory'))) {
       $selected_family = key($s_he_test_laboratory);
     }
@@ -600,8 +598,6 @@ class LabTestMethodForm extends PodsFormBase {
       $elementsToUpdate = [];
       $id = $form_state->get('lab_test_id');
       $labTestMethod = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
-
-      $method_assets = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'lab_testing_method']);
       $elementNames = $this->createElementNames();
       foreach ($elementNames as $elemName) {
         $labTestMethod->set($elemName, $form_state->getValue($elemName));

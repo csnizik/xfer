@@ -90,7 +90,6 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
 
     // Get the user's eAuthID and zRole.
     $eauth_id = $this->getEAuthId();
-    $zrole = $this->getZRole();
 
     // Admins can create any asset.
     if (self::isAdmin()) {
@@ -125,9 +124,6 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     if (!$result->isNeutral()) {
       return $result;
     }
-
-    // Get the user's zRole.
-    $zrole = $this->getZRole();
 
     // Admins can create any asset.
     if (self::isAdmin()) {
@@ -273,7 +269,6 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
 
     // Get the user's eAuthID and zRole.
     $eauth_id = ProjectAccessControlHandler::getEAuthId();
-    $zrole = ProjectAccessControlHandler::getZRole();
 
     // If this is an admin, don't apply any additional filters.
     if (self::isAdmin()) {

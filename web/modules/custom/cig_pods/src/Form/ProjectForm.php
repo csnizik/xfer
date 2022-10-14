@@ -459,7 +459,7 @@ class ProjectForm extends PodsFormBase {
   public function arrayValuesAreUnique($array) {
     $count_dict = array_count_values($array);
 
-    foreach ($count_dict as $key => $value) {
+    foreach ($count_dict as $value) {
       if ($value != 1) {
         return FALSE;
       }
@@ -539,8 +539,6 @@ class ProjectForm extends PodsFormBase {
     $contact_options = $form['names_fieldset'][0]['contact_name']['#options'];
 
     if ($is_create) {
-      $values = $form_state->getValues();
-
       $mapping = $this->getFormEntityMapping();
 
       $project_submission = [];

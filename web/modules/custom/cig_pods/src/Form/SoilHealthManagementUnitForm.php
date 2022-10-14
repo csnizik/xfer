@@ -145,7 +145,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $field_iter = $shmu->get($field_name);
 
     $populated_values = [];
-    foreach ($field_iter as $key => $term) {
+    foreach ($field_iter as $term) {
       // This is the PHP syntax to append to the array.
       $populated_values[] = $term->target_id;
     }
@@ -171,7 +171,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     // Expected type of FieldItemList.
     $field_shmu_crop_rotation_list = $shmu->get('field_shmu_crop_rotation_sequence');
-    foreach ($field_shmu_crop_rotation_list as $key => $value) {
+    foreach ($field_shmu_crop_rotation_list as $value) {
       // $value is of type EntityReferenceItem (has access to value through
       // target_id).
       $crop_rotation_target_ids[] = $value->target_id;
@@ -184,11 +184,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    */
   public function loadCropRotationsIntoFormState($crop_rotation_ids, $form_state) {
 
-    $ignored_fields = ['uuid', 'revision_id', 'langcode', 'type', 'revision_user', 'revision_log_message', 'uid', 'name', 'status', 'created', 'changed', 'archived', 'default_langcode', 'revision_default'];
-
     $rotations = [];
     $i = 0;
-    foreach ($crop_rotation_ids as $key => $crop_rotation_id) {
+    foreach ($crop_rotation_ids as $crop_rotation_id) {
       $tmp_rotation = $this->getAsset($crop_rotation_id)->toArray();
       $rotations[$i] = [];
       $rotations[$i]['field_shmu_crop_rotation_crop'] = $tmp_rotation['field_shmu_crop_rotation_crop'];
@@ -212,7 +210,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
     $shmu = $asset;
     $is_edit = $shmu <> NULL;
-    $irrigating = FALSE;
 
     if ($form_state->get('load_done') == NULL) {
       $form_state->set('load_done', FALSE);
@@ -478,25 +475,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $crop_rotation_years_options = $this->getCropRotationYearOptions();
     $crop_rotation_years_options[''] = '-- Select --';
 
-    $month_lookup = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
     $month_options = $this->getYearOptions();
 
     $fs_crop_rotations = $form_state->get('rotations');
-
-    $num_crop_rotations = 1;
-
-    if (count($fs_crop_rotations) <> 0) {
-      $num_crop_rotations = count($fs_crop_rotations);
-    }
 
     // Not to be confused with rotation.
     $form_index = 0;
     foreach ($fs_crop_rotations as $fs_index => $rotation) {
 
-      // Default value for empty Rotation.
-      $crop_default_value = '';
-      // Default value for empty rotation.
-      $crop_year_default_value = '';
       // Default value for empty rotation.
       $crop_months_present_lookup = [];
 
@@ -505,7 +491,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       // Of type array.
       $crop_months_present_lookup_raw = $rotation['field_shmu_crop_rotation_crop_present'];
 
-      foreach ($crop_months_present_lookup_raw as $key => $value) {
+      foreach ($crop_months_present_lookup_raw as $value) {
         // Array of values, where val maintains 0 <= val < 12 for val in values.
         $crop_months_present_lookup[] = $value['numerator'];
       }
@@ -978,7 +964,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $new_crop_rotation['field_shmu_crop_rotation_year'][0]['numerator'] = '';
     $new_crop_rotation['field_shmu_crop_rotation_crop_present'] = [];
 
-    $crop_options = $this->getCropOptions();
     $rotations[] = $new_crop_rotation;
     $form_state->set('rotations', $rotations);
     $form_state->setRebuild(TRUE);

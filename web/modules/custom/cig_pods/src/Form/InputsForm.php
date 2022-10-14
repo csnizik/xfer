@@ -67,7 +67,7 @@ class InputsForm extends PodsFormBase {
 
     // Expected type of FieldItemList.
     $field_cost_sequence_list = $input->get('field_input_cost_sequences');
-    foreach ($field_cost_sequence_list as $key => $value) {
+    foreach ($field_cost_sequence_list as $value) {
       // $value is of type EntityReferenceItem (has access to value through
       // target_id)
       $cost_sequence_target_ids[] = $value->target_id;
@@ -90,7 +90,7 @@ class InputsForm extends PodsFormBase {
   public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state) {
     $sequences = [];
     $i = 0;
-    foreach ($cost_sequence_ids as $key => $cost_sequence_id) {
+    foreach ($cost_sequence_ids as $cost_sequence_id) {
       $tmp_sequence = $this->getAsset($cost_sequence_id)->toArray();
       $sequences[$i] = [];
       $sequences[$i]['field_cost_type'] = $tmp_sequence['field_cost_type'];
@@ -307,18 +307,9 @@ class InputsForm extends PodsFormBase {
 
     $fs_cost_sequences = $form_state->get('sequences');
 
-    $num_cost_sequences = 1;
-    if (count($fs_cost_sequences) <> 0) {
-      $num_cost_sequences = count($fs_cost_sequences);
-    }
-
     // Not to be confused with rotation.
     $form_index = 0;
     foreach ($fs_cost_sequences as $fs_index => $sequence) {
-      // Default value for empty Rotation.
-      $cost_type_default_value = '';
-      // Default value for empty rotation.
-      $cost_default_value = '';
 
       $cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
 
@@ -467,9 +458,7 @@ class InputsForm extends PodsFormBase {
 
       $input_to_save = Asset::create($input_submission);
 
-      $num_cost_sequences = count($form_values['cost_sequence']);
       $all_cost_sequences = $form_values['cost_sequence'];
-      $cost_options = $this->getOtherCostsOptions();
 
       $cost_template = [];
       $cost_template['type'] = 'cost_sequence';
@@ -517,9 +506,7 @@ class InputsForm extends PodsFormBase {
         $input->set($entity_field_id, $form[$form_elem_id]['#value']);
       }
 
-      $num_cost_sequences = count($form_values['cost_sequence']);
       $all_cost_sequences = $form_values['cost_sequence'];
-      $cost_options = $this->getOtherCostsOptions();
 
       $cost_template = [];
       $cost_template['type'] = 'cost_sequence';
@@ -621,7 +608,6 @@ class InputsForm extends PodsFormBase {
     $new_cost_sequence = [];
     $new_cost_sequence['field_cost'][0]['value'] = '';
     $new_cost_sequence['field_cost_type'][0]['value'] = '';
-    $cost_options = $this->getOtherCostsOptions();
     $sequences[] = $new_cost_sequence;
     $form_state->set('sequences', $sequences);
     $form_state->setRebuild(TRUE);

@@ -81,7 +81,6 @@ class LabTestProfilesAdminForm extends PodsFormBase {
       $lab[$key] = html_entity_decode($item);
     }
     $nitrate_method = $this->getSoilHealthExtractionOptions("d_nitrate_n_method");
-    $ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
     $resp_detect = $this->getSoilHealthExtractionOptions("d_respiration_detection_");
     $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
@@ -354,7 +353,6 @@ class LabTestProfilesAdminForm extends PodsFormBase {
       $id = $form_state->get('lab_test_id');
       $labTestProfile = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
-      $profile_assets = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'lab_testing_profile']);
       $elementNames = $this->createElementNames();
       foreach ($elementNames as $elemName) {
         $labTestProfile->set($elemName, $form_state->getValue($elemName));

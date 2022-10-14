@@ -20,24 +20,6 @@ class LabTestProfilesAdminForm extends PodsFormBase {
   }
 
   /**
-   * Page lookup.
-   */
-  private function pageLookup(string $path) {
-    $match = [];
-    $path2 = $path;
-    $router = \Drupal::service('router.no_access_checks');
-
-    try {
-      $match = $router->match($path2);
-    }
-    catch (\Exception $e) {
-      // The route using that path hasn't been found,
-      // or the HTTP method isn't allowed for that route.
-    }
-    return $match['_route'];
-  }
-
-  /**
    * Create element names.
    */
   private function createElementNames() {

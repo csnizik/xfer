@@ -598,8 +598,7 @@ class InputsForm extends PodsFormBase {
     catch (\Exception $e) {
       $this
         ->messenger()
-        ->addError($this
-          ->t($e->getMessage()));
+        ->addError($e->getMessage());
     }
     foreach ($sequence_ids as $sid) {
       try {
@@ -609,8 +608,7 @@ class InputsForm extends PodsFormBase {
       catch (\Exception $e) {
         $this
           ->messenger()
-          ->addError($this
-            ->t($e->getMessage()));
+          ->addError($e->getMessage());
       }
     }
   }

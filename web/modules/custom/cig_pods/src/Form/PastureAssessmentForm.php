@@ -291,8 +291,7 @@ class PastureAssessmentForm extends PodsFormBase {
     catch (\Exception $e) {
       $this
         ->messenger()
-        ->addError($this
-          ->t($e->getMessage()));
+        ->addError($e->getMessage());
     }
 
   }

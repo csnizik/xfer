@@ -749,8 +749,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     catch (\Exception $e) {
       $this
         ->messenger()
-        ->addError($this
-          ->t($e->getMessage()));
+        ->addError($e->getMessage());
     }
 
     foreach ($crop_rotation_ids as $crop_rotation_id) {
@@ -761,8 +760,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       catch (\Exception $e) {
         $this
           ->messenger()
-          ->addError($this
-            ->t($e->getMessage()));
+          ->addError($e->getMessage());
       }
     }
   }

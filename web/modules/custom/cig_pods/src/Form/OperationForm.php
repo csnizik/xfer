@@ -411,8 +411,7 @@ class OperationForm extends PodsFormBase {
     catch (\Exception $e) {
       $this
         ->messenger()
-        ->addError($this
-          ->t($e->getMessage()));
+        ->addError($e->getMessage());
     }
     foreach ($sequence_ids as $sid) {
       try {
@@ -422,8 +421,7 @@ class OperationForm extends PodsFormBase {
       catch (\Exception $e) {
         $this
           ->messenger()
-          ->addError($this
-            ->t($e->getMessage()));
+          ->addError($e->getMessage());
       }
     }
   }
@@ -439,8 +437,7 @@ class OperationForm extends PodsFormBase {
     catch (\Exception $e) {
       $this
         ->messenger()
-        ->addError($this
-          ->t($e->getMessage()));
+        ->addError($e->getMessage());
     }
     foreach ($sequence_ids as $sid) {
       try {
@@ -450,8 +447,7 @@ class OperationForm extends PodsFormBase {
       catch (\Exception $e) {
         $this
           ->messenger()
-          ->addError($this
-            ->t($e->getMessage()));
+          ->addError($e->getMessage());
       }
     }
   }

@@ -9,12 +9,12 @@ use Drupal\Core\Render\Element\Checkboxes;
 use Drupal\geofield\GeoPHP\GeoPHPWrapper;
 
 /**
- *
+ * SHMU form.
  */
 class SoilHealthManagementUnitForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU type options.
    */
   public function getShmuTypeOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_shmu_type');
@@ -22,7 +22,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get experimental design options.
    */
   public function getExperimentalDesignOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_experimental_design');
@@ -31,7 +31,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get tillage system options.
    */
   public function getTillageSystemOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_tillage_system');
@@ -40,7 +40,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get year options.
    */
   public function getYearOptions() {
     $month_options = [];
@@ -56,7 +56,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get major resource concern options.
    */
   public function getMajorResourceConcernOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_major_resource_concern');
@@ -64,7 +64,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get resource concern options.
    */
   public function getResourceConcernOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_resource_concern');
@@ -72,7 +72,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get land use options.
    */
   public function getLandUseOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_land_use');
@@ -81,7 +81,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get practices addressed options.
    */
   public function getPracticesAddressedOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_practice');
@@ -90,7 +90,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get producer options.
    */
   public function getProducerOptions() {
     $options = $this->entityOptions('asset', 'producer');
@@ -98,7 +98,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get land use modifier options.
    */
   public function getLandUseModifierOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_land_use_modifiers');
@@ -106,7 +106,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get crop rotation year options.
    */
   public function getCropRotationYearOptions() {
     // Maximum number of years for crop rotations.
@@ -121,7 +121,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get crop options.
    */
   public function getCropOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_crop');
@@ -155,7 +155,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get asset.
    */
   public function getAsset($id) {
     // We use load instead of load by properties here because we are looking by id.
@@ -165,7 +165,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   * $shmu is expected to be of type EntityInterface.
+   * The $shmu is expected to be of type EntityInterface.
    */
   public function getCropRotationIdsForShmu($shmu) {
     $crop_rotation_target_ids = [];
@@ -728,14 +728,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect after cancel.
    */
   public function redirectAfterCancel(array $form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete SHMU.
    */
   public function deleteShmu(array &$form, FormStateInterface $form_state) {
     $shmu_id = $form_state->get('shmu_id');
@@ -906,7 +906,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $projectReference) {
     $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
@@ -992,14 +992,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for adding another crop rotation.
    */
   public function addAnotherCropRotationCallback(array &$form, FormStateInterface $form_state) {
     return $form['crop_sequence'];
   }
 
   /**
-   *
+   * Delete crop rotation.
    */
   public function deleteCropRotation(array &$form, FormStateInterface $form_state) {
     $idx_to_rm = str_replace('delete-crop-sequence-', '', $form_state->getTriggeringElement()['#name']);
@@ -1015,7 +1015,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for deleting crop rotations.
    */
   public function deleteCropRotationCallback(array &$form, FormStateInterface $form_state) {
     return $form['crop_sequence'];

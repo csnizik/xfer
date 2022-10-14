@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Range assessment form.
  */
 class RangeAssessmentForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -21,7 +21,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get land use options.
    */
   public function getLandUseOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_land_use');
@@ -368,14 +368,14 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete field assessment.
    */
   public function deleteFieldAssessment(array &$form, FormStateInterface $form_state) {
 
@@ -395,7 +395,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Create element names.
    */
   public function createElementNames() {
     return ['shmu', 'range_assessment_date', 'range_assessment_land_use', 'range_assessment_rills', 'range_assessment_water_flow', 'range_assessment_pedestals', 'range_assessment_bare_ground', 'range_assessment_gullies',
@@ -449,7 +449,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
@@ -459,7 +459,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get soil site stability.
    */
   public function getSoilSiteStability(array &$form, FormStateInterface $form_state, $severity_options) {
     $rills = $form_state->getValue('range_assessment_rills');
@@ -478,7 +478,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get hydrologic function.
    */
   public function getHydrologicFunction(array &$form, FormStateInterface $form_state, $severity_options) {
     $rills = $form_state->getValue('range_assessment_rills');
@@ -497,7 +497,7 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get biotic integrity.
    */
   public function getBioticIntegrity(array &$form, FormStateInterface $form_state, $severity_options) {
     $soil_surface_resistance = $form_state->getValue('range_assessment_soil_surface_resistance');

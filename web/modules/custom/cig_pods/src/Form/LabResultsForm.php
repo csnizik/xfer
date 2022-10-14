@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Lab results form.
  */
 class LabResultsForm extends PodsFormBase {
 
   /**
-   *
+   * Get taxonomy term options.
    */
   public function getLabInterpretationOptions($bundle) {
     $options = $this->entityOptions('taxonomy_term', $bundle);
@@ -20,7 +20,7 @@ class LabResultsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get soil sample options.
    */
   private function getSoilSampleOptions() {
     $options = $this->entityOptions('asset', 'soil_health_sample');
@@ -28,7 +28,7 @@ class LabResultsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get lab method options.
    */
   private function getLabMethodOptions() {
     $options = $this->entityOptions('asset', 'lab_testing_method');
@@ -36,7 +36,7 @@ class LabResultsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Convert Fraction to decimal.
    */
   private function convertFractionsToDecimal($is_edit, $labResults, $field) {
     if ($is_edit) {
@@ -514,14 +514,14 @@ class LabResultsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect after cancel.
    */
   public function redirectAfterCancel(array $form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete lab test.
    */
   public function deleteLabTest(array &$form, FormStateInterface $form_state) {
     try {
@@ -584,7 +584,7 @@ class LabResultsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $sampleReference) {
     $soilSample = \Drupal::entityTypeManager()->getStorage('asset')->load($sampleReference);

@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Field assessment form.
  */
 class FieldAssessmentForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -297,14 +297,14 @@ class FieldAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete field assessment.
    */
   public function deleteFieldAssessment(array &$form, FormStateInterface $form_state) {
 
@@ -404,7 +404,7 @@ class FieldAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
@@ -414,7 +414,7 @@ class FieldAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Calculate resource concerns.
    */
   public function calcuateResourceConcerns(array &$form, FormStateInterface $form_state) {
 
@@ -520,7 +520,7 @@ class FieldAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for calculating resource concerns.
    */
   public function calcuateResourceConcernsCallback(array &$form, FormStateInterface $form_state) {
     return $form['assessment_wrapper'];

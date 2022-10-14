@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Pasture assessment form.
  */
 class PastureAssessmentForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -271,14 +271,14 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete field assessment.
    */
   public function deleteFieldAssessment(array &$form, FormStateInterface $form_state) {
 
@@ -299,7 +299,7 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Create element names.
    */
   public function createElementNames() {
     return ['shmu', 'pasture_assessment_date', 'pasture_assessment_desirable_plants', 'pasture_assessment_Legume_dry_weight', 'pasture_assessment_live_plant_cover', 'pasture_assessment_diversity_dry_weight', 'pasture_assessment_litter_soil_cover',
@@ -350,7 +350,7 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
@@ -360,7 +360,7 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get pasture condition score.
    */
   public function getPastureCondition(array &$form, FormStateInterface $form_state, $severity_options) {
     $desirable_plants = $form_state->getValue('pasture_assessment_desirable_plants');
@@ -379,7 +379,7 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Display RC scores.
    */
   public function displayRcScores(array &$form, FormStateInterface $form_state) {
     $form_state->set('rc_display', [1, 2, 3, 4]);
@@ -387,7 +387,7 @@ class PastureAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Update scores.
    */
   public function updateScores(array &$form, FormStateInterface $form_state) {
 

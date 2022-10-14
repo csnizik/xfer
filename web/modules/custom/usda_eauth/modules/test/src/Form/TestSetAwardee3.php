@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- *
+ * Set session values to mock an awardee user.
  */
 class TestSetAwardee3 extends FormBase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
 

@@ -17,7 +17,7 @@ use Drupal\farm_field\FarmFieldFactory;
 class Contact extends FarmAssetType {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();

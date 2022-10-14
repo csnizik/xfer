@@ -6,7 +6,7 @@ namespace Drupal\usda_eauth;
 use Drupal\Core\Site\Settings;
 
 /**
- *
+ * Utilities service for zRoles.
  */
 class zRolesUtilities implements zRolesUtilitiesInterface {
 

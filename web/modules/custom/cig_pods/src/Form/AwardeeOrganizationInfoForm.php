@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Awardee organization form.
  */
 class AwardeeOrganizationInfoForm extends PodsFormBase {
 
   /**
-   *
+   * Get options for state territory terms.
    */
   private function getStateTerritoryOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_state_territory');
@@ -101,14 +101,14 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to the PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete awardee.
    */
   public function deleteAwardee(array &$form, FormStateInterface $form_state) {
     $awardee_id = $form_state->get('awardee_id');

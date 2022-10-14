@@ -5,7 +5,7 @@ namespace Drupal\usda_eauth;
 use Drupal\Core\Security\TrustedCallbackInterface;
 
 /**
- *
+ * User login block prerender logic.
  */
 class UserLoginBlock implements TrustedCallbackInterface {
 

@@ -9,7 +9,7 @@ use Drupal\entity\UncacheableEntityAccessControlHandler;
 use Drupal\views\Plugin\views\ViewsHandlerInterface;
 
 /**
- *
+ * PODS project access control handler.
  */
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
 

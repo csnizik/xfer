@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Soil health sample form.
  */
 class SoilHealthSampleForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -20,7 +20,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get equipment used options.
    */
   public function getEquipmentUsedOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_equipment');
@@ -28,7 +28,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get plant options.
    */
   public function getPlantOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_plant_stage');
@@ -36,7 +36,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Build sample information section.
    */
   public function buildSampleInformationSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL) {
     $form['form_title'] = [
@@ -126,7 +126,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to the PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
@@ -255,14 +255,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
-  }
-
-  /**
-   *
+   * Convert fraction to decimal.
    */
   private function convertFractionsToDecimal($soilSample, $field) {
     $num = $soilSample->get($field)[0]->getValue()["numerator"];
@@ -271,7 +264,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Entity fields.
    */
   public function entityfields() {
     return ['field_diameter', 'field_plant_stage_at_sampling', 'field_sampling_depth', 'shmu', 'field_soil_sample_collection_dat', 'field_equipment_used'];
@@ -332,7 +325,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);

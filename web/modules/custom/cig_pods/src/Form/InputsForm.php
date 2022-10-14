@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Inputs form.
  */
 class InputsForm extends PodsFormBase {
 
@@ -33,7 +33,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get cost type options.
    */
   public function getCostTypeOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_cost_type');
@@ -41,7 +41,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get operation ID.
    */
   public function getOperationReferenceID($input_id) {
     $operation_query = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(
@@ -52,7 +52,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get unit options.
    */
   public function getUnitOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_unit');
@@ -60,7 +60,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get cost sequence IDs.
    */
   public function getCostSequenceIdsForInput($input) {
     $cost_sequence_target_ids = [];
@@ -75,7 +75,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get asset.
    */
   public function getAsset($id) {
     // We use load instead of load by properties here because we are looking by id.
@@ -85,7 +85,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Load other costs into $form_state.
    */
   public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state) {
     $sequences = [];
@@ -108,7 +108,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get other cost options.
    */
   public function getOtherCostsOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_cost_type');
@@ -116,7 +116,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Convert fraction to decimal.
    */
   private function convertFraction($fraction) {
     $num = $fraction->getValue()["numerator"];
@@ -125,7 +125,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL, AssetInterface $operation = NULL) {
     $input = $asset;
@@ -406,14 +406,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    return;
-  }
-
-  /**
-   *
+   * Add another input.
    */
   public function addAnotherInput(array &$form, FormStateInterface $form_state) {
     $form_state->set('input_redirect', TRUE);
@@ -428,7 +421,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get form entity mapping.
    */
   public function getFormEntityMapping() {
     $mapping = [];
@@ -567,7 +560,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $operationReference) {
     $operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
@@ -577,7 +570,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard on cancel.
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
@@ -585,7 +578,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete inputs.
    */
   public function deleteInputs(array &$form, FormStateInterface $form_state) {
     $input_id = $form_state->get('input_id');
@@ -627,7 +620,7 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Add another cost sequence.
    */
   public function addAnotherCostSequence(array &$form, FormStateInterface $form_state) {
     $sequences = $form_state->get('sequences');
@@ -641,14 +634,14 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for adding another cost sequence.
    */
   public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state) {
     return $form['cost_sequence'];
   }
 
   /**
-   *
+   * Delete cost sequence.
    */
   public function deleteCostSequence(array &$form, FormStateInterface $form_state) {
     $idx_to_rm = str_replace('delete-cost-', '', $form_state->getTriggeringElement()['#name']);
@@ -661,14 +654,14 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for input category.
    */
   public function inputCategoryCallback(array &$form, FormStateInterface $form_state) {
     return $form['field_input'];
   }
 
   /**
-   *
+   * Ajax callback for deleting cost sequence.
    */
   public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state) {
     return $form['cost_sequence'];

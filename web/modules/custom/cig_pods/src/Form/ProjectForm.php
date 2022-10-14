@@ -8,12 +8,12 @@ use Drupal\asset\Entity\Asset;
 use Drupal\Core\Render\Element\Checkboxes;
 
 /**
- *
+ * Project form.
  */
 class ProjectForm extends PodsFormBase {
 
   /**
-   *
+   * Get awardee options.
    */
   public function getAwardeeOptions() {
     $options = $this->entityOptions('asset', 'awardee');
@@ -21,7 +21,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get referenced contacts.
    */
   public function getReferencedContacts(array $form, FormStateInterface $form_state, $project_id) {
     $contacts = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(
@@ -61,7 +61,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get awardee contact type options.
    */
   public function getAwardeeContactTypeOptions() {
     $contact_type_options = [];
@@ -80,7 +80,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get grant type options.
    */
   public function getGrantTypeOptions() {
     $grand_type_options = [];
@@ -100,7 +100,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Convert fraction to decimal.
    */
   private function convertFractionsToDecimal($is_edit, $project, $field) {
     if ($is_edit) {
@@ -114,7 +114,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get resource concern options.
    */
   public function getResourceConcernOptions() {
     $resource_concern_options = [];
@@ -426,7 +426,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete project.
    */
   public function deleteProject(array &$form, FormStateInterface $form_state) {
     $project_id = $form_state->get('project_id');
@@ -506,14 +506,14 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Get form entity mapping.
    */
   public function getFormEntityMapping() {
     $mapping = [];
@@ -668,7 +668,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete contacts.
    */
   public function deleteContacts(array $pre_existsing_contacts) {
 
@@ -694,14 +694,14 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for adding contact row.
    */
   public function addContactRowCallback(array &$form, FormStateInterface $form_state) {
     return $form['names_fieldset'];
   }
 
   /**
-   *
+   * Add producer row.
    */
   public function addProducerRow(array &$form, FormStateInterface $form_state) {
     $num_producers = $form_state->get('num_producers');
@@ -712,7 +712,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Add contact row.
    */
   public function addContactRow(array &$form, FormStateInterface $form_state) {
     $num_contacts = $form_state->get('num_contacts');
@@ -723,7 +723,7 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Remove contact.
    */
   public function removeContactCallback(array &$form, FormStateInterface $form_state) {
     $trigger = $form_state->getTriggeringElement();

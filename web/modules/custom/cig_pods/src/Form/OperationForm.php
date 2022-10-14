@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Operation form.
  */
 class OperationForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -20,7 +20,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get equipment options.
    */
   public function getEquipmentOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_tractor_self_propelled_machine');
@@ -29,7 +29,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get equipment ownership options.
    */
   public function getEquipmentOwnershipOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_equipment_ownership');
@@ -37,7 +37,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get operation options.
    */
   public function getOperationOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_operation_type');
@@ -45,7 +45,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get cost sequence IDs for operation.
    */
   public function getCostSequenceIdsForOperation($operation) {
     $cost_sequence_target_ids = [];
@@ -60,7 +60,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get cost sequence IDs for input.
    */
   public function getCostSequenceIdsForInput($input) {
     $cost_sequence_target_ids = [];
@@ -75,7 +75,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get asset.
    */
   public function getAsset($id) {
     // We use load instead of load by properties here because we are looking by id.
@@ -85,7 +85,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Load other costs into $form_state.
    */
   public function loadOtherCostsIntoFormState($cost_sequence_ids, $form_state) {
 
@@ -112,7 +112,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get other costs options.
    */
   public function getOtherCostsOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_cost_type');
@@ -120,7 +120,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get decimal from SHMU fraction field.
    */
   public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name) {
     return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
@@ -382,7 +382,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Cancel submit.
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
@@ -390,7 +390,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete submit.
    */
   public function deleteSubmit(array &$form, FormStateInterface $form_state) {
     $id = $form_state->get('operation_id');
@@ -426,7 +426,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete inputs.
    */
   public function deleteInputs($input_to_delete) {
     $sequence_ids = $this->getCostSequenceIdsForInput($input_to_delete);
@@ -454,7 +454,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Add input.
    */
   public function addInput(array &$form, FormStateInterface $form_state) {
     $form_state->set('input_redirect', TRUE);
@@ -562,7 +562,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
@@ -572,7 +572,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Add another cost sequence.
    */
   public function addAnotherCostSequence(array &$form, FormStateInterface $form_state) {
     $sequences = $form_state->get('sequences');
@@ -589,7 +589,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for adding another cost sequence.
    */
   public function addAnotherCostSequenceCallback(array &$form, FormStateInterface $form_state) {
 
@@ -597,7 +597,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete cost sequence.
    */
   public function deleteCostSequence(array &$form, FormStateInterface $form_state) {
     $idx_to_rm = str_replace('delete-cost-', '', $form_state->getTriggeringElement()['#name']);
@@ -613,7 +613,7 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Ajax callback for deleting cost sequence.
    */
   public function deleteCostSequenceCallback(array &$form, FormStateInterface $form_state) {
     return $form['cost_sequence'];

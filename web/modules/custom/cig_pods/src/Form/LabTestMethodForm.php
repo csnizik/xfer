@@ -7,13 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- * Use Drupal\Core\Ajax\AjaxResponse;
- * use Drupal\Core\Ajax\ReplaceCommand;.
+ * Lab test method form.
  */
 class LabTestMethodForm extends PodsFormBase {
 
   /**
-   *
+   * Get taxonomy term options.
    */
   public function getTaxonomyOptions($bundle) {
     $options = $this->entityOptions('taxonomy_term', $bundle);
@@ -24,7 +23,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get asset options.
    */
   private function getAssetOptions($assetType) {
     $options = $this->entityOptions('asset', $assetType);
@@ -32,7 +31,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Convert fraction to decimal.
    */
   private function convertFractionsToDecimal($labTestMethod, $field) {
     $num = $labTestMethod->get($field)[0]->getValue()["numerator"];
@@ -41,7 +40,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Create element names.
    */
   private function createElementNames() {
     return ['field_lab_method_name', 'field_lab_method_project', 'field_lab_soil_test_laboratory'];
@@ -425,14 +424,14 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Reload profile.
    */
   public function reloadProfile(array $form, FormStateInterface $form_state) {
     return $form['field_lab_method_lab_test_profile'];
   }
 
   /**
-   *
+   * Get profile options.
    */
   public static function getProfileOptions($key = '') {
 
@@ -460,7 +459,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Load profile data.
    */
   public function loadProfileData(array &$form, FormStateInterface $form_state) {
 
@@ -490,7 +489,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Update profile.
    */
   public function updateProfile(array &$form, FormStateInterface $form_state) {
 
@@ -498,14 +497,14 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect after cancel.
    */
   public function redirectAfterCancel(array $form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete lab test.
    */
   public function deleteLabTest(array &$form, FormStateInterface $form_state) {
 
@@ -576,7 +575,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $method_submission = [];
@@ -627,7 +626,7 @@ class LabTestMethodForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $projectReference) {
     $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);

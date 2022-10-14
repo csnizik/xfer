@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Irrigation form.
  */
 class IrrigationForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -20,7 +20,7 @@ class IrrigationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Convert Fraction to decimal.
    */
   public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name) {
     return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
@@ -208,7 +208,7 @@ class IrrigationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard when cancel is clicked.
    */
   public function cancelSubmit(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
@@ -216,7 +216,7 @@ class IrrigationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Delete irrigation submit.
    */
   public function deleteSubmit(array &$form, FormStateInterface $form_state) {
     $id = $form_state->get('irrigation_id');
@@ -289,7 +289,7 @@ class IrrigationForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);

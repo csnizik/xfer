@@ -17,7 +17,7 @@ use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
 class PastureHealthAssessment extends FarmAssetType {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();

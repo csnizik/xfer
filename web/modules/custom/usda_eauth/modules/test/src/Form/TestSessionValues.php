@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Site\Settings;
 
 /**
- *
+ * Shows eAuth/zRole session values for debugging.
  */
 class TestSessionValues extends FormBase {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL) {
 

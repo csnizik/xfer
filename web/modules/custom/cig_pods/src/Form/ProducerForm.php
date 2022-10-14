@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Producer form.
  */
 class ProducerForm extends PodsFormBase {
 
   /**
-   *
+   * Get asset options.
    */
   private function getAssetOptions($assetType) {
     $options = $this->entityOptions('asset', $assetType);
@@ -130,7 +130,7 @@ class ProducerForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
@@ -193,7 +193,7 @@ class ProducerForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $projectReference) {
     $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);

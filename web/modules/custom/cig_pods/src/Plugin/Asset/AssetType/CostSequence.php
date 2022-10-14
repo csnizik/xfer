@@ -16,7 +16,7 @@ use Drupal\farm_field\FarmFieldFactory;
 class CostSequence extends FarmAssetType {
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();

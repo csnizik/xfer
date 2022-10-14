@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Pasture health assessment form.
  */
 class PastureHealthAssessmentForm extends PodsFormBase {
 
   /**
-   *
+   * Get SHMU options.
    */
   public function getSHMUOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
@@ -20,7 +20,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Get land use options.
    */
   public function getLandUseOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_land_use');
@@ -436,14 +436,14 @@ class PastureHealthAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect to the PODS dashboard.
    */
   public function dashboardRedirect(array &$form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete field assessment.
    */
   public function deleteFieldAssessment(array &$form, FormStateInterface $form_state) {
 
@@ -463,7 +463,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Create element names.
    */
   public function createElementNames() {
     return ['shmu', 'pasture_health_assessment_date', 'pasture_health_assessment_land_use', 'pasture_health_assessment_erosion_sheet', 'pasture_health_assessment_erosion_gullies',
@@ -518,7 +518,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Set project reference.
    */
   public function setProjectReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);

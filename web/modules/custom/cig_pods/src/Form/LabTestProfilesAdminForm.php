@@ -7,12 +7,12 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\asset\Entity\Asset;
 
 /**
- *
+ * Lab test profile admin form.
  */
 class LabTestProfilesAdminForm extends PodsFormBase {
 
   /**
-   *
+   * Get soil health extraction options.
    */
   public function getSoilHealthExtractionOptions($bundle) {
     $options = $this->entityOptions('taxonomy_term', $bundle);
@@ -20,7 +20,7 @@ class LabTestProfilesAdminForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Page lookup.
    */
   private function pageLookup(string $path) {
     $match = [];
@@ -38,7 +38,7 @@ class LabTestProfilesAdminForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Create element names.
    */
   private function createElementNames() {
     return ['name', 'field_profile_laboratory', 'field_profile_aggregate_stability_method', 'field_profile_respiratory_incubation_days', 'field_profile_respiration_detection_method',
@@ -301,14 +301,14 @@ class LabTestProfilesAdminForm extends PodsFormBase {
   }
 
   /**
-   *
+   * Redirect after cancel.
    */
   public function redirectAfterCancel(array $form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   *
+   * Delete lab test.
    */
   public function deleteLabTest(array &$form, FormStateInterface $form_state) {
     $lab_test_id = $form_state->get('lab_test_id');

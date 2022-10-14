@@ -14,7 +14,7 @@ class OperationForm extends PodsFormBase {
   /**
    * Get SHMU options.
    */
-  public function getSHMUOptions() {
+  public function getShmuOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
     return ['' => '- Select -'] + $options;
   }
@@ -123,7 +123,7 @@ class OperationForm extends PodsFormBase {
   /**
    * Get decimal from SHMU fraction field.
    */
-  public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name) {
+  public function getDecimalFromShmuFractionFieldType(object $shmu, string $field_name) {
     return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
@@ -166,7 +166,7 @@ class OperationForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container title-spacer"><h1>Operation</h1></div>',
     ];
 
-    $shmu_options = $this->getSHMUOptions();
+    $shmu_options = $this->getShmuOptions();
     $shmu_default_value = $is_edit ? $operation->get('shmu')->target_id : $default_options;
     $form['shmu'] = [
       '#type' => 'select',
@@ -231,7 +231,7 @@ class OperationForm extends PodsFormBase {
       '#required' => TRUE,
     ];
 
-    $field_number_of_rows = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($operation, 'field_row_number') : '';
+    $field_number_of_rows = $is_edit ? $this->getDecimalFromShmuFractionFieldType($operation, 'field_row_number') : '';
 
     $form['field_row_number'] = [
       '#type' => 'number',
@@ -245,7 +245,7 @@ class OperationForm extends PodsFormBase {
       '#required' => FALSE,
     ];
 
-    $field_width_of = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($operation, 'field_width') : '';
+    $field_width_of = $is_edit ? $this->getDecimalFromShmuFractionFieldType($operation, 'field_width') : '';
 
     $form['field_width'] = [
       '#type' => 'number',
@@ -260,7 +260,7 @@ class OperationForm extends PodsFormBase {
       '#required' => FALSE,
     ];
 
-    $field_horsepower_of = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($operation, 'field_horsepower') : '';
+    $field_horsepower_of = $is_edit ? $this->getDecimalFromShmuFractionFieldType($operation, 'field_horsepower') : '';
 
     $form['field_horsepower'] = [
       '#type' => 'number',

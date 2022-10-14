@@ -14,7 +14,7 @@ class SoilHealthSampleForm extends PodsFormBase {
   /**
    * Get SHMU options.
    */
-  public function getSHMUOptions() {
+  public function getShmuOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
     return ['' => '- Select -'] + $options;
   }
@@ -47,7 +47,7 @@ class SoilHealthSampleForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container section1-subtitle-spacer"><h2>Sample Information</h2><h4>6 Fields | Section 1 of 2</h4></div>',
     ];
 
-    $shmu_options = $this->getSHMUOptions();
+    $shmu_options = $this->getShmuOptions();
     $shmu_default_value = $is_edit ? $sample_collection->get('shmu')->target_id : '';
     $form['shmu'] = [
       '#type' => 'select',

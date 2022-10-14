@@ -131,7 +131,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   /**
    * SHMU is a reference to SoilHealthManagmentUnit entity.
    */
-  public function getDecimalFromSHMUFractionFieldType(object $shmu, string $field_name) {
+  public function getDecimalFromShmuFractionFieldType(object $shmu, string $field_name) {
     return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
@@ -141,7 +141,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    * Field_name must be a string relating to a field witn "multiple -> TRUE" in
    * its definition.
    */
-  public function getDefaultValuesArrayFromMultivaluedSHMUField(object $shmu, string $field_name) {
+  public function getDefaultValuesArrayFromMultivaluedShmuField(object $shmu, string $field_name) {
     $field_iter = $shmu->get($field_name);
 
     $populated_values = [];
@@ -294,7 +294,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => TRUE,
     ];
 
-    $field_shmu_replicate_number_value = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($shmu, 'field_shmu_replicate_number') : '';
+    $field_shmu_replicate_number_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_replicate_number') : '';
     $form['field_shmu_replicate_number'] = [
       '#type' => 'number',
       '#title' => $this->t('Replicate Number'),
@@ -404,7 +404,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => FALSE,
     ];
 
-    $field_shmu_prev_land_use_modifiers_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_prev_land_use_modifiers') : [];
+    $field_shmu_prev_land_use_modifiers_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_prev_land_use_modifiers') : [];
     $land_use_modifier_options = $this->getLandUseModifierOptions();
     $form['field_shmu_prev_land_use_modifiers'] = [
       '#type' => 'checkboxes',
@@ -444,7 +444,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => TRUE,
     ];
 
-    $field_shmu_current_land_use_modifiers_value = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_current_land_use_modifiers') : [];
+    $field_shmu_current_land_use_modifiers_value = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_current_land_use_modifiers') : [];
 
     $form['field_shmu_current_land_use_modifiers'] = [
       '#type' => 'checkboxes',
@@ -579,7 +579,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container section7"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 10</h4> </div>',
     ];
 
-    $field_shmu_initial_crops_planted = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_initial_crops_planted') : [];
+    $field_shmu_initial_crops_planted = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_initial_crops_planted') : [];
 
     $form['field_shmu_initial_crops_planted'] = [
       '#type' => 'checkboxes',
@@ -603,7 +603,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#default_value' => $field_current_tillage_system_value,
       '#required' => TRUE,
     ];
-    $field_years_in_current_tillage_system_value = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_current_tillage_system') : '';
+    $field_years_in_current_tillage_system_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_years_in_current_tillage_system') : '';
 
     $form['field_years_in_current_tillage_system'] = [
       '#type' => 'number',
@@ -624,7 +624,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#default_value' => $field_shmu_previous_tillage_system_value,
       '#required' => TRUE,
     ];
-    $field_years_in_prev_tillage_system_value = $is_edit ? $this->getDecimalFromSHMUFractionFieldType($shmu, 'field_years_in_prev_tillage_system') : '';
+    $field_years_in_prev_tillage_system_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_years_in_prev_tillage_system') : '';
 
     $form['field_years_in_prev_tillage_system'] = [
       '#type' => 'number',
@@ -668,7 +668,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     $major_resource_concerns_options = $this->getMajorResourceConcernOptions();
 
-    $field_shmu_major_resource_concern_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_major_resource_concern') : [];
+    $field_shmu_major_resource_concern_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_major_resource_concern') : [];
 
     $form['field_shmu_major_resource_concern'] = [
       '#type' => 'checkboxes',
@@ -678,7 +678,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => FALSE,
     ];
 
-    $field_shmu_resource_concern_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_resource_concern') : [];
+    $field_shmu_resource_concern_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_resource_concern') : [];
 
     $resource_concern_options = $this->getResourceConcernOptions();
     $form['field_shmu_resource_concern'] = [
@@ -692,7 +692,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container section10"><h2>NRCS Practices</h2><h4> 1 Field | Section 10 of 10</h4></div>',
     ];
 
-    $field_shmu_practices_addressed_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedSHMUField($shmu, 'field_shmu_practices_addressed') : [];
+    $field_shmu_practices_addressed_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_practices_addressed') : [];
     $practices_addressed_options = $this->getPracticesAddressedOptions();
     $form['field_shmu_practices_addressed'] = [
       '#type' => 'checkboxes',

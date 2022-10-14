@@ -14,7 +14,7 @@ class FieldAssessmentForm extends PodsFormBase {
   /**
    * Get SHMU options.
    */
-  public function getSHMUOptions() {
+  public function getShmuOptions() {
     $options = $this->entityOptions('asset', 'soil_health_management_unit');
     return ['' => '- Select -'] + $options;
   }
@@ -58,7 +58,7 @@ class FieldAssessmentForm extends PodsFormBase {
     $form['shmu'] = [
       '#type' => 'select',
       '#title' => 'Select a Soil Health Management Unit',
-      '#options' => $this->getSHMUOptions(),
+      '#options' => $this->getShmuOptions(),
       '#default_value' => $shmu_value,
       '#required' => TRUE,
     ];

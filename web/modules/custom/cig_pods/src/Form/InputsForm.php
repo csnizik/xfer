@@ -43,7 +43,7 @@ class InputsForm extends PodsFormBase {
   /**
    * Get operation ID.
    */
-  public function getOperationReferenceID($input_id) {
+  public function getOperationReferenceId($input_id) {
     $operation_query = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(
             ['type' => 'operation', 'field_input' => $input_id]
         );
@@ -137,7 +137,7 @@ class InputsForm extends PodsFormBase {
     if ($is_edit) {
       $form_state->set('operation', 'edit');
       $form_state->set('input_id', $input->id());
-      $form_state->set('operation_id', $this->getOperationReferenceID($input->id()));
+      $form_state->set('operation_id', $this->getOperationReferenceId($input->id()));
       $input_cost_sequences_ids = $this->getCostSequenceIdsForInput($input);
       if (!$form_state->get('load_done')) {
         $this->loadOtherCostsIntoFormState($input_cost_sequences_ids, $form_state);

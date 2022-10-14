@@ -282,10 +282,10 @@ class PastureAssessmentForm extends PodsFormBase {
   public function deleteFieldAssessment(array &$form, FormStateInterface $form_state) {
 
     $assessment_id = $form_state->get('assessment_id');
-    $PastureAssessment = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
+    $pasture_assessment = \Drupal::entityTypeManager()->getStorage('asset')->load($assessment_id);
 
     try {
-      $PastureAssessment->delete();
+      $pasture_assessment->delete();
       $form_state->setRedirect('cig_pods.dashboard');
     }
     catch (\Exception $e) {
@@ -362,7 +362,7 @@ class PastureAssessmentForm extends PodsFormBase {
    */
   public function getPastureCondition(array &$form, FormStateInterface $form_state, $severity_options) {
     $desirable_plants = $form_state->getValue('pasture_assessment_desirable_plants');
-    $Legume_dry_weight = $form_state->getValue('pasture_assessment_Legume_dry_weight');
+    $legume_dry_weight = $form_state->getValue('pasture_assessment_Legume_dry_weight');
     $live_plant_cover = $form_state->getValue('pasture_assessment_live_plant_cover');
     $diversity_dry_weight = $form_state->getValue('pasture_assessment_diversity_dry_weight');
     $litter_soil_cover = $form_state->getValue('pasture_assessment_litter_soil_cover');
@@ -372,7 +372,7 @@ class PastureAssessmentForm extends PodsFormBase {
     $plant_rigor = $form_state->getValue('pasture_assessment_plant_rigor');
     $erosion = $form_state->getValue('pasture_assessment_erosion');
 
-    $score = $desirable_plants + $Legume_dry_weight + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor;
+    $score = $desirable_plants + $legume_dry_weight + $live_plant_cover + $diversity_dry_weight + $litter_soil_cover + $grazing_utilization_severity + $livestock_concentration + $pasture_assessment_soil_compaction + $erosion + $plant_rigor;
     return $score;
   }
 

@@ -11,7 +11,6 @@ use Drupal\farm_field\FarmFieldFactory;
  * @AssetType(
  * id = "input",
  * label = @Translation("Input"),
- * description = @Translation("Input")
  * )
  */
 class Input extends FarmAssetType {

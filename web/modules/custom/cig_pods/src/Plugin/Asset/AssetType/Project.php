@@ -12,7 +12,6 @@ use Drupal\farm_field\FarmFieldFactory;
  * @AssetType(
  * id = "project",
  * label = @Translation("Project"),
- * description = @Translation("Project")
  * )
  */
 class Project extends FarmAssetType {

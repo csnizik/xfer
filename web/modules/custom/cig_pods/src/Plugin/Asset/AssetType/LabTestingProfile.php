@@ -11,8 +11,7 @@ use Drupal\farm_field\FarmFieldFactory;
  *
  * @AssetType(
  * id = "lab_testing_profile",
- * label = @Translation("LabTestingProfile"),
- * description = @Translation("LabTestingProfile")
+ * label = @Translation("Lab Testing Profile"),
  * )
  */
 class LabTestingProfile extends FarmAssetType {

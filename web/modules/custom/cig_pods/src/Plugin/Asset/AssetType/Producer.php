@@ -11,11 +11,6 @@ use Drupal\farm_field\FarmFieldFactory;
  * @AssetType(
  * id = "producer",
  * label = @Translation("Producer"),
- * handlers = {
- *  "form" = {
- *     "add"="Drupal\cig_pods\Form\ProducerForm",
- *  }
- * },
  * )
  */
 class Producer extends FarmAssetType {

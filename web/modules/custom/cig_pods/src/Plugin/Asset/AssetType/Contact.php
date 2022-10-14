@@ -11,7 +11,6 @@ use Drupal\farm_field\FarmFieldFactory;
  * @AssetType(
  * id = "contact",
  * label = @Translation("Contact"),
- * description = @Translation("Contact")
  * )
  */
 class Contact extends FarmAssetType {

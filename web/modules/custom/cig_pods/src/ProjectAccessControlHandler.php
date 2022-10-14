@@ -8,6 +8,9 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\entity\UncacheableEntityAccessControlHandler;
 use Drupal\views\Plugin\views\ViewsHandlerInterface;
 
+/**
+ *
+ */
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
 
   /**
@@ -167,7 +170,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   public static function eAuthIdProjects($eauth_id) {
 
-    // Query the asset table
+    // Query the asset table.
     $query = \Drupal::database()->select('asset', 'a');
 
     // Select the asset entity IDs.

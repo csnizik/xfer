@@ -393,9 +393,9 @@ class ProjectForm extends PodsFormBase {
       ],
       '#states' => [
         'visible' => [
-          ":input[name='names_fieldset[0][contact_name]']" => ['!value' => ''],
+          [":input[name='names_fieldset[0][contact_name]']" => ['!value' => '']],
           "and",
-          ":input[name='names_fieldset[0][contact_type]']" => ['!value' => ''],
+          [":input[name='names_fieldset[0][contact_type]']" => ['!value' => '']],
         ],
       ],
       "#limit_validation_errors" => [],

@@ -103,20 +103,19 @@ class PodsDashboardForm extends PodsFormBase {
 
     $form['awardee_proj'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Projects(s): ' . $entityCount[0]),
+      '#value' => $this->t('Projects(s): @count', ['@count' => $entityCount[0]]),
       '#name' => 'project',
-      '#class="button-container">',
     ];
 
     $form['awardee_org'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Awardee Organization(s): ' . $entityCount[1]),
+      '#value' => $this->t('Awardee Organization(s): @count', ['@count' => $entityCount[1]]),
       '#name' => 'awardee',
     ];
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Lab Test Profile(s): ' . $entityCount[2]),
+      '#value' => $this->t('Lab Test Profile(s): @count', ['@count' => $entityCount[2]]),
       '#name' => 'lab_profile',
       '#suffix' => '</div>',
     ];
@@ -204,67 +203,67 @@ class PodsDashboardForm extends PodsFormBase {
 
     $form['awardee_producer'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Producer(s): ' . $entityCount['producer']),
+      '#value' => $this->t('Producer(s): @count', ['@count' => $entityCount['producer']]),
       '#name' => 'producer',
     ];
 
     $form['awardee_soil_health_management_unit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('SHMU(s): ' . $entityCount['soil_health_management_unit']),
+      '#value' => $this->t('SHMU(s): @count', ['@count' => $entityCount['soil_health_management_unit']]),
       '#name' => 'soil_health_management_unit',
     ];
 
     $form['awardee_soil_health_sample'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Soil Sample(s): ' . $entityCount['soil_health_sample']),
+      '#value' => $this->t('Soil Sample(s): @count', ['@count' => $entityCount['soil_health_sample']]),
       '#name' => 'soil_health_sample',
     ];
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('CIFSH Assessment(s): ' . $entityCount['field_assessment']),
+      '#value' => $this->t('CIFSH Assessment(s): @count', ['@count' => $entityCount['field_assessment']]),
       '#name' => 'field_assessment',
     ];
 
     $form['awardee_rangeland_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('IIRH Assessment(s): ' . $entityCount['range_assessment']),
+      '#value' => $this->t('IIRH Assessment(s): @count', ['@count' => $entityCount['range_assessment']]),
       '#name' => 'range_assessment',
     ];
 
     $form['awardee_pasture_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('PCS Assessment(s): ' . $entityCount['pasture_assessment']),
+      '#value' => $this->t('PCS Assessment(s): @count', ['@count' => $entityCount['pasture_assessment']]),
       '#name' => 'pasture_assessment',
     ];
 
     $form['awardee_pasture_health_assessment'] = [
       '#type' => 'submit',
-      '#value' => $this->t('DIPH Assessment(s): ' . $entityCount['pasture_health_assessment']),
+      '#value' => $this->t('DIPH Assessment(s): @count', ['@count' => $entityCount['pasture_health_assessment']]),
       '#name' => 'pasture_health_assessment',
     ];
 
     $form['awardee_lab_result'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Soil Test Result(s): ' . $entityCount['lab_result']),
+      '#value' => $this->t('Soil Test Result(s): @count', ['@count' => $entityCount['lab_result']]),
       '#name' => 'lab_result',
     ];
 
     $form['awardee_lab'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Method(s): ' . $entityCount['lab_testing_method']),
+      '#value' => $this->t('Method(s):  @count', ['@count' => $entityCount['lab_testing_method']]),
       '#name' => 'lab_testing_method',
     ];
 
     $form['awardee_irrigation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Irrigation(s): ' . $entityCount['irrigation']),
+      '#value' => $this->t('Irrigation(s): @count', ['@count' => $entityCount['irrigation']]),
       '#name' => 'irrigation',
     ];
 
     $form['awardee_operation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Operation(s): ' . $entityCount['operation']),
+      '#value' => $this->t('Operation(s): @count', ['@count' => $entityCount['operation']]),
       '#name' => 'operation',
       '#suffix' => '</div>',
     ];

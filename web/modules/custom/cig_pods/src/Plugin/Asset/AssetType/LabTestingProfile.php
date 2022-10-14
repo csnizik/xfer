@@ -27,7 +27,6 @@ class LabTestingProfile extends FarmAssetType {
       'ph_method' => [
         'type'  => 'entity_reference',
         'label' => 'PH method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_ph_method',
         'handler' => 'default',
@@ -46,7 +45,6 @@ class LabTestingProfile extends FarmAssetType {
       'electroconductivity_method' => [
         'type'  => 'entity_reference',
         'label' => 'Electroconductivity Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_ec_method',
         'handler' => 'default',
@@ -65,7 +63,6 @@ class LabTestingProfile extends FarmAssetType {
       'nitrate_n_method' => [
         'type'  => 'entity_reference',
         'label' => 'Nitrate-N Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_nitrate_n_method',
         'handler' => 'default',
@@ -84,7 +81,6 @@ class LabTestingProfile extends FarmAssetType {
       'phosphorus_method' => [
         'type'  => 'entity_reference',
         'label' => 'Phosphorus Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -103,7 +99,6 @@ class LabTestingProfile extends FarmAssetType {
       'potassium_method' => [
         'type'  => 'entity_reference',
         'label' => 'Potassium Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -122,7 +117,6 @@ class LabTestingProfile extends FarmAssetType {
       'calcium_method' => [
         'type'  => 'entity_reference',
         'label' => 'Calcium Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -141,7 +135,6 @@ class LabTestingProfile extends FarmAssetType {
       'magnesium_method' => [
         'type'  => 'entity_reference',
         'label' => 'Magnesium Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -160,7 +153,6 @@ class LabTestingProfile extends FarmAssetType {
       'sulfur_method' => [
         'type'  => 'entity_reference',
         'label' => 'Sulfur Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -179,7 +171,6 @@ class LabTestingProfile extends FarmAssetType {
       'iron_method' => [
         'type'  => 'entity_reference',
         'label' => 'Iron Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -198,7 +189,6 @@ class LabTestingProfile extends FarmAssetType {
       'manganese_method' => [
         'type'  => 'entity_reference',
         'label' => 'Magnanese Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -217,7 +207,6 @@ class LabTestingProfile extends FarmAssetType {
       'copper_method' => [
         'type'  => 'entity_reference',
         'label' => 'Copper Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -236,7 +225,6 @@ class LabTestingProfile extends FarmAssetType {
       'zinc_method' => [
         'type'  => 'entity_reference',
         'label' => 'Zinc Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -255,7 +243,6 @@ class LabTestingProfile extends FarmAssetType {
       'boron_method' => [
         'type'  => 'entity_reference',
         'label' => 'Boron Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -274,7 +261,6 @@ class LabTestingProfile extends FarmAssetType {
       'aluminum_method' => [
         'type'  => 'entity_reference',
         'label' => 'Aluminum Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',
@@ -293,7 +279,6 @@ class LabTestingProfile extends FarmAssetType {
       'molybdenum_method' => [
         'type'  => 'entity_reference',
         'label' => 'Molybdenum Method',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_soil_health_extraction',
         'handler' => 'default',

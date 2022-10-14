@@ -48,7 +48,6 @@ class Awardee extends FarmAssetType {
       'organization_state_territory' => [
         'type' => 'entity_reference',
         'label' => 'Awardee Organization State Or Territory',
-        'description' => $this->t(''),
         'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_state_territory',
         'handler' => 'default',

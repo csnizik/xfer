@@ -2,13 +2,41 @@
 
 namespace Drupal\cig_pods\Form;
 
+use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Base form for PODS.
  */
 class PodsFormBase extends FormBase {
+
+  /**
+   * The selection plugin manager service.
+   *
+   * @var \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface
+   */
+  protected $selectionPluginManager;
+
+  /**
+   * Constructs a new PodsFormBase instance.
+   *
+   * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface $selection_plugin_manager
+   *   The selection plugin manager service.
+   */
+  public function __construct(SelectionPluginManagerInterface $selection_plugin_manager) {
+    $this->selectionPluginManager = $selection_plugin_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('plugin.manager.entity_reference_selection'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -63,7 +91,7 @@ class PodsFormBase extends FormBase {
         ],
       ];
     }
-    $selection_handler = \Drupal::service('plugin.manager.entity_reference_selection')->getInstance($selection_options);
+    $selection_handler = $this->selectionPluginManager->getInstance($selection_options);
     $referenceable_entities = $selection_handler->getReferenceableEntities();
     if (!empty($referenceable_entities[$bundle])) {
       $options = $referenceable_entities[$bundle];

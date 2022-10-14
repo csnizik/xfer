@@ -4,12 +4,40 @@ namespace Drupal\usda_eauth_test\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\usda_eauth\ZRolesUtilitiesInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Set session values to mock an awardee user.
  */
 class TestzRoles extends FormBase {
+
+  /**
+   * The zRoles utilities service.
+   *
+   * @var \Drupal\usda_eauth\ZRolesUtilitiesInterface
+   */
+  protected $zRoles;
+
+  /**
+   * Constructs a new TestzRoles instance.
+   *
+   * @param \Drupal\usda_eauth\ZRolesUtilitiesInterface $zRoles
+   *   The session.
+   */
+  public function __construct(ZRolesUtilitiesInterface $zRoles) {
+    $this->zRoles = $zRoles;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('usda_eauth.zroles'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -28,74 +56,70 @@ class TestzRoles extends FormBase {
       $this->t('Cancel'),
     ];
 
-    // Get the zRoles utility service.
-    /** @var \Drupal\usda_eauth\ZRolesUtilitiesInterface $zroles_util */
-    $zroles_util = \Drupal::service('usda_eauth.zroles');
-
     /* Display the users that have Admin zRole */
     $role = 'CIG_App_Admin';
 
-    $userInfo = $zroles_util->getListByzRole($role);
+    $userInfo = $this->zRoles->getListByzRole($role);
     print_r('<br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
     /* userinfo may be a single object or an array of userinfo objects, so check count */
     if (count($userInfo) == 1) {
-      $zroles_util->printUserInfo($userInfo);
+      $this->zRoles->printUserInfo($userInfo);
     }
     else {
       foreach ($userInfo as $user) {
-        $zroles_util->printUserInfo($user);
+        $this->zRoles->printUserInfo($user);
       }
     }
 
     /* Display the users that have data steward zRole */
     $role = 'CIG_NSHDS';
-    $userInfo = $zroles_util->getListByzRole($role);
+    $userInfo = $this->zRoles->getListByzRole($role);
     print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
     if (count($userInfo) == 1) {
-      $zroles_util->printUserInfo($userInfo);
+      $this->zRoles->printUserInfo($userInfo);
     }
     else {
       foreach ($userInfo as $user) {
-        $zroles_util->printUserInfo($user);
+        $this->zRoles->printUserInfo($user);
       }
     }
 
     /* Display the users that have CIG_NCDS zRole */
     $role = 'CIG_NCDS';
-    $userInfo = $zroles_util->getListByzRole($role);
+    $userInfo = $this->zRoles->getListByzRole($role);
     print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
     if (count($userInfo) == 1) {
-      $zroles_util->printUserInfo($userInfo);
+      $this->zRoles->printUserInfo($userInfo);
     }
     else {
       foreach ($userInfo as $user) {
-        $zroles_util->printUserInfo($user);
+        $this->zRoles->printUserInfo($user);
       }
     }
 
     /* Display the users that have CIG_APT zRole */
     $role = 'CIG_APT';
-    $userInfo = $zroles_util->getListByzRole($role);
+    $userInfo = $this->zRoles->getListByzRole($role);
     print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
     if (count($userInfo) == 1) {
-      $zroles_util->printUserInfo($userInfo);
+      $this->zRoles->printUserInfo($userInfo);
     }
     else {
       foreach ($userInfo as $user) {
-        $zroles_util->printUserInfo($user);
+        $this->zRoles->printUserInfo($user);
       }
     }
 
     /* Display the users that have CIG_NCDS zRole */
     $role = 'CIG_APA';
-    $userInfo = $zroles_util->getListByzRole($role);
+    $userInfo = $this->zRoles->getListByzRole($role);
     print_r('<br><br>** ' . $role . ' role has ' . count($userInfo) . ' users. ** <br>');
     if (count($userInfo) == 1) {
-      $zroles_util->printUserInfo($userInfo);
+      $this->zRoles->printUserInfo($userInfo);
     }
     else {
       foreach ($userInfo as $user) {
-        $zroles_util->printUserInfo($user);
+        $this->zRoles->printUserInfo($user);
       }
     }
 

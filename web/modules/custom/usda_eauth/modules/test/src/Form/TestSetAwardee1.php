@@ -5,11 +5,39 @@ namespace Drupal\usda_eauth_test\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Set session values to mock an awardee user.
  */
 class TestSetAwardee1 extends FormBase {
+
+  /**
+   * The session.
+   *
+   * @var \Symfony\Component\HttpFoundation\Session\Session
+   */
+  protected $session;
+
+  /**
+   * Constructs a new TestSetAwardee1 instance.
+   *
+   * @param \Symfony\Component\HttpFoundation\Session\Session $session
+   *   The session.
+   */
+  public function __construct(Session $session) {
+    $this->session = $session;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('session'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -38,15 +66,14 @@ class TestSetAwardee1 extends FormBase {
     $roleDisplay = 'NRCS Soil Health Data Steward';
 
     /*Store the user info in the session */
-    $session = \Drupal::request()->getSession();
-    $session->set('eAuthId', $eAuthId);
-    $session->set('EmailAddress', $email);
-    $session->set('FirstName', $firstName);
-    $session->set('LastName', $lastName);
-    $session->set('ApplicationRoleId', $roleId);
-    $session->set('ApplicationRoleName', $roleName);
-    $session->set('ApplicationRoleEnumeration', $roleEnum);
-    $session->set('ApplicationRoleDisplay', $roleDisplay);
+    $this->session->set('eAuthId', $eAuthId);
+    $this->session->set('EmailAddress', $email);
+    $this->session->set('FirstName', $firstName);
+    $this->session->set('LastName', $lastName);
+    $this->session->set('ApplicationRoleId', $roleId);
+    $this->session->set('ApplicationRoleName', $roleName);
+    $this->session->set('ApplicationRoleEnumeration', $roleEnum);
+    $this->session->set('ApplicationRoleDisplay', $roleDisplay);
 
     // Redirect to the PODS dashboard.
     (new RedirectResponse('/pods'))->send();

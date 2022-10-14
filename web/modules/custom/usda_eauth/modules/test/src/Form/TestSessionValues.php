@@ -7,11 +7,39 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 // Used to access Settings.
 use Drupal\Core\Site\Settings;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Shows eAuth/zRole session values for debugging.
  */
 class TestSessionValues extends FormBase {
+
+  /**
+   * The session.
+   *
+   * @var \Symfony\Component\HttpFoundation\Session\Session
+   */
+  protected $session;
+
+  /**
+   * Constructs a new TestSessionValues instance.
+   *
+   * @param \Symfony\Component\HttpFoundation\Session\Session $session
+   *   The session.
+   */
+  public function __construct(Session $session) {
+    $this->session = $session;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('session'),
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -31,15 +59,14 @@ class TestSessionValues extends FormBase {
     ];
 
     /* Display the the current users zrole info from the session variables */
-    $session = \Drupal::request()->getSession();
-    $sessionEA = $session->get('eAuthId');
-    $sessionEM = $session->get('EmailAddress');
-    $sessionFN = $session->get('FirstName');
-    $sessionLN = $session->get('LastName');
-    $sessionID = $session->get('ApplicationRoleId');
-    $sessionRN = $session->get('ApplicationRoleName');
-    $sessionRE = $session->get('ApplicationRoleEnumeration');
-    $sessionRD = $session->get('ApplicationRoleDisplay');
+    $sessionEA = $this->session->get('eAuthId');
+    $sessionEM = $this->session->get('EmailAddress');
+    $sessionFN = $this->session->get('FirstName');
+    $sessionLN = $this->session->get('LastName');
+    $sessionID = $this->session->get('ApplicationRoleId');
+    $sessionRN = $this->session->get('ApplicationRoleName');
+    $sessionRE = $this->session->get('ApplicationRoleEnumeration');
+    $sessionRD = $this->session->get('ApplicationRoleDisplay');
 
     print_r("Current user info:<br>
       eAuthId = $sessionEA<br>

@@ -67,7 +67,7 @@ class IrrigationForm extends PodsFormBase {
     $shmu_default_value = $is_edit ? $irrigation->get('shmu')->target_id : '';
     $form['shmu'] = [
       '#type' => 'select',
-      '#title' => t('Select a Soil Health Management Unit (SHMU)'),
+      '#title' => $this->t('Select a Soil Health Management Unit (SHMU)'),
       '#options' => $shmu_options,
       '#default_value' => $shmu_default_value,
       '#required' => TRUE,

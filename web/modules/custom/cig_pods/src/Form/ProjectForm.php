@@ -273,7 +273,7 @@ class ProjectForm extends PodsFormBase {
 
     $form['field_resource_concerns'] = [
       '#type' => 'checkboxes',
-      '#title' => t('Possible Resource Concerns'),
+      '#title' => $this->t('Possible Resource Concerns'),
       '#options' => $resource_concern_options,
       '#required' => TRUE,
       '#default_value' => $field_resource_concerns_defaultvalue,
@@ -385,7 +385,7 @@ class ProjectForm extends PodsFormBase {
       '#type' => 'submit',
       '#button_type' => 'button',
       '#name' => 'add_contact_button',
-      '#value' => t('Add Another Contact'),
+      '#value' => $this->t('Add Another Contact'),
       '#submit' => ['::addContactRow'],
       '#ajax' => [
         'callback' => '::addContactRowCallback',

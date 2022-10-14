@@ -51,7 +51,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     $shmu_default_value = $is_edit ? $sample_collection->get('shmu')->target_id : '';
     $form['shmu'] = [
       '#type' => 'select',
-      '#title' => t('Select a Soil Health Management Unit (SHMU)'),
+      '#title' => $this->t('Select a Soil Health Management Unit (SHMU)'),
       '#options' => $shmu_options,
       '#default_value' => $shmu_default_value,
       '#required' => TRUE,
@@ -65,7 +65,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     }
     $form['field_soil_sample_collection_dat'] = [
       '#type' => 'date',
-      '#title' => t('Sample Collection Date'),
+      '#title' => $this->t('Sample Collection Date'),
       '#date_label_position' => 'within',
       '#default_value' => $date_default_value,
       '#required' => TRUE,
@@ -75,7 +75,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     $equipment_used_default_value = $is_edit ? $sample_collection->get('field_equipment_used')->target_id : '';
     $form['field_equipment_used'] = [
       '#type' => 'select',
-      '#title' => t('Equipment Used'),
+      '#title' => $this->t('Equipment Used'),
       '#options' => $equipment_used_options,
       '#default_value' => $equipment_used_default_value,
       '#required' => TRUE,
@@ -108,7 +108,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     }
     $form['field_plant_stage_at_sampling'] = [
       '#type' => 'select',
-      '#title' => t('Plant Stage at Sampling'),
+      '#title' => $this->t('Plant Stage at Sampling'),
       '#options' => $plant_options,
       '#default_value' => $plant_stage_default_value,
       '#required' => TRUE,

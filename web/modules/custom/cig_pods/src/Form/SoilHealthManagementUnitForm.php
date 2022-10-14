@@ -626,7 +626,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['irrigation_radios'] = [
       '#type' => 'radios',
       '#required' => TRUE,
-      '#title' => t('Is this SHMU being irrigated?'),
+      '#title' => $this->t('Is this SHMU being irrigated?'),
       '#default_value' => 'no',
       '#options' => [
         'yes' => $this->t('Yes'),

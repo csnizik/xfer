@@ -162,7 +162,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   /**
    * Query to find projects that an eAuth ID has access to.
    *
-   * @param $eauth_id
+   * @param string $eauth_id
    *   The eAuth ID.
    *
    * @return array
@@ -204,7 +204,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   /**
    * Query to find assets that an eAuth ID has access to.
    *
-   * @param $eauth_id
+   * @param string $eauth_id
    *   The eAuth ID.
    * @param string|null $asset_type
    *   The asset type to filter by.

@@ -32,19 +32,22 @@ interface ZRolesUtilitiesInterface {
   /**
    * Use strpos and substr to get the value of a token from an XML string.
    *
-   * Used to get around problerms with non-breaking spaces.
+   * Used to get around problems with non-breaking spaces.
    *
-   * @param $xmlString
-   * @param $token
+   * @param string $xmlString
+   *   The XML string.
+   * @param string $token
+   *   The token string.
    *
    * @return string
+   *   Returns the value of the token.
    */
   public static function getTokenValue($xmlString, $token);
 
   /**
    * Debug Only - function to print out the user information using print_r.
    *
-   * @param $user
+   * @param object|array $user
    *   User object.
    */
   public static function printUserInfo($user);

@@ -1,6 +1,5 @@
 <?php
 
-// cig_pods namespace implies this file depends on the cig_pods module.
 namespace Drupal\cig_pods\Plugin\Asset\AssetType;
 
 use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;

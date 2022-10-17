@@ -29,6 +29,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/pasture_health_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 		$form['#tree'] = TRUE;
 
 		$severity_options = ['' => '- Select -', 5 => 'Extreme to Total', 4 => 'Moderate to Extreme', 3 => 'Moderate', 2 => 'Slight to Moderate', 1 => 'None to Slight'];
@@ -340,7 +341,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 			'#required' => FALSE,
 		];
 
-			 $pasture_health_assessment_hydro_func_just_value = $is_edit ? $assessment->get('pasture_health_assessment_hydro_func_just')->getValue()[0]['value'] : '';	
+			 $pasture_health_assessment_hydro_func_just_value = $is_edit ? $assessment->get('pasture_health_assessment_hydro_func_just')->getValue()[0]['value'] : '';
 			$form['pasture_health_assessment_hydro_func_just'] = [
 				'#type' => 'textarea',
 				'#title' => $this->t('Hydrological Function Assessment Justification'),
@@ -359,7 +360,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 				'#required' => FALSE,
 			];
 
-			 $pasture_health_assessment_bio_integ_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_just')->getValue()[0]['value'] : '';	
+			 $pasture_health_assessment_bio_integ_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_just')->getValue()[0]['value'] : '';
 
 			$form['pasture_health_assessment_bio_integ_just'] = [
 				'#type' => 'textarea',
@@ -379,7 +380,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
 				'#required' => FALSE,
 			];
 
-			 $pasture_health_assessment_bio_integ_qual_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_qual_just')->getValue()[0]['value'] : '';	
+			 $pasture_health_assessment_bio_integ_qual_just_value = $is_edit ? $assessment->get('pasture_health_assessment_bio_integ_qual_just')->getValue()[0]['value'] : '';
 
 			$form['pasture_health_assessment_bio_integ_qual_just'] = [
 				'#type' => 'textarea',

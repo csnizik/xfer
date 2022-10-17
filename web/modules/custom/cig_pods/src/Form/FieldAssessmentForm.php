@@ -21,6 +21,7 @@ class FieldAssessmentForm extends PodsFormBase {
     $assessment = $asset;
 		$form['#attached']['library'][] = 'cig_pods/field_assessment_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		$is_edit = $assessment <> NULL;
 
@@ -267,6 +268,7 @@ class FieldAssessmentForm extends PodsFormBase {
 			'#type' => 'submit',
 			'#value' => $this->t('Cancel'),
 			'#submit' => ['::dashboardRedirect'],
+			'#limit_validation_errors' => array(),
 
 		];
 

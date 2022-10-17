@@ -25260,16 +25260,6 @@ taxonomies:
       uuid: ea01c220-a911-40da-8ba5-da00b1db2cf2
     -
       vid: d_land_use_modifiers
-      tid: '869'
-      langcode: en
-      name: Organi
-      description__value: null
-      description__format: null
-      weight: '0'
-      parent: '0'
-      uuid: e0191254-39e1-4ff3-aa40-fd6ab458dee3
-    -
-      vid: d_land_use_modifiers
       tid: '874'
       langcode: en
       name: Organic

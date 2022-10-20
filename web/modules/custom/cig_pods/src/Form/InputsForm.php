@@ -229,25 +229,25 @@ class InputsForm extends PodsFormBase {
     $field_input_value = $is_edit ? $input->get('field_input')->target_id : '';
 
     $form['field_input'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Input'),
-			'#options' => $input_options,
-			'#default_value' => $field_input_value,
-			'#required' => FALSE,
-			'#validated' => TRUE,
+      '#type' => 'select',
+      '#title' => $this->t('Input'),
+      '#options' => $input_options,
+      '#default_value' => $field_input_value,
+      '#required' => FALSE,
+      '#validated' => TRUE,
       '#prefix' => '<span id="field_input">',
       '#suffix' => '</span>',
-		];
+    ];
 
     $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
 
     $form['field_unit'] = [
-			'#type' => 'select',
-			'#title' => $this->t('Unit'),
-			'#options' => $this->getUnitOptions(),
-			'#default_value' => $field_unit_value,
-			'#required' => TRUE,
-		];
+      '#type' => 'select',
+      '#title' => $this->t('Unit'),
+      '#options' => $this->getUnitOptions(),
+      '#default_value' => $field_unit_value,
+      '#required' => TRUE,
+    ];
 
     $form['input_suffix'] = [
       '#type' => 'markup',

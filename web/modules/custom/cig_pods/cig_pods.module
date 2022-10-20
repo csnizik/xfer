@@ -29,8 +29,6 @@ function cig_pods_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'cig_pods/hide_return';
 }
 
-
-
 /**
  * Implements hook_views_pre_render().
  */
@@ -57,8 +55,9 @@ function cig_pods_views_pre_render(ViewExecutable $view) {
 
       // Apply misc libraries...
       case 'irrigation':
-      $library = 'irrigation_display';
+        $library = 'irrigation_display';
         break;
+
       case 'field_assessment':
         $library = 'field_assessment';
         break;

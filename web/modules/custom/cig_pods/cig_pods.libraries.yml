@@ -20,6 +20,11 @@ awardee_methods_details_display:
     theme:
       css/awardee-methods-details-display.css: {}
 
+admin_details_display:
+  css:
+    theme:
+      css/admin-details-display.css: {}
+
 lab_test_profiles_admin_form:
   css:
     theme:

@@ -128,6 +128,7 @@ class InputsForm extends PodsFormBase {
        
 		 $form['#attached']['library'][] = 'cig_pods/css_form';
 		  $form['#attached']['library'][] = 'cig_pods/inputs_form';
+      $form['#attached']['library'][] = 'core/drupal.form';
 
 		$current_operation = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->get('operation_id'));
 
@@ -176,7 +177,7 @@ class InputsForm extends PodsFormBase {
 			'#required' => TRUE,
       '#ajax' => [
         'callback' => '::inputCategoryCallback',
-        'wrapper' => 'input-type',
+        'wrapper' => 'field_input',
       ],
 		];
 
@@ -204,8 +205,9 @@ class InputsForm extends PodsFormBase {
 			'#options' => $input_options,
 			'#default_value' => $field_input_value,
 			'#required' => FALSE,
-    //    '#prefix' => '<span id="input-type">',
-    //   '#suffix' => '</span>',
+			'#validated' => TRUE,
+		    '#prefix' => '<span id="field_input">',
+    		 '#suffix' => '</span>',
 		];
 
         $field_unit_value = $is_edit ? $input->get('field_unit')->target_id : '';
@@ -216,8 +218,6 @@ class InputsForm extends PodsFormBase {
 			'#options' => $this->getUnitOptions(),
 			'#default_value' => $field_unit_value,
 			'#required' => TRUE,
-    //   '#prefix' => '<span>',
-    //    '#suffix' => '</span>',
 		];
 
       $form['input_suffix'] = [

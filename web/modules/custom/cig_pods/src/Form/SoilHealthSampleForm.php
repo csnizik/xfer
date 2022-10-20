@@ -44,9 +44,9 @@ class SoilHealthSampleForm extends PodsFormBase {
 		];
 
 		$date_default_value = '';
-		if($is_edit && $sample_collection){
+		if($is_edit){
             // $prev_date_value is expected to be a UNIX timestamp
-            $prev_date_value = $sample_collection->get('field_soil_sample_collection_dat')[0]->value;
+            $prev_date_value = $sample_collection->get('field_soil_sample_collection_dat')->value;
             $date_default_value = date("Y-m-d", $prev_date_value);
         }
         $form['field_soil_sample_collection_dat'] = [
@@ -143,6 +143,7 @@ class SoilHealthSampleForm extends PodsFormBase {
 		$form['#attached']['library'][] = 'cig_pods/soil_health_sample_form';
 		$is_edit = $sample_collection <> NULL;
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 
 		if($is_edit){
 			$form_state->set('operation','edit');
@@ -268,6 +269,10 @@ public function entityfields(){
 		$sample_collection_submission['type'] = 'soil_health_sample';
 
 		foreach($form_values as $value){
+			if($value === 'field_soil_sample_collection_dat'){
+				$sample_collection_submission[$value] = strtotime($form_state->getValue($value));
+				continue;
+			}
 			$sample_collection_submission[$value] = $form_state->getValue($value);
 		}
 		$sample_collection_submission['name'] = $form_state->getValue('soil_sample_id');
@@ -284,6 +289,10 @@ public function entityfields(){
 		$sample_collection = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
 
 		foreach($form_values as $value){
+			if($value === 'field_soil_sample_collection_dat'){
+				$sample_collection->set($value, strtotime($form_state->getValue($value)));
+				continue;
+			}
 			$sample_collection->set($value, $form_state->getValue($value));
 		}
 		$sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));

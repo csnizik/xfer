@@ -20,6 +20,7 @@ class PastureAssessmentForm extends PodsFormBase {
 		// Attach proper CSS to form
 		$form['#attached']['library'][] = 'cig_pods/pasture_assessment_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
+		$form['#attached']['library'][] = 'core/drupal.form';
 		$form['#tree'] = TRUE;
 
 		if($form_state->get('rc_display') == NULL){

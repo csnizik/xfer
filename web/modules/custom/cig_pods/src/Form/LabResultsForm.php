@@ -50,6 +50,7 @@ class LabResultsForm extends PodsFormBase {
 
         $form['#attached']['library'][] = 'cig_pods/lab_results_form';
         $form['#attached']['library'][] = 'cig_pods/css_form';
+        $form['#attached']['library'][] = 'core/drupal.form';
 
         $lab_interpretation = $this->getLabInterpretationOptions("d_lab_interpretation");
 

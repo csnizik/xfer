@@ -36,16 +36,24 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
     $library = FALSE;
     switch ($view->current_display) {
 
-      // Apply admin_project_display library.
-      case 'irrigation':
-      $library = 'irrigation_display';
+       // Apply admin_details_display library.
+      case 'awardee':
+      case 'lab_testing_profile':
+      case 'producer':
+      case 'soil_health_management_unit':
+        $library = 'admin_details_display';
         break;
+
+      // Apply admin_project_display library.
       case 'pasture_assessment':
       case 'project':
         $library = 'admin_project_display';
         break;
 
       // Apply misc libraries...
+      case 'irrigation':
+      $library = 'irrigation_display';
+        break;
       case 'field_assessment':
         $library = 'field_assessment';
         break;

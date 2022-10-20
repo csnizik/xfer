@@ -1,3 +1,4 @@
+@import "variables";
 .a{
     --colorGinAppBackgroundRGB:0,0,0;
 }
@@ -18,7 +19,7 @@ h1.page-title {
     width: 100%;
 }
 
-.admin-project-display table th, td {
+.awardee-rangeland-details-display table th, td {
     background-color: white;
 }
 
@@ -32,7 +33,7 @@ h1.page-title {
 {
     background-color: white;
     margin-left: 0;
-    width: 650px
+    width: 675px
 }
 
 .layout-container::after {
@@ -62,9 +63,6 @@ table.views-table.views-view-table.cols-4 {
 }
 .content-header {
     display: none;
-}
-.page-content {
-    margin-top: -40px;
 }
 .gin-secondary-toolbar.layout-container {
     display: none;
@@ -100,8 +98,8 @@ td.views-field.views-field-name {
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td{
@@ -111,8 +109,8 @@ td{
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td.views-field.views-field-status {

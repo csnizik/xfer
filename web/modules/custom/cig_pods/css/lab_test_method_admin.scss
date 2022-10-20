@@ -1,7 +1,9 @@
+@import "variables";
+
 #edit-actions-update-profile.button {
-  background-color: #005ea2;
+  background-color: $sub-blue;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
   color: #ffffff;
   font-weight: 600;

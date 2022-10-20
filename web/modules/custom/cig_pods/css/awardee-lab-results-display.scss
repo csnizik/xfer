@@ -1,3 +1,4 @@
+@import "variables";
 .a{
     --colorGinAppBackgroundRGB:0,0,0;
 }
@@ -18,7 +19,7 @@ h1.page-title {
     width: 100%;
 }
 
-.awardee-operation-display table th, td {
+.awardee-lab-results-display table th, td {
     background-color: white;
 }
 
@@ -50,14 +51,11 @@ table  {
     --colorGinTableBorder:rgba(0,0,0,0); /* working*/
 }
 
-table.views-table.views-view-table.cols-5 {
+table.views-table.views-view-table.cols-4 {
     padding-left: 40px;
+    width:100%;
     margin-top: 0px;
     margin-bottom: 0px;
-}
-
-table.views-table.views-view-table.cols-5 td:nth-child(2) {
-    width: 120%;
 }
 
 .sticky-shadow{
@@ -91,11 +89,11 @@ th.views-field.views-field-name {
     --colorGinPrimaryActive: #000000;
 }
 
-table.views-table.views-view-table.cols-5 {
+table.views-table.views-view-table.cols-4 {
     --colorGinPrimaryActive: #000000;
      width: auto;
-     min-width: 120%;
 }
+
 td.views-field.views-field-name {
     width: max-content;
     max-width: 250px;
@@ -103,8 +101,8 @@ td.views-field.views-field-name {
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td{
@@ -114,8 +112,8 @@ td{
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td.views-field.views-field-status {

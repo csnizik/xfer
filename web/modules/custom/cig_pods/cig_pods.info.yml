@@ -6,3 +6,4 @@ dependencies:
   - entity:entity
   - farm_nrcs:farm_nrcs
   - usda_eauth:usda_eauth
+  - scss_compiler:scss_compiler

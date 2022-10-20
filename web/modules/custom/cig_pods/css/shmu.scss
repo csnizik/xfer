@@ -1,3 +1,5 @@
+@import "variables";
+
 .subform-title-container.section1 {
   margin-top: 27px;
   margin-bottom: 30px;
@@ -52,23 +54,25 @@
   margin-bottom: 20px;
 }
 
-#block-gin-content form .subform-title-container h4 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
+#block-gin-content form {
+  .subform-title-container h4 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .form-title {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+  }
 }
 
-#block-gin-content form .form-title {
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 38px;
-}
 
 form#soil-health-management-unit-form
   #edit-crop-sequence-actions-addcrop.button {
   background-color: #ffffff;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
   color: #ffffff;
   font-weight: 600;
@@ -79,17 +83,17 @@ form#soil-health-management-unit-form
 form#soil-health-management-unit-form #edit-ssurgo-lookup.button {
   background-color: #ffffff;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
-  color: #005ea2;
+  color: $sub-blue;
   font-weight: 600;
   font-size: 16px;
 }
 
 form#soil-health-management-unit-form #edit-ssurgo-lookup:hover {
-  background-color: #005ea2;
+  background-color: $sub-blue;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
   color: #ffffff;
   font-weight: 600;
@@ -104,23 +108,6 @@ div#edit-irrigation-radios {
   display: inline;
 }
 
-/*Scrollbar CSS Start*/
-/*===================*/
-::-webkit-scrollbar {
-  width: 7px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #dcdee0;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #71767a;
-}
-/*Scrollbar CSS End*/
-/*===================*/
 
 .form-checkboxes {
   max-height: 298px;
@@ -141,83 +128,85 @@ div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
 
 #crop_rotation_months {
   display: flex;
+
+  .form-checkboxes {
+    display: flex;
+    padding: 0;
+    border: none;
+    overflow: visible !important;
+    .form-type--checkbox { 
+      input {
+        position: relative;
+        top: 26px;
+        width: 20px;
+        height: 20px;
+      }
+      label {
+        right: 20px;
+        top: -100%;
+      }
+    }
+  }
 }
 
 #crop_rotation {
   display: flex;
   align-items: center;
+
+  div[class*="field-shmu-crop-rotation-crop"] {
+    width: 30.2%;
+    margin-right: 1.3%;
+  }
+  div[class*="field-shmu-crop-rotation-year"] {
+    width: 75px;
+    margin-right: 18px;
+  }
+
+  div[class*="form-type--checkbox"] {
+    margin-left: 15px;
+
+    &:first-of-type {
+      margin-left: 32px;
+    }
+  }
+
+  input[id*="actions-delete"] {
+    border: 0 !important;
+    box-shadow: 0 0 0 0;
+    color: $main-red;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 10px;
+    left: 30px;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
 }
 
-#crop_rotation div[class*="field-shmu-crop-rotation-crop"] {
-  width: 30.2%;
-  margin-right: 1.3%;
-}
 
-#crop_rotation div[class*="field-shmu-crop-rotation-year"] {
-  width: 75px;
-  margin-right: 18px;
-}
-
-#crop_rotation_months .form-checkboxes {
-  display: flex;
-  padding: 0;
-  border: none;
-  overflow: visible !important;
-}
-#crop_rotation div[class*="form-type--checkbox"] {
-  margin-left: 15px;
-}
-
-#crop_rotation div[class*="form-type--checkbox"]:first-of-type {
-  margin-left: 32px;
-}
-
-#crop_rotation_months .form-checkboxes .form-type--checkbox input {
-  position: relative;
-  top: 26px;
-  width: 20px;
-  height: 20px;
-}
-
-#crop_rotation_months .form-checkboxes .form-type--checkbox label {
-  right: 20px;
-  top: -100%;
-}
 
 form#soil-health-management-unit-form input#edit-addcrop.button {
   background-color: #ffffff;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
-  color: #005ea2;
+  color: $sub-blue;
   font-weight: 600;
   font-size: 16px;
 }
 
 form#soil-health-management-unit-form input#edit-addcrop:hover {
-  background-color: #005ea2;
+  background-color: $sub-blue;
   border-radius: 4px;
-  border-color: #005ea2 !important;
+  border-color: $sub-blue !important;
   padding: 12 20 12 20;
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
-}
-
-#crop_rotation input[id*="actions-delete"] {
-  border: 0 !important;
-  box-shadow: 0 0 0 0;
-  color: #b51d09;
-  padding: 0;
-  width: 20px;
-  height: 20px;
-  position: relative;
-  top: 10px;
-  left: 30px;
-}
-
-#crop_rotation input[id*="actions-delete"]:hover {
-  background-color: transparent !important;
 }
 
 form#soil-health-management-unit-form.soil-health-management-unit-form {

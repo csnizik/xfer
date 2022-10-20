@@ -1,24 +1,24 @@
 dashboard:
   css:
     theme:
-      css/dashboard.css: {}
+      css/dashboard.scss: {}
 
 project_entry_form:
   css:
     theme:
-      css/project.css: {}
+      css/project.scss: {}
   js:
     js/project.js: {}
 producer_entry_form:
   css:
     theme:
-      css/producer.css: {}
+      css/producer.scss: {}
       css/project.js: {}
 
 awardee_methods_details_display:
   css:
     theme:
-      css/awardee-methods-details-display.css: {}
+      css/awardee-methods-details-display.scss: {}
 
 admin_details_display:
   css:
@@ -28,116 +28,116 @@ admin_details_display:
 lab_test_profiles_admin_form:
   css:
     theme:
-      css/lab_test_profiles_admin.css: {}
+      css/lab_test_profiles_admin.scss: {}
 
 soil_health_sample_form:
   css:
     theme:
-      css/soil-health-sample.css: {}
+      css/soil-health-sample.scss: {}
 
 soil_health_management_unit_form:
   css:
     theme:
-      css/shmu.css: {}
+      css/shmu.scss: {}
 
 irrigation_form:
   css:
     theme:
-      css/irrigation.css: {}
+      css/irrigation.scss: {}
 
 irrigation_display:
   css:
     theme:
-      css/irrigation_display.css: {}
+      css/irrigation_display.scss: {}
 
 operation_form:
   css:
     theme:
-      css/operation.css: {}
+      css/operation.scss: {}
 
 operation_display:
   css:
     theme:
-      css/awardee-operation-display.css: {}
+      css/awardee-operation-display.scss: {}
 
 lab_test_method_admin_form:
   js:
     js/methods.js: {}
   css:
     theme:
-      css/lab_test_method_admin.css: {}
+      css/lab_test_method_admin.scss: {}
 
 lab_results_form:
   css:
     theme:
-      css/lab_results.css: {}
+      css/lab_results.scss: {}
 awardee_organization_form:
   css:
     theme:
-      css/awardee-organization.css: {}
+      css/awardee-organization.scss: {}
 producer_form:
   css:
     theme:
-      css/producer.css: {}
+      css/producer.scss: {}
 awardee_lab_results_display:
   css:
     theme:
-      css/awardee-lab-results-display.css: {}
+      css/awardee-lab-results-display.scss: {}
 awardee_soil_sample_display:
   css:
     theme:
-      css/awardee-soil-sample-display.css: {}
+      css/awardee-soil-sample-display.scss: {}
 admin_project_display:
   css:
     theme:
-      css/admin-project-display.css: {}
+      css/admin-project-display.scss: {}
 css_form:
   css:
     theme:
-      css/form.css: {}
+      css/form.scss: {}
 field_assessment:
   css:
     theme:
-      css/field-assesment-display.css: {}
+      css/field-assesment-display.scss: {}
       # @todo CSS cleanup
       # Both of these were being applied to field assessment Views originally
       # so copied this one here when the Views were merged.
-      css/awardee-soil-sample-display.css: {}
+      css/awardee-soil-sample-display.scss: {}
 
 field_assessment_form:
   css:
     theme:
-      css/awardee-field-assessment.css: {}
+      css/awardee-field-assessment.scss: {}
 
 range_assessment_form:
   css:
     theme:
-      css/awardee-range-assessment.css: {}
+      css/awardee-range-assessment.scss: {}
 
 pasture_health_assessment_form:
   css:
     theme:
-      css/awardee-pasture-health-assessment.css: {}
+      css/awardee-pasture-health-assessment.scss: {}
 
 pasture_health_display:
   css:
     theme:
-      css/awardee-pasture-health-display.css: {}
+      css/awardee-pasture-health-display.scss: {}
 
 range_assessment_display:
   css:
     theme:
-      css/awardee-rangeland-details-display.css: {}
+      css/awardee-rangeland-details-display.scss: {}
 
 hide_return:
   css:
     theme:
-      css/hide_return.css: {}
+      css/hide_return.scss: {}
 
 pasture_assessment_form:
   css:
     theme:
-      css/pasture-assessment.css: {}
+      css/pasture-assessment.scss: {}
 
 behavior_wkt_refresh:
   js:
@@ -172,4 +172,5 @@ behavior_latlon_refresh:
 inputs_form:
   css:
     theme:
-      css/inputs.css: {}
+      css/inputs.scss: {}
+

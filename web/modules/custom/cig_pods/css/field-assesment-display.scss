@@ -1,4 +1,4 @@
-/* This should be deleted */
+@import "variables";
 .a {
   --colorGinAppBackgroundRGB: 0, 0, 0;
 }
@@ -8,7 +8,7 @@ h1.page-title {
   padding-bottom: 20px;
   font-size: 22px;
   line-height: 30px;
-  font-weight: 700;
+  font-weight: 500;
   display: block;
   padding-left: 50px;
   margin-top: 0px;
@@ -19,7 +19,7 @@ h1.page-title {
   width: 100%;
 }
 
-.admin-details-display table th,
+.field-assesment-display table th,
 td {
   background-color: white;
 }
@@ -93,6 +93,10 @@ table.views-table.views-view-table.cols-3 {
   --colorGinPrimaryActive: #000000;
   width: auto;
 }
+table.views-table.views-view-table.cols-4 {
+  --colorGinPrimaryActive: #000000;
+  width: auto;
+}
 
 td.views-field.views-field-name {
   width: max-content;
@@ -101,8 +105,8 @@ td.views-field.views-field-name {
   padding-top: 0px;
   padding-bottom: 0px;
   height: 36px;
-  --colorGinPrimary: #005fa2;
-  --colorGinPrimaryHover: #005fa2;
+  --colorGinPrimary: $main-blue;
+  --colorGinPrimaryHover: $main-blue;
 }
 
 td.views-field.views-field-status {

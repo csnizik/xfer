@@ -24,6 +24,8 @@ function cig_pods_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'cig_pods/hide_return';
 }
 
+
+
 /**
  * Implements hook_views_pre_render().
  */

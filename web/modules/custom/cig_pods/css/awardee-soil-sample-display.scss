@@ -1,3 +1,4 @@
+@import "variables";
 .a{
     --colorGinAppBackgroundRGB:0,0,0;
 }
@@ -18,7 +19,7 @@ h1.page-title {
     width: 100%;
 }
 
-.awardee-lab-results-display table th, td {
+.awardee-soil-sample-display table th, td {
     background-color: white;
 }
 
@@ -100,8 +101,8 @@ td.views-field.views-field-name {
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td{
@@ -111,8 +112,8 @@ td{
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:#005fa2;
-    --colorGinPrimaryHover: #005fa2;
+    --colorGinPrimary:$main-blue;
+    --colorGinPrimaryHover: $main-blue;
 }
 
 td.views-field.views-field-status {

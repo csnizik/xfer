@@ -1,0 +1,81 @@
+@import "variables";
+#block-gin-content form {
+  input#edit-create-organization {
+    display: block;
+    margin-top: -22px;
+  }
+  #names-fieldset-wrapper {
+    width: 648px;
+  }
+  .inline-components {
+    float: left;
+    width: 316px;
+    margin-right: 8px;
+    margin-bottom: 0px;
+    .js-form-item {
+      margin-bottom: 0;
+    }
+  }
+  .inline-components-short {
+    float: left;
+    width: 205px;
+    margin-right: 8px;
+    margin-bottom: 0px;
+    .js-form-item {
+      margin-bottom: 0;
+    }
+  }
+  .remove-button-container {
+    display: inline-block;
+    margin-top: 10px;
+  }
+  .clear-space {
+    clear: both;
+  }
+  #addmore-button-container input {
+    margin: 8px 0 0 0;
+    background-color: $sub-blue;
+    color: #ffffff;
+    border-color: $sub-blue !important;
+    border-radius: 4px;
+  }
+}
+
+.form-boolean--type-checkbox:checked {
+  background-color: #205493 !important;
+}
+
+form#project-create-form.project-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+.form-checkboxes {
+  max-height: 396px;
+  overflow-y: overlay;
+  border: 1px solid #1b1b1b;
+  border-radius: 0;
+  padding: 10px 0px 10px 16px;
+  .form-type--checkbox {
+    position: relative;
+    top: 20px;
+    bottom: 20px;
+    margin-bottom: 10px !important;
+  }
+}
+
+.subform-title-container.awardee-info-spacing {
+  margin-top: 105px;
+  margin-bottom: 29px;
+}
+
+
+div[id="names-fieldset-wrapper"] div:nth-last-child(3) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(4) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(5) .js-form-item {
+  margin-bottom: 8px !important;
+}
+
+div[id="addmore-button-container"] {
+  margin-bottom: 64px;
+}

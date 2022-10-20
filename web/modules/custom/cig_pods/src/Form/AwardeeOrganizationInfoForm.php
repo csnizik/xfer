@@ -28,7 +28,7 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 			$form_state->set('operation','create');
 		}
 
-		// Attach proper CSS to form
+
 		$form['#attached']['library'][] = 'cig_pods/awardee_organization_form';
 		$form['#attached']['library'][] = 'cig_pods/css_form';
 		$form['#attached']['library'][] = 'core/drupal.form';
@@ -95,16 +95,18 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 	}
 
 	public function dashboardRedirect(array &$form, FormStateInterface $form_state){
-		$form_state->setRedirect('cig_pods.dashboard');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	}
 
 	public function deleteAwardee(array &$form, FormStateInterface $form_state){
+
+		// TODO: we probably want a confirm stage on the delete button. Implementations exist online
 		$awardee_id = $form_state->get('awardee_id');
 		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
 
 		try{
 			$awardee->delete();
-			$form_state->setRedirect('cig_pods.dashboard');
+			$form_state->setRedirect('cig_pods.admin_dashboard_form');
 		}catch(\Exception $e){
 			$this
 		  ->messenger()
@@ -125,6 +127,13 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+	// $this
+	// ->messenger()
+	// ->addStatus($this
+	// ->t('Form submitted for awardee org info @org_name', [
+	// '@org_name' => $form['awardee_org_name']['#value'],
+	// ]));
+	
 	$is_create = $form_state->get('operation') === 'create';
 
 	if($is_create){
@@ -138,7 +147,7 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 		$awardee = Asset::create($awardee_submission);
 		$awardee->save();
 
-		$form_state->setRedirect('cig_pods.dashboard');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 	} else {
 		$awardee_id = $form_state->get('awardee_id');
 		$awardee = \Drupal::entityTypeManager()->getStorage('asset')->load($awardee_id);
@@ -154,7 +163,7 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
 		$awardee->set('organization_acronym', $awardee_acronym);
 
 		$awardee->save();
-		$form_state->setRedirect('cig_pods.dashboard');
+		$form_state->setRedirect('cig_pods.admin_dashboard_form');
 
 	}
 

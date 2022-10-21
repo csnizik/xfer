@@ -7,10 +7,10 @@ services:
     ports:
       - '3306:3306'
     environment:
-        MYSQL_ROOT_PASSWORD: farm
-        MYSQL_DATABASE: farm
-        MYSQL_USER: farm
-        MYSQL_PASSWORD: farm
+        MYSQL_ROOT_PASSWORD: pods
+        MYSQL_DATABASE: pods
+        MYSQL_USER: pods
+        MYSQL_PASSWORD: pods
   www:
     depends_on:
       - db

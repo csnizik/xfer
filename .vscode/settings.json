@@ -8,9 +8,9 @@
 			"server": "localhost",
 			"port": 3306,
 			"driver": "MySQL",
-			"name": "MySQL Docker db",
-			"database": "farm",
-			"username": "farm",
+			"name": "PODS Database",
+			"database": "pods",
+			"username": "pods",
 			"password": "farm"
 		}
 	]

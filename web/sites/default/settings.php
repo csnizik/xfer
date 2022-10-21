@@ -770,9 +770,9 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'farm',
-  'username' => 'farm',
-  'password' => 'farm',
+  'database' => 'pods',
+  'username' => 'pods',
+  'password' => 'pods',
   'prefix' => '',
   'host' => 'db',
   'port' => '3306',

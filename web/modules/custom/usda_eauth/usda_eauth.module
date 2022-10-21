@@ -5,6 +5,7 @@
  * Module file for USDA eAuth.
  */
 
+use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\usda_eauth\UserLoginBlock;
 use Drupal\user\UserInterface;
 
@@ -14,7 +15,7 @@ use Drupal\user\UserInterface;
 function usda_eauth_openid_connect_post_authorize(UserInterface $account, array $context) {
 
   // Get the zRoles utility service.
-  /** @var \Drupal\usda_eauth\zRolesUtilitiesInterface $zroles_util */
+  /** @var \Drupal\usda_eauth\ZRolesUtilitiesInterface $zroles_util */
   $zroles_util = \Drupal::service('usda_eauth.zroles');
 
   // eAuthId should be in $context['sub'].
@@ -57,6 +58,7 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
     case 'CIG_APA':
       $destination = '/pods_admin_dashboard';
       break;
+
     case 'CIG_NSHDS':
     case 'CIG_NCDS':
     case 'CIG_APT':
@@ -88,7 +90,7 @@ function usda_eauth_openid_connect_userinfo_alter(&$userinfo, array $context) {
 /**
  * Implements hook_block_view_alter().
  */
-function usda_eauth_block_view_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+function usda_eauth_block_view_alter(array &$build, BlockPluginInterface $block) {
 
   // Remove the "Reset your password" link from user login block.
   if ($block->getBaseId() === 'user_login_block') {

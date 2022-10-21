@@ -2,12 +2,10 @@
 
 namespace Drupal\usda_eauth;
 
-use Drupal\Core\Session\AccountInterface;
-
 /**
- * zRoles utilities interface.
+ * Utilities service interface for zRoles.
  */
-interface zRolesUtilitiesInterface {
+interface ZRolesUtilitiesInterface {
 
   /**
    * Get roles and scopes for an eAuthID.
@@ -23,7 +21,7 @@ interface zRolesUtilitiesInterface {
   /**
    * Get a list of employees with the specified zRole.
    *
-   * @param String $zRole
+   * @param string $zRole
    *   The zRole to search for.
    *
    * @return mixed
@@ -34,20 +32,24 @@ interface zRolesUtilitiesInterface {
   /**
    * Use strpos and substr to get the value of a token from an XML string.
    *
-   * Used to get around problerms with non-breaking spaces
+   * Used to get around problems with non-breaking spaces.
    *
-   * @param $xmlString
-   * @param $token
+   * @param string $xmlString
+   *   The XML string.
+   * @param string $token
+   *   The token string.
    *
    * @return string
+   *   Returns the value of the token.
    */
   public static function getTokenValue($xmlString, $token);
 
   /**
    * Debug Only - function to print out the user information using print_r.
    *
-   * @param $user
+   * @param object|array $user
    *   User object.
    */
   public static function printUserInfo($user);
+
 }

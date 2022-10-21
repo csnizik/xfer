@@ -173,4 +173,3 @@ inputs_form:
   css:
     theme:
       css/inputs.scss: {}
-

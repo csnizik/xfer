@@ -1,7 +1,12 @@
 <?php
 
-Use Drupal\views\ViewExecutable;
-Use Drupal\Core\Form\FormStateInterface;
+/**
+ * @file
+ * CIG PODS module.
+ */
+
+use Drupal\views\ViewExecutable;
+
 /**
  * @file
  * Module file for Producer Operation Data Systems (PODS)
@@ -24,19 +29,17 @@ function cig_pods_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'cig_pods/hide_return';
 }
 
-
-
 /**
  * Implements hook_views_pre_render().
  */
-function cig_pods_views_pre_render(ViewExecutable $view ) {
+function cig_pods_views_pre_render(ViewExecutable $view) {
 
   // Attach custom CSS libraries to PODS Asset List Views.
   if ($view->id() == 'pods_asset_lists') {
     $library = FALSE;
     switch ($view->current_display) {
 
-       // Apply admin_details_display library.
+      // Apply admin_details_display library.
       case 'awardee':
       case 'lab_testing_profile':
       case 'producer':
@@ -52,26 +55,33 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
 
       // Apply misc libraries...
       case 'irrigation':
-      $library = 'irrigation_display';
+        $library = 'irrigation_display';
         break;
+
       case 'field_assessment':
         $library = 'field_assessment';
         break;
+
       case 'lab_result':
         $library = 'awardee_lab_results_display';
         break;
+
       case 'lab_testing_method':
         $library = 'awardee_methods_details_display';
         break;
+
       case 'operation':
         $library = 'operation_display';
         break;
+
       case 'pasture_health_assessment':
         $library = 'pasture_health_display';
         break;
+
       case 'range_assessment':
         $library = 'range_assessment_display';
         break;
+
       case 'soil_health_sample':
         $library = 'awardee_soil_sample_display';
         break;

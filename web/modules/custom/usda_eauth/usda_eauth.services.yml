@@ -1,6 +1,6 @@
 services:
   usda_eauth.zroles:
-    class: Drupal\usda_eauth\zRolesUtilities
+    class: Drupal\usda_eauth\ZRolesUtilities
   usda_eauth.overrider:
     class: Drupal\usda_eauth\Config\UsdaEAuthConfigOverride
     arguments: ['@settings']

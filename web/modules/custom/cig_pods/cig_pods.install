@@ -11,7 +11,7 @@
 function cig_pods_install() {
 
   // Set the front page to /pods_dashboard.
-  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/pods_dashboard')->save();
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/pods')->save();
 }
 
 /**

@@ -5,5 +5,5 @@ docker exec $DOCKERID vendor/bin/drush en -y structure_sync farm_map_mapbox cig_
 docker exec $DOCKERID vendor/bin/drush en -y field_ui views_ui usda_eauth_test
 docker exec $DOCKERID chown -R root:www-data web/sites/default/files
 docker exec $DOCKERID vendor/bin/drush -y import:taxonomies --choice=full
-docker exec -it $DOCKERID vendor/bin/drush -y config-set system.performance css.preprocess 0
-docker exec -it $DOCKERID vendor/bin/drush -y config-set system.performance js.preprocess 0
+docker exec $DOCKERID vendor/bin/drush -y config-set system.performance css.preprocess 0
+docker exec $DOCKERID vendor/bin/drush -y config-set system.performance js.preprocess 0

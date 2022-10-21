@@ -1,3 +1,0 @@
-#!/bin/bash
-docker build . -t pods:latest
-docker-compose up

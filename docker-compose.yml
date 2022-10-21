@@ -16,6 +16,6 @@ services:
     depends_on:
       - db
     volumes:
-      - './web/modules/custom:/opt/drupal/PODS/web/modules/custom'
+      - './:/opt/drupal'
     ports:
       - '85:80'

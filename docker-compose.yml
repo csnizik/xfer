@@ -5,14 +5,13 @@ services:
     volumes:
       - './db:/var/lib/mysql'
     ports:
-            - '3306:3306'
+      - '3306:3306'
     environment:
         MYSQL_ROOT_PASSWORD: farm
         MYSQL_DATABASE: farm
         MYSQL_USER: farm
         MYSQL_PASSWORD: farm
-
-  pods-container:
+  www:
     depends_on:
       - db
     volumes:
@@ -21,13 +20,3 @@ services:
     image: pods:latest
     ports:
       - '85:80'
-    # environment:
-      # XDEBUG_MODE: debug
-      # XDEBUG_CONFIG: client_host=172.17.0.1
-      # Enable these for PHPStorm:
-      #XDEBUG_SESSION: PHPSTORM
-      #PHP_IDE_CONFIG: serverName=localhost
-
-  # Enable this service when executing javascript tests.
-#  chrome:
-#    image: selenium/standalone-chrome:latest

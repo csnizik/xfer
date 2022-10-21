@@ -12,10 +12,10 @@ services:
         MYSQL_USER: pods
         MYSQL_PASSWORD: pods
   www:
+    image: drupal:9-php7.4-apache
     depends_on:
       - db
     volumes:
       - './web/modules/custom:/opt/drupal/PODS/web/modules/custom'
-    image: pods:latest
     ports:
       - '85:80'

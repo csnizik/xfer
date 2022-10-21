@@ -2,7 +2,5 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 PARENTPATH="$(dirname $SCRIPTPATH)"
 docker-compose -f $PARENTPATH/docker-compose.yml down
-docker system prune
 sudo rm -r $PARENTPATH/db
-docker build -t pods:latest $PARENTPATH
 docker-compose -f $PARENTPATH/docker-compose.yml up -d

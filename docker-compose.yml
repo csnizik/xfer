@@ -33,6 +33,9 @@ services:
 
           # Make sites/default/files writable by Apache.
           chown -R root:www-data /opt/drupal/web/sites/default/files
+
+          # Import taxonomy terms via Drush.
+          drush -y import:taxonomies --choice=full
         fi
 
         # Run Apache.

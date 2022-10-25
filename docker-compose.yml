@@ -12,7 +12,7 @@ services:
         MYSQL_USER: pods
         MYSQL_PASSWORD: pods
   www:
-    image: drupal:9-php7.4-apache
+    build: .
     entrypoint: /bin/bash
     command:
       - -c

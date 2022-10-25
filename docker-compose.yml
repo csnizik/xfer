@@ -44,6 +44,9 @@ services:
           drush user:create test --mail="test@example.com" --password="test"
         fi
 
+        # Notify that PODS is ready.
+        echo "##### PODS IS READY #####"
+
         # Run Apache.
         apache2-foreground
 

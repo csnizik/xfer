@@ -30,6 +30,9 @@ services:
 
           # Install Drupal via Drush.
           drush site-install -y --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
+
+          # Make sites/default/files writable by Apache.
+          chown -R root:www-data /opt/drupal/web/sites/default/files
         fi
 
         # Run Apache.

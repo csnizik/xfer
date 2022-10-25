@@ -22,9 +22,14 @@ services:
         # Install Git (required by Composer).
         apt-get update && apt-get install -y git
 
-        # Build PODS via Composer, if necessary.
+        # If the vendor directory doesn't exist, assume a fresh install.
         if [ ! -d /opt/drupal/vendor ]; then
+
+          # Build the PODS codebase via Composer.
           composer install
+
+          # Install Drupal via Drush.
+          drush site-install -y --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
         fi
 
         # Run Apache.

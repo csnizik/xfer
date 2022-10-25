@@ -53,3 +53,6 @@ services:
       - './:/opt/drupal'
     ports:
       - '85:80'
+    environment:
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG: discover_client_host=yes

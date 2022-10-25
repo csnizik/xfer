@@ -90,3 +90,19 @@ violations:
 `./scripts/codecheck`
 
 If there is no output, then the code is clean.
+
+### XDebug
+
+[XDebug](https://xdebug.org) is a PHP debugger, which is installed in the PODS
+Docker container.
+
+The PODS development environment comes with XDebug configuration for
+[VSCode](https://code.visualstudio.com/). Install the PHP Debug extension for
+VSCode with F1 + `ext install php-debug`.
+
+To start the debugger, click "Run and Debug" in VSCode and then click the green
+arrow next to "Listen for XDebug". Add a breakpoint to a line of code (eg:
+`web/index.php`), and refresh PODS in the browser. VSCode will intercept the
+request and stop execution at the breakpoint. Variables can be examined, and
+execution can be resumed or stepped forward one line at a time using the
+debugger controls.

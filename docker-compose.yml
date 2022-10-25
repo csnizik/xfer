@@ -11,6 +11,7 @@ services:
         MYSQL_DATABASE: pods
         MYSQL_USER: pods
         MYSQL_PASSWORD: pods
+        MYSQL_INITDB_SKIP_TZINFO: 1
   www:
     build: .
     entrypoint: /bin/bash

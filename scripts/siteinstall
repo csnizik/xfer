@@ -1,6 +1,5 @@
 #!/bin/bash
 DOCKERID=$(docker ps | awk 'NR > 1 {print $1; exit}')
-docker exec $DOCKERID vendor/bin/drush en -y structure_sync farm_map_mapbox cig_pods
 docker exec $DOCKERID vendor/bin/drush en -y field_ui views_ui usda_eauth_test
 docker exec $DOCKERID vendor/bin/drush -y import:taxonomies --choice=full
 docker exec $DOCKERID vendor/bin/drush -y config-set system.performance css.preprocess 0

@@ -29,7 +29,7 @@ services:
           composer install
 
           # Install Drupal via Drush.
-          drush site-install -y --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
+          drush site-install -y --existing-config --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
 
           # Make sites/default/files writable by Apache.
           chown -R root:www-data /opt/drupal/web/sites/default/files

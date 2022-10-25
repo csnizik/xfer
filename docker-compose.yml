@@ -36,6 +36,9 @@ services:
 
           # Import taxonomy terms via Drush.
           drush -y import:taxonomies --choice=full
+
+          # Enable USDA eAuth testing module via Drush.
+          drush en -y usda_eauth_test
         fi
 
         # Run Apache.

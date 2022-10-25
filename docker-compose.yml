@@ -13,6 +13,23 @@ services:
         MYSQL_PASSWORD: pods
   www:
     image: drupal:9-php7.4-apache
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        set -ex
+
+        # Install Git (required by Composer).
+        apt-get update && apt-get install -y git
+
+        # Build PODS via Composer, if necessary.
+        if [ ! -d /opt/drupal/vendor ]; then
+          composer install
+        fi
+
+        # Run Apache.
+        apache2-foreground
+
     depends_on:
       - db
     volumes:

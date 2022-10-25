@@ -64,7 +64,13 @@
       "merge-extra": true,
       "merge-extra-deep": true
     },
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
     "patches": {
+      "drupal/core": {
+        "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch"
+      },
       "drupal/openid_connect": {
         "Force HTTPS in redirect URIs": "patches/openid_connect/https-true.patch"
       },

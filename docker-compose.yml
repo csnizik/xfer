@@ -39,6 +39,9 @@ services:
 
           # Enable USDA eAuth testing module via Drush.
           drush en -y usda_eauth_test
+
+          # Add a test user.
+          drush user:create test --mail="test@example.com" --password="test"
         fi
 
         # Run Apache.

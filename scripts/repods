@@ -19,4 +19,4 @@ sudo rm -r $PARENTPATH/.editorconfig $PARENTPATH/.gitattributes $PARENTPATH/keys
 (cd $PARENTPATH && git checkout -- web)
 
 # Start up the Docker containers.
-docker-compose -f $PARENTPATH/docker-compose.yml up -d
+docker-compose -f $PARENTPATH/docker-compose.yml up

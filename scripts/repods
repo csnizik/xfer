@@ -1,6 +1,17 @@
 #!/bin/bash
+
+# This script will COMPLETELY refresh the PODS codebase and container.
+# THIS WILL UNDO ALL UNCOMMITTED CHANGES!
+
+# Get this script's path and parent directory.
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 PARENTPATH="$(dirname $SCRIPTPATH)"
+
+# Shut down the Docker containers.
 docker-compose -f $PARENTPATH/docker-compose.yml down
+
+# Delete the database volume.
 sudo rm -r $PARENTPATH/db
+
+# Start up the Docker containers.
 docker-compose -f $PARENTPATH/docker-compose.yml up -d

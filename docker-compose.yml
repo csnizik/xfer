@@ -19,9 +19,6 @@ services:
       - |
         set -ex
 
-        # Install Git (required by Composer).
-        apt-get update && apt-get install -y git
-
         # If the vendor directory doesn't exist, assume a fresh install.
         if [ ! -d /opt/drupal/vendor ]; then
 

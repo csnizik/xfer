@@ -780,7 +780,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-$settings["config_sync_directory"] = "/opt/drupal/PODS/config/sync";
+$settings["config_sync_directory"] = "/opt/drupal/config/sync";
 
 ini_set('memory_limit','512M');
 

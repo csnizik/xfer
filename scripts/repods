@@ -13,5 +13,10 @@ docker-compose -f $PARENTPATH/docker-compose.yml down
 # Delete the database volume.
 sudo rm -r $PARENTPATH/db
 
+# Delete all files created by Composer.
+# This also deletes our custom modules and then restores them via Git.
+sudo rm -r $PARENTPATH/.editorconfig $PARENTPATH/.gitattributes $PARENTPATH/keys $PARENTPATH/vendor $PARENTPATH/web
+(cd $PARENTPATH && git checkout -- web)
+
 # Start up the Docker containers.
 docker-compose -f $PARENTPATH/docker-compose.yml up -d

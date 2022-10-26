@@ -1,0 +1,13 @@
+uuid: 1da7f001-df7b-4f15-8dc6-f8b18c7b030d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: oP6Np92A67SHGJzBfE0YM1J2rlhBQ6G8L3jBDi2vtjQ
+name: 'Practice Innovation Status'
+vid: d_practice_innovation_st
+description: 'A list of Practice Innovation Status'
+weight: 0

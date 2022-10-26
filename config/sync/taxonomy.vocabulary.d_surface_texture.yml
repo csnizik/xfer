@@ -1,0 +1,13 @@
+uuid: 4a51b9a5-11fc-4ad4-b42d-9319371abb83
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: m1sKxFp2KVje46mEJOyngxf4KNq62DpnzlMecMNHvRk
+name: 'Surface Texture'
+vid: d_surface_texture
+description: 'A list of Surface Textures'
+weight: 0

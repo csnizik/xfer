@@ -1,0 +1,13 @@
+uuid: 397f38d7-9e27-470b-b9fc-f248a64075b9
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: p5nw_tN79THAYS1YPUTHek9yBqEGG75IpmkHe2ONOfE
+name: Ecoregions
+vid: d_ecoregions
+description: 'A list of Ecoregionss'
+weight: 0

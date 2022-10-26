@@ -1,0 +1,13 @@
+uuid: 1a6e68b9-9490-48e9-a414-0a541bd59eed
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: Tewd9aYPnO9iusIWp4yTviYmmvCSwSd-wXgEMENki3c
+name: 'Cover Crop Species'
+vid: d_cover_crop_species
+description: 'A list of Cover Crop Speciess'
+weight: 0

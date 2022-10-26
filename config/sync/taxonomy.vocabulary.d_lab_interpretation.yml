@@ -1,0 +1,13 @@
+uuid: bcd8aec1-d222-4cdb-aa2a-341c10f80566
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: c1eTLTc9cA-xb_Dab5opEhtjfdDfnzI1hBEF81pc6mw
+name: 'Lab Interpretation'
+vid: d_lab_interpretation
+description: 'A list of Lab Interpretations'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 13a10f4b-be91-410d-b15c-3700527d67dc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: '-sbdHsx6Ta3ZGymhKgW1mArkKMTHkWN_rqiGnIBIDjw'
+name: State
+vid: d_state
+description: 'A list of State'
+weight: 0

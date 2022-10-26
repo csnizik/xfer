@@ -1,0 +1,14 @@
+uuid: 19ad0bfa-63d3-4e17-860f-fc2b3398cb39
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: LXnO7Q78oFCrKwDK5JT27exWLCg_0F9MrjIDqAKwBXE
+id: latlon_add
+label: 'Lat/Lon Add'
+description: 'Adds a point to the map from lat/lon fields.'
+library: cig_pods/behavior_latlon_add
+settings: {  }

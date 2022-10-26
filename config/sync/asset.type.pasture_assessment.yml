@@ -1,0 +1,14 @@
+uuid: 7307fda1-f408-45c1-910d-6624c374b2fa
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 6rTPHDfhCKIcalohPg7IFmeXE7ByHRC7NshW4JPnfG4
+id: pasture_assessment
+label: 'Pasture Assessment'
+description: 'Pasture Assessment'
+workflow: asset_default
+new_revision: false

@@ -1,0 +1,13 @@
+uuid: 2c167c67-f6cb-4939-8672-956d9dbd121d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: KuR-Dzf4I0iamk6RrJB43sgMsQkEuk6JZDde1Id2xWI
+name: 'Production Use'
+vid: d_production_use
+description: 'A list of Production Uses'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 08fdce82-1a6e-47e9-a9d2-5f1fb35c9388
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: GpdnotYwBiyrUN1Nd3-GofMQND42yRYEhPYfhSvpkvk
+name: 'Respiration Incubation days'
+vid: d_respiration_incubation
+description: 'Respiration Incubation days'
+weight: 0

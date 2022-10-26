@@ -1,0 +1,14 @@
+uuid: 7a733923-aef0-4761-982d-18f0b48d8d3a
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: kj_m043-W4RiCu63CKcG2jMlYNonvlmdUQW9XxGgk5M
+id: lab_result
+label: 'Lab Result'
+description: 'Lab Result'
+workflow: asset_default
+new_revision: false

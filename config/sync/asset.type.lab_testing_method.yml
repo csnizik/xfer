@@ -1,0 +1,14 @@
+uuid: 4cca82fa-1a3c-4a77-bbed-e14734c3f566
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: gPJ3U8_V3O1aNycKDy2Zq8TMYCw9RFuxfRw6tLLvGZc
+id: lab_testing_method
+label: 'Lab Testing Method'
+description: 'Lab Testing Method'
+workflow: asset_default
+new_revision: true

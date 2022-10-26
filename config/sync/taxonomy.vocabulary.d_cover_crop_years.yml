@@ -1,0 +1,13 @@
+uuid: 64afe5f5-20b7-4ed2-ac38-ef03054017c0
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: ZKf7xeZhrCvVUOtFDh9Od2gZIwyqGOylAG6sH_qR-T8
+name: 'Cover Crop Years'
+vid: d_cover_crop_years
+description: 'A list of Cover Crop Yearss'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 62572f23-74b4-484d-8a9c-c2ea37e41e65
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 2gB3Kji87Kh8JUIpJC4YIPv2CwAPvm8gf1JeURxp7Ag
+name: 'Innovation Results'
+vid: d_innovation_results
+description: 'A list of Innovation Resultss'
+weight: 0

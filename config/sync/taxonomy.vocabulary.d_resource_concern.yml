@@ -1,0 +1,13 @@
+uuid: 7e36a33f-4ab8-474e-8ba6-e4f64249d23f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 8ra-mzHNedFn6m3Crqzer4_e56sWuZWaG9I87iwcOTk
+name: 'Resource Concern'
+vid: d_resource_concern
+description: 'A list of Resource Concerns'
+weight: 0

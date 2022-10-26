@@ -1,0 +1,14 @@
+uuid: e7434507-3245-4b91-baef-9981d8e85266
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 5eyIFVhYx3hXEz5088N8qinh7DwiZbW-eQ-AARMKV4g
+id: contact
+label: 'Eauth Contact'
+description: 'Eauth Contact'
+workflow: asset_default
+new_revision: true

@@ -1,0 +1,14 @@
+uuid: a4511927-f598-48fe-a4a3-e227f8deb53d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_nrcs
+_core:
+  default_config_hash: u97e-r1spkHHqO8CeR5WIlt4W0LC9rgJHzUwuKK2OXY
+id: nrcs_soil_survey
+label: 'NRCS Soil Survey'
+description: 'Displays NRCS Soil Survey layer.'
+library: farm_nrcs/nrcs_soil_survey
+settings: {  }

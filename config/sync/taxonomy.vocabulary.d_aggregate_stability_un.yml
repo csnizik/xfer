@@ -1,0 +1,13 @@
+uuid: 0dfa15ab-8e57-46b7-bca5-ee2d231f49c5
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: S2jyLj_rYGZdJD2z_vgc73YU58x0FoCs7ypQ86lBOaQ
+name: 'Aggregate Stability Unit'
+vid: d_aggregate_stability_un
+description: 'A list of Aggregate Stability Units'
+weight: 0

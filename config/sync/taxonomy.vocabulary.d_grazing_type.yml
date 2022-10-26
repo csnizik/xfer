@@ -1,0 +1,13 @@
+uuid: 0cf00d10-7fbe-48ba-b6e1-505234ea9ecd
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: KH6tjK8kohwGMcCiuNG1rbWYrrBqEut9c2tkClOF4qk
+name: 'Grazing Type'
+vid: d_grazing_type
+description: 'A list of Grazing Types'
+weight: 0

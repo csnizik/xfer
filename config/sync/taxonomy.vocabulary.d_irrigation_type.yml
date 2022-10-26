@@ -1,0 +1,13 @@
+uuid: 88409c7d-f2c8-448a-8076-ca5e1231e186
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 1e7o9Fovr1Jfc0eTo58MA15wklJHuhbtCi9cFkU8-nk
+name: 'Irrigation Type'
+vid: d_irrigation_type
+description: 'A list of Irrigation Types'
+weight: 0

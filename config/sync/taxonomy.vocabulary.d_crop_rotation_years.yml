@@ -1,0 +1,13 @@
+uuid: e87bcd70-77c1-4344-b298-8483b10d78d8
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 0J0EAwiHuHkRW_Gmc1lghOsFy-xommwJrXlRpgvSxco
+name: 'Crop Rotation Years'
+vid: d_crop_rotation_years
+description: 'A list of Crop Rotation Yearss'
+weight: 0

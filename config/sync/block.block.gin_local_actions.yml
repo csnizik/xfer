@@ -1,0 +1,20 @@
+uuid: 93db2f2c-f381-4259-b53d-264510682700
+langcode: en
+status: true
+dependencies:
+  theme:
+    - gin
+_core:
+  default_config_hash: OQ9aJ-4qVwK1x00o9EOYK4eFDjQr_HLpbPiJaPSVZiQ
+id: gin_local_actions
+theme: gin
+region: content
+weight: -10
+provider: null
+plugin: farm_local_actions_block
+settings:
+  id: farm_local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: farm_ui_theme
+visibility: {  }

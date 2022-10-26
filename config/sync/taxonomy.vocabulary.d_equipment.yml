@@ -1,0 +1,13 @@
+uuid: 162591e0-af5f-4055-b074-9c5acc84a264
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: '-f4bOk36sUeKgfrVdr97IK38xst65nyZXcbZMnqItps'
+name: Equipment
+vid: d_equipment
+description: 'The list of equipment'
+weight: 0

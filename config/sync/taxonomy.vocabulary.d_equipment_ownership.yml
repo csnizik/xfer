@@ -1,0 +1,13 @@
+uuid: 07244c86-05a5-414e-ae13-147baa8990d2
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: fw_nBm6yhqqZM5cGeGU-ml9CewCOZet3pTyf4MEsuNc
+name: 'Equipment Ownership'
+vid: d_equipment_ownership
+description: 'A list of Equipment Ownerships'
+weight: 0

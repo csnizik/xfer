@@ -1,0 +1,13 @@
+uuid: 7c9e1548-f112-4930-8006-3083ce5c0a50
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: SiiM4v8KXbUm5S5qUZ5-ZUFglxS7XlmHyO-cFuKsAXc
+name: 'Contact Type'
+vid: d_contact_type
+description: 'A list of Contact Types'
+weight: 0

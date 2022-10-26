@@ -1,0 +1,14 @@
+uuid: f21b1338-62fe-4035-b4bc-af71236731ac
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_ui_dashboard
+_core:
+  default_config_hash: ZsBq3-nxR6G1nlvhqXAfvtnTwoKbmBF8EC1gkX4iamM
+id: dashboard
+label: Dashboard
+description: 'The farmOS dashboard map.'
+behaviors: {  }
+options: {  }

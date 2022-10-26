@@ -1,0 +1,13 @@
+uuid: 37b14f28-771d-4156-9027-614ee33b5501
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: bZkZ0jfsQeIsN8pFqywsogBQykLL_cgve-TdN9POjk4
+name: 'Qualitative Impact'
+vid: d_qualitative_impact
+description: 'A list of Qualitative Impacts'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 65d4e4cb-9c71-4d83-a545-0476b75cc217
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: ioenuEIbetO-PD1B4gMfYAWfj4VfSqVC8gR0fmC1Xz0
+name: 'Plant Stage'
+vid: d_plant_stage
+description: 'A list of Plant Stages'
+weight: 0

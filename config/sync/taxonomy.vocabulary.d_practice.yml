@@ -1,0 +1,13 @@
+uuid: cb0d6d89-627f-4ac5-9736-a54b2bb0d769
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: flQkMKF5yYWt147s8YLcV3mX-azOMWhpth6GA8TWYfo
+name: Practice
+vid: d_practice
+description: 'A list of Practices'
+weight: 0

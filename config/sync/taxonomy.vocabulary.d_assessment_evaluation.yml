@@ -1,0 +1,13 @@
+uuid: 13b4235f-4346-4301-8b62-81377320cd7d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: ncTX_DEQD1Sc10u4wwlQRQIAKQ-GIgXACRxd2pz8m_0
+name: 'Assessment Evaluation'
+vid: d_assessment_evaluation
+description: 'A taxonomy only containing "Yes", "No" and "N/A" for use in the Assessment Form'
+weight: 0

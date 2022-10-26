@@ -1,0 +1,13 @@
+uuid: 5080b261-8095-4f47-ae0f-34fdd0b506f7
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 6mhWxefXztfS6hwcWvK1Hip981PFYaSlc4UPyzzhJwY
+name: Laboratory
+vid: d_laboratory
+description: 'A list of Laboratories'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 97035d9d-5d9b-4953-a29d-f35d15b047a0
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: gf10cpXdfRnuU4GydQs-RKSkm22zkGR46WGFW5vkO_o
+name: 'Animal Type'
+vid: d_animal_type
+description: 'A list of Animal Types'
+weight: 0

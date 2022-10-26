@@ -1,0 +1,13 @@
+uuid: e5e0054f-a906-4dcc-8a30-0f83f59cce55
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: TmkJ97BVFLXCmp9IRtniKI8yL1XPcwc8cM6McoOBjRc
+name: Input
+vid: d_input
+description: 'A list of Inputs'
+weight: 0

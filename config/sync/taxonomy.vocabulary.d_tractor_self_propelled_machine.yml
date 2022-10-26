@@ -1,0 +1,13 @@
+uuid: 113ce5a8-1832-4887-a904-0d732e6b50e6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: L9p9cdzohKmJMRnJY-vyKAk-zIUbajCrPt9pRDr1RsM
+name: 'Tractor/Self-Propelled Machine'
+vid: d_tractor_self_propelled_machine
+description: 'A list of Tractor/Self-Propelled Machines'
+weight: 0

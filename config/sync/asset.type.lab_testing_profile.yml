@@ -1,0 +1,14 @@
+uuid: 1d4c4d8e-1c5b-43c1-9cf5-ddf87faeb3f3
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: QAtyzZUAZ1tr5ZdY9_G9k9ldkKw1Pm3HNKB76TMO6kc
+id: lab_testing_profile
+label: 'Lab Testing Profile'
+description: 'Lab Testing Profile'
+workflow: asset_default
+new_revision: true

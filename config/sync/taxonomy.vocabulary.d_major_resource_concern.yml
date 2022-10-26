@@ -1,0 +1,13 @@
+uuid: a0fa7f72-2421-4bbc-a850-49a9cad87472
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: SdjfIzmmn1xQc_svZbS3-Z9xeZuDPwMMUAh6OjG6KPc
+name: 'Major Resource Concern'
+vid: d_major_resource_concern
+description: 'A list of Contact Types'
+weight: 0

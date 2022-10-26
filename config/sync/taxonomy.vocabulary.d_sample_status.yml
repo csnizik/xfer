@@ -1,0 +1,13 @@
+uuid: 95eb714c-5b67-4fcb-ab2c-a38670ee14eb
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 3rnounLg2o5upUMS1ynnOIyXoQGu4no4WKQrckc_d00
+name: 'Sample Status'
+vid: d_sample_status
+description: 'A list of Sample Status'
+weight: 0

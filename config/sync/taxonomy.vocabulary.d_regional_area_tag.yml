@@ -1,0 +1,13 @@
+uuid: db8ad2ba-2a73-4bc8-9de1-d9c83bb950e3
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: UlPBEqqPt4ww08yRKTcEeYQvheq-lddStIQ_0noxenc
+name: 'Regional Area Tag'
+vid: d_regional_area_tag
+description: 'A list of Regional Area Tags'
+weight: 0

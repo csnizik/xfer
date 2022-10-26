@@ -1,0 +1,12 @@
+uuid: b96e6749-ab06-4ec4-b04c-dce122e58264
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_flag
+_core:
+  default_config_hash: 8his9QOyvwzCXXH7q7NDUIOXACJFDktI8ebwnsVW_T4
+id: review
+label: 'Needs review'
+entity_types: null

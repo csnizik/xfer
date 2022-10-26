@@ -1,0 +1,13 @@
+uuid: f813edfc-e555-4da1-9742-1c9f3ee52920
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 0Jwti86JLuZcfoxQHaYafcUnjsqk1ncDpUbzF-dSyyU
+name: 'Project Type'
+vid: d_project_type
+description: 'A list of Project Types'
+weight: 0

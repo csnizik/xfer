@@ -1,0 +1,13 @@
+uuid: dcda299d-db3f-4c92-938a-901772c6f18d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: N0XkxcXDuXK1bNDHC-_eRFzYWwO9WWTEyTAiuQbOkO8
+name: 'Respiration Detection Method'
+vid: d_respiration_detection_
+description: 'A list of Respiration Detection Methods'
+weight: 0

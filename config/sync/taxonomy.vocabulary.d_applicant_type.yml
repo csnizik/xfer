@@ -1,0 +1,13 @@
+uuid: 00d331ed-0467-4897-926d-9993871f3fc7
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: ZYMD_M95-H8ilBW-i4WB2p9u6jXJVbhgZfCxq-EE0Zc
+name: 'Applicant Type'
+vid: d_applicant_type
+description: 'A list of Applicant Types'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 8aebeb53-bef8-44da-b36f-c62cf2f33abb
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: YQtWzUkMd5yTl5mp9advvZ3y-kPSaDquFOCHv58Ve8s
+name: 'Aggregate Stability Method'
+vid: d_aggregate_stability_me
+description: 'A list of Aggregate Stability Methods'
+weight: 0

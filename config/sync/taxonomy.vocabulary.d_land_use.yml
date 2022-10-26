@@ -1,0 +1,13 @@
+uuid: e777aaaf-e733-4295-a561-037dc0143039
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: EFAd4MotbXfObqYMFo9ArW6dWmoCX2OsUyVQ8CafMn0
+name: 'Land Use'
+vid: d_land_use
+description: 'A list of Land Uses'
+weight: 0

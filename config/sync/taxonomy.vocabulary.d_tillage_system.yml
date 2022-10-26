@@ -1,0 +1,13 @@
+uuid: 279d95be-e2f4-491b-bb6c-e08c8c4fbd0b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: tLsODDia-JdGOqpFTl3AtY7xFcK_onNUlVo4PHBp0F4
+name: 'Tillage System'
+vid: d_tillage_system
+description: 'A list of Tillage Systems'
+weight: 0

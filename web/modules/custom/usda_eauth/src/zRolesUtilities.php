@@ -183,7 +183,7 @@ public static function getTokenValue ($xmlString, $token)
             }
          else
             {
-            $value = 'NA';
+            $value = '';
             }
        return $value;
 }

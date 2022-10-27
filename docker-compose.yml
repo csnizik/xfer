@@ -57,3 +57,4 @@ services:
     environment:
       XDEBUG_MODE: debug
       XDEBUG_CONFIG: discover_client_host=yes
+      XDEBUG_SESSION: PHPSTORM

@@ -145,7 +145,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       $value = substr($xmlString, $pos1, $len);
     }
     else {
-      $value = 'NA';
+      $value = '';
     }
     return $value;
   }

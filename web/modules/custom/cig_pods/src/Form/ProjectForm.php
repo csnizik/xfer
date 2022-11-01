@@ -561,7 +561,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 		$contact_submission['field_contact_type'] = $contact_type;
 		$contact_submission['name'] = $contact_options[$contact_eauth_id];
 		$contact_submission['eauth_id'] = $contact_eauth_id;
-		$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
+		//$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
 
 		$contact = Asset::create($contact_submission);
 
@@ -607,7 +607,7 @@ private function convertFractionsToDecimal($is_edit, $project, $field){
 			$contact_submission['field_contact_type'] = $contact_type;
 			$contact_submission['name'] = $contact_options[$contact_eauth_id];
 			$contact_submission['eauth_id'] = $contact_eauth_id;
-			$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
+			//$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
 
 			$contact = Asset::create($contact_submission);
 

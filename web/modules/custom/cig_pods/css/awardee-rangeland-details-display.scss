@@ -14,9 +14,11 @@ h1.page-title {
     margin-top: 0px;
     margin-bottom: 10px;
     display: block;
-    height: 26px;
+    /*height: 26px;*/
     transition: none;
     width: 100%;
+    overflow: inherit;
+    white-space: inherit;
 }
 
 .awardee-rangeland-details-display table th, td {
@@ -40,7 +42,7 @@ h1.page-title {
     display: none;
 }
 .layout-container.region-sticky__items {
-    height: 75px;
+    height: 90px;
 }
 
 div#block-gin-page-title {
@@ -133,11 +135,31 @@ td.views-field.views-field-id {
 }
 
 .region-sticky__items__inner {
+    width: 94% !important;
     display: block;
+    align-items: unset;
+    margin-top: 60px;
+}
+
+.dropbutton-widget, .dropbutton {
+	background-color: white !important;
+	border-color: #005EA2 !important;
+    border-radius: 0 !important;
+}
+
+.dropbutton > .dropbutton__item > a {
+	color: #005EA2 !important;
+    border-radius: 2px;
+}
+
+.dropbutton > .dropbutton__item > a:hover,
+.dropbutton > .dropbutton__item:first-of-type > a:focus,
+.dropbutton > .dropbutton__item:first-of-type > a:active {
+    background-color: transparent !important;
 }
 
 .region-sticky__items .block-page-title-block {
-    display:    block;
+    display: block;
 }
 
 /* prevent view-content from being shifted down when width is changed */

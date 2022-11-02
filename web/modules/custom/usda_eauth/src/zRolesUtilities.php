@@ -71,6 +71,9 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
           </soap:Body>
         </soap:Envelope>';
 
+        // log the query going to zRoles
+        \Drupal::logger('usda_eauth')->notice("zRoles request: " . $xml);
+
          $curl = curl_init();
 
          curl_setopt_array($curl, [
@@ -95,6 +98,10 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
             echo "cURL Error #:" . $err;
             $response = '';
            }
+
+          // log the raw response coming back from zRoles
+          \Drupal::logger('usda_eauth')->notice("raw zRoles response: " . $response);
+
          return $response;
 }
 
@@ -129,6 +136,9 @@ public static function getListByzRole(String $zRole) {
            </soap:Body>
         </soap:Envelope>';
 
+        // log the query going to zRoles
+        \Drupal::logger('usda_eauth')->notice("zRoles request: " . $xml);
+
          $curl = curl_init();
 
          curl_setopt_array($curl, [
@@ -154,6 +164,9 @@ public static function getListByzRole(String $zRole) {
             echo "cURL Error #:" . $err;
            }
 
+        // log the raw response coming back from zRoles
+        \Drupal::logger('usda_eauth')->notice("raw zRoles response: " . $response);
+
         //the next 6 lines correct the first part of $response and removes unnecessary xml code
         $ResLen = strlen($response);
         $pos2 = strpos($response, '<soap:Body>');
@@ -164,6 +177,9 @@ public static function getListByzRole(String $zRole) {
         $data = new SimpleXMLElement($value );
         $data = json_decode(json_encode($data));
         $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
+
+        // log the parsed zRoles response
+        \Drupal::logger('usda_eauth')->notice("zRoles response: " . $response);
 
         return $result;
   }

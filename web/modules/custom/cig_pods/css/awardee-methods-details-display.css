@@ -1,4 +1,3 @@
-@import "variables";
 .a{
     --colorGinAppBackgroundRGB:0,0,0;
 }
@@ -14,12 +13,14 @@ h1.page-title {
     margin-top: 0px;
     margin-bottom: 10px;
     display: block;
-    /*height: 26px;*/
+    height: 26px;
     transition: none;
     width: 100%;
+    overflow: inherit;
+    white-space: normal;
 }
 
-.awardee-lab-results-display table th, td {
+.awardee-methods-details-display table th, td {
     background-color: white;
 }
 
@@ -101,8 +102,8 @@ td.views-field.views-field-name {
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:$main-blue;
-    --colorGinPrimaryHover: $main-blue;
+    --colorGinPrimary:#005fa2;
+    --colorGinPrimaryHover: #005fa2;
 }
 
 td{
@@ -112,8 +113,8 @@ td{
     padding-top: 0px;
     padding-bottom: 0px;
     height: 36px;
-    --colorGinPrimary:$main-blue;
-    --colorGinPrimaryHover: $main-blue;
+    --colorGinPrimary:#005fa2;
+    --colorGinPrimaryHover: #005fa2;
 }
 
 td.views-field.views-field-status {

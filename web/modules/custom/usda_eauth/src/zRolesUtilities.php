@@ -179,7 +179,7 @@ public static function getListByzRole(String $zRole) {
         $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
 
         // log the parsed zRoles response
-        \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars($response));
+        \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars(print_r($result, true)));
 
         return $result;
   }

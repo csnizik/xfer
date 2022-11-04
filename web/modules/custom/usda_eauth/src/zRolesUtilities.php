@@ -72,7 +72,7 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
         </soap:Envelope>';
 
         // log the query going to zRoles
-        \Drupal::logger('usda_eauth')->notice("zRoles request: " . $xml);
+        \Drupal::logger('usda_eauth')->notice("zRoles request from getUserAccessRolesAndScopes: " . htmlspecialchars($xml));
 
          $curl = curl_init();
 
@@ -100,7 +100,7 @@ public static function getUserAccessRolesAndScopes(String $eAuthId){
            }
 
           // log the raw response coming back from zRoles
-          \Drupal::logger('usda_eauth')->notice("raw zRoles response: " . $response);
+          \Drupal::logger('usda_eauth')->notice("raw zRoles response from getUserAccessRolesAndScopes: " . htmlspecialchars($response));
 
          return $response;
 }
@@ -137,7 +137,7 @@ public static function getListByzRole(String $zRole) {
         </soap:Envelope>';
 
         // log the query going to zRoles
-        \Drupal::logger('usda_eauth')->notice("zRoles request: " . $xml);
+        \Drupal::logger('usda_eauth')->notice("zRoles request from getListByzRole: " . htmlspecialchars($xml));
 
          $curl = curl_init();
 
@@ -165,7 +165,7 @@ public static function getListByzRole(String $zRole) {
            }
 
         // log the raw response coming back from zRoles
-        \Drupal::logger('usda_eauth')->notice("raw zRoles response: " . $response);
+        \Drupal::logger('usda_eauth')->notice("raw zRoles response from getListByzRole: " . htmlspecialchars($response));
 
         //the next 6 lines correct the first part of $response and removes unnecessary xml code
         $ResLen = strlen($response);
@@ -179,7 +179,7 @@ public static function getListByzRole(String $zRole) {
         $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
 
         // log the parsed zRoles response
-        \Drupal::logger('usda_eauth')->notice("zRoles response: " . $response);
+        \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars(print_r($result, true)));
 
         return $result;
   }

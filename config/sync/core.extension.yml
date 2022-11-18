@@ -87,8 +87,10 @@ module:
   toolbar: 0
   update: 0
   usda_eauth: 0
+  usda_eauth_test: 0
   user: 0
   views_geojson: 0
+  scss_compiler: 1
   externalauth: 10
   views: 10
   farm: 1000

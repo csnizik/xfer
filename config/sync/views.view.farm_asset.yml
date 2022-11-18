@@ -147,6 +147,8 @@ display:
           settings:
             image_link: content
             image_style: thumbnail
+            image_loading:
+              attribute: lazy
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -428,6 +430,71 @@ display:
           entity_field: parent
           plugin_id: field
           label: Parents
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        owner_target_id:
+          id: owner_target_id
+          table: asset__owner
+          field: owner_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: owner
+          plugin_id: field
+          label: Owner
           exclude: false
           alter:
             alter_text: false
@@ -786,7 +853,7 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: false
+          reduce_duplicates: true
         is_location:
           id: is_location
           table: asset_field_data
@@ -909,6 +976,63 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        owner_target_id:
+          id: owner_target_id
+          table: asset__owner
+          field: owner_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: owner
+          plugin_id: entity_reference
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: owner_target_id_op
+            label: Owner
+            description: ''
+            use_operator: false
+            operator: owner_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: owner_target_id
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          handler: 'default:user'
+          widget: select
+          handler_settings:
+            target_bundles: null
+            sort:
+              field: _none
+              direction: ASC
+            auto_create: false
+            filter:
+              type: _none
+            include_anonymous: false
       filter_groups:
         operator: AND
         groups:
@@ -927,6 +1051,7 @@ display:
             type: type
             flag_value: flag_value
             parent_target_id: parent_target_id
+            owner_target_id: owner_target_id
             location: location
             status: status
           default: name
@@ -968,6 +1093,11 @@ display:
               empty_column: false
               responsive: ''
             parent_target_id:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            owner_target_id:
               align: ''
               separator: ''
               empty_column: false
@@ -1032,7 +1162,7 @@ display:
     id: csv
     display_title: 'CSV export (rest)'
     display_plugin: rest_export
-    position: 5
+    position: 7
     display_options:
       pager:
         type: none
@@ -1087,7 +1217,7 @@ display:
     id: entity_browser
     display_title: 'Entity browser'
     display_plugin: entity_browser
-    position: 6
+    position: 8
     display_options:
       fields:
         entity_browser_select:
@@ -1577,7 +1707,9 @@ display:
           label: 'Export CSV'
           empty: false
           display_id: csv
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: assets
       menu:
         type: normal
@@ -1597,11 +1729,85 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
+  page_assigned_to:
+    id: page_assigned_to
+    display_title: 'Assigned (page)'
+    display_plugin: page
+    position: 4
+    display_options:
+      title: 'Assigned assets'
+      arguments:
+        owner_target_id:
+          id: owner_target_id
+          table: asset__owner
+          field: owner_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: owner
+          plugin_id: numeric
+          default_action: 'not found'
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          default_argument_skip_url: false
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: 'entity:user'
+            fail: 'not found'
+          validate_options:
+            access: false
+            operation: view
+            multiple: 0
+            restrict_roles: false
+            roles: {  }
+          break_phrase: false
+          not: false
+      defaults:
+        title: false
+        arguments: false
+      display_description: ''
+      display_extenders: {  }
+      path: user/%user/assets
+      menu:
+        type: tab
+        title: Assets
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: account
+        parent: ''
+        context: '0'
+    cache_metadata:
+      max-age: 0
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }
   page_children:
     id: page_children
     display_title: 'Children (page)'
     display_plugin: page
-    position: 4
+    position: 5
     display_options:
       title: 'Asset children'
       arguments:
@@ -1653,7 +1859,9 @@ display:
         arguments: false
       use_ajax: true
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: asset/%asset/children
       menu:
         type: tab
@@ -1717,7 +1925,9 @@ display:
       defaults:
         arguments: false
       display_description: ''
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: asset/%asset/assets
       menu:
         type: tab
@@ -1738,14 +1948,11 @@ display:
         - user.permissions
       tags: {  }
   page_term:
-    display_plugin: page
     id: page_term
     display_title: 'By term (page)'
-    position: 4
+    display_plugin: page
+    position: 6
     display_options:
-      display_extenders: {  }
-      display_description: ''
-      path: taxonomy/term/%taxonomy_term/assets/%entity_bundle
       arguments:
         asset_taxonomy_term_reference:
           id: asset_taxonomy_term_reference
@@ -1754,7 +1961,8 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          break_phrase: false
+          entity_type: asset
+          plugin_id: entity_taxonomy_term_reference
           default_action: 'not found'
           exception:
             value: all
@@ -1769,8 +1977,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -1780,12 +1988,11 @@ display:
             type: 'entity:taxonomy_term'
             fail: 'not found'
           validate_options:
-            operation: view
-            access: false
-            multiple: 0
             bundles: {  }
-          entity_type: asset
-          plugin_id: entity_taxonomy_term_reference
+            access: false
+            operation: view
+            multiple: 0
+          break_phrase: false
         type:
           id: type
           table: asset_field_data
@@ -1793,6 +2000,9 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: asset
+          entity_field: type
+          plugin_id: string
           default_action: 'not found'
           exception:
             value: all
@@ -1807,8 +2017,8 @@ display:
           summary_options:
             base_path: ''
             count: true
-            items_per_page: 25
             override: false
+            items_per_page: 25
           summary:
             sort_order: asc
             number_of_records: 0
@@ -1818,21 +2028,23 @@ display:
             type: 'entity:asset_type'
             fail: 'not found'
           validate_options:
+            bundles: {  }
+            access: false
             operation: view
             multiple: 0
-            access: false
-            bundles: {  }
           glossary: false
           limit: 0
           case: none
           path_case: none
           transform_dash: false
           break_phrase: false
-          entity_type: asset
-          entity_field: type
-          plugin_id: string
       defaults:
         arguments: false
+      display_description: ''
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
+      path: taxonomy/term/%taxonomy_term/assets/%entity_bundle
     cache_metadata:
       max-age: 0
       contexts:
@@ -1920,7 +2132,9 @@ display:
           label: 'Export CSV'
           empty: false
           display_id: csv
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: assets/%
     cache_metadata:
       max-age: 0

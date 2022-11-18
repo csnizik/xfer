@@ -1337,6 +1337,56 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        asset_target_id:
+          id: asset_target_id
+          table: log__asset
+          field: asset_target_id
+          relationship: reverse__log__quantity
+          group_type: group
+          admin_label: ''
+          entity_type: log
+          entity_field: asset
+          plugin_id: entity_reference
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: asset_target_id_op
+            label: 'Log assets'
+            description: ''
+            use_operator: false
+            operator: asset_target_id_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: asset_target_id
+            required: false
+            remember: false
+            multiple: true
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_operator: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: true
+          handler: 'default:asset'
+          widget: autocomplete
+          handler_settings: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1575,7 +1625,9 @@ display:
           label: 'Export CSV'
           empty: false
           display_id: csv
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: quantities
       menu:
         type: normal
@@ -1674,7 +1726,9 @@ display:
           label: 'Export CSV'
           empty: false
           display_id: csv
-      display_extenders: {  }
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
       path: quantities/%
     cache_metadata:
       max-age: -1

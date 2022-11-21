@@ -1,0 +1,13 @@
+uuid: 7476b2bf-ab78-43e9-b3a0-58d15e4d83b3
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: q3q80KOOBMDv746K6Fo3yaeOVMJ52Tu62JLG6MW6CBI
+name: 'Ph Method'
+vid: d_ph_method
+description: 'A list of Ph Methods'
+weight: 0

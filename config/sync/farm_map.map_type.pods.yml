@@ -1,0 +1,14 @@
+uuid: d4d2672b-bb56-410f-a101-fef235371956
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: sfedF83c8U-Z_XSF4ZoQiPGyM5uDz9IL4mzNnUM_ks0
+id: pods
+label: PODS
+description: 'A generic map type for PODS.'
+behaviors: {  }
+options: {  }

@@ -1,0 +1,14 @@
+uuid: 93241fc7-271f-4aad-b506-a53fc7b5287d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: s4vG6OuB1x6lc-Ap261JYZrjS_Y_9YI201M_X9-kA3g
+id: wkt_refresh_soil_sample
+label: 'WKT Refresh'
+description: 'Refreshes map with WKT from form input.'
+library: cig_pods/behavior_wkt_refresh_soil_sample
+settings: {  }

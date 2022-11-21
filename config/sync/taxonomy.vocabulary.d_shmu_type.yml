@@ -1,0 +1,13 @@
+uuid: 71cbc4d9-95b1-4c3c-b226-dba068c25984
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: bqJNLbQtsdCG4yeiMaF9etsLQZSrm0lFWXX9o9xwoGg
+name: 'SHMU Type'
+vid: d_shmu_type
+description: 'A list of SHMU Types'
+weight: 0

@@ -1,0 +1,13 @@
+uuid: 90bf9231-7429-42b4-906b-f55ba3bea5f4
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: 4jYYcalaYcmU1Ygw-gx2ymPdZc4WSJfgwn3fuA5t5G4
+name: 'Soil Health Extraction Method'
+vid: d_soil_health_extraction
+description: 'A list of Soil Health Extraction Methods'
+weight: 0

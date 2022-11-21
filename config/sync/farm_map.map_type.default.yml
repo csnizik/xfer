@@ -1,0 +1,14 @@
+uuid: 1e3aaeb3-3ed1-4000-9532-dcafdeb82a8a
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_map
+_core:
+  default_config_hash: _FEQWl_DhUnWiyBSHAvY895RFbEHYi3nD2KFUkw0KjY
+id: default
+label: Default
+description: 'The default farmOS map.'
+behaviors: {  }
+options: {  }

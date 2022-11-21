@@ -1,0 +1,14 @@
+uuid: ca9a0896-1e1c-4068-a59a-212c3f121ffc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: stdUijz_hJiVurNnV0m_5DtB2qdeYML9PTUN5EMR7Dg
+id: field_assessment
+label: 'Field Assessment'
+description: 'Field Assessment'
+workflow: asset_default
+new_revision: false

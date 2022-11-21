@@ -1,0 +1,13 @@
+uuid: 7bf05deb-88a3-436b-a137-d13cae55696e
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+_core:
+  default_config_hash: B_XTuYvusHq64OYTuvaBjIwd3EXP5vSdgIntZeASqyM
+id: asset_activate_action
+label: 'Unarchive asset'
+type: asset
+plugin: asset_activate_action
+configuration: {  }

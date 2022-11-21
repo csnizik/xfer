@@ -1,0 +1,13 @@
+uuid: 4139992c-1feb-4afa-8cc6-29a97bddd179
+langcode: en
+status: true
+dependencies:
+  module:
+    - asset
+_core:
+  default_config_hash: K5pXlYXvtlImAAcDRryUVCrpPhDOOduBoNXaa1sWK1A
+id: asset_archive_action
+label: 'Archive asset'
+type: asset
+plugin: asset_archive_action
+configuration: {  }

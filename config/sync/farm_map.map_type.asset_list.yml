@@ -1,0 +1,15 @@
+uuid: 6e75e702-4e5f-4058-94f0-933813ea9c9b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_ui_map
+_core:
+  default_config_hash: U7k0A8salEBo1KJQFMAydhb-oxFeYYc70GnjFzXSowQ
+id: asset_list
+label: 'Asset list'
+description: 'The map displayed on lists of assets.'
+behaviors:
+  - asset_type_layers
+options: {  }

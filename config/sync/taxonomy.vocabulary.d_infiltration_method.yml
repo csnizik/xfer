@@ -1,0 +1,13 @@
+uuid: 5a79d1f4-2bd2-41ea-b9a4-71822ecbec59
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: Kcwr7WMPuuCn8r-GBSEypIQhFGRoWFzoCjTCl1YKSJU
+name: 'Infiltration Method'
+vid: d_infiltration_method
+description: 'A list of Infiltration Methods'
+weight: 0

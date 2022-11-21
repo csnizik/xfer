@@ -1,0 +1,13 @@
+uuid: 27af7634-c66b-49d5-a22d-4b1af4a1da76
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: bBkEd9NNEOiE5AOmzVgvoOxBsBQFbk7nruJbyO2Q9Ss
+name: Crop
+vid: d_crop
+description: 'A list of Crops'
+weight: 0

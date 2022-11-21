@@ -1,0 +1,14 @@
+uuid: 0aaca117-3830-449b-ae8b-d47a35bde404
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: t25rzfpUeY9r-1HMOvFBx-pcW2slDpMzgQL40n4NCYY
+id: irrigation
+label: Irrigation
+description: Irrigation
+workflow: asset_default
+new_revision: true

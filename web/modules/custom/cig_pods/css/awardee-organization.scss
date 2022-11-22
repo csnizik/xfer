@@ -1,0 +1,13 @@
+@import "variables";
+#block-gin-content form h1 {
+  margin-bottom: 43px;
+}
+
+.form-item:last-of-type {
+  margin-bottom: 64px !important;
+}
+
+form#awardee-org-create-form.awardee-org-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

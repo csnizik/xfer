@@ -1,0 +1,83 @@
+cig_pods.add_field_awardee:
+  route_name: cig_pods.awardee_organization_info_form
+  title: 'Add Awardee'
+  appears_on:
+    - view.pods_asset_lists.awardee
+
+cig_pods.add_field_assessment:
+  route_name: cig_pods.field_assessment_form
+  title: 'Add Field Assessment'
+  appears_on:
+    - view.pods_asset_lists.field_assessment
+
+cig_pods.add_irrigation:
+  route_name: cig_pods.irrigation_form
+  title: 'Add Irrigation'
+  appears_on:
+    - view.pods_asset_lists.irrigation
+
+cig_pods.add_lab_result:
+  route_name: cig_pods.lab_results_form
+  title: 'Add Soil Test Result'
+  appears_on:
+    - view.pods_asset_lists.lab_result
+
+cig_pods.add_lab_testing_profile:
+  route_name: cig_pods.lab_test_profiles_admin_form
+  title: 'Add Lab Testing Profile'
+  appears_on:
+    - view.pods_asset_lists.lab_testing_profile
+
+cig_pods.add_lab_test_method:
+  route_name: cig_pods.lab_test_method_form
+  title: 'Add Method'
+  appears_on:
+    - view.pods_asset_lists.lab_testing_method
+
+cig_pods.add_operation:
+  route_name: cig_pods.operation_form
+  title: 'Add Operation'
+  appears_on:
+    - view.pods_asset_lists.operation
+
+cig_pods.add_pasture_assessment:
+  route_name: cig_pods.pasture_assessment_form
+  title: 'Add Pasture Assessment'
+  appears_on:
+    - view.pods_asset_lists.pasture_assessment
+
+cig_pods.add_pasture_health_assessment:
+  route_name: cig_pods.pasture_health_assessment_form
+  title: 'Add Pasture Health Assessment'
+  appears_on:
+    - view.pods_asset_lists.pasture_health_assessment
+
+cig_pods.add_producer:
+  route_name: cig_pods.producer_form
+  title: 'Add Producer'
+  appears_on:
+    - view.pods_asset_lists.producer
+
+cig_pods.add_project:
+  route_name: cig_pods.project_form
+  title: 'Add Project'
+  appears_on:
+    - view.pods_asset_lists.project
+
+cig_pods.add_range_assessment:
+  route_name: cig_pods.range_assessment_form
+  title: 'Add Range Assessment'
+  appears_on:
+    - view.pods_asset_lists.range_assessment
+
+cig_pods.add_soil_health_management_unit:
+  route_name: cig_pods.soil_health_management_unit_form
+  title: 'Add SHMU'
+  appears_on:
+    - view.pods_asset_lists.soil_health_management_unit
+
+cig_pods.add_soil_health_sample:
+  route_name: cig_pods.soil_health_sample_form
+  title: 'Add Soil Health Sample'
+  appears_on:
+    - view.pods_asset_lists.soil_health_sample

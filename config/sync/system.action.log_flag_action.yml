@@ -1,0 +1,14 @@
+uuid: b20a4f63-6ba2-493c-af59-a9637ff3cafb
+langcode: en
+status: true
+dependencies:
+  module:
+    - farm_flag
+    - log
+_core:
+  default_config_hash: HA9a27tiHHQc-Jvh5Zm5OpfZRPoBQcZLyHHtehVYkTM
+id: log_flag_action
+label: 'Flag log'
+type: log
+plugin: 'entity:flag_action:log'
+configuration: {  }

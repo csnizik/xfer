@@ -1,0 +1,13 @@
+uuid: 5cd1e6f9-f00e-40f0-ba60-8d8b9c3adc68
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: lGCCDlndy9V-UKDmSPOcqa7AWD-Vg08AkQICbzKyZs0
+name: 'State Territory'
+vid: d_state_territory
+description: 'A list of State Territories'
+weight: 0

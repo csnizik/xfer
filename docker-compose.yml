@@ -5,29 +5,56 @@ services:
     volumes:
       - './db:/var/lib/mysql'
     ports:
-            - '3306:3306'
+      - '3306:3306'
     environment:
-        MYSQL_ROOT_PASSWORD: farm
-        MYSQL_DATABASE: farm
-        MYSQL_USER: farm
-        MYSQL_PASSWORD: farm
+        MYSQL_ROOT_PASSWORD: pods
+        MYSQL_DATABASE: pods
+        MYSQL_USER: pods
+        MYSQL_PASSWORD: pods
+        MYSQL_INITDB_SKIP_TZINFO: 1
+  www:
+    build: .
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        set -ex
 
-  pods-container:
+        # If the vendor directory doesn't exist, assume a fresh install.
+        if [ ! -d /opt/drupal/vendor ]; then
+
+          # Build the PODS codebase via Composer.
+          composer install
+
+          # Install Drupal via Drush.
+          drush site-install -y --existing-config --db-url=mysql://farm:farm@db/farm --account-pass=admin farm farm.modules="base"
+
+          # Make sites/default/files writable by Apache.
+          chown -R root:www-data /opt/drupal/web/sites/default/files
+
+          # Import taxonomy terms via Drush.
+          drush -y import:taxonomies --choice=full
+
+          # Enable USDA eAuth testing module via Drush.
+          drush en -y usda_eauth_test
+
+          # Add a test user.
+          drush user:create test --mail="test@example.com" --password="test"
+        fi
+
+        # Notify that PODS is ready.
+        echo "##### PODS IS READY #####"
+
+        # Run Apache.
+        apache2-foreground
+
     depends_on:
       - db
     volumes:
-      - './web/modules/custom:/opt/drupal/PODS/web/modules/custom'
-      - './logs:/var/log/apache2/'
-    image: pods:latest
+      - './:/opt/drupal'
     ports:
       - '85:80'
-    # environment:
-      # XDEBUG_MODE: debug
-      # XDEBUG_CONFIG: client_host=172.17.0.1
-      # Enable these for PHPStorm:
-      #XDEBUG_SESSION: PHPSTORM
-      #PHP_IDE_CONFIG: serverName=localhost
-
-  # Enable this service when executing javascript tests.
-#  chrome:
-#    image: selenium/standalone-chrome:latest
+    environment:
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG: discover_client_host=yes
+      XDEBUG_SESSION: PHPSTORM

@@ -1,0 +1,232 @@
+@import "variables";
+
+.subform-title-container.section1 {
+  margin-top: 27px;
+  margin-bottom: 30px;
+}
+
+.subform-title-container.section2 {
+  margin-top: 101px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section3 {
+  margin-top: 109px;
+  margin-bottom: 57px;
+}
+
+.subform-title-container.section4 {
+  margin-top: 99px;
+  margin-bottom: 9px;
+}
+
+.subform-title-container.section5 {
+  margin-top: 62px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section6 {
+  margin-top: 103px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section7 {
+  margin-top: 90px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section8 {
+  margin-top: 105px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section9 {
+  margin-top: 67px;
+  margin-bottom: 32px;
+}
+
+.subform-title-container.section10 {
+  margin-top: 104px;
+  margin-bottom: 23px;
+}
+
+.draw {
+  margin-bottom: 20px;
+}
+
+#block-gin-content form {
+  .subform-title-container h4 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+  .form-title {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+  }
+}
+
+
+form#soil-health-management-unit-form
+  #edit-crop-sequence-actions-addcrop.button {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: $sub-blue !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px !important;
+}
+
+form#soil-health-management-unit-form #edit-ssurgo-lookup.button {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: $sub-blue !important;
+  padding: 12 20 12 20;
+  color: $sub-blue;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form #edit-ssurgo-lookup:hover {
+  background-color: $sub-blue;
+  border-radius: 4px;
+  border-color: $sub-blue !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+div#edit-irrigation-radios {
+  float: left;
+  width: 50%;
+}
+.form-item label.option {
+  display: inline;
+}
+
+
+.form-checkboxes {
+  max-height: 298px;
+  overflow-y: overlay;
+  border: 1px solid #1b1b1b;
+  border-radius: 0;
+  padding: 10px 0px 10px 16px;
+}
+div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
+  margin-bottom: 10px !important;
+}
+
+.fieldset__label,
+.fieldset__label--group,
+.form-item__label {
+  font-weight: normal !important;
+}
+
+#crop_rotation_months {
+  display: flex;
+
+  .form-checkboxes {
+    display: flex;
+    padding: 0;
+    border: none;
+    overflow: visible !important;
+    .form-type--checkbox { 
+      input {
+        position: relative;
+        top: 26px;
+        width: 20px;
+        height: 20px;
+      }
+      label {
+        right: 20px;
+        top: -100%;
+      }
+    }
+  }
+}
+
+#crop_rotation {
+  display: flex;
+  align-items: center;
+
+  div[class*="field-shmu-crop-rotation-crop"] {
+    width: 30.2%;
+    margin-right: 1.3%;
+  }
+  div[class*="field-shmu-crop-rotation-year"] {
+    width: 75px;
+    margin-right: 18px;
+  }
+
+  div[class*="form-type--checkbox"] {
+    margin-left: 15px;
+
+    &:first-of-type {
+      margin-left: 32px;
+    }
+  }
+
+  input[id*="actions-delete"] {
+    border: 0 !important;
+    box-shadow: 0 0 0 0;
+    color: $main-red;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 10px;
+    left: 30px;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+
+
+form#soil-health-management-unit-form input#edit-addcrop.button {
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: $sub-blue !important;
+  padding: 12 20 12 20;
+  color: $sub-blue;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form input#edit-addcrop:hover {
+  background-color: $sub-blue;
+  border-radius: 4px;
+  border-color: $sub-blue !important;
+  padding: 12 20 12 20;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+form#soil-health-management-unit-form.soil-health-management-unit-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}
+
+#block-gin-content form h1 {
+  font-size: 31px !important;
+}
+
+.form-item.form-item--irrigation-radios:first-of-type {
+  margin-top: 21px !important;
+  margin-bottom: 14px !important;
+}
+
+fieldset#edit-field-shmu-practices-addressed--wrapper:last-of-type {
+  margin-bottom: 59px !important;
+}
+
+.form-item__label {
+  margin-top: 15px !important;
+}

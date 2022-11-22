@@ -1,59 +1,13 @@
-# Inherit from the Drupal 9 image on Docker Hub.
+# Inherit from the official Drupal 9 PHP 7.4 image.
 FROM drupal:9-php7.4-apache
 
+# Install Git (required by Composer).
+RUN apt-get update && apt-get install -y git
 
-# Wipe the template project provided by Drupal Docker image
-RUN rm -rf /opt/drupal/*
-RUN mkdir /opt/drupal/PODS
+# Set OPcache's revalidation frequency to 0 seconds for development.
+# See https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.revalidate-freq
+RUN sed -i 's|opcache.revalidate_freq=60|opcache.revalidate_freq=0|g' /usr/local/etc/php/conf.d/opcache-recommended.ini
 
-WORKDIR /opt/drupal/PODS
-
-COPY composer.json composer.json
-COPY config/sync config/sync
-# COPY web/sites/default/ web/sites/default/
-
-COPY patches patches
-
-# Do I need to case on different environments here?
-# TODO: Change back to sfi.dev to serve? Or it's okay because Docker?
-COPY pods.conf /etc/apache2/sites-available/pods.conf
-
-RUN pwd
-
-# RUN cat /etc/apache2/apache2.conf
-
-# RUN ls /etc/apache2/sites-enabled | xargs -I {} cat /etc/apache2/sites-enabled/{}
-
-# RUN ls /etc/apache2/sites-available | xargs -I {} cat /etc/apache2/sites-available/{}
-
-# Install Git (Needed by composer utility)
-RUN apt-get update \
-  && apt-get install -y git unzip
-
-# PODS folder is potentially misplaced...bole-apps.com/?#home
-RUN composer install
-
-# COPY web/modules/custom/cig_pods web/modules/custom/cig_pods
-COPY web/sites/default/settings.php web/sites/default/settings.php
-RUN chmod -R a+w web/sites/default/
-# Update the settings.php file
-# TODO: define our own settings.php file
-
-
-# Deploy code
-# Run database updates
-
-RUN a2ensite pods.conf
-# Ubuntu equivalent of apache2ctl enable pods.conf
-RUN a2dissite 000-default.conf
-
-
-# Debug prints
-# RUN ls /etc/apache2/sites-available/
-# RUN cat /etc/apache2/ports.conf
-# RUN cat /etc/apache2/apache2.conf
-# RUN ls /etc/apache2/sites-enabled | xargs -I {} cat /etc/apache2/sites-enabled/{}
-
-
-# TODO: Figure out why apache2-foregroud is caled here. I don't understand how there is both an "ENTRYPOINT" script and a "CMD"present. 
-CMD ["apache2-foreground"]
+# Install and configure XDebug.
+RUN yes | pecl install xdebug \
+	&& echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini

@@ -1,0 +1,18 @@
+uuid: a106cd0b-1ee3-42fb-9a2a-53e26cd04209
+langcode: en
+status: true
+dependencies: {  }
+id: generic
+label: 'USDA eAuth'
+plugin: generic
+settings:
+  client_id: ''
+  client_secret: ''
+  issuer_url: ''
+  authorization_endpoint: ''
+  token_endpoint: ''
+  userinfo_endpoint: ''
+  end_session_endpoint: ''
+  scopes:
+    - openid
+    - email

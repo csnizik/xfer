@@ -770,9 +770,9 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'farm',
-  'username' => 'farm',
-  'password' => 'farm',
+  'database' => 'pods',
+  'username' => 'pods',
+  'password' => 'pods',
   'prefix' => '',
   'host' => 'db',
   'port' => '3306',
@@ -780,7 +780,7 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 
-$settings["config_sync_directory"] = "/opt/drupal/PODS/config/sync";
+$settings["config_sync_directory"] = "/opt/drupal/config/sync";
 
 ini_set('memory_limit','512M');
 

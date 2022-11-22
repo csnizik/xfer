@@ -1,0 +1,13 @@
+uuid: cc878998-353c-43e1-bf1c-f711a6de34d8
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: WXFBtym9MHEvRJVXN8A9fSLe7znEVNuf40uBGqOKTdc
+name: 'Nitrate N Method'
+vid: d_nitrate_n_method
+description: 'A list of Nitrate N Methods'
+weight: 0

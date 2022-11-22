@@ -1,0 +1,12 @@
+uuid: a504f301-ffd9-4a2c-a601-6c8d28ebaae5
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_id_tag
+_core:
+  default_config_hash: MP7uALLtprB-9MH1IdUcxnOZs-EIG2bdpsbl-jzb7X4
+id: eid
+label: 'Electronic ID'
+bundles: null

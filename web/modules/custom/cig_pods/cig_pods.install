@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the CIG PODS module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function cig_pods_install() {
+
+  // Set the front page to /pods_dashboard.
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/pods')->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function cig_pods_uninstall() {
+
+  // Set the front page to /dashboard.
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/dashboard')->save();
+}

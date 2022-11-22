@@ -8,7 +8,26 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\entity\UncacheableEntityAccessControlHandler;
 use Drupal\views\Plugin\views\ViewsHandlerInterface;
 
+/**
+ * PODS project access control handler.
+ */
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
+
+  /**
+   * Define admin zRoles.
+   */
+  const ADMIN_ZROLES = [
+    'CIG_App_Admin',
+    'CIG_APA',
+  ];
+
+  /**
+   * Define awardee zRoles.
+   */
+  const AWARDEE_ZROLES = [
+    'CIG_NSHDS',
+    'CIG_APT',
+  ];
 
   /**
    * Helper method for getting the current session zRole.
@@ -16,7 +35,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    * @return string
    *   The zRole.
    */
-  protected static function getZRole() {
+  protected static function getZrole() {
     $session = \Drupal::request()->getSession();
     return $session->get('ApplicationRoleEnumeration');
   }
@@ -27,9 +46,29 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    * @return string
    *   The zRole.
    */
-  protected static function getEAuthId() {
+  protected static function getEauthId() {
     $session = \Drupal::request()->getSession();
     return $session->get('eAuthId');
+  }
+
+  /**
+   * Checks to see if the user is an admin.
+   *
+   * @return bool
+   *   Returns TRUE if the user has an admin zRole. FALSE otherwise.
+   */
+  public static function isAdmin() {
+    return in_array(self::getZrole(), self::ADMIN_ZROLES);
+  }
+
+  /**
+   * Checks to see if the user is an awardee.
+   *
+   * @return bool
+   *   Returns TRUE if the user has an awardee zRole. FALSE otherwise.
+   */
+  public static function isAwardee() {
+    return in_array(self::getZrole(), self::AWARDEE_ZROLES);
   }
 
   /**
@@ -40,21 +79,26 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
 
-    // Assume forbidden.
-    $result = AccessResult::forbidden();
+    // First delegate to the parent method.
+    $result = parent::checkAccess($entity, $operation, $account);
+
+    // Only proceed if access was not determined. We will use eAuth ID + zRole
+    // to check if the user should have access.
+    if (!$result->isNeutral()) {
+      return $result;
+    }
 
     // Get the user's eAuthID and zRole.
-    $eauth_id = $this->getEAuthId();
-    $zrole = $this->getZRole();
+    $eauth_id = $this->getEauthId();
 
     // Admins can create any asset.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       $result = AccessResult::allowed();
     }
 
     // Awardees only have access to assets in a project that their eAuth ID
     // is associated with.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
       if (in_array($entity->id(), $this->eAuthIdAssets($eauth_id, $entity->bundle()))) {
         $result = AccessResult::allowed();
       }
@@ -72,19 +116,22 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
 
-    // Assume forbidden.
-    $result = AccessResult::forbidden();
+    // First delegate to the parent method.
+    $result = parent::checkCreateAccess($account, $context, $entity_bundle);
 
-    // Get the user's zRole.
-    $zrole = $this->getZRole();
+    // Only proceed if access was not determined. We will use zRole to check if
+    // the user should have access.
+    if (!$result->isNeutral()) {
+      return $result;
+    }
 
     // Admins can create any asset.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       $result = AccessResult::allowed();
     }
 
     // Awardees can only create certain asset types.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
       $allowed_types = [
         'producer',
         'soil_health_management_unit',
@@ -111,7 +158,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   /**
    * Query to find projects that an eAuth ID has access to.
    *
-   * @param $eauth_id
+   * @param string $eauth_id
    *   The eAuth ID.
    *
    * @return array
@@ -119,7 +166,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   public static function eAuthIdProjects($eauth_id) {
 
-    // Query the asset table
+    // Query the asset table.
     $query = \Drupal::database()->select('asset', 'a');
 
     // Select the asset entity IDs.
@@ -128,10 +175,12 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // Filter to project assets.
     $query->condition('a.type', 'project');
 
-    // Join the asset__project table to find contacts that reference the project.
+    // Join the asset__project table to find contacts that reference the
+    // project.
     $query->join('asset__project', 'ap', "a.id = ap.project_target_id AND ap.bundle = 'contact' AND ap.deleted != 1");
 
-    // Join the asset__eauth_id table, which assigns eAuth IDs to contact assets.
+    // Join the asset__eauth_id table, which assigns eAuth IDs to contact
+    // assets.
     $query->join('asset__eauth_id', 'aei', "ap.entity_id = aei.entity_id AND aei.deleted != 1");
 
     // Filter by the eAuth ID field on the contact asset.
@@ -153,7 +202,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   /**
    * Query to find assets that an eAuth ID has access to.
    *
-   * @param $eauth_id
+   * @param string $eauth_id
    *   The eAuth ID.
    * @param string|null $asset_type
    *   The asset type to filter by.
@@ -188,7 +237,8 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // reference the same project.
     $query->join('asset__project', 'apc', "ap.project_target_id = apc.project_target_id AND apc.bundle = 'contact' AND apc.deleted != 1");
 
-    // Join the asset__eauth_id table, which assigns eAuth IDs to contact assets.
+    // Join the asset__eauth_id table, which assigns eAuth IDs to contact
+    // assets.
     $query->join('asset__eauth_id', 'aei', "apc.entity_id = aei.entity_id AND aei.deleted != 1");
 
     // Filter by the eAuth ID field on the contact asset.
@@ -218,16 +268,15 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   public static function viewsArgumentQueryAlter(ViewsHandlerInterface $handler) {
 
     // Get the user's eAuthID and zRole.
-    $eauth_id = ProjectAccessControlHandler::getEAuthId();
-    $zrole = ProjectAccessControlHandler::getZRole();
+    $eauth_id = ProjectAccessControlHandler::getEauthId();
 
     // If this is an admin, don't apply any additional filters.
-    if (in_array($zrole, ['CIG_App_Admin', 'CIG_APA'])) {
+    if (self::isAdmin()) {
       return;
     }
 
     // If this is an awardee, filter out assets that they do not have access to.
-    elseif (in_array($zrole, ['CIG_NSHDS', 'CIG_APT'])) {
+    elseif (self::isAwardee()) {
 
       // Try to determine the asset type from arguments.
       // The pods_asset_er View uses asset type as the first argument, so we

@@ -1,0 +1,26 @@
+@import "variables";
+
+#block-gin-content {
+  width: 688px;
+  margin: auto;
+  form .form-element {
+    width: 648px;
+    border: 1px solid #1b1b1b;
+    border-radius: 0;
+  }
+}
+
+
+h1#producer-title {
+  margin-top: 0px;
+  margin-bottom: 45px;
+}
+
+input#edit-field-producer-headquarter {
+  margin-bottom: 28px;
+}
+
+form#producer-create-form.producer-create-form {
+  padding-top: 0px;
+  padding-bottom: 3px;
+}

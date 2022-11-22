@@ -1,0 +1,13 @@
+uuid: 1f6bec98-19d9-4be6-8a36-1053862e01b1
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: MlclRQzBKAxQaVfax0YlKhe-TVCa-0h7s96l7628sEo
+name: 'Grant Type'
+vid: d_grant_type
+description: 'A list of Grant Types'
+weight: 0

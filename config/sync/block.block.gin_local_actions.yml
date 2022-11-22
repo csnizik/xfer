@@ -1,0 +1,4 @@
+plugin: farm_local_actions_block
+settings:
+  id: farm_local_actions_block
+  provider: farm_ui_theme

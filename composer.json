@@ -10,12 +10,12 @@
   ],
   "require": {
     "oomphinc/composer-installers-extender": "^2.0",
-    "farmos/farmos": "2.0.0-beta6",
+    "farmos/farmos": "2.0.0-beta7",
     "wikimedia/composer-merge-plugin": "^2.0",
     "drupal/structure_sync": "^2.0",
     "drupal/farm_nrcs": "^2.1",
     "drupal/openid_connect": "2.0.0-alpha12",
-    "twig/twig": "2.15.2"
+    "drupal/scss_compiler": "^1.1"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -25,6 +25,7 @@
       "cweagans/composer-patches": true,
       "drupal/core-composer-scaffold": true,
       "oomphinc/composer-installers-extender": true,
+      "phpstan/extension-installer": true,
       "wikimedia/composer-merge-plugin": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
@@ -33,6 +34,9 @@
     "composer-exit-on-patch-failure": true,
     "enable-patching": true,
     "installer-paths": {
+      "web/libraries/scssphp": [
+        "scssphp/scssphp"
+      ],
       "web/core": [
         "type:drupal-core"
       ],
@@ -60,9 +64,18 @@
       "merge-extra": true,
       "merge-extra-deep": true
     },
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
     "patches": {
+      "drupal/core": {
+        "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch"
+      },
       "drupal/openid_connect": {
         "Force HTTPS in redirect URIs": "patches/openid_connect/https-true.patch"
+      },
+      "farmos/farmos": {
+        "Issue #3317437: Use hook_install_tasks() instead of hook_install() in farm profile": "https://www.drupal.org/files/issues/2022-10-25/3317437-3_0.patch"
       }
     }
   }

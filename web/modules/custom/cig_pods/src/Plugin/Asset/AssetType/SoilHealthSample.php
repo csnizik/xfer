@@ -4,19 +4,20 @@ namespace Drupal\cig_pods\Plugin\Asset\AssetType;
 
 use Drupal\farm_entity\Plugin\Asset\AssetType\FarmAssetType;
 use Drupal\farm_field\FarmFieldFactory;
+
 /**
-   * Provides the Soil Health Sample asset type.
-   *
-   * @AssetType(
-   * id = "soil_health_sample",
-   * label = @Translation("Soil Health Sample"),
-   * )
-   */
+ * Provides the Soil Health Sample asset type.
+ *
+ * @AssetType(
+ * id = "soil_health_sample",
+ * label = @Translation("Soil Health Sample"),
+ * )
+ */
 class SoilHealthSample extends FarmAssetType {
 
   /**
-  * {@inheritdoc}
-  */
+   * {@inheritdoc}
+   */
   public function buildFieldDefinitions() {
 
     $fields = parent::buildFieldDefinitions();
@@ -29,17 +30,17 @@ class SoilHealthSample extends FarmAssetType {
         'multiple' => FALSE,
       ],
       'field_equipment_used' => [
-        'label'=> 'Soil Sample Equipment',
-        'type'=> 'entity_reference',
-        'target_type'=> 'taxonomy_term',
+        'label' => 'Soil Sample Equipment',
+        'type' => 'entity_reference',
+        'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_equipment',
         'required' => FALSE,
         'multiple' => FALSE,
       ],
       'field_plant_stage_at_sampling' => [
-        'label'=> 'Soil Sample Plant Stage',
-        'type'=> 'entity_reference',
-        'target_type'=> 'taxonomy_term',
+        'label' => 'Soil Sample Plant Stage',
+        'type' => 'entity_reference',
+        'target_type' => 'taxonomy_term',
         'target_bundle' => 'd_plant_stage',
         'required' => FALSE,
         'multiple' => FALSE,
@@ -60,18 +61,18 @@ class SoilHealthSample extends FarmAssetType {
         'multiple' => FALSE,
       ],
       'field_soil_sample_collection_dat' => [
-        'label'=> 'Date Sample was collected',
-        'type'=> 'timestamp',
+        'label' => 'Date Sample was collected',
+        'type' => 'timestamp',
         'required' => FALSE,
         'description' => '',
       ],
       'field_soil_sample_geofield' => [
-        'label'=> 'Geofield',
-        'type'=> 'geofield',
+        'label' => 'Geofield',
+        'type' => 'geofield',
         'required' => FALSE,
         'description' => '',
       ],
-      'project' =>[
+      'project' => [
         'label' => 'Project',
         'type' => 'entity_reference',
         'target_type' => 'asset',
@@ -79,17 +80,18 @@ class SoilHealthSample extends FarmAssetType {
         'required' => TRUE,
         'multiple' => TRUE,
       ],
-      ];
+    ];
 
     $farmFieldFactory = new FarmFieldFactory();
 
-    foreach($field_info as $name => $info){
+    foreach ($field_info as $name => $info) {
       $fields[$name] = $farmFieldFactory->bundleFieldDefinition($info)
-                    -> setDisplayConfigurable('form',TRUE)
-                    -> setDisplayConfigurable('view', TRUE);
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
     }
 
     return $fields;
 
   }
+
 }

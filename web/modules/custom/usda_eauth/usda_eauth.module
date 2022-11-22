@@ -22,7 +22,18 @@ function usda_eauth_openid_connect_post_authorize(UserInterface $account, array 
   $eAuthId = $context['sub'];
 
   // Get the zRoles based on the eAuthID.
-  $response = $zroles_util->getUserAccessRolesAndScopes($eAuthId);
+  try {
+    $response = $zroles_util->getUserAccessRolesAndScopes($eAuthId);
+  }
+
+  // If the request to zRoles fails, logout and show an error.
+  catch (Exception $e) {
+    $session = \Drupal::request()->getSession();
+    $session->set('openid_connect_destination', '/user/logout');
+    \Drupal::messenger()->addError('Could not retrieve user info from zRoles. Please contact an administrator.');
+    watchdog_exception('usda_eauth', $e, 'zRoles request failed (eAuth ID: @eauthid).', ['@eauthid' => $eAuthId]);
+    return;
+  }
 
   // Get the user info from zRoles response.
   $email = $zroles_util->getTokenValue($response, 'EmailAddress');

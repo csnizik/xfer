@@ -37,6 +37,9 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
           </soap:Body>
         </soap:Envelope>';
 
+    // log the query going to zRoles
+    \Drupal::logger('usda_eauth')->notice("zRoles request from getUserAccessRolesAndScopes: " . htmlspecialchars($xml));
+
     $curl = curl_init();
 
     curl_setopt_array($curl, [
@@ -61,6 +64,10 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       echo "cURL Error #:" . $err;
       $response = '';
     }
+
+    // log the raw response coming back from zRoles
+    \Drupal::logger('usda_eauth')->notice("raw zRoles response from getUserAccessRolesAndScopes: " . htmlspecialchars($response));
+
     return $response;
   }
 
@@ -93,6 +100,9 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
            </soap:Body>
         </soap:Envelope>';
 
+    // log the query going to zRoles
+    \Drupal::logger('usda_eauth')->notice("zRoles request from getListByzRole: " . htmlspecialchars($xml));
+
     $curl = curl_init();
 
     curl_setopt_array($curl, [
@@ -118,6 +128,9 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       echo "cURL Error #:" . $err;
     }
 
+    // log the raw response coming back from zRoles
+    \Drupal::logger('usda_eauth')->notice("raw zRoles response from getListByzRole: " . htmlspecialchars($response));
+
     // The next 6 lines correct the first part of $response and removes
     // unnecessary xml code.
     $res_len = strlen($response);
@@ -129,6 +142,9 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
     $data = new \SimpleXMLElement($value);
     $data = json_decode(json_encode($data));
     $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
+
+    // log the parsed zRoles response
+    \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars(print_r($result, true)));
 
     return $result;
   }

@@ -32,23 +32,24 @@ class ProjectForm extends PodsFormBase {
 
   /**
    * Get awardee contact name options.
-   *
-   * Eventually, this function will get replaced with a call to EAuth to find
-   * registered users.
    */
   public function getAwardeeContactNameOptions(array &$form, FormStateInterface $form_state) {
     $contact_options_email = [];
 
     $contact_name_options = [];
     $contact_name_options[''] = ' - Select -';
-    $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole('CIG_NSHDS');
+    $this->addContactsToArray('CIG_NSHDS', $contact_name_options, $contact_options_email);
+    $this->addContactsToArray('CIG_APT', $contact_name_options, $contact_options_email);
+    $this->addContactsToArray('CIG_App_Admin', $contact_name_options, $contact_options_email);
+    $this->addContactsToArray('CIG_APA', $contact_name_options, $contact_options_email);
 
-    foreach ($zRoleContacts as $zContacts) {
-      $contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;
-      $contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
-    }
+    $form_state->set('contact_emails', $contact_options_email);
 
-    $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole('CIG_APT');
+    return $contact_name_options;
+  }
+
+  public function addContactsToArray(string $zRoleType, array &$contact_name_options, array &$contact_options_email){
+    $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole($zRoleType);
 
     foreach ($zRoleContacts as $zContacts) {
       if (array_key_exists($contact_name_options, $zContacts->UsdaeAuthenticationId)) {
@@ -57,10 +58,6 @@ class ProjectForm extends PodsFormBase {
       $contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;
       $contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
     }
-
-    $form_state->set('contact_emails', $contact_options_email);
-
-    return $contact_name_options;
   }
 
   /**
@@ -585,7 +582,7 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
+        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
 
         $contact = Asset::create($contact_submission);
 
@@ -627,7 +624,7 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id];
+        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
 
         $contact = Asset::create($contact_submission);
 

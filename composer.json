@@ -72,7 +72,8 @@
         "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch"
       },
       "drupal/openid_connect": {
-        "Force HTTPS in redirect URIs": "patches/openid_connect/https-true.patch"
+        "Force HTTPS in redirect URIs": "patches/openid_connect/https-true.patch",
+        "Send Post Request to revoke endpoint for smooth logout": "patches/openid_connect/smooth-logout.patches"
       },
       "farmos/farmos": {
         "Issue #3317437: Use hook_install_tasks() instead of hook_install() in farm profile": "https://www.drupal.org/files/issues/2022-10-25/3317437-3_0.patch",

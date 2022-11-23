@@ -230,7 +230,7 @@ class ProjectForm extends PodsFormBase {
     $form['name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Project Name'),
-      '#description' => 'Project Name',
+      '#description' => $this->t('Project Name'),
       '#required' => TRUE,
       '#default_value' => $project_default_name,
     ];
@@ -239,7 +239,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_project_agreement_number'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Agreement Number'),
-      '#description' => 'Agreement Number',
+      '#description' => $this->t('Agreement Number'),
       '#default_value' => $agreement_number_default,
       '#required' => TRUE,
     ];
@@ -258,7 +258,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_funding_amount'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Funding Amount'),
-      '#description' => 'Funding Amount',
+      '#description' => $this->t('Funding Amount'),
       '#required' => TRUE,
       '#default_value' => $awardee_org_default_name,
     ];
@@ -283,7 +283,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_summary'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Project Summary'),
-      '#description' => 'Project Summary',
+      '#description' => $this->t('Project Summary'),
       '#required' => TRUE,
       '#default_value' => $summary_default,
     ];

@@ -48,7 +48,10 @@ class ProjectForm extends PodsFormBase {
     return $contact_name_options;
   }
 
-  public function addContactsToArray(string $zRoleType, array &$contact_name_options, array &$contact_options_email){
+  /**
+   * Add contacts to array.
+   */
+  public function addContactsToArray(string $zRoleType, array &$contact_name_options, array &$contact_options_email) {
     $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole($zRoleType);
 
     foreach ($zRoleContacts as $zContacts) {
@@ -582,8 +585,7 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
-
+        // $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);
@@ -624,8 +626,7 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
-
+        // $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);

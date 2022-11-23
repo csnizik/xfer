@@ -33,8 +33,8 @@ To restart PODS, run `./scripts/podsu`.
 
 At any time, PODS can be rebuilt by running `./scripts/repods`.
 
-WARNING: This will completely rebuild the codebase, clear the database, and 
-evert uncommitted changes to code.
+WARNING: This will completely rebuild the codebase, clear the database, and
+revert uncommitted changes to code.
 
 ## Developing
 

@@ -535,7 +535,6 @@ class ProjectForm extends PodsFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $is_create = $form_state->get('operation') === 'create';
-    $contact_emails = $form_state->get('contact_emails');
     $contact_options = $form['names_fieldset'][0]['contact_name']['#options'];
 
     if ($is_create) {
@@ -585,7 +584,6 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        // $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);
@@ -626,7 +624,6 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        // $contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);

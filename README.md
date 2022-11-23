@@ -91,6 +91,13 @@ violations:
 
 If there is no output, then the code is clean.
 
+In some cases, Codesniffer has the ability to automatically fix issues. A
+second helper script is provided for this:
+
+`./scripts/codefix`
+
+Be sure to review and understand the changes before committing them.
+
 ### XDebug
 
 [XDebug](https://xdebug.org) is a PHP debugger, which is installed in the PODS

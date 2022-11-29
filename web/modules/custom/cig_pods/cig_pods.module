@@ -23,6 +23,16 @@ function cig_pods_entity_type_alter(array &$entity_types) {
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+function cig_pods_theme_registry_alter(&$theme_registry) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  if ($theme == 'gin') {
+    $theme_registry['html']['path'] = \Drupal::service('extension.list.module')->getPath('cig_pods') . '/templates';
+  }
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function cig_pods_page_attachments(array &$attachments) {

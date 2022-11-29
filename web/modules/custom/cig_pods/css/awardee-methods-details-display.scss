@@ -179,3 +179,316 @@ div#block-gin-local-actions {
 .content-header.clearfix {
     height: 0px;
 }
+
+.usa-banner {
+    padding-bottom: 0;
+    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif !important;
+    font-size: 1.06rem;
+    line-height: 1.5;
+    background-color: #f0f0f0;
+  }
+
+  div#usda-header {
+    border-bottom: 5px solid #0068AD;
+}
+  
+  .usa-accordion {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style-type: none;
+    padding-left: 0;
+    color: #1b1b1b;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .usa-banner .usa-accordion {
+    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.06rem;
+    line-height: 1.5;
+  }
+  
+  .usa-banner__header-flag {
+    margin-right: 0.5rem;
+    padding-top: 0;
+    float: left;
+    width: 1rem;
+  }
+  
+  .usa-banner__header-action {
+    display: none;
+    color: #005ea2;
+    line-height: 1.1;
+    margin-bottom: 0;
+    margin-top: 2px;
+    text-decoration: underline;
+  }
+  
+  .usa-banner__header {
+    padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
+    min-height: 0;
+    font-size: 0.8rem;
+    font-weight: normal;
+    position: relative;
+    color: #1b1b1b;
+  }
+  
+  .usa-banner__inner {
+    align-items: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .grid-col-auto {
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 100%;
+  }
+  
+  [class*=grid-col] {
+    position: relative;
+    /*width: 100%;*/
+    box-sizing: border-box;
+  }
+  
+  .tablet\:grid-col-auto {
+    flex: 0 1 auto;
+    width: auto;
+    max-width: 100%;
+  }
+  
+  .grid-col-fill {
+    min-width: 1px;
+  }
+  
+  .usa-banner__header-text {
+    margin-bottom: 0;
+    margin-top: 0;
+    font-size: 0.8rem;
+    line-height: 1.1;
+    font-family: Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  }
+  
+  .usa-banner__header-action {
+    display: none;
+    color: #005ea2;
+    line-height: 1.1;
+    margin-bottom: 0;
+    margin-top: 2px;
+    text-decoration: underline;
+  }
+  
+  .usa-banner__button[aria-expanded=false] {
+    background-image: none;
+  }
+  
+  .usa-accordion__button[aria-expanded=false] {
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .usa-banner__button:focus {
+    outline: 0.25rem solid #2491ff;
+    outline-offset: 0;
+  }
+  
+  .usa-banner__button:hover,
+  .usa-banner__button:active {
+    color: #0b4778;
+  }
+  
+  .usa-banner__button {
+    color: #005ea2;
+    position: static;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    display: inline;
+    margin-left: 0.5rem;
+    position: relative;
+    -webkit-font-smoothing: subpixel-antialiased;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    font-weight: normal;
+    padding: 0;
+    text-align: left;
+    vertical-align: baseline;
+    font-size: 0.8rem;
+    height: auto;
+    line-height: 1.1;
+    padding-top: 0;
+    padding-left: 0;
+    text-decoration: none;
+    width: auto;
+  }
+  
+  .usa-banner__button-text {
+    position: static;
+    display: inline;
+    left: -999em;
+    right: auto;
+    text-decoration: underline;
+  }
+  
+  .usa-banner__button::after {
+    background: none;
+    background-color: #005ea2;
+    -webkit-mask: url(/img/chevron.svg) no-repeat center/1.3128205128ex 0.8ex;
+    mask: url(/img/chevron.svg) no-repeat center/1.3128205128ex 0.8ex;
+    display: inline-block;
+    height: 0.8ex;
+    width: 1.3128205128ex;
+    content: "";
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+  
+  .usa-header--extended .usa-navbar {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .usa-header {
+    font-family: Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  }
+  
+  .usa-header--extended .usa-logo {
+    margin: 2rem 0 1.5rem;
+    max-width: 50%;
+  }
+  
+  .usa-navbar {
+    border-bottom: none;
+    display: inline-block;
+    height: auto;
+  }
+  
+  .usa-navbar {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: block;
+    height: auto;
+    overflow: auto;
+  }
+  
+  .usa-logo {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.46rem;
+    line-height: 1.1;
+  }
+  
+  
+  .usa-logo__text {
+    display: block;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0;
+    font-size: large;
+  }
+  
+  .usa-logo__text .logo-img {
+    float: left;
+    width: auto;
+    height: auto;
+    margin-right: 1em;
+  }
+  
+  .usa-logo a {
+    color: #1b1b1b;
+    text-decoration: none;
+  }
+  
+  .usa-logo__text a:hover {
+    color: inherit;
+  }
+  
+  .usa-logo a,
+  .usa-logo p {
+    font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  }
+  
+  .usa-header a {
+    border-bottom: none;
+  }
+  
+  .usa-logo__text .usa-font-lead {
+    display: contents;
+    font-weight: 700;
+    font-size: unset;
+  }
+  
+  p.usa-font-lead {
+    margin: 0;
+  }
+  
+  .usa-banner__content {
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.25rem 1rem 1rem 2.5rem;
+    background-color: transparent;
+    font-size: 1rem;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .usa-accordion__content> :last-child {
+    margin-bottom: 0px;
+  }
+  
+  .usa-accordion__content> :first-child {
+    margin-top: 0px;
+  }
+  
+  .grid-row.grid-gap-lg {
+    margin: 0 auto;
+  }
+  
+  .grid-row.grid-gap-lg>* {
+    padding-left: 0.64rem;
+    padding-right: 0.64rem;
+  }
+  
+  .grid-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .usa-banner__guidance {
+    display: flex;
+    align-items: flex-start;
+    max-width: 64ex;
+    padding-top: 1rem;
+  }
+  
+  [class*=grid-col] {
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .usa-media-block__img {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+  }
+  
+  .usa-banner__icon {
+    width: 2.5rem;
+  }
+  
+  .usa-media-block__body p {
+    margin: 0;
+  }

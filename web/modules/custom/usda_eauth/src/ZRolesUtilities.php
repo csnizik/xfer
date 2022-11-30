@@ -37,7 +37,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
           </soap:Body>
         </soap:Envelope>';
 
-    // log the query going to zRoles
+    // Log the query going to zRoles.
     \Drupal::logger('usda_eauth')->notice("zRoles request from getUserAccessRolesAndScopes: " . htmlspecialchars($xml));
 
     $curl = curl_init();
@@ -65,7 +65,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       $response = '';
     }
 
-    // log the raw response coming back from zRoles
+    // Log the raw response coming back from zRoles.
     \Drupal::logger('usda_eauth')->notice("raw zRoles response from getUserAccessRolesAndScopes: " . htmlspecialchars($response));
 
     return $response;
@@ -100,7 +100,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
            </soap:Body>
         </soap:Envelope>';
 
-    // log the query going to zRoles
+    // Log the query going to zRoles.
     \Drupal::logger('usda_eauth')->notice("zRoles request from getListByzRole: " . htmlspecialchars($xml));
 
     $curl = curl_init();
@@ -128,7 +128,7 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
       echo "cURL Error #:" . $err;
     }
 
-    // log the raw response coming back from zRoles
+    // Log the raw response coming back from zRoles.
     \Drupal::logger('usda_eauth')->notice("raw zRoles response from getListByzRole: " . htmlspecialchars($response));
 
     // The next 6 lines correct the first part of $response and removes
@@ -143,8 +143,8 @@ class ZRolesUtilities implements ZRolesUtilitiesInterface {
     $data = json_decode(json_encode($data));
     $result = $data->{'soap:Body'}->{'GetAuthorizedUsersResponse'}->{'GetAuthorizedUsersResult'}->{'UserSummary'};
 
-    // log the parsed zRoles response
-    \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars(print_r($result, true)));
+    // Log the parsed zRoles response.
+    \Drupal::logger('usda_eauth')->notice("parsed zRoles response from getListByzRole: " . htmlspecialchars(print_r($result, TRUE)));
 
     return $result;
   }

@@ -48,7 +48,10 @@ class ProjectForm extends PodsFormBase {
     return $contact_name_options;
   }
 
-  public function addContactsToArray(string $zRoleType, array &$contact_name_options, array &$contact_options_email){
+  /**
+   * Add contacts to array.
+   */
+  public function addContactsToArray(string $zRoleType, array &$contact_name_options, array &$contact_options_email) {
     $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole($zRoleType);
 
     foreach ($zRoleContacts as $zContacts) {
@@ -227,7 +230,7 @@ class ProjectForm extends PodsFormBase {
     $form['name'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Project Name'),
-      '#description' => 'Project Name',
+      '#description' => $this->t('Project Name'),
       '#required' => TRUE,
       '#default_value' => $project_default_name,
     ];
@@ -236,7 +239,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_project_agreement_number'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Agreement Number'),
-      '#description' => 'Agreement Number',
+      '#description' => $this->t('Agreement Number'),
       '#default_value' => $agreement_number_default,
       '#required' => TRUE,
     ];
@@ -255,7 +258,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_funding_amount'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Funding Amount'),
-      '#description' => 'Funding Amount',
+      '#description' => $this->t('Funding Amount'),
       '#required' => TRUE,
       '#default_value' => $awardee_org_default_name,
     ];
@@ -280,7 +283,7 @@ class ProjectForm extends PodsFormBase {
     $form['field_summary'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Project Summary'),
-      '#description' => 'Project Summary',
+      '#description' => $this->t('Project Summary'),
       '#required' => TRUE,
       '#default_value' => $summary_default,
     ];
@@ -532,7 +535,6 @@ class ProjectForm extends PodsFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $is_create = $form_state->get('operation') === 'create';
-    $contact_emails = $form_state->get('contact_emails');
     $contact_options = $form['names_fieldset'][0]['contact_name']['#options'];
 
     if ($is_create) {
@@ -582,8 +584,6 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
-
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);
@@ -624,8 +624,6 @@ class ProjectForm extends PodsFormBase {
         $contact_submission['field_contact_type'] = $contact_type;
         $contact_submission['name'] = $contact_options[$contact_eauth_id];
         $contact_submission['eauth_id'] = $contact_eauth_id;
-        //$contact_submission['field_contact_email'] = $contact_emails[$contact_eauth_id]; // -wjk this causes problems if the zRoles return had no email
-
         $contact = Asset::create($contact_submission);
 
         array_push($contacts, $contact);

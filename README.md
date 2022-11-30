@@ -33,8 +33,8 @@ To restart PODS, run `./scripts/podsu`.
 
 At any time, PODS can be rebuilt by running `./scripts/repods`.
 
-WARNING: This will completely rebuild the codebase, clear the database, and 
-evert uncommitted changes to code.
+WARNING: This will completely rebuild the codebase, clear the database, and
+revert uncommitted changes to code.
 
 ## Developing
 
@@ -90,6 +90,13 @@ violations:
 `./scripts/codecheck`
 
 If there is no output, then the code is clean.
+
+In some cases, Codesniffer has the ability to automatically fix issues. A
+second helper script is provided for this:
+
+`./scripts/codefix`
+
+Be sure to review and understand the changes before committing them.
 
 ### XDebug
 

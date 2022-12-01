@@ -367,6 +367,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#limit_validation_errors' => [['mymap']],
       '#submit' => ['::ssurgoDataLookup'],
     ];
+    $form['ssurgo_symbol_text'] = [
+            '#markup' => $this->t('<div class="ssurgo-symbol-text"><p>Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.</p></div>')
+        ];
     $form['ssurgo_data_wrapper'] = [
       '#type' => 'container',
       '#prefix' => '<div id="ssurgo-data">',
@@ -376,14 +379,15 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['ssurgo_data_wrapper']['map_unit_symbol'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Map Unit Symbol'),
-      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the map symbols present.'),
       '#default_value' => $map_unit_symbol_value,
     ];
+     $form['ssurgo_data_wrapper']['ssurgo_texture_text'] = [
+            '#markup' => $this->t('<div><p>Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.</p></div>'),
+        ];
     $surface_texture_value = $is_edit ? $shmu->get('field_shmu_surface_texture')->value : '';
     $form['ssurgo_data_wrapper']['surface_texture'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Surface Texture'),
-      '#description' => $this->t('Click "Lookup via SSURGO" to query the SSURGO database using the geometry in the map above and populate this field with the soil textures present.'),
       '#default_value' => $surface_texture_value,
     ];
 

@@ -109,7 +109,19 @@
             <p class="usa-font-lead">Conservation Innovation Grants</p>
           </em>
         </div>
-        <!--button class="usa-menu-btn">Menu</button-->
+        {% if logged_in %}
+        <div class="logout-button">
+            <div class="dropbutton-wrapper dropbutton-single" data-once="dropbutton">
+              <div class="dropbutton-widget">
+                <ul class="dropbutton dropbutton--standard dropbutton--single dropbutton--gin">
+                  <li class="dropbutton__item dropbutton-action">
+                    <a href="/user/logout">Logout</a>
+                  </li>
+                </ul>
+              </div>
+          </div>
+        </div>
+        {% endif %}
       </div>
     </div>
 

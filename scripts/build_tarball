@@ -3,6 +3,13 @@
 if [ $# -eq 0 ]
   then
     echo "No version supplied: ./build_tarball <version>"
+    exit 1
+fi
+
+if ! [[ -d "../scripts" ]]
+then
+    echo "Run this from inside the scripts directory."
+    exit 1
 fi
 
 echo "Installing patch utility..."
@@ -31,10 +38,9 @@ export COMPOSER_ALLOW_SUPERUSER=1
 
 echo "Packaging tarball..."
 cd ..
-tar -cz pods/ > pods_$1.tar.gz
+tar -cz pods/ > cig_pods/scripts/pods_$1.tar.gz
 
 echo "Cleaning up..."
-#rm -rf composer-installer.php pods/ pods_src/
-rm composer-installer.php pods/
+rm -rf cig_pods/scripts/composer-installer.php pods/
 
 echo "Done!"

@@ -17,11 +17,11 @@ cd .. # now just pods source
 echo "Preparing files for build..."
 cd ..
 mkdir -p pods/web/modules/custom
-cp pods_src/composer.json pods
-cp -r pods_src/patches/ pods
+cp cig_pods/composer.json pods
+cp -r cig_pods/patches/ pods
 
 echo "Copying custom modules..."
-cp -r pods_src/web/modules/custom/* pods/web/modules/custom
+cp -r cig_pods/web/modules/custom/* pods/web/modules/custom
 
 
 echo "Building with composer..."
@@ -34,6 +34,7 @@ cd ..
 tar -cz pods/ > pods_$1.tar.gz
 
 echo "Cleaning up..."
-rm -rf composer-installer.php pods/ pods_src/
+#rm -rf composer-installer.php pods/ pods_src/
+rm composer-installer.php pods/
 
 echo "Done!"

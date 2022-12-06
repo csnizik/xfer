@@ -12,7 +12,7 @@ echo "Installing composer..."
 wget https://getcomposer.org/installer -O composer-installer.php
 php composer-installer.php --filename=composer --install-dir=/usr/local/bin
 
-cd pods_src
+cd .. # now just pods source
 
 echo "Preparing files for build..."
 cd ..

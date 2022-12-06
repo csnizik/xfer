@@ -10,3 +10,7 @@ services:
     class: Drupal\usda_eauth\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+  usda_eauth.responsehandler_subscriber:
+    class: Drupal\usda_eauth\ResponseHandlerSubscriber
+    tags:
+      - { name: event_subscriber }

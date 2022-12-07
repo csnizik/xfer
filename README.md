@@ -99,6 +99,16 @@ second helper script is provided for this:
 
 Be sure to review and understand the changes before committing them.
 
+### Tarball Generation
+
+A helper script is provided to generate the PODS tarball for deployment. The script should be run from inside the scripts directory of a fresh PODS repo checkout.
+
+```
+$> cd cig_pods/scripts
+$> ./build_tarball <version number>
+```
+The file will be placed in the scripts directory, named `pods_<version number>.tar.gz`.
+
 ### XDebug
 
 [XDebug](https://xdebug.org) is a PHP debugger, which is installed in the PODS

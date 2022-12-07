@@ -2,8 +2,9 @@
 
 ## Requirements
 
-- WSL2 (if developing on Windows)
-- Docker
+- WSL1 recommended over WSL2 for GFE due to mounted volume performance issues and network access issues for WSL2
+- WSL2 recommended for all other Windows development
+- Docker set to use WSL1
 
 ## Setup
 

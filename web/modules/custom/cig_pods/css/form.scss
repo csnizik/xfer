@@ -174,3 +174,23 @@ form {
   padding-left: 20px !important;
   padding-right: 20px !important;
 }
+
+.usa-banner__inner {
+  max-width: 42rem;
+}
+
+.usa-navbar {
+  max-width: 42rem !important;
+}
+
+.usa-banner__content {
+  padding: 0.25rem 1rem 1rem 0.5rem;
+}
+
+.grid-row.grid-gap-lg {
+  width: 42rem;
+}
+
+.usa-banner__guidance.tablet\:grid-col-6 {
+  width: 21rem;
+}

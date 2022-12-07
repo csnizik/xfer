@@ -76,3 +76,23 @@ select.form-select.form-element.form-element--type-select {
   margin-left: -25px;
   margin-bottom: 10px;
 }
+
+.usa-banner__inner {
+  max-width: 42rem;
+}
+
+.usa-navbar {
+  max-width: 42rem !important;
+}
+
+.usa-banner__content {
+  padding: 0.25rem 1rem 1rem 0.5rem;
+}
+
+.grid-row.grid-gap-lg {
+  width: 42rem;
+}
+
+.usa-banner__guidance.tablet\:grid-col-6 {
+  width: 21rem;
+}

@@ -101,13 +101,15 @@ Be sure to review and understand the changes before committing them.
 
 ### Tarball Generation
 
-A helper script is provided to generate the PODS tarball for deployment. The script should be run from inside the scripts directory of a fresh PODS repo checkout.
+A helper script is provided to generate the PODS tarball for deployment. The script should be run from inside the scripts directory of a fresh PODS repo checkout on the USDA development server 10.203.24.63 .
 
 ```
 $> cd cig_pods/scripts
 $> ./build_tarball <version number>
 ```
 The file will be placed in the scripts directory, named `pods_<version number>.tar.gz`.
+
+You can run this locally if you want a copy of the tarball. Just make sure `patch` is installed because the command to install it in the script is RHEL8 specific.
 
 ### XDebug
 

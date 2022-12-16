@@ -1,5 +1,5 @@
-# Inherit from the official Drupal 9 PHP 7.4 image.
-FROM drupal:9-php7.4-apache
+# Inherit from the official Drupal 9 PHP 8.1 image.
+FROM drupal:9-php8.1-apache
 
 # Install Git (required by Composer), and mariadb-client (so Drush can drop
 # the database during site-install).

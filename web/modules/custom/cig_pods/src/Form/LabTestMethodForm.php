@@ -136,7 +136,6 @@ class LabTestMethodForm extends PodsFormBase {
         '#type' => 'select',
         '#title' => $this->t('Soil Health Test Laboratory'),
         '#required' => TRUE,
-        '#validated' => TRUE,
         '#options' => $s_he_test_laboratory,
         '#ajax' => [
           'callback' => '::reloadProfile',
@@ -148,23 +147,16 @@ class LabTestMethodForm extends PodsFormBase {
         '#title' => $this->t('Soil Health Test Methods'),
         '#type' => 'select',
         '#required' => TRUE,
-        '#validated' => TRUE,
         '#prefix' => '<div id="field_lab_method_lab_test_profile">',
         '#suffix' => '</div>',
         '#options' => static::getProfileOptions($selected_family),
       ];
     }
 
-    $form['autoload_container'] = [
-      '#prefix' => '<div id="autoload_container"',
-      '#suffix' => '</div>',
-    ];
-
     if (!$is_edit) {
-      $form['actions']['update_profile'] = [
+      $form['update_profile'] = [
         '#type' => 'submit',
         '#submit' => ['::loadProfileData'],
-        '#limit_validation_errors' => '',
         '#value' => $this->t('Load Selected Profile'),
         '#ajax' => [
           'callback' => '::updateProfile',
@@ -174,12 +166,17 @@ class LabTestMethodForm extends PodsFormBase {
         '#suffix' => '</div>',
       ];
     }
-
-    $form['autoload_container']['lab_test_line'] = [
-      '#markup' => '<hr class="line"/>',
+    
+    $form['autoload_container'] = [
+      '#prefix' => '<div id="autoload_container"',
+      '#suffix' => '</div>',
     ];
+
     $fs_lab_profile = $form_state->get('lab_profile');
     if (count($fs_lab_profile) <> 0 || $is_edit) {
+      $form['autoload_container']['lab_test_line'] = [
+        '#markup' => '<hr class="line"/>',
+      ];
 
       if ($form_state->get('loading') <> NULL) {
         $molybdenum_method_default_value = $fs_lab_profile['molybdenum_method'];
@@ -559,15 +556,7 @@ class LabTestMethodForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $loaded = $form_state->get('loading') <> NULL;
-    $is_create = $form_state->get('operation') === 'create';
 
-    if (!$loaded && $is_create) {
-      $form_state->setError(
-            $form['actions']['update_profile'],
-            $this->t('Please Select and load a Soil Health Test Method'),
-        );
-    }
   }
 
   /**

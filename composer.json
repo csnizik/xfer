@@ -10,7 +10,7 @@
   ],
   "require": {
     "oomphinc/composer-installers-extender": "^2.0",
-    "farmos/farmos": "2.0.0-beta7",
+    "farmos/farmos": "2.0.0-rc1",
     "wikimedia/composer-merge-plugin": "^2.0",
     "drupal/structure_sync": "^2.0",
     "drupal/farm_nrcs": "^2.1",
@@ -74,10 +74,6 @@
       "drupal/openid_connect": {
         "Force HTTPS in redirect URIs": "patches/openid_connect/https-true.patch",
         "Send Post Request to revoke endpoint for smooth logout": "patches/openid_connect/smooth-logout.patch"
-      },
-      "farmos/farmos": {
-        "Issue #3317437: Use hook_install_tasks() instead of hook_install() in farm profile": "https://www.drupal.org/files/issues/2022-10-25/3317437-3_0.patch",
-        "Issue #3323108: Action links block overrides break farmOS installation from config": "https://www.drupal.org/files/issues/2022-11-22/3323108-8.patch"
       }
     }
   }

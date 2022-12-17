@@ -49,6 +49,7 @@ module:
   farm_ui_map: 0
   farm_ui_menu: 0
   farm_ui_metrics: 0
+  farm_parent: 0
   farm_ui_theme: 0
   farm_ui_user: 0
   farm_ui_views: 0

@@ -55,7 +55,7 @@ class ProjectForm extends PodsFormBase {
     $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole($zRoleType);
 
     foreach ($zRoleContacts as $zContacts) {
-      if (array_key_exists($contact_name_options, $zContacts->UsdaeAuthenticationId)) {
+      if (array_key_exists($zContacts->UsdaeAuthenticationId, $contact_name_options)) {
         continue;
       }
       $contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;

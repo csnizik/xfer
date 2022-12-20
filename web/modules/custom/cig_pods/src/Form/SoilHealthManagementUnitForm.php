@@ -132,7 +132,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    * SHMU is a reference to SoilHealthManagmentUnit entity.
    */
   public function getDecimalFromShmuFractionFieldType(object $shmu, string $field_name) {
-    return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
+    return $shmu->get($field_name)->denominator == '' ? '' : $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
   /**
@@ -197,8 +197,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     // If rotations is still empty, set a blank crop rotation at index 0.
     if ($i == 0) {
-      $rotations[0]['field_shmu_crop_rotation_crop'] = '';
-      $rotations[0]['field_shmu_crop_rotation_year'] = '';
+      $rotations[0]['field_shmu_crop_rotation_crop'][0]['target_id'] = '';
+      $rotations[0]['field_shmu_crop_rotation_year'][0]['numerator'] = '';
       $rotations[0]['field_shmu_crop_rotation_crop_present'] = [];
     }
     $form_state->set('rotations', $rotations);

@@ -23,7 +23,7 @@ class IrrigationForm extends PodsFormBase {
    * Convert Fraction to decimal.
    */
   public function getDecimalFromShmuFractionFieldType(object $shmu, string $field_name) {
-    return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
+    return $shmu->get($field_name)->denominator == '' ? '' : $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
   /**

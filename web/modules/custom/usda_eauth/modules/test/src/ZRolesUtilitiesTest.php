@@ -22,7 +22,13 @@ class ZRolesUtilitiesTest extends ZRolesUtilities implements ZRolesUtilitiesInte
       return parent::getUserAccessRolesAndScopes($eAuthId);
     }
 
-    return [];
+    $test_roles['28200310160021007137'] = '<ApplicationRoleEnumeration>CIG_App_Admin</ApplicationRoleEnumeration>';
+    $test_roles['28200711150011206144332'] = '<ApplicationRoleEnumeration>CIG_NSHDS</ApplicationRoleEnumeration>';
+    $test_roles['2'] = '<ApplicationRoleEnumeration>CIG_APT</ApplicationRoleEnumeration>';
+    $test_roles['8'] = '<ApplicationRoleEnumeration>CIG_NSHDS</ApplicationRoleEnumeration>';
+    $test_roles['28'] = '<ApplicationRoleEnumeration>CIG_NSHDSA</ApplicationRoleEnumeration>';
+
+    return $test_roles[$eAuthId];
   }
 
   /**

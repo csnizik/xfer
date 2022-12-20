@@ -474,19 +474,19 @@ class ProjectForm extends PodsFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     // Minus 1 because there is an entry with key 'actions' for the "Add Another
     // Producer Button".
-    $num_producers = count($form['producers_fieldset']) - 1;
+    $num_producers = count($form['names_fieldset']) - 1;
     // Minus 1 as above.
     $num_contacts = count($form['names_fieldset']) - 1;
 
     $producers = [];
     for ($i = 0; $i < $num_producers; $i++) {
-      $producer_id = $form['producers_fieldset'][$i]['producer_name']['#value'];
+      $producer_id = $form['names_fieldset'][$i]['producer_name']['#value'];
       $producers[$i] = $producer_id;
     }
     // Check $producers array for duplicate values.
     if (!$this->arrayValuesAreUnique($producers)) {
       $form_state->setError(
-      $form['producers_fieldset'],
+      $form['names_fieldset'],
       $this->t('Each Producer selection must be unique'),
       );
     }
@@ -558,13 +558,13 @@ class ProjectForm extends PodsFormBase {
       $project_submission['field_resource_concerns'] = $checked_resource_concerns;
 
       // Minus 1 because there is an entry with key 'actions'.
-      $num_producers = count($form['producers_fieldset']) - 1;
+      $num_producers = count($form['names_fieldset']) - 1;
       // As above.
       $num_contacts = count($form['names_fieldset']) - 1;
 
       $producers = [];
       for ($i = 0; $i < $num_producers; $i++) {
-        $producers[$i] = $form['producers_fieldset'][$i]['producer_name']['#value'];
+        $producers[$i] = $form['names_fieldset'][$i]['producer_name']['#value'];
       }
 
       $project_submission['field_producer_contact_name'] = $producers;
@@ -604,7 +604,7 @@ class ProjectForm extends PodsFormBase {
       $project = \Drupal::entityTypeManager()->getStorage('asset')->load($project_id);
 
       // Minus 1 because there is an entry with key 'actions'.
-      $num_producers = count($form['producers_fieldset']) - 1;
+      $num_producers = count($form['names_fieldset']) - 1;
       // As above.
       $num_contacts = count($form['names_fieldset']) - 1;
 

@@ -104,8 +104,8 @@ class OperationForm extends PodsFormBase {
     }
     // If sequences is still empty, set a blank sequence at index 0.
     if ($i == 0) {
-      $sequences[0]['field_cost_type'] = '';
-      $sequences[0]['field_cost'] = '';
+      $sequences[0]['field_cost_type'][0]['value'] = '';
+      $sequences[0]['field_cost'][0]['target_id'] = '';
     }
 
     $form_state->set('sequences', $sequences);
@@ -123,7 +123,7 @@ class OperationForm extends PodsFormBase {
    * Get decimal from SHMU fraction field.
    */
   public function getDecimalFromShmuFractionFieldType(object $shmu, string $field_name) {
-    return $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
+    return $shmu->get($field_name)->denominator == '' ? '' : $shmu->get($field_name)->numerator / $shmu->get($field_name)->denominator;
   }
 
   /**
@@ -291,7 +291,11 @@ class OperationForm extends PodsFormBase {
     $form_index = 0;
     foreach ($fs_cost_sequences as $fs_index => $sequence) {
 
-      $cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
+      if ($sequence['field_cost'][0]['denominator'] == '') {
+        $cost_default_value = '';
+      } else {
+        $cost_default_value = $sequence['field_cost'][0]['numerator'] / $sequence['field_cost'][0]['denominator'];
+      }
 
       $cost_type_default_value = $sequence['field_cost_type'][0]['target_id'];
 
@@ -582,7 +586,7 @@ class OperationForm extends PodsFormBase {
 
     $new_cost_sequence = [];
     $new_cost_sequence['field_cost'][0]['value'] = '';
-    $new_cost_sequence['field_cost_type'][0]['value'] = '';
+    $new_cost_sequence['field_cost_type'][0]['target_id'] = '';
 
     $sequences[] = $new_cost_sequence;
     $form_state->set('sequences', $sequences);

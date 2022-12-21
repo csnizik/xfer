@@ -7,6 +7,7 @@ dependencies:
     - asset
     - cig_pods
     - csv_serialization
+    - fraction
     - rest
     - serialization
 id: pods_csv_exports
@@ -24,15 +25,15 @@ display:
     position: 0
     display_options:
       fields:
-        field_operation_target_id:
-          id: field_operation_target_id
-          table: asset__field_operation
-          field: field_operation_target_id
+        shmu_target_id:
+          id: shmu_target_id
+          table: asset__shmu
+          field: shmu_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_operation
+          entity_field: shmu
           plugin_id: field
           label: ''
           exclude: false
@@ -156,6 +157,136 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        field_operation_target_id:
+          id: field_operation_target_id
+          table: asset__field_operation
+          field: field_operation_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: field_operation
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_ownership_status_target_id:
+          id: field_ownership_status_target_id
+          table: asset__field_ownership_status
+          field: field_ownership_status_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: field_ownership_status
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         field_tractor_self_propelled_machine_target_id:
           id: field_tractor_self_propelled_machine_target_id
           table: asset__field_tractor_self_propelled_machine
@@ -221,15 +352,15 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_input_target_id:
-          id: field_input_target_id
-          table: asset__field_input
-          field: field_input_target_id
+        field_row_number_numerator:
+          id: field_row_number_numerator
+          table: asset__field_row_number
+          field: field_row_number_numerator
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: field_input
+          entity_field: field_row_number
           plugin_id: field
           label: ''
           exclude: false
@@ -272,11 +403,13 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: numerator
+          type: fraction_decimal
           settings:
-            link: true
-          group_column: target_id
+            precision: 0
+            auto_precision: true
+            prefix_suffix: false
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -286,15 +419,149 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        shmu_target_id:
-          id: shmu_target_id
-          table: asset__shmu
-          field: shmu_target_id
+        field_width_numerator:
+          id: field_width_numerator
+          table: asset__field_width
+          field: field_width_numerator
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: asset
-          entity_field: shmu
+          entity_field: field_width
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: numerator
+          type: fraction_decimal
+          settings:
+            precision: 0
+            auto_precision: true
+            prefix_suffix: false
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_horsepower_numerator:
+          id: field_horsepower_numerator
+          table: asset__field_horsepower
+          field: field_horsepower_numerator
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: field_horsepower
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: numerator
+          type: fraction_decimal
+          settings:
+            precision: 0
+            auto_precision: true
+            prefix_suffix: false
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        project_target_id:
+          id: project_target_id
+          table: asset__project
+          field: project_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: asset
+          entity_field: project
           plugin_id: field
           label: ''
           exclude: false

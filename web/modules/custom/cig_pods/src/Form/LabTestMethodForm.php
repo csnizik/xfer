@@ -106,6 +106,7 @@ class LabTestMethodForm extends PodsFormBase {
       '#title' => 'Name',
       '#default_value' => $method_name_default,
       '#required' => TRUE,
+      '#validated' => TRUE,
     ];
 
     $project_default = $is_edit ? $labTestMethod->get('field_lab_method_project')->target_id : NULL;
@@ -115,6 +116,7 @@ class LabTestMethodForm extends PodsFormBase {
       '#options' => $project,
       '#default_value' => $project_default,
       '#required' => TRUE,
+      '#validated' => TRUE,
     ];
 
     $form['lab_form_header'] = [
@@ -145,16 +147,26 @@ class LabTestMethodForm extends PodsFormBase {
 
       $form['field_lab_method_lab_test_profile'] = [
         '#title' => $this->t('Soil Health Test Methods'),
+        '#id' => 'field_lab_profile',
         '#type' => 'select',
         '#required' => TRUE,
         '#prefix' => '<div id="field_lab_method_lab_test_profile">',
         '#suffix' => '</div>',
         '#options' => static::getProfileOptions($selected_family),
+        '#ajax' => [
+          'callback' => '::reloadProfile',
+          'wrapper' => 'field_lab_method_lab_test_profile',
+        ],
       ];
     }
+    
+    $form['autoload_container'] = [
+      '#prefix' => '<div id="autoload_container"',
+      '#suffix' => '</div>',
+    ];
 
     if (!$is_edit) {
-      $form['update_profile'] = [
+      $form['actions']['update_profile'] = [
         '#type' => 'submit',
         '#submit' => ['::loadProfileData'],
         '#value' => $this->t('Load Selected Profile'),
@@ -166,11 +178,6 @@ class LabTestMethodForm extends PodsFormBase {
         '#suffix' => '</div>',
       ];
     }
-    
-    $form['autoload_container'] = [
-      '#prefix' => '<div id="autoload_container"',
-      '#suffix' => '</div>',
-    ];
 
     $fs_lab_profile = $form_state->get('lab_profile');
     if (count($fs_lab_profile) <> 0 || $is_edit) {

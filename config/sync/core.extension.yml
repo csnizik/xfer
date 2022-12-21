@@ -57,6 +57,7 @@ module:
   farm_unit: 0
   farm_update: 0
   field: 0
+  field_ui: 0
   file: 0
   filter: 0
   fraction: 0

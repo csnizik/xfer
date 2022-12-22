@@ -106,6 +106,7 @@ class LabTestMethodForm extends PodsFormBase {
       '#title' => 'Name',
       '#default_value' => $method_name_default,
       '#required' => TRUE,
+      '#validated' => TRUE,
     ];
 
     $project_default = $is_edit ? $labTestMethod->get('field_lab_method_project')->target_id : NULL;
@@ -115,6 +116,7 @@ class LabTestMethodForm extends PodsFormBase {
       '#options' => $project,
       '#default_value' => $project_default,
       '#required' => TRUE,
+      '#validated' => TRUE,
     ];
 
     $form['lab_form_header'] = [
@@ -136,7 +138,6 @@ class LabTestMethodForm extends PodsFormBase {
         '#type' => 'select',
         '#title' => $this->t('Soil Health Test Laboratory'),
         '#required' => TRUE,
-        '#validated' => TRUE,
         '#options' => $s_he_test_laboratory,
         '#ajax' => [
           'callback' => '::reloadProfile',
@@ -146,15 +147,19 @@ class LabTestMethodForm extends PodsFormBase {
 
       $form['field_lab_method_lab_test_profile'] = [
         '#title' => $this->t('Soil Health Test Methods'),
+        '#id' => 'field_lab_profile',
         '#type' => 'select',
         '#required' => TRUE,
-        '#validated' => TRUE,
         '#prefix' => '<div id="field_lab_method_lab_test_profile">',
         '#suffix' => '</div>',
         '#options' => static::getProfileOptions($selected_family),
+        '#ajax' => [
+          'callback' => '::reloadProfile',
+          'wrapper' => 'field_lab_method_lab_test_profile',
+        ],
       ];
     }
-
+    
     $form['autoload_container'] = [
       '#prefix' => '<div id="autoload_container"',
       '#suffix' => '</div>',
@@ -164,7 +169,6 @@ class LabTestMethodForm extends PodsFormBase {
       $form['actions']['update_profile'] = [
         '#type' => 'submit',
         '#submit' => ['::loadProfileData'],
-        '#limit_validation_errors' => '',
         '#value' => $this->t('Load Selected Profile'),
         '#ajax' => [
           'callback' => '::updateProfile',
@@ -175,11 +179,11 @@ class LabTestMethodForm extends PodsFormBase {
       ];
     }
 
-    $form['autoload_container']['lab_test_line'] = [
-      '#markup' => '<hr class="line"/>',
-    ];
     $fs_lab_profile = $form_state->get('lab_profile');
     if (count($fs_lab_profile) <> 0 || $is_edit) {
+      $form['autoload_container']['lab_test_line'] = [
+        '#markup' => '<hr class="line"/>',
+      ];
 
       if ($form_state->get('loading') <> NULL) {
         $molybdenum_method_default_value = $fs_lab_profile['molybdenum_method'];
@@ -559,15 +563,7 @@ class LabTestMethodForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $loaded = $form_state->get('loading') <> NULL;
-    $is_create = $form_state->get('operation') === 'create';
 
-    if (!$loaded && $is_create) {
-      $form_state->setError(
-            $form['actions']['update_profile'],
-            $this->t('Please Select and load a Soil Health Test Method'),
-        );
-    }
   }
 
   /**

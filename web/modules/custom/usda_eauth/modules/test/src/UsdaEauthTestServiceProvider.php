@@ -16,7 +16,7 @@ class UsdaEauthTestServiceProvider extends ServiceProviderBase implements Servic
    */
   public function alter(ContainerBuilder $container) {
     $definition = $container->getDefinition('usda_eauth.zroles');
-    $definition->setClass('Drupal\usda_eauth_test\zRolesUtilitiesTest');
+    $definition->setClass('Drupal\usda_eauth_test\ZRolesUtilitiesTest');
   }
 
 }

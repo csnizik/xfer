@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
+langcode: en
+uuid: e9c87564-b2b7-47a7-b463-59a8f6f58c4e
+name: 'NRCS Producer Operations Data System'
+mail: admin@example.com
+slogan: ''
+page:
+  403: /403
+  404: ''
+  front: /pods
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

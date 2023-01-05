@@ -1,0 +1,14 @@
+uuid: c04b404e-3833-4daf-8240-387778c0c7e6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: SVPq6T3bsG_W0GH2V5KIQOcGwV3YuhVsg7pHAjz5yhQ
+id: input
+label: Input
+description: Input
+workflow: asset_default
+new_revision: true

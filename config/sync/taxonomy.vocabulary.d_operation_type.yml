@@ -1,0 +1,13 @@
+uuid: b48dc040-ee79-418e-8f2f-3637ce39dca7
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: j7kjZHtDX9aHGz0_1YYCzzZku-PRrDgCvr-gwtfom5w
+name: 'Operation Type'
+vid: d_operation_type
+description: 'A list of Operation Types'
+weight: 0

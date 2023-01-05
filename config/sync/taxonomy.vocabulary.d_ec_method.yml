@@ -1,0 +1,13 @@
+uuid: 1ba50bba-7610-495d-9ff8-d399f9c1bb99
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: VGVqUhDEUbiEbFQVSR9lAhEebivi4rVOsb50L1EjeIY
+name: 'Ec Method'
+vid: d_ec_method
+description: 'A list of Ec Methods'
+weight: 0

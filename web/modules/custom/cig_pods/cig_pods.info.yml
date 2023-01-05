@@ -3,6 +3,9 @@ description: Producer Operations Data System (PODS)
 type: module
 core_version_requirement: ^9
 dependencies:
-  - entity:entity
+  - drupal:views
+  - farm:farm_entity
+  - farm:farm_map
   - farm_nrcs:farm_nrcs
   - usda_eauth:usda_eauth
+  - scss_compiler:scss_compiler

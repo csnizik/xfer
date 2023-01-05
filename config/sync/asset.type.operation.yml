@@ -1,0 +1,14 @@
+uuid: 7d20287f-ce65-4945-aa09-0111f5dd6657
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: Q0ehts3XNF7hH71hDqDuIIw15otfrIeKYXsPgGoFXeg
+id: operation
+label: Operation
+description: Operation
+workflow: asset_default
+new_revision: true

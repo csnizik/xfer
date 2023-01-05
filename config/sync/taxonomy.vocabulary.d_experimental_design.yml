@@ -1,0 +1,13 @@
+uuid: d4d95c98-eb9c-4a45-8f2c-0415e8d0cd3d
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: pgG0qwM6dFb5r6NaGWUy5pwyWQSpuJmOwAEu9iA4NYs
+name: 'Experimental Design'
+vid: d_experimental_design
+description: 'A list of Experimental Designs'
+weight: 0

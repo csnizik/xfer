@@ -51,7 +51,7 @@ class UsdaEAuthConfigOverride implements ConfigFactoryOverrideInterface {
       $overrides['openid_connect.client.generic']['settings']['client_id'] = $this->settings->get('client_id', '');
       $overrides['openid_connect.client.generic']['settings']['client_secret'] = $this->settings->get('client_secret', '');
       $eauth_url = $this->settings->get('eAuthBaseUrl', '');
-      $overrides['openid_connect.client.generic']['settings']['authorization_endpoint'] =$eauth_url . '/authorize';
+      $overrides['openid_connect.client.generic']['settings']['authorization_endpoint'] = $eauth_url . '/authorize';
       $overrides['openid_connect.client.generic']['settings']['token_endpoint'] = $eauth_url . '/token';
       $overrides['openid_connect.client.generic']['settings']['userinfo_endpoint'] = $eauth_url . '/userinfo';
       $overrides['openid_connect.client.generic']['settings']['end_session_endpoint'] = $eauth_url . '/revoke';

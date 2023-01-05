@@ -1,0 +1,14 @@
+uuid: 8e916c71-a16f-434b-984d-ab04f77b5158
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: LcoXuPCKafAbazR0ebfvvxqfhSB0on43E_zO-UyEnkE
+id: zoom_us
+label: 'Zoom US'
+description: 'Start the map zoomed to the continental United States.'
+library: cig_pods/behavior_zoom_us
+settings: {  }

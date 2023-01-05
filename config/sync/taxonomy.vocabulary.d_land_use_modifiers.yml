@@ -1,0 +1,13 @@
+uuid: aa8875fa-de51-49e5-8b3e-edad5cba1a2a
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: PVy-yIqLOga5tH-IN41Z07RFsHwuqKlNrTEhNNgSRBY
+name: 'Land Use Modifiers'
+vid: d_land_use_modifiers
+description: 'A list of Land Use Modifierss'
+weight: 0

@@ -1,0 +1,14 @@
+uuid: 4aac1a48-89fd-48b7-9d68-4b2da20ec33a
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: PeIz1-pnLnMICVwpybECJ_-EEPvGsqEDvj3vbIPMhA4
+id: shmu_crop_rotation
+label: 'SHMU Crop Rotation'
+description: 'Soil Health Management Unit Crop Rotation'
+workflow: asset_default
+new_revision: true

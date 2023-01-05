@@ -1,0 +1,14 @@
+uuid: 72f6ed34-9087-43f2-96a8-48297f20ea2b
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: bzFnpMK7gN7V57ZB77_OfI30Z_LS5bYQuMhrzcP0AoE
+id: wkt_refresh
+label: 'WKT Refresh'
+description: 'Refreshes map with WKT from form input.'
+library: cig_pods/behavior_wkt_refresh
+settings: {  }

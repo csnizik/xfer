@@ -1,0 +1,14 @@
+uuid: a4e82dc1-75d8-4f78-869b-c9367f3f3a53
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_map
+_core:
+  default_config_hash: tptT_NwC_cyYT_j4tT8UwVkeRN19x8Na96t0AW3HGTk
+id: popup
+label: Popup
+description: 'Creates popups on the map when features are selected.'
+library: farm_map/behavior_popup
+settings: {  }

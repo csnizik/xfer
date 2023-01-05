@@ -1,7 +1,12 @@
 <?php
 
-Use Drupal\views\ViewExecutable;
-Use Drupal\Core\Form\FormStateInterface;
+/**
+ * @file
+ * CIG PODS module.
+ */
+
+use Drupal\views\ViewExecutable;
+
 /**
  * @file
  * Module file for Producer Operation Data Systems (PODS)
@@ -18,6 +23,16 @@ function cig_pods_entity_type_alter(array &$entity_types) {
 }
 
 /**
+ * Implements hook_theme_registry_alter().
+ */
+function cig_pods_theme_registry_alter(&$theme_registry) {
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+  if ($theme == 'gin') {
+    $theme_registry['html']['path'] = \Drupal::service('extension.list.module')->getPath('cig_pods') . '/templates';
+  }
+}
+
+/**
  * Implements hook_page_attachments().
  */
 function cig_pods_page_attachments(array &$attachments) {
@@ -27,7 +42,7 @@ function cig_pods_page_attachments(array &$attachments) {
 /**
  * Implements hook_views_pre_render().
  */
-function cig_pods_views_pre_render(ViewExecutable $view ) {
+function cig_pods_views_pre_render(ViewExecutable $view) {
 
   // Attach custom CSS libraries to PODS Asset List Views.
   if ($view->id() == 'pods_asset_lists') {
@@ -43,31 +58,40 @@ function cig_pods_views_pre_render(ViewExecutable $view ) {
         break;
 
       // Apply admin_project_display library.
-      case 'irrigation':
       case 'pasture_assessment':
       case 'project':
         $library = 'admin_project_display';
         break;
 
       // Apply misc libraries...
+      case 'irrigation':
+        $library = 'irrigation_display';
+        break;
+
       case 'field_assessment':
         $library = 'field_assessment';
         break;
+
       case 'lab_result':
         $library = 'awardee_lab_results_display';
         break;
+
       case 'lab_testing_method':
         $library = 'awardee_methods_details_display';
         break;
+
       case 'operation':
         $library = 'operation_display';
         break;
+
       case 'pasture_health_assessment':
         $library = 'pasture_health_display';
         break;
+
       case 'range_assessment':
         $library = 'range_assessment_display';
         break;
+
       case 'soil_health_sample':
         $library = 'awardee_soil_sample_display';
         break;

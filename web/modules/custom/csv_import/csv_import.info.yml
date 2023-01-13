@@ -1,0 +1,4 @@
+name: CSV import
+description: csv import tests
+type: module
+core_version_requirement: ^9

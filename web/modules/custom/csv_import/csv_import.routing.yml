@@ -1,0 +1,15 @@
+csv_import.import_test:
+  path: '/csv_import/test'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::test'
+    _title: 'csv import test'
+  requirements:
+    _permission: 'access content'
+
+csv_import.process:
+  path: '/csv_import/process'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process'
+    _title: 'csv import process'
+  requirements:
+    _permission: 'access content'

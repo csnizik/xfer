@@ -2,7 +2,7 @@
 namespace Drupal\csv_import\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-
+use Drupal\asset\Entity\Asset;
 /**
  * Provides route responses for the Example module.
  */
@@ -23,14 +23,45 @@ class CsvImportController extends ControllerBase {
     ];
   }
 
+
   public function process() {
     $file = \Drupal::request()->files->get("file");
     $fName = $file->getClientOriginalName();
     $fLoc = $file->getRealPath();
     $csv = array_map('str_getcsv', file($fLoc));
+
+
+    $operation = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
+    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
+
+    $input_submission = [];
+    $input_submission['type'] = 'input';
+    $input_submission['field_input_date'] = strtotime($csv[1][1]);
+    $input_submission['field_input_category'] = $csv[1][2];
+    $input_submission['field_input'] = $csv[1][3];
+    $input_submission['field_unit'] = $csv[1][4];
+    $input_submission['field_rate_units'] = $csv[1][5];
+    $input_submission['field_cost_per_unit'] = $csv[1][6];
+    $input_submission['field_custom_application_unit'] = $csv[1][7];
+    $input_submission['project'] = $project;
+
+    $operation_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($operation->get('field_operation')->target_id);
+    $input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($csv[1][2]);
+    $input_submission['name'] = $operation_taxonomy_name->getName() . "_" . $input_taxonomy_name->getName() . "_" . $csv[1][1];
+
+    $input_to_save = Asset::create($input_submission);
+    $input_to_save->save();
+    
+    $operation->get('field_input')[] = $input_to_save->id();
+    $operation->save();
+
+
+    dpm($input_to_save);
+
     return [
-      "#children" => "uploaded file: " . $fName . "</br>" . nl2br(print_r($csv, true))
+      "#children" => "raw_markup",
     ];
+    
   }
 
 }

@@ -49,17 +49,24 @@ class CsvImportController extends ControllerBase {
     $input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($csv[1][2]);
     $input_submission['name'] = $operation_taxonomy_name->getName() . "_" . $input_taxonomy_name->getName() . "_" . $csv[1][1];
 
+    
     $input_to_save = Asset::create($input_submission);
+
+    $cost_submission = [];
+    $cost_submission ['type'] = 'cost_sequence';
+    $cost_submission ['field_cost_type'] = $csv[1][8];
+    $cost_submission ['field_cost'] = $csv[1][9];
+
+    $other_cost = Asset::create($cost_submission);
+
+    $input_to_save->set('field_input_cost_sequences', $other_cost);
     $input_to_save->save();
     
     $operation->get('field_input')[] = $input_to_save->id();
     $operation->save();
 
-
-    dpm($input_to_save);
-
     return [
-      "#children" => "raw_markup",
+      "#children" => "uploaded.",
     ];
     
   }

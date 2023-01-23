@@ -13,3 +13,11 @@ csv_import.process:
     _title: 'csv import process'
   requirements:
     _permission: 'access content'
+
+csv_import.process2:
+  path: '/csv_import/process2'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process2'
+    _title: 'csv import process2'
+  requirements:
+    _permission: 'access content'

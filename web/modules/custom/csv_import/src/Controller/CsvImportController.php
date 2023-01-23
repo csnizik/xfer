@@ -19,7 +19,15 @@ class CsvImportController extends ControllerBase {
       '#children' => '<form action="/csv_import/process" enctype="multipart/form-data" method="post">
       <input type="file" id="file" name="file">
       <input type="submit">
-    </form>',
+    </form>
+    
+    operation:
+    <form action="/csv_import/process2" enctype="multipart/form-data" method="post">
+      <input type="file" id="file" name="file">
+      <input type="submit">
+    </form>
+
+    ',
     ];
   }
 
@@ -67,6 +75,50 @@ class CsvImportController extends ControllerBase {
 
     return [
       "#children" => "uploaded.",
+    ];
+    
+  }
+
+  public function process2() {
+    $file = \Drupal::request()->files->get("file");
+    $fName = $file->getClientOriginalName();
+    $fLoc = $file->getRealPath();
+    $csv = array_map('str_getcsv', file($fLoc));
+
+    $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
+    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+
+    $field_input = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][2]);
+
+
+    $input_submission = [];
+    $input_submission['type'] = 'operation';
+
+    $input_submission['shmu'] = $shmu;
+    $input_submission['field_operation_date'] = strtotime($csv[1][1]);
+    //$input_submission['field_input'] = $field_input;
+    $input_submission['field_operation'] = $csv[1][3];
+    $input_submission['field_ownership_status'] = $csv[1][4];
+    $input_submission['field_tractor_self_propelled_machine'] = $csv[1][5];
+    $input_submission['field_row_number'] = $csv[1][6];
+    $input_submission['field_width'] = $csv[1][7];
+    $input_submission['field_horsepower'] = $csv[1][8];
+    $input_submission['project'] = $project;
+
+    $operation_to_save = Asset::create($input_submission);
+
+    // $cost_submission = [];
+    // $cost_submission ['type'] = 'cost_sequence';
+    // $cost_submission ['field_cost_type'] = $csv[1][9];
+    // $cost_submission ['field_cost'] = $csv[1][8];
+
+    // $other_cost = Asset::create($cost_submission);
+
+    // $operation_to_save->set('field_operation_cost_sequences', $other_cost);
+    $operation_to_save->save();
+
+    return [
+      "#children" => nl2br(print_r("saved", true)),
     ];
     
   }

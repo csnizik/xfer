@@ -16,17 +16,18 @@ class CsvImportController extends ControllerBase {
    */
   public function test() {
     return [
-      '#children' => '<form action="/csv_import/process" enctype="multipart/form-data" method="post">
-      <input type="file" id="file" name="file">
-      <input type="submit">
-    </form>
-    
-    operation:
-    <form action="/csv_import/process2" enctype="multipart/form-data" method="post">
-      <input type="file" id="file" name="file">
-      <input type="submit">
-    </form>
-
+      '#children' => '
+        inputs:
+        <form action="/csv_import/process" enctype="multipart/form-data" method="post">
+          <input type="file" id="file" name="file">
+          <input type="submit">
+        </form>
+        
+        operations:
+        <form action="/csv_import/process2" enctype="multipart/form-data" method="post">
+          <input type="file" id="file" name="file">
+          <input type="submit">
+        </form>
     ',
     ];
   }
@@ -91,21 +92,21 @@ class CsvImportController extends ControllerBase {
     $field_input = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][2]);
 
 
-    $input_submission = [];
-    $input_submission['type'] = 'operation';
+    $operation_submission = [];
+    $operation_submission['type'] = 'operation';
 
-    $input_submission['shmu'] = $shmu;
-    $input_submission['field_operation_date'] = strtotime($csv[1][1]);
-    //$input_submission['field_input'] = $field_input;
-    $input_submission['field_operation'] = $csv[1][3];
-    $input_submission['field_ownership_status'] = $csv[1][4];
-    $input_submission['field_tractor_self_propelled_machine'] = $csv[1][5];
-    $input_submission['field_row_number'] = $csv[1][6];
-    $input_submission['field_width'] = $csv[1][7];
-    $input_submission['field_horsepower'] = $csv[1][8];
-    $input_submission['project'] = $project;
+    $operation_submission['shmu'] = $shmu;
+    $operation_submission['field_operation_date'] = strtotime($csv[1][1]);
+    //$operation_submission['field_input'] = $field_input;
+    $operation_submission['field_operation'] = $csv[1][3];
+    $operation_submission['field_ownership_status'] = $csv[1][4];
+    $operation_submission['field_tractor_self_propelled_machine'] = $csv[1][5];
+    $operation_submission['field_row_number'] = $csv[1][6];
+    $operation_submission['field_width'] = $csv[1][7];
+    $operation_submissionoperation_submission['field_horsepower'] = $csv[1][8];
+    $operation_submission['project'] = $project;
 
-    $operation_to_save = Asset::create($input_submission);
+    $operation_to_save = Asset::create($operation_submission);
 
     // $cost_submission = [];
     // $cost_submission ['type'] = 'cost_sequence';
@@ -115,6 +116,7 @@ class CsvImportController extends ControllerBase {
     // $other_cost = Asset::create($cost_submission);
 
     // $operation_to_save->set('field_operation_cost_sequences', $other_cost);
+    
     $operation_to_save->save();
 
     return [

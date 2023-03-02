@@ -15,19 +15,26 @@ class CsvImportController extends ControllerBase {
    *   A simple renderable array.
    */
   public function upload() {
+
+    $modulePath = \Drupal::service('module_handler')->getModule('csv_import')->getPath();
+    $imagePath = $modulePath . "/files/Operation, input import CSV template with instructions.zip";
+
     return [
       '#children' => '
         inputs:
-        <form action="/csv_import/process" enctype="multipart/form-data" method="post">
+        <form action="/csv_import/inputs" enctype="multipart/form-data" method="post">
           <input type="file" id="file" name="file">
           <input type="submit">
         </form>
         
         operations:
-        <form action="/csv_import/process2" enctype="multipart/form-data" method="post">
+        <form action="/csv_import/operations" enctype="multipart/form-data" method="post">
           <input type="file" id="file" name="file">
           <input type="submit">
         </form>
+        </br></br>
+        <p>Download the CSV template for Input and Operations import with Instruction.</p>
+        <a href="/'.$imagePath.'" download="Operation, input import CSV template with instructions"><button>Download CSV template</button></a>
     ',
     ];
   }
@@ -49,7 +56,7 @@ class CsvImportController extends ControllerBase {
 
     $csid = [];
     
-    foreach( $exps as $exp){
+    foreach( $exps as $exp) {
       
       $cval = explode(",",$exp);
       $cost = $cval[0];
@@ -71,8 +78,8 @@ class CsvImportController extends ControllerBase {
 
 
 
-    $operation = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
+    // $operation = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
+    // $project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
 
     $input_submission = [];
     $input_submission['type'] = 'input';
@@ -83,12 +90,12 @@ class CsvImportController extends ControllerBase {
     $input_submission['field_rate_units'] = $csv[1][5];
     $input_submission['field_cost_per_unit'] = $csv[1][6];
     $input_submission['field_custom_application_unit'] = $csv[1][7];
-    $input_submission['project'] = $project;
+    // $input_submission['project'] = $project;
     $input_submission['field_input_cost_sequences'] = $csid;
 
-    $operation_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($operation->get('field_operation')->target_id);
-    $input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($csv[1][2]);
-    $input_submission['name'] = $operation_taxonomy_name->getName() . "_" . $input_taxonomy_name->getName() . "_" . $csv[1][1];
+    // $operation_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($operation->get('field_operation')->target_id);
+    // $input_taxonomy_name = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($csv[1][2]);
+    // $input_submission['name'] = $operation_taxonomy_name->getName() . "_" . $input_taxonomy_name->getName() . "_" . $csv[1][1];
     
     $input_to_save = Asset::create($input_submission);
 
@@ -139,16 +146,16 @@ class CsvImportController extends ControllerBase {
 
     }
 
-    $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+    // $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][0]);
+    // $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
 
-    $field_input = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][2]);
+    // $field_input = \Drupal::entityTypeManager()->getStorage('asset')->load($csv[1][2]);
 
 
     $operation_submission = [];
     $operation_submission['type'] = 'operation';
 
-    $operation_submission['shmu'] = $shmu;
+    // $operation_submission['shmu'] = $shmu;
     $operation_submission['field_operation_date'] = strtotime($csv[1][1]);
     //$operation_submission['field_input'] = $field_input;
     $operation_submission['field_operation'] = $csv[1][3];
@@ -157,7 +164,7 @@ class CsvImportController extends ControllerBase {
     $operation_submission['field_row_number'] = $csv[1][6];
     $operation_submission['field_width'] = $csv[1][7];
     $operation_submission['field_horsepower'] = $csv[1][8];
-    $operation_submission['project'] = $project;
+    // $operation_submission['project'] = $project;
     $operation_submission['field_operation_cost_sequences'] = $csid;
     $operation_to_save = Asset::create($operation_submission);
 

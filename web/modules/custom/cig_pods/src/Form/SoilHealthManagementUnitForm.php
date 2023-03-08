@@ -598,7 +598,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['field_years_in_current_tillage_system'] = [
       '#type' => 'number',
       '#title' => $this->t('Years in Current Tillage System'),
-      '#min_value' => 0,
+      '#min' => 0,
     // Int.
       '#step' => 1,
       '#description' => '',
@@ -618,7 +618,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     $form['field_years_in_prev_tillage_system'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
     // Int.
       '#step' => 1,
       '#title' => $this->t('Years in Previous Tillage System'),

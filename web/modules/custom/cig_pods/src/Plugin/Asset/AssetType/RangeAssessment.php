@@ -38,15 +38,6 @@ class RangeAssessment extends FarmAssetType {
         'required' => TRUE,
         'description' => '',
       ],
-      'range_assessment_land_use' => [
-        'label' => 'Land Use',
-        'type' => 'entity_reference',
-        'target_type' => 'taxonomy_term',
-        'target_bundle' => 'd_land_use',
-        'required' => TRUE,
-        'description' => '',
-
-      ],
       'range_assessment_rills' => [
         'label' => 'Rills',
         'type' => 'string',

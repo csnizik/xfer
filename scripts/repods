@@ -25,13 +25,11 @@ PARENTPATH="$(dirname $SCRIPTPATH)"
 # Shut down the Docker containers.
 docker-compose -f $PARENTPATH/docker-compose.yml down
 
-# Delete the database volume.
-sudo rm -r $PARENTPATH/db
+#Delete INSTALLED
+rm $PARENTPATH/INSTALLED
 
-# Delete all files created by Composer.
-# This also deletes our custom modules and then restores them via Git.
-sudo rm -r $PARENTPATH/.editorconfig $PARENTPATH/.gitattributes $PARENTPATH/keys $PARENTPATH/vendor $PARENTPATH/web
-(cd $PARENTPATH && git checkout -- web)
+#The following rm should be removed if we transfer over to a WSL2 enviornment
+yes| rm -r $PARENTPATH/web
 
 # Build the Docker image.
 docker-compose -f $PARENTPATH/docker-compose.yml build --no-cache

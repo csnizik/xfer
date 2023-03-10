@@ -11,4 +11,9 @@ web/*
 !web/modules
 web/modules/*
 !web/modules/custom
-!/sites/default/settings.php
+!web/sites
+web/sites/*
+!web/sites/default
+web/sites/default/*
+!web/sites/default/settings.php
+INSTALLED

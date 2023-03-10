@@ -94,12 +94,12 @@ class IrrigationForm extends PodsFormBase {
     $field_shmu_irrigation_water_ph_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($irrigation, 'field_shmu_irrigation_water_ph') : '';
 
     $form['field_shmu_irrigation_water_ph'] = [
+      '#step' => 0.1,
       '#type' => 'number',
       '#title' => $this->t('Water pH'),
-      '#min_value' => 1,
-      '#max_value' => 14,
+      '#min' => 1.0,
+      '#max' => 14.0,
       // Float.
-      '#step' => 0.01,
       '#description' => '',
       '#default_value' => $field_shmu_irrigation_water_ph_value,
       '#required' => FALSE,
@@ -121,10 +121,10 @@ class IrrigationForm extends PodsFormBase {
 
     $form['field_shmu_irrigation_total_dissolved_solids'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#max_value' => 1000000,
+      '#max' => 1000000,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Total Dissolved Solids (Unit ppm)'),
@@ -136,10 +136,10 @@ class IrrigationForm extends PodsFormBase {
 
     $form['field_shmu_irrigation_total_alkalinity'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#max_value' => 1000000,
+      '#max' => 1000000,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Total Alkalinity (Unit ppm CaCO3)'),
@@ -151,10 +151,10 @@ class IrrigationForm extends PodsFormBase {
 
     $form['field_shmu_irrigation_chlorides'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#max_value' => 1000000,
+      '#max' => 1000000,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Chlorides (Unit ppm)'),

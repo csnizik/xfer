@@ -20,8 +20,21 @@ services:
       - |
         set -ex
 
-        # If the vendor directory doesn't exist, assume a fresh install.
-        if [ ! -d /opt/drupal/vendor ]; then
+        # If a INSTALLED file does not exist, perform a fresh install
+        if [ ! -f /opt/drupal/INSTALLED ]; then
+
+          # Wait for MySQL
+          while ! mysqladmin ping -h db --silent; do
+            sleep 1
+          done
+
+          # Delete the database volume.
+          mysql -u pods -h db -ppods -e "DROP DATABASE pods; CREATE DATABASE pods"
+
+          # Delete all files created by Composer.
+          # This also deletes our custom modules and then restores them via Git.
+          rm -rf /opt/drupal/.editorconfig /opt/drupal/.gitattributes /opt/drupal/keys /opt/drupal/vendor /opt/drupal/web
+          (cd /opt/drupal/ && git checkout -- web)
 
           # Build the PODS codebase via Composer.
           composer install
@@ -34,12 +47,12 @@ services:
 
           # Import taxonomy terms via Drush.
           drush -y import:taxonomies --choice=full
-
-          # Enable USDA eAuth testing module via Drush.
-          drush en -y usda_eauth_test
-
+          
           # Add a test user.
           drush user:create test --mail="test@example.com" --password="test"
+
+          # Create INSTALLED file
+          touch /opt/drupal/INSTALLED
         fi
 
         # Notify that PODS is ready.

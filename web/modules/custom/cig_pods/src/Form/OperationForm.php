@@ -248,10 +248,10 @@ class OperationForm extends PodsFormBase {
 
     $form['field_width'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#max_value' => 1000000,
+      '#max' => 1000000,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Width'),
@@ -263,10 +263,10 @@ class OperationForm extends PodsFormBase {
 
     $form['field_horsepower'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#max_value' => 1000000,
+      '#max' => 1000000,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Horsepower'),

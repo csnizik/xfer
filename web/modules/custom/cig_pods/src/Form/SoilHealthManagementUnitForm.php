@@ -387,7 +387,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $surface_texture_value = $is_edit ? $shmu->get('field_shmu_surface_texture')->value : '';
     $form['ssurgo_data_wrapper']['surface_texture'] = [
       '#type' => 'textarea',
-      '#title' => $this->t('Surface Texture'),
+      '#title' => $this->t('Map Unit Name'),
       '#default_value' => $surface_texture_value,
     ];
 

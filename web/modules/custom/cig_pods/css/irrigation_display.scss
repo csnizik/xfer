@@ -14,9 +14,11 @@ h1.page-title {
     margin-top: 0px;
     margin-bottom: 10px;
     display: block;
-    height: 26px;
+    // height: 26px;
     transition: none;
     width: 100%;
+    overflow: inherit;
+    white-space: normal;
 }
 
 .admin-project-display table th, td {
@@ -54,8 +56,8 @@ table  {
 table.views-table.views-view-table.cols-4 {
     padding-left: 40px;
     width:100%;
-    margin-top: 0px;
     margin-bottom: 0px;
+    margin-top: 50px;
 }
 
 .sticky-shadow{
@@ -137,6 +139,26 @@ td.views-field.views-field-id {
 
 .region-sticky__items__inner {
     display: block;
+    width: 94% !important;
+    align-items: unset;
+    margin-top: 60px;
+}
+
+.dropbutton-widget, .dropbutton {
+	background-color: white !important;
+	border-color: #005EA2 !important;
+    border-radius: 0 !important;
+}
+
+.dropbutton > .dropbutton__item > a {
+	color: #005EA2 !important;
+    border-radius: 2px;
+}
+
+.dropbutton > .dropbutton__item > a:hover,
+.dropbutton > .dropbutton__item:first-of-type > a:focus,
+.dropbutton > .dropbutton__item:first-of-type > a:active {
+    background-color: transparent !important;
 }
 
 .region-sticky__items .block-page-title-block {
@@ -145,7 +167,7 @@ td.views-field.views-field-id {
 
 /* prevent view-content from being shifted down when width is changed */
 div#block-gin-local-actions {
-    height: 0px;
+    // height: 0px;
 }
 .region-sticky-watcher {
     height: 0px;

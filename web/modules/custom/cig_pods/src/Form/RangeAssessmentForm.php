@@ -64,7 +64,7 @@ class RangeAssessmentForm extends PodsFormBase {
       '#markup' => '<h1> Assessments </h1>',
     ];
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>Interpreting Indicators of Range Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>',
+      '#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>Interpreting Indicators of Rangeland Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>',
     ];
 
     $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -105,7 +105,7 @@ class RangeAssessmentForm extends PodsFormBase {
 
     $form['range_assessment_water_flow'] = [
       '#type' => 'select',
-      '#title' => $this->t('Water Flow'),
+      '#title' => $this->t('Water Flow Patterns'),
       '#options' => $severity_options,
       '#default_value' => $range_assessment_water_flow_value,
       '#required' => FALSE,

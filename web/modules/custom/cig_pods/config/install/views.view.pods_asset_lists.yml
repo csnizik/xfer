@@ -1272,7 +1272,7 @@ display:
     display_plugin: page
     position: 3
     display_options:
-      title: 'Manage Irrigation(s)'
+      title: 'Enter Irrigation Water Test Results'
       fields:
         id:
           id: id
@@ -5456,7 +5456,7 @@ display:
     display_plugin: page
     position: 12
     display_options:
-      title: 'Manage Interpreting Indicators of Range Health Assessment'
+      title: 'Manage Interpreting Indicators of Rangeland Health Assessment'
       fields:
         id:
           id: id

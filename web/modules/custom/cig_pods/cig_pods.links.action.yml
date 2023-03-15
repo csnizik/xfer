@@ -12,7 +12,7 @@ cig_pods.add_field_assessment:
 
 cig_pods.add_irrigation:
   route_name: cig_pods.irrigation_form
-  title: 'Add Irrigation'
+  title: 'Add Results'
   appears_on:
     - view.pods_asset_lists.irrigation
 
@@ -66,7 +66,7 @@ cig_pods.add_project:
 
 cig_pods.add_range_assessment:
   route_name: cig_pods.range_assessment_form
-  title: 'Add Range Assessment'
+  title: 'Add Rangeland Assessment'
   appears_on:
     - view.pods_asset_lists.range_assessment
 

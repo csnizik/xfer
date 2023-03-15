@@ -181,7 +181,7 @@ class PastureAssessmentForm extends PodsFormBase {
 
     $form['pasture_assessment_plant_rigor'] = [
       '#type' => 'select',
-      '#title' => $this->t('Plant Rigor'),
+      '#title' => $this->t('Plant Vigor'),
       '#options' => $severity_options,
       '#default_value' => $pasture_assessment_litter_movement_value,
       '#required' => TRUE,

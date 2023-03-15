@@ -103,7 +103,7 @@ class PodsDashboardForm extends PodsFormBase {
 
     $form['awardee_proj'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Projects(s): @count', ['@count' => $entityCount[0]]),
+      '#value' => $this->t('Project(s): @count', ['@count' => $entityCount[0]]),
       '#name' => 'project',
     ];
 

@@ -6,6 +6,76 @@
  */
 
 /**
+ * Add new Field in SHMU Experiemental Design Section - Experimental Duration (Months).
+ */
+function cig_pods_post_update_field_shmu_experimental_duration_month(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Experimental Duration Month',
+    'type' => 'fraction',
+    'required' => FALSE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_duration_month', 'asset', 'cig_pods', $field_definition);
+}
+
+/**
+ * Add new Field in SHMU Experiemental Design Section - Experimental Duration (Years).
+ */
+function cig_pods_post_update_field_shmu_experimental_duration_year(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Experimental Duration Year',
+    'type' => 'fraction',
+    'required' => FALSE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_duration_year', 'asset', 'cig_pods', $field_definition);
+}
+
+/**
+ * Add new Field in SHMU Experiemental Design Section - Experimental Frequency (Days).
+ */
+function cig_pods_post_update_field_shmu_experimental_frequency_day(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Experimental Frequency Day',
+    'type' => 'fraction',
+    'required' => FALSE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_frequency_day', 'asset', 'cig_pods', $field_definition);
+}
+
+/**
+ * Add new Field in SHMU Experiemental Design Section - Experimental Frequency (Months).
+ */
+function cig_pods_post_update_field_shmu_experimental_frequency_month(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Experimental Frequency Month',
+    'type' => 'fraction',
+    'required' => FALSE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_frequency_month', 'asset', 'cig_pods', $field_definition);
+}
+
+/**
+ * Add new Field in SHMU Experiemental Design Section - Experimental Frequency (Years).
+ */
+function cig_pods_post_update_field_shmu_experimental_frequency_year(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Experimental Frequency Year',
+    'type' => 'fraction',
+    'required' => FALSE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_frequency_year', 'asset', 'cig_pods', $field_definition);
+}
+
+/**
  * Install SCSS Compiler module.
  */
 function cig_pods_post_update_enable_scss_compiler(&$sandbox = NULL) {

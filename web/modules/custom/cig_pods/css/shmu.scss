@@ -149,6 +149,37 @@ div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
   }
 }
 
+#experimental_duration, #experimental_frequency {
+  display: flex;
+  align-items: center;
+
+  div[class*="field-shmu-experimental-duration-month"] {
+    width: 75px;
+    margin-right: 10px;
+  }
+  div[class*="field-shmu-experimental-duration-year"] {
+    width: 75px;
+    margin-right: 10px;
+  }
+
+  div[class*="field-shmu-experimental-frequency-text"] {
+    width: 75px;
+  }
+  div[class*="field-shmu-experimental-frequency-day"] {
+    width: 75px;
+    margin-right: 10px;
+  }
+  div[class*="field-shmu-experimental-frequency-month"] {
+    width: 75px;
+    margin-right: 10px;
+  }
+  div[class*="field-shmu-experimental-frequency-year"] {
+    width: 75px;
+    margin-right: 10px;
+    margin-left: 18px;
+  }
+}
+
 #crop_rotation {
   display: flex;
   align-items: center;

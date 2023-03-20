@@ -61,6 +61,36 @@ class SoilHealthManagementUnit extends FarmAssetType {
         'description' => '',
 
       ],
+      'field_shmu_experimental_duration_month' => [
+        'label' => 'Experimental Duration Month',
+        'type' => 'fraction',
+        'required' => FALSE,
+        'description' => '',
+      ],
+      'field_shmu_experimental_duration_year' => [
+        'label' => 'Experimental Duration Year',
+        'type' => 'fraction',
+        'required' => FALSE,
+        'description' => '',
+      ],
+      'field_shmu_experimental_frequency_day' => [
+        'label' => 'Experimental Frequency Day',
+        'type' => 'fraction',
+        'required' => FALSE,
+        'description' => '',
+      ],
+      'field_shmu_experimental_frequency_month' => [
+        'label' => 'Experimental Frequency Month',
+        'type' => 'fraction',
+        'required' => FALSE,
+        'description' => '',
+      ],
+      'field_shmu_experimental_frequency_year' => [
+        'label' => 'Experimental Frequency Year',
+        'type' => 'fraction',
+        'required' => FALSE,
+        'description' => '',
+      ],
       'field_shmu_latitude' => [
         'label' => 'Latitude',
         'type' => 'fraction',

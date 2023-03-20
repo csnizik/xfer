@@ -325,6 +325,82 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#default_value' => $field_shmu_experimental_design_value,
       '#required' => TRUE,
     ];
+
+    $form['static_2']['experimental design duration'] = [
+      '#markup' => '<div class="fieldset__label--group">Experimental Duration</div>',
+    ];
+    $form['experimental_dur'] = [
+      '#prefix' => '<div id="experimental_duration">',
+      '#suffix' => '</div>',
+    ];
+
+    $field_shmu_experimental_duration_year_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_duration_year') : '';
+    $form['experimental_dur']['field_shmu_experimental_duration_year'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Year(s)'),
+      '#min' => 0,
+      '#step' => 1,
+      '#description' => '',
+      '#default_value' => $field_shmu_experimental_duration_year_value,
+      '#required' => FALSE,
+    ];
+
+    $field_shmu_experimental_duration_month_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_duration_month') : '';
+    $form['experimental_dur']['field_shmu_experimental_duration_month'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Month(s)'),
+      '#min' => 0,
+      '#step' => 1,
+      '#description' => '',
+      '#default_value' => $field_shmu_experimental_duration_month_value,
+      '#required' => FALSE,
+    ];
+
+    $form['static_3']['experimental design frequency'] = [
+      '#markup' => '<div class="fieldset__label--group">Experimental Frequency</div>',
+    ];
+    $form['experimental_freq'] = [
+      '#prefix' => '<div id="experimental_frequency">',
+      '#suffix' => '</div>',
+    ];
+
+    $form['experimental_freq']['field_shmu_experimental_frequency_text'] = [
+      '#markup' => '<span class="fieldset__label--group">Every</span>',
+    ];
+
+    $field_shmu_experimental_frequency_year_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_year') : '';
+    $form['experimental_freq']['field_shmu_experimental_frequency_year'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Year(s)'),
+      '#min' => 0,
+      '#step' => 1,
+      '#description' => '',
+      '#default_value' => $field_shmu_experimental_frequency_year_value,
+      '#required' => FALSE,
+    ];
+
+    $field_shmu_experimental_frequency_month_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_month') : '';
+    $form['experimental_freq']['field_shmu_experimental_frequency_month'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Month(s)'),
+      '#min' => 0,
+      '#step' => 1,
+      '#description' => '',
+      '#default_value' => $field_shmu_experimental_frequency_month_value,
+      '#required' => FALSE,
+    ];
+
+    $field_shmu_experimental_frequency_day_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_day') : '';
+    $form['experimental_freq']['field_shmu_experimental_frequency_day'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Day(s)'),
+      '#min' => 0,
+      '#step' => 1,
+      '#description' => '',
+      '#default_value' => $field_shmu_experimental_frequency_day_value,
+      '#required' => FALSE,
+    ];
+
     // New section (Geometry entry)
     $form['subform_3'] = [
       '#markup' => '<div class="subform-title-container section3"><h2>Soil Health Management Unit (SHMU) Area</h2><h4>3 Fields | Section 3 of 10</h4> </div>',

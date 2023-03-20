@@ -1,0 +1,45 @@
+FROM docker-rhel-base
+
+ARG PHP_VERSION=remi-8.1
+
+# ensure the correct versoin of php is installed with a few very common
+#  extensions
+RUN dnf module disable -y php && \
+    dnf module reset -y php && \
+    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+    dnf install -y https://rpms.remirepo.net/enterprise/remi-release-8.rpm && \
+    dnf module install -y php:${PHP_VERSION} && \
+    dnf module enable -y php:${PHP_VERSION} && \
+    dnf install -y wget && \
+    dnf install -y patch && \
+    dnf install -y php && \
+    dnf install -y php-json php-xml php-bcmath php-gd php-pdo
+
+RUN curl -o composer-installer.php https://getcomposer.org/installer && \
+    php composer-installer.php --filename=composer --install-dir=/usr/local/bin
+
+# PHP doesn't have a good way to set a global cache directory
+#  <3 le pay bas: https://blog.bandhosting.nl/blog/share-your-composer-cache-between-jobs-and-pipelines-in-gitlab
+ENV COMPOSER_CACHE_DIR=/composer
+
+WORKDIR /build
+
+RUN git clone ssh://git@bitbucket.fpac.usda.gov:7999/nrcsapps/pods.git
+WORKDIR /build/pods
+RUN pwd
+RUN git fetch
+RUN git checkout develop
+WORKDIR /build
+
+#to align with old repo name
+RUN mv pods cig_pods 
+
+WORKDIR /build/cig_pods/scripts
+RUN chmod +x ./build_usda_tarball
+RUN ./build_usda_tarball
+RUN mkdir -p /build/out
+RUN cp pods.tar.gz /build/out
+
+VOLUME [ "/build/out" ]
+
+ENTRYPOINT [ "/bin/bash" ]

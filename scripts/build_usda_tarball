@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if ! [[ -d "../scripts" ]]
+then
+    echo "Run this from inside the scripts directory."
+    exit 1
+fi
+
+cd .. # now just pods source
+
+echo "Preparing files for build..."
+cd ..
+mkdir -p pods/web/modules/custom
+
+cp cig_pods/composer.json pods
+cp cig_pods/composer.lock pods
+
+cp -r cig_pods/patches/ pods
+cp -r cig_pods/config/ pods
+
+echo "Copying custom modules..."
+cp -r cig_pods/web/modules/custom/* pods/web/modules/custom
+
+
+echo "Building with composer..."
+cd pods
+/usr/local/bin/composer install
+
+echo "Packaging tarball..."
+cd ..
+tar -cz pods/ > cig_pods/scripts/pods.tar.gz
+
+echo "Done!"

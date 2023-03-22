@@ -81,9 +81,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   * Get practices addressed options.
+   * Get practices applied options.
    */
-  public function getPracticesAddressedOptions() {
+  public function getPracticesAppliedOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_practice');
     return $options;
 
@@ -678,7 +678,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['field_years_in_current_tillage_system'] = [
       '#type' => 'number',
       '#title' => $this->t('Years in Current Tillage System'),
-      '#min' => 0,
+      '#min_value' => 0,
     // Int.
       '#step' => 1,
       '#description' => '',
@@ -698,7 +698,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     $form['field_years_in_prev_tillage_system'] = [
       '#type' => 'number',
-      '#min' => 0,
+      '#min_value' => 0,
     // Int.
       '#step' => 1,
       '#title' => $this->t('Years in Previous Tillage System'),
@@ -707,29 +707,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => TRUE,
     ];
 
-    $form['irrigation_radios'] = [
-      '#type' => 'radios',
-      '#required' => TRUE,
-      '#title' => $this->t('Is this SHMU being irrigated?'),
-      '#default_value' => 'no',
-      '#options' => [
-        'yes' => $this->t('Yes'),
-        'no' => $this->t('No'),
-      ],
-      '#attributes' => [
-        '#name' => 'irrigation_radios',
-      ],
-    ];
+    
 
-    $form['subform_etc'] = [
-      '#type' => 'item',
-      '#markup' => '<p>Remember to add an irrigation sample!<p>',
-      '#states' => [
-        'visible' => [
-          ':input[name="irrigation_radios"]' => ['value' => 'yes'],
-        ],
-      ],
-    ];
+  
 
     // New section (Additional Concerns or Impacts)
     $form['subform_10'] = [
@@ -762,29 +742,54 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container section10"><h2>NRCS Practices</h2><h4> 1 Field | Section 10 of 10</h4></div>',
     ];
 
-    $field_shmu_practices_addressed_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_practices_addressed') : [];
-    $practices_addressed_options = $this->getPracticesAddressedOptions();
+    $field_shmu_practices_applied_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_practices_addressed') : [];
+    $practices_applied_options = $this->getPracticesAppliedOptions();
     $form['field_shmu_practices_addressed'] = [
       '#type' => 'checkboxes',
-      '#title' => $this->t('Practices Addressed'),
-      '#options' => $practices_addressed_options,
-      '#default_value' => $field_shmu_practices_addressed_values,
+      '#title' => $this->t('Practices Applied'),
+      '#options' => $practices_applied_options,
+      '#default_value' => $field_shmu_practices_applied_values,
       '#required' => TRUE,
     ];
 
+    $form['irrigation_radios'] = [
+      '#type' => 'radios',
+      '#required' => TRUE,
+      '#title' => $this->t('Is this SHMU being irrigated?'),
+      '#default_value' => 'no',
+      '#options' => [
+        'yes' => $this->t('Yes'),
+        'no' => $this->t('No'),
+      ],
+      '#attributes' => [
+        '#name' => 'irrigation_radios',
+      ],
+    ];
+    
     $form['actions']['send'] = [
       '#type' => 'submit',
       '#value' => 'Save',
-
+      
     ];
-
+    
     $form['actions']['cancel'] = [
       '#type' => 'submit',
       '#value' => $this->t('Cancel'),
       '#limit_validation_errors' => '',
       '#submit' => ['::redirectAfterCancel'],
     ];
-
+    
+    $form['actions']['add irrigation'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Save & Add Irrigation Water Sample'),
+      '#submit' => ['::addIrrigation'],
+      '#states' => [
+        'visible' => [
+          ':input[name="irrigation_radios"]' => ['value' => 'yes'],
+        ],
+      ],
+    ];
+    
     if ($is_edit) {
       $form['actions']['delete'] = [
         '#type' => 'submit',
@@ -842,6 +847,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     return 'soil_health_management_unit_form';
   }
 
+  public function addIrrigation(array &$form, FormStateInterface $form_state) {
+    $form_state->set('irrigation_redirect', TRUE);
+    $this->submitForm($form, $form_state);
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -864,7 +874,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       'mymap',
       'ssurgo_lookup',
       'ssurgo_data_wrapper',
-      'addCrop',
+      'addCrop'
     ];
 
     $form_values = $form_state->getValues();
@@ -875,7 +885,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       'field_shmu_current_land_use_modifiers',
       'field_shmu_major_resource_concern',
       'field_shmu_resource_concern',
-      'field_shmu_practices_addressed',
+      'field_shmu_practices_applied',
     ];
     // All of the fields that support date input on the page.
     $date_fields = [
@@ -934,7 +944,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     // Map submission logic.
     $shmu->set('field_geofield', $form_values['mymap']);
 
-    // Set map unit symbol and surface texture.
+    // Set map unit symbol and map unit name.
     $shmu->set('field_shmu_map_unit_symbol', $form_values['ssurgo_data_wrapper']['map_unit_symbol']);
     $shmu->set('field_shmu_surface_texture', $form_values['ssurgo_data_wrapper']['surface_texture']);
 
@@ -944,7 +954,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     $crop_rotation_template = [];
     $crop_rotation_template['type'] = 'shmu_crop_rotation';
-
+    $crop_rotation_ids = [];
     for ($rotation = 0; $rotation < $num_crop_rotations; $rotation++) {
 
       // If they did not select a crop for the row, do not include it in the
@@ -989,7 +999,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
     $this->setProjectReference($shmu, $producer->get('project')->target_id);
 
-    $form_state->setRedirect('cig_pods.dashboard');
+    if ($form_state->get('irrigation_redirect')) {
+      $form_state->setRedirect('cig_pods.irrigation_shmu_form', ['shmu' => $shmu->get('id')->value]);
+    }
+    else {
+      $form_state->setRedirect('cig_pods.dashboard');
+    }
   }
 
   /**

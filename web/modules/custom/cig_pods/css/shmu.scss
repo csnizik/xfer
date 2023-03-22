@@ -80,6 +80,16 @@ form#soil-health-management-unit-form
   margin-bottom: 10px !important;
 }
 
+input#edit-actions-add-irrigation {
+  background-color: $sub-blue !important;
+  color: white !important;
+  border-color: $sub-blue !important;
+  border-radius: 4px;
+  padding: 12 20 12 20;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 form#soil-health-management-unit-form #edit-ssurgo-lookup.button {
   background-color: #ffffff;
   border-radius: 4px;
@@ -100,7 +110,7 @@ form#soil-health-management-unit-form #edit-ssurgo-lookup:hover {
   font-size: 16px;
 }
 
-div#edit-irrigation-radios {
+#edit-irrigation-radios {
   float: left;
   width: 50%;
 }

@@ -66,12 +66,26 @@ cig_pods.lab_results_form:
   requirements:
     _entity_create_access: 'asset:lab_result'
 
+
 cig_pods.irrigation_form:
   path: "/create/irrigation"
   defaults:
     _form: '\Drupal\cig_pods\Form\IrrigationForm'
   requirements:
     _entity_create_access: 'asset:irrigation'
+
+cig_pods.irrigation_shmu_form:
+  path: "/create/irrigation/{shmu}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\IrrigationForm'
+  requirements:
+    _entity_create_access: 'asset:irrigation'
+    _entity_access: shmu.view
+    asset: \d+
+  options:
+    parameters:
+      shmu:
+        type: entity:asset
 
 cig_pods.field_assessment_form:
   path: "/create/field_assessment"

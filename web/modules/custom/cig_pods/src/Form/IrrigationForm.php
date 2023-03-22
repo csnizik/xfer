@@ -29,8 +29,9 @@ class IrrigationForm extends PodsFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL, AssetInterface $shmu = NULL) {
     $irrigation = $asset;
+    $current_shmu = $shmu;
     $is_edit = $irrigation <> NULL;
 
     if ($form_state->get('load_done') == NULL) {
@@ -65,6 +66,10 @@ class IrrigationForm extends PodsFormBase {
     ];
     $shmu_options = $this->getShmuOptions();
     $shmu_default_value = $is_edit ? $irrigation->get('shmu')->target_id : '';
+    if($shmu <> NULL){
+      $shmu_default_value = $shmu->id();
+    }
+
     $form['shmu'] = [
       '#type' => 'select',
       '#title' => $this->t('Select a Soil Health Management Unit (SHMU)'),
@@ -276,9 +281,6 @@ class IrrigationForm extends PodsFormBase {
       $id = $form_state->get('irrigation_id');
       $irrigation = \Drupal::entityTypeManager()->getStorage('asset')->load($id);
     }
-
-    // Set the irrigation asset name to "Irrigation {{asset-id}}".
-    $irrigation->set('name', 'Irrigation ' . $id);
 
     foreach ($form_values as $key => $value) {
       // If it is an ignored field, skip the loop.

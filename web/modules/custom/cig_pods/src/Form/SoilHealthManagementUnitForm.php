@@ -329,13 +329,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['static_2']['experimental design duration'] = [
       '#markup' => '<div class="fieldset__label--group">Experimental Duration</div>',
     ];
-    $form['experimental_dur'] = [
-      '#prefix' => '<div id="experimental_duration">',
-      '#suffix' => '</div>',
-    ];
 
     $field_shmu_experimental_duration_year_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_duration_year') : '';
-    $form['experimental_dur']['field_shmu_experimental_duration_year'] = [
+    $form['field_shmu_experimental_duration_year'] = [
+      '#prefix' => '<div id="field_shmu_experimental_duration_year_id">',
+      '#suffix' => '</div>',
       '#type' => 'number',
       '#title' => $this->t('Year(s)'),
       '#min' => 0,
@@ -346,7 +344,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     ];
 
     $field_shmu_experimental_duration_month_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_duration_month') : '';
-    $form['experimental_dur']['field_shmu_experimental_duration_month'] = [
+    $form['field_shmu_experimental_duration_month'] = [
+      '#prefix' => '<div id="field_shmu_experimental_duration_month_id">',
+      '#suffix' => '</div>',
       '#type' => 'number',
       '#title' => $this->t('Month(s)'),
       '#min' => 0,
@@ -359,17 +359,17 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['static_3']['experimental design frequency'] = [
       '#markup' => '<div class="fieldset__label--group">Experimental Frequency</div>',
     ];
-    $form['experimental_freq'] = [
-      '#prefix' => '<div id="experimental_frequency">',
-      '#suffix' => '</div>',
-    ];
 
-    $form['experimental_freq']['field_shmu_experimental_frequency_text'] = [
+    $form['field_shmu_experimental_frequency_text'] = [
+      '#prefix' => '<div id="field_shmu_experimental_frequency_text_id">',
+      '#suffix' => '</div>',
       '#markup' => '<span class="fieldset__label--group">Every</span>',
     ];
 
     $field_shmu_experimental_frequency_year_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_year') : '';
-    $form['experimental_freq']['field_shmu_experimental_frequency_year'] = [
+    $form['field_shmu_experimental_frequency_year'] = [
+      '#prefix' => '<div id="field_shmu_experimental_frequency_year_id">',
+      '#suffix' => '</div>',
       '#type' => 'number',
       '#title' => $this->t('Year(s)'),
       '#min' => 0,
@@ -380,7 +380,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     ];
 
     $field_shmu_experimental_frequency_month_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_month') : '';
-    $form['experimental_freq']['field_shmu_experimental_frequency_month'] = [
+    $form['field_shmu_experimental_frequency_month'] = [
+      '#prefix' => '<div id="field_shmu_experimental_frequency_month_id">',
+      '#suffix' => '</div>',
       '#type' => 'number',
       '#title' => $this->t('Month(s)'),
       '#min' => 0,
@@ -391,7 +393,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     ];
 
     $field_shmu_experimental_frequency_day_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($shmu, 'field_shmu_experimental_frequency_day') : '';
-    $form['experimental_freq']['field_shmu_experimental_frequency_day'] = [
+    $form['field_shmu_experimental_frequency_day'] = [
+      '#prefix' => '<div id="field_shmu_experimental_frequency_day_id">',
+      '#suffix' => '</div>',
       '#type' => 'number',
       '#title' => $this->t('Day(s)'),
       '#min' => 0,

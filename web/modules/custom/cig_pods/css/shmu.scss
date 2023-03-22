@@ -149,10 +149,10 @@ div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
   }
 }
 
-#experimental_duration, #experimental_frequency {
-  display: flex;
-  align-items: center;
-
+#field_shmu_experimental_duration_year_id, #field_shmu_experimental_duration_month_id {
+  display: inline-block;
+  width: 75px;
+  margin-right: 10px;
   div[class*="field-shmu-experimental-duration-month"] {
     width: 75px;
     margin-right: 10px;
@@ -161,9 +161,15 @@ div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
     width: 75px;
     margin-right: 10px;
   }
+}
 
+#field_shmu_experimental_frequency_year_id, #field_shmu_experimental_frequency_month_id, #field_shmu_experimental_frequency_day_id, #field_shmu_experimental_frequency_text_id {
+  display: inline-block;
+  width: 75px;
+  margin-right: 10px;
   div[class*="field-shmu-experimental-frequency-text"] {
-    width: 75px;
+    width: auto;
+    margin-right: 10px;
   }
   div[class*="field-shmu-experimental-frequency-day"] {
     width: 75px;
@@ -176,7 +182,6 @@ div.js-form-type-checkbox.form-type--checkbox.form-type--boolean {
   div[class*="field-shmu-experimental-frequency-year"] {
     width: 75px;
     margin-right: 10px;
-    margin-left: 18px;
   }
 }
 

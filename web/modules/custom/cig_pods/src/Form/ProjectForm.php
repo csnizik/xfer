@@ -272,7 +272,8 @@ class ProjectForm extends PodsFormBase {
     }
 
     $form['field_resource_concerns'] = [
-      '#type' => 'checkboxes',
+      '#type' => 'select2',
+      '#multiple' => TRUE,
       '#title' => $this->t('Possible Resource Concerns'),
       '#options' => $resource_concern_options,
       '#required' => TRUE,

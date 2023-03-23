@@ -194,3 +194,15 @@ form {
 .usa-banner__guidance.tablet\:grid-col-6 {
   width: 21rem;
 }
+
+ul#select2-edit-field-shmu-initial-crops-planted-container, 
+ul#select2-edit-field-shmu-practices-addressed-container,
+ul#select2-edit-field-shmu-resource-concern-container,
+ul#select2-edit-field-resource-concerns-container {
+  margin: 0;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border-radius: 0px !important;
+  border: 1px solid #000 !important;
+}

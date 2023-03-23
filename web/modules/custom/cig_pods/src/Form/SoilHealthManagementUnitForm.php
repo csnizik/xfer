@@ -652,7 +652,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $field_shmu_initial_crops_planted = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_initial_crops_planted') : [];
 
     $form['field_shmu_initial_crops_planted'] = [
-      '#type' => 'checkboxes',
+      '#type' => 'select2',
+      '#multiple' => TRUE,
       '#required' => TRUE,
       '#title' => 'What Crops are Currently Planted',
       '#options' => $crop_options,
@@ -732,7 +733,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     $resource_concern_options = $this->getResourceConcernOptions();
     $form['field_shmu_resource_concern'] = [
-      '#type' => 'checkboxes',
+      '#type' => 'select2',
+      '#multiple' => TRUE,
       '#title' => $this->t('Other Specific Resource Concerns'),
       '#options' => $resource_concern_options,
       '#default_value' => $field_shmu_resource_concern_values,
@@ -745,7 +747,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $field_shmu_practices_applied_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_practices_addressed') : [];
     $practices_applied_options = $this->getPracticesAppliedOptions();
     $form['field_shmu_practices_addressed'] = [
-      '#type' => 'checkboxes',
+      '#type' => 'select2',
+      '#multiple' => TRUE,
       '#title' => $this->t('Practices Applied'),
       '#options' => $practices_applied_options,
       '#default_value' => $field_shmu_practices_applied_values,

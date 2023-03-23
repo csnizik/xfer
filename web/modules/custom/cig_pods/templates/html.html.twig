@@ -41,6 +41,10 @@
     <js-placeholder token="{{ placeholder_token }}">
     <script src="https://use.fontawesome.com/releases/v5.13.1/js/all.js" defer="" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/releases/v5.13.1/js/v4-shims.js" defer="" crossorigin="anonymous"></script>
+    <script src="/modules/select2/js/select2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
 
   <body{{ attributes.addClass(body_classes) }}>
@@ -139,6 +143,12 @@
           const element = document.getElementById("gov-banner").setAttribute("hidden", "");
         } 
       }
+    </script>
+    <script>
+    $(document).ready(function() {
+      $('.select2-widget').select2({
+      });
+    });
     </script>
   </body>
 </html>

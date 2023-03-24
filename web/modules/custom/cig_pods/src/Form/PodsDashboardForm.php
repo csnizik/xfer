@@ -136,7 +136,7 @@ class PodsDashboardForm extends PodsFormBase {
         'create_soil_health_management_unit' => $this->t('SHMU'),
         'create_soil_health_sample' => $this->t('Soil Sample'),
         'create_field_assessment' => $this->t('CIFSH Assessment'),
-        'create_range_assessment' => $this->t('IIRH Assessment'),
+        'create_rangeland_assessment' => $this->t('IIRH Assessment'),
         'create_pasture_assessment' => $this->t('PCS Assessment'),
         'create_pasture_health_assessment' => $this->t('DIPH Assessment'),
         'create_lab_result' => $this->t('Soil Test Result'),
@@ -169,7 +169,7 @@ class PodsDashboardForm extends PodsFormBase {
     ];
 
     $form['form_subtitle'] = [
-      '#markup' => '<h2 id="form-subtitle">Manage Assets</h2>',
+      '#markup' => '<div> <h2 id="form-subtitle">Manage Assets<span class="small-question" title="Assets are identifiable persons, field samples, management actions and operations performed within the SHMU."><sup>?</sup></span></div></h2>',
       '#prefix' => '<div class="bottom-form">',
     ];
 
@@ -177,16 +177,12 @@ class PodsDashboardForm extends PodsFormBase {
       'project',
       'producer',
       'soil_health_sample',
-      'lab_result',
-      'field_assessment',
+      'lab_result',      
       'soil_health_management_unit',
       'lab_testing_method',
       'operation',
       'irrigation',
-      'range_assessment',
-      'pasture_assessment',
       'soil_health_management_unit',
-      'pasture_health_assessment',
     ];
 
     $entityCount = [];
@@ -211,6 +207,7 @@ class PodsDashboardForm extends PodsFormBase {
       '#type' => 'submit',
       '#value' => $this->t('SHMU(s): @count', ['@count' => $entityCount['soil_health_management_unit']]),
       '#name' => 'soil_health_management_unit',
+      '#attributes' => array('title'=>t('Soil Health Management Unit (SHMU) is one or more planning land units with similar soil type, land use, and management that can vary in size or acreage depending on soil texture, topography, and cropping system. SHMU is like a conservation management unit but designed to assess soil health status and potential limitations on soil health indicators.')),
     ];
 
     $form['awardee_soil_health_sample'] = [
@@ -219,34 +216,10 @@ class PodsDashboardForm extends PodsFormBase {
       '#name' => 'soil_health_sample',
     ];
 
-    $form['awardee_in_field_assessment'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('CIFSH Assessment(s): @count', ['@count' => $entityCount['field_assessment']]),
-      '#name' => 'field_assessment',
-    ];
-
-    $form['awardee_rangeland_assessment'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('IIRH Assessment(s): @count', ['@count' => $entityCount['range_assessment']]),
-      '#name' => 'range_assessment',
-    ];
-
-    $form['awardee_pasture_assessment'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('PCS Assessment(s): @count', ['@count' => $entityCount['pasture_assessment']]),
-      '#name' => 'pasture_assessment',
-    ];
-
-    $form['awardee_pasture_health_assessment'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('DIPH Assessment(s): @count', ['@count' => $entityCount['pasture_health_assessment']]),
-      '#name' => 'pasture_health_assessment',
-    ];
-
     $form['awardee_lab_result'] = [
       '#type' => 'submit',
       '#value' => $this->t('Soil Test Result(s): @count', ['@count' => $entityCount['lab_result']]),
-      '#name' => 'lab_result',
+      '#name' => 'lab_result','#attributes' => array('title'=>t('Enter the method(s) used by the laboratory to conduct the soil tests')),
     ];
 
     $form['awardee_lab'] = [
@@ -266,6 +239,55 @@ class PodsDashboardForm extends PodsFormBase {
       '#value' => $this->t('Operation(s): @count', ['@count' => $entityCount['operation']]),
       '#name' => 'operation',
       '#suffix' => '</div>',
+    ];
+
+    $form['form_subtitle2'] = [
+      '#markup' => '<h2 id="form-subtitle2">Manage Assessments<span class="small-question" title="Assessments provide an evaluation of resources within the SHMU at one or more points in time."><sup>?</sup></span></h2>',
+      '#prefix' => '<div class="bottom-form">',
+    ];
+
+    $awardeeEntities = [
+      
+      'field_assessment',
+      'rangeland_assessment',
+      'pasture_assessment',
+      'pasture_health_assessment',
+    ];
+
+    $entityCount = [];
+
+    foreach ($awardeeEntities as $bundle) {
+      $entities = $this->entityOptions('asset', $bundle);
+      $entityCount[$bundle] = count($entities);
+    }
+
+    // If no projects are assigned, display a warning.
+    if (empty($entityCount['project'])) {
+      $this->messenger()->addWarning($this->t('You are not currently assigned to any projects. You must be assigned as a project contact in order to create or edit records.'));
+    }
+
+    $form['awardee_in_field_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('CIFSH Assessment(s): @count', ['@count' => $entityCount['field_assessment']]),
+      '#name' => 'field_assessment',
+    ];
+
+    $form['awardee_rangeland_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('IIRH Assessment(s): @count', ['@count' => $entityCount['range_assessment']]),
+      '#name' => 'rangeland_assessment',
+    ];
+
+    $form['awardee_pasture_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('PCS Assessment(s): @count', ['@count' => $entityCount['pasture_assessment']]),
+      '#name' => 'pasture_assessment',
+    ];
+
+    $form['awardee_pasture_health_assessment'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('DIPH Assessment(s): @count', ['@count' => $entityCount['pasture_health_assessment']]),
+      '#name' => 'pasture_health_assessment',
     ];
 
     return $form;
@@ -294,7 +316,7 @@ class PodsDashboardForm extends PodsFormBase {
       'create_soil_health_management_unit' => '/create/shmu',
       'create_soil_health_sample' => '/create/soil_health_sample',
       'create_field_assessment' => '/create/field_assessment',
-      'create_range_assessment' => '/create/range_assessment',
+      'create_rangeland_assessment' => '/create/range_assessment',
       'create_pasture_assessment' => '/create/pasture_assessment',
       'create_pasture_health_assessment' => '/create/pasture_health_assessment',
       'create_lab_result' => '/create/lab_results',
@@ -307,7 +329,7 @@ class PodsDashboardForm extends PodsFormBase {
       'soil_health_management_unit' => '/assets/soil_health_management_unit',
       'soil_health_sample' => '/assets/soil_health_sample',
       'field_assessment' => '/assets/field_assessment',
-      'range_assessment' => '/assets/range_assessment',
+      'rangeland_assessment' => '/assets/range_assessment',
       'pasture_assessment' => '/assets/pasture_assessment',
       'pasture_health_assessment' => '/assets/pasture_health_assessment',
       'lab_result' => '/assets/lab_result',
@@ -336,5 +358,4 @@ class PodsDashboardForm extends PodsFormBase {
       }
     }
   }
-
 }

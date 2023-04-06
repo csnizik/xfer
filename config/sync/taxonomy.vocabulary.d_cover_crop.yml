@@ -1,0 +1,13 @@
+uuid: 009a9817-f591-4096-8a33-4d97b4890e82
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+_core:
+  default_config_hash: SdjfIzmmn1xQc_svZbS3-Z9xeZuDPwMMUAh6OjG6KPc
+name: 'Cover Crop'
+vid: d_cover_crop
+description: 'A list of Cover Crops'
+weight: 0

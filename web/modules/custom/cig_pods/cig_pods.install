@@ -1,5 +1,6 @@
 <?php
-
+use Drupal\asset\Entity\Asset;
+use Drupal\taxonomy\Entity\Term;
 /**
  * @file
  * Install, update and uninstall functions for the CIG PODS module.

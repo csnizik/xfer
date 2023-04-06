@@ -1,5 +1,6 @@
 <?php
-
+use Drupal\asset\Entity\Asset;
+use Drupal\taxonomy\Entity\Term;
 /**
  * @file
  * Post update functions for CIG PODS module.
@@ -60,6 +61,43 @@ function cig_pods_post_update_field_shmu_experimental_frequency_month(&$sandbox 
   $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
   \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_shmu_experimental_frequency_month', 'asset', 'cig_pods', $field_definition);
 }
+/**
+ * Adjust the name of Short Term Storage of Animal Waste and By-Products (318)
+ * taxonomy for correctness.
+ */
+function cig_pods_post_update_taxonomy_by_products($sandbox = NULL) {
+  $term_arr = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->
+  loadByProperties(['name' => 'Short Term Storage of Animal Waste and By- Products  (318)']);
+  $term = reset($term_arr);
+  $term->setName('Short Term Storage of Animal Waste and By-Products (318)');
+  $term->save();
+}
+
+/**
+ * Add Cover Crop Terms.
+ */
+function cig_pods_post_update_cover_crop_terms(&$sandbox = NULL) {
+  $terms = cig_pods_cover_crop_terms();
+  foreach($terms as $name){
+    $term = Term::create([
+      'name' => $name,
+      'vid' => "d_cover_crop",
+    ]);
+    $term->save();
+  }
+}
+
+/**
+ * Add Soil Carbon Amendment Taxonomy.
+ */
+function cig_pods_post_update_soil_carbon_amendment(&$sandbox = NULL) {
+    $term = Term::create([
+      'name' => 'Soil Carbon Amendment (336)',
+      'vid' => "d_practice",
+    ]);
+    $term->save();
+}
+
 
 /**
  * Add new Field in SHMU Experiemental Design Section - Experimental Frequency (Years).
@@ -120,3 +158,4 @@ function cig_pods_post_update_uninstall_mvp_config(&$sandbox = NULL) {
     }
   }
 }
+

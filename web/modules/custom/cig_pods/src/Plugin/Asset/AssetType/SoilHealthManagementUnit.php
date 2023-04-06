@@ -236,7 +236,7 @@ class SoilHealthManagementUnit extends FarmAssetType {
         'label' => 'SHMU initial crops planted',
         'type' => 'entity_reference',
         'target_type' => 'taxonomy_term',
-        'target_bundle' => 'd_crop',
+        'target_bundle' => 'd_cover_crop',
         'required' => FALSE,
         'multiple' => TRUE,
         'description' => '',

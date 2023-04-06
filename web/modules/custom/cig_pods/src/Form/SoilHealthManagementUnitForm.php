@@ -125,6 +125,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    */
   public function getCropOptions() {
     $options = $this->entityOptions('taxonomy_term', 'd_crop');
+    return ['' => '- Select -'] + $options;
+  }
+
+  /**
+   * Get cover crop options.
+   */
+  public function getCoverCrops() {
+    $options = $this->entityOptions('taxonomy_term', 'd_cover_crop');
     return $options;
   }
 
@@ -554,7 +562,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     ];
     // Get Options for Year and Crop Dropdowns.
     $crop_options = $this->getCropOptions();
-    $crop_options[''] = '-- Select --';
 
     $crop_rotation_years_options = $this->getCropRotationYearOptions();
     $crop_rotation_years_options[''] = '-- Select --';
@@ -649,6 +656,8 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container section7"> <h2> Cover Crop History </h2> <h4> 1 Field | Section 7 of 10</h4> </div>',
     ];
 
+    $cover_crop_options = $this->getCoverCrops();
+
     $field_shmu_initial_crops_planted = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_initial_crops_planted') : [];
 
     $form['field_shmu_initial_crops_planted'] = [
@@ -656,7 +665,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#multiple' => TRUE,
       '#required' => TRUE,
       '#title' => 'What Crops are Currently Planted',
-      '#options' => $crop_options,
+      '#options' => $cover_crop_options,
       '#default_value' => $field_shmu_initial_crops_planted,
     ];
 

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+name: 'Cover Crop'
+vid: d_cover_crop
+description: 'A list of Cover Crops'
+weight: 0

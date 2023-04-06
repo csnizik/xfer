@@ -183,6 +183,10 @@ class PodsDashboardForm extends PodsFormBase {
       'operation',
       'irrigation',
       'soil_health_management_unit',
+      'field_assessment',
+      'rangeland_assessment',
+      'pasture_assessment',
+      'pasture_health_assessment',
     ];
 
     $entityCount = [];
@@ -245,26 +249,6 @@ class PodsDashboardForm extends PodsFormBase {
       '#markup' => '<h2 id="form-subtitle2">Manage Assessments<span class="small-question" title="Assessments provide an evaluation of resources within the SHMU at one or more points in time."><sup>?</sup></span></h2>',
       '#prefix' => '<div class="bottom-form">',
     ];
-
-    $awardeeEntities = [
-      
-      'field_assessment',
-      'rangeland_assessment',
-      'pasture_assessment',
-      'pasture_health_assessment',
-    ];
-
-    $entityCount = [];
-
-    foreach ($awardeeEntities as $bundle) {
-      $entities = $this->entityOptions('asset', $bundle);
-      $entityCount[$bundle] = count($entities);
-    }
-
-    // If no projects are assigned, display a warning.
-    if (empty($entityCount['project'])) {
-      $this->messenger()->addWarning($this->t('You are not currently assigned to any projects. You must be assigned as a project contact in order to create or edit records.'));
-    }
 
     $form['awardee_in_field_assessment'] = [
       '#type' => 'submit',

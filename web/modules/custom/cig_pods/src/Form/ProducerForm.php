@@ -132,14 +132,7 @@ class ProducerForm extends PodsFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-
-    $this
-      ->messenger()
-      ->addStatus($this
-        ->t('Form submitted for producer @producer_name', [
-          '@producer_name' => $form['producer_name']['#value'],
-        ]));
-
+    
     $is_create = $form_state->get('operation') === 'create';
 
     // PHP: '1' == 1 is True but '1' === 1 is False.

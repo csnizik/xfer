@@ -101,3 +101,22 @@ function cig_pods_views_pre_render(ViewExecutable $view) {
     }
   }
 }
+
+function cig_pods_cover_crop_terms(){
+  return [
+    'Alfalfa, Annual', 'Alfalfa, Perennial', 'Amaranth', 'Barley, Spring', 'Barley, Winter', 'Beans, Mung', 'Beans, Sword',
+    'Beans, Velvet', 'Bluegrass, Annual', 'Bluegrass, Perennial', 'Buckwheat', 'Cabbage, Ethiopian', 'Camelina', 'Canola or Rapeseed',
+    'Carrot', 'Chess, Soft', 'Chickpea', 'Chicory', 'Chufa', 'Clover, Alsike', 'Clover, Arrowleaf', 'Clover, Balansa', 'Clover, Berseem',
+    'Clover, Crimson', 'Clover, Egyptian', 'Clover, Kura', 'Clover, Micro', 'Clover, Red', 'Clover, Rose', 'Clover, Sour',
+    'Clover, Strawberry', 'Clover, Subterranean', 'Clover, White', 'Clover, White, Intermediate', 'Clover, White, Ladino',
+    'Collards', 'Corn', 'Cowpea', 'Crownvetch', 'Fescue', 'Flatpea', 'Flax', 'Guar', 'Indigo, Hairy', 'Kale', 'Lablab',
+    'Lentil', 'Lespedeza', 'Lemongrass', 'Lupin', 'Medic, Barrel', 'Medic, Black', 'Medic, Gamma', 'Millet, Foxtail',
+    'Millet, Japanese', 'Millet, Pearl', 'Millet, Proso', 'Mustard, Black', 'Mustard, Brown', 'Mustard, Field', 'Mustard, White',
+    'Mustard, Yellow', 'None', 'Oats, Field', 'Oats, Black', 'Oats, Forage', 'Orchardgrass', 'Other', 'Pea, Spring', 'Pea, Winter',
+    'Peanut, Perennial', 'Peanut, Pinto', 'Phacelia', 'Radish, Oilseed', 'Rye, Cereal', 'Ryegrass, Annual', 'Ryegrass, Perennial',
+    'Safflower', 'Sainfoin', 'Sesbania', 'Sesame', 'Sorghum', 'Sorghum x Sudangrass', 'Soybean', 'Soybean, Forage', 'Spelt',
+    'Spinach', 'Squash', 'Sudangrass', 'Sunflower', 'SunnHemp', 'Sweetclover, White', 'Sweetclover, Yellow', 'Teff',
+    'Trefoil, Birdsfoot', 'Triticale', 'Turnip', 'Vetch, Chickling', 'Vetch, Common', 'Vetch, Hairy', 'Vetch, Purple',
+    'Vetch, Woolypod', 'Vetiver', 'Weeds or Resident Vegetation', 'Wheat, Spring', 'Wheat, Winter',
+  ];
+}

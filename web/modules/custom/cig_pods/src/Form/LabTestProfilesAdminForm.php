@@ -26,6 +26,7 @@ class LabTestProfilesAdminForm extends PodsFormBase {
     return ['name', 'field_profile_laboratory', 'field_profile_aggregate_stability_method', 'field_profile_respiratory_incubation_days', 'field_profile_respiration_detection_method',
       'electroconductivity_method', 'nitrate_n_method', 'phosphorus_method', 'potassium_method', 'calcium_method', 'magnesium_method', 'sulfur_method', 'iron_method', 'manganese_method',
       'copper_method', 'zinc_method', 'boron_method', 'aluminum_method', 'molybdenum_method', 'field_profile_aggregate_stability_unit', 'field_lab_profile_infiltration_method',
+      'ph_method',
     ];
 
   }
@@ -67,6 +68,7 @@ class LabTestProfilesAdminForm extends PodsFormBase {
     $resp_incub = $this->getSoilHealthExtractionOptions("d_respiration_incubation");
     $s_he_extract = $this->getSoilHealthExtractionOptions("d_soil_health_extraction");
     $infiltration_method = $this->getSoilHealthExtractionOptions("d_infiltration_method");
+    $soil_ph_method = $this->getSoilHealthExtractionOptions("d_ph_method");
 
     $form['lab_test_title'] = [
       '#markup' => '<h1>Lab Test Profiles</h1>',
@@ -148,6 +150,15 @@ class LabTestProfilesAdminForm extends PodsFormBase {
       '#title' => $this->t('Nitrate-N Method'),
       '#options' => $nitrate_method,
       '#default_value' => $nitrate_n_method_default_value,
+      '#required' => TRUE,
+    ];
+
+    $soil_ph_method_default_value = $is_edit ? $labTestProfile->get('ph_method')->target_id : NULL;
+    $form['ph_method'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Soil pH Method'),
+      '#options' => $soil_ph_method,
+      '#default_value' => $soil_ph_method_default_value,
       '#required' => TRUE,
     ];
 

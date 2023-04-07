@@ -88,6 +88,7 @@ class LabTestMethodForm extends PodsFormBase {
     $respiration_incubation = $this->getTaxonomyOptions("d_respiration_incubation");
     $s_he_extract = $this->getTaxonomyOptions("d_soil_health_extraction");
     $s_he_test_laboratory = $this->getTaxonomyOptions("d_laboratory");
+    $soil_ph_method = $this->getTaxonomyOptions("d_ph_method");
 
     $project = $this->getAssetOptions('project');
     if (empty($form_state->getValue('field_lab_soil_test_laboratory'))) {
@@ -192,6 +193,7 @@ class LabTestMethodForm extends PodsFormBase {
         $respiratory_detection_default_value = $fs_lab_profile['field_profile_respiration_detection_method'];
         $electroconductivity_method_default_value = $fs_lab_profile['electroconductivity_method'];
         $nitrate_n_method_default_value = $fs_lab_profile['nitrate_n_method'];
+        $soil_ph_method_default_value = $fs_lab_profile['ph_method'];
         $phosphorus_method_default_value = $fs_lab_profile['phosphorus_method'];
         $potassium_method_default_value = $fs_lab_profile['potassium_method'];
         $calcium_method_default_value = $fs_lab_profile['calcium_method'];
@@ -227,6 +229,7 @@ class LabTestMethodForm extends PodsFormBase {
         $zinc_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_zinc_method')->target_id : NULL;
         $boron_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_boron_method')->target_id : NULL;
         $aluminum_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_aluminum_method')->target_id : NULL;
+        $soil_ph_method_default_value = $is_edit ? $labTestMethod->get('field_lab_method_soil_ph_method')->target_id : NULL;
 
       }
 
@@ -304,6 +307,14 @@ class LabTestMethodForm extends PodsFormBase {
         '#title' => $this->t('Nitrate-N Method'),
         '#options' => $nitrate_method,
         '#default_value' => $nitrate_n_method_default_value,
+        '#required' => TRUE,
+      ];
+      
+      $form['autoload_container']['field_lab_method_soil_ph_method'] = [
+        '#type' => 'select',
+        '#title' => $this->t('Soil pH Method'),
+        '#options' => $soil_ph_method,
+        '#default_value' => $soil_ph_method_default_value,
         '#required' => TRUE,
       ];
 
@@ -598,6 +609,7 @@ class LabTestMethodForm extends PodsFormBase {
     $method_submission['field_lab_method_aluminum_method'] = $form_state->getValue('autoload_container')['field_lab_method_aluminum_method'];
     $method_submission['field_lab_method_infiltration_method'] = $form_state->getValue('autoload_container')['field_lab_method_infiltration_method'];
     $method_submission['field_lab_method_nitrate_n_method'] = $form_state->getValue('autoload_container')['field_lab_method_nitrate_n_method'];
+    $method_submission['field_lab_method_soil_ph_method'] = $form_state->getValue('autoload_container')['field_lab_method_soil_ph_method'];
   }
 
   /**

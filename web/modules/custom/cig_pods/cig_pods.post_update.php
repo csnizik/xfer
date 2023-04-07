@@ -98,6 +98,41 @@ function cig_pods_post_update_soil_carbon_amendment(&$sandbox = NULL) {
     $term->save();
 }
 
+/**
+ * Add Soil PH Method Taxonomies.
+ */
+function cig_pods_post_update_soil_ph_terms(&$sandbox = NULL) {
+  $terms = [
+    'H20, 1:1, v:v',
+    'H20, 1:1, w:v',
+    'CaCl2, 1:1, v:v',
+    'CaCl2, 1:1, w:v',
+    'Other'
+  ];
+  foreach($terms as $name){
+    $term = Term::create([
+      'name' => $name,
+      'vid' => "d_ph_method",
+    ]);
+    $term->save();
+  }
+}
+
+/**
+ * Add new Field in Lab Methods Soil PH Methods.
+ */
+function cig_pods_post_update_field_lab_method_soil_ph(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Lab Method Soil PH Method',
+    'type' => 'entity_reference',
+    'target_type' => 'taxonomy_term',
+    'target_bundle' => 'd_ph_method',
+    'required' => TRUE,
+    'description' => '',
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('field_lab_method_soil_ph_method', 'asset', 'cig_pods', $field_definition);
+}
 
 /**
  * Add new Field in SHMU Experiemental Design Section - Experimental Frequency (Years).
@@ -119,6 +154,22 @@ function cig_pods_post_update_field_shmu_experimental_frequency_year(&$sandbox =
 function cig_pods_post_update_enable_scss_compiler(&$sandbox = NULL) {
   if (!\Drupal::service('module_handler')->moduleExists('scss_compiler')) {
     \Drupal::service('module_installer')->install(['scss_compiler']);
+  }
+}
+
+/**
+ * Add New Soil PH taxonomies.
+ */
+function cig_pods_post_update_add_soil_ph_taxonomies(&$sandbox = NULL) {
+  $terms = [
+    'H20, 1:1, v:v',
+    'H20, 1:1, w:v',
+    'CaCl2, 1:1, v:v',
+    'CaCl2, 1:1, w:v',
+    'Other'
+  ];
+  foreach($terms as $term){
+    
   }
 }
 

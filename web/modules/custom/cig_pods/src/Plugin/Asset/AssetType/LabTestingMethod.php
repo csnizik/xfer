@@ -252,6 +252,16 @@ class LabTestingMethod extends FarmAssetType {
         'required' => TRUE,
         'multiple' => FALSE,
       ],
+      'field_lab_method_soil_ph_method' => [
+        'label' => 'Lab Method Soil PH Method',
+        'type' => 'entity_reference',
+        'target_type' => 'taxonomy_term',
+        'target_bundle' => 'd_ph_method',
+        'description' => $this->t('Lab Test Method d_ph_method'),
+        'handler' => 'default',
+        'required' => TRUE,
+        'multiple' => FALSE,
+      ],
       'project' => [
         'label' => 'Project',
         'type' => 'entity_reference',

@@ -1,23 +1,23 @@
 csv_import.import_test:
-  path: '/csv_import'
+  path: '/csv_import/upload'
   defaults:
     _controller: '\Drupal\csv_import\Controller\CsvImportController::upload'
-    _title: 'csv import form'
+    _title: 'csv import upload'
   requirements:
     _permission: 'access content'
 
-csv_import.process:
-  path: '/csv_import/inputs'
+csv_import.process_inputs:
+  path: '/csv_import/upload_inputs'
   defaults:
-    _controller: '\Drupal\csv_import\Controller\CsvImportController::inputs'
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process_inputs'
     _title: 'csv import inputs'
   requirements:
     _permission: 'access content'
 
-csv_import.process2:
-  path: '/csv_import/operations'
+csv_import.process_combo:
+  path: '/csv_import/upload_combo'
   defaults:
-    _controller: '\Drupal\csv_import\Controller\CsvImportController::operations'
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process_combo'
     _title: 'csv import operations'
   requirements:
     _permission: 'access content'

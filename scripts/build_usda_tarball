@@ -6,28 +6,69 @@ then
     exit 1
 fi
 
+# Get this script's path and parent directory.
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+PARENTPATH="$(dirname $SCRIPTPATH)"
+#PARENTPATH="home/bob/Workspace"
+#SUBPATH="home/bob/Workspace/PODS"
+echo $SCRIPTPATH
+echo $PARENTPATH
 cd .. # now just pods source
+echo "current folder after cd .." 
+pwd
 
 echo "Preparing files for build..."
 cd ..
+
+echo "current folder after 2nd cd .."
+pwd
+
 mkdir -p pods/web/modules/custom
 
-cp cig_pods/composer.json pods
-cp cig_pods/composer.lock pods
+cp -v $PARENTPATH/composer.json pods
+cp -v $PARENTPATH/composer.lock pods
 
-cp -r cig_pods/patches/ pods
-cp -r cig_pods/config/ pods
+cp -rv $PARENTPATH/patches/ pods
+cp -rv $PARENTPATH/config/ pods
 
 echo "Copying custom modules..."
-cp -r cig_pods/web/modules/custom/* pods/web/modules/custom
+cp -rv $PARENTPATH/web/modules/custom/* pods/web/modules/custom
 
+
+
+cd pods
+
+echo "current folder after cd pods"
+pwd
+
+echo "files in pods folder"
+ls -f
+
+echo "Looking for composer here"
+ls -f /usr/local/bin
 
 echo "Building with composer..."
-cd pods
+
+#/usr/local/bin/composer install
 /usr/local/bin/composer install
 
-echo "Packaging tarball..."
+
 cd ..
-tar -cz pods/ > cig_pods/scripts/pods.tar.gz
+
+echo "current folder after cd .. up out of pods"
+pwd
+
+echo "Packaging tarball..."
+tar -czvf $PARENTPATH/scripts/pods.tar.gz pods/
+
+echo "Prove tarball exists"
+cd $PARENTPATH/scripts
+pwd
+ls -f
+
+# echo "what about the lowercase pods folder"
+# cd /home/bob/Workspace/pods/scripts
+# pwd
+# ls -f
 
 echo "Done!"

@@ -7,6 +7,15 @@ use Drupal\taxonomy\Entity\Term;
  */
 
 /**
+ * Install the select2 module if needed
+ */
+ function cig_pods_post_update_enable_select2(&$sandbox = NULL) {
+  if (!\Drupal::service('module_handler')->moduleExists('select2')) {
+  \Drupal::service('module_installer')->install(['select2']);
+  }
+}
+
+/**
  * Add new Field in SHMU Experiemental Design Section - Experimental Duration (Months).
  */
 function cig_pods_post_update_field_shmu_experimental_duration_month(&$sandbox = NULL) {

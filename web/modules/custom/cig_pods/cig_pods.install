@@ -23,3 +23,26 @@ function cig_pods_uninstall() {
   // Set the front page to /dashboard.
   \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/dashboard')->save();
 }
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function cig_pods_update_dependencies() {
+
+  // Make sure cig_pods_update_9000() runs ahead of other update hooks by
+  // sticking it in from of farm_api_update_9000.
+  $dependencies['farm_api'][9000] = [
+    'cig_pods' => 9000,
+  ];
+  return $dependencies;
+}
+
+/**
+ * Clean up old cost asset config.
+ */
+function cig_pods_update_9000(&$sandbox) {
+  $config = \Drupal::configFactory()->getEditable('asset.type.cost');
+  if ($config) {
+    $config->delete();
+  }
+}

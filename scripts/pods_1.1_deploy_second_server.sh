@@ -6,6 +6,10 @@ if [ $# -ne 2 ]; then
         exit 1
 fi
 
+declare -A envs=( ["dev"]="PODS-Dev.Dev" ["test"]="pods" ["uat"]="pods" ["stage"]="pods" ["prod"]="pods" )
+ENVNAME="${envs[$2]}"
+echo "PODS folder for deploy is: ${envs[$2]}" 2>&1|tee $LOGFILE
+
 # Designate the log file.
 LOGFILE="/app/upload/pods_$1_update.log"
 
@@ -21,38 +25,50 @@ elif [[ ! -f /app/upload/pods.$2.settings.php ]]; then
 fi
 
 # If there is already a Pods installation, make a backup of the existing settings file.
-if [[ -f /app/www/html/pods/web/sites/default/settings.php ]]; then
+if [[ -f /app/www/html/"$ENVNAME"/web/sites/default/settings.php ]]; then
+        UPGRADE_SCENARIO="true"
 		echo "Creating a backup of the existing settings.php file." 2>&1|tee $LOGFILE
-		cp -fp /app/www/html/pods/web/sites/default/settings.php /app/upload/pods.$2.settings.php.bak
+		cp -fp /app/www/html/"$ENVNAME"/web/sites/default/settings.php /app/upload/pods."$2".settings.php.bak
+elif
+        echo "Creating $ENVNAME folder in /app/www/html" 2>&1|tee -a $LOGFILE
+        mkdir /app/www/html/"$ENVNAME" 2>&1|tee -a $LOGFILE
+        wait
 fi
 
 # Since the required files exist in the /app/upload directory, we can proceed with installing PODS on the server.
 if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
 
-        echo "Enter Drupal maintenance mode"
-        /app/www/html/pods/vendor/bin/drush sset system.maintenance_mode 1 2>&1|tee -a $LOGFILE
+        ENVNAME="${envs["$2"]}"
 
-        echo "Removing the /app/www/pods folder..." 2>&1|tee -a $LOGFILE
-        cd /app/www/html
-        rm -rf /app/www/html/pods
-		wait
+        cd /app/www/html/"$ENVNAME"
 
         echo "Restoring the PODS tarball file: /app/upload/pods_$1.tar.gz" 2>&1|tee -a $LOGFILE
-        tar -xzvf /app/upload/pods_$1.tar.gz
+        tar -xzf /app/upload/pods_$1.tar.gz 2>&1|tee -a $LOGFILE
 		wait
 
-        echo "Copying the /app/upload/pods.$2.settings.php file to the settings file..." 2>&1|tee -a $LOGFILE
-        cp /app/upload/pods.$2.settings.php /app/www/html/pods/web/sites/default/settings.php
+        if [[ "$UPGRADE_SCENARIO" == "false" ]]; then
+            
+            echo "Copying the /app/upload/pods.$2.settings.php file to the settings file..." 2>&1|tee -a $LOGFILE
+            cp -fp /app/upload/pods.$2.settings.php /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE
 
+            echo "Running drush to clear and rebuild cache..." 2>&1|tee -a $LOGFILE
+            /app/www/html/"$ENVNAME"/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
+		    wait
+        else
+            read -r -p "Please put the server back in tier, renaming the alive file back to Alive.html. Press enter when ready for the symbolic link to be recreated."
+
+            echo "recreate alive file symbolic link"
+            ln -s /app/httpd/htdocs/Alive1.html /app/www/html/$ENVNAME/web/Alive1.html 2>&1|tee -a $LOGFILE
+
+            echo "copy settings.php from backup made earlier" 2>&1|tee -a $LOGFILE
+            cp -fp /app/upload/pods.$2.settings.php.bak /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE
+        fi
         echo "Running drush to clear and rebuild cache..." 2>&1|tee -a $LOGFILE
-        /app/www/html/pods/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
-		wait
+        /app/www/html/"$ENVNAME"/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
+        wait
 
         echo "Changing application ownership to appadmin..." 2>&1|tee -a $LOGFILE
-        chown -R appadmin:appadmin /app/www/html
-
-        echo "Turn off Drupal maintenance mode"
-        /app/www/html/pods/vendor/bin/drush sset system.maintenance_mode 0 2>&1|tee -a $LOGFILE
+        chown -R appadmin:appadmin /app/www/html 2>&1|tee -a $LOGFILE
 
         echo "Script completed." 2>&1|tee -a $LOGFILE
         exit 0

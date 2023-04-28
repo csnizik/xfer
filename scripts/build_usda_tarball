@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 if ! [[ -d "../scripts" ]]
 then
@@ -9,19 +10,11 @@ fi
 # Get this script's path and parent directory.
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 PARENTPATH="$(dirname $SCRIPTPATH)"
-#PARENTPATH="home/bob/Workspace"
-#SUBPATH="home/bob/Workspace/PODS"
-echo $SCRIPTPATH
-echo $PARENTPATH
+
 cd .. # now just pods source
-echo "current folder after cd .." 
-pwd
 
 echo "Preparing files for build..."
 cd ..
-
-echo "current folder after 2nd cd .."
-pwd
 
 mkdir -p pods/web/modules/custom
 
@@ -30,45 +23,24 @@ cp -v $PARENTPATH/composer.lock pods
 
 cp -rv $PARENTPATH/patches/ pods
 cp -rv $PARENTPATH/config/ pods
+cp -rv $PARENTPATH/scripts/ pods
+cp -rv $PARENTPATH/vendor/ pods
 
 echo "Copying custom modules..."
 cp -rv $PARENTPATH/web/modules/custom/* pods/web/modules/custom
-
-
+cp -rv $PARENTPATH/web/ pods
 
 cd pods
-
-echo "current folder after cd pods"
-pwd
-
-echo "files in pods folder"
-ls -f
 
 echo "Looking for composer here"
 ls -f /usr/local/bin
 
 echo "Building with composer..."
 
-#/usr/local/bin/composer install
 /usr/local/bin/composer install
-
-
-cd ..
-
-echo "current folder after cd .. up out of pods"
-pwd
+wait
 
 echo "Packaging tarball..."
-tar -czvf $PARENTPATH/scripts/pods.tar.gz pods/
-
-echo "Prove tarball exists"
-cd $PARENTPATH/scripts
-pwd
-ls -f
-
-# echo "what about the lowercase pods folder"
-# cd /home/bob/Workspace/pods/scripts
-# pwd
-# ls -f
+tar -czf $PARENTPATH/scripts/pods.tar.gz .
 
 echo "Done!"

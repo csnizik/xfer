@@ -55,14 +55,18 @@ class ProjectForm extends PodsFormBase {
     $zRoleContacts = \Drupal::service('usda_eauth.zroles')->getListByzRole($zRoleType);
 
     foreach ($zRoleContacts as $zContacts) {
+      if (gettype($zContacts->UsdaeAuthenticationId) != "string") {
+        continue; // discard users with no eauth id
+      }
+      
       if (array_key_exists($zContacts->UsdaeAuthenticationId, $contact_name_options)) {
         continue;
       }
+      
       $contact_name_options[$zContacts->UsdaeAuthenticationId] = $zContacts->FirstName . ' ' . $zContacts->LastName;
       $contact_options_email[$zContacts->UsdaeAuthenticationId] = $zContacts->EmailAddress;
     }
   }
-
   /**
    * Get awardee contact type options.
    */

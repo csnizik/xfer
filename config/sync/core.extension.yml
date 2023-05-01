@@ -55,7 +55,6 @@ module:
   farm_ui_user: 0
   farm_ui_views: 0
   farm_unit: 0
-  farm_update: 0
   field: 0
   field_ui: 0
   file: 0
@@ -79,6 +78,7 @@ module:
   path_alias: 0
   quantity: 0
   rest: 0
+  select2: 0
   serialization: 0
   simple_oauth: 0
   state_machine: 0

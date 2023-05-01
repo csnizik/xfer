@@ -12,6 +12,7 @@ echo "PODS folder for deploy is: ${envs[$2]}" 2>&1|tee $LOGFILE
 
 # Designate the log file.
 LOGFILE="/app/upload/pods_$1_update.log"
+UPGRADE_SCENARIO="false"
 
 # Ensure that the required files have been uploaded to the /app/upload directory
 if [[ ! -f /app/upload/pods_$1.tar.gz ]]; then
@@ -50,10 +51,6 @@ if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
             
             echo "Copying the /app/upload/pods.$2.settings.php file to the settings file..." 2>&1|tee -a $LOGFILE
             cp -fp /app/upload/pods.$2.settings.php /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE
-
-            echo "Running drush to clear and rebuild cache..." 2>&1|tee -a $LOGFILE
-            /app/www/html/"$ENVNAME"/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
-		    wait
         else
             read -r -p "Please put the server back in tier, renaming the alive file back to Alive.html. Press enter when ready for the symbolic link to be recreated."
 

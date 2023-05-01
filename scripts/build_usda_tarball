@@ -11,11 +11,25 @@ fi
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 PARENTPATH="$(dirname $SCRIPTPATH)"
 
+if [[ -f pods.tar.gz ]]; then
+    echo "Deleting last tar file"
+    rm pods.tar.gz
+fi
+
 cd .. # now just pods source
 
 echo "Preparing files for build..."
 cd ..
 
+
+# Delete the folder if it exists from a previous run
+if [[ -d pods ]]; then
+    echo "Deleting folder form previous attempt"
+    rm -rf pods
+fi
+
+# Create new empty folders
+echo "Creating assembly folder"
 mkdir -p pods/web/modules/custom
 
 cp -v $PARENTPATH/composer.json pods

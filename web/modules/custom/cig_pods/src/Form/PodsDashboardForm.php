@@ -184,7 +184,7 @@ class PodsDashboardForm extends PodsFormBase {
       'irrigation',
       'soil_health_management_unit',
       'field_assessment',
-      'rangeland_assessment',
+      'range_assessment',
       'pasture_assessment',
       'pasture_health_assessment',
     ];

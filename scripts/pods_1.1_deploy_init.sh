@@ -80,8 +80,11 @@ if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
 		    wait
 
         else
-            echo "recreate alive file symbolic link"
-            ln -s /app/httpd/htdocs/Alive1.html /app/www/html/$ENVNAME/web/Alive1.html 2>&1|tee -a $LOGFILE
+            # Recreate alive file link if needed
+            if [[ ! -L /app/www/html/$ENVNAME/web/Alive1.html ]]; then
+                echo "recreating alive file symbolic link"
+                ln -s /app/httpd/htdocs/Alive1.html /app/www/html/$ENVNAME/web/Alive1.html 2>&1|tee -a $LOGFILE
+            fi
 
             echo "copy settings.php from backup made earlier" 2>&1|tee -a $LOGFILE
             cp -fp /app/upload/pods.$2.settings.php.bak /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE

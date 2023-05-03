@@ -58,3 +58,5 @@ echo "Packaging tarball..."
 tar -czf $PARENTPATH/scripts/pods.tar.gz .
 
 echo "Done!"
+
+exit 0

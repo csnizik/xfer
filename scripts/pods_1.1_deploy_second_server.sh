@@ -30,7 +30,7 @@ if [[ -f /app/www/html/"$ENVNAME"/web/sites/default/settings.php ]]; then
         UPGRADE_SCENARIO="true"
 		echo "Creating a backup of the existing settings.php file." 2>&1|tee $LOGFILE
 		cp -fp /app/www/html/"$ENVNAME"/web/sites/default/settings.php /app/upload/pods."$2".settings.php.bak
-elif
+else
         echo "Creating $ENVNAME folder in /app/www/html" 2>&1|tee -a $LOGFILE
         mkdir /app/www/html/"$ENVNAME" 2>&1|tee -a $LOGFILE
         wait
@@ -52,10 +52,14 @@ if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
             echo "Copying the /app/upload/pods.$2.settings.php file to the settings file..." 2>&1|tee -a $LOGFILE
             cp -fp /app/upload/pods.$2.settings.php /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE
         else
-            read -r -p "Please put the server back in tier, renaming the alive file back to Alive.html. Press enter when ready for the symbolic link to be recreated."
-
-            echo "recreate alive file symbolic link"
-            ln -s /app/httpd/htdocs/Alive1.html /app/www/html/$ENVNAME/web/Alive1.html 2>&1|tee -a $LOGFILE
+            # Recreate alive file link if needed
+            if [[ ! -f /app/httpd/htdocs/Alive1.html ]]; then
+                read -r -p "Please put the server back in tier, renaming the alive file back to Alive.html. Press enter when ready to continue:"
+                if [[ ! -L /app/www/html/"$ENVNAME"/web/Alive1.html ]]; then
+                    echo "recreating alive file symbolic link"
+                    ln -s /app/httpd/htdocs/Alive1.html /app/www/html/$ENVNAME/web/Alive1.html 2>&1|tee -a $LOGFILE
+                fi
+            fi
 
             echo "copy settings.php from backup made earlier" 2>&1|tee -a $LOGFILE
             cp -fp /app/upload/pods.$2.settings.php.bak /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE

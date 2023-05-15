@@ -29,6 +29,12 @@ class CsvImportController extends ControllerBase {
           <input type="submit">
         </form>
 
+        soil health:
+        <form action="/csv_import/upload_soil_health_sample" enctype="multipart/form-data" method="post">
+          <input type="file" id="file" name="file">
+          <input type="submit">
+        </form>
+
         combo:
         <form action="/csv_import/upload_combo" enctype="multipart/form-data" method="post">
           <input type="file" id="file" name="file">
@@ -164,6 +170,43 @@ class CsvImportController extends ControllerBase {
     
   }
 
+  public function process_soil_health_sample() {
+    $file = \Drupal::request()->files->get("file");
+    $fName = $file->getClientOriginalName();
+    $fLoc = $file->getRealPath();
+    $csv = array_map('str_getcsv', file($fLoc));
+    array_shift($csv);
+    $out = 0;
+
+    foreach($csv as $csv_line) { 
+
+      $shmu = array_pop(\Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'soil_health_management_unit', 'name' => $csv_line[1]]));
+      $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
+
+      $soil_health_sample_submission = [];
+      $soil_health_sample_submission['type'] = 'soil_health_sample';
+      $soil_health_sample_submission['soil_id'] = $csv_line[0];
+      $soil_health_sample_submission['shmu'] = array_pop(\Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'soil_health_management_unit', 'name' => $csv_line[1]]));
+      $soil_health_sample_submission['field_soil_sample_collection_dat'] = \DateTime::createFromFormat("D, m/d/Y - G:i", $csv_line[2])->getTimestamp();
+      $soil_health_sample_submission['field_equipment_used'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_equipment', 'name' => $csv_line[3]]));
+      $soil_health_sample_submission['field_diameter'] = $csv_line[4];
+      $soil_health_sample_submission['name'] = $csv_line[5];
+      $soil_health_sample_submission['field_plant_stage_at_sampling'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_plant_stage', 'name' => $csv_line[6]]));
+      $soil_health_sample_submission['field_sampling_depth'] = $csv_line[7];
+      $soil_health_sample_submission['field_soil_sample_geofield'] = $csv_line[8];
+      $soil_health_sample_submission['project'] = $project;
+      
+      $soil_health_sample_to_save = Asset::create($soil_health_sample_submission);
+      
+      $soil_health_sample_to_save->save();
+      $out = $out + 1;
+
+    }
+    return [
+      "#children" => "saved " . $out . " soil health sample.",
+    ];
+  }
+
   public function process_combo() {
     // grab the contents of the file and same some info
     $file = \Drupal::request()->files->get("file");
@@ -246,7 +289,7 @@ class CsvImportController extends ControllerBase {
       $item_count++;
 
     }
-     
+
     foreach($items["OpCosts"] as $csv_line) {
      $operation = $operation_ref_nums[$csv_line[1]];
 

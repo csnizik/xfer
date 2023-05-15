@@ -14,6 +14,14 @@ csv_import.process_inputs:
   requirements:
     _permission: 'access content'
 
+csv_import.process_soil_health_sample:
+  path: '/csv_import/upload_soil_health_sample'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process_soil_health_sample'
+    _title: 'csv import soil health sample'
+  requirements:
+    _permission: 'access content'
+
 csv_import.process_combo:
   path: '/csv_import/upload_combo'
   defaults:

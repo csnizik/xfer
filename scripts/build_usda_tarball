@@ -38,7 +38,6 @@ cp -v $PARENTPATH/composer.lock pods
 cp -rv $PARENTPATH/patches/ pods
 cp -rv $PARENTPATH/config/ pods
 cp -rv $PARENTPATH/scripts/ pods
-cp -rv $PARENTPATH/vendor/ pods
 
 echo "Copying custom modules..."
 cp -rv $PARENTPATH/web/modules/custom/* pods/web/modules/custom
@@ -54,6 +53,8 @@ echo "Building with composer..."
 /usr/local/bin/composer install
 wait
 
+echo "copy vendor folder"
+cp -rv $PARENTPATH/vendor/ pods
 echo "Packaging tarball..."
 tar -czf $PARENTPATH/scripts/pods.tar.gz .
 

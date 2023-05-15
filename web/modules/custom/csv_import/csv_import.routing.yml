@@ -29,3 +29,11 @@ csv_import.process_combo:
     _title: 'csv import operations'
   requirements:
     _permission: 'access content'
+
+csv_import.process_soil_test_results:
+  path: '/csv_import/upload_soil_test_results'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process_soil_test_results'
+    _title: 'csv import operations'
+  requirements:
+    _permission: 'access content'

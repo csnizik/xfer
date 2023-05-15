@@ -40,6 +40,12 @@ class CsvImportController extends ControllerBase {
           <input type="file" id="file" name="file">
           <input type="submit">
         </form>
+
+        soil test results:
+        <form action="/csv_import/upload_soil_test_results" enctype="multipart/form-data" method="post">
+          <input type="file" id="file" name="file">
+          <input type="submit">
+        </form>
     ',
     ];
   }
@@ -434,7 +440,75 @@ class CsvImportController extends ControllerBase {
     return [
       "#children" => nl2br(print_r("saved", true)),
     ];
-    
+  }
+  public function process_soil_test_results() {
+    $file = \Drupal::request()->files->get("file");
+    $fName = $file->getClientOriginalName();
+    $fLoc = $file->getRealPath();
+    $csv = array_map('str_getcsv', file($fLoc));
+    array_shift($csv);
+    $out = 0;
+  
+    foreach($csv as $csv_line) {
+  
+      $soil_sample_id = array_pop(\Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'soil_health_sample', 'name' => $csv_line[0]]));
+      $lab_method = array_pop(\Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'lab_testing_method', 'name' => $csv_line[1]]));
+      $project = \Drupal::entityTypeManager()->getStorage('asset')->load($lab_method->get('project')->target_id);
+  
+      $soil_test_results_submission = [];
+      $soil_test_results_submission['name'] = 'Soil Test Results';
+      $soil_test_results_submission['type'] = 'lab_result';
+      $soil_test_results_submission['project'] = $project;
+      
+      $soil_test_results_submission['field_lab_result_soil_sample'] = $soil_sample_id;
+      $soil_test_results_submission['field_lab_result_method'] = $lab_method;
+      $soil_test_results_submission['field_lab_result_raw_soil_organic_carbon'] = $csv_line[2];
+      $soil_test_results_submission['field_lab_result_raw_aggregate_stability'] = $csv_line[3];
+      $soil_test_results_submission['field_lab_result_raw_respiration'] =  $csv_line[4];
+      $soil_test_results_submission['field_lab_result_active_carbon'] = $csv_line[5];
+      $soil_test_results_submission['field_lab_result_available_organic_nitrogen'] = $csv_line[6];
+      $soil_test_results_submission['field_lab_result_sf_bulk_density_dry_weight'] = $csv_line[7];
+      $soil_test_results_submission['field_lab_result_sf_infiltration_rate'] = $csv_line[8];
+      $soil_test_results_submission['field_lab_result_sf_ph_value'] = $csv_line[9];
+      $soil_test_results_submission['field_lab_result_sf_electroconductivity'] = $csv_line[10];
+      $soil_test_results_submission['field_lab_result_sf_ec_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[11]]));
+      $soil_test_results_submission['field_lab_result_sf_cation_exchange_capacity'] = $csv_line[12];
+      $soil_test_results_submission['field_lab_result_sf_nitrate_n'] = $csv_line[13];
+      $soil_test_results_submission['field_lab_result_sf_nitrate_n_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[14]]));
+      $soil_test_results_submission['field_lab_result_sf_nitrogen_by_dry_combustion'] = $csv_line[15];
+      $soil_test_results_submission['field_lab_result_sf_phosphorous'] = $csv_line[16];
+      $soil_test_results_submission['field_lab_result_sf_phosphorous_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[17]]));
+      $soil_test_results_submission['field_lab_result_sf_potassium'] = $csv_line[18];
+      $soil_test_results_submission['field_lab_result_sf_potassium_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[19]]));
+      $soil_test_results_submission['field_lab_result_sf_calcium'] = $csv_line[20];  
+      $soil_test_results_submission['field_lab_result_sf_calcium_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[21]]));
+      $soil_test_results_submission['field_lab_result_sf_magnesium'] = $csv_line[22];
+      $soil_test_results_submission['field_lab_result_sf_magnesium_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[23]]));
+      $soil_test_results_submission['field_lab_result_sf_sulfur'] = $csv_line[24];
+      $soil_test_results_submission['field_lab_result_sf_sulfur_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[25]]));
+      $soil_test_results_submission['field_lab_result_sf_iron'] = $csv_line[26];
+      $soil_test_results_submission['field_lab_result_sf_iron_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[27]]));
+      $soil_test_results_submission['field_lab_result_sf_manganese'] = $csv_line[28];
+      $soil_test_results_submission['field_lab_result_sf_manganese_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[29]]));
+      $soil_test_results_submission['field_lab_result_sf_copper'] = $csv_line[30];
+      $soil_test_results_submission['field_lab_result_sf_copper_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[31]]));
+      $soil_test_results_submission['field_lab_result_sf_zinc'] = $csv_line[32];
+      $soil_test_results_submission['field_lab_result_sf_zinc_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[33]]));
+      $soil_test_results_submission['field_lab_result_sf_boron'] = $csv_line[34];
+      $soil_test_results_submission['field_lab_result_sf_boron_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[35]]));
+      $soil_test_results_submission['field_lab_result_sf_aluminum'] = $csv_line[36];
+      $soil_test_results_submission['field_lab_result_sf_aluminum_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[37]]));
+      $soil_test_results_submission['field_lab_result_sf_molybdenum'] = $csv_line[38];
+      $soil_test_results_submission['field_lab_result_sf_molybdenum_lab_interpretation'] = array_pop(\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'd_lab_interpretation', 'name' => $csv_line[39]]));
+  
+      $soil_test_results_submission_to_save = Asset::create($soil_test_results_submission);
+        
+        $soil_test_results_submission_to_save->save();
+        $out = $out + 1;
+    }
+      return [
+        "#children" => "saved " . $out . " soil test results.",
+      ];
   }
 
 }

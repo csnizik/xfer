@@ -133,16 +133,16 @@ class PodsDashboardForm extends PodsFormBase {
       '#options' => [
         '' => $this->t('Create New'),
         'create_producer' => $this->t('Producer'),
+        'create_lab_testing_method' => $this->t('Methods'),
         'create_soil_health_management_unit' => $this->t('SHMU'),
         'create_soil_health_sample' => $this->t('Soil Sample'),
+        'create_lab_result' => $this->t('Soil Test Result'),
+        'create_operation' => $this->t('Operation'),
+        'create_irrigation' => $this->t('Irrigation'),
         'create_field_assessment' => $this->t('CIFSH Assessment'),
         'create_rangeland_assessment' => $this->t('IIRH Assessment'),
         'create_pasture_assessment' => $this->t('PCS Assessment'),
         'create_pasture_health_assessment' => $this->t('DIPH Assessment'),
-        'create_lab_result' => $this->t('Soil Test Result'),
-        'create_lab_testing_method' => $this->t('Methods'),
-        'create_operation' => $this->t('Operation'),
-        'create_irrigation' => $this->t('Irrigation'),
       ],
       '#attributes' => [
         'onchange' => 'this.form.submit();',
@@ -207,6 +207,12 @@ class PodsDashboardForm extends PodsFormBase {
       '#name' => 'producer',
     ];
 
+    $form['awardee_lab'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Method(s):  @count', ['@count' => $entityCount['lab_testing_method']]),
+      '#name' => 'lab_testing_method',
+    ];
+
     $form['awardee_soil_health_management_unit'] = [
       '#type' => 'submit',
       '#value' => $this->t('SHMU(s): @count', ['@count' => $entityCount['soil_health_management_unit']]),
@@ -225,23 +231,17 @@ class PodsDashboardForm extends PodsFormBase {
       '#value' => $this->t('Soil Test Result(s): @count', ['@count' => $entityCount['lab_result']]),
       '#name' => 'lab_result','#attributes' => array('title'=>t('Enter the method(s) used by the laboratory to conduct the soil tests')),
     ];
-
-    $form['awardee_lab'] = [
+    
+    $form['awardee_operation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Method(s):  @count', ['@count' => $entityCount['lab_testing_method']]),
-      '#name' => 'lab_testing_method',
+      '#value' => $this->t('Operation(s): @count', ['@count' => $entityCount['operation']]),
+      '#name' => 'operation',
     ];
 
     $form['awardee_irrigation'] = [
       '#type' => 'submit',
       '#value' => $this->t('Irrigation(s): @count', ['@count' => $entityCount['irrigation']]),
       '#name' => 'irrigation',
-    ];
-
-    $form['awardee_operation'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Operation(s): @count', ['@count' => $entityCount['operation']]),
-      '#name' => 'operation',
       '#suffix' => '</div>',
     ];
 

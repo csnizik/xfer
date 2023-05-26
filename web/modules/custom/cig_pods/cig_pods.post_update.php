@@ -167,22 +167,6 @@ function cig_pods_post_update_enable_scss_compiler(&$sandbox = NULL) {
 }
 
 /**
- * Add New Soil PH taxonomies.
- */
-function cig_pods_post_update_add_soil_ph_taxonomies(&$sandbox = NULL) {
-  $terms = [
-    'H20, 1:1, v:v',
-    'H20, 1:1, w:v',
-    'CaCl2, 1:1, v:v',
-    'CaCl2, 1:1, w:v',
-    'Other'
-  ];
-  foreach($terms as $term){
-    
-  }
-}
-
-/**
  * Uninstall MVP config.
  */
 function cig_pods_post_update_uninstall_mvp_config(&$sandbox = NULL) {
@@ -217,5 +201,54 @@ function cig_pods_post_update_uninstall_mvp_config(&$sandbox = NULL) {
       $config->delete();
     }
   }
+}
+
+/**
+ * Correct the typing of the fields in the Field Assessment Entity
+ */
+function cig_pods_post_update_field_assessment_fields(&$sandbox = NULL) {
+  $field_assessments = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(
+    ['type' => 'field_assessment']);
+    
+    if(count($field_assessments) > 0){
+      foreach($field_assessments as $assessment){
+        try{ 
+          $assessment->delete();
+        }catch (\Exception $e) {
+        }
+      }
+    }
+    
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+
+  $fields_to_change = [
+    'Soil Cover' => 'field_assessment_soil_cover',
+    'Residue Breakdown' => 'field_assessment_residue_breakdown',
+    'Surface Crusts' => 'field_assessment_surface_crusts',
+    'Ponding' => 'field_assessment_ponding',
+    'Penetration Resistance' => 'field_assessment_penetration_resistance',
+    'Water Stable Aggregates' => 'field_assessment_water_stable_aggregates',
+    'Soil Structure' => 'field_assessment_soil_structure',
+    'Soil Color' => 'field_assessment_soil_color',
+    'Plant Roots' => 'field_assessment_plant_roots',
+    'Biological Diversity' => 'field_assessment_biological_diversity',
+    'Biopores' => 'field_assessment_biopores',
+  ];
+
+  foreach($fields_to_change as $key => $field){
+    $storage_definition = $update_manager->getFieldStorageDefinition($field, 'asset');
+    $update_manager->uninstallFieldStorageDefinition($storage_definition);
+  
+    $options = [
+      'label' => $key,
+      'type' => 'string',
+      'required' => FALSE,
+      'description' => 'Field Assessment',
+    ];
+  
+    $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+    $update_manager->installFieldStorageDefinition($field, 'asset', 'cig_pods', $field_definition);
+  }
+
 }
 

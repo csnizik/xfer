@@ -108,7 +108,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Soil Organic Carbon (Unit Percent)'),
       '#description' => '',
       '#default_value' => $organic_carbon_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $aggregate_stability_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_aggregate_stability');
@@ -118,7 +118,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Aggregate Stability (Unit Percent)'),
       '#description' => '',
       '#default_value' => $aggregate_stability_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $raw_respiration_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_respiration');
@@ -128,7 +128,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Respiration (Unit mg/g dry weight)'),
       '#description' => '',
       '#default_value' => $raw_respiration_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $active_carbon_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_active_carbon');
@@ -138,7 +138,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Active Carbon (Unit ppm)'),
       '#description' => '',
       '#default_value' => $active_carbon_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $organic_nitrogen_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_available_organic_nitrogen');
@@ -148,7 +148,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Available Organic Nitrogen (ACE Protein (Unit ppm))'),
       '#description' => '',
       '#default_value' => $organic_nitrogen_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $form['subform_2'] = [
@@ -162,7 +162,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Bulk Density Dry Weight (Unit grams)'),
       '#description' => '',
       '#default_value' => $bulk_density_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $infiltration_rate_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_infiltration_rate');
@@ -172,7 +172,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Infiltration Rate (inches Per Hour)'),
       '#description' => '',
       '#default_value' => $infiltration_rate_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $form['subform_3'] = [
@@ -186,7 +186,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('pH (Decimal value between 1 and 14 to the tenth)'),
       '#description' => '',
       '#default_value' => $ph_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $electroconductivity_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_electroconductivity');
@@ -196,7 +196,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Electroconductivity (EC (Unit dS/m))'),
       '#description' => '',
       '#default_value' => $electroconductivity_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $ec_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_ec_lab_interpretation')->target_id : NULL;
@@ -205,7 +205,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Electroconductivity Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $ec_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $cation_exchanges_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_cation_exchange_capacity');
@@ -215,7 +215,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Cation Exchange Capacity (CEC (Unit ppm))'),
       '#description' => '',
       '#default_value' => $cation_exchanges_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $nitrate_n_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_nitrate_n');
@@ -225,7 +225,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Nitrate-N (Unit ppm)'),
       '#description' => '',
       '#default_value' => $nitrate_n_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $nitrate_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_nitrate_n_lab_interpretation')->target_id : NULL;
@@ -234,7 +234,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Nitrate-N Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $nitrate_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $nitrogen_dry_combustion_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_nitrogen_by_dry_combustion');
@@ -244,7 +244,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Total Nitrogen by Dry Combustion (Unit Percent)'),
       '#description' => '',
       '#default_value' => $nitrogen_dry_combustion_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $phosphorus_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_phosphorous');
@@ -254,7 +254,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Phosphorus (Unit ppm)'),
       '#description' => '',
       '#default_value' => $phosphorus_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $phosphorus_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_phosphorous_lab_interpretation')->target_id : NULL;
@@ -263,7 +263,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Phosphorus Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $phosphorus_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $potassium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_potassium');
@@ -273,7 +273,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Potassium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $potassium_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $potassium_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_potassium_lab_interpretation')->target_id : NULL;
@@ -282,7 +282,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Potassium Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $potassium_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $calcium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_calcium');
@@ -292,7 +292,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Calcium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $calcium_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $calcium_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_calcium_lab_interpretation')->target_id : NULL;
@@ -301,7 +301,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Calcium Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $calcium_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $magnesium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_magnesium');
@@ -311,7 +311,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Magnesium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $magnesium_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $magnesium_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_magnesium_lab_interpretation')->target_id : NULL;
@@ -320,7 +320,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Magnesium Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $magnesium_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $sulfur_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_sulfur');
@@ -330,7 +330,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Sulfur (Unit ppm)'),
       '#description' => '',
       '#default_value' => $sulfur_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $sulfur_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_sulfur_lab_interpretation')->target_id : NULL;
@@ -339,7 +339,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Sulfur Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $sulfur_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $iron_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_iron');
@@ -349,7 +349,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Iron (Unit ppm)'),
       '#description' => '',
       '#default_value' => $iron_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $iron_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_iron_lab_interpretation')->target_id : NULL;
@@ -358,7 +358,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Iron Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $iron_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $manganese_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_manganese');
@@ -368,7 +368,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Manganese (Unit ppm)'),
       '#description' => '',
       '#default_value' => $manganese_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $manganese_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_manganese_lab_interpretation')->target_id : NULL;
@@ -377,7 +377,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Manganese Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $manganese_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $copper_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_copper');
@@ -387,7 +387,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Copper (Unit ppm)'),
       '#description' => '',
       '#default_value' => $copper_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $copper_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_copper_lab_interpretation')->target_id : NULL;
@@ -396,7 +396,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Copper Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $copper_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $zinc_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_zinc');
@@ -406,7 +406,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Zinc (Unit ppm)'),
       '#description' => '',
       '#default_value' => $zinc_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $zinc_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_zinc_lab_interpretation')->target_id : NULL;
@@ -415,7 +415,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Zinc Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $zinc_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $boron_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_boron');
@@ -425,7 +425,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Boron (Unit ppm)'),
       '#description' => '',
       '#default_value' => $boron_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $boron_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_boron_lab_interpretation')->target_id : NULL;
@@ -434,7 +434,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Boron Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $boron_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $aluminum_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_aluminum');
@@ -444,7 +444,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Aluminum (Unit ppm)'),
       '#description' => '',
       '#default_value' => $aluminum_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $aluminum_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_aluminum_lab_interpretation')->target_id : NULL;
@@ -453,7 +453,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Aluminum Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $aluminum_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $molybdenum_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_molybdenum');
@@ -463,7 +463,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Molybdenum (Unit ppm)'),
       '#description' => '',
       '#default_value' => $molybdenum_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $molybdenum_interp_results = $is_edit ? $labResults->get('field_lab_result_sf_molybdenum_lab_interpretation')->target_id : NULL;
@@ -472,7 +472,7 @@ class LabResultsForm extends PodsFormBase {
       '#title' => $this->t('Molybdenum Lab Interpretation'),
       '#options' => $lab_interpretation,
       '#default_value' => $molybdenum_interp_results,
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     $form['actions']['save'] = [

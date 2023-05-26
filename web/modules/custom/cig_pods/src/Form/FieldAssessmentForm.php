@@ -221,7 +221,7 @@ class FieldAssessmentForm extends PodsFormBase {
       $soil_organic_matter_rc = $form_state->get('soil_organic_matter_rc_present') ? 'Present' : 'Not Present';
 
       $form['assessment_wrapper']['organic_matter_title'] = [
-        '#markup' => $this->t('<span>Soil Organic Matter Depletion Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+        '#markup' => $this->t('<span>Soil Organic Matter Depletion Resource Concern</span> <span class="grey-note">(Calculated from in-field assessment)</span>'),
         '#prefix' => '<div class="calculated_field_container">',
       ];
 
@@ -233,7 +233,7 @@ class FieldAssessmentForm extends PodsFormBase {
       $agg_instability_val = $form_state->get('aggregate_instability_rc_present') ? 'Present' : 'Not Present';
 
       $form['assessment_wrapper']['agg_instability_title'] = [
-        '#markup' => $this->t('<span>Aggregate Instability Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+        '#markup' => $this->t('<span>Aggregate Instability Resource Concern</span> <span class="grey-note">(Calculated from in-field assessment)</span>'),
         '#prefix' => '<div class="calculated_field_container">',
       ];
 
@@ -245,7 +245,7 @@ class FieldAssessmentForm extends PodsFormBase {
       $compaction_val = $form_state->get('compaction_rc_present') ? 'Present' : 'Not Present';
 
       $form['assessment_wrapper']['compaction_title'] = [
-        '#markup' => $this->t('<span>Compaction Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+        '#markup' => $this->t('<span>Compaction Resource Concern</span> <span class="grey-note">(Calculated from in-field assessment)</span>'),
         '#prefix' => '<div class="calculated_field_container">',
       ];
 
@@ -257,7 +257,7 @@ class FieldAssessmentForm extends PodsFormBase {
       $cfsoh_val = $form_state->get('soil_organism_habitat_rc_present') ? 'Present' : 'Not Present';
 
       $form['assessment_wrapper']['organism_title'] = [
-        '#markup' => $this->t('<span>Soil Organism Habitat Resource Concern</span> <span class="grey-note">(Calulated from in-field assessment)</span>'),
+        '#markup' => $this->t('<span>Soil Organism Habitat Resource Concern</span> <span class="grey-note">(Calculated from in-field assessment)</span>'),
         '#prefix' => '<div class="calculated_field_container">',
       ];
 

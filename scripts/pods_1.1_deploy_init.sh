@@ -95,12 +95,13 @@ if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
             echo "Run config import"
             /app/www/html/"$ENVNAME"/vendor/bin/drush cim 2>&1|tee -a $LOGFILE
         fi
+        
+        echo "Changing application ownership to appadmin..." 2>&1|tee -a $LOGFILE
+        chown -R appadmin:appadmin /app/www/html 2>&1|tee -a $LOGFILE
+
         echo "Running drush to clear and rebuild cache..." 2>&1|tee -a $LOGFILE
         /app/www/html/"$ENVNAME"/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
         wait
-
-        echo "Changing application ownership to appadmin..." 2>&1|tee -a $LOGFILE
-        chown -R appadmin:appadmin /app/www/html 2>&1|tee -a $LOGFILE
 
         echo "Turn off Drupal maintenance mode"
         /app/www/html/"$ENVNAME"/vendor/bin/drush sset system.maintenance_mode 0 2>&1|tee -a $LOGFILE

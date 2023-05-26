@@ -64,12 +64,14 @@ if [[ "$SUPPORTED_ENVS" == *"$2"* ]]; then
             echo "copy settings.php from backup made earlier" 2>&1|tee -a $LOGFILE
             cp -fp /app/upload/pods.$2.settings.php.bak /app/www/html/"$ENVNAME"/web/sites/default/settings.php 2>&1|tee -a $LOGFILE
         fi
+
+        echo "Changing application ownership to appadmin..." 2>&1|tee -a $LOGFILE
+        chown -R appadmin:appadmin /app/www/html 2>&1|tee -a $LOGFILE
+
         echo "Running drush to clear and rebuild cache..." 2>&1|tee -a $LOGFILE
         /app/www/html/"$ENVNAME"/vendor/bin/drush cr 2>&1|tee -a $LOGFILE
         wait
 
-        echo "Changing application ownership to appadmin..." 2>&1|tee -a $LOGFILE
-        chown -R appadmin:appadmin /app/www/html 2>&1|tee -a $LOGFILE
 
         echo "Script completed." 2>&1|tee -a $LOGFILE
         exit 0

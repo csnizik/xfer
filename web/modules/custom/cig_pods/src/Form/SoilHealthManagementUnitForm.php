@@ -218,6 +218,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   public function buildForm(array $form, FormStateInterface $form_state, AssetInterface $asset = NULL) {
     $shmu = $asset;
     $is_edit = $shmu <> NULL;
+  
 
     if ($form_state->get('load_done') == NULL) {
       $form_state->set('load_done', FALSE);
@@ -784,6 +785,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#value' => 'Save',
       
     ];
+
+    $form['actions']['save_copy'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Save & Copy'),
+      '#submit' => ['::redirectAfterSaveCopy'],
+    ];
     
     $form['actions']['cancel'] = [
       '#type' => 'submit',
@@ -820,6 +827,14 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
    */
   public function redirectAfterCancel(array $form, FormStateInterface $form_state) {
     $form_state->setRedirect('cig_pods.dashboard');
+  }
+
+  /**
+   * Redirect after Save & Copy.
+   */
+  public function redirectAfterSaveCopy(array &$form, FormStateInterface $form_state) {
+    $form_state->set('save_copy', TRUE);
+    $this->submitForm($form, $form_state);
   }
 
   /**
@@ -903,7 +918,6 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     // All of the fields that support date input on the page.
     $date_fields = [
       'field_shmu_date_land_use_changed',
-      'field_shmu_irrigation_sample_date',
     ];
 
     // Specialty crop rotation section fields.
@@ -1014,6 +1028,9 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     if ($form_state->get('irrigation_redirect')) {
       $form_state->setRedirect('cig_pods.irrigation_shmu_form', ['shmu' => $shmu->get('id')->value]);
+    }
+    if($form_state->get('save_copy')){
+      $form_state->setRedirect('cig_pods.copy_soil_health_management_unit_form', ['asset' => $shmu->get('id')->value]);
     }
     else {
       $form_state->setRedirect('cig_pods.dashboard');

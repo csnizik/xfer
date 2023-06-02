@@ -251,6 +251,19 @@ cig_pods.edit_soil_health_management_unit_form:
       asset:
         type: entity:asset
 
+cig_pods.copy_soil_health_management_unit_form:
+  path: "/copy/shmu/{asset}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\ShmuCopyConfirmationForm'
+    _title: ""
+  requirements:
+    _entity_access: asset.edit
+    asset: \d+
+  options:
+    parameters:
+      asset:
+        type: entity:asset
+
 cig_pods.edit_lab_test_method_form:
   path: "/edit/lab_testing_method/{asset}"
   defaults:

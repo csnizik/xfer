@@ -6,6 +6,14 @@ csv_import.import_test:
   requirements:
     _permission: 'access content'
 
+csv_import.process_workbook:
+  path: '/csv_import/upload_workbook'
+  defaults:
+    _controller: '\Drupal\csv_import\Controller\CsvImportController::process_workbook'
+    _title: 'csv import workbook'
+  requirements:
+    _permission: 'access content'
+    
 csv_import.process_inputs:
   path: '/csv_import/upload_inputs'
   defaults:

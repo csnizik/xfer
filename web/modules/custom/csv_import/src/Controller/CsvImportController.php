@@ -1,8 +1,13 @@
 <?php
 namespace Drupal\csv_import\Controller;
+include 'csvImportFunctions.php';
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\asset\Entity\Asset;
+use Drupal\log\Entity\Log;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+
 /**
  * Provides route responses for the Example module.
  */
@@ -17,6 +22,13 @@ class CsvImportController extends ControllerBase {
   public function upload() {
     return [
       '#children' => '
+        import excel workbook (.xlsx, .xls):
+        <form class="form-horizontal" action="/csv_import/upload_workbook" method="post"
+        name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data" onsubmit="return validateFile()">
+          <input type="file" name="file" id="file" class="file" accept=".xls,.xlsx">
+          <input type="submit" id="submit" name="import" class="btn-submit" />
+        </form>
+
         inputs:
         <form action="/csv_import/upload_inputs" enctype="multipart/form-data" method="post">
           <input type="file" id="file" name="file">
@@ -48,6 +60,135 @@ class CsvImportController extends ControllerBase {
         </form>
     ',
     ];
+  }
+
+  public function process_workbook() {
+    $out = [];      //output messages: imported sheets;
+    $output = '';     //output messages: skipped sheets;
+
+    if (isset($_POST["import"])) {
+      $allowedFileType = [
+          'application/vnd.ms-excel',
+          'text/xls',
+          'text/xlsx',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      ];
+
+      if (in_array($_FILES["file"]["type"], $allowedFileType)) {
+
+          //temporarily save imported file
+          $folderPath = realpath($_FILES['file']['tmp_name']);
+          $targetPath = $folderPath . $_FILES['file']['name'];
+          move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+
+          //get file extension
+          $extension = ucfirst(strtolower(pathinfo($targetPath, PATHINFO_EXTENSION)));
+          
+          //read the workbook but only get the sheets that is relevent
+          $sheetnames = ['Producer', 'Methods'];
+          $reader = IOFactory::createReader($extension);
+          $reader->setReadDataOnly(TRUE);
+          $reader->setLoadSheetsOnly($sheetnames);
+          $spreadSheet = $reader->load($targetPath);
+          $sheetCount = $spreadSheet->getSheetCount();
+          
+
+          // Process each sheet in the workbook.
+          for ($i = 0; $i < $sheetCount; $i++) {
+            $sheet = $spreadSheet->getSheet($i);
+            $sheet_name = $sheet->getTitle();
+            
+            // $csv = $spreadSheet->getSheet($i)->toArray();
+
+            // // Skip sheets that don't have data.
+            // if (empty($csv)) {
+            //   continue;
+            // }
+
+            // Process the data in the sheet based on its name.
+            switch ($sheet_name) {
+              //import producer
+              case $sheetnames[0]:
+                $end_column = 6;
+                $records = $this->processImport($sheet, 'import_producer', $end_column);
+
+                //output message
+                $out[] = array('name' => 'Producer', 'records' => $records);
+                
+                break;
+
+              //import Methods
+              case $sheetnames[1]:
+                $end_column = 28;
+                $records = $this->processImport($sheet, 'import_methods', $end_column);
+
+                //output message
+                $out[] = array('name' => 'Methods', 'records' => $records);
+
+                break;
+              
+              default:
+                // Unknown sheet name.
+                $output .= "<p>Skipping unknown sheet \"$sheet_name\".</p>";
+                break;
+            }
+
+          }
+
+          //Purge the uploaded file after import is completed.
+          unlink($targetPath);
+          
+      } else {    
+          $output = "Invalid File Type. Upload Excel File.";
+      }
+    }
+
+    $out_msg = "";
+    foreach ($out as $it){
+      $out_msg .= $it['name'] . ': ' . $it['records'] . ' records.' . '<br>';
+    } 
+
+    return [
+      '#children' => 'Workbook has been imported:' . '<br><br>' . $out_msg . '<br>' . $output,
+    ];
+
+
+  }
+
+  public function processImport($in_sheet, $importFunction, $end_column){
+    $record_count = 0;
+                
+    $start_column = 3;
+
+    $row = 5;
+
+    // Starting from first column and row of data, retrieve each cell of the rows of data. 
+    for($row; ; $row++){
+      $dataArray = [];
+      for($col = $start_column; $col != $end_column + 1; ++$col) {
+        $curr_cell = $in_sheet->getCell(Coordinate::stringFromColumnIndex($col) . $row);
+        $cell_value = $curr_cell->getValue();
+        if ($cell_value[0] === '=') {
+          $cell_value = $curr_cell->getOldCalculatedValue();
+        }
+        array_push($dataArray, $cell_value);
+      }
+
+      //if the row is empty then we reach the end of rows and stop importing
+      if(empty(array_filter($dataArray, function ($a) { return $a !== null;}))) {
+        break;
+      }
+      
+      //increment record count
+      $record_count = $record_count + 1;
+
+      //import new project summary record
+      $importFunction($dataArray, $record_count);
+      
+    }
+
+    return $record_count;
+    
   }
 
   public function process_combo_operations($csv) {

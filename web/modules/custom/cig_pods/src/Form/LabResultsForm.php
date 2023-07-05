@@ -104,6 +104,7 @@ class LabResultsForm extends PodsFormBase {
     $organic_carbon_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_soil_organic_carbon');
     $form['field_lab_result_raw_soil_organic_carbon'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Soil Organic Carbon (Unit Percent)'),
       '#description' => '',
@@ -114,6 +115,7 @@ class LabResultsForm extends PodsFormBase {
     $aggregate_stability_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_aggregate_stability');
     $form['field_lab_result_raw_aggregate_stability'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Aggregate Stability (Unit Percent)'),
       '#description' => '',
@@ -124,6 +126,7 @@ class LabResultsForm extends PodsFormBase {
     $raw_respiration_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_respiration');
     $form['field_lab_result_raw_respiration'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Respiration (Unit mg/g dry weight)'),
       '#description' => '',
@@ -134,6 +137,7 @@ class LabResultsForm extends PodsFormBase {
     $active_carbon_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_active_carbon');
     $form['field_lab_result_active_carbon'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Active Carbon (Unit ppm)'),
       '#description' => '',
@@ -144,6 +148,7 @@ class LabResultsForm extends PodsFormBase {
     $organic_nitrogen_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_available_organic_nitrogen');
     $form['field_lab_result_available_organic_nitrogen'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Available Organic Nitrogen (ACE Protein (Unit ppm))'),
       '#description' => '',
@@ -158,6 +163,7 @@ class LabResultsForm extends PodsFormBase {
     $bulk_density_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_bulk_density_dry_weight');
     $form['field_lab_result_sf_bulk_density_dry_weight'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Bulk Density Dry Weight (Unit grams)'),
       '#description' => '',
@@ -168,6 +174,7 @@ class LabResultsForm extends PodsFormBase {
     $infiltration_rate_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_infiltration_rate');
     $form['field_lab_result_sf_infiltration_rate'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Infiltration Rate (inches Per Hour)'),
       '#description' => '',
@@ -182,6 +189,7 @@ class LabResultsForm extends PodsFormBase {
     $ph_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_ph_value');
     $form['field_lab_result_sf_ph_value'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('pH (Decimal value between 1 and 14 to the tenth)'),
       '#description' => '',
@@ -192,6 +200,7 @@ class LabResultsForm extends PodsFormBase {
     $electroconductivity_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_electroconductivity');
     $form['field_lab_result_sf_electroconductivity'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Electroconductivity (EC (Unit dS/m))'),
       '#description' => '',
@@ -211,6 +220,7 @@ class LabResultsForm extends PodsFormBase {
     $cation_exchanges_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_cation_exchange_capacity');
     $form['field_lab_result_sf_cation_exchange_capacity'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Cation Exchange Capacity (CEC (Unit ppm))'),
       '#description' => '',
@@ -221,6 +231,7 @@ class LabResultsForm extends PodsFormBase {
     $nitrate_n_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_nitrate_n');
     $form['field_lab_result_sf_nitrate_n'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Nitrate-N (Unit ppm)'),
       '#description' => '',
@@ -240,6 +251,7 @@ class LabResultsForm extends PodsFormBase {
     $nitrogen_dry_combustion_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_nitrogen_by_dry_combustion');
     $form['field_lab_result_sf_nitrogen_by_dry_combustion'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Total Nitrogen by Dry Combustion (Unit Percent)'),
       '#description' => '',
@@ -250,6 +262,7 @@ class LabResultsForm extends PodsFormBase {
     $phosphorus_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_phosphorous');
     $form['field_lab_result_sf_phosphorous'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Phosphorus (Unit ppm)'),
       '#description' => '',
@@ -269,6 +282,7 @@ class LabResultsForm extends PodsFormBase {
     $potassium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_potassium');
     $form['field_lab_result_sf_potassium'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Potassium (Unit ppm)'),
       '#description' => '',
@@ -288,6 +302,7 @@ class LabResultsForm extends PodsFormBase {
     $calcium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_calcium');
     $form['field_lab_result_sf_calcium'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Calcium (Unit ppm)'),
       '#description' => '',
@@ -307,6 +322,7 @@ class LabResultsForm extends PodsFormBase {
     $magnesium_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_magnesium');
     $form['field_lab_result_sf_magnesium'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Magnesium (Unit ppm)'),
       '#description' => '',
@@ -326,6 +342,7 @@ class LabResultsForm extends PodsFormBase {
     $sulfur_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_sulfur');
     $form['field_lab_result_sf_sulfur'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Sulfur (Unit ppm)'),
       '#description' => '',
@@ -345,6 +362,7 @@ class LabResultsForm extends PodsFormBase {
     $iron_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_iron');
     $form['field_lab_result_sf_iron'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Iron (Unit ppm)'),
       '#description' => '',
@@ -364,6 +382,7 @@ class LabResultsForm extends PodsFormBase {
     $manganese_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_manganese');
     $form['field_lab_result_sf_manganese'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Manganese (Unit ppm)'),
       '#description' => '',
@@ -383,6 +402,7 @@ class LabResultsForm extends PodsFormBase {
     $copper_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_copper');
     $form['field_lab_result_sf_copper'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Copper (Unit ppm)'),
       '#description' => '',
@@ -402,6 +422,7 @@ class LabResultsForm extends PodsFormBase {
     $zinc_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_zinc');
     $form['field_lab_result_sf_zinc'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Zinc (Unit ppm)'),
       '#description' => '',
@@ -421,6 +442,7 @@ class LabResultsForm extends PodsFormBase {
     $boron_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_boron');
     $form['field_lab_result_sf_boron'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Boron (Unit ppm)'),
       '#description' => '',
@@ -440,6 +462,7 @@ class LabResultsForm extends PodsFormBase {
     $aluminum_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_aluminum');
     $form['field_lab_result_sf_aluminum'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Aluminum (Unit ppm)'),
       '#description' => '',
@@ -459,6 +482,7 @@ class LabResultsForm extends PodsFormBase {
     $molybdenum_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_molybdenum');
     $form['field_lab_result_sf_molybdenum'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#step' => 0.01,
       '#title' => $this->t('Molybdenum (Unit ppm)'),
       '#description' => '',

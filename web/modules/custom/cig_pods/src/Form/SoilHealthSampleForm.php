@@ -117,6 +117,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     $sample_depth_default_value = $is_edit ? $this->convertFractionsToDecimal($sample_collection, 'field_sampling_depth') : NULL;
     $form['field_sampling_depth'] = [
       '#type' => 'number',
+      '#min' => 0,
       '#title' => $this->t('Sampling Depth (Unit Inches)'),
       '#step' => 1,
       '$description' => 'In feet',

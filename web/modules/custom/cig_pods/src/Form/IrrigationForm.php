@@ -114,7 +114,7 @@ class IrrigationForm extends PodsFormBase {
 
     $form['field_shmu_irrigation_sodium_absorption_ratio'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Float.
       '#step' => 0.01,
       '#title' => $this->t('Sodium Absorption Ratio (Unit meq/L)'),
@@ -169,7 +169,7 @@ class IrrigationForm extends PodsFormBase {
     $field_shmu_irrigation_sulfates_value = $is_edit ? $this->getDecimalFromShmuFractionFieldType($irrigation, 'field_shmu_irrigation_sulfates') : '';
     $form['field_shmu_irrigation_sulfates'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
       '#max_value' => 1000000,
@@ -184,7 +184,7 @@ class IrrigationForm extends PodsFormBase {
 
     $form['field_shmu_irrigation_nitrates'] = [
       '#type' => 'number',
-      '#min_value' => 0,
+      '#min' => 0,
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
       '#max_value' => 1000000,

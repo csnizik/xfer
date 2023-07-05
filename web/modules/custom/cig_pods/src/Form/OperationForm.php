@@ -236,7 +236,7 @@ class OperationForm extends PodsFormBase {
       '#type' => 'number',
       // Capped at 1 million because you can't have more than 1 million parts
       // per million.
-      '#min_value' => 0,
+      '#min' => 0,
       // Float.
       '#step' => 1,
       '#title' => $this->t('Number of Rows'),
@@ -306,6 +306,7 @@ class OperationForm extends PodsFormBase {
 
       $form['cost_sequence'][$fs_index]['field_cost'] = [
         '#type' => 'number',
+        '#min' => 0,
         '#title' => 'Cost',
         '#step' => 0.01,
         '#default_value' => $cost_default_value,

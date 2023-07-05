@@ -306,7 +306,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#title' => $this->t('Replicate Number'),
       '#description' => '',
       '#default_value' => $field_shmu_replicate_number_value,
-      '#min_value' => 0,
+      '#min' => 0,
     // We enforce integer with step = 1.
       '#step' => 1,
       '#required' => TRUE,

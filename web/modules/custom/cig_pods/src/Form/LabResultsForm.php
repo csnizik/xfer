@@ -105,7 +105,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_raw_soil_organic_carbon'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Soil Organic Carbon (Unit Percent)'),
       '#description' => '',
       '#default_value' => $organic_carbon_results,
@@ -116,7 +116,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_raw_aggregate_stability'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Aggregate Stability (Unit Percent)'),
       '#description' => '',
       '#default_value' => $aggregate_stability_results,
@@ -127,7 +127,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_raw_respiration'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Respiration (Unit mg/g dry weight)'),
       '#description' => '',
       '#default_value' => $raw_respiration_results,
@@ -138,7 +138,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_active_carbon'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Active Carbon (Unit ppm)'),
       '#description' => '',
       '#default_value' => $active_carbon_results,
@@ -149,7 +149,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_available_organic_nitrogen'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Available Organic Nitrogen (ACE Protein (Unit ppm))'),
       '#description' => '',
       '#default_value' => $organic_nitrogen_results,
@@ -164,7 +164,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_bulk_density_dry_weight'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Bulk Density Dry Weight (Unit grams)'),
       '#description' => '',
       '#default_value' => $bulk_density_results,
@@ -175,7 +175,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_infiltration_rate'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Infiltration Rate (inches Per Hour)'),
       '#description' => '',
       '#default_value' => $infiltration_rate_results,
@@ -190,7 +190,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_ph_value'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('pH (Decimal value between 1 and 14 to the tenth)'),
       '#description' => '',
       '#default_value' => $ph_results,
@@ -201,7 +201,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_electroconductivity'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Electroconductivity (EC (Unit dS/m))'),
       '#description' => '',
       '#default_value' => $electroconductivity_results,
@@ -221,7 +221,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_cation_exchange_capacity'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Cation Exchange Capacity (CEC (Unit ppm))'),
       '#description' => '',
       '#default_value' => $cation_exchanges_results,
@@ -232,7 +232,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_nitrate_n'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Nitrate-N (Unit ppm)'),
       '#description' => '',
       '#default_value' => $nitrate_n_results,
@@ -252,7 +252,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_nitrogen_by_dry_combustion'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Total Nitrogen by Dry Combustion (Unit Percent)'),
       '#description' => '',
       '#default_value' => $nitrogen_dry_combustion_results,
@@ -263,7 +263,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_phosphorous'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Phosphorus (Unit ppm)'),
       '#description' => '',
       '#default_value' => $phosphorus_results,
@@ -283,7 +283,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_potassium'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Potassium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $potassium_results,
@@ -303,7 +303,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_calcium'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Calcium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $calcium_results,
@@ -323,7 +323,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_magnesium'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Magnesium (Unit ppm)'),
       '#description' => '',
       '#default_value' => $magnesium_results,
@@ -343,7 +343,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_sulfur'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Sulfur (Unit ppm)'),
       '#description' => '',
       '#default_value' => $sulfur_results,
@@ -363,7 +363,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_iron'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Iron (Unit ppm)'),
       '#description' => '',
       '#default_value' => $iron_results,
@@ -383,7 +383,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_manganese'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Manganese (Unit ppm)'),
       '#description' => '',
       '#default_value' => $manganese_results,
@@ -403,7 +403,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_copper'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Copper (Unit ppm)'),
       '#description' => '',
       '#default_value' => $copper_results,
@@ -423,7 +423,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_zinc'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Zinc (Unit ppm)'),
       '#description' => '',
       '#default_value' => $zinc_results,
@@ -443,7 +443,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_boron'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Boron (Unit ppm)'),
       '#description' => '',
       '#default_value' => $boron_results,
@@ -463,7 +463,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_aluminum'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Aluminum (Unit ppm)'),
       '#description' => '',
       '#default_value' => $aluminum_results,
@@ -483,7 +483,7 @@ class LabResultsForm extends PodsFormBase {
     $form['field_lab_result_sf_molybdenum'] = [
       '#type' => 'number',
       '#min' => 0,
-      '#step' => 0.01,
+      '#step' => 0.1,
       '#title' => $this->t('Molybdenum (Unit ppm)'),
       '#description' => '',
       '#default_value' => $molybdenum_results,

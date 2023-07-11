@@ -120,6 +120,7 @@ class SoilHealthSampleForm extends PodsFormBase {
       '#min' => 0,
       '#title' => $this->t('Sampling Depth (Unit Inches)'),
       '#step' => 1,
+      '#min' => 0,
       '$description' => 'In feet',
       '#default_value' => $sample_depth_default_value,
       '#required' => TRUE,

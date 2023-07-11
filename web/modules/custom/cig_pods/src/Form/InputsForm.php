@@ -260,6 +260,7 @@ class InputsForm extends PodsFormBase {
       '#type' => 'number',
       '#min' => 0,
       '#step' => 1,
+      '#min' => 0,
       '#title' => $this->t('Rate Units/Ac'),
       '#description' => '',
       '#default_value' => $field_rate_units_value,
@@ -276,6 +277,7 @@ class InputsForm extends PodsFormBase {
       '#type' => 'number',
       '#min' => 0,
       '#step' => 0.01,
+      '#min' => 0,
       '#title' => $this->t('Cost Per Unit'),
       '#description' => '',
       '#default_value' => $field_cost_per_unit_value,
@@ -331,6 +333,7 @@ class InputsForm extends PodsFormBase {
         '#min' => 0,
         '#title' => 'Cost',
         '#step' => 0.01,
+        '#min' => 0,
         '#default_value' => $cost_default_value,
         '#required' => $form_index > 0,
       ];

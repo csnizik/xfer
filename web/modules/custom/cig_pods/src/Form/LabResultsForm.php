@@ -39,6 +39,11 @@ class LabResultsForm extends PodsFormBase {
    * Convert Fraction to decimal.
    */
   private function convertFractionsToDecimal($is_edit, $labResults, $field) {
+    try{
+      $get_field = $labResutls->get($field)[0]->getValue();
+    }catch(\Throwable $t){
+      return '';
+    }
     if ($is_edit) {
       $num = $labResults->get($field)[0]->getValue()["numerator"];
       $denom = $labResults->get($field)[0]->getValue()["denominator"];

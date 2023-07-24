@@ -1026,10 +1026,12 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
     $this->setProjectReference($shmu, $producer->get('project')->target_id);
 
+    // dpm($form_state->get('irrigation_redirect'));
+
     if ($form_state->get('irrigation_redirect')) {
       $form_state->setRedirect('cig_pods.irrigation_shmu_form', ['shmu' => $shmu->get('id')->value]);
     }
-    if($form_state->get('save_copy')){
+    elseif($form_state->get('save_copy')){
       $form_state->setRedirect('cig_pods.copy_soil_health_management_unit_form', ['asset' => $shmu->get('id')->value]);
     }
     else {

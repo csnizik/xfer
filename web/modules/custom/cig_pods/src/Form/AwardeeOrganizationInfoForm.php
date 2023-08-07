@@ -41,7 +41,11 @@ class AwardeeOrganizationInfoForm extends PodsFormBase {
     $form['#attached']['library'][] = 'core/drupal.form';
 
     $form['form_title'] = [
-      '#markup' => '<h1>Awardee Organization Information</h1>',
+      '#markup' => '<h1>Awardee Organization</h1>',
+    ];
+
+    $form['subform_1'] = [
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Organization Information</h2><h4>4 Fields | Section 1 of 1</h4></div>',
     ];
 
     $awardee_org_default_name = $is_edit ? $awardee->get('name')->value : '';

@@ -253,11 +253,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     $form['#tree'] = TRUE;
 
     $form['title'] = [
-      '#markup' => '<div class="title-container"><h1>Soil Health Management Unit (SHMU) Details</h1></div>',
+      '#markup' => '<div class="title-container"><h1>Soil Health Management Unit (SHMU)</h1></div>',
     ];
     // First section.
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container section1"><h2>Soil Health Management Unit (SHMU) Setup</h2><h4>5 Fields | Section 1 of 10</h4></div>',
+      '#markup' => '<div class="subform-title-container section1"><h2>SHMU Information</h2><h4>5 Fields | Section 1 of 10</h4></div>',
     ];
 
     $field_shmu_involved_producer_value = '';
@@ -322,7 +322,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => FALSE,
     ];
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container section2"><h2>Experimental Design</h2><h4>1 Field | Section 2 of 10</h4></div>',
+      '#markup' => '<div class="subform-title-container section2"><h2>Experimental Design</h2><h4>6 Fields | Section 2 of 10</h4></div>',
     ];
 
     $field_shmu_experimental_design_value = $is_edit ? $shmu->get('field_shmu_experimental_design')->target_id : '';
@@ -547,7 +547,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
 
     // New section (Overview of the Production System)
     $form['subform_6'] = [
-      '#markup' => '<div class="subform-title-container section6"><h2>Overview of the Production System</h2><h4>5 Fields | Section 6 of 10</h4> </div>',
+      '#markup' => '<div class="subform-title-container section6"><h2>Overview of the Production System</h2><h4>3 Fields | Section 6 of 10</h4> </div>',
     ];
 
     $form['static']['crop_rotation_description'] = [
@@ -752,7 +752,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
       '#required' => FALSE,
     ];
     $form['subform_11'] = [
-      '#markup' => '<div class="subform-title-container section10"><h2>NRCS Practices</h2><h4> 1 Field | Section 10 of 10</h4></div>',
+      '#markup' => '<div class="subform-title-container section10"><h2>NRCS Practices</h2><h4> 2 Fields | Section 10 of 10</h4></div>',
     ];
 
     $field_shmu_practices_applied_values = $is_edit ? $this->getDefaultValuesArrayFromMultivaluedShmuField($shmu, 'field_shmu_practices_addressed') : [];

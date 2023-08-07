@@ -1271,11 +1271,11 @@ display:
       tags: {  }
   irrigation:
     id: irrigation
-    display_title: Irrigation
+    display_title: 'Irrigation Test'
     display_plugin: page
     position: 3
     display_options:
-      title: 'Enter Irrigation Water Test Results'
+      title: 'Manage Irrigation Water Test Results'
       fields:
         id:
           id: id
@@ -6314,7 +6314,7 @@ display:
     display_plugin: page
     position: 14
     display_options:
-      title: 'Manage Soil Health Sample'
+      title: 'Manage Soil Health Samples'
       fields:
         id:
           id: id

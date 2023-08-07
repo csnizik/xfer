@@ -59,10 +59,10 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     }
 
     $form['producer_title'] = [
-      '#markup' => '<h1> Assessments </h1>',
+      '#markup' => '<h1>Determining Indicators of Pastureland Health (DIPH) Assessment</h1>',
     ];
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container subtitle-spacing"><h2>Determining Indicators of Pastureland Health Assessment</h2><h4>Section 1 of 1</h4></div>',
+      '#markup' => '<div class="subform-title-container subtitle-spacing"><h2>DIPH Information</h2><h4>25 Fields | Section 1 of 2</h4></div>',
     ];
 
     $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -324,7 +324,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
     ];
 
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>',
+      '#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment</h2><h4>8 Fields | Section 2 of 2</h4></div>',
     ];
 
     $pasture_health_assessment_soil_site_stab_value = $is_edit ? $assessment->get('pasture_health_assessment_soil_site_stab')->value : '';

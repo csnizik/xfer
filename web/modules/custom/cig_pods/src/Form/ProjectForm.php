@@ -223,11 +223,12 @@ class ProjectForm extends PodsFormBase {
     }
 
     $form['form_title'] = [
-      '#markup' => '<h1 id="form-title">Project Information</h1>',
+      '#markup' => '<h1 id="form-title">Project</h1>',
     ];
 
+
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container"><h2>General Project Information</h2><h4>6 Fields | Section 1 of 2</h4></div>',
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Project Information</h2><h4>6 Fields | Section 1 of 2</h4></div>',
     ];
 
     $project_default_name = $is_edit ? $project->get('name')->value : '';
@@ -300,7 +301,7 @@ class ProjectForm extends PodsFormBase {
     $contact_type_options = $this->getAwardeeContactTypeOptions();
     /* Awardee Information */
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container awardee-info-spacing"><h2>Awardee Information</h2><h4>Section 2 of 2</h4></div>',
+      '#markup' => '<div class="subform-title-container awardee-info-spacing"><h2>Awardee Information</h2><h4>3 Fields | Section 2 of 2</h4></div>',
     ];
 
     $awardee_default_name = $is_edit ? $project->get('field_awardee')->target_id : NULL;

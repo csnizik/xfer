@@ -51,10 +51,10 @@ class PastureAssessmentForm extends PodsFormBase {
       $form_state->set('calculate_rcs', FALSE);
     }
     $form['producer_title'] = [
-      '#markup' => '<h1>Assessments</h1>',
+      '#markup' => '<h1>Pasture Condition Score (PCS) Assessment</h1>',
     ];
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container subform1-spacer"><h2>Pasture Condition Score Assessment </h2><h4>10 Fields | Section 1 of 1</h4></div>',
+      '#markup' => '<div class="subform-title-container subform1-spacer"><h2>PCS Information</h2><h4>12 Fields | Section 1 of 1</h4></div>',
     ];
 
     $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';

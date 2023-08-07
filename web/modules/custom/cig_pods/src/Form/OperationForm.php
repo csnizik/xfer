@@ -165,6 +165,10 @@ class OperationForm extends PodsFormBase {
       '#markup' => '<div class="subform-title-container title-spacer"><h1>Operation</h1></div>',
     ];
 
+    $form['subform_2'] = [
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Operation Information</h2><h4>4 Fields | Section 1 of 3</h4></div>',
+    ];
+
     $shmu_options = $this->getShmuOptions();
     $shmu_default_value = $is_edit ? $operation->get('shmu')->target_id : $default_options;
     $form['shmu'] = [
@@ -190,10 +194,6 @@ class OperationForm extends PodsFormBase {
       '#description' => '',
       '#default_value' => $field_operation_timestamp_default_value,
       '#required' => TRUE,
-    ];
-
-    $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container subheader-spacer"><h2>Operation Information</h2><h4>2 Fields | Section 1 of 3</h4></div>',
     ];
 
     $field_operation_type = $is_edit ? $operation->get('field_operation')->target_id : '';

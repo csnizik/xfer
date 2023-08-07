@@ -84,6 +84,10 @@ class LabResultsForm extends PodsFormBase {
       '#markup' => '<h1>Soil Test Results</h1',
     ];
 
+    $form['sub_title_1'] = [
+      '#markup' => '<div class="subform-title-container raw-values-subheading"><h2>Test Information </h2><h4>2 Fields | Section 1 of 4</h4></div>',
+    ];
+
     $soil_sample_default_id = $is_edit ? $labResults->get('field_lab_result_soil_sample')->target_id : NULL;
     $form['field_lab_result_soil_sample'] = [
       '#type' => 'select',
@@ -102,8 +106,8 @@ class LabResultsForm extends PodsFormBase {
       '#required' => TRUE,
     ];
 
-    $form['sub_title_1'] = [
-      '#markup' => '<div class="subform-title-container raw-values-subheading"><h2>Soil Health Raw Values</h2><h4>6 Fields | Section 1 of 3</h4></div>',
+    $form['sub_title_2'] = [
+      '#markup' => '<div class="subform-title-container raw-values-subheading"><h2>Soil Health Raw Values</h2><h4>5 Fields | Section 2 of 4</h4></div>',
     ];
 
     $organic_carbon_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_raw_soil_organic_carbon');
@@ -162,7 +166,7 @@ class LabResultsForm extends PodsFormBase {
     ];
 
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container function-subheading"><h2>Soil Function</h2><h4>2 Fields | Section 2 of 3</h4></div>',
+      '#markup' => '<div class="subform-title-container function-subheading"><h2>Soil Function</h2><h4>2 Fields | Section 3 of 4</h4></div>',
     ];
 
     $bulk_density_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_bulk_density_dry_weight');
@@ -188,7 +192,7 @@ class LabResultsForm extends PodsFormBase {
     ];
 
     $form['subform_3'] = [
-      '#markup' => '<div class="subform-title-container fertility-subheading"><h2>Soil Fertility</h2><h4>31 Fields | Section 3 of 3</h4></div>',
+      '#markup' => '<div class="subform-title-container fertility-subheading"><h2>Soil Fertility</h2><h4>31 Fields | Section 4 of 4</h4></div>',
     ];
 
     $ph_results = $this->convertFractionsToDecimal($is_edit, $labResults, 'field_lab_result_sf_ph_value');

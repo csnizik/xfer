@@ -73,6 +73,11 @@ class LabTestProfilesAdminForm extends PodsFormBase {
     $form['lab_test_title'] = [
       '#markup' => '<h1>Lab Test Profiles</h1>',
     ];
+
+    $form['subform_1'] = [
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Profiles Information</h2><h4>21 Fields | Section 1 of 1</h4></div>',
+    ];
+
     $profile_name = $is_edit ? $labTestProfile->get('name')->value : "";
     $form['name'] = [
       '#type' => 'textfield',

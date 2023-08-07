@@ -40,11 +40,11 @@ class SoilHealthSampleForm extends PodsFormBase {
    */
   public function buildSampleInformationSection(array &$form, FormStateInterface &$form_state, $is_edit = NULL, $sample_collection = NULL) {
     $form['form_title'] = [
-      '#markup' => '<h1>Sample Collection</h1>',
+      '#markup' => '<h1>Soil Health Sample</h1>',
     ];
 
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container section1-subtitle-spacer"><h2>Sample Information</h2><h4>6 Fields | Section 1 of 2</h4></div>',
+      '#markup' => '<div class="subform-title-container section1-subtitle-spacer"><h2>Sample Information</h2><h4>7 Fields | Section 1 of 2</h4></div>',
     ];
 
     $shmu_options = $this->getShmuOptions();
@@ -175,7 +175,7 @@ class SoilHealthSampleForm extends PodsFormBase {
     $this->buildSampleInformationSection($form, $form_state, $is_edit, $sample_collection);
 
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>6 Fields | Section 2 of 2</h4></div>',
+      '#markup' => '<div class="subform-title-container" id="subform2"><h2>GPS Points</h2><h4>3 Fields | Section 2 of 2</h4></div>',
     ];
 
     $form['create_points_prompt'] = [

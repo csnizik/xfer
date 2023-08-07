@@ -5,7 +5,7 @@ dependencies:
     module:
       - cig_pods
 id: irrigation
-label: Irrigation
+label: 'Irrigation Test'
 description: Irrigation
 workflow: asset_default
 new_revision: true

@@ -98,7 +98,11 @@ class LabTestMethodForm extends PodsFormBase {
       $selected_family = $form_state->getValue('field_lab_soil_test_laboratory');
     }
     $form['lab_test_title'] = [
-      '#markup' => '<h1>Methods</h1>',
+      '#markup' => '<h1>Method</h1>',
+    ];
+
+    $form['subform_1'] = [
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Method Information</h2><h4>2 Fields | Section 1 of 2</h4></div>',
     ];
 
     $method_name_default = $is_edit ? $labTestMethod->get('field_lab_method_name')->value : '';
@@ -121,7 +125,7 @@ class LabTestMethodForm extends PodsFormBase {
     ];
 
     $form['lab_form_header'] = [
-      '#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Methods</h2><h4>23 Fields | Section 1 of 1</h4></div>',
+      '#markup' => '<div class="subtitle-container section1"><h2>Soil Health Test Methods</h2><h4>23 Fields | Section 2 of 2</h4></div>',
     ];
     if ($is_edit) {
       $lab_default = $is_edit ? $labTestMethod->get('field_lab_soil_test_laboratory')->target_id : NULL;

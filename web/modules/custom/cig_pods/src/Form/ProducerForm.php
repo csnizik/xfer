@@ -40,9 +40,13 @@ class ProducerForm extends PodsFormBase {
     $form['#attached']['library'][] = 'core/drupal.form';
 
     $form['producer_title'] = [
-      '#markup' => '<h1 id="producer-title">Producer Information</h1>',
+      '#markup' => '<div><h1>Producer</h1></div>',
     ];
 
+    $form['subform_1'] = [
+      '#markup' => '<div class="subform-title-container subform-title-container-top"><h2>Producer Information</h2><h4>4 Fields | Section 1 of 1</h4></div>',
+    ];
+    
     $projects = $this->getAssetOptions('project');
 
     $producer_project_default_value = $is_edit ? $producer->get('project')->target_id : NULL;

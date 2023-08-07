@@ -61,10 +61,10 @@ class RangeAssessmentForm extends PodsFormBase {
     }
 
     $form['producer_title'] = [
-      '#markup' => '<h1> Assessments </h1>',
+      '#markup' => '<h1>Interpreting Indicators of Rangeland Health (IIRH) Assessment</h1>',
     ];
     $form['subform_1'] = [
-      '#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>Interpreting Indicators of Rangeland Health Assessment </h2><h4>18 Fields | Section 1 of 1</h4></div>',
+      '#markup' => '<div class="subform-title-container assessment-top-spacing"><h2>IIRH Information</h2><h4>19 Fields | Section 1 of 2</h4></div>',
     ];
 
     $shmu_value = $is_edit ? $assessment->get('shmu')->target_id : '';
@@ -261,7 +261,7 @@ class RangeAssessmentForm extends PodsFormBase {
     ];
 
     $form['subform_2'] = [
-      '#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment </h2></div>',
+      '#markup' => '<div class="subform-title-container-assessment"><h2>Resource Concerns Identified from In-Field Assessment</h2><h4>6 Fields | Section 2 of 2</h4></div>',
     ];
 
     $range_assessment_rc_soil_site_stability_value = $is_edit ? $assessment->get('range_assessment_rc_soil_site_stability')->value : '';

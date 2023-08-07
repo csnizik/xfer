@@ -8,7 +8,7 @@ dependencies:
 _core:
   default_config_hash: t25rzfpUeY9r-1HMOvFBx-pcW2slDpMzgQL40n4NCYY
 id: irrigation
-label: Irrigation
+label: 'Irrigation Test'
 description: Irrigation
 workflow: asset_default
 new_revision: true

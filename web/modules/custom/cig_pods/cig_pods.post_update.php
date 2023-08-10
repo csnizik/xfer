@@ -252,3 +252,19 @@ function cig_pods_post_update_field_assessment_fields(&$sandbox = NULL) {
 
 }
 
+/**
+ * Remove Lab Testing Profile entries from the database
+ */
+function cig_pods_post_update_delete_lab_profile_entries(&$sandbox = NULL) {
+  //delete any existing lab test proifle entiries
+  $storage = \Drupal::entityTypeManager()->getStorage('asset');
+  $assets = $storage->loadByProperties(['type' => 'lab_testing_profile']);
+  $storage->delete($assets);
+
+  //delete the lab test profile entity type
+  $asset_type = \Drupal::entityTypeManager()->getStorage('asset_type')->load('lab_testing_profile');
+  if (!empty($asset_type)) {
+    $asset_type->delete();
+  }
+
+}

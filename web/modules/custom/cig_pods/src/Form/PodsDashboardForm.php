@@ -62,7 +62,6 @@ class PodsDashboardForm extends PodsFormBase {
         '' => $this->t('Create New'),
         'create_awardee' => $this->t('Awardee Org'),
         'create_project' => $this->t('Project'),
-        'create_lab_test_profile' => $this->t('Lab Test Profile'),
       ],
       '#attributes' => [
         'onchange' => 'this.form.submit();',
@@ -93,7 +92,7 @@ class PodsDashboardForm extends PodsFormBase {
       '#prefix' => '<div class="bottom-form">',
     ];
 
-    $awardeeEntities = ['project', 'awardee', 'lab_testing_profile'];
+    $awardeeEntities = ['project', 'awardee'];
     $entityCount = [];
 
     foreach ($awardeeEntities as $bundle) {
@@ -111,13 +110,6 @@ class PodsDashboardForm extends PodsFormBase {
       '#type' => 'submit',
       '#value' => $this->t('Awardee Organization(s): @count', ['@count' => $entityCount[1]]),
       '#name' => 'awardee',
-    ];
-
-    $form['awardee_lab'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Lab Test Profile(s): @count', ['@count' => $entityCount[2]]),
-      '#name' => 'lab_profile',
-      '#suffix' => '</div>',
     ];
 
     return $form;
@@ -293,7 +285,6 @@ class PodsDashboardForm extends PodsFormBase {
       // Admin asset list paths:
       'project' => '/assets/project',
       'awardee' => '/assets/awardee',
-      'lab_profile' => '/assets/lab_testing_profile',
 
       // Awardee asset creation paths:
       'create_producer' => '/create/producer',

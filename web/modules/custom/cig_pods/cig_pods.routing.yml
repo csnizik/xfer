@@ -34,14 +34,6 @@ cig_pods.operation_form:
   requirements:
     _entity_create_access: 'asset:operation'
 
-cig_pods.lab_test_profiles_admin_form:
-  path: "/create/lab_test_profiles_admin"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\LabTestProfilesAdminForm'
-    _title: ""
-  requirements:
-    _entity_create_access: 'asset:lab_testing_profile'
-
 cig_pods.soil_health_management_unit_form:
   path: "/create/shmu"
   defaults:
@@ -217,19 +209,6 @@ cig_pods.edit_awardee_form:
   path: "/edit/awardee/{asset}"
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
-  requirements:
-    _entity_access: asset.edit
-    asset: \d+
-  options:
-    parameters:
-      asset:
-        type: entity:asset
-
-cig_pods.edit_lab_test_form:
-  path: "/edit/lab_testing_profile/{asset}"
-  defaults:
-    _form: '\Drupal\cig_pods\Form\LabTestProfilesAdminForm'
-    _title: ""
   requirements:
     _entity_access: asset.edit
     asset: \d+

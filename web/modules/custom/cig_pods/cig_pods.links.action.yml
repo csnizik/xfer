@@ -22,12 +22,6 @@ cig_pods.add_lab_result:
   appears_on:
     - view.pods_asset_lists.lab_result
 
-cig_pods.add_lab_testing_profile:
-  route_name: cig_pods.lab_test_profiles_admin_form
-  title: 'Add Lab Testing Profile'
-  appears_on:
-    - view.pods_asset_lists.lab_testing_profile
-
 cig_pods.add_lab_test_method:
   route_name: cig_pods.lab_test_method_form
   title: 'Add Method'

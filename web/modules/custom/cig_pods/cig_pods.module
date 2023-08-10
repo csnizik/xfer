@@ -51,7 +51,6 @@ function cig_pods_views_pre_render(ViewExecutable $view) {
 
       // Apply admin_details_display library.
       case 'awardee':
-      case 'lab_testing_profile':
       case 'producer':
       case 'soil_health_management_unit':
         $library = 'admin_details_display';

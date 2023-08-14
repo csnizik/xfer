@@ -130,7 +130,7 @@ class PodsDashboardForm extends PodsFormBase {
         'create_soil_health_sample' => $this->t('Soil Sample'),
         'create_lab_result' => $this->t('Soil Test Result'),
         'create_operation' => $this->t('Operation'),
-        'create_irrigation' => $this->t('Irrigation'),
+        'create_irrigation' => $this->t('Irrigation Test'),
         'create_field_assessment' => $this->t('CIFSH Assessment'),
         'create_rangeland_assessment' => $this->t('IIRH Assessment'),
         'create_pasture_assessment' => $this->t('PCS Assessment'),
@@ -232,7 +232,7 @@ class PodsDashboardForm extends PodsFormBase {
 
     $form['awardee_irrigation'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Irrigation(s): @count', ['@count' => $entityCount['irrigation']]),
+      '#value' => $this->t('Irrigation Test(s): @count', ['@count' => $entityCount['irrigation']]),
       '#name' => 'irrigation',
       '#suffix' => '</div>',
     ];

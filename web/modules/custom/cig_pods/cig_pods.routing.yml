@@ -20,6 +20,13 @@ cig_pods.awardee_organization_info_form:
   requirements:
     _entity_create_access: 'asset:awardee'
 
+cig_pods.award_form:
+  path: "/create/award"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AwardForm'
+  requirements:
+    _entity_create_access: 'asset:award'
+
 cig_pods.producer_form:
   path: "/create/producer"
   defaults:
@@ -209,6 +216,18 @@ cig_pods.edit_awardee_form:
   path: "/edit/awardee/{asset}"
   defaults:
     _form: '\Drupal\cig_pods\Form\AwardeeOrganizationInfoForm'
+  requirements:
+    _entity_access: asset.edit
+    asset: \d+
+  options:
+    parameters:
+      asset:
+        type: entity:asset
+
+cig_pods.edit_award_form:
+  path: "/edit/award/{asset}"
+  defaults:
+    _form: '\Drupal\cig_pods\Form\AwardForm'
   requirements:
     _entity_access: asset.edit
     asset: \d+

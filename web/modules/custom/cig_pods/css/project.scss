@@ -71,9 +71,13 @@ form#project-create-form.project-create-form {
 
 
 div[id="names-fieldset-wrapper"] div:nth-last-child(3) .js-form-item,
-div[id="names-fieldset-wrapper"] div:nth-last-child(4) .js-form-item,
-div[id="names-fieldset-wrapper"] div:nth-last-child(5) .js-form-item {
+div[id="names-fieldset-wrapper"] div:nth-last-child(6) .js-form-item,
+div[id="names-fieldset-wrapper"] div:nth-last-child(7) .js-form-item {
   margin-bottom: 8px !important;
+}
+
+.js-form-item.form-item.js-form-type-textfield.form-type--textfield.js-form-item-names-fieldset-0-contact-name.form-item--names-fieldset-0-contact-name {
+  margin-bottom: 0 !important;
 }
 
 div[id="addmore-button-container"] {

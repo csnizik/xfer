@@ -50,6 +50,14 @@ class Contact extends FarmAssetType {
         'required' => FALSE,
         'multiple' => TRUE,
       ],
+      'award' => [
+        'label' => 'Award',
+        'type' => 'entity_reference',
+        'target_type' => 'asset',
+        'target_bundle' => 'award',
+        'required' => FALSE,
+        'multiple' => TRUE,
+      ],
     ];
 
     $farmFieldFactory = new FarmFieldFactory();

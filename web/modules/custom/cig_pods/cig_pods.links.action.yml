@@ -4,6 +4,12 @@ cig_pods.add_field_awardee:
   appears_on:
     - view.pods_asset_lists.awardee
 
+cig_pods.add_award:
+  route_name: cig_pods.award_form
+  title: 'Add Award'
+  appears_on:
+    - view.pods_asset_lists.award
+
 cig_pods.add_field_assessment:
   route_name: cig_pods.field_assessment_form
   title: 'Add Field Assessment'

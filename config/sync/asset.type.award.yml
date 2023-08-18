@@ -1,0 +1,12 @@
+uuid: 65b489c4-b398-4544-96a6-a238de4e4ced
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - cig_pods
+id: award
+label: Award
+description: Award
+workflow: asset_default
+new_revision: true

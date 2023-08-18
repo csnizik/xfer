@@ -60,6 +60,7 @@ class PodsDashboardForm extends PodsFormBase {
       '#type' => 'select',
       '#options' => [
         '' => $this->t('Create New'),
+        'create_award' => $this->t('Award'),
         'create_awardee' => $this->t('Awardee Org'),
         'create_project' => $this->t('Project'),
       ],
@@ -92,24 +93,30 @@ class PodsDashboardForm extends PodsFormBase {
       '#prefix' => '<div class="bottom-form">',
     ];
 
-    $awardeeEntities = ['project', 'awardee'];
+    $awardeeEntities = ['project', 'awardee', 'award'];
     $entityCount = [];
 
     foreach ($awardeeEntities as $bundle) {
       $entities = $this->entityOptions('asset', $bundle);
       $entityCount[] = count($entities);
     }
+    
+    $form['awardee_award'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Award(s): @count', ['@count' => $entityCount[2]]),
+      '#name' => 'award',
+    ];
+        
+    $form['awardee_org'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Awardee Organization(s): @count', ['@count' => $entityCount[1]]),
+      '#name' => 'awardee',
+    ];
 
     $form['awardee_proj'] = [
       '#type' => 'submit',
       '#value' => $this->t('Project(s): @count', ['@count' => $entityCount[0]]),
       '#name' => 'project',
-    ];
-
-    $form['awardee_org'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Awardee Organization(s): @count', ['@count' => $entityCount[1]]),
-      '#name' => 'awardee',
     ];
 
     return $form;
@@ -280,11 +287,12 @@ class PodsDashboardForm extends PodsFormBase {
       // Admin asset creation paths:
       'create_project' => '/create/project',
       'create_awardee' => '/create/awardee_org',
-      'create_lab_test_profile' => '/create/lab_test_profiles_admin',
+      'create_award' => '/create/award',
 
       // Admin asset list paths:
       'project' => '/assets/project',
       'awardee' => '/assets/awardee',
+      'award' => '/assets/award',
 
       // Awardee asset creation paths:
       'create_producer' => '/create/producer',

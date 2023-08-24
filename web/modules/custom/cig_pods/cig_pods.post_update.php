@@ -1,5 +1,6 @@
 <?php
 use Drupal\asset\Entity\Asset;
+use Drupal\asset\Entity\AssetType;
 use Drupal\taxonomy\Entity\Term;
 /**
  * @file
@@ -267,4 +268,48 @@ function cig_pods_post_update_delete_lab_profile_entries(&$sandbox = NULL) {
     $asset_type->delete();
   }
 
+}
+
+/**
+ * Add Award Entity.
+ */
+function cig_pods_post_update_award_entity_creation(&$sandbox = NULL) {
+  $assetType = AssetType::create([
+    'uuid' => '65b489c4-b398-4544-96a6-a238de4e4ced',
+    'id' => 'award',
+    'label' => 'Award',
+    'description' => 'Award',
+    'workflow' => 'asset_default',
+    'new_revision' => TRUE,
+    'dependencies' => [
+      'enforced' => [
+        'module' => 'cig_pods',
+      ],
+    ],
+  ]);
+  $assetType->save();
+
+  $entity_type = 'asset';
+  $bundle = 'award';
+  $bundle_handler = \Drupal::service('entity_type.manager')->getHandler($entity_type, 'bundle_plugin');
+  foreach ($bundle_handler->getFieldDefinitions($bundle) as $definition) {
+    \Drupal::service('field_storage_definition.listener')->onFieldStorageDefinitionCreate($definition);
+    \Drupal::service('field_definition.listener')->onFieldDefinitionCreate($definition);
+  }
+}
+
+/**
+ * Add new Field to Contact entity Award ID field.
+ */
+function cig_pods_post_update_field_contact_award_field(&$sandbox = NULL) {
+  $options = [
+    'label' => 'Award',
+    'type' => 'entity_reference',
+    'target_type' => 'asset',
+    'target_bundle' => 'award',
+    'required' => FALSE,
+    'multiple' => TRUE,
+  ];
+  $field_definition = \Drupal::service(id: 'farm_field.factory')->bundleFieldDefinition($options);
+  \Drupal::entityDefinitionUpdateManager()->installFieldStorageDefinition('award', 'asset', 'cig_pods', $field_definition);
 }

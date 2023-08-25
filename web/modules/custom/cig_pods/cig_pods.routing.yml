@@ -6,6 +6,14 @@ cig_pods.dashboard:
   requirements:
     _custom_access: '\Drupal\cig_pods\Form\PodsDashboardForm::access'
 
+cig_pods.confirm_modal:
+  path: 'modals/confirm-modal'
+  defaults:
+    _controller: '\Drupal\cig_pods\Controller\PopupController::openConfirmModal'
+    _title: 'Confirm Modal'
+  requirements:
+    _permission: 'access content'
+
 cig_pods.project_form:
   path: "/create/project"
   defaults:

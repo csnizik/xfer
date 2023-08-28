@@ -133,6 +133,28 @@ class ProjectForm extends PodsFormBase {
   }
 
   /**
+   * Get award agreement number options.
+   */
+  public function getAwardAgreementNumberOptions() {
+    $awards = \Drupal::entityTypeManager()->getStorage('asset')->loadByProperties(['type' => 'award']);
+    
+    if (empty($awards)) {
+      return ['' => ' - Select - '];
+    }
+    
+    $agreement_number_options = ['' => ' - Select - '];
+
+    foreach ($awards as $award_id => $award) {
+      if ($award->hasField('field_award_agreement_number') && !$award->get('field_award_agreement_number')->isEmpty()) {
+        $agreement_number = $award->get('field_award_agreement_number')->getValue()[0]['value'];
+        $agreement_number_options[$award_id] = $agreement_number;
+      }
+    }
+    
+    return $agreement_number_options;
+  }
+  
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state, $options = NULL, AssetInterface $asset = NULL) {
@@ -233,11 +255,12 @@ class ProjectForm extends PodsFormBase {
       '#default_value' => $project_default_name,
     ];
 
-    $agreement_number_default = $is_edit ? $project->get('field_project_agreement_number')->getValue()[0]['value'] : '';
+    $agreement_number_options = $this->getAwardAgreementNumberOptions();
+    $agreement_number_default = $is_edit ? $project->get('field_project_agreement_number')->target_id : NULL;
     $form['field_project_agreement_number'] = [
-      '#type' => 'textfield',
+      '#type' => 'select',
       '#title' => $this->t('Agreement Number'),
-      '#description' => $this->t('Agreement Number'),
+      '#options' => $agreement_number_options,
       '#default_value' => $agreement_number_default,
       '#required' => TRUE,
     ];
@@ -627,7 +650,7 @@ class ProjectForm extends PodsFormBase {
       $this->deleteContacts($pre_existsing_contacts);
 
       $project_name = $form_state->getValue('name');
-      $agreement_number = $form_state->getValue('field_project_agreement_number');
+      $agreement_number = $form['field_project_agreement_number']['#options'][$form_state->getValue('field_project_agreement_number')];
       $field_resource_concerns = $form_state->getValue('field_resource_concerns');
       $field_funding_amount = $form_state->getValue('field_funding_amount');
       $summary = $form_state->getValue('field_summary');

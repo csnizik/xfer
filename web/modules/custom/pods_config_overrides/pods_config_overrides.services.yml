@@ -1,0 +1,6 @@
+services:
+  pods_config_overrides.overrider:
+    class: Drupal\pods_config_overrides\Config\PODSConfigOverrides
+    arguments: ['@settings']
+    tags:
+      - { name: config.factory.override, priority: 5 }

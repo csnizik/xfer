@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function pods_config_overrides_install() {
+  /*
+
+  Location for potentially neccesary install code.
+
+  */
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function pods_config_overrides_uninstall() {
+  /*
+
+  Location for potentially neccesary uninstall code.
+
+  */
+}

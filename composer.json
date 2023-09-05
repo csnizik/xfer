@@ -17,7 +17,8 @@
     "drupal/openid_connect": "2.0.0-alpha12",
     "drupal/scss_compiler": "^1.1",
     "drupal/select2": "^1.14",
-    "phpoffice/phpspreadsheet": "^1.28"
+    "phpoffice/phpspreadsheet": "^1.28",
+    "drupal/scss": "^1.6"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

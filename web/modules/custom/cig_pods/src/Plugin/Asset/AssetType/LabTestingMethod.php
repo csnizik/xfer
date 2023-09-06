@@ -262,11 +262,11 @@ class LabTestingMethod extends FarmAssetType {
         'required' => TRUE,
         'multiple' => FALSE,
       ],
-      'project' => [
-        'label' => 'Project',
+      'award' => [
+        'label' => 'Award',
         'type' => 'entity_reference',
         'target_type' => 'asset',
-        'target_bundle' => 'project',
+        'target_bundle' => 'award',
         'required' => TRUE,
         'multiple' => TRUE,
       ],

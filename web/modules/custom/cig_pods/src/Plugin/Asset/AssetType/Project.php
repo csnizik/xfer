@@ -24,18 +24,6 @@ class Project extends FarmAssetType {
     // We do not add a "Name" field because we inherit that from the
     // FarmAssetType class.
     $field_info = [
-      'field_project_agreement_number' => [
-        'type'  => 'string',
-        'label' => 'Agreement Number',
-        'description' => '',
-        'required' => FALSE,
-        'multiple' => FALSE,
-          // Lower weight shows up first in form.
-        'weight' => [
-          'form' => 1,
-          'view' => 1,
-        ],
-      ],
       'field_grant_type' => [
         'type' => 'entity_reference',
         'label' => 'Grant Type',
@@ -97,23 +85,14 @@ class Project extends FarmAssetType {
           'label' => 'inline',
         ],
       ],
-      'field_awardee' => [
+      'award' => [
+        'label' => 'Award Reference',
+        'description' => 'Award Reference',
         'type' => 'entity_reference',
-        'label' => 'Awardee',
         'target_type' => 'asset',
-        'target_bundle' => 'awardee',
+        'target_bundle' => 'award',
         'required' => FALSE,
         'multiple' => FALSE,
-        'form_display_options' => [
-          'label' => 'inline',
-          'type' => 'options_select',
-        ],
-      ],
-      'field_awardee_eauth_id' => [
-        'type' => 'string',
-        'label' => 'Awardee Contact eAuth ID',
-        'multiple' => TRUE,
-        'required' => FALSE,
       ],
     ];
 

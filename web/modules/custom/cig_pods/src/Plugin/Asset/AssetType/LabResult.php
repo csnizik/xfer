@@ -296,11 +296,11 @@ class LabResult extends FarmAssetType {
         'required' => TRUE,
         'description' => $this->t('Lab Result Method'),
       ],
-      'project' => [
-        'label' => 'Project',
+      'award' => [
+        'label' => 'Award',
         'type' => 'entity_reference',
         'target_type' => 'asset',
-        'target_bundle' => 'project',
+        'target_bundle' => 'award',
         'required' => TRUE,
         'multiple' => TRUE,
       ],

@@ -23,11 +23,11 @@ class Awardee extends FarmAssetType {
     $fields = parent::buildFieldDefinitions();
 
     $field_info = [
-      'project' => [
+      'award' => [
+        'label' => 'Award',
         'type' => 'entity_reference',
-        'label' => 'Projects',
         'target_type' => 'asset',
-        'target_bundle' => 'project',
+        'target_bundle' => 'award',
         'required' => TRUE,
         'multiple' => TRUE,
       ],

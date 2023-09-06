@@ -23,10 +23,18 @@ class Producer extends FarmAssetType {
 
     $field_info = [
       'project' => [
-        'type' => 'entity_reference',
         'label' => 'Project',
+        'type' => 'entity_reference',
         'target_type' => 'asset',
         'target_bundle' => 'project',
+        'required' => TRUE,
+        'multiple' => TRUE,
+      ],
+      'award' => [
+        'label' => 'Award',
+        'type' => 'entity_reference',
+        'target_type' => 'asset',
+        'target_bundle' => 'award',
         'required' => TRUE,
         'multiple' => TRUE,
       ],

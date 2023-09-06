@@ -152,7 +152,7 @@ class ProducerForm extends PodsFormBase {
       $producer = Asset::create($producer_submission);
       $producer->save();
 
-      $this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
+      $this->setAwardReference($producer, $form_state->getValue('field_producer_project'));
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
@@ -174,7 +174,7 @@ class ProducerForm extends PodsFormBase {
 
       $producer->save();
 
-      $this->setProjectReference($producer, $form_state->getValue('field_producer_project'));
+      $this->setAwardReference($producer, $form_state->getValue('field_producer_project'));
 
       $form_state->setRedirect('cig_pods.dashboard');
 
@@ -182,13 +182,14 @@ class ProducerForm extends PodsFormBase {
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $projectReference) {
+  public function setAwardReference($assetReference, $projectReference) {
     $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($project->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
-  }
+  }     
 
   /**
    * {@inheritdoc}

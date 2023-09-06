@@ -577,13 +577,13 @@ class LabResultsForm extends PodsFormBase {
           $profile_submission[$elemName] = $form_state->getValue($elemName);
         }
       }
-
+      
       $profile_submission['name'] = 'Soil Test Results';
       $profile_submission['type'] = 'lab_result';
       $profile = Asset::create($profile_submission);
-      $profile->save();
-
-      $this->setProjectReference($profile, $profile->get('field_lab_result_soil_sample')->target_id);
+      // $profile->save();
+      
+      $this->setAwardReference($profile, $profile->get('field_lab_result_soil_sample')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
 
@@ -601,19 +601,19 @@ class LabResultsForm extends PodsFormBase {
 
       $labTestProfile->save();
 
-      $this->setProjectReference($labTestProfile, $labTestProfile->get('field_lab_result_soil_sample')->target_id);
+      $this->setAwardReference($labTestProfile, $labTestProfile->get('field_lab_result_soil_sample')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $sampleReference) {
+  public function setAwardReference($assetReference, $sampleReference) {
     $soilSample = \Drupal::entityTypeManager()->getStorage('asset')->load($sampleReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($soilSample->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($soilSample->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

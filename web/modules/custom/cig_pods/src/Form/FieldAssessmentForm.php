@@ -393,18 +393,18 @@ class FieldAssessmentForm extends PodsFormBase {
 
     $assessment->save();
 
-    $this->setProjectReference($assessment, $assessment->get('shmu')->target_id);
+    $this->setAwardReference($assessment, $assessment->get('shmu')->target_id);
 
     $form_state->setRedirect('cig_pods.dashboard');
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $shmuReference) {
+  public function setAwardReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

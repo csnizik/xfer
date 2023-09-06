@@ -42,20 +42,12 @@ class Contact extends FarmAssetType {
         'required' => FALSE,
         'description' => '',
       ],
-      'project' => [
-        'label' => 'Project',
-        'type' => 'entity_reference',
-        'target_type' => 'asset',
-        'target_bundle' => 'project',
-        'required' => FALSE,
-        'multiple' => TRUE,
-      ],
       'award' => [
         'label' => 'Award',
         'type' => 'entity_reference',
         'target_type' => 'asset',
         'target_bundle' => 'award',
-        'required' => FALSE,
+        'required' => TRUE,
         'multiple' => TRUE,
       ],
     ];

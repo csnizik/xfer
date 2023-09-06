@@ -495,7 +495,7 @@ class InputsForm extends PodsFormBase {
       $input_to_save->set('field_input_cost_sequences', $cost_sequence_ids);
 
       $input_to_save->save();
-      $this->setProjectReference($input_to_save, $operation_reference->id());
+      $this->setAwardReference($input_to_save, $operation_reference->id());
 
       $operation_reference->get('field_input')[] = $input_to_save->id();
       $operation_reference->save();
@@ -554,12 +554,12 @@ class InputsForm extends PodsFormBase {
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $operationReference) {
+  public function setAwardReference($assetReference, $operationReference) {
     $operation = \Drupal::entityTypeManager()->getStorage('asset')->load($operationReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($operation->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

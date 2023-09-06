@@ -297,7 +297,7 @@ class SoilHealthSampleForm extends PodsFormBase {
       $sample_collection->set('field_soil_sample_geofield', $form_state->getValue('field_map'));
       $sample_collection->save();
 
-      $this->setProjectReference($sample_collection, $sample_collection->get('shmu')->target_id);
+      $this->setAwardReference($sample_collection, $sample_collection->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
@@ -317,19 +317,19 @@ class SoilHealthSampleForm extends PodsFormBase {
 
       $sample_collection->save();
 
-      $this->setProjectReference($sample_collection, $sample_collection->get('shmu')->target_id);
+      $this->setAwardReference($sample_collection, $sample_collection->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $shmuReference) {
+  public function setAwardReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

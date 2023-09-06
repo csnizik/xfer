@@ -81,11 +81,11 @@ class Input extends FarmAssetType {
         'multiple' => TRUE,
         'description' => '',
       ],
-      'project' => [
-        'label' => 'Project',
+      'award' => [
+        'label' => 'Award',
         'type' => 'entity_reference',
         'target_type' => 'asset',
-        'target_bundle' => 'project',
+        'target_bundle' => 'award',
         'required' => TRUE,
         'multiple' => TRUE,
       ],

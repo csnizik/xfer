@@ -156,50 +156,6 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
   }
 
   /**
-   * Query to find projects that an eAuth ID has access to.
-   *
-   * @param string $eauth_id
-   *   The eAuth ID.
-   *
-   * @return array
-   *   Returns an array of projectasset IDs.
-   */
-  public static function eAuthIdProjects($eauth_id) {
-
-    // Query the asset table.
-    $query = \Drupal::database()->select('asset', 'a');
-
-    // Select the asset entity IDs.
-    $query->addField('a', 'id');
-
-    // Filter to project assets.
-    $query->condition('a.type', 'project');
-
-    // Join the asset__project table to find contacts that reference the
-    // project.
-    $query->join('asset__project', 'ap', "a.id = ap.project_target_id AND ap.bundle = 'contact' AND ap.deleted != 1");
-
-    // Join the asset__eauth_id table, which assigns eAuth IDs to contact
-    // assets.
-    $query->join('asset__eauth_id', 'aei', "ap.entity_id = aei.entity_id AND aei.deleted != 1");
-
-    // Filter by the eAuth ID field on the contact asset.
-    $query->condition('aei.eauth_id_value', $eauth_id);
-
-    // Execute the query.
-    $result = $query->execute();
-
-    // Return an array of unique asset IDs.
-    $asset_ids = [];
-    foreach ($result as $row) {
-      if (!empty($row->id)) {
-        $asset_ids[] = $row->id;
-      }
-    }
-    return $asset_ids;
-  }
-
-  /**
    * Query to find assets that an eAuth ID has access to.
    *
    * @param string $eauth_id
@@ -212,34 +168,28 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   public static function eAuthIdAssets($eauth_id, string $asset_type = NULL) {
 
-    // If the asset type is "project", then we need a slightly different query.
-    // Delegate to the eAuthIdProjects() method instead.
-    if ($asset_type == 'project') {
-      return ProjectAccessControlHandler::eAuthIdProjects($eauth_id);
-    }
-
-    // Query the asset__project table, where each row is a relationship between
-    // an asset and a project.
-    $query = \Drupal::database()->select('asset__project', 'ap');
+    // Query the asset__award table, where each row is a relationship between
+    // an asset and a award.
+    $query = \Drupal::database()->select('asset__award', 'aa');
 
     // Select the asset entity IDs.
-    $query->addField('ap', 'entity_id', 'id');
+    $query->addField('aa', 'entity_id', 'id');
 
     // Exclude deleted fields.
-    $query->condition('ap.deleted', 1, '!=');
+    $query->condition('aa.deleted', 1, '!=');
 
     // Optionally filter by asset type.
     if (!empty($asset_type)) {
-      $query->condition('ap.bundle', $asset_type);
+      $query->condition('aa.bundle', $asset_type);
     }
 
-    // Join the asset__project table again, this time to get contacts that
-    // reference the same project.
-    $query->join('asset__project', 'apc', "ap.project_target_id = apc.project_target_id AND apc.bundle = 'contact' AND apc.deleted != 1");
+    // Join the asset__award table again, this time to get contacts that
+    // reference the same award.
+    $query->join('asset__award', 'aac', "aa.award_target_id = aac.award_target_id AND aac.bundle = 'contact' AND aac.deleted != 1");
 
     // Join the asset__eauth_id table, which assigns eAuth IDs to contact
     // assets.
-    $query->join('asset__eauth_id', 'aei', "apc.entity_id = aei.entity_id AND aei.deleted != 1");
+    $query->join('asset__eauth_id', 'aei', "aac.entity_id = aei.entity_id AND aei.deleted != 1");
 
     // Filter by the eAuth ID field on the contact asset.
     $query->condition('aei.eauth_id_value', $eauth_id);

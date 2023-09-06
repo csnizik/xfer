@@ -1024,7 +1024,7 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
     }
     // Cleanup done.
     $producer = \Drupal::entityTypeManager()->getStorage('asset')->load($form_state->getValue('field_shmu_involved_producer'));
-    $this->setProjectReference($shmu, $producer->get('project')->target_id);
+    $this->setAwardReference($shmu, $producer->get('award')->target_id);
 
     // dpm($form_state->get('irrigation_redirect'));
 
@@ -1040,11 +1040,11 @@ class SoilHealthManagementUnitForm extends PodsFormBase {
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $projectReference) {
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
-    $assetReference->set('project', $project);
+  public function setAwardReference($assetReference, $awardReference) {
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($awardReference);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

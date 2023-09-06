@@ -497,7 +497,7 @@ class PastureHealthAssessmentForm extends PodsFormBase {
       $pastureAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
       $pastureAssessment->save();
 
-      $this->setProjectReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
+      $this->setAwardReference($pastureAssessment, $pastureAssessment->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
 
@@ -514,19 +514,19 @@ class PastureHealthAssessmentForm extends PodsFormBase {
       $pastureHealthAssessment->set('pasture_health_assessment_date', strtotime($form['pasture_health_assessment_date']['#value']));
       $pastureHealthAssessment->save();
 
-      $this->setProjectReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
+      $this->setAwardReference($pastureHealthAssessment, $pastureHealthAssessment->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $shmuReference) {
+  public function setAwardReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

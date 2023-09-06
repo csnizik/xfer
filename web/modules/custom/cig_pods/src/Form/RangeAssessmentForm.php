@@ -412,7 +412,7 @@ class RangeAssessmentForm extends PodsFormBase {
       $rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
       $rangelandAssessment->save();
 
-      $this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
+      $this->setAwardReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
 
@@ -429,7 +429,7 @@ class RangeAssessmentForm extends PodsFormBase {
       $rangelandAssessment->set('range_assessment_date', strtotime($form['range_assessment_date']['#value']));
       $rangelandAssessment->save();
 
-      $this->setProjectReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
+      $this->setAwardReference($rangelandAssessment, $rangelandAssessment->get('shmu')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
@@ -437,12 +437,12 @@ class RangeAssessmentForm extends PodsFormBase {
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $shmuReference) {
+  public function setAwardReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

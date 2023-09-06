@@ -550,7 +550,7 @@ class OperationForm extends PodsFormBase {
     $operation->set('field_operation_cost_sequences', $cost_sequence_ids);
     $operation->save();
 
-    $this->setProjectReference($operation, $operation->get('shmu')->target_id);
+    $this->setAwardReference($operation, $operation->get('shmu')->target_id);
 
     // Cleanup - remove the old cost Sequence Assets that are no longer used.
     if ($is_edit) {
@@ -570,12 +570,12 @@ class OperationForm extends PodsFormBase {
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $shmuReference) {
+  public function setAwardReference($assetReference, $shmuReference) {
     $shmu = \Drupal::entityTypeManager()->getStorage('asset')->load($shmuReference);
-    $project = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('project')->target_id);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($shmu->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

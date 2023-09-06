@@ -435,7 +435,7 @@ class LabTestMethodForm extends PodsFormBase {
       $method = Asset::create($method_submission);
       $method->save();
 
-      $this->setProjectReference($method, $method->get('field_lab_method_project')->target_id);
+      $this->setAwardReference($method, $method->get('field_lab_method_project')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
 
@@ -452,18 +452,19 @@ class LabTestMethodForm extends PodsFormBase {
 
       $labTestMethod->save();
 
-      $this->setProjectReference($labTestMethod, $labTestMethod->get('field_lab_method_project')->target_id);
+      $this->setAwardReference($labTestMethod, $labTestMethod->get('field_lab_method_project')->target_id);
 
       $form_state->setRedirect('cig_pods.dashboard');
     }
   }
 
   /**
-   * Set project reference.
+   * Set award reference.
    */
-  public function setProjectReference($assetReference, $projectReference) {
+  public function setAwardReference($assetReference, $projectReference) {
     $project = \Drupal::entityTypeManager()->getStorage('asset')->load($projectReference);
-    $assetReference->set('project', $project);
+    $award = \Drupal::entityTypeManager()->getStorage('asset')->load($project->get('award')->target_id);
+    $assetReference->set('award', $award);
     $assetReference->save();
   }
 

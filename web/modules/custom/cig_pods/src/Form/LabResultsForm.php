@@ -40,7 +40,7 @@ class LabResultsForm extends PodsFormBase {
    */
   private function convertFractionsToDecimal($is_edit, $labResults, $field) {
     try{
-      $get_field = $labResutls->get($field)[0]->getValue();
+      $get_field = $labResults->get($field)[0]->getValue();
     }catch(\Throwable $t){
       return '';
     }

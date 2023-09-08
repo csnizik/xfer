@@ -70,6 +70,7 @@ class PodsDashboardForm extends PodsFormBase {
       '#prefix' => '<div id="top-form">',
     ];
 
+
     // Create a hidden submit button that will be used when an item is
     // selected from the dropdown. This is necessary because we are using
     // this.form.submit() and if Drupal can't detect the triggering element,
@@ -84,7 +85,7 @@ class PodsDashboardForm extends PodsFormBase {
     ];
 
     $form['form_body'] = [
-      '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods using this tool.</p>',
+      '#markup' => ' <p  id="form-body">Let\'s get started, you can create and manage Awardees, Projects, Lab Test Methods using this tool.</p> ' ,
       '#suffix' => '</div>',
     ];
 
@@ -146,9 +147,12 @@ class PodsDashboardForm extends PodsFormBase {
       '#attributes' => [
         'onchange' => 'this.form.submit();',
       ],
-      '#prefix' => '<div id="top-form">',
+      '#prefix' => ' <div id="top-form"> 
+   ',
     ];
 
+  
+    
     // Create a hidden submit button that will be used when an item is
     // selected from the dropdown. This is necessary because we are using
     // this.form.submit() and if Drupal can't detect the triggering element,
@@ -164,9 +168,15 @@ class PodsDashboardForm extends PodsFormBase {
 
     $form['form_body'] = [
       '#markup' => '<p id="form-body">Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p>',
-      '#suffix' => '</div>',
+      '#suffix' => '</div>', 
     ];
-
+    $form['form_body2'] = [
+      '#prefix' => '<div class="middle-form">',
+      '#markup' => '<span id="grape" onclick="showInfo2()">
+      Lets Get Started
+   </span> <div id="collapse"><p id="form-body">Let\'s get started, you can create and manage Producers, Soil Health Management Units (SHMU), Soil Samples, Lab Test Methods, and Operations using this tool.</p> </div>',
+   '#suffix' => '</div>',
+    ];
     $form['form_subtitle'] = [
       '#markup' => '<div> <h2 id="form-subtitle">Manage Assets<span class="small-question" title="Assets are identifiable persons, field samples, management actions and operations performed within the SHMU."><sup>?</sup></span></div></h2>',
       '#prefix' => '<div class="bottom-form">',

@@ -144,6 +144,18 @@
         } 
       }
     </script>
+
+     <script>
+      document.getElementById("grape").onclick = function() {showInfo2()};
+      const button2 = document.getElementById('collapse');
+      function showInfo2() {
+        if (button2.hasAttribute("hidden")) {
+          const element = document.getElementById("collapse").removeAttribute("hidden");
+        } else {
+          const element = document.getElementById("collapse").setAttribute("hidden", "");
+        } 
+      }
+    </script>
     <script>
     $(document).ready(function() {
       $('.select2-widget').select2({

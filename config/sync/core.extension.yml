@@ -96,6 +96,7 @@ module:
   views_geojson: 0
   views_ui: 0
   scss_compiler: 1
+  scss: 0
   externalauth: 10
   views: 10
   farm: 1000

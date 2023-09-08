@@ -19,3 +19,4 @@ web/sites/default/*
 INSTALLED
 scripts/pods_1.1.0.6.tar.gz
 scripts/pods.tar.gz
+auth.json

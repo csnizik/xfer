@@ -36,8 +36,12 @@ services:
           rm -rf /opt/drupal/.editorconfig /opt/drupal/.gitattributes /opt/drupal/keys /opt/drupal/vendor /opt/drupal/web
           (cd /opt/drupal/ && git checkout -- web)
 
+          git config --global http.sslverify false
+
           # Build the PODS codebase via Composer.
           composer install
+
+          rm auth.json
 
           # Install Drupal via Drush.
           drush site-install -y --existing-config --db-url=mysql://pods:pods@db/pods --account-pass=admin farm farm.modules="base"

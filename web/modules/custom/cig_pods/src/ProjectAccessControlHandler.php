@@ -14,29 +14,28 @@ use Drupal\views\Plugin\views\ViewsHandlerInterface;
 class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler {
 
   /**
-   * Define admin zRoles.
+   * Define admin Roles.
    */
-  const ADMIN_ZROLES = [
-    'CIG_App_Admin',
-    'CIG_APA',
+  const ADMIN_ROLES = [
+    'NRCS_PODS_SH-AdminUser',
   ];
 
   /**
-   * Define awardee zRoles.
+   * Define awardee Roles.
    */
-  const AWARDEE_ZROLES = [
-    'CIG_NSHDS',
-    'CIG_APT',
+  const AWARDEE_ROLES = [
+    'NRCS_PODS_SH-User-Awardee',
   ];
 
   /**
-   * Helper method for getting the current session zRole.
+   * Helper method for getting the current session Roles.
    *
    * @return string
-   *   The zRole.
+   *   The Roles.
    */
-  protected static function getZrole() {
-    $session = \Drupal::request()->getSession();
+  protected static function getRole() {
+          $session = \Drupal::request()->getSession();
+            \Drupal::logger('auth_rewrite')->notice("getRole: " . print_r($session->get('ApplicationRoleEnumeration'), True));
     return $session->get('ApplicationRoleEnumeration');
   }
 
@@ -44,7 +43,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    * Helper method for getting the current session eAuth ID.
    *
    * @return string
-   *   The zRole.
+   *   The Roles.
    */
   protected static function getEauthId() {
     $session = \Drupal::request()->getSession();
@@ -55,20 +54,32 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    * Checks to see if the user is an admin.
    *
    * @return bool
-   *   Returns TRUE if the user has an admin zRole. FALSE otherwise.
+   *   Returns TRUE if the user has an admin Roles. FALSE otherwise.
    */
   public static function isAdmin() {
-    return in_array(self::getZrole(), self::ADMIN_ZROLES);
+    foreach(self::getRole() as $role) {
+        if(in_array($role, self::ADMIN_ROLES)) {
+                return True;
+        }
+    }
+
+    return False;
   }
 
   /**
    * Checks to see if the user is an awardee.
    *
    * @return bool
-   *   Returns TRUE if the user has an awardee zRole. FALSE otherwise.
+   *   Returns TRUE if the user has an awardee Roles. FALSE otherwise.
    */
   public static function isAwardee() {
-    return in_array(self::getZrole(), self::AWARDEE_ZROLES);
+      foreach(self::getRole() as $role) {
+        if(in_array($role, self::AWARDEE_ROLES)) {
+           return True;
+        }
+      }
+
+    return False;
   }
 
   /**
@@ -82,13 +93,13 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // First delegate to the parent method.
     $result = parent::checkAccess($entity, $operation, $account);
 
-    // Only proceed if access was not determined. We will use eAuth ID + zRole
+    // Only proceed if access was not determined. We will use eAuth ID + Roles
     // to check if the user should have access.
     if (!$result->isNeutral()) {
       return $result;
     }
 
-    // Get the user's eAuthID and zRole.
+    // Get the user's eAuthID and Roles.
     $eauth_id = $this->getEauthId();
 
     // Admins can create any asset.
@@ -119,7 +130,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
     // First delegate to the parent method.
     $result = parent::checkCreateAccess($account, $context, $entity_bundle);
 
-    // Only proceed if access was not determined. We will use zRole to check if
+    // Only proceed if access was not determined. We will use Roles to check if
     // the user should have access.
     if (!$result->isNeutral()) {
       return $result;
@@ -217,7 +228,7 @@ class ProjectAccessControlHandler extends UncacheableEntityAccessControlHandler 
    */
   public static function viewsArgumentQueryAlter(ViewsHandlerInterface $handler) {
 
-    // Get the user's eAuthID and zRole.
+    // Get the user's eAuthID and Roles.
     $eauth_id = ProjectAccessControlHandler::getEauthId();
 
     // If this is an admin, don't apply any additional filters.

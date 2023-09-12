@@ -7,8 +7,11 @@ Build PODS tarball.
 2.  Open the project in VS Code
 3.	Open git bash terminal in VS Code
 4.	Switch to the develop branch, i.e. 
-    $ git checkout develop=
-5.	$ docker exec cig_pods-www-1 bash -c 'cd scripts; ./build_usda_tarball'
+    $ git checkout develop
+5. Start the site locally with:
+    $ ./scripts/podsu
+6. Navigate to https://localhost:85/admin/config/development/scss , and click "save configuration" and then "compile and write" so compile the scss files.
+7.	$ docker exec cig_pods-www-1 bash -c 'cd scripts; ./build_usda_tarball'
 	The build will take a while. When it is finished an up-to-date pods.tar.gz file will exist in the scripts folder.
 
 Prepare the 2nd server node before updating the 1st server node:

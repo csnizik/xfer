@@ -10,3 +10,4 @@ dependencies:
   - usda_eauth:usda_eauth
   - scss_compiler:scss_compiler
   - scss:scss
+  - pods_config_overrides:pods_config_overrides
